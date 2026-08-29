@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#7c3aed"
+    >
+
+    <meta
+        name="description"
+        content="LOVEMI reports and safety center"
+    >
+
+    <title>Reports | LOVEMI</title>
+
+
+    <!-- ======================================================
+         LOVEMI TAB / LOGO
+    ======================================================= -->
+
+    <link
+        rel="icon"
+        href="assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+
+    <style>
+
+        :root {
+
+            --primary:#7c3aed;
+            --primary-dark:#5b21b6;
+            --primary-light:#ede9fe;
+            --accent:#ec4899;
+            --accent-light:#fce7f3;
+
+            --text:#18181b;
+            --muted:#71717a;
+            --soft:#a1a1aa;
+
+            --page:#f7f7fb;
+            --white:#fff;
+            --border:#e8e8ef;
+
+            --success:#16a34a;
+            --success-light:#f0fdf4;
+
+            --danger:#dc2626;
+            --danger-light:#fef2f2;
+
+            --warning:#d97706;
+            --warning-light:#fffbeb;
+
+            --shadow:
+                0 14px 42px
+                rgba(24,24,27,.07);
+
+            --radius:18px;
+
+        }
+
+
+        * {
+
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+
+        }
+
+
+        body {
+
+            min-height:100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:var(--page);
+
+            color:var(--text);
+
+        }
+
+
+        a {
+
+            text-decoration:none;
+            color:inherit;
+
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+
+            font:inherit;
+
+        }
+
+
+        button {
+
+            cursor:pointer;
+
+        }
+
+
+        /* ===================================================
+           HEADER
+        ==================================================== */
+
+        .topbar {
+
+            position:sticky;
+            top:0;
+            z-index:1000;
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:blur(16px);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .topbar-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1380px
+                );
+
+            min-height:74px;
+
+            margin:auto;
+
+            display:grid;
+
+            grid-template-columns:auto 1fr auto;
+
+            align-items:center;
+
+            gap:18px;
+
+        }
+
+
+        .brand {
+
+            display:flex;
+            align-items:center;
+            gap:9px;
+
+        }
+
+
+        .brand-logo {
+
+            width:44px;
+            height:44px;
+
+            object-fit:contain;
+
+            border-radius:11px;
+
+        }
+
+
+        .brand-name {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:25px;
+            font-weight:800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:text;
+            background-clip:text;
+
+            -webkit-text-fill-color:transparent;
+
+        }
+
+
+        .brand-tagline {
+
+            display:block;
+
+            margin-top:1px;
+
+            color:var(--soft);
+
+            font-size:7px;
+
+            letter-spacing:.9px;
+
+        }
+
+
+        .desktop-nav {
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            gap:3px;
+
+        }
+
+
+        .nav-link {
+
+            min-height:39px;
+
+            padding:0 9px;
+
+            border-radius:10px;
+
+            display:flex;
+            align-items:center;
+
+            color:var(--muted);
+
+            font-size:10px;
+            font-weight:800;
+
+            white-space:nowrap;
+
+        }
+
+
+        .nav-link:hover {
+
+            color:var(--primary);
+            background:#fafafa;
+
+        }
+
+
+        .nav-link.active {
+
+            color:var(--primary);
+            background:var(--primary-light);
+
+        }
+
+
+        .top-actions {
+
+            display:flex;
+            gap:7px;
+
+        }
+
+
+        .top-icon {
+
+            width:39px;
+            height:39px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:white;
+
+            color:var(--muted);
+
+        }
+
+
+        .top-icon:hover {
+
+            color:var(--primary);
+            background:var(--primary-light);
+
+        }
+
+
+        /* ===================================================
+           MAIN
+        ==================================================== */
+
+        main {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1080px
+                );
+
+            margin:auto;
+
+            padding:
+                32px 0 75px;
+
+        }
+
+
+        .page-head {
+
+            margin-bottom:20px;
+
+        }
+
+
+        .page-head h1 {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(30px,5vw,45px);
+
+            letter-spacing:-.8px;
+
+        }
+
+
+        .page-head p {
+
+            margin-top:7px;
+
+            color:var(--muted);
+
+            font-size:10px;
+
+        }
+
+
+        /* ===================================================
+           REPORT FORM
+        ==================================================== */
+
+        .report-layout {
+
+            display:grid;
+
+            grid-template-columns:
+                1fr
+                340px;
+
+            gap:16px;
+
+        }
+
+
+        .card {
+
+            background:white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .card-body {
+
+            padding:20px;
+
+        }
+
+
+        .card h2 {
+
+            font-size:17px;
+
+            margin-bottom:5px;
+
+        }
+
+
+        .card-intro {
+
+            color:var(--muted);
+
+            font-size:9px;
+
+            line-height:1.65;
+
+            margin-bottom:17px;
+
+        }
+
+
+        .field {
+
+            margin-bottom:14px;
+
+        }
+
+
+        .field label {
+
+            display:block;
+
+            margin-bottom:6px;
+
+            font-size:9px;
+
+            font-weight:900;
+
+        }
+
+
+        .field input,
+        .field select,
+        .field textarea {
+
+            width:100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+
+            color:var(--text);
+
+            outline:none;
+
+            padding:11px 12px;
+
+            font-size:10px;
+
+        }
+
+
+        .field textarea {
+
+            min-height:130px;
+
+            resize:vertical;
+
+        }
+
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+
+            border-color:
+                #c9b4f7;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(124,58,237,.08);
+
+        }
+
+
+        .target-help {
+
+            margin-top:6px;
+
+            color:var(--soft);
+
+            font-size:8px;
+
+        }
+
+
+        .btn {
+
+            min-height:40px;
+
+            padding:0 15px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:white;
+
+            font-size:9px;
+
+            font-weight:900;
+
+        }
+
+
+        .btn-primary {
+
+            color:white;
+
+            border-color:var(--primary);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+        }
+
+
+        .btn-primary:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary-dark),
+                    #db2777
+                );
+
+        }
+
+
+        .btn-secondary:hover {
+
+            color:var(--primary);
+
+        }
+
+
+        .form-actions {
+
+            display:flex;
+
+            justify-content:flex-end;
+
+            gap:8px;
+
+        }
+
+
+        .message {
+
+            display:none;
+
+            margin-bottom:14px;
+
+            border-radius:11px;
+
+            padding:10px 12px;
+
+            font-size:9px;
+
+            line-height:1.5;
+
+        }
+
+
+        .message.success {
+
+            display:block;
+
+            color:#166534;
+
+            background:var(--success-light);
+
+            border:1px solid #bbf7d0;
+
+        }
+
+
+        .message.error {
+
+            display:block;
+
+            color:#991b1b;
+
+            background:var(--danger-light);
+
+            border:1px solid #fecaca;
+
+        }
+
+
+        /* ===================================================
+           SAFETY CARD
+        ==================================================== */
+
+        .safety-card {
+
+            padding:20px;
+
+        }
+
+
+        .safety-item {
+
+            display:flex;
+
+            align-items:flex-start;
+
+            gap:10px;
+
+            padding:12px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .safety-item:last-child {
+
+            border-bottom:0;
+
+        }
+
+
+        .safety-icon {
+
+            width:34px;
+            height:34px;
+
+            flex:none;
+
+            display:grid;
+            place-items:center;
+
+            border-radius:10px;
+
+            background:var(--primary-light);
+
+            color:var(--primary);
+
+        }
+
+
+        .safety-item h3 {
+
+            font-size:10px;
+
+            margin-bottom:4px;
+
+        }
+
+
+        .safety-item p {
+
+            color:var(--muted);
+
+            font-size:8px;
+
+            line-height:1.6;
+
+        }
+
+
+        /* ===================================================
+           REPORT HISTORY
+        ==================================================== */
+
+        .history {
+
+            margin-top:18px;
+
+        }
+
+
+        .history-head {
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:10px;
+
+            margin-bottom:10px;
+
+        }
+
+
+        .history-head h2 {
+
+            margin:0;
+
+        }
+
+
+        .report-list {
+
+            display:grid;
+
+            gap:9px;
+
+        }
+
+
+        .report-row {
+
+            background:white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:14px;
+
+            padding:14px;
+
+            display:grid;
+
+            grid-template-columns:
+                42px
+                minmax(0,1fr)
+                auto;
+
+            gap:11px;
+
+            align-items:start;
+
+        }
+
+
+        .report-icon {
+
+            width:42px;
+            height:42px;
+
+            display:grid;
+            place-items:center;
+
+            border-radius:12px;
+
+            background:var(--primary-light);
+
+            color:var(--primary);
+
+        }
+
+
+        .report-title {
+
+            font-size:10px;
+
+            font-weight:900;
+
+        }
+
+
+        .report-desc {
+
+            margin-top:4px;
+
+            color:var(--muted);
+
+            font-size:8px;
+
+            line-height:1.5;
+
+        }
+
+
+        .report-meta {
+
+            margin-top:5px;
+
+            color:var(--soft);
+
+            font-size:7px;
+
+        }
+
+
+        .status {
+
+            padding:4px 7px;
+
+            border-radius:999px;
+
+            font-size:7px;
+
+            font-weight:900;
+
+            white-space:nowrap;
+
+        }
+
+
+        .status.pending,
+        .status.reviewing,
+        .status.open {
+
+            color:#92400e;
+
+            background:var(--warning-light);
+
+        }
+
+
+        .status.resolved,
+        .status.closed {
+
+            color:#166534;
+
+            background:var(--success-light);
+
+        }
+
+
+        .status.rejected,
+        .status.dismissed {
+
+            color:#991b1b;
+
+            background:var(--danger-light);
+
+        }
+
+
+        /* ===================================================
+           EMPTY
+        ==================================================== */
+
+        .empty {
+
+            padding:35px 20px;
+
+            text-align:center;
+
+            color:var(--muted);
+
+            background:white;
+
+            border:
+                1px dashed #dcdce5;
+
+            border-radius:16px;
+
+        }
+
+
+        .empty-icon {
+
+            width:56px;
+            height:56px;
+
+            margin:0 auto 10px;
+
+            display:grid;
+            place-items:center;
+
+            border-radius:17px;
+
+            background:var(--primary-light);
+
+            color:var(--primary);
+
+            font-size:24px;
+
+        }
+
+
+        .empty h3 {
+
+            color:var(--text);
+
+            font-size:12px;
+
+        }
+
+
+        .empty p {
+
+            margin-top:5px;
+
+            font-size:8px;
+
+        }
+
+
+        /* ===================================================
+           FOOTER
+        ==================================================== */
+
+        .footer {
+
+            background:#17151b;
+
+            color:white;
+
+        }
+
+
+        .footer-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1380px
+                );
+
+            margin:auto;
+
+            padding:38px 0 18px;
+
+        }
+
+
+        .footer-grid {
+
+            display:grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                1fr
+                1fr;
+
+            gap:30px;
+
+            padding-bottom:25px;
+
+        }
+
+
+        .footer-logo-row {
+
+            display:flex;
+            align-items:center;
+            gap:9px;
+
+        }
+
+
+        .footer-logo {
+
+            width:44px;
+            height:44px;
+
+            border-radius:11px;
+
+            object-fit:contain;
+
+        }
+
+
+        .footer-brand {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:24px;
+
+            font-weight:800;
+
+        }
+
+
+        .footer-description {
+
+            max-width:330px;
+
+            margin-top:10px;
+
+            color:#9d99a5;
+
+            font-size:9px;
+
+            line-height:1.7;
+
+        }
+
+
+        .footer-heading {
+
+            margin-bottom:9px;
+
+            font-size:10px;
+
+        }
+
+
+        .footer-links {
+
+            display:flex;
+            flex-direction:column;
+
+            gap:6px;
+
+        }
+
+
+        .footer-links a {
+
+            color:#9d99a5;
+
+            font-size:8px;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color:white;
+
+        }
+
+
+        .footer-bottom {
+
+            padding-top:15px;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            gap:10px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color:#716d78;
+
+            font-size:7px;
+
+        }
+
+
+        /* ===================================================
+           MOBILE
+        ==================================================== */
+
+        .mobile-nav {
+
+            display:none;
+
+        }
+
+
+        @media (
+            max-width:1100px
+        ) {
+
+            .desktop-nav {
+
+                display:none;
+
+            }
+
+            .mobile-nav {
+
+                display:block;
+
+                position:fixed;
+
+                left:0;
+                right:0;
+                bottom:0;
+
+                z-index:2000;
+
+                background:
+                    rgba(255,255,255,.97);
+
+                backdrop-filter:blur(16px);
+
+                border-top:
+                    1px solid var(--border);
+
+                padding:
+                    7px 7px
+                    env(safe-area-inset-bottom);
+
+            }
+
+
+            .mobile-nav-inner {
+
+                max-width:650px;
+
+                margin:auto;
+
+                display:grid;
+
+                grid-template-columns:
+                    repeat(5,1fr);
+
+                gap:4px;
+
+            }
+
+
+            .mobile-link {
+
+                min-height:50px;
+
+                display:flex;
+
+                flex-direction:column;
+
+                align-items:center;
+
+                justify-content:center;
+
+                gap:3px;
+
+                border-radius:11px;
+
+                color:#8b8b95;
+
+                font-size:8px;
+
+                font-weight:800;
+
+            }
+
+
+            .mobile-link.active {
+
+                color:var(--primary);
+
+                background:var(--primary-light);
+
+            }
+
+
+            .mobile-icon {
+
+                font-size:16px;
+
+            }
+
+
+            main {
+
+                padding-bottom:95px;
+
+            }
+
+        }
+
+
+        @media (
+            max-width:850px
+        ) {
+
+            .report-layout {
+
+                grid-template-columns:1fr;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+        }
+
+
+        @media (
+            max-width:580px
+        ) {
+
+            .brand-tagline {
+
+                display:none;
+
+            }
+
+
+            .top-actions {
+
+                display:none;
+
+            }
+
+
+            main {
+
+                width:
+                    calc(100% - 20px);
+
+                padding-top:22px;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:1fr;
+
+            }
+
+
+            .footer-bottom {
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+            }
+
+
+            .footer {
+
+                padding-bottom:80px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     HEADER
+=========================================================== -->
+
+<header class="topbar">
+
+    <div class="topbar-inner">
+
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <img
+                src="assets/logo1/LOGO1.ico"
+                alt="LOVEMI"
+                class="brand-logo"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                "
+            >
+
+
+            <span>
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <nav class="desktop-nav">
+
+            <a
+                href="dashboard.html"
+                class="nav-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="discover.html"
+                class="nav-link"
+            >
+                Discover
+            </a>
+
+            <a
+                href="connections.html"
+                class="nav-link"
+            >
+                Connections
+            </a>
+
+            <a
+                href="messages.html"
+                class="nav-link"
+            >
+                Messages
+            </a>
+
+            <a
+                href="profile.html"
+                class="nav-link"
+            >
+                Profile
+            </a>
+
+            <a
+                href="notifications.html"
+                class="nav-link"
+            >
+                Notifications
+            </a>
+
+            <a
+                href="settings.html"
+                class="nav-link"
+            >
+                Settings
+            </a>
+
+            <a
+                href="premium.html"
+                class="nav-link"
+            >
+                Premium
+            </a>
+
+        </nav>
+
+
+        <div class="top-actions">
+
+            <a
+                href="messages.html"
+                class="top-icon"
+                aria-label="Messages"
+            >
+                💬
+            </a>
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+                aria-label="Notifications"
+            >
+                🔔
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================================
+     MAIN
+=========================================================== -->
+
+<main>
+
+
+    <section class="page-head">
+
+        <h1>
+            Safety & Reports
+        </h1>
+
+        <p>
+            Help us keep LOVEMI safe by reporting harmful or
+            inappropriate activity.
+        </p>
+
+    </section>
+
+
+    <section class="report-layout">
+
+
+        <!-- ==================================================
+             REPORT FORM
+        =================================================== -->
+
+        <article class="card">
+
+            <div class="card-body">
+
+                <h2>
+                    Submit a report
+                </h2>
+
+                <p class="card-intro">
+
+                    Give us enough information to identify the
+                    account, post or message. Our administration
+                    team can review and take appropriate action.
+
+                </p>
+
+
+                <div
+                    id="formMessage"
+                    class="message"
+                ></div>
+
+
+                <form
+                    id="reportForm"
+                    novalidate
+                >
+
+
+                    <div class="field">
+
+                        <label for="targetType">
+                            What are you reporting?
+                        </label>
+
+                        <select
+                            id="targetType"
+                            name="target_type"
+                            required
+                        >
+
+                            <option value="user">
+                                User / Profile
+                            </option>
+
+                            <option value="post">
+                                Post
+                            </option>
+
+                            <option value="message">
+                                Message
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="targetId">
+                            Target ID
+                        </label>
+
+                        <input
+                            type="number"
+                            id="targetId"
+                            name="target_id"
+                            min="1"
+                            placeholder="Enter the ID"
+                            required
+                        >
+
+                        <div
+                            class="target-help"
+                            id="targetHelp"
+                        >
+                            Enter the user/profile ID.
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="reason">
+                            Reason
+                        </label>
+
+                        <select
+                            id="reason"
+                            name="reason"
+                            required
+                        >
+
+                            <option value="">
+                                Select a reason
+                            </option>
+
+                            <option value="Harassment">
+                                Harassment
+                            </option>
+
+                            <option value="Impersonation">
+                                Impersonation
+                            </option>
+
+                            <option value="Spam">
+                                Spam
+                            </option>
+
+                            <option value="Scam or fraud">
+                                Scam or fraud
+                            </option>
+
+                            <option value="Inappropriate content">
+                                Inappropriate content
+                            </option>
+
+                            <option value="Threatening behavior">
+                                Threatening behavior
+                            </option>
+
+                            <option value="Fake profile">
+                                Fake profile
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            maxlength="5000"
+                            placeholder="Tell us what happened..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="reset"
+                            class="btn btn-secondary"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="submitButton"
+                        >
+                            Submit Report
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </article>
+
+
+        <!-- ==================================================
+             SAFETY INFORMATION
+        =================================================== -->
+
+        <aside class="card safety-card">
+
+
+            <h2>
+                Stay safe
+            </h2>
+
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    🛡️
+                </div>
+
+                <div>
+
+                    <h3>
+                        Report suspicious activity
+                    </h3>
+
+                    <p>
+                        Report accounts or content that appears
+                        unsafe, deceptive or inappropriate.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    🚫
+                </div>
+
+                <div>
+
+                    <h3>
+                        Block users when necessary
+                    </h3>
+
+                    <p>
+                        Use the blocking feature when you no
+                        longer want interaction with another
+                        member.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    🔐
+                </div>
+
+                <div>
+
+                    <h3>
+                        Protect private information
+                    </h3>
+
+                    <p>
+                        Never post your password or other sensitive
+                        account credentials in messages or reports.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </section>
+
+
+    <!-- =======================================================
+         REPORT HISTORY
+    ======================================================== -->
+
+    <section class="history">
+
+
+        <div class="history-head">
+
+            <h2>
+                My reports
+            </h2>
+
+            <button
+                type="button"
+                class="btn"
+                id="refreshReports"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div id="reportList">
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Loading reports...
+                </h3>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================================
+     FOOTER
+=========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <div class="footer-logo-row">
+
+                    <img
+                        src="assets/logo1/LOGO1.ico"
+                        alt="LOVEMI"
+                        class="footer-logo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        "
+                    >
+
+                    <span class="footer-brand">
+                        LOVEMI
+                    </span>
+
+                </div>
+
+
+                <p class="footer-description">
+
+                    Discover approved profiles, build meaningful
+                    connections and use LOVEMI services securely.
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+                    <a href="payments.html">
+                        Payments
+                    </a>
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                ©
+                <span id="footerYear"></span>
+                LOVEMI. All rights reserved.
+            </span>
+
+            <span>
+                Discover • Connect • Meet
+            </span>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================================
+     MOBILE NAV
+=========================================================== -->
+
+<nav
+    class="mobile-nav"
+    aria-label="Mobile navigation"
+>
+
+    <div class="mobile-nav-inner">
+
+
+        <a
+            href="dashboard.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-icon">
+                🏠
+            </span>
+
+            Dashboard
+
+        </a>
+
+
+        <a
+            href="discover.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-icon">
+                🔎
+            </span>
+
+            Discover
+
+        </a>
+
+
+        <a
+            href="connections.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-icon">
+                ❤️
+            </span>
+
+            Connect
+
+        </a>
+
+
+        <a
+            href="messages.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-icon">
+                💬
+            </span>
+
+            Messages
+
+        </a>
+
+
+        <a
+            href="reports.html"
+            class="mobile-link active"
+        >
+
+            <span class="mobile-icon">
+                🛡️
+            </span>
+
+            Reports
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<script>
+
+/* ============================================================
+   API
+============================================================ */
+
+const REPORT_API = {
+
+    create:
+        'api/reports/create.php',
+
+    list:
+        'api/reports/list.php'
+
+};
+
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const form =
+    document.getElementById(
+        'reportForm'
+    );
+
+
+const targetType =
+    document.getElementById(
+        'targetType'
+    );
+
+
+const targetId =
+    document.getElementById(
+        'targetId'
+    );
+
+
+const targetHelp =
+    document.getElementById(
+        'targetHelp'
+    );
+
+
+const formMessage =
+    document.getElementById(
+        'formMessage'
+    );
+
+
+const submitButton =
+    document.getElementById(
+        'submitButton'
+    );
+
+
+const reportList =
+    document.getElementById(
+        'reportList'
+    );
+
+
+document.getElementById(
+    'footerYear'
+).textContent =
+    new Date().getFullYear();
+
+
+/* ============================================================
+   URL TARGET
+============================================================ */
+
+function loadTargetFromUrl() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const reportedUserId =
+        params.get(
+            'reported_user_id'
+        );
+
+
+    const postId =
+        params.get(
+            'post_id'
+        );
+
+
+    const messageId =
+        params.get(
+            'message_id'
+        );
+
+
+    if (
+        reportedUserId
+    ) {
+
+        targetType.value =
+            'user';
+
+        targetId.value =
+            reportedUserId;
+
+        updateTargetHelp();
+
+    }
+
+
+    if (
+        postId
+    ) {
+
+        targetType.value =
+            'post';
+
+        targetId.value =
+            postId;
+
+        updateTargetHelp();
+
+    }
+
+
+    if (
+        messageId
+    ) {
+
+        targetType.value =
+            'message';
+
+        targetId.value =
+            messageId;
+
+        updateTargetHelp();
+
+    }
+
+}
+
+
+function updateTargetHelp() {
+
+    const type =
+        targetType.value;
+
+
+    if (
+        type === 'user'
+    ) {
+
+        targetHelp.textContent =
+            'Enter the user/profile ID.';
+
+    }
+    else if (
+        type === 'post'
+    ) {
+
+        targetHelp.textContent =
+            'Enter the post ID.';
+
+    }
+    else {
+
+        targetHelp.textContent =
+            'Enter the message ID.';
+
+    }
+
+}
+
+
+targetType.addEventListener(
+    'change',
+    updateTargetHelp
+);
+
+
+/* ============================================================
+   MESSAGE
+============================================================ */
+
+function showMessage(
+    text,
+    type
+) {
+
+    formMessage.textContent =
+        text;
+
+    formMessage.className =
+        'message '
+        +
+        type;
+
+}
+
+
+function clearMessage() {
+
+    formMessage.textContent =
+        '';
+
+    formMessage.className =
+        'message';
+
+}
+
+
+/* ============================================================
+   SUBMIT REPORT
+============================================================ */
+
+form.addEventListener(
+    'submit',
+    async function(event) {
+
+        event.preventDefault();
+
+        clearMessage();
+
+
+        const type =
+            targetType.value;
+
+        const id =
+            Number(
+                targetId.value
+            );
+
+        const reason =
+            document.getElementById(
+                'reason'
+            ).value;
+
+        const description =
+            document.getElementById(
+                'description'
+            ).value.trim();
+
+
+        if (
+            !id
+            ||
+            id < 1
+        ) {
+
+            showMessage(
+                'Please enter a valid target ID.',
+                'error'
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !reason
+        ) {
+
+            showMessage(
+                'Please select a report reason.',
+                'error'
+            );
+
+            return;
+
+        }
+
+
+        const payload = {
+
+
+            reported_user_id:
+                type === 'user'
+                    ? id
+                    : null,
+
+
+            post_id:
+                type === 'post'
+                    ? id
+                    : null,
+
+
+            message_id:
+                type === 'message'
+                    ? id
+                    : null,
+
+
+            reason:
+                reason,
+
+
+            description:
+                description
+
+        };
+
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.textContent =
+            'Submitting...';
+
+
+        try {
+
+            const response =
+                await fetch(
+                    REPORT_API.create,
+                    {
+
+                        method:
+                            'POST',
+
+                        credentials:
+                            'same-origin',
+
+                        cache:
+                            'no-store',
+
+                        headers: {
+
+                            'Content-Type':
+                                'application/json',
+
+                            'Accept':
+                                'application/json'
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                response.status ===
+                401
+            ) {
+
+                window.location.href =
+                    'login.html?return='
+                    +
+                    encodeURIComponent(
+                        'reports.html'
+                    );
+
+                return;
+
+            }
+
+
+            if (
+                !response.ok
+                ||
+                data.success !== true
+            ) {
+
+                throw new Error(
+                    data.message
+                    ||
+                    'Unable to submit report.'
+                );
+
+            }
+
+
+            showMessage(
+                data.message
+                ||
+                'Report submitted successfully.',
+                'success'
+            );
+
+
+            form.reset();
+
+            updateTargetHelp();
+
+
+            loadReports();
+
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+                error.message
+                ||
+                'Unable to submit report.',
+                'error'
+            );
+
+        } finally {
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                'Submit Report';
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   STATUS
+============================================================ */
+
+function statusClass(
+    status
+) {
+
+    const value =
+        String(
+            status || ''
+        ).toLowerCase();
+
+
+    return [
+
+        'pending',
+        'reviewing',
+        'resolved',
+        'rejected',
+        'dismissed',
+        'closed',
+        'open'
+
+    ].includes(value)
+
+        ? value
+
+        : 'pending';
+
+}
+
+
+/* ============================================================
+   LOAD REPORTS
+============================================================ */
+
+async function loadReports() {
+
+    reportList.innerHTML = `
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h3>
+                Loading your reports...
+            </h3>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                REPORT_API.list
+                +
+                '?limit=50&offset=0&_='
+                +
+                Date.now(),
+                {
+
+                    method:
+                        'GET',
+
+                    credentials:
+                        'same-origin',
+
+                    cache:
+                        'no-store',
+
+                    headers: {
+
+                        'Accept':
+                            'application/json'
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                'login.html?return=reports.html';
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            data.success !== true
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                'Unable to load reports.'
+            );
+
+        }
+
+
+        const reports =
+            Array.isArray(
+                data.reports
+            )
+                ?
+                data.reports
+                :
+                [];
+
+
+        if (
+            reports.length === 0
+        ) {
+
+            reportList.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ✅
+                    </div>
+
+                    <h3>
+                        No reports yet
+                    </h3>
+
+                    <p>
+                        Reports you submit will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        reportList.innerHTML = `
+
+            <div class="report-list">
+
+                ${
+                    reports
+                        .map(
+                            renderReport
+                        )
+                        .join('')
+                }
+
+            </div>
+
+        `;
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        reportList.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Unable to load reports
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                        ||
+                        'Please try again.'
+                    )}
+                </p>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    style="margin-top:12px;"
+                    onclick="loadReports()"
+                >
+                    Try again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER REPORT
+============================================================ */
+
+function renderReport(
+    report
+) {
+
+    const target =
+        report.target
+        ||
+        {};
+
+
+    let targetText =
+        'LOVEMI item';
+
+
+    if (
+        target.reported_username
+    ) {
+
+        targetText =
+            '@'
+            +
+            target.reported_username;
+
+    }
+    else if (
+        target.reported_full_names
+    ) {
+
+        targetText =
+            target.reported_full_names;
+
+    }
+    else if (
+        target.post_id
+    ) {
+
+        targetText =
+            'Post #'
+            +
+            target.post_id;
+
+    }
+    else if (
+        target.message_id
+    ) {
+
+        targetText =
+            'Message #'
+            +
+            target.message_id;
+
+    }
+
+
+    return `
+
+        <article class="report-row">
+
+            <div class="report-icon">
+                🛡️
+            </div>
+
+
+            <div>
+
+                <div class="report-title">
+
+                    Report #${Number(
+                        report.id
+                    )}
+
+                    ·
+
+                    ${escapeHtml(
+                        report.reason
+                    )}
+
+                </div>
+
+
+                <div class="report-desc">
+
+                    ${escapeHtml(
+                        targetText
+                    )}
+
+                    ${
+                        report.description
+                        ?
+                        ' — '
+                        +
+                        escapeHtml(
+                            report.description
+                        )
+                        :
+                        ''
+                    }
+
+                </div>
+
+
+                <div class="report-meta">
+
+                    Submitted:
+                    ${escapeHtml(
+                        formatDate(
+                            report.created_at
+                        )
+                    )}
+
+                    ${
+                        report.review.resolution
+                        ?
+                        `
+                            <br>
+                            Resolution:
+                            ${escapeHtml(
+                                report.review.resolution
+                            )}
+                        `
+                        :
+                        ''
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span
+                    class="
+                        status
+                        ${statusClass(
+                            report.status
+                        )}
+                    "
+                >
+                    ${escapeHtml(
+                        String(
+                            report.status
+                        ).replace(
+                            /^./,
+                            char =>
+                                char.toUpperCase()
+                        )
+                    )}
+                </span>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ''
+    )
+    .replace(
+        /&/g,
+        '&amp;'
+    )
+    .replace(
+        /</g,
+        '&lt;'
+    )
+    .replace(
+        />/g,
+        '&gt;'
+    )
+    .replace(
+        /"/g,
+        '&quot;'
+    )
+    .replace(
+        /'/g,
+        '&#039;'
+    );
+
+}
+
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+
+        return '';
+
+    }
+
+
+    const date =
+        new Date(
+            String(
+                value
+            ).replace(
+                ' ',
+                'T'
+            )
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleString(
+        undefined,
+        {
+            dateStyle:
+                'medium',
+
+            timeStyle:
+                'short'
+        }
+    );
+
+}
+
+
+/* ============================================================
+   BUTTON
+============================================================ */
+
+document.getElementById(
+    'refreshReports'
+).addEventListener(
+    'click',
+    loadReports
+);
+
+
+/* ============================================================
+   START
+============================================================ */
+
+loadTargetFromUrl();
+
+updateTargetHelp();
+
+loadReports();
+
+</script>
+
+
+</body>
+
+</html>

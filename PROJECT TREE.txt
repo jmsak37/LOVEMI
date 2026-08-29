@@ -1,0 +1,577 @@
+LOVEMI/
+│
+├── index.html
+├── login.html
+├── registration.html
+├── forgot-password.html
+├── verify-account.html
+├── reset-password.html
+├── dashboard.html
+├── discover.html
+├── profile.html
+├── edit-profile.html
+├── connections.html
+├── messages.html
+├── premium.html
+├── payments.html
+├── notifications.html
+├── settings.html
+├── privacy.html
+├── terms.html
+├── help.html
+├── about.html
+├── contact.html
+├── blocked-users.html
+├── reports.html
+├── error.html
+│
+├── admin/
+│   │
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── users.html
+│   ├── user-details.html
+│   ├── admins.html
+│   ├── admin-details.html
+│   ├── roles.html
+│   ├── permissions.html
+│   │
+│   ├── profiles.html
+│   ├── photos.html
+│   ├── posts.html
+│   ├── post-details.html
+│   │
+│   ├── connections.html
+│   ├── conversations.html
+│   ├── messages.html
+│   │
+│   ├── premium-users.html
+│   ├── subscriptions.html
+│   ├── payments.html
+│   ├── payment-details.html
+│   │
+│   ├── services.html
+│   ├── service-details.html
+│   │
+│   ├── countries.html
+│   ├── currencies.html
+│   ├── exchange-rates.html
+│   │
+│   ├── notifications.html
+│   ├── notification-types.html
+│   ├── audio-notifications.html
+│   │
+│   ├── reports.html
+│   ├── report-details.html
+│   ├── blocked-users.html
+│   │
+│   ├── verification.html
+│   ├── pending-accounts.html
+│   ├── pending-posts.html
+│   ├── pending-photos.html
+│   │
+│   ├── audit-logs.html
+│   ├── login-logs.html
+│   ├── system-settings.html
+│   ├── backup.html
+│   └── profile.html
+│
+├── api/
+│   │
+│   ├── auth/
+│   │   ├── login.php
+│   │   ├── logout.php
+│   │   ├── registration.php
+│   │   ├── check-admin-exists.php
+│   │   ├── verify-email.php
+│   │   ├── resend-email-code.php
+│   │   ├── verify-phone.php
+│   │   ├── resend-phone-code.php
+│   │   ├── forgot-password.php
+│   │   ├── verify-reset.php
+│   │   ├── reset-password.php
+│   │   ├── change-password.php
+│   │   └── session.php
+│   │
+│   ├── users/
+│   │   ├── get-user.php
+│   │   ├── get-profile.php
+│   │   ├── update-profile.php
+│   │   ├── upload-profile-photo.php
+│   │   ├── delete-profile-photo.php
+│   │   ├── update-privacy.php
+│   │   ├── online-status.php
+│   │   └── delete-account.php
+│   │
+│   ├── discover/
+│   │   ├── list-users.php
+│   │   ├── search-users.php
+│   │   ├── filter-users.php
+│   │   └── profile-view.php
+│   │
+│   ├── posts/
+│   │   ├── create.php
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── update.php
+│   │   ├── delete.php
+│   │   ├── upload-photo.php
+│   │   └── report.php
+│   │
+│   ├── connections/
+│   │   ├── create.php
+│   │   ├── list.php
+│   │   ├── pending.php
+│   │   ├── accept.php
+│   │   ├── reject.php
+│   │   ├── cancel.php
+│   │   ├── block.php
+│   │   └── unblock.php
+│   │
+│   ├── chat/
+│   │   ├── create-conversation.php
+│   │   ├── conversations.php
+│   │   ├── messages.php
+│   │   ├── send-message.php
+│   │   ├── delete-message.php
+│   │   ├── mark-read.php
+│   │   ├── typing.php
+│   │   ├── online.php
+│   │   └── report-message.php
+│   │
+│   ├── premium/
+│   │   ├── status.php
+│   │   ├── services.php
+│   │   ├── subscribe.php
+│   │   ├── renew.php
+│   │   ├── history.php
+│   │   ├── check-access.php
+│   │   └── expire.php
+│   │
+│   ├── payments/
+│   │   ├── initiate.php
+│   │   ├── callback.php
+│   │   ├── verify.php
+│   │   ├── status.php
+│   │   └── receipt.php
+│   │
+│   ├── notifications/
+│   │   ├── list.php
+│   │   ├── unread-count.php
+│   │   ├── mark-read.php
+│   │   ├── mark-all-read.php
+│   │   └── play-sound.php
+│   │
+│   ├── countries/
+│   │   ├── list.php
+│   │   └── phone-code.php
+│   │
+│   ├── currencies/
+│   │   ├── list.php
+│   │   ├── rate.php
+│   │   └── convert.php
+│   │
+│   ├── reports/
+│   │   ├── create.php
+│   │   ├── list.php
+│   │   └── status.php
+│   │
+│   └── settings/
+│       ├── get.php
+│       └── update.php
+│
+├── admin-api/
+│   │
+│   ├── dashboard.php
+│   │
+│   ├── users/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   ├── suspend.php
+│   │   ├── activate.php
+│   │   ├── delete.php
+│   │   ├── verify.php
+│   │   └── reset-password.php
+│   │
+│   ├── admins/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   ├── suspend.php
+│   │   ├── activate.php
+│   │   └── delete.php
+│   │
+│   ├── roles/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── permissions/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── profiles/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── photos/
+│   │   ├── list.php
+│   │   ├── approve.php
+│   │   ├── reject.php
+│   │   ├── delete.php
+│   │   └── feature.php
+│   │
+│   ├── posts/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── approve.php
+│   │   ├── reject.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── connections/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── delete.php
+│   │   └── block.php
+│   │
+│   ├── messages/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── send.php
+│   │   └── delete.php
+│   │
+│   ├── premium/
+│   │   ├── list.php
+│   │   ├── activate.php
+│   │   ├── deactivate.php
+│   │   ├── extend.php
+│   │   └── expire.php
+│   │
+│   ├── payments/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── verify.php
+│   │   ├── refund.php
+│   │   └── receipt.php
+│   │
+│   ├── services/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   ├── delete.php
+│   │   ├── activate.php
+│   │   └── deactivate.php
+│   │
+│   ├── countries/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── currencies/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── exchange-rates/
+│   │   ├── list.php
+│   │   ├── update.php
+│   │   └── refresh.php
+│   │
+│   ├── notifications/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   ├── delete.php
+│   │   └── send.php
+│   │
+│   ├── audio/
+│   │   ├── list.php
+│   │   ├── upload.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── reports/
+│   │   ├── list.php
+│   │   ├── get.php
+│   │   ├── review.php
+│   │   ├── resolve.php
+│   │   └── delete.php
+│   │
+│   ├── settings/
+│   │   ├── get.php
+│   │   └── update.php
+│   │
+│   ├── audit/
+│   │   ├── logs.php
+│   │   ├── login-logs.php
+│   │   └── activity.php
+│   │
+│   └── backup/
+│       ├── create.php
+│       └── list.php
+│
+├── config/
+│   ├── database.php
+│   ├── app.php
+│   └── constants.php
+│
+├── includes/
+│   ├── auth.php
+│   ├── session.php
+│   ├── permissions.php
+│   ├── admin-auth.php
+│   ├── security.php
+│   ├── csrf.php
+│   ├── validation.php
+│   ├── functions.php
+│   ├── response.php
+│   ├── upload.php
+│   ├── premium.php
+│   ├── subscriptions.php
+│   ├── payments.php
+│   ├── notifications.php
+│   ├── messaging.php
+│   ├── connections.php
+│   ├── currency.php
+│   ├── country.php
+│   ├── email.php
+│   ├── sms.php
+│   └── audit.php
+│
+├── css/
+│   ├── style.css
+│   ├── reset.css
+│   ├── variables.css
+│   ├── auth.css
+│   ├── registration.css
+│   ├── dashboard.css
+│   ├── discover.css
+│   ├── profile.css
+│   ├── connections.css
+│   ├── chat.css
+│   ├── premium.css
+│   ├── payments.css
+│   ├── notifications.css
+│   ├── settings.css
+│   ├── admin.css
+│   ├── tables.css
+│   ├── modals.css
+│   ├── forms.css
+│   ├── alerts.css
+│   └── responsive.css
+│
+├── js/
+│   ├── app.js
+│   ├── utils.js
+│   ├── api.js
+│   │
+│   ├── auth/
+│   │   ├── login.js
+│   │   ├── registration.js
+│   │   ├── forgot-password.js
+│   │   ├── verify-account.js
+│   │   └── reset-password.js
+│   │
+│   ├── dashboard/
+│   │   ├── dashboard.js
+│   │   ├── discover.js
+│   │   ├── profile.js
+│   │   └── feed.js
+│   │
+│   ├── chat/
+│   │   ├── chat.js
+│   │   ├── messages.js
+│   │   └── typing.js
+│   │
+│   ├── connections/
+│   │   ├── connections.js
+│   │   └── connect.js
+│   │
+│   ├── premium/
+│   │   ├── premium.js
+│   │   ├── subscription.js
+│   │   └── payment.js
+│   │
+│   ├── notifications/
+│   │   ├── notifications.js
+│   │   └── sounds.js
+│   │
+│   ├── profile/
+│   │   ├── profile.js
+│   │   ├── edit-profile.js
+│   │   └── upload-photo.js
+│   │
+│   ├── country/
+│   │   └── country.js
+│   │
+│   ├── currency/
+│   │   └── currency.js
+│   │
+│   └── admin/
+│       ├── admin.js
+│       ├── users.js
+│       ├── posts.js
+│       ├── photos.js
+│       ├── payments.js
+│       ├── subscriptions.js
+│       ├── services.js
+│       ├── notifications.js
+│       ├── reports.js
+│       ├── countries.js
+│       ├── currencies.js
+│       ├── exchange-rates.js
+│       ├── audio.js
+│       ├── admins.js
+│       ├── roles.js
+│       ├── permissions.js
+│       └── audit-logs.js
+│
+├── assets/
+│   │
+│   ├── logo1/
+│   │   ├── logo1.png
+│   │   ├── logo1.svg
+│   │   ├── logo1-white.png
+│   │   ├── logo1-dark.png
+│   │   └── favicon.png
+│   │
+│   ├── icons/
+│   │   ├── notification.svg
+│   │   ├── message.svg
+│   │   ├── premium.svg
+│   │   ├── profile.svg
+│   │   ├── search.svg
+│   │   └── settings.svg
+│   │
+│   ├── audio/
+│   │   ├── notification1.mp3
+│   │   ├── notification2.mp3
+│   │   ├── notification3.mp3
+│   │   ├── notification4.mp3
+│   │   ├── notification5.mp3
+│   │   ├── notification6.mp3
+│   │   ├── notification7.mp3
+│   │   ├── notification8.mp3
+│   │   └── notification9.mp3
+│   │
+│   ├── images/
+│   │   ├── defaults/
+│   │   │   ├── default-avatar-male.png
+│   │   │   ├── default-avatar-female.png
+│   │   │   └── default-cover.png
+│   │   │
+│   │   ├── backgrounds/
+│   │   ├── banners/
+│   │   └── icons/
+│   │
+│   └── fonts/
+│
+├── uploads/
+│   │
+│   ├── profiles/
+│   │   ├── original/
+│   │   ├── thumbnails/
+│   │   └── approved/
+│   │
+│   ├── posts/
+│   │   ├── original/
+│   │   ├── thumbnails/
+│   │   └── approved/
+│   │
+│   ├── chat/
+│   │   ├── images/
+│   │   └── files/
+│   │
+│   ├── documents/
+│   │
+│   └── admin/
+│       └── audio/
+│
+├── database/
+│   │
+│   ├── schema.sql
+│   ├── seed.sql
+│   ├── indexes.sql
+│   ├── views.sql
+│   ├── triggers.sql
+│   │
+│   └── migrations/
+│       ├── 001_create_roles.sql
+│       ├── 002_create_permissions.sql
+│       ├── 003_create_users.sql
+│       ├── 004_create_profiles.sql
+│       ├── 005_create_countries.sql
+│       ├── 006_create_currencies.sql
+│       ├── 007_create_exchange_rates.sql
+│       ├── 008_create_photos.sql
+│       ├── 009_create_posts.sql
+│       ├── 010_create_connections.sql
+│       ├── 011_create_conversations.sql
+│       ├── 012_create_messages.sql
+│       ├── 013_create_services.sql
+│       ├── 014_create_subscriptions.sql
+│       ├── 015_create_payments.sql
+│       ├── 016_create_notifications.sql
+│       ├── 017_create_reports.sql
+│       ├── 018_create_blocks.sql
+│       ├── 019_create_verifications.sql
+│       ├── 020_create_password_resets.sql
+│       ├── 021_create_audit_logs.sql
+│       └── 022_create_system_settings.sql
+│
+├── cron/
+│   │
+│   ├── premium-expiry.php
+│   ├── premium-reminders.php
+│   ├── notification-dispatch.php
+│   ├── exchange-rate-update.php
+│   ├── cleanup-expired-codes.php
+│   ├── cleanup-expired-sessions.php
+│   ├── cleanup-temporary-files.php
+│   └── daily-maintenance.php
+│
+├── services/
+│   │
+│   ├── payment/
+│   │   ├── payment-gateway.php
+│   │   ├── mpesa.php
+│   │   ├── card.php
+│   │   └── paypal.php
+│   │
+│   ├── currency/
+│   │   └── exchange-rate-service.php
+│   │
+│   ├── notifications/
+│   │   ├── notification-service.php
+│   │   └── sound-service.php
+│   │
+│   ├── email/
+│   │   └── email-service.php
+│   │
+│   └── sms/
+│       └── sms-service.php
+│
+├── storage/
+│   ├── logs/
+│   │   ├── app.log
+│   │   ├── error.log
+│   │   ├── payment.log
+│   │   └── security.log
+│   │
+│   └── temp/
+│
+├── .htaccess
+├── robots.txt
+├── favicon.ico
+├── README.md
+└── LICENSE

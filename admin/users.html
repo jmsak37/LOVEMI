@@ -1,0 +1,4546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <title>Users | LOVEMI Admin</title>
+
+
+    <!-- =====================================================
+         TAB ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+
+    <!-- =====================================================
+         NO CACHE
+    ====================================================== -->
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+
+    <style>
+
+        :root {
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
+            --accent:#db2777;
+            --green:#16a34a;
+            --green-soft:#ecfdf5;
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+            --orange:#d97706;
+            --orange-soft:#fffbeb;
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9696a1;
+            --background:#f6f6fa;
+            --white:#ffffff;
+            --border:#e8e8ef;
+            --sidebar:258px;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body {
+            min-height:100vh;
+            font-family:Inter,sans-serif;
+            color:var(--text);
+            background:var(--background);
+            line-height:1.5;
+        }
+
+        a {
+            color:inherit;
+            text-decoration:none;
+        }
+
+        button,
+        input,
+        select {
+            font-family:inherit;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+        .sidebar {
+            position:fixed;
+            inset:0 auto 0 0;
+            width:var(--sidebar);
+            z-index:1200;
+            overflow-y:auto;
+            color:white;
+            background:#16131e;
+        }
+
+        .sidebar-header {
+            min-height:82px;
+            padding:17px 18px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            border-bottom:1px solid rgba(255,255,255,.06);
+        }
+
+        .sidebar-logo {
+            width:46px;
+            height:46px;
+            object-fit:contain;
+            border-radius:12px;
+        }
+
+        .sidebar-title {
+            font-family:"Playfair Display",serif;
+            font-size:22px;
+            font-weight:800;
+        }
+
+        .sidebar-subtitle {
+            display:block;
+            color:#9f9ba9;
+            font-size:8px;
+            letter-spacing:.7px;
+            font-weight:700;
+        }
+
+        .admin-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            margin:16px;
+            padding:7px 10px;
+            border:1px solid rgba(255,255,255,.1);
+            border-radius:999px;
+            color:#e9ddff;
+            background:rgba(109,40,217,.16);
+            font-size:9px;
+            font-weight:800;
+        }
+
+        .sidebar-section {
+            padding:4px 12px;
+        }
+
+        .sidebar-label {
+            padding:12px 10px 7px;
+            color:#716c7d;
+            font-size:8px;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .sidebar-link {
+            display:flex;
+            align-items:center;
+            gap:11px;
+            margin:2px 0;
+            padding:10px 11px;
+            border-radius:10px;
+            color:#b7b1c2;
+            font-size:9px;
+            font-weight:600;
+            transition:.2s ease;
+        }
+
+        .sidebar-link i {
+            width:17px;
+            text-align:center;
+        }
+
+        .sidebar-link:hover {
+            color:#fff;
+            background:rgba(255,255,255,.06);
+        }
+
+        .sidebar-link.active {
+            color:#fff;
+            background:linear-gradient(
+                135deg,
+                rgba(109,40,217,.78),
+                rgba(219,39,119,.58)
+            );
+        }
+
+        .main {
+            min-height:100vh;
+            margin-left:var(--sidebar);
+        }
+
+        .topbar {
+            position:sticky;
+            top:0;
+            z-index:900;
+            min-height:76px;
+            padding:0 28px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
+            border-bottom:1px solid var(--border);
+            background:rgba(255,255,255,.96);
+            backdrop-filter:blur(14px);
+        }
+
+        .topbar-left {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .menu-btn {
+            display:none;
+            width:40px;
+            height:40px;
+            place-items:center;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:white;
+        }
+
+        .page-title h1 {
+            font-size:18px;
+            font-weight:800;
+        }
+
+        .page-title p {
+            margin-top:2px;
+            color:var(--text-muted);
+            font-size:9px;
+        }
+
+        .topbar-right {
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .top-icon {
+            width:38px;
+            height:38px;
+            display:grid;
+            place-items:center;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:#fff;
+            color:var(--text-soft);
+        }
+
+        .admin-user {
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding-left:10px;
+            border-left:1px solid var(--border);
+        }
+
+        .admin-avatar {
+            width:37px;
+            height:37px;
+            object-fit:cover;
+            border-radius:50%;
+        }
+
+        .admin-user strong {
+            display:block;
+            font-size:8px;
+        }
+
+        .admin-user span {
+            display:block;
+            color:var(--text-muted);
+            font-size:7px;
+        }
+
+        .content {
+            width:min(calc(100% - 48px),1500px);
+            margin:auto;
+            padding:28px 0 55px;
+        }
+
+        .heading-row {
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+            gap:18px;
+            margin-bottom:18px;
+        }
+
+        .heading-row h2 {
+            font-size:23px;
+            font-weight:800;
+        }
+
+        .heading-row p {
+            margin-top:4px;
+            color:var(--text-muted);
+            font-size:9px;
+        }
+
+        .btn {
+            min-height:42px;
+            padding:0 14px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            border:none;
+            border-radius:10px;
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .btn-primary {
+            color:#fff;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+        }
+
+        .btn-light {
+            color:var(--text-soft);
+            background:#fff;
+            border:1px solid var(--border);
+        }
+
+        .btn-danger {
+            color:#fff;
+            background:var(--red);
+        }
+
+        .alert {
+            display:none;
+            padding:12px 14px;
+            margin-bottom:16px;
+            border-radius:11px;
+            font-size:9px;
+        }
+
+        .alert.show {
+            display:block;
+        }
+
+        .alert.error {
+            color:#991b1b;
+            background:var(--red-soft);
+            border:1px solid #fecaca;
+        }
+
+        .alert.success {
+            color:#166534;
+            background:var(--green-soft);
+            border:1px solid #bbf7d0;
+        }
+
+        .stats {
+            display:grid;
+            grid-template-columns:repeat(5,minmax(0,1fr));
+            gap:12px;
+            margin-bottom:16px;
+        }
+
+        .stat-card {
+            padding:18px;
+            border:1px solid var(--border);
+            border-radius:15px;
+            background:#fff;
+            box-shadow:0 7px 22px rgba(0,0,0,.04);
+        }
+
+        .stat-top {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+
+        .stat-card span {
+            display:block;
+            color:var(--text-muted);
+            font-size:8px;
+        }
+
+        .stat-card strong {
+            display:block;
+            margin-top:6px;
+            font-size:21px;
+        }
+
+        .stat-icon {
+            width:35px;
+            height:35px;
+            display:grid;
+            place-items:center;
+            border-radius:10px;
+            color:var(--primary);
+            background:var(--primary-soft);
+            font-size:10px;
+        }
+
+        .filter-card,
+        .table-card {
+            overflow:hidden;
+            border:1px solid var(--border);
+            border-radius:17px;
+            background:#fff;
+            box-shadow:0 10px 30px rgba(0,0,0,.05);
+        }
+
+        .filter-card {
+            padding:14px;
+            margin-bottom:16px;
+        }
+
+        .filters {
+            display:grid;
+            grid-template-columns:minmax(260px,1fr) 180px 180px 180px 42px;
+            gap:9px;
+        }
+
+        .field {
+            width:100%;
+            height:42px;
+            padding:0 12px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            outline:none;
+            background:white;
+            font-size:8px;
+        }
+
+        .field:focus {
+            border-color:#c4b5fd;
+            box-shadow:0 0 0 4px rgba(109,40,217,.05);
+        }
+
+        .refresh-btn {
+            width:42px;
+            height:42px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:#fff;
+        }
+
+        .table-header {
+            min-height:62px;
+            padding:0 18px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            border-bottom:1px solid #f0f0f4;
+        }
+
+        .table-header h3 {
+            font-size:11px;
+            font-weight:800;
+        }
+
+        .table-header span {
+            display:block;
+            color:var(--text-muted);
+            font-size:7px;
+        }
+
+        .table-wrap {
+            overflow-x:auto;
+        }
+
+        table {
+            width:100%;
+            min-width:1280px;
+            border-collapse:collapse;
+        }
+
+        th {
+            padding:11px 13px;
+            text-align:left;
+            color:var(--text-muted);
+            background:#fafafd;
+            border-bottom:1px solid var(--border);
+            font-size:7px;
+            text-transform:uppercase;
+            letter-spacing:.4px;
+        }
+
+        td {
+            padding:11px 13px;
+            border-bottom:1px solid #f0f0f4;
+            color:#4f5159;
+            font-size:8px;
+            vertical-align:middle;
+        }
+
+        .user-cell {
+            display:flex;
+            align-items:center;
+            gap:9px;
+        }
+
+        .user-avatar {
+            width:40px;
+            height:40px;
+            object-fit:cover;
+            border-radius:50%;
+            background:var(--primary-soft);
+        }
+
+        .user-name strong {
+            display:block;
+            color:var(--text);
+            font-size:8px;
+        }
+
+        .user-name span {
+            display:block;
+            color:var(--text-muted);
+            font-size:7px;
+        }
+
+        .pill {
+            display:inline-flex;
+            align-items:center;
+            gap:4px;
+            padding:5px 8px;
+            border-radius:999px;
+            font-size:6px;
+            font-weight:800;
+        }
+
+        .pill.green {
+            color:var(--green);
+            background:var(--green-soft);
+        }
+
+        .pill.red {
+            color:var(--red);
+            background:var(--red-soft);
+        }
+
+        .pill.orange {
+            color:var(--orange);
+            background:var(--orange-soft);
+        }
+
+        .pill.blue {
+            color:var(--blue);
+            background:var(--blue-soft);
+        }
+
+        .pill.gray {
+            color:var(--text-soft);
+            background:#f3f4f6;
+        }
+
+        .action-group {
+            display:flex;
+            gap:5px;
+        }
+
+        .action {
+            width:31px;
+            height:31px;
+            display:grid;
+            place-items:center;
+            border:1px solid var(--border);
+            border-radius:9px;
+            background:white;
+            color:var(--text-soft);
+        }
+
+        .action:hover {
+            color:var(--primary);
+            border-color:#d9cef3;
+        }
+
+        .action.danger:hover {
+            color:var(--red);
+            border-color:#fecaca;
+            background:var(--red-soft);
+        }
+
+        .loading,
+        .empty {
+            padding:60px 20px;
+            text-align:center;
+            color:var(--text-muted);
+            font-size:9px;
+        }
+
+        .pagination {
+            min-height:64px;
+            padding:0 18px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .pagination-info {
+            color:var(--text-muted);
+            font-size:8px;
+        }
+
+        .pages {
+            display:flex;
+            gap:5px;
+        }
+
+        .page-btn {
+            width:31px;
+            height:31px;
+            display:grid;
+            place-items:center;
+            border:1px solid var(--border);
+            border-radius:8px;
+            background:#fff;
+            font-size:8px;
+            font-weight:700;
+        }
+
+        .page-btn.active {
+            color:#fff;
+            background:var(--primary);
+            border-color:var(--primary);
+        }
+
+        .page-btn:disabled {
+            opacity:.4;
+            cursor:not-allowed;
+        }
+
+        .overlay {
+            display:none;
+            position:fixed;
+            inset:0;
+            z-index:1100;
+            background:rgba(0,0,0,.45);
+        }
+
+        .modal-backdrop {
+            display:none;
+            position:fixed;
+            inset:0;
+            z-index:2000;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            background:rgba(12,10,18,.55);
+        }
+
+        .modal-backdrop.show {
+            display:flex;
+        }
+
+        .modal {
+            width:min(100%,620px);
+            max-height:90vh;
+            overflow:auto;
+            border-radius:18px;
+            background:#fff;
+            box-shadow:0 25px 80px rgba(0,0,0,.18);
+        }
+
+        .modal-header {
+            padding:18px 20px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            border-bottom:1px solid var(--border);
+        }
+
+        .modal-header h3 {
+            font-size:14px;
+        }
+
+        .close-modal {
+            width:34px;
+            height:34px;
+            border:1px solid var(--border);
+            border-radius:9px;
+            background:white;
+        }
+
+        .modal-body {
+            padding:20px;
+        }
+
+        .form-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+        }
+
+        .form-group {
+            display:flex;
+            flex-direction:column;
+            gap:6px;
+        }
+
+        .form-group.full {
+            grid-column:1/-1;
+        }
+
+        .form-label {
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .modal-actions {
+            display:flex;
+            justify-content:flex-end;
+            gap:8px;
+            margin-top:18px;
+        }
+
+        .checkbox-row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+        }
+
+        .check-item {
+            display:flex;
+            align-items:center;
+            gap:6px;
+            font-size:8px;
+        }
+
+        @media (max-width:1200px) {
+            .stats {
+                grid-template-columns:repeat(3,1fr);
+            }
+
+            .filters {
+                grid-template-columns:1fr 1fr;
+            }
+
+            .refresh-btn {
+                width:100%;
+            }
+        }
+
+        @media (max-width:850px) {
+            .sidebar {
+                transform:translateX(-100%);
+                transition:.25s ease;
+            }
+
+            .sidebar.open {
+                transform:translateX(0);
+            }
+
+            .main {
+                margin-left:0;
+            }
+
+            .menu-btn {
+                display:grid;
+            }
+
+            .overlay.show {
+                display:block;
+            }
+        }
+
+        @media (max-width:650px) {
+            .content {
+                width:calc(100% - 24px);
+            }
+
+            .topbar {
+                padding:0 13px;
+            }
+
+            .top-icon {
+                display:none;
+            }
+
+            .admin-user {
+                border-left:none;
+                padding-left:0;
+            }
+
+            .admin-user > div {
+                display:none;
+            }
+
+            .heading-row {
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .stats {
+                grid-template-columns:1fr 1fr;
+            }
+
+            .filters,
+            .form-grid {
+                grid-template-columns:1fr;
+            }
+
+            .form-group.full {
+                grid-column:auto;
+            }
+
+            .pagination {
+                min-height:auto;
+                padding:14px 18px;
+                align-items:flex-start;
+                flex-direction:column;
+            }
+        }
+
+        @media (max-width:420px) {
+            .stats {
+                grid-template-columns:1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            class="sidebar-logo"
+            alt="LOVEMI"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a href="dashboard.html" class="sidebar-link">
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+        <a href="users.html" class="sidebar-link active">
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+        <a href="profiles.html" class="sidebar-link">
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+        <a href="admins.html" class="sidebar-link">
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+        <a href="roles.html" class="sidebar-link">
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+        <a href="permissions.html" class="sidebar-link">
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+        <a href="photos.html" class="sidebar-link">
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+        <a href="posts.html" class="sidebar-link">
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+        <a href="connections.html" class="sidebar-link">
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+        <a href="conversations.html" class="sidebar-link">
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+        <a href="messages.html" class="sidebar-link">
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+        <a href="premium-users.html" class="sidebar-link">
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+        <a href="subscriptions.html" class="sidebar-link">
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+        <a href="payments.html" class="sidebar-link">
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+        <a href="reports.html" class="sidebar-link">
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+        <a href="blocked-users.html" class="sidebar-link">
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+        <a href="verification.html" class="sidebar-link">
+            <i class="fa-solid fa-circle-check"></i>
+            Verification
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+        <a href="notifications.html" class="sidebar-link">
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+        <a href="system-settings.html" class="sidebar-link">
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+        <a href="audit-logs.html" class="sidebar-link">
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+        <a href="backup.html" class="sidebar-link">
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+        <a href="../dashboard.html" class="sidebar-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+        <a href="#" id="logoutLink" class="sidebar-link">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+
+                <h1>
+                    Users
+                </h1>
+
+                <p>
+                    Manage LOVEMI member accounts.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+            <a
+                href="messages.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-message"></i>
+            </a>
+
+            <a
+                href="../index.html"
+                class="top-icon"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+
+            <div class="admin-user">
+
+                <img
+                    id="adminAvatar"
+                    class="admin-avatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                >
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+
+        <div class="heading-row">
+
+            <div>
+
+                <h2>
+                    User Management
+                </h2>
+
+                <p>
+                    Create, edit, verify, suspend, activate and manage member accounts.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                id="openCreateModal"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add User
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="alertBox"
+            class="alert"
+        ></div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <span>Total Users</span>
+                        <strong id="totalUsers">—</strong>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <span>Active</span>
+                        <strong id="activeUsers">—</strong>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <span>Suspended</span>
+                        <strong id="suspendedUsers">—</strong>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <span>Verified Email</span>
+                        <strong id="verifiedUsers">—</strong>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-envelope-circle-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <span>Admins</span>
+                        <strong id="adminUsers">—</strong>
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-card">
+
+
+            <div class="filters">
+
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="field"
+                    placeholder="Search username, full name or email..."
+                >
+
+
+                <select
+                    id="statusFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="suspended">
+                        Suspended
+                    </option>
+
+                    <option value="deleted">
+                        Deleted
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="roleFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Roles
+                    </option>
+
+                    <option value="member">
+                        Member
+                    </option>
+
+                    <option value="admin">
+                        Administrator
+                    </option>
+
+                    <option value="moderator">
+                        Moderator
+                    </option>
+
+                    <option value="support">
+                        Support
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="verificationFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        Verification
+                    </option>
+
+                    <option value="verified">
+                        Email Verified
+                    </option>
+
+                    <option value="unverified">
+                        Email Not Verified
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    id="refreshButton"
+                    title="Refresh"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <section class="table-card">
+
+
+            <div class="table-header">
+
+                <div>
+
+                    <h3>
+                        LOVEMI Accounts
+                    </h3>
+
+                    <span>
+                        User data is read directly from the database.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Country
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                2FA
+                            </th>
+
+                            <th>
+                                Created
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="usersBody">
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                class="loading"
+                            >
+
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                Loading users...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="pagination">
+
+                <div
+                    class="pagination-info"
+                    id="paginationInfo"
+                >
+                    Loading...
+                </div>
+
+                <div
+                    class="pages"
+                    id="pages"
+                ></div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     CREATE USER MODAL
+========================================================== -->
+
+<div
+    class="modal-backdrop"
+    id="createModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Create LOVEMI User
+            </h3>
+
+            <button
+                type="button"
+                class="close-modal"
+                data-close="createModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <form id="createUserForm">
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="field"
+                            maxlength="50"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Full Names
+                        </label>
+
+                        <input
+                            type="text"
+                            name="full_names"
+                            class="field"
+                            maxlength="180"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Gender
+                        </label>
+
+                        <select
+                            name="gender"
+                            class="field"
+                            required
+                        >
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="field"
+                            maxlength="190"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Country ID
+                        </label>
+
+                        <input
+                            type="number"
+                            name="country_id"
+                            class="field"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone_number"
+                            class="field"
+                            maxlength="30"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            E.164 Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone_e164"
+                            class="field"
+                            maxlength="30"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Role ID
+                        </label>
+
+                        <select
+                            name="role_id"
+                            class="field"
+                            required
+                        >
+
+                            <option value="1">
+                                1 — Member
+                            </option>
+
+                            <option value="2">
+                                2 — Administrator
+                            </option>
+
+                            <option value="3">
+                                3 — Moderator
+                            </option>
+
+                            <option value="4">
+                                4 — Support
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date_of_birth"
+                            class="field"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="field"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label class="form-label">
+                            Initial Verification
+                        </label>
+
+
+                        <div class="checkbox-row">
+
+
+                            <label class="check-item">
+
+                                <input
+                                    type="checkbox"
+                                    name="email_verified"
+                                    value="1"
+                                >
+
+                                Email Verified
+
+                            </label>
+
+
+                            <label class="check-item">
+
+                                <input
+                                    type="checkbox"
+                                    name="phone_verified"
+                                    value="1"
+                                >
+
+                                Phone Verified
+
+                            </label>
+
+
+                            <label class="check-item">
+
+                                <input
+                                    type="checkbox"
+                                    name="identity_verified"
+                                    value="1"
+                                >
+
+                                Identity Verified
+
+                            </label>
+
+
+                            <label class="check-item">
+
+                                <input
+                                    type="checkbox"
+                                    name="age_verified"
+                                    value="1"
+                                >
+
+                                Age Verified
+
+                            </label>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-close="createModal"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="createSubmit"
+                    >
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Create User
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     EDIT USER MODAL
+========================================================== -->
+
+<div
+    class="modal-backdrop"
+    id="editModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Edit User
+            </h3>
+
+            <button
+                type="button"
+                class="close-modal"
+                data-close="editModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <form id="editUserForm">
+
+
+                <input
+                    type="hidden"
+                    name="user_id"
+                    id="editUserId"
+                >
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            id="editUsername"
+                            class="field"
+                            maxlength="50"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Full Names
+                        </label>
+
+                        <input
+                            type="text"
+                            name="full_names"
+                            id="editFullNames"
+                            class="field"
+                            maxlength="180"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Gender
+                        </label>
+
+                        <select
+                            name="gender"
+                            id="editGender"
+                            class="field"
+                            required
+                        >
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="editEmail"
+                            class="field"
+                            maxlength="190"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Country ID
+                        </label>
+
+                        <input
+                            type="number"
+                            name="country_id"
+                            id="editCountry"
+                            class="field"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone_number"
+                            id="editPhone"
+                            class="field"
+                            maxlength="30"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            E.164 Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone_e164"
+                            id="editPhoneE164"
+                            class="field"
+                            maxlength="30"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Role ID
+                        </label>
+
+                        <input
+                            type="number"
+                            name="role_id"
+                            id="editRoleId"
+                            class="field"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Account Status
+                        </label>
+
+                        <select
+                            name="account_status"
+                            id="editAccountStatus"
+                            class="field"
+                        >
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="approved">
+                                Approved
+                            </option>
+
+                            <option value="suspended">
+                                Suspended
+                            </option>
+
+                            <option value="blocked">
+                                Blocked
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date_of_birth"
+                            id="editDob"
+                            class="field"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label class="form-label">
+                            Verification
+                        </label>
+
+
+                        <div class="checkbox-row">
+
+                            <label class="check-item">
+                                <input
+                                    type="checkbox"
+                                    name="email_verified"
+                                    id="editEmailVerified"
+                                    value="1"
+                                >
+                                Email
+                            </label>
+
+                            <label class="check-item">
+                                <input
+                                    type="checkbox"
+                                    name="phone_verified"
+                                    id="editPhoneVerified"
+                                    value="1"
+                                >
+                                Phone
+                            </label>
+
+                            <label class="check-item">
+                                <input
+                                    type="checkbox"
+                                    name="identity_verified"
+                                    id="editIdentityVerified"
+                                    value="1"
+                                >
+                                Identity
+                            </label>
+
+                            <label class="check-item">
+                                <input
+                                    type="checkbox"
+                                    name="age_verified"
+                                    id="editAgeVerified"
+                                    value="1"
+                                >
+                                Age
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label class="check-item">
+
+                            <input
+                                type="checkbox"
+                                name="two_factor_enabled"
+                                id="editTwoFactor"
+                                value="1"
+                            >
+
+                            Google Authenticator Enabled
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-close="editModal"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="editSubmit"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     RESET PASSWORD MODAL
+========================================================== -->
+
+<div
+    class="modal-backdrop"
+    id="passwordModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Reset User Password
+            </h3>
+
+            <button
+                type="button"
+                class="close-modal"
+                data-close="passwordModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <form id="passwordForm">
+
+
+                <input
+                    type="hidden"
+                    id="passwordUserId"
+                    name="user_id"
+                >
+
+
+                <div class="form-group">
+
+
+                    <label class="form-label">
+                        New Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        class="field"
+                        name="new_password"
+                        minlength="8"
+                        required
+                    >
+
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-close="passwordModal"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        <i class="fa-solid fa-key"></i>
+
+                        Reset Password
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+const API = {
+
+    list:
+        "../admin-api/users/list.php",
+
+    get:
+        "../admin-api/users/get.php",
+
+    create:
+        "../admin-api/users/create.php",
+
+    update:
+        "../admin-api/users/update.php",
+
+    suspend:
+        "../admin-api/users/suspend.php",
+
+    activate:
+        "../admin-api/users/activate.php",
+
+    delete:
+        "../admin-api/users/delete.php",
+
+    verify:
+        "../admin-api/users/verify.php",
+
+    reset:
+        "../admin-api/users/reset-password.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+let currentPage = 1;
+let totalPages = 1;
+let searchTimer = null;
+
+
+const usersBody =
+    document.getElementById("usersBody");
+
+const alertBox =
+    document.getElementById("alertBox");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
+
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show " + type;
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    alertBox.className =
+        "alert";
+
+    alertBox.textContent =
+        "";
+
+}
+
+
+function formatDate(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const d =
+        new Date(
+            String(value).replace(
+                " ",
+                "T"
+            )
+        );
+
+    if (
+        Number.isNaN(
+            d.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+    return d.toLocaleString();
+
+}
+
+
+function openModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.add("show");
+
+}
+
+
+function closeModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(
+    "[data-close]"
+).forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () =>
+                closeModal(
+                    button.dataset.close
+                )
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+document
+    .getElementById("menuBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+            overlay.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+
+overlay.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+        overlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+async function loadUsers() {
+
+    hideAlert();
+
+
+    usersBody.innerHTML =
+        `
+        <tr>
+
+            <td
+                colspan="9"
+                class="loading"
+            >
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Loading users...
+
+            </td>
+
+        </tr>
+        `;
+
+
+    const params =
+        new URLSearchParams({
+
+            page:
+                String(currentPage),
+
+            limit:
+                "20",
+
+            search:
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value
+                    .trim(),
+
+            status:
+                document
+                    .getElementById(
+                        "statusFilter"
+                    )
+                    .value,
+
+            role:
+                document
+                    .getElementById(
+                        "roleFilter"
+                    )
+                    .value,
+
+            verification:
+                document
+                    .getElementById(
+                        "verificationFilter"
+                    )
+                    .value
+
+        });
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.list
+                +
+                "?"
+                +
+                params.toString(),
+                {
+
+                    method:
+                        "GET",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Cache-Control":
+                            "no-cache"
+
+                    }
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/users.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            response.status === 403
+        ) {
+
+            window.location.href =
+                "../error.html?code=403";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load users."
+            );
+
+        }
+
+
+        renderUsers(
+            result.data
+            ||
+            {}
+        );
+
+
+    } catch(error) {
+
+        console.error(
+            error
+        );
+
+
+        usersBody.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="empty"
+                >
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderUsers(data) {
+
+    const users =
+        Array.isArray(
+            data.users
+        )
+            ?
+            data.users
+            :
+            [];
+
+
+    const stats =
+        data.summary
+        ||
+        {};
+
+
+    const pagination =
+        data.pagination
+        ||
+        {};
+
+
+    const admin =
+        data.current_admin
+        ||
+        {};
+
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            admin.avatar_url;
+
+    }
+
+
+    document.getElementById(
+        "totalUsers"
+    ).textContent =
+        Number(
+            stats.total_users
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "activeUsers"
+    ).textContent =
+        Number(
+            stats.active_users
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "suspendedUsers"
+    ).textContent =
+        Number(
+            stats.suspended_users
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "verifiedUsers"
+    ).textContent =
+        Number(
+            stats.verified_users
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "adminUsers"
+    ).textContent =
+        Number(
+            stats.admin_users
+            ||
+            0
+        ).toLocaleString();
+
+
+    if (
+        !users.length
+    ) {
+
+        usersBody.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="empty"
+                >
+
+                    <i class="fa-solid fa-users-slash"></i>
+
+                    No users found.
+
+                </td>
+
+            </tr>
+            `;
+
+    } else {
+
+        usersBody.innerHTML =
+            users.map(
+                user => {
+
+                    const status =
+                        (
+                            Number(
+                                user.is_deleted
+                            ) === 1
+                        )
+                            ?
+                            "deleted"
+                            :
+                            (
+                                Number(
+                                    user.is_suspended
+                                ) === 1
+                                    ?
+                                    "suspended"
+                                    :
+                                    (
+                                        Number(
+                                            user.is_active
+                                        ) === 1
+                                            ?
+                                            "active"
+                                            :
+                                            "inactive"
+                                    )
+                            );
+
+
+                    const statusClass =
+                        status === "active"
+                            ?
+                            "green"
+                            :
+                            (
+                                status === "suspended"
+                                    ?
+                                    "orange"
+                                    :
+                                    "red"
+                            );
+
+
+                    const avatar =
+                        user.avatar_url
+                        ||
+                        "../assets/images/defaults/default-avatar-male.png";
+
+
+                    return `
+
+                    <tr>
+
+
+                        <td>
+
+                            <div class="user-cell">
+
+                                <img
+                                    src="${escapeHTML(
+                                        avatar
+                                    )}"
+                                    class="user-avatar"
+                                    alt=""
+                                    loading="lazy"
+                                    onerror="
+                                        this.onerror=null;
+                                        this.src='../assets/images/defaults/default-avatar-male.png';
+                                    "
+                                >
+
+                                <div class="user-name">
+
+                                    <strong>
+                                        ${escapeHTML(
+                                            user.full_names
+                                            ||
+                                            "Unnamed"
+                                        )}
+                                    </strong>
+
+                                    <span>
+                                        @${escapeHTML(
+                                            user.username
+                                            ||
+                                            ""
+                                        )}
+                                        ·
+                                        ${escapeHTML(
+                                            user.email
+                                            ||
+                                            ""
+                                        )}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="pill blue">
+
+                                ${escapeHTML(
+                                    user.role_name
+                                    ||
+                                    "Unknown"
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHTML(
+                                user.country_name
+                                ||
+                                "—"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="pill ${statusClass}">
+
+                                <i class="fa-solid fa-circle"></i>
+
+                                ${escapeHTML(
+                                    status
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="pill ${
+                                    Number(
+                                        user.email_verified
+                                    ) === 1
+                                        ?
+                                        "green"
+                                        :
+                                        "gray"
+                                }"
+                            >
+
+                                ${
+                                    Number(
+                                        user.email_verified
+                                    ) === 1
+                                        ?
+                                        "Verified"
+                                        :
+                                        "Unverified"
+                                }
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHTML(
+                                user.phone_e164
+                                ||
+                                user.phone_number
+                                ||
+                                "—"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="pill ${
+                                    Number(
+                                        user.two_factor_enabled
+                                    ) === 1
+                                        ?
+                                        "green"
+                                        :
+                                        "gray"
+                                }"
+                            >
+
+                                ${
+                                    Number(
+                                        user.two_factor_enabled
+                                    ) === 1
+                                        ?
+                                        "Enabled"
+                                        :
+                                        "Off"
+                                }
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHTML(
+                                formatDate(
+                                    user.created_at
+                                )
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="action-group">
+
+
+                                <button
+                                    type="button"
+                                    class="action"
+                                    title="Edit"
+                                    onclick="editUser(${Number(
+                                        user.id
+                                    )})"
+                                >
+
+                                    <i class="fa-regular fa-pen-to-square"></i>
+
+                                </button>
+
+
+                                ${
+                                    status === "active"
+                                        ?
+                                        `
+                                        <button
+                                            type="button"
+                                            class="action"
+                                            title="Suspend"
+                                            onclick="changeStatus(${Number(
+                                                user.id
+                                            )}, 'suspend')"
+                                        >
+
+                                            <i class="fa-solid fa-user-lock"></i>
+
+                                        </button>
+                                        `
+                                        :
+                                        `
+                                        <button
+                                            type="button"
+                                            class="action"
+                                            title="Activate"
+                                            onclick="changeStatus(${Number(
+                                                user.id
+                                            )}, 'activate')"
+                                        >
+
+                                            <i class="fa-solid fa-user-check"></i>
+
+                                        </button>
+                                        `
+                                }
+
+
+                                <button
+                                    type="button"
+                                    class="action"
+                                    title="Verify"
+                                    onclick="verifyUser(${Number(
+                                        user.id
+                                    )})"
+                                >
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="action"
+                                    title="Reset Password"
+                                    onclick="openPasswordReset(${Number(
+                                        user.id
+                                    )})"
+                                >
+
+                                    <i class="fa-solid fa-key"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="action danger"
+                                    title="Delete"
+                                    onclick="deleteUser(${Number(
+                                        user.id
+                                    )})"
+                                >
+
+                                    <i class="fa-regular fa-trash-can"></i>
+
+                                </button>
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    currentPage =
+        Number(
+            pagination.page
+            ||
+            1
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                pagination.pages
+                ||
+                1
+            )
+        );
+
+
+    const total =
+        Number(
+            pagination.total
+            ||
+            0
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ||
+            20
+        );
+
+
+    const first =
+        total
+            ?
+            (
+                (
+                    currentPage -
+                    1
+                )
+                *
+                limit
+            )
+            +
+            1
+            :
+            0;
+
+
+    const last =
+        Math.min(
+            currentPage * limit,
+            total
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total
+            ?
+            `Showing ${first}–${last} of ${total.toLocaleString()} users`
+            :
+            "No users";
+
+
+    renderPages();
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPages() {
+
+    const pages =
+        document.getElementById(
+            "pages"
+        );
+
+
+    let html =
+        `
+        <button
+            class="page-btn"
+            type="button"
+            onclick="goPage(${currentPage - 1})"
+            ${currentPage <= 1 ? "disabled" : ""}
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let page = start;
+        page <= end;
+        page++
+    ) {
+
+        html +=
+            `
+            <button
+                class="page-btn ${
+                    page === currentPage
+                        ?
+                        "active"
+                        :
+                        ""
+                }"
+                type="button"
+                onclick="goPage(${page})"
+            >
+                ${page}
+            </button>
+            `;
+
+    }
+
+
+    html +=
+        `
+        <button
+            class="page-btn"
+            type="button"
+            onclick="goPage(${currentPage + 1})"
+            ${currentPage >= totalPages ? "disabled" : ""}
+        >
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        `;
+
+
+    pages.innerHTML =
+        html;
+
+}
+
+
+function goPage(page) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+    loadUsers();
+
+}
+
+
+/* =========================================================
+   SEARCH / FILTERS
+========================================================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            clearTimeout(
+                searchTimer
+            );
+
+            searchTimer =
+                setTimeout(
+                    () => {
+
+                        currentPage = 1;
+
+                        loadUsers();
+
+                    },
+                    350
+                );
+
+        }
+    );
+
+
+[
+    "statusFilter",
+    "roleFilter",
+    "verificationFilter"
+].forEach(
+    id => {
+
+        document
+            .getElementById(id)
+            .addEventListener(
+                "change",
+                () => {
+
+                    currentPage = 1;
+
+                    loadUsers();
+
+                }
+            );
+
+    }
+);
+
+
+document
+    .getElementById(
+        "refreshButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            currentPage = 1;
+
+            loadUsers();
+
+        }
+    );
+
+
+/* =========================================================
+   CREATE USER
+========================================================= */
+
+document
+    .getElementById(
+        "openCreateModal"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "createUserForm"
+                )
+                .reset();
+
+            openModal(
+                "createModal"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "createUserForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const button =
+                document.getElementById(
+                    "createSubmit"
+                );
+
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML =
+                `
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Creating...
+                `;
+
+
+            try {
+
+                const formData =
+                    new FormData(
+                        this
+                    );
+
+
+                const payload =
+                    Object.fromEntries(
+                        formData.entries()
+                    );
+
+
+                [
+                    "email_verified",
+                    "phone_verified",
+                    "identity_verified",
+                    "age_verified"
+                ].forEach(
+                    key => {
+
+                        payload[key] =
+                            this.elements[key]
+                            &&
+                            this.elements[key].checked
+                                ?
+                                1
+                                :
+                                0;
+
+                    }
+                );
+
+
+                const response =
+                    await fetch(
+                        API.create,
+                        {
+
+                            method:
+                                "POST",
+
+                            credentials:
+                                "include",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok
+                    ||
+                    result.success !== true
+                ) {
+
+                    throw new Error(
+                        result.message
+                        ||
+                        "Unable to create user."
+                    );
+
+                }
+
+
+                closeModal(
+                    "createModal"
+                );
+
+
+                showAlert(
+                    result.message
+                    ||
+                    "User created successfully.",
+                    "success"
+                );
+
+
+                currentPage = 1;
+
+                loadUsers();
+
+
+            } catch(error) {
+
+                showAlert(
+                    error.message
+                );
+
+            } finally {
+
+                button.disabled =
+                    false;
+
+                button.innerHTML =
+                    `
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create User
+                    `;
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   GET USER
+========================================================= */
+
+async function editUser(
+    userId
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                API.get
+                +
+                "?id="
+                +
+                encodeURIComponent(
+                    userId
+                ),
+                {
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store"
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "../login.html";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load user."
+            );
+
+        }
+
+
+        const user =
+            result.data.user
+            ||
+            result.user
+            ||
+            {};
+
+
+        document.getElementById(
+            "editUserId"
+        ).value =
+            user.id
+            ||
+            user.user_id
+            ||
+            userId;
+
+
+        document.getElementById(
+            "editUsername"
+        ).value =
+            user.username
+            ||
+            "";
+
+
+        document.getElementById(
+            "editFullNames"
+        ).value =
+            user.full_names
+            ||
+            "";
+
+
+        document.getElementById(
+            "editGender"
+        ).value =
+            user.gender
+            ||
+            "Male";
+
+
+        document.getElementById(
+            "editEmail"
+        ).value =
+            user.email
+            ||
+            "";
+
+
+        document.getElementById(
+            "editCountry"
+        ).value =
+            user.country_id
+            ||
+            "";
+
+
+        document.getElementById(
+            "editPhone"
+        ).value =
+            user.phone_number
+            ||
+            "";
+
+
+        document.getElementById(
+            "editPhoneE164"
+        ).value =
+            user.phone_e164
+            ||
+            "";
+
+
+        document.getElementById(
+            "editRoleId"
+        ).value =
+            user.role_id
+            ||
+            "";
+
+
+        document.getElementById(
+            "editAccountStatus"
+        ).value =
+            user.account_status
+            ||
+            "pending";
+
+
+        document.getElementById(
+            "editDob"
+        ).value =
+            user.date_of_birth
+            ||
+            "";
+
+
+        document.getElementById(
+            "editEmailVerified"
+        ).checked =
+            Number(
+                user.email_verified
+            ) === 1;
+
+
+        document.getElementById(
+            "editPhoneVerified"
+        ).checked =
+            Number(
+                user.phone_verified
+            ) === 1;
+
+
+        document.getElementById(
+            "editIdentityVerified"
+        ).checked =
+            Number(
+                user.identity_verified
+            ) === 1;
+
+
+        document.getElementById(
+            "editAgeVerified"
+        ).checked =
+            Number(
+                user.age_verified
+            ) === 1;
+
+
+        document.getElementById(
+            "editTwoFactor"
+        ).checked =
+            Number(
+                user.two_factor_enabled
+            ) === 1;
+
+
+        openModal(
+            "editModal"
+        );
+
+
+    } catch(error) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE
+========================================================= */
+
+document
+    .getElementById(
+        "editUserForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const button =
+                document.getElementById(
+                    "editSubmit"
+                );
+
+
+            button.disabled =
+                true;
+
+
+            try {
+
+                const payload =
+                    Object.fromEntries(
+                        new FormData(
+                            this
+                        ).entries()
+                    );
+
+
+                [
+                    "email_verified",
+                    "phone_verified",
+                    "identity_verified",
+                    "age_verified",
+                    "two_factor_enabled"
+                ].forEach(
+                    key => {
+
+                        payload[key] =
+                            this.elements[key].checked
+                                ?
+                                1
+                                :
+                                0;
+
+                    }
+                );
+
+
+                const response =
+                    await fetch(
+                        API.update,
+                        {
+
+                            method:
+                                "POST",
+
+                            credentials:
+                                "include",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok
+                    ||
+                    result.success !== true
+                ) {
+
+                    throw new Error(
+                        result.message
+                        ||
+                        "Unable to update user."
+                    );
+
+                }
+
+
+                closeModal(
+                    "editModal"
+                );
+
+
+                showAlert(
+                    result.message
+                    ||
+                    "User updated successfully.",
+                    "success"
+                );
+
+
+                loadUsers();
+
+
+            } catch(error) {
+
+                showAlert(
+                    error.message
+                );
+
+            } finally {
+
+                button.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+async function changeStatus(
+    userId,
+    action
+) {
+
+    const confirmed =
+        window.confirm(
+            action === "suspend"
+                ?
+                "Suspend this user?"
+                :
+                "Activate this user?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                action === "suspend"
+                    ?
+                    API.suspend
+                    :
+                    API.activate,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                user_id:
+                                    Number(
+                                        userId
+                                    )
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to change account status."
+            );
+
+        }
+
+
+        showAlert(
+            result.message,
+            "success"
+        );
+
+
+        loadUsers();
+
+
+    } catch(error) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   VERIFY
+========================================================= */
+
+async function verifyUser(
+    userId
+) {
+
+    const confirmed =
+        window.confirm(
+            "Mark this user's email, phone, identity and age verification as completed?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.verify,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                user_id:
+                                    Number(
+                                        userId
+                                    ),
+
+                                email_verified:
+                                    1,
+
+                                phone_verified:
+                                    1,
+
+                                identity_verified:
+                                    1,
+
+                                age_verified:
+                                    1
+
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to verify user."
+            );
+
+        }
+
+
+        showAlert(
+            result.message,
+            "success"
+        );
+
+
+        loadUsers();
+
+
+    } catch(error) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+function openPasswordReset(
+    userId
+) {
+
+    document.getElementById(
+        "passwordUserId"
+    ).value =
+        userId;
+
+    document
+        .getElementById(
+            "passwordForm"
+        )
+        .reset();
+
+    document.getElementById(
+        "passwordUserId"
+    ).value =
+        userId;
+
+    openModal(
+        "passwordModal"
+    );
+
+}
+
+
+document
+    .getElementById(
+        "passwordForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            try {
+
+                const payload =
+                    Object.fromEntries(
+                        new FormData(
+                            this
+                        ).entries()
+                    );
+
+
+                const response =
+                    await fetch(
+                        API.reset,
+                        {
+
+                            method:
+                                "POST",
+
+                            credentials:
+                                "include",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok
+                    ||
+                    result.success !== true
+                ) {
+
+                    throw new Error(
+                        result.message
+                        ||
+                        "Unable to reset password."
+                    );
+
+                }
+
+
+                closeModal(
+                    "passwordModal"
+                );
+
+
+                showAlert(
+                    result.message,
+                    "success"
+                );
+
+
+            } catch(error) {
+
+                showAlert(
+                    error.message
+                );
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteUser(
+    userId
+) {
+
+    const confirmed =
+        window.confirm(
+            "Delete this account? The action will use LOVEMI's protected account deletion process."
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.delete,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                user_id:
+                                    Number(
+                                        userId
+                                    )
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to delete user."
+            );
+
+        }
+
+
+        showAlert(
+            result.message,
+            "success"
+        );
+
+
+        loadUsers();
+
+
+    } catch(error) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutLink"
+    )
+    .addEventListener(
+        "click",
+        async function(event) {
+
+            event.preventDefault();
+
+            try {
+
+                await fetch(
+                    API.logout,
+                    {
+
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store"
+
+                    }
+                );
+
+            } catch(error) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+            window.location.href =
+                "../login.html";
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadUsers();
+
+</script>
+
+
+</body>
+
+</html>

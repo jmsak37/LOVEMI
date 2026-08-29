@@ -1,0 +1,3508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <title>User Details | LOVEMI Admin</title>
+
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+
+    <style>
+
+        :root {
+
+            --primary: #6d28d9;
+            --primary-soft: #f3e8ff;
+            --accent: #db2777;
+
+            --green: #16a34a;
+            --green-soft: #ecfdf5;
+
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+
+            --orange: #d97706;
+            --orange-soft: #fffbeb;
+
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+
+            --text: #18181b;
+            --soft: #68686f;
+            --muted: #9696a1;
+
+            --bg: #f6f6fa;
+            --white: #ffffff;
+            --border: #e8e8ef;
+
+            --sidebar: 258px;
+        }
+
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing:
+                border-box;
+        }
+
+
+        body {
+
+            min-height:
+                100vh;
+
+            font-family:
+                Inter,
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--bg);
+        }
+
+
+        a {
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family:
+                inherit;
+        }
+
+
+        button {
+
+            cursor:
+                pointer;
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        =================================================== */
+
+        .sidebar {
+
+            position:
+                fixed;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            bottom:
+                0;
+
+            z-index:
+                1200;
+
+            width:
+                var(--sidebar);
+
+            overflow-y:
+                auto;
+
+            color:
+                white;
+
+            background:
+                #16131e;
+        }
+
+
+        .sidebar-header {
+
+            min-height:
+                82px;
+
+            padding:
+                17px 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+
+        .sidebar-logo {
+
+            width:
+                46px;
+
+            height:
+                46px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                12px;
+        }
+
+
+        .sidebar-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                22px;
+        }
+
+
+        .sidebar-subtitle {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #9f9ba9;
+
+            font-size:
+                8px;
+
+            letter-spacing:
+                .7px;
+        }
+
+
+        .admin-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            margin:
+                16px;
+
+            padding:
+                7px 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius:
+                999px;
+
+            color:
+                #e9ddff;
+
+            background:
+                rgba(109,40,217,.16);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                5px 12px;
+        }
+
+
+        .sidebar-label {
+
+            padding:
+                12px 10px 7px;
+
+            color:
+                #716c7d;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .sidebar-link {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            margin:
+                2px 0;
+
+            padding:
+                10px 11px;
+
+            border-radius:
+                10px;
+
+            color:
+                #b7b1c2;
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .sidebar-link i {
+
+            width:
+                17px;
+
+            text-align:
+                center;
+        }
+
+
+        .sidebar-link:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        .sidebar-link.active {
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.75),
+                    rgba(219,39,119,.55)
+                );
+        }
+
+
+        /* ==================================================
+           MAIN
+        =================================================== */
+
+        .main {
+
+            margin-left:
+                var(--sidebar);
+
+            min-height:
+                100vh;
+        }
+
+
+        .topbar {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                900;
+
+            min-height:
+                76px;
+
+            padding:
+                0 28px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid var(--border);
+
+            background:
+                rgba(255,255,255,.95);
+
+            backdrop-filter:
+                blur(14px);
+        }
+
+
+        .topbar-left {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+        }
+
+
+        .menu-btn {
+
+            display:
+                none;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            place-items:
+                center;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                white;
+
+            border-radius:
+                11px;
+        }
+
+
+        .top-title h1 {
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+        }
+
+
+        .top-title p {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        .topbar-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .top-icon {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                white;
+
+            border-radius:
+                10px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                11px;
+        }
+
+
+        .admin-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding-left:
+                10px;
+
+            border-left:
+                1px solid var(--border);
+        }
+
+
+        .admin-avatar {
+
+            width:
+                37px;
+
+            height:
+                37px;
+
+            border-radius:
+                50%;
+
+            object-fit:
+                cover;
+        }
+
+
+        .admin-user strong {
+
+            display:
+                block;
+
+            font-size:
+                8px;
+        }
+
+
+        .admin-user span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                7px;
+        }
+
+
+        /* ==================================================
+           CONTENT
+        =================================================== */
+
+        .content {
+
+            width:
+                min(
+                    calc(100% - 48px),
+                    1450px
+                );
+
+            margin:
+                auto;
+
+            padding:
+                25px 0 50px;
+        }
+
+
+        .back-link {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                16px;
+
+            color:
+                var(--primary);
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+        }
+
+
+        .alert {
+
+            display:
+                none;
+
+            padding:
+                12px 14px;
+
+            margin-bottom:
+                16px;
+
+            border-radius:
+                11px;
+
+            font-size:
+                9px;
+        }
+
+
+        .alert.show {
+
+            display:
+                block;
+        }
+
+
+        .alert.error {
+
+            color:
+                #991b1b;
+
+            background:
+                var(--red-soft);
+
+            border:
+                1px solid #fecaca;
+        }
+
+
+        /* ==================================================
+           PROFILE HERO
+        =================================================== */
+
+        .profile-hero {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                120px
+                1fr
+                auto;
+
+            gap:
+                18px;
+
+            align-items:
+                center;
+
+            padding:
+                24px;
+
+            margin-bottom:
+                17px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                18px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+
+        .big-avatar {
+
+            width:
+                105px;
+
+            height:
+                105px;
+
+            border-radius:
+                50%;
+
+            object-fit:
+                cover;
+
+            background:
+                var(--primary-soft);
+
+            border:
+                4px solid white;
+
+            box-shadow:
+                0 7px 25px rgba(0,0,0,.1);
+        }
+
+
+        .profile-info h2 {
+
+            font-size:
+                24px;
+
+            font-weight:
+                800;
+        }
+
+
+        .profile-info .username {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        .profile-info .email {
+
+            display:
+                block;
+
+            margin-top:
+                8px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                9px;
+        }
+
+
+        .pills {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                6px;
+
+            margin-top:
+                11px;
+        }
+
+
+        .pill {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            padding:
+                5px 8px;
+
+            border-radius:
+                999px;
+
+            background:
+                var(--primary-soft);
+
+            color:
+                var(--primary);
+
+            font-size:
+                6px;
+
+            font-weight:
+                800;
+        }
+
+
+        .hero-actions {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                7px;
+        }
+
+
+        .btn {
+
+            min-height:
+                40px;
+
+            padding:
+                0 14px;
+
+            border:
+                none;
+
+            border-radius:
+                10px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .btn-primary {
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+        }
+
+
+        .btn-light {
+
+            color:
+                var(--soft);
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+        }
+
+
+        .btn-danger {
+
+            color:
+                white;
+
+            background:
+                var(--red);
+        }
+
+
+        /* ==================================================
+           GRID
+        =================================================== */
+
+        .grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                17px;
+        }
+
+
+        .card {
+
+            overflow:
+                hidden;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.04);
+        }
+
+
+        .card-header {
+
+            min-height:
+                56px;
+
+            padding:
+                0 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+
+        .card-header h3 {
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .card-header span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                7px;
+        }
+
+
+        .card-body {
+
+            padding:
+                18px;
+        }
+
+
+        /* ==================================================
+           DETAIL ROW
+        =================================================== */
+
+        .detail-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                11px;
+        }
+
+
+        .detail {
+
+            padding:
+                11px 12px;
+
+            border:
+                1px solid #eeeeF3;
+
+            border-radius:
+                11px;
+
+            background:
+                #fcfcfd;
+        }
+
+
+        .detail.full {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        .detail label {
+
+            display:
+                block;
+
+            margin-bottom:
+                4px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                7px;
+
+            font-weight:
+                700;
+        }
+
+
+        .detail strong {
+
+            display:
+                block;
+
+            color:
+                var(--text);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
+
+            word-break:
+                break-word;
+        }
+
+
+        /* ==================================================
+           STATUS
+        =================================================== */
+
+        .status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            padding:
+                5px 8px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                6px;
+
+            font-weight:
+                800;
+        }
+
+
+        .status.green {
+
+            color:
+                var(--green);
+
+            background:
+                var(--green-soft);
+        }
+
+
+        .status.orange {
+
+            color:
+                var(--orange);
+
+            background:
+                var(--orange-soft);
+        }
+
+
+        .status.red {
+
+            color:
+                var(--red);
+
+            background:
+                var(--red-soft);
+        }
+
+
+        .status.blue {
+
+            color:
+                var(--blue);
+
+            background:
+                var(--blue-soft);
+        }
+
+
+        /* ==================================================
+           PHOTOS
+        =================================================== */
+
+        .photo-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap:
+                8px;
+        }
+
+
+        .photo {
+
+            aspect-ratio:
+                1 / 1;
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                #f4f4f7;
+        }
+
+
+        .photo img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+        }
+
+
+        .no-photos {
+
+            padding:
+                25px;
+
+            text-align:
+                center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                8px;
+        }
+
+
+        /* ==================================================
+           SECURITY
+        =================================================== */
+
+        .security-list {
+
+            display:
+                grid;
+
+            gap:
+                9px;
+        }
+
+
+        .security-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            padding:
+                10px 0;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+
+        .security-row:last-child {
+
+            border-bottom:
+                none;
+        }
+
+
+        .security-name {
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .security-description {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                6px;
+        }
+
+
+        /* ==================================================
+           LOADING
+        =================================================== */
+
+        .loading {
+
+            padding:
+                65px 20px;
+
+            text-align:
+                center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        /* ==================================================
+           OVERLAY
+        =================================================== */
+
+        .overlay {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                1100;
+
+            background:
+                rgba(0,0,0,.45);
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .profile-hero {
+
+                grid-template-columns:
+                    90px
+                    1fr;
+            }
+
+
+            .hero-actions {
+
+                grid-column:
+                    1 / -1;
+
+                flex-direction:
+                    row;
+
+                flex-wrap:
+                    wrap;
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    .25s ease;
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .overlay.show {
+
+                display:
+                    block;
+            }
+
+
+            .main {
+
+                margin-left:
+                    0;
+            }
+
+
+            .menu-btn {
+
+                display:
+                    grid;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .detail-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .photo-grid {
+
+                grid-template-columns:
+                    repeat(3,1fr);
+            }
+
+
+            .content {
+
+                width:
+                    min(
+                        calc(100% - 24px),
+                        1450px
+                    );
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 13px;
+            }
+
+
+            .top-icon:nth-child(1),
+            .top-icon:nth-child(2) {
+
+                display:
+                    none;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .profile-hero {
+
+                grid-template-columns:
+                    1fr;
+
+                text-align:
+                    center;
+            }
+
+
+            .big-avatar {
+
+                margin:
+                    auto;
+            }
+
+
+            .pills {
+
+                justify-content:
+                    center;
+            }
+
+
+            .hero-actions {
+
+                flex-direction:
+                    column;
+            }
+
+
+            .photo-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+
+            .top-title p {
+
+                display:
+                    none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+
+        <a
+            href="users.html"
+            class="sidebar-link active"
+        >
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+
+        <a
+            href="profiles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+
+        <a
+            href="admins.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+
+        <a
+            href="roles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+
+        <a
+            href="permissions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+        <a
+            href="photos.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+        <a
+            href="posts.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+        <a
+            href="connections.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+        <a
+            href="conversations.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+        <a
+            href="messages.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+        <a
+            href="premium-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+        <a
+            href="subscriptions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+        <a
+            href="payments.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+        <a
+            href="reports.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+        <a
+            href="blocked-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+        <a
+            href="verification.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-circle-check"></i>
+            Verification
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+        <a
+            href="notifications.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+        <a
+            href="system-settings.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+        <a
+            href="audit-logs.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+        <a
+            href="backup.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+        <a
+            href="../dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+        <a
+            href="#"
+            class="sidebar-link"
+            id="logoutLink"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+
+        <div class="topbar-left">
+
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="top-title">
+
+                <h1>
+                    User Details
+                </h1>
+
+                <p>
+                    Complete account and profile information
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-message"></i>
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="top-icon"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+
+            <div class="admin-user">
+
+                <img
+                    class="admin-avatar"
+                    id="adminAvatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Admin"
+                >
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <main class="content">
+
+
+        <a
+            href="users.html"
+            class="back-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Users
+
+        </a>
+
+
+        <div
+            class="alert"
+            id="alertBox"
+        ></div>
+
+
+        <div
+            id="pageContent"
+        >
+
+            <div class="loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Loading user details...
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+const USER_API =
+    "../admin-api/users/get.php";
+
+const LOGOUT_API =
+    "../api/auth/logout.php";
+
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+const pageContent =
+    document.getElementById(
+        "pageContent"
+    );
+
+const alertBox =
+    document.getElementById(
+        "alertBox"
+    );
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    const el =
+        document.createElement(
+            "div"
+        );
+
+    el.textContent =
+        value ?? "";
+
+    return el.innerHTML;
+
+}
+
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+
+        return "—";
+
+    }
+
+
+    const d =
+        new Date(
+            String(value).replace(
+                " ",
+                "T"
+            )
+        );
+
+
+    if (
+        Number.isNaN(
+            d.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return d.toLocaleString(
+        undefined,
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+function showError(
+    message
+) {
+
+    alertBox.className =
+        "alert show error";
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+            overlay.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+
+overlay.addEventListener(
+    "click",
+    function () {
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+        overlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   USER ID
+========================================================= */
+
+const query =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const userId =
+    Number(
+        query.get("id")
+        ||
+        0
+    );
+
+
+if (
+    userId <= 0
+) {
+
+    window.location.href =
+        "users.html";
+
+}
+
+
+/* =========================================================
+   LOAD USER
+========================================================= */
+
+async function loadUser() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${USER_API}?id=${encodeURIComponent(userId)}`,
+                {
+                    method:
+                        "GET",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Cache-Control":
+                            "no-cache, no-store, max-age=0"
+
+                    }
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status === 401
+            ||
+            result.code ===
+                "NOT_AUTHENTICATED"
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/user-details.html?id="
+                    +
+                    userId
+                );
+
+            return;
+
+        }
+
+
+        if (
+            response.status === 403
+            ||
+            result.code ===
+                "ADMIN_ACCESS_REQUIRED"
+        ) {
+
+            window.location.href =
+                "../error.html?code=403";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load user."
+            );
+
+        }
+
+
+        renderUser(
+            result.data
+            ||
+            result
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        pageContent.innerHTML =
+            `
+            <div class="card">
+
+                <div class="loading">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    ${escapeHTML(
+                        error.message
+                        ||
+                        "Unable to load user details."
+                    )}
+
+                </div>
+
+            </div>
+            `;
+
+
+        showError(
+            error.message
+            ||
+            "Unable to load user details."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function statusClass(
+    status
+) {
+
+    const value =
+        String(
+            status
+            ||
+            ""
+        )
+        .toLowerCase();
+
+
+    if (
+        [
+            "approved",
+            "active",
+            "verified",
+            "yes",
+            "enabled"
+        ].includes(
+            value
+        )
+    ) {
+
+        return "green";
+
+    }
+
+
+    if (
+        [
+            "pending",
+            "unverified"
+        ].includes(
+            value
+        )
+    ) {
+
+        return "orange";
+
+    }
+
+
+    if (
+        [
+            "suspended",
+            "blocked",
+            "disabled",
+            "deleted",
+            "no"
+        ].includes(
+            value
+        )
+    ) {
+
+        return "red";
+
+    }
+
+
+    return "blue";
+
+}
+
+
+/* =========================================================
+   RENDER USER
+========================================================= */
+
+function renderUser(
+    data
+) {
+
+    const user =
+        data.user
+        ||
+        {};
+
+
+    const profile =
+        data.profile
+        ||
+        {};
+
+
+    const photos =
+        Array.isArray(
+            data.photos
+        )
+            ?
+            data.photos
+            :
+            [];
+
+
+    const security =
+        data.security
+        ||
+        {};
+
+
+    const admin =
+        data.admin
+        ||
+        {};
+
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Administrator";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            admin.avatar_url;
+
+    }
+
+
+    const avatar =
+        user.avatar_url
+        ||
+        "../assets/images/defaults/default-avatar-male.png";
+
+
+    const accountStatus =
+        user.account_status
+        ||
+        "pending";
+
+
+    const emailVerified =
+        Number(
+            user.email_verified
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    const phoneVerified =
+        Number(
+            user.phone_verified
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    const identityVerified =
+        Number(
+            user.identity_verified
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    const ageVerified =
+        Number(
+            user.age_verified
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    pageContent.innerHTML =
+        `
+
+        <section class="profile-hero">
+
+
+            <img
+                class="big-avatar"
+                src="${escapeHTML(avatar)}"
+                alt=""
+                onerror="
+                    this.onerror=null;
+                    this.src='../assets/images/defaults/default-avatar-male.png';
+                "
+            >
+
+
+            <div class="profile-info">
+
+                <h2>
+                    ${escapeHTML(
+                        user.full_names
+                        ||
+                        profile.display_name
+                        ||
+                        user.username
+                        ||
+                        "User"
+                    )}
+                </h2>
+
+
+                <span class="username">
+                    @${escapeHTML(
+                        user.username
+                        ||
+                        ""
+                    )}
+                </span>
+
+
+                <span class="email">
+                    ${escapeHTML(
+                        user.email
+                        ||
+                        "No email"
+                    )}
+                </span>
+
+
+                <div class="pills">
+
+
+                    <span
+                        class="pill"
+                    >
+                        <i class="fa-solid fa-user-tag"></i>
+                        ${escapeHTML(
+                            user.role_name
+                            ||
+                            user.role_slug
+                            ||
+                            "Member"
+                        )}
+                    </span>
+
+
+                    <span
+                        class="status ${statusClass(accountStatus)}"
+                    >
+                        ${escapeHTML(
+                            accountStatus
+                        )}
+                    </span>
+
+
+                    ${
+                        emailVerified
+                            ?
+                            `
+                            <span class="pill">
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+                                Email Verified
+                            </span>
+                            `
+                            :
+                            ""
+                    }
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="hero-actions">
+
+
+                <a
+                    class="btn btn-light"
+                    href="users.html"
+                >
+                    <i class="fa-solid fa-users"></i>
+                    All Users
+                </a>
+
+
+                <a
+                    class="btn btn-primary"
+                    href="profiles.html?id=${encodeURIComponent(user.id)}"
+                >
+                    <i class="fa-solid fa-id-card"></i>
+                    Profile Manager
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+        <div class="grid">
+
+
+            <!-- =============================================
+                 ACCOUNT
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Account Information
+                        </h3>
+
+                        <span>
+                            Core account details
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="detail-grid">
+
+
+                        <div class="detail">
+
+                            <label>
+                                User ID
+                            </label>
+
+                            <strong>
+                                #${escapeHTML(
+                                    user.id
+                                    ||
+                                    ""
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Username
+                            </label>
+
+                            <strong>
+                                @${escapeHTML(
+                                    user.username
+                                    ||
+                                    ""
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Full Names
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.full_names
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Gender
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.gender
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.email
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Country
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.country_name
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Phone
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.phone_number
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Phone E.164
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.phone_e164
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Date of Birth
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.date_of_birth
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Role
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    user.role_name
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Account Status
+                            </label>
+
+                            <strong>
+
+                                <span
+                                    class="status ${statusClass(accountStatus)}"
+                                >
+                                    ${escapeHTML(
+                                        accountStatus
+                                    )}
+                                </span>
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Registered
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    formatDate(
+                                        user.created_at
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Last Login
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    formatDate(
+                                        user.last_login_at
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Last Seen
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    formatDate(
+                                        user.last_seen_at
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =============================================
+                 VERIFICATION
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Verification & Security
+                        </h3>
+
+                        <span>
+                            Account security state
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="security-list">
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Email Verification
+                                </div>
+
+                                <div class="security-description">
+                                    Whether the registered email has been verified.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    emailVerified
+                                        ?
+                                        "green"
+                                        :
+                                        "orange"
+                                }"
+                            >
+                                ${emailVerified ? "Verified" : "Unverified"}
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Phone Verification
+                                </div>
+
+                                <div class="security-description">
+                                    Whether the registered phone has been verified.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    phoneVerified
+                                        ?
+                                        "green"
+                                        :
+                                        "orange"
+                                }"
+                            >
+                                ${phoneVerified ? "Verified" : "Unverified"}
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Identity Verification
+                                </div>
+
+                                <div class="security-description">
+                                    Identity verification state.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    identityVerified
+                                        ?
+                                        "green"
+                                        :
+                                        "orange"
+                                }"
+                            >
+                                ${identityVerified ? "Verified" : "Unverified"}
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Age Verification
+                                </div>
+
+                                <div class="security-description">
+                                    Age verification state.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    ageVerified
+                                        ?
+                                        "green"
+                                        :
+                                        "orange"
+                                }"
+                            >
+                                ${ageVerified ? "Verified" : "Unverified"}
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Two-Factor Authentication
+                                </div>
+
+                                <div class="security-description">
+                                    Google Authenticator account protection.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    Number(
+                                        security.two_factor_enabled
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "green"
+                                        :
+                                        "orange"
+                                }"
+                            >
+                                ${
+                                    Number(
+                                        security.two_factor_enabled
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "Enabled"
+                                        :
+                                        "Disabled"
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Active Account
+                                </div>
+
+                                <div class="security-description">
+                                    Whether the account is currently active.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    Number(
+                                        user.is_active
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "green"
+                                        :
+                                        "red"
+                                }"
+                            >
+                                ${
+                                    Number(
+                                        user.is_active
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "Active"
+                                        :
+                                        "Inactive"
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div>
+
+                                <div class="security-name">
+                                    Suspended
+                                </div>
+
+                                <div class="security-description">
+                                    Current suspension state.
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${
+                                    Number(
+                                        user.is_suspended
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "red"
+                                        :
+                                        "green"
+                                }"
+                            >
+                                ${
+                                    Number(
+                                        user.is_suspended
+                                        ||
+                                        0
+                                    ) === 1
+                                        ?
+                                        "Yes"
+                                        :
+                                        "No"
+                                }
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =============================================
+                 PROFILE
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Profile
+                        </h3>
+
+                        <span>
+                            Public profile information
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="detail-grid">
+
+
+                        <div class="detail">
+
+                            <label>
+                                Display Name
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.display_name
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                City
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.city
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Occupation
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.occupation
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Education
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.education
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Relationship Status
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.relationship_status
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <label>
+                                Looking For
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.looking_for
+                                    ||
+                                    "—"
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail full">
+
+                            <label>
+                                Bio
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.bio
+                                    ||
+                                    "No biography provided."
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail full">
+
+                            <label>
+                                Interests
+                            </label>
+
+                            <strong>
+                                ${escapeHTML(
+                                    profile.interests
+                                    ||
+                                    "No interests provided."
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =============================================
+                 PHOTOS
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            User Photos
+                        </h3>
+
+                        <span>
+                            Approved and uploaded profile media
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    ${
+                        photos.length
+                            ?
+                            `
+                            <div class="photo-grid">
+
+                                ${photos
+                                    .map(
+                                        function(photo) {
+
+                                            return `
+                                            <div class="photo">
+
+                                                <img
+                                                    src="${escapeHTML(
+                                                        photo.file_path
+                                                        ||
+                                                        ""
+                                                    )}"
+                                                    alt=""
+                                                    loading="lazy"
+                                                    onerror="
+                                                        this.style.display='none';
+                                                    "
+                                                >
+
+                                            </div>
+                                            `;
+
+                                        }
+                                    )
+                                    .join("")
+                                }
+
+                            </div>
+                            `
+                            :
+                            `
+                            <div class="no-photos">
+
+                                <i class="fa-regular fa-images"></i>
+
+                                No approved photos found.
+
+                            </div>
+                            `
+                    }
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutLink"
+    )
+    .addEventListener(
+        "click",
+        async function(
+            event
+        ) {
+
+            event.preventDefault();
+
+
+            try {
+
+                await fetch(
+                    LOGOUT_API,
+                    {
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store"
+
+                    }
+                );
+
+            } catch (
+                error
+            ) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+
+            window.location.href =
+                "../login.html";
+
+        }
+    );
+
+
+loadUser();
+
+</script>
+
+
+</body>
+
+</html>

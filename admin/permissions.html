@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <title>Permissions | LOVEMI Admin</title>
+
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+
+    <style>
+
+        :root {
+
+            --primary: #6d28d9;
+            --primary-soft: #f3e8ff;
+            --accent: #db2777;
+
+            --green: #16a34a;
+            --green-soft: #ecfdf5;
+
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+
+            --text: #18181b;
+            --soft: #68686f;
+            --muted: #9696a1;
+
+            --bg: #f6f6fa;
+            --white: #ffffff;
+            --border: #e8e8ef;
+
+            --sidebar: 258px;
+        }
+
+
+        * {
+
+            margin:
+                0;
+
+            padding:
+                0;
+
+            box-sizing:
+                border-box;
+        }
+
+
+        body {
+
+            min-height:
+                100vh;
+
+            font-family:
+                Inter,
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--bg);
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        .sidebar {
+
+            position:
+                fixed;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            bottom:
+                0;
+
+            width:
+                var(--sidebar);
+
+            z-index:
+                1200;
+
+            overflow-y:
+                auto;
+
+            background:
+                #16131e;
+
+            color:
+                white;
+        }
+
+
+        .sidebar-header {
+
+            min-height:
+                82px;
+
+            padding:
+                17px 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+
+        .sidebar-logo {
+
+            width:
+                46px;
+
+            height:
+                46px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                12px;
+        }
+
+
+        .sidebar-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                22px;
+        }
+
+
+        .sidebar-subtitle {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #9f9ba9;
+
+            font-size:
+                8px;
+
+            letter-spacing:
+                .7px;
+        }
+
+
+        .admin-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            margin:
+                16px;
+
+            padding:
+                7px 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius:
+                999px;
+
+            color:
+                #e9ddff;
+
+            background:
+                rgba(109,40,217,.16);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                5px 12px;
+        }
+
+
+        .sidebar-label {
+
+            padding:
+                12px 10px 7px;
+
+            color:
+                #716c7d;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .sidebar-link {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            margin:
+                2px 0;
+
+            padding:
+                10px 11px;
+
+            border-radius:
+                10px;
+
+            color:
+                #b7b1c2;
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .sidebar-link i {
+
+            width:
+                17px;
+
+            text-align:
+                center;
+        }
+
+
+        .sidebar-link:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        .sidebar-link.active {
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.75),
+                    rgba(219,39,119,.55)
+                );
+        }
+
+
+        .main {
+
+            margin-left:
+                var(--sidebar);
+
+            min-height:
+                100vh;
+        }
+
+
+        .topbar {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                900;
+
+            min-height:
+                76px;
+
+            padding:
+                0 28px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            background:
+                rgba(255,255,255,.95);
+
+            backdrop-filter:
+                blur(14px);
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+
+        .topbar-left {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+        }
+
+
+        .menu-btn {
+
+            display:
+                none;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            place-items:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+        }
+
+
+        .title h1 {
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+        }
+
+
+        .title p {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        .topbar-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .top-icon {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+            color:
+                var(--soft);
+
+            font-size:
+                11px;
+        }
+
+
+        .admin-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding-left:
+                10px;
+
+            border-left:
+                1px solid
+                var(--border);
+        }
+
+
+        .admin-avatar {
+
+            width:
+                37px;
+
+            height:
+                37px;
+
+            object-fit:
+                cover;
+
+            border-radius:
+                50%;
+        }
+
+
+        .admin-user strong {
+
+            display:
+                block;
+
+            font-size:
+                8px;
+        }
+
+
+        .admin-user span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                7px;
+        }
+
+
+        .content {
+
+            width:
+                min(
+                    calc(100% - 48px),
+                    1450px
+                );
+
+            margin:
+                auto;
+
+            padding:
+                28px 0 50px;
+        }
+
+
+        .heading-row {
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .heading-row h2 {
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+        }
+
+
+        .heading-row p {
+
+            margin-top:
+                4px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        .btn {
+
+            min-height:
+                41px;
+
+            padding:
+                0 14px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            border:
+                none;
+
+            border-radius:
+                10px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .btn-light {
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                white;
+
+            color:
+                var(--soft);
+        }
+
+
+        .alert {
+
+            display:
+                none;
+
+            padding:
+                12px 14px;
+
+            margin-bottom:
+                16px;
+
+            border-radius:
+                11px;
+
+            font-size:
+                9px;
+        }
+
+
+        .alert.show {
+            display:
+                block;
+        }
+
+
+        .alert.error {
+
+            color:
+                #991b1b;
+
+            background:
+                var(--red-soft);
+
+            border:
+                1px solid #fecaca;
+        }
+
+
+        .alert.success {
+
+            color:
+                #166534;
+
+            background:
+                var(--green-soft);
+
+            border:
+                1px solid #bbf7d0;
+        }
+
+
+        .card {
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+
+        .card-header {
+
+            min-height:
+                60px;
+
+            padding:
+                0 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+
+        .card-header h3 {
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .card-header span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                7px;
+        }
+
+
+        .body {
+
+            padding:
+                18px;
+        }
+
+
+        .search {
+
+            width:
+                290px;
+
+            max-width:
+                100%;
+
+            height:
+                41px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            outline:
+                none;
+
+            font-size:
+                9px;
+        }
+
+
+        .search:focus {
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+        }
+
+
+        .permission-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0,1fr)
+                );
+
+            gap:
+                10px;
+        }
+
+
+        .permission {
+
+            padding:
+                13px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                12px;
+
+            background:
+                #fcfcfd;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .permission:hover {
+
+            border-color:
+                #d9cef3;
+
+            background:
+                #fdfaff;
+        }
+
+
+        .permission-head {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+        }
+
+
+        .permission-icon {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            flex:
+                0 0 auto;
+
+            border-radius:
+                9px;
+
+            background:
+                var(--primary-soft);
+
+            color:
+                var(--primary);
+
+            font-size:
+                9px;
+        }
+
+
+        .permission strong {
+
+            display:
+                block;
+
+            font-size:
+                8px;
+        }
+
+
+        .permission code {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                6px;
+
+            word-break:
+                break-word;
+        }
+
+
+        .permission p {
+
+            margin-top:
+                8px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                7px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .overlay {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                1100;
+
+            background:
+                rgba(0,0,0,.45);
+        }
+
+
+        .empty,
+        .loading {
+
+            padding:
+                60px 20px;
+
+            text-align:
+                center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        @media (max-width: 1100px) {
+
+            .permission-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    .25s ease;
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .main {
+
+                margin-left:
+                    0;
+            }
+
+
+            .menu-btn {
+
+                display:
+                    grid;
+            }
+
+
+            .overlay.show {
+
+                display:
+                    block;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .content {
+
+                width:
+                    min(
+                        calc(100% - 24px),
+                        1450px
+                    );
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 13px;
+            }
+
+
+            .top-icon {
+
+                display:
+                    none;
+            }
+
+
+            .admin-user {
+
+                border-left:
+                    none;
+
+                padding-left:
+                    0;
+            }
+
+
+            .admin-user > div {
+
+                display:
+                    none;
+            }
+
+
+            .heading-row {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .permission-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            class="sidebar-logo"
+            alt="LOVEMI"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-gauge-high"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+
+        <a
+            href="users.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-users"></i>
+
+            Users
+
+        </a>
+
+
+        <a
+            href="profiles.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-id-card"></i>
+
+            Profiles
+
+        </a>
+
+
+        <a
+            href="admins.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            Administrators
+
+        </a>
+
+
+        <a
+            href="roles.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-user-tag"></i>
+
+            Roles
+
+        </a>
+
+
+        <a
+            href="permissions.html"
+            class="sidebar-link active"
+        >
+
+            <i class="fa-solid fa-key"></i>
+
+            Permissions
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+
+        <a
+            href="photos.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-images"></i>
+
+            Photos
+
+        </a>
+
+
+        <a
+            href="posts.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-newspaper"></i>
+
+            Posts
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+
+        <a
+            href="connections.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-link"></i>
+
+            Connections
+
+        </a>
+
+
+        <a
+            href="conversations.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-comments"></i>
+
+            Conversations
+
+        </a>
+
+
+        <a
+            href="messages.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-message"></i>
+
+            Messages
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+
+        <a
+            href="premium-users.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-crown"></i>
+
+            Premium Users
+
+        </a>
+
+
+        <a
+            href="subscriptions.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Subscriptions
+
+        </a>
+
+
+        <a
+            href="payments.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-credit-card"></i>
+
+            Payments
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+
+        <a
+            href="reports.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-flag"></i>
+
+            Reports
+
+        </a>
+
+
+        <a
+            href="blocked-users.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-ban"></i>
+
+            Blocked Users
+
+        </a>
+
+
+        <a
+            href="verification.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Verification
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+
+        <a
+            href="notifications.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-bell"></i>
+
+            Notifications
+
+        </a>
+
+
+        <a
+            href="system-settings.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-sliders"></i>
+
+            System Settings
+
+        </a>
+
+
+        <a
+            href="audit-logs.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Audit Logs
+
+        </a>
+
+
+        <a
+            href="backup.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-database"></i>
+
+            Backups
+
+        </a>
+
+
+        <a
+            href="../dashboard.html"
+            class="sidebar-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            User Dashboard
+
+        </a>
+
+
+        <a
+            href="#"
+            class="sidebar-link"
+            id="logoutLink"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<div class="main">
+
+
+    <header class="topbar">
+
+
+        <div class="topbar-left">
+
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="title">
+
+                <h1>
+                    Permissions
+                </h1>
+
+                <p>
+                    View the permission catalogue available to LOVEMI roles.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+            >
+
+                <i class="fa-regular fa-bell"></i>
+
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="top-icon"
+            >
+
+                <i class="fa-regular fa-message"></i>
+
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="top-icon"
+            >
+
+                <i class="fa-solid fa-globe"></i>
+
+            </a>
+
+
+            <div class="admin-user">
+
+
+                <img
+                    id="adminAvatar"
+                    class="admin-avatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                >
+
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <main class="content">
+
+
+        <div class="heading-row">
+
+
+            <div>
+
+                <h2>
+                    Permission Catalogue
+                </h2>
+
+                <p>
+                    These permissions come directly from the database.
+                </p>
+
+            </div>
+
+
+            <input
+                type="search"
+                id="searchInput"
+                class="search"
+                placeholder="Search permissions..."
+                autocomplete="off"
+            >
+
+
+        </div>
+
+
+        <div
+            class="alert"
+            id="alertBox"
+        ></div>
+
+
+        <section class="card">
+
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <h3>
+                        Available Permissions
+                    </h3>
+
+                    <span id="permissionCountText">
+                        Loading permissions...
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    id="refreshButton"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Refresh
+
+                </button>
+
+
+            </div>
+
+
+            <div class="body">
+
+
+                <div
+                    id="permissionsGrid"
+                    class="permission-grid"
+                >
+
+                    <div class="loading">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Loading permissions...
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+const API =
+    "../admin-api/roles/list.php";
+
+const LOGOUT_API =
+    "../api/auth/logout.php";
+
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
+
+const permissionsGrid =
+    document.getElementById("permissionsGrid");
+
+const alertBox =
+    document.getElementById("alertBox");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+let permissionData =
+    [];
+
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show " + type;
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    alertBox.className =
+        "alert";
+
+    alertBox.textContent =
+        "";
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+document
+    .getElementById("menuBtn")
+    .addEventListener(
+        "click",
+        function() {
+
+            sidebar.classList.toggle("open");
+
+            overlay.classList.toggle("show");
+
+        }
+    );
+
+
+overlay.addEventListener(
+    "click",
+    function() {
+
+        sidebar.classList.remove("open");
+
+        overlay.classList.remove("show");
+
+    }
+);
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+function getIcon(slug) {
+
+    const icons = {
+
+        "dashboard.view":
+            "fa-gauge-high",
+
+        "users.manage":
+            "fa-users-gear",
+
+        "users.view":
+            "fa-users",
+
+        "profiles.manage":
+            "fa-id-card",
+
+        "photos.manage":
+            "fa-images",
+
+        "posts.manage":
+            "fa-newspaper",
+
+        "connections.manage":
+            "fa-link",
+
+        "conversations.manage":
+            "fa-comments",
+
+        "messages.manage":
+            "fa-message",
+
+        "premium.manage":
+            "fa-crown",
+
+        "payments.manage":
+            "fa-credit-card",
+
+        "services.manage":
+            "fa-layer-group",
+
+        "countries.manage":
+            "fa-earth-africa",
+
+        "currencies.manage":
+            "fa-coins",
+
+        "exchange_rates.manage":
+            "fa-chart-line",
+
+        "notifications.manage":
+            "fa-bell",
+
+        "audio.manage":
+            "fa-volume-high",
+
+        "reports.manage":
+            "fa-flag",
+
+        "blocks.manage":
+            "fa-ban",
+
+        "admins.manage":
+            "fa-user-shield",
+
+        "roles.manage":
+            "fa-user-tag",
+
+        "permissions.manage":
+            "fa-key",
+
+        "audit.view":
+            "fa-list-check",
+
+        "login_logs.view":
+            "fa-right-to-bracket",
+
+        "settings.manage":
+            "fa-sliders",
+
+        "backups.manage":
+            "fa-database"
+
+    };
+
+
+    return (
+        icons[slug]
+        ||
+        "fa-key"
+    );
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadPermissions() {
+
+    hideAlert();
+
+
+    permissionsGrid.innerHTML =
+        `
+        <div class="loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading permissions...
+
+        </div>
+        `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                API,
+                {
+                    method:
+                        "GET",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json"
+
+                    }
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/permissions.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            response.status === 403
+        ) {
+
+            window.location.href =
+                "../error.html?code=403";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load permissions."
+            );
+
+        }
+
+
+        const data =
+            result.data
+            ||
+            result;
+
+
+        permissionData =
+            Array.isArray(
+                data.permissions
+            )
+                ?
+                data.permissions
+                :
+                [];
+
+
+        const currentAdmin =
+            data.current_admin
+            ||
+            {};
+
+
+        document.getElementById(
+            "adminName"
+        ).textContent =
+            currentAdmin.full_names
+            ||
+            currentAdmin.username
+            ||
+            "Administrator";
+
+
+        document.getElementById(
+            "adminRole"
+        ).textContent =
+            currentAdmin.role_name
+            ||
+            "Admin";
+
+
+        if (
+            currentAdmin.avatar_url
+        ) {
+
+            document.getElementById(
+                "adminAvatar"
+            ).src =
+                currentAdmin.avatar_url;
+
+        }
+
+
+        renderPermissions();
+
+    } catch(error) {
+
+        console.error(error);
+
+
+        permissionsGrid.innerHTML =
+            `
+            <div class="empty">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+            `;
+
+
+        showAlert(
+            error.message
+            ||
+            "Unable to load permissions."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderPermissions() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        permissionData.filter(
+            permission => {
+
+                const text =
+                    (
+                        String(
+                            permission.name
+                            ||
+                            ""
+                        )
+                        +
+                        " "
+                        +
+                        String(
+                            permission.slug
+                            ||
+                            ""
+                        )
+                        +
+                        " "
+                        +
+                        String(
+                            permission.description
+                            ||
+                            ""
+                        )
+                    )
+                    .toLowerCase();
+
+
+                return text.includes(
+                    search
+                );
+
+            }
+        );
+
+
+    document.getElementById(
+        "permissionCountText"
+    ).textContent =
+        `${filtered.length} permission${
+            filtered.length === 1
+                ?
+                ""
+                :
+                "s"
+        }`;
+
+
+    if (
+        !filtered.length
+    ) {
+
+        permissionsGrid.innerHTML =
+            `
+            <div class="empty">
+
+                No matching permissions found.
+
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    permissionsGrid.innerHTML =
+        filtered
+            .map(
+                permission => {
+
+                    return `
+
+                    <article class="permission">
+
+
+                        <div class="permission-head">
+
+
+                            <div class="permission-icon">
+
+                                <i class="fa-solid ${getIcon(
+                                    permission.slug
+                                )}"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    ${escapeHTML(
+                                        permission.name
+                                        ||
+                                        ""
+                                    )}
+
+                                </strong>
+
+
+                                <code>
+
+                                    ${escapeHTML(
+                                        permission.slug
+                                        ||
+                                        ""
+                                    )}
+
+                                </code>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <p>
+
+                            ${escapeHTML(
+                                permission.description
+                                ||
+                                "No description available."
+                            )}
+
+                        </p>
+
+
+                    </article>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    renderPermissions
+);
+
+
+document
+    .getElementById("refreshButton")
+    .addEventListener(
+        "click",
+        loadPermissions
+    );
+
+
+document
+    .getElementById("logoutLink")
+    .addEventListener(
+        "click",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            try {
+
+                await fetch(
+                    LOGOUT_API,
+                    {
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store"
+                    }
+                );
+
+            } catch(error) {
+
+                console.error(error);
+
+            }
+
+
+            window.location.href =
+                "../login.html";
+
+        }
+    );
+
+
+loadPermissions();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,5355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Discover approved LOVEMI members and build meaningful connections.">
+
+    <meta name="theme-color"
+          content="#6d28d9">
+
+
+    <!-- =====================================================
+         LOVEMI TAB / FAVICON FILES
+    ====================================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="assets/logo1/favicon-16x16.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/logo1/favicon-32x32.png">
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="assets/logo1/apple-touch-icon.png">
+
+    <link rel="manifest"
+          href="assets/logo1/site.webmanifest">
+
+
+    <!-- =====================================================
+         NO CACHE
+    ====================================================== -->
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+
+    <title>Discover | LOVEMI</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ====================================================== */
+
+        :root {
+
+            --primary: #6d28d9;
+            --primary-dark: #4c1d95;
+            --primary-soft: #f3e8ff;
+
+            --accent: #db2777;
+            --accent-soft: #fce7f3;
+
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+
+            --green: #16a34a;
+            --green-soft: #f0fdf4;
+
+            --orange: #d97706;
+            --orange-soft: #fff7ed;
+
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+
+            --text: #18181b;
+            --text-soft: #68686f;
+            --text-muted: #9898a1;
+
+            --white: #ffffff;
+            --background: #f7f7fb;
+
+            --border: #e9e9ef;
+
+            --shadow-sm:
+                0 5px 18px rgba(0,0,0,.04);
+
+            --shadow-md:
+                0 14px 38px rgba(0,0,0,.07);
+
+            --shadow-lg:
+                0 22px 55px rgba(0,0,0,.10);
+
+            --container: 1380px;
+
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--background);
+
+            line-height: 1.55;
+
+        }
+
+
+        body.menu-open {
+
+            overflow: hidden;
+
+        }
+
+
+        a {
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font-family:
+                inherit;
+
+        }
+
+
+        button {
+
+            cursor:
+                pointer;
+
+        }
+
+
+        img {
+
+            display:
+                block;
+
+            max-width:
+                100%;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .header {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                2000;
+
+            width:
+                100%;
+
+            background:
+                rgba(255,255,255,.97);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid
+                rgba(0,0,0,.06);
+
+        }
+
+
+        .header-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            min-height:
+                76px;
+
+            margin:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                auto
+                minmax(0,1fr)
+                auto;
+
+            align-items:
+                center;
+
+            gap:
+                18px;
+
+        }
+
+
+        /* =====================================================
+           BRAND
+        ====================================================== */
+
+        .brand {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            min-width:
+                max-content;
+
+        }
+
+
+        .brand-logo {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                12px;
+
+            flex:
+                0 0 45px;
+
+        }
+
+
+        .brand-text {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                26px;
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+        }
+
+
+        .brand-tagline {
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+
+            letter-spacing:
+                .7px;
+
+        }
+
+
+        /* =====================================================
+           DESKTOP NAVIGATION
+        ====================================================== */
+
+        .main-navigation {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                3px;
+
+            min-width:
+                0;
+
+        }
+
+
+        .nav-link {
+
+            position:
+                relative;
+
+            min-height:
+                40px;
+
+            padding:
+                0 9px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                5px;
+
+            border-radius:
+                9px;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            white-space:
+                nowrap;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .nav-link i {
+
+            font-size:
+                9px;
+
+        }
+
+
+        .nav-link:hover {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+        }
+
+
+        .nav-link.active {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+        }
+
+
+        .nav-link.active::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                12px;
+
+            right:
+                12px;
+
+            bottom:
+                3px;
+
+            height:
+                2px;
+
+            border-radius:
+                2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+        }
+
+
+        /* =====================================================
+           HEADER ACTIONS
+        ====================================================== */
+
+        .header-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                flex-end;
+
+            gap:
+                6px;
+
+        }
+
+
+        .header-icon {
+
+            position:
+                relative;
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            color:
+                var(--text-soft);
+
+            background:
+                var(--white);
+
+            font-size:
+                10px;
+
+        }
+
+
+        .header-icon:hover {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+        }
+
+
+        .notification-dot {
+
+            position:
+                absolute;
+
+            top:
+                4px;
+
+            right:
+                4px;
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            border:
+                2px solid
+                white;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--accent);
+
+            display:
+                none;
+
+        }
+
+
+        .profile-shortcut {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            padding:
+                3px 7px 3px 3px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+        }
+
+
+        .profile-shortcut-avatar {
+
+            width:
+                31px;
+
+            height:
+                31px;
+
+            border-radius:
+                8px;
+
+            object-fit:
+                cover;
+
+            background:
+                #efeff4;
+
+        }
+
+
+        .profile-shortcut-name {
+
+            max-width:
+                74px;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .mobile-menu-button {
+
+            display:
+                none;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+
+        }
+
+
+        /* =====================================================
+           MOBILE NAV
+        ====================================================== */
+
+        .mobile-navigation {
+
+            position:
+                fixed;
+
+            top:
+                76px;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            z-index:
+                1900;
+
+            display:
+                none;
+
+            padding:
+                8px;
+
+            background:
+                rgba(255,255,255,.98);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.10);
+
+        }
+
+
+        .mobile-navigation.open {
+
+            display:
+                block;
+
+        }
+
+
+        .mobile-nav-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2,minmax(0,1fr));
+
+            gap:
+                6px;
+
+        }
+
+
+        .mobile-nav-link {
+
+            min-height:
+                48px;
+
+            padding:
+                8px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            color:
+                var(--text-soft);
+
+            background:
+                white;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .mobile-nav-link i {
+
+            color:
+                var(--primary);
+
+            font-size:
+                11px;
+
+        }
+
+
+        .mobile-nav-link.active {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            border-color:
+                #ddd6fe;
+
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .page {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                25px 0 55px;
+
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                32px;
+
+            margin-bottom:
+                18px;
+
+            border:
+                1px solid
+                rgba(109,40,217,.12);
+
+            border-radius:
+                22px;
+
+            background:
+
+                radial-gradient(
+                    circle at 91% 9%,
+                    rgba(219,39,119,.12),
+                    transparent 27%
+                ),
+
+                radial-gradient(
+                    circle at 4% 91%,
+                    rgba(109,40,217,.10),
+                    transparent 31%
+                ),
+
+                white;
+
+            box-shadow:
+                var(--shadow-sm);
+
+        }
+
+
+        .hero-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            padding:
+                6px 9px;
+
+            border-radius:
+                999px;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .hero h1 {
+
+            margin-top:
+                9px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(28px,4vw,46px);
+
+            line-height:
+                1.08;
+
+        }
+
+
+        .hero h1 span {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+        }
+
+
+        .hero p {
+
+            max-width:
+                700px;
+
+            margin-top:
+                8px;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        /* =====================================================
+           PREMIUM MESSAGE
+        ====================================================== */
+
+        .premium-note {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                15px;
+
+            padding:
+                11px 13px;
+
+            border:
+                1px solid
+                #eadcff;
+
+            border-radius:
+                12px;
+
+            background:
+                #fcfaff;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .premium-note i {
+
+            color:
+                var(--primary);
+
+            flex:
+                0 0 auto;
+
+        }
+
+
+        .premium-note a {
+
+            color:
+                var(--primary);
+
+            font-weight:
+                800;
+
+        }
+
+
+        /* =====================================================
+           FILTER CARD
+        ====================================================== */
+
+        .filters {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(260px,1.5fr)
+                minmax(150px,.6fr)
+                minmax(210px,.8fr)
+                auto;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                19px;
+
+            padding:
+                13px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            background:
+                white;
+
+            box-shadow:
+                var(--shadow-sm);
+
+        }
+
+
+        .filter-field {
+
+            position:
+                relative;
+
+        }
+
+
+        .filter-field > i {
+
+            position:
+                absolute;
+
+            left:
+                12px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .filter-field input,
+        .filter-field select {
+
+            width:
+                100%;
+
+            height:
+                41px;
+
+            padding:
+                0 11px 0 34px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            outline:
+                none;
+
+            color:
+                var(--text);
+
+            background:
+                #fafafa;
+
+            font-size:
+                8px;
+
+        }
+
+
+        .filter-field input:focus,
+        .filter-field select:focus {
+
+            background:
+                white;
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(109,40,217,.05);
+
+        }
+
+
+        .search-button {
+
+            min-width:
+                94px;
+
+            height:
+                41px;
+
+            padding:
+                0 12px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                6px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .search-button:hover {
+
+            opacity:
+                .94;
+
+        }
+
+
+        /* =====================================================
+           RESULTS
+        ====================================================== */
+
+        .results-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .results-title {
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .results-count {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+        }
+
+
+        .result-sort {
+
+            height:
+                34px;
+
+            padding:
+                0 10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            color:
+                var(--text-soft);
+
+            background:
+                white;
+
+            font-size:
+                8px;
+
+        }
+
+
+        /* =====================================================
+           USER GRID
+        ====================================================== */
+
+        .user-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0,1fr)
+                );
+
+            gap:
+                15px;
+
+        }
+
+
+        /* =====================================================
+           USER CARD
+        ====================================================== */
+
+        .user-card {
+
+            overflow:
+                hidden;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                16px;
+
+            box-shadow:
+                var(--shadow-sm);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .user-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                var(--shadow-md);
+
+        }
+
+
+        .photo-area {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            aspect-ratio:
+                1 / 1.08;
+
+            overflow:
+                hidden;
+
+            background:
+                #efeff4;
+
+        }
+
+
+        .profile-photo {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+
+            cursor:
+                pointer;
+
+            transition:
+                transform .35s ease;
+
+        }
+
+
+        .user-card:hover .profile-photo {
+
+            transform:
+                scale(1.025);
+
+        }
+
+
+        .online-status {
+
+            position:
+                absolute;
+
+            top:
+                10px;
+
+            left:
+                10px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+
+            padding:
+                5px 7px;
+
+            border-radius:
+                999px;
+
+            color:
+                white;
+
+            background:
+                rgba(0,0,0,.52);
+
+            backdrop-filter:
+                blur(7px);
+
+            font-size:
+                6.5px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .online-status i {
+
+            color:
+                #4ade80;
+
+            font-size:
+                5.5px;
+
+        }
+
+
+        .verified-badge {
+
+            position:
+                absolute;
+
+            top:
+                10px;
+
+            right:
+                10px;
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                8px;
+
+            color:
+                white;
+
+            background:
+                rgba(37,99,235,.90);
+
+            font-size:
+                8px;
+
+        }
+
+
+        .photo-connect-overlay {
+
+            position:
+                absolute;
+
+            left:
+                9px;
+
+            right:
+                9px;
+
+            bottom:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                7px;
+
+            padding:
+                7px 8px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            border-radius:
+                10px;
+
+            color:
+                white;
+
+            background:
+                rgba(0,0,0,.44);
+
+            backdrop-filter:
+                blur(7px);
+
+        }
+
+
+        .photo-connect-overlay span {
+
+            font-size:
+                6.5px;
+
+        }
+
+
+        .overlay-connect {
+
+            min-height:
+                29px;
+
+            padding:
+                0 8px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                4px;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .user-body {
+
+            padding:
+                12px;
+
+        }
+
+
+        .user-name {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .user-name .check {
+
+            color:
+                var(--blue);
+
+            font-size:
+                7px;
+
+        }
+
+
+        .user-username {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+
+        }
+
+
+        .user-meta {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                5px;
+
+            margin-top:
+                8px;
+
+        }
+
+
+        .meta-pill {
+
+            padding:
+                4px 6px;
+
+            border-radius:
+                6px;
+
+            color:
+                var(--text-soft);
+
+            background:
+                #f5f5f7;
+
+            font-size:
+                6.5px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .connect-button {
+
+            width:
+                100%;
+
+            min-height:
+                35px;
+
+            margin-top:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                5px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:
+                7.5px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .connect-button:hover {
+
+            opacity:
+                .94;
+
+        }
+
+
+        .connect-button.connected {
+
+            background:
+                var(--green);
+
+        }
+
+
+        .profile-button {
+
+            width:
+                100%;
+
+            min-height:
+                34px;
+
+            margin-top:
+                7px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                5px;
+
+            border:
+                1px solid
+                #ddd6fe;
+
+            border-radius:
+                9px;
+
+            color:
+                var(--primary);
+
+            background:
+                white;
+
+            font-size:
+                7.5px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .profile-button:hover {
+
+            background:
+                var(--primary-soft);
+
+        }
+
+
+        /* =====================================================
+           STATE
+        ====================================================== */
+
+        .state-card {
+
+            grid-column:
+                1 / -1;
+
+            min-height:
+                230px;
+
+            padding:
+                30px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                16px;
+
+            background:
+                white;
+
+        }
+
+
+        .state-icon {
+
+            width:
+                50px;
+
+            height:
+                50px;
+
+            margin-bottom:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                14px;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+        }
+
+
+        .state-card h3 {
+
+            font-size:
+                12px;
+
+        }
+
+
+        .state-card p {
+
+            max-width:
+                450px;
+
+            margin-top:
+                4px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .retry-button {
+
+            min-height:
+                36px;
+
+            margin-top:
+                12px;
+
+            padding:
+                0 13px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                6px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            color:
+                white;
+
+            background:
+                var(--primary);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            background:
+                #17151b;
+
+            color:
+                white;
+
+        }
+
+
+        .footer-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                38px 0 18px;
+
+        }
+
+
+        .footer-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr 1fr;
+
+            gap:
+                30px;
+
+            padding-bottom:
+                25px;
+
+        }
+
+
+        .footer-description {
+
+            max-width:
+                320px;
+
+            margin-top:
+                10px;
+
+            color:
+                #9d99a5;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        .footer-heading {
+
+            margin-bottom:
+                9px;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+
+        }
+
+
+        .footer-links a {
+
+            color:
+                #9d99a5;
+
+            font-size:
+                8px;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                white;
+
+        }
+
+
+        .footer-bottom {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding-top:
+                15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color:
+                #716d78;
+
+            font-size:
+                7px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1180px) {
+
+            .nav-link {
+
+                padding:
+                    0 7px;
+
+                font-size:
+                    8px;
+
+            }
+
+
+            .nav-link i {
+
+                font-size:
+                    8px;
+
+            }
+
+
+            .profile-shortcut-name {
+
+                display:
+                    none;
+
+            }
+
+
+            .user-grid {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0,1fr)
+                    );
+
+            }
+
+        }
+
+
+        @media (max-width: 980px) {
+
+            .main-navigation {
+
+                display:
+                    none;
+
+            }
+
+
+            .mobile-menu-button {
+
+                display:
+                    inline-flex;
+
+            }
+
+
+            .header-inner {
+
+                grid-template-columns:
+                    auto
+                    1fr
+                    auto;
+
+            }
+
+
+            .filters {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .search-button {
+
+                width:
+                    100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 760px) {
+
+            .page {
+
+                width:
+                    calc(100% - 22px);
+
+                padding-top:
+                    17px;
+
+            }
+
+
+            .header-inner {
+
+                width:
+                    calc(100% - 20px);
+
+                min-height:
+                    70px;
+
+            }
+
+
+            .header-icon {
+
+                width:
+                    36px;
+
+                height:
+                    36px;
+
+            }
+
+
+            .profile-shortcut {
+
+                display:
+                    none;
+
+            }
+
+
+            .user-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+
+                gap:
+                    10px;
+
+            }
+
+
+            .filters {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .search-button {
+
+                width:
+                    100%;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .brand-text {
+
+                display:
+                    none;
+
+            }
+
+
+            .hero {
+
+                padding:
+                    22px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size:
+                    29px;
+
+            }
+
+
+            .premium-note {
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .results-header {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .result-sort {
+
+                width:
+                    100%;
+
+            }
+
+
+            .user-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+
+                gap:
+                    8px;
+
+            }
+
+
+            .user-body {
+
+                padding:
+                    9px;
+
+            }
+
+
+            .user-name {
+
+                font-size:
+                    8.5px;
+
+            }
+
+
+            .user-username {
+
+                font-size:
+                    6.5px;
+
+            }
+
+
+            .meta-pill {
+
+                font-size:
+                    5.8px;
+
+            }
+
+
+            .photo-connect-overlay span {
+
+                display:
+                    none;
+
+            }
+
+
+            .overlay-connect {
+
+                width:
+                    100%;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .footer-bottom {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+
+
+        @media (max-width: 360px) {
+
+            .user-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .mobile-nav-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+
+        <!-- =================================================
+             LOGO
+        ================================================== -->
+
+        <a
+            href="dashboard.html"
+            class="brand"
+            aria-label="LOVEMI Dashboard">
+
+
+            <img
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI Logo"
+                class="brand-logo"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                ">
+
+
+            <span class="brand-text">
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+            </span>
+
+
+        </a>
+
+
+        <!-- =================================================
+             FULL DESKTOP NAVIGATION
+        ================================================== -->
+
+        <nav
+            class="main-navigation"
+            aria-label="Main navigation">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="discover.html"
+                class="nav-link active">
+
+                <i class="fa-solid fa-compass"></i>
+
+                <span>
+                    Discover
+                </span>
+
+            </a>
+
+
+            <a
+                href="connections.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-user-group"></i>
+
+                <span>
+                    Connections
+                </span>
+
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-message"></i>
+
+                <span>
+                    Messages
+                </span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="notifications.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+            <a
+                href="premium.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-crown"></i>
+
+                <span>
+                    Premium
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             HEADER ACTIONS
+        ================================================== -->
+
+        <div class="header-actions">
+
+
+            <a
+                href="notifications.html"
+                class="header-icon"
+                title="Notifications"
+                aria-label="Notifications">
+
+
+                <i class="fa-regular fa-bell"></i>
+
+
+                <span
+                    id="notificationDot"
+                    class="notification-dot">
+                </span>
+
+
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="header-icon"
+                title="Messages"
+                aria-label="Messages">
+
+                <i class="fa-regular fa-message"></i>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="header-icon"
+                title="Profile"
+                aria-label="Profile">
+
+                <i class="fa-regular fa-user"></i>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="profile-shortcut"
+                aria-label="My profile">
+
+
+                <img
+                    id="profileAvatar"
+                    src="assets/images/defaults/default-avatar-male.png"
+                    alt="My profile"
+                    class="profile-shortcut-avatar"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-avatar-male.png';
+                    ">
+
+
+                <span
+                    id="profileName"
+                    class="profile-shortcut-name">
+
+                    Account
+
+                </span>
+
+
+            </a>
+
+
+            <button
+                type="button"
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                aria-label="Open navigation"
+                aria-expanded="false">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================== -->
+
+<nav
+    id="mobileNavigation"
+    class="mobile-navigation"
+    aria-label="Mobile navigation">
+
+
+    <div class="mobile-nav-grid">
+
+
+        <a
+            href="dashboard.html"
+            class="mobile-nav-link">
+
+            <i class="fa-solid fa-house"></i>
+
+            Dashboard
+
+        </a>
+
+
+        <a
+            href="discover.html"
+            class="mobile-nav-link active">
+
+            <i class="fa-solid fa-compass"></i>
+
+            Discover
+
+        </a>
+
+
+        <a
+            href="connections.html"
+            class="mobile-nav-link">
+
+            <i class="fa-solid fa-user-group"></i>
+
+            Connections
+
+        </a>
+
+
+        <a
+            href="messages.html"
+            class="mobile-nav-link">
+
+            <i class="fa-regular fa-message"></i>
+
+            Messages
+
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="mobile-nav-link">
+
+            <i class="fa-regular fa-user"></i>
+
+            Profile
+
+        </a>
+
+
+        <a
+            href="notifications.html"
+            class="mobile-nav-link">
+
+            <i class="fa-regular fa-bell"></i>
+
+            Notifications
+
+        </a>
+
+
+        <a
+            href="settings.html"
+            class="mobile-nav-link">
+
+            <i class="fa-solid fa-gear"></i>
+
+            Settings
+
+        </a>
+
+
+        <a
+            href="premium.html"
+            class="mobile-nav-link">
+
+            <i class="fa-solid fa-crown"></i>
+
+            Premium
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main class="page">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+
+        <div class="hero-badge">
+
+            <i class="fa-solid fa-compass"></i>
+
+            Discover LOVEMI
+
+        </div>
+
+
+        <h1>
+
+            Discover
+            <span>people</span>
+            on LOVEMI.
+
+        </h1>
+
+
+        <p>
+
+            Browse approved profiles from members who have
+            completed account verification. Search by name,
+            gender or country. Private phone and WhatsApp
+            details are never displayed on this page.
+
+        </p>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         PREMIUM NOTICE
+    ====================================================== -->
+
+    <div class="premium-note">
+
+
+        <i class="fa-solid fa-shield-heart"></i>
+
+
+        <span>
+
+            You can discover profiles without Premium.
+            A Premium membership is required to create
+            a connection with another member.
+
+            <a href="premium.html">
+                Get Premium
+            </a>
+
+        </span>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         FILTER CARD
+    ====================================================== -->
+
+    <section class="filters">
+
+
+        <div class="filter-field">
+
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search by name or username..."
+                autocomplete="off"
+                maxlength="100">
+
+
+        </div>
+
+
+        <div class="filter-field">
+
+
+            <i class="fa-solid fa-venus-mars"></i>
+
+
+            <select id="genderFilter">
+
+
+                <option value="">
+                    All genders
+                </option>
+
+
+                <option value="Male">
+                    Male
+                </option>
+
+
+                <option value="Female">
+                    Female
+                </option>
+
+
+                <option value="Other">
+                    Other
+                </option>
+
+
+            </select>
+
+
+        </div>
+
+
+        <div class="filter-field">
+
+
+            <i class="fa-solid fa-earth-africa"></i>
+
+
+            <select id="countryFilter">
+
+
+                <option value="">
+                    Loading countries...
+                </option>
+
+
+            </select>
+
+
+        </div>
+
+
+        <button
+            type="button"
+            id="searchButton"
+            class="search-button">
+
+
+            <i class="fa-solid fa-filter"></i>
+
+            Search
+
+        </button>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         RESULTS HEADER
+    ====================================================== -->
+
+    <div class="results-header">
+
+
+        <div>
+
+
+            <div class="results-title">
+                People
+            </div>
+
+
+            <div
+                id="resultsCount"
+                class="results-count">
+
+                Loading profiles...
+
+            </div>
+
+
+        </div>
+
+
+        <select
+            id="sortFilter"
+            class="result-sort">
+
+
+            <option value="latest">
+                Latest members
+            </option>
+
+
+            <option value="online">
+                Online first
+            </option>
+
+
+            <option value="name">
+                Name A-Z
+            </option>
+
+
+        </select>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         USER GRID
+    ====================================================== -->
+
+    <section
+        id="userGrid"
+        class="user-grid">
+
+
+        <div class="state-card">
+
+
+            <div class="state-icon">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+            </div>
+
+
+            <h3>
+                Loading profiles...
+            </h3>
+
+
+            <p>
+
+                LOVEMI is loading approved members
+                directly from the database.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="footer-grid">
+
+
+            <!-- BRAND -->
+
+            <div>
+
+
+                <a
+                    href="dashboard.html"
+                    class="brand">
+
+
+                    <img
+                        src="assets/logo1/logo1.png"
+                        alt="LOVEMI Logo"
+                        class="brand-logo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        ">
+
+
+                    <span class="brand-text">
+
+                        <span class="brand-name">
+                            LOVEMI
+                        </span>
+
+                        <span class="brand-tagline"
+                              style="color:#77717f;">
+                            DISCOVER • CONNECT • MEET
+                        </span>
+
+                    </span>
+
+
+                </a>
+
+
+                <p class="footer-description">
+
+                    Discover approved members, create meaningful
+                    connections and access secure LOVEMI services.
+
+                </p>
+
+
+            </div>
+
+
+            <!-- EXPLORE -->
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+
+                <div class="footer-links">
+
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ACCOUNT -->
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+
+                <div class="footer-links">
+
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+
+                    <a href="notifications.html">
+                        Notifications
+                    </a>
+
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- HELP -->
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+
+                <div class="footer-links">
+
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+
+            <span>
+
+                ©
+                <span id="year"></span>
+                LOVEMI. All rights reserved.
+
+            </span>
+
+
+            <span>
+                Discover • Connect • Meet
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API ENDPOINTS
+========================================================= */
+
+const API = {
+
+    session:
+        "api/auth/session.php",
+
+    discover:
+        "api/discover/list-users.php",
+
+    countries:
+        "api/countries/list.php",
+
+    createConnection:
+        "api/connections/create.php"
+
+};
+
+
+/* =========================================================
+   DEFAULT IMAGES
+========================================================= */
+
+const DEFAULT_MALE =
+    "assets/images/defaults/default-avatar-male.png";
+
+
+const DEFAULT_FEMALE =
+    "assets/images/defaults/default-avatar-female.png";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+    currentUser:
+        null,
+
+    users:
+        [],
+
+    filteredUsers:
+        [],
+
+    countries:
+        [],
+
+    premium:
+        false,
+
+    search:
+        "",
+
+    gender:
+        "",
+
+    country:
+        "",
+
+    sort:
+        "latest"
+
+};
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const userGrid =
+    document.getElementById(
+        "userGrid"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+const genderFilter =
+    document.getElementById(
+        "genderFilter"
+    );
+
+
+const countryFilter =
+    document.getElementById(
+        "countryFilter"
+    );
+
+
+const searchButton =
+    document.getElementById(
+        "searchButton"
+    );
+
+
+const sortFilter =
+    document.getElementById(
+        "sortFilter"
+    );
+
+
+const resultsCount =
+    document.getElementById(
+        "resultsCount"
+    );
+
+
+const profileAvatar =
+    document.getElementById(
+        "profileAvatar"
+    );
+
+
+const profileName =
+    document.getElementById(
+        "profileName"
+    );
+
+
+const mobileMenuButton =
+    document.getElementById(
+        "mobileMenuButton"
+    );
+
+
+const mobileNavigation =
+    document.getElementById(
+        "mobileNavigation"
+    );
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+function getUserImage(
+    user
+) {
+
+    const photo =
+        user.profile_photo
+        ||
+        user.photo_url
+        ||
+        user.avatar
+        ||
+        "";
+
+
+    if (
+        photo
+    ) {
+
+        return photo;
+
+    }
+
+
+    return String(
+        user.gender
+        ||
+        ""
+    ).toLowerCase()
+        ===
+        "female"
+
+        ?
+
+        DEFAULT_FEMALE
+
+        :
+
+        DEFAULT_MALE;
+
+}
+
+
+/* =========================================================
+   GET JSON
+========================================================= */
+
+async function apiGet(
+    url
+) {
+
+    const separator =
+        url.includes("?")
+            ? "&"
+            : "?";
+
+
+    const response =
+        await fetch(
+            url
+            +
+            separator
+            +
+            "_="
+            +
+            Date.now(),
+            {
+
+                method:
+                    "GET",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                }
+
+            }
+        );
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        !contentType.includes(
+            "application/json"
+        )
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   POST JSON
+========================================================= */
+
+async function apiPost(
+    url,
+    data
+) {
+
+    const response =
+        await fetch(
+            url,
+            {
+
+                method:
+                    "POST",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        data
+                    )
+
+            }
+        );
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        !contentType.includes(
+            "application/json"
+        )
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+async function loadSession() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.session
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.authenticated !== true
+        ) {
+
+            window.location.href =
+                "login.html?return=discover.html";
+
+            return false;
+
+        }
+
+
+        state.currentUser =
+            result.user
+            ||
+            null;
+
+
+        if (
+            !state.currentUser
+        ) {
+
+            window.location.href =
+                "login.html?return=discover.html";
+
+            return false;
+
+        }
+
+
+        renderCurrentUser();
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "Session error:",
+            error
+        );
+
+
+        window.location.href =
+            "login.html?return=discover.html";
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER CURRENT USER
+========================================================= */
+
+function renderCurrentUser() {
+
+    if (
+        !state.currentUser
+    ) {
+
+        return;
+
+    }
+
+
+    profileName.textContent =
+        state.currentUser.username
+        ||
+        state.currentUser.full_name
+        ||
+        "Account";
+
+
+    profileAvatar.src =
+        getUserImage(
+            state.currentUser
+        );
+
+}
+
+
+/* =========================================================
+   LOAD COUNTRIES
+========================================================= */
+
+async function loadCountries() {
+
+    countryFilter.innerHTML = `
+
+        <option value="">
+            Loading countries...
+        </option>
+
+    `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.countries
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Countries could not be loaded."
+            );
+
+        }
+
+
+        let countries = [];
+
+
+        /*
+         * Supports:
+         *
+         * result.countries
+         * result.data
+         * result.data.countries
+         */
+
+        if (
+            Array.isArray(
+                result.countries
+            )
+        ) {
+
+            countries =
+                result.countries;
+
+        } else if (
+            Array.isArray(
+                result.data
+            )
+        ) {
+
+            countries =
+                result.data;
+
+        } else if (
+            result.data
+            &&
+            Array.isArray(
+                result.data.countries
+            )
+        ) {
+
+            countries =
+                result.data.countries;
+
+        }
+
+
+        state.countries =
+            countries;
+
+
+        countryFilter.innerHTML = `
+
+            <option value="">
+                All countries
+            </option>
+
+        `;
+
+
+        countries
+            .sort(
+                function(a,b) {
+
+                    return String(
+                        a.name
+                        ||
+                        ""
+                    ).localeCompare(
+                        String(
+                            b.name
+                            ||
+                            ""
+                        )
+                    );
+
+                }
+            )
+            .forEach(
+                function(country) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    /*
+                     * The value is country ID because the
+                     * backend can filter directly by ID.
+                     */
+
+                    option.value =
+                        String(
+                            country.id
+                            ??
+                            ""
+                        );
+
+
+                    option.textContent =
+                        (
+                            country.name
+                            ||
+                            "Unknown country"
+                        )
+                        +
+                        (
+                            country.iso2
+                                ?
+                                " ("
+                                +
+                                String(
+                                    country.iso2
+                                ).toUpperCase()
+                                +
+                                ")"
+                                :
+                                ""
+                        );
+
+
+                    /*
+                     * Store ISO and phone code for possible
+                     * future filtering/UI use.
+                     */
+
+                    if (
+                        country.iso2
+                    ) {
+
+                        option.dataset.iso2 =
+                            String(
+                                country.iso2
+                            ).toUpperCase();
+
+                    }
+
+
+                    if (
+                        country.phone_code
+                    ) {
+
+                        option.dataset.phoneCode =
+                            String(
+                                country.phone_code
+                            );
+
+                    }
+
+
+                    countryFilter.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+    } catch (error) {
+
+        console.error(
+            "Countries error:",
+            error
+        );
+
+
+        countryFilter.innerHTML = `
+
+            <option value="">
+                All countries
+            </option>
+
+        `;
+
+
+        /*
+         * Profiles can still load without a country filter.
+         */
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD USERS
+========================================================= */
+
+async function loadUsers() {
+
+    renderLoading();
+
+
+    try {
+
+        const params =
+            new URLSearchParams();
+
+
+        params.set(
+            "limit",
+            "100"
+        );
+
+
+        /*
+         * We initially load approved/available profiles.
+         *
+         * The backend applies the real security rules.
+         */
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.discover
+                +
+                "?"
+                +
+                params.toString()
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Profiles could not be loaded."
+            );
+
+        }
+
+
+        if (
+            Array.isArray(
+                result.users
+            )
+        ) {
+
+            state.users =
+                result.users;
+
+        } else if (
+            Array.isArray(
+                result.data
+            )
+        ) {
+
+            state.users =
+                result.data;
+
+        } else {
+
+            state.users =
+                [];
+
+        }
+
+
+        applyFilters();
+
+
+    } catch (error) {
+
+        console.error(
+            "Users error:",
+            error
+        );
+
+
+        resultsCount.textContent =
+            "Unable to load profiles";
+
+
+        renderError(
+            error.message
+            ||
+            "Profiles could not be loaded."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FILTER USERS
+========================================================= */
+
+function applyFilters() {
+
+    state.search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    state.gender =
+        genderFilter.value
+            .trim()
+            .toLowerCase();
+
+
+    state.country =
+        countryFilter.value
+            .trim();
+
+
+    state.sort =
+        sortFilter.value;
+
+
+    let users =
+        state.users.filter(
+            function(user) {
+
+                const name =
+                    String(
+                        user.full_name
+                        ||
+                        user.full_names
+                        ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const username =
+                    String(
+                        user.username
+                        ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const userGender =
+                    String(
+                        user.gender
+                        ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const userCountryId =
+                    String(
+                        user.country_id
+                        ??
+                        ""
+                    );
+
+
+                const searchMatch =
+                    !state.search
+                    ||
+                    name.includes(
+                        state.search
+                    )
+                    ||
+                    username.includes(
+                        state.search
+                    );
+
+
+                const genderMatch =
+                    !state.gender
+                    ||
+                    userGender ===
+                    state.gender;
+
+
+                const countryMatch =
+                    !state.country
+                    ||
+                    userCountryId ===
+                    state.country;
+
+
+                return (
+                    searchMatch
+                    &&
+                    genderMatch
+                    &&
+                    countryMatch
+                );
+
+            }
+        );
+
+
+    /*
+     * SORT
+     */
+
+    if (
+        state.sort ===
+        "online"
+    ) {
+
+        users.sort(
+            function(a,b) {
+
+                return (
+                    Number(
+                        Boolean(
+                            b.is_online
+                        )
+                    )
+                    -
+                    Number(
+                        Boolean(
+                            a.is_online
+                        )
+                    )
+                );
+
+            }
+        );
+
+
+    } else if (
+        state.sort ===
+        "name"
+    ) {
+
+        users.sort(
+            function(a,b) {
+
+                const nameA =
+                    String(
+                        a.full_name
+                        ||
+                        a.full_names
+                        ||
+                        a.username
+                        ||
+                        ""
+                    ).toLowerCase();
+
+
+                const nameB =
+                    String(
+                        b.full_name
+                        ||
+                        b.full_names
+                        ||
+                        b.username
+                        ||
+                        ""
+                    ).toLowerCase();
+
+
+                return nameA.localeCompare(
+                    nameB
+                );
+
+            }
+        );
+
+    }
+
+
+    state.filteredUsers =
+        users;
+
+
+    renderUsers();
+
+}
+
+
+/* =========================================================
+   RENDER LOADING
+========================================================= */
+
+function renderLoading() {
+
+    userGrid.innerHTML = `
+
+        <div class="state-card">
+
+            <div class="state-icon">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+            </div>
+
+            <h3>
+                Loading profiles...
+            </h3>
+
+            <p>
+                Loading approved LOVEMI members directly from the database.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER ERROR
+========================================================= */
+
+function renderError(
+    message
+) {
+
+    userGrid.innerHTML = `
+
+        <div class="state-card">
+
+            <div class="state-icon">
+
+                <i class="fa-solid fa-cloud-exclamation"></i>
+
+            </div>
+
+            <h3>
+                Profiles could not be loaded
+            </h3>
+
+            <p>
+                ${escapeHtml(message)}
+            </p>
+
+            <button
+                type="button"
+                class="retry-button"
+                id="retryButton">
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Try Again
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "retryButton"
+        )
+        ?.addEventListener(
+            "click",
+            loadUsers
+        );
+
+}
+
+
+/* =========================================================
+   RENDER EMPTY
+========================================================= */
+
+function renderEmpty() {
+
+    userGrid.innerHTML = `
+
+        <div class="state-card">
+
+            <div class="state-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+            <h3>
+                No matching profiles
+            </h3>
+
+            <p>
+                Try another name, gender or country.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER USERS
+========================================================= */
+
+function renderUsers() {
+
+    const users =
+        state.filteredUsers;
+
+
+    resultsCount.textContent =
+        users.length
+        +
+        (
+            users.length === 1
+                ?
+                " member found"
+                :
+                " members found"
+        );
+
+
+    if (
+        !users.length
+    ) {
+
+        renderEmpty();
+
+        return;
+
+    }
+
+
+    userGrid.innerHTML =
+        users
+            .map(
+                renderUserCard
+            )
+            .join("");
+
+
+    bindUserEvents();
+
+}
+
+
+/* =========================================================
+   USER CARD
+========================================================= */
+
+function renderUserCard(
+    user
+) {
+
+    const id =
+        user.id
+        ??
+        user.user_id;
+
+
+    const fullName =
+        user.full_name
+        ??
+        user.full_names
+        ??
+        user.username
+        ??
+        "Member";
+
+
+    const username =
+        user.username
+        ??
+        "";
+
+
+    const gender =
+        user.gender
+        ??
+        "";
+
+
+    const countryName =
+        user.country_name
+        ??
+        getCountryName(
+            user.country_id
+        );
+
+
+    const avatar =
+        getUserImage(
+            user
+        );
+
+
+    const verified =
+        Boolean(
+            user.email_verified
+            ??
+            user.verified
+            ??
+            false
+        );
+
+
+    const online =
+        Boolean(
+            user.is_online
+            ??
+            user.online
+            ??
+            false
+        );
+
+
+    const isSelf =
+        Number(
+            id
+        )
+        ===
+        Number(
+            state.currentUser?.id
+        );
+
+
+    if (
+        isSelf
+    ) {
+
+        return "";
+
+    }
+
+
+    return `
+
+        <article
+            class="user-card"
+            data-user-id="${escapeHtml(id)}">
+
+
+            <!-- =================================================
+                 PHOTO
+            ================================================== -->
+
+            <div class="photo-area">
+
+
+                <img
+                    src="${escapeHtml(avatar)}"
+                    alt="${escapeHtml(fullName)}"
+                    class="profile-photo"
+                    loading="lazy"
+                    data-connect-user="${escapeHtml(id)}"
+                    data-connect-name="${escapeHtml(fullName)}"
+                    onerror="
+                        this.onerror=null;
+                        this.src='${escapeHtml(
+                            String(gender).toLowerCase() === "female"
+                                ? DEFAULT_FEMALE
+                                : DEFAULT_MALE
+                        )}';
+                    ">
+
+
+                ${
+                    online
+                        ?
+                        `
+                        <span class="online-status">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            Online
+
+                        </span>
+                        `
+                        :
+                        ""
+                }
+
+
+                ${
+                    verified
+                        ?
+                        `
+                        <span
+                            class="verified-badge"
+                            title="Verified account">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </span>
+                        `
+                        :
+                        ""
+                }
+
+
+                <!-- Photo clickable connection -->
+                <div class="photo-connect-overlay">
+
+
+                    <span>
+                        Click photo to connect
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="overlay-connect"
+                        data-connect-user="${escapeHtml(id)}"
+                        data-connect-name="${escapeHtml(fullName)}">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Connect
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 USER DETAILS
+            ================================================== -->
+
+            <div class="user-body">
+
+
+                <div class="user-name">
+
+
+                    ${escapeHtml(fullName)}
+
+
+                    ${
+                        verified
+                            ?
+                            `
+                            <i
+                                class="fa-solid fa-circle-check check"
+                                title="Verified">
+                            </i>
+                            `
+                            :
+                            ""
+                    }
+
+
+                </div>
+
+
+                ${
+                    username
+                        ?
+                        `
+                        <div class="user-username">
+
+                            @${escapeHtml(username)}
+
+                        </div>
+                        `
+                        :
+                        ""
+                }
+
+
+                <div class="user-meta">
+
+
+                    ${
+                        gender
+                            ?
+                            `
+                            <span class="meta-pill">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                ${escapeHtml(gender)}
+
+                            </span>
+                            `
+                            :
+                            ""
+                    }
+
+
+                    ${
+                        countryName
+                            ?
+                            `
+                            <span class="meta-pill">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                ${escapeHtml(countryName)}
+
+                            </span>
+                            `
+                            :
+                            ""
+                    }
+
+
+                    ${
+                        online
+                            ?
+                            `
+                            <span class="meta-pill">
+
+                                Online
+
+                            </span>
+                            `
+                            :
+                            ""
+                    }
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="connect-button"
+                    data-connect-user="${escapeHtml(id)}"
+                    data-connect-name="${escapeHtml(fullName)}">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Connect
+
+                </button>
+
+
+                <a
+                    href="profile.html?user=${encodeURIComponent(id)}"
+                    class="profile-button">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    View Profile
+
+                </a>
+
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   COUNTRY NAME
+========================================================= */
+
+function getCountryName(
+    countryId
+) {
+
+    if (
+        !countryId
+    ) {
+
+        return "";
+
+    }
+
+
+    const found =
+        state.countries.find(
+            function(country) {
+
+                return Number(
+                    country.id
+                )
+                ===
+                Number(
+                    countryId
+                );
+
+            }
+        );
+
+
+    return found?.name || "";
+
+}
+
+
+/* =========================================================
+   USER EVENTS
+========================================================= */
+
+function bindUserEvents() {
+
+    document
+        .querySelectorAll(
+            "[data-connect-user]"
+        )
+        .forEach(
+            function(element) {
+
+                element.addEventListener(
+                    "click",
+                    function(event) {
+
+                        /*
+                         * Prevent clicking a button from triggering
+                         * duplicate events.
+                         */
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        const id =
+                            this.dataset.connectUser;
+
+
+                        const name =
+                            this.dataset.connectName
+                            ||
+                            "this member";
+
+
+                        if (
+                            id
+                        ) {
+
+                            createConnection(
+                                this.tagName === "BUTTON"
+                                    ? this
+                                    : null,
+                                id,
+                                name
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   CREATE CONNECTION
+========================================================= */
+
+async function createConnection(
+    button,
+    targetUserId,
+    targetName
+) {
+
+    if (
+        !targetUserId
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        button
+    ) {
+
+        button.disabled =
+            true;
+
+
+        button.dataset.originalText =
+            button.innerHTML;
+
+
+        button.innerHTML =
+            `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Connecting...
+            `;
+
+    }
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiPost(
+                API.createConnection,
+                {
+                    user_id:
+                        Number(
+                            targetUserId
+                        ),
+
+                    source:
+                        "discover_photo_click"
+                }
+            );
+
+
+        /*
+         * No active session.
+         */
+
+        if (
+            result.code ===
+            "AUTHENTICATION_REQUIRED"
+        ) {
+
+            window.location.href =
+                "login.html?return=discover.html";
+
+            return;
+
+        }
+
+
+        /*
+         * Premium required.
+         */
+
+        if (
+            result.code ===
+            "PREMIUM_REQUIRED"
+        ) {
+
+            window.location.href =
+                "premium.html?return=discover.html";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "The connection could not be created."
+            );
+
+        }
+
+
+        /*
+         * Success.
+         */
+
+        if (
+            button
+        ) {
+
+            button.innerHTML =
+                `
+                <i class="fa-solid fa-circle-check"></i>
+                Connected
+                `;
+
+
+            button.classList.add(
+                "connected"
+            );
+
+
+            button.disabled =
+                true;
+
+        }
+
+
+        /*
+         * Backend may optionally redirect.
+         */
+
+        if (
+            result.redirect
+        ) {
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        result.redirect;
+
+                },
+                600
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Connection error:",
+            error
+        );
+
+
+        alert(
+            error.message
+            ||
+            (
+                "Unable to connect with "
+                +
+                targetName
+                +
+                "."
+            )
+        );
+
+
+        if (
+            button
+        ) {
+
+            button.disabled =
+                false;
+
+
+            button.innerHTML =
+                button.dataset.originalText
+                ||
+                `
+                <i class="fa-solid fa-user-plus"></i>
+                Connect
+                `;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchButton.addEventListener(
+    "click",
+    function() {
+
+        applyFilters();
+
+    }
+);
+
+
+searchInput.addEventListener(
+    "input",
+    function() {
+
+        applyFilters();
+
+    }
+);
+
+
+genderFilter.addEventListener(
+    "change",
+    function() {
+
+        applyFilters();
+
+    }
+);
+
+
+countryFilter.addEventListener(
+    "change",
+    function() {
+
+        applyFilters();
+
+    }
+);
+
+
+sortFilter.addEventListener(
+    "change",
+    function() {
+
+        applyFilters();
+
+    }
+);
+
+
+/* =========================================================
+   ENTER SEARCH
+========================================================= */
+
+searchInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            event.preventDefault();
+
+            applyFilters();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+mobileMenuButton.addEventListener(
+    "click",
+    function() {
+
+        const isOpen =
+            mobileNavigation.classList.contains(
+                "open"
+            );
+
+
+        mobileNavigation.classList.toggle(
+            "open"
+        );
+
+
+        document.body.classList.toggle(
+            "menu-open",
+            !isOpen
+        );
+
+
+        this.setAttribute(
+            "aria-expanded",
+            String(
+                !isOpen
+            )
+        );
+
+
+        this.innerHTML =
+            !isOpen
+
+                ?
+
+                '<i class="fa-solid fa-xmark"></i>'
+
+                :
+
+                '<i class="fa-solid fa-bars"></i>';
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE MOBILE MENU AFTER LINK
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".mobile-nav-link"
+    )
+    .forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    mobileNavigation.classList.remove(
+                        "open"
+                    );
+
+
+                    document.body.classList.remove(
+                        "menu-open"
+                    );
+
+
+                    mobileMenuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    mobileMenuButton.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   CLOSE MOBILE MENU ON OUTSIDE CLICK
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !mobileNavigation.contains(
+                event.target
+            )
+            &&
+            !mobileMenuButton.contains(
+                event.target
+            )
+        ) {
+
+            mobileNavigation.classList.remove(
+                "open"
+            );
+
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            mobileMenuButton.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        const authenticated =
+            await loadSession();
+
+
+        if (
+            !authenticated
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Load countries directly from the database-backed API
+         * and profiles independently.
+         */
+
+        await Promise.allSettled(
+            [
+                loadCountries(),
+                loadUsers()
+            ]
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

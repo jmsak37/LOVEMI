@@ -1,0 +1,6800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="LOVEMI member dashboard. Discover approved profiles, manage connections, messages, premium access and notifications.">
+
+    <meta name="theme-color"
+          content="#6d28d9">
+
+    <!-- =====================================================
+         LOVEMI TAB ICONS
+    ====================================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="assets/logo1/favicon-16x16.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/logo1/favicon-32x32.png">
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="assets/logo1/apple-touch-icon.png">
+
+    <link rel="manifest"
+          href="assets/logo1/site.webmanifest">
+
+    <!-- =====================================================
+         NO CACHE
+    ====================================================== -->
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+    <title>Dashboard | LOVEMI</title>
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <style>
+
+        :root {
+
+            --primary: #6d28d9;
+            --primary-dark: #4c1d95;
+            --primary-soft: #f3e8ff;
+
+            --accent: #db2777;
+            --accent-soft: #fce7f3;
+
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+
+            --green: #16a34a;
+            --green-soft: #f0fdf4;
+
+            --orange: #d97706;
+            --orange-soft: #fff7ed;
+
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+
+            --text: #18181b;
+            --text-soft: #68686f;
+            --text-muted: #9898a1;
+
+            --white: #ffffff;
+            --bg: #f6f6fa;
+
+            --border: #e9e9ef;
+
+            --shadow-sm:
+                0 5px 18px rgba(0,0,0,.04);
+
+            --shadow-md:
+                0 14px 38px rgba(0,0,0,.07);
+
+            --shadow-lg:
+                0 20px 55px rgba(0,0,0,.10);
+
+            --radius-sm: 10px;
+            --radius-md: 15px;
+            --radius-lg: 22px;
+
+            --container: 1380px;
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--bg);
+
+            line-height:
+                1.55;
+        }
+
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .header {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1100;
+
+            background:
+                rgba(255,255,255,.97);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid
+                rgba(0,0,0,.055);
+        }
+
+
+        .header-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            min-height:
+                74px;
+
+            margin:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                auto minmax(260px,1fr) auto;
+
+            gap:
+                18px;
+
+            align-items:
+                center;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ====================================================== */
+
+        .brand {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            min-width:
+                max-content;
+        }
+
+
+        .brand-image {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                12px;
+
+            object-fit:
+                contain;
+        }
+
+
+        .brand-text {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                26px;
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+                background-clip:
+                    text;
+        }
+
+
+        .brand-tagline {
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+
+            letter-spacing:
+                .7px;
+        }
+
+
+        /* =====================================================
+           HEADER SEARCH
+        ====================================================== */
+
+        .top-search {
+
+            position:
+                relative;
+
+            max-width:
+                560px;
+
+            width:
+                100%;
+
+            margin:
+                auto;
+        }
+
+
+        .top-search-icon {
+
+            position:
+                absolute;
+
+            left:
+                14px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+            pointer-events:
+                none;
+        }
+
+
+        .top-search input {
+
+            width:
+                100%;
+
+            height:
+                43px;
+
+            padding:
+                0 14px 0 38px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            outline:
+                none;
+
+            background:
+                #fafaff;
+
+            color:
+                var(--text);
+
+            font-size:
+                10px;
+        }
+
+
+        .top-search input:focus {
+
+            background:
+                white;
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.06);
+        }
+
+
+        /* =====================================================
+           HEADER ACTIONS
+        ====================================================== */
+
+        .header-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+        }
+
+
+        .icon-button {
+
+            position:
+                relative;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                12px;
+        }
+
+
+        .icon-button:hover {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+        }
+
+
+        .notification-count {
+
+            position:
+                absolute;
+
+            top:
+                -3px;
+
+            right:
+                -3px;
+
+            min-width:
+                16px;
+
+            height:
+                16px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                0 4px;
+
+            border:
+                2px solid white;
+
+            border-radius:
+                999px;
+
+            color:
+                white;
+
+            background:
+                var(--accent);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        .profile-mini {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                4px 8px 4px 4px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            background:
+                white;
+        }
+
+
+        .profile-mini-avatar {
+
+            width:
+                32px;
+
+            height:
+                32px;
+
+            border-radius:
+                9px;
+
+            object-fit:
+                cover;
+
+            background:
+                #f0eff4;
+        }
+
+
+        .profile-mini-name {
+
+            max-width:
+                90px;
+
+            overflow:
+                hidden;
+
+            white-space:
+                nowrap;
+
+            text-overflow:
+                ellipsis;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .mobile-menu {
+
+            display:
+                none;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+        }
+
+
+        /* =====================================================
+           PAGE WRAPPER
+        ====================================================== */
+
+        .page {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                24px 0 55px;
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ====================================================== */
+
+        .welcome-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(0,1fr)
+                auto;
+
+            gap:
+                20px;
+
+            align-items:
+                center;
+
+            padding:
+                25px 28px;
+
+            margin-bottom:
+                18px;
+
+            border:
+                1px solid
+                rgba(109,40,217,.12);
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+
+                radial-gradient(
+                    circle at 92% 10%,
+                    rgba(219,39,119,.10),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 8% 90%,
+                    rgba(109,40,217,.08),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    white,
+                    #fbf9ff
+                );
+
+            box-shadow:
+                var(--shadow-sm);
+        }
+
+
+        .welcome-eyebrow {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            padding:
+                6px 9px;
+
+            margin-bottom:
+                7px;
+
+            border-radius:
+                999px;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .welcome-card h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(27px,3vw,40px);
+
+            line-height:
+                1.08;
+        }
+
+
+        .welcome-card h1 span {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .welcome-description {
+
+            margin-top:
+                7px;
+
+            max-width:
+                640px;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                10px;
+        }
+
+
+        .welcome-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .button-primary,
+        .button-secondary {
+
+            min-height:
+                42px;
+
+            padding:
+                0 14px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            border-radius:
+                11px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+        }
+
+
+        .button-primary {
+
+            border:
+                none;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+        }
+
+
+        .button-secondary {
+
+            border:
+                1px solid
+                #ddd6fe;
+
+            color:
+                var(--primary);
+
+            background:
+                white;
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ====================================================== */
+
+        .dashboard-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(0,1.45fr)
+                minmax(290px,.55fr);
+
+            gap:
+                18px;
+
+            align-items:
+                start;
+        }
+
+
+        /* =====================================================
+           LEFT COLUMN
+        ====================================================== */
+
+        .main-column {
+
+            min-width:
+                0;
+        }
+
+
+        .section-toolbar {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .section-title {
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+        }
+
+
+        .section-subtitle {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+            margin-top:
+                2px;
+        }
+
+
+        .toolbar-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+        }
+
+
+        .filter-button {
+
+            height:
+                35px;
+
+            padding:
+                0 11px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .filter-button.active,
+        .filter-button:hover {
+
+            color:
+                var(--primary);
+
+            border-color:
+                #ddd6fe;
+
+            background:
+                var(--primary-soft);
+        }
+
+
+        /* =====================================================
+           FEED
+        ====================================================== */
+
+        .feed {
+
+            display:
+                grid;
+
+            gap:
+                15px;
+        }
+
+
+        .post-card {
+
+            overflow:
+                hidden;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                17px;
+
+            box-shadow:
+                var(--shadow-sm);
+        }
+
+
+        .post-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            padding:
+                13px 15px 9px;
+        }
+
+
+        .post-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            min-width:
+                0;
+        }
+
+
+        .post-avatar {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            flex:
+                0 0 38px;
+
+            border-radius:
+                11px;
+
+            object-fit:
+                cover;
+
+            background:
+                #efeff4;
+        }
+
+
+        .post-user-text {
+
+            min-width:
+                0;
+        }
+
+
+        .post-user-name {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+        }
+
+
+        .verified-badge {
+
+            color:
+                var(--blue);
+
+            font-size:
+                8px;
+        }
+
+
+        .post-meta {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+
+            margin-top:
+                2px;
+        }
+
+
+        .post-menu {
+
+            width:
+                29px;
+
+            height:
+                29px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                var(--text-muted);
+        }
+
+
+        .post-text {
+
+            padding:
+                3px 15px 11px;
+
+            color:
+                var(--text);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.65;
+
+            white-space:
+                pre-line;
+        }
+
+
+        .media-wrapper {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            overflow:
+                hidden;
+
+            background:
+                #111;
+        }
+
+
+        .post-media {
+
+            width:
+                100%;
+
+            max-height:
+                630px;
+
+            object-fit:
+                cover;
+
+            cursor:
+                pointer;
+        }
+
+
+        .post-media.video {
+
+            max-height:
+                650px;
+
+            object-fit:
+                contain;
+
+            background:
+                #050505;
+        }
+
+
+        .media-badge {
+
+            position:
+                absolute;
+
+            top:
+                11px;
+
+            right:
+                11px;
+
+            padding:
+                6px 8px;
+
+            border-radius:
+                8px;
+
+            color:
+                white;
+
+            background:
+                rgba(0,0,0,.55);
+
+            backdrop-filter:
+                blur(8px);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .connect-overlay {
+
+            position:
+                absolute;
+
+            left:
+                12px;
+
+            bottom:
+                12px;
+
+            right:
+                12px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            border-radius:
+                12px;
+
+            color:
+                white;
+
+            background:
+                rgba(0,0,0,.47);
+
+            backdrop-filter:
+                blur(10px);
+        }
+
+
+        .connect-overlay span {
+
+            font-size:
+                8px;
+        }
+
+
+        .connect-button {
+
+            min-height:
+                32px;
+
+            padding:
+                0 10px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                5px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .post-footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                10px 15px 13px;
+        }
+
+
+        .post-action {
+
+            min-height:
+                34px;
+
+            padding:
+                0 10px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .post-action:hover {
+
+            color:
+                var(--primary);
+
+            border-color:
+                #ddd6fe;
+
+            background:
+                var(--primary-soft);
+        }
+
+
+        /* =====================================================
+           PREMIUM NOTICE
+        ====================================================== */
+
+        .premium-banner {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                auto minmax(0,1fr) auto;
+
+            gap:
+                11px;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                15px;
+
+            padding:
+                14px 15px;
+
+            border:
+                1px solid
+                #eadcff;
+
+            border-radius:
+                15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff,
+                    #faf7ff
+                );
+        }
+
+
+        .premium-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                11px;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+        }
+
+
+        .premium-banner strong {
+
+            display:
+                block;
+
+            font-size:
+                10px;
+        }
+
+
+        .premium-banner span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+        }
+
+
+        .premium-banner .button-primary {
+
+            min-height:
+                37px;
+
+            font-size:
+                8px;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading-card {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-height:
+                180px;
+
+            padding:
+                30px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                16px;
+
+            background:
+                white;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+        }
+
+
+        .loading-card i {
+
+            margin-right:
+                7px;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        .empty-card {
+
+            padding:
+                35px 20px;
+
+            text-align:
+                center;
+
+            border:
+                1px dashed
+                #dcdce4;
+
+            border-radius:
+                16px;
+
+            background:
+                white;
+        }
+
+
+        .empty-icon {
+
+            width:
+                48px;
+
+            height:
+                48px;
+
+            margin:
+                0 auto 10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                14px;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-soft);
+        }
+
+
+        .empty-card h3 {
+
+            font-size:
+                12px;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .empty-card p {
+
+            max-width:
+                420px;
+
+            margin:
+                0 auto;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           RIGHT COLUMN
+        ====================================================== */
+
+        .sidebar {
+
+            min-width:
+                0;
+
+            display:
+                grid;
+
+            gap:
+                15px;
+        }
+
+
+        .side-card {
+
+            padding:
+                16px;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                16px;
+
+            box-shadow:
+                var(--shadow-sm);
+        }
+
+
+        .side-card-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .side-card-header h3 {
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .side-card-header a {
+
+            color:
+                var(--primary);
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           ACCOUNT SUMMARY
+        ====================================================== */
+
+        .account-summary {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+        }
+
+
+        .account-avatar {
+
+            width:
+                54px;
+
+            height:
+                54px;
+
+            border-radius:
+                14px;
+
+            object-fit:
+                cover;
+
+            background:
+                #efeff4;
+        }
+
+
+        .account-name {
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .account-location {
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+        }
+
+
+        .verified-label {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+
+            margin-top:
+                5px;
+
+            color:
+                var(--green);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           PREMIUM STATUS
+        ====================================================== */
+
+        .premium-status {
+
+            padding:
+                12px;
+
+            border:
+                1px solid
+                #eadcff;
+
+            border-radius:
+                12px;
+
+            background:
+                #fcfaff;
+        }
+
+
+        .premium-status-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .premium-label {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            color:
+                var(--primary);
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+        }
+
+
+        .premium-pill {
+
+            padding:
+                5px 8px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        .premium-pill.active {
+
+            color:
+                #166534;
+
+            background:
+                #dcfce7;
+        }
+
+
+        .premium-pill.inactive {
+
+            color:
+                #9a3412;
+
+            background:
+                #ffedd5;
+        }
+
+
+        .premium-details {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.5;
+        }
+
+
+        .premium-cta {
+
+            width:
+                100%;
+
+            min-height:
+                37px;
+
+            margin-top:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                6px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           LATEST CONNECTIONS
+        ====================================================== */
+
+        .connection-list {
+
+            display:
+                grid;
+
+            gap:
+                8px;
+        }
+
+
+        .connection-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                7px;
+
+            border-radius:
+                10px;
+
+            background:
+                #fafafa;
+        }
+
+
+        .connection-avatar {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border-radius:
+                9px;
+
+            object-fit:
+                cover;
+
+            background:
+                #ededf2;
+        }
+
+
+        .connection-name {
+
+            min-width:
+                0;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .connection-meta {
+
+            margin-top:
+                1px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+        }
+
+
+        .online-dot {
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            margin-left:
+                auto;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+
+            box-shadow:
+                0 0 0 3px
+                #dcfce7;
+        }
+
+
+        /* =====================================================
+           QUICK LINKS
+        ====================================================== */
+
+        .quick-links {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2,minmax(0,1fr));
+
+            gap:
+                7px;
+        }
+
+
+        .quick-link {
+
+            min-height:
+                65px;
+
+            padding:
+                8px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                6px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                7px;
+
+            font-weight:
+                700;
+
+            text-align:
+                center;
+        }
+
+
+        .quick-link i {
+
+            color:
+                var(--primary);
+
+            font-size:
+                12px;
+        }
+
+
+        .quick-link:hover {
+
+            border-color:
+                #ddd6fe;
+
+            background:
+                var(--primary-soft);
+
+            color:
+                var(--primary);
+        }
+
+
+        /* =====================================================
+           SAFETY CARD
+        ====================================================== */
+
+        .safety-card {
+
+            padding:
+                13px;
+
+            border:
+                1px solid
+                #dbeafe;
+
+            border-radius:
+                12px;
+
+            color:
+                #334155;
+
+            background:
+                #f8fbff;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .safety-card strong {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            margin-bottom:
+                5px;
+
+            color:
+                #1d4ed8;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            margin-top:
+                25px;
+
+            background:
+                #17151b;
+
+            color:
+                white;
+        }
+
+
+        .footer-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    var(--container)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                35px 0 18px;
+        }
+
+
+        .footer-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr 1fr;
+
+            gap:
+                30px;
+
+            padding-bottom:
+                25px;
+        }
+
+
+        .footer-description {
+
+            max-width:
+                320px;
+
+            margin-top:
+                10px;
+
+            color:
+                #9d99a5;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .footer-heading {
+
+            font-size:
+                10px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+        }
+
+
+        .footer-links a {
+
+            color:
+                #9d99a5;
+
+            font-size:
+                8px;
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                white;
+        }
+
+
+        .footer-bottom {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding-top:
+                16px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color:
+                #716d78;
+
+            font-size:
+                7px;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                2000;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(15,15,20,.62);
+
+            backdrop-filter:
+                blur(7px);
+        }
+
+
+        .modal.show {
+
+            display:
+                flex;
+        }
+
+
+        .modal-dialog {
+
+            width:
+                min(
+                    100%,
+                    520px
+                );
+
+            max-height:
+                calc(100vh - 40px);
+
+            overflow:
+                auto;
+
+            padding:
+                20px;
+
+            border-radius:
+                18px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 30px 90px
+                rgba(0,0,0,.20);
+        }
+
+
+        .modal-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .modal-title {
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+        }
+
+
+        .modal-close {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--text-soft);
+        }
+
+
+        .modal-body {
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.65;
+        }
+
+
+        .modal-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                flex-end;
+
+            gap:
+                8px;
+
+            margin-top:
+                17px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1120px) {
+
+            .dashboard-grid {
+
+                grid-template-columns:
+                    minmax(0,1fr);
+
+            }
+
+
+            .sidebar {
+
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .header-inner {
+
+                grid-template-columns:
+                    auto 1fr auto;
+
+            }
+
+
+            .top-search {
+
+                display:
+                    none;
+
+            }
+
+
+            .welcome-card {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .welcome-actions {
+
+                justify-content:
+                    flex-start;
+
+            }
+
+
+            .sidebar {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navigation-placeholder {
+                display:none;
+            }
+
+
+            .profile-mini-name {
+                display:none;
+            }
+
+
+            .mobile-menu {
+                display:inline-flex;
+                align-items:center;
+                justify-content:center;
+            }
+
+
+            .header-actions {
+
+                justify-content:
+                    flex-end;
+
+            }
+
+
+            .page {
+
+                width:
+                    calc(100% - 22px);
+
+                padding-top:
+                    16px;
+
+            }
+
+
+            .welcome-card {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .toolbar-actions {
+
+                flex-wrap:
+                    wrap;
+
+                justify-content:
+                    flex-end;
+
+            }
+
+
+            .post-action {
+
+                flex:
+                    1;
+
+                justify-content:
+                    center;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .brand-text {
+
+                display:none;
+
+            }
+
+
+            .header-inner {
+
+                width:
+                    calc(100% - 20px);
+
+            }
+
+
+            .welcome-actions {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+            }
+
+
+            .button-primary,
+            .button-secondary {
+
+                width:
+                    100%;
+
+            }
+
+
+            .premium-banner {
+
+                grid-template-columns:
+                    auto minmax(0,1fr);
+
+            }
+
+
+            .premium-banner .button-primary {
+
+                grid-column:
+                    1 / -1;
+
+                width:
+                    100%;
+
+            }
+
+
+            .post-footer {
+
+                flex-wrap:
+                    wrap;
+
+            }
+
+
+            .post-action {
+
+                min-width:
+                    calc(50% - 4px);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+
+        <!-- BRAND -->
+
+        <a
+            href="dashboard.html"
+            class="brand"
+            aria-label="LOVEMI Dashboard">
+
+
+            <img
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI Logo"
+                class="brand-image"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                ">
+
+
+            <span class="brand-text">
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+            </span>
+
+
+        </a>
+
+
+        <!-- TOP SEARCH -->
+
+        <div class="top-search">
+
+
+            <i class="fa-solid fa-magnifying-glass top-search-icon"></i>
+
+
+            <input
+                type="search"
+                id="globalSearch"
+                placeholder="Search people by name, country or profile..."
+                autocomplete="off">
+
+
+        </div>
+
+
+        <!-- HEADER ACTIONS -->
+
+        <div class="header-actions">
+
+
+            <button
+                type="button"
+                class="icon-button"
+                id="notificationButton"
+                aria-label="Notifications">
+
+
+                <i class="fa-regular fa-bell"></i>
+
+
+                <span
+                    id="notificationCount"
+                    class="notification-count"
+                    style="display:none;">
+
+                    0
+
+                </span>
+
+
+            </button>
+
+
+            <a
+                href="messages.html"
+                class="icon-button"
+                aria-label="Messages">
+
+                <i class="fa-regular fa-comment-dots"></i>
+
+            </a>
+
+
+            <a
+                href="premium.html"
+                class="icon-button"
+                aria-label="Premium">
+
+                <i class="fa-solid fa-crown"></i>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="profile-mini">
+
+
+                <img
+                    id="profileMiniAvatar"
+                    class="profile-mini-avatar"
+                    src="assets/images/defaults/default-avatar-male.png"
+                    alt="Profile"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-avatar-male.png';
+                    ">
+
+
+                <span
+                    id="profileMiniName"
+                    class="profile-mini-name">
+
+                    Account
+
+                </span>
+
+
+            </a>
+
+
+            <button
+                type="button"
+                class="mobile-menu"
+                id="mobileMenu"
+                aria-label="Menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================== -->
+
+<div
+    id="mobileNav"
+    style="
+        display:none;
+        position:fixed;
+        top:75px;
+        left:10px;
+        right:10px;
+        z-index:1050;
+        padding:8px;
+        border:1px solid #e9e9ef;
+        border-radius:14px;
+        background:#ffffff;
+        box-shadow:0 22px 55px rgba(0,0,0,.12);
+    ">
+
+
+    <a
+        href="dashboard.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#6d28d9;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+
+    </a>
+
+
+    <a
+        href="discover.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-solid fa-compass"></i>
+        Discover
+
+    </a>
+
+
+    <a
+        href="connections.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-solid fa-user-group"></i>
+        Connections
+
+    </a>
+
+
+    <a
+        href="messages.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-regular fa-message"></i>
+        Messages
+
+    </a>
+
+
+    <a
+        href="profile.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-regular fa-user"></i>
+        Profile
+
+    </a>
+
+
+    <a
+        href="notifications.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-regular fa-bell"></i>
+        Notifications
+
+    </a>
+
+
+    <a
+        href="settings.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#68686f;
+            font-size:10px;
+            font-weight:700;
+        ">
+
+        <i class="fa-solid fa-gear"></i>
+        Settings
+
+    </a>
+
+
+    <a
+        href="premium.html"
+        style="
+            display:block;
+            padding:10px;
+            border-radius:9px;
+            color:#6d28d9;
+            font-size:10px;
+            font-weight:800;
+        ">
+
+        <i class="fa-solid fa-crown"></i>
+        Premium
+
+    </a>
+
+
+</div>
+
+
+<!-- =========================================================
+     PAGE
+========================================================== -->
+
+<main class="page">
+
+
+    <!-- =====================================================
+         WELCOME
+    ====================================================== -->
+
+    <section class="welcome-card">
+
+
+        <div>
+
+
+            <div class="welcome-eyebrow">
+
+                <i class="fa-solid fa-sparkles"></i>
+
+                Your LOVEMI Space
+
+            </div>
+
+
+            <h1>
+
+                Welcome back,
+                <span id="welcomeName">
+                    Member
+                </span>.
+
+            </h1>
+
+
+            <p class="welcome-description">
+
+                Discover approved profiles, manage your connections,
+                keep your account secure and access premium services.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="welcome-actions">
+
+
+            <a
+                href="discover.html"
+                class="button-primary">
+
+                <i class="fa-solid fa-compass"></i>
+
+                Discover
+
+            </a>
+
+
+            <a
+                href="premium.html"
+                class="button-secondary">
+
+                <i class="fa-solid fa-crown"></i>
+
+                Premium
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         PREMIUM BANNER
+    ====================================================== -->
+
+    <section
+        id="premiumBanner"
+        class="premium-banner"
+        style="display:none;">
+
+
+        <div class="premium-icon">
+
+            <i class="fa-solid fa-crown"></i>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+                Unlock LOVEMI Premium
+            </strong>
+
+            <span>
+
+                Premium access is required for connection requests,
+                messaging and other premium services.
+
+            </span>
+
+        </div>
+
+
+        <a
+            href="premium.html"
+            class="button-primary">
+
+            View Premium
+
+        </a>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         DASHBOARD GRID
+    ====================================================== -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- =================================================
+             MAIN COLUMN
+        ================================================== -->
+
+        <section class="main-column">
+
+
+            <div class="section-toolbar">
+
+
+                <div>
+
+                    <div class="section-title">
+                        Latest Posts
+                    </div>
+
+                    <div class="section-subtitle">
+                        Approved content from LOVEMI members
+                    </div>
+
+                </div>
+
+
+                <div class="toolbar-actions">
+
+
+                    <button
+                        type="button"
+                        class="filter-button active"
+                        data-filter="latest">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Latest
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-filter="photos">
+
+                        <i class="fa-regular fa-image"></i>
+
+                        Photos
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-filter="videos">
+
+                        <i class="fa-solid fa-video"></i>
+
+                        Videos
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FEED -->
+
+            <div
+                id="feed"
+                class="feed">
+
+
+                <div class="loading-card">
+
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    Loading approved posts...
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- =================================================
+                 ACCOUNT
+            ================================================== -->
+
+            <section class="side-card">
+
+
+                <div class="side-card-header">
+
+                    <h3>
+                        My Account
+                    </h3>
+
+                    <a href="profile.html">
+                        View Profile
+                    </a>
+
+                </div>
+
+
+                <div class="account-summary">
+
+
+                    <img
+                        id="accountAvatar"
+                        class="account-avatar"
+                        src="assets/images/defaults/default-avatar-male.png"
+                        alt="Profile photo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/images/defaults/default-avatar-male.png';
+                        ">
+
+
+                    <div>
+
+
+                        <div
+                            id="accountName"
+                            class="account-name">
+
+                            Loading...
+
+                        </div>
+
+
+                        <div
+                            id="accountLocation"
+                            class="account-location">
+
+                            Loading...
+
+                        </div>
+
+
+                        <div class="verified-label">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Email verified
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PREMIUM STATUS
+            ================================================== -->
+
+            <section class="side-card">
+
+
+                <div class="side-card-header">
+
+                    <h3>
+                        Premium Access
+                    </h3>
+
+                    <a href="premium.html">
+                        Details
+                    </a>
+
+                </div>
+
+
+                <div class="premium-status">
+
+
+                    <div class="premium-status-top">
+
+
+                        <span class="premium-label">
+
+                            <i class="fa-solid fa-crown"></i>
+
+                            Membership
+
+                        </span>
+
+
+                        <span
+                            id="premiumPill"
+                            class="premium-pill inactive">
+
+                            Checking...
+
+                        </span>
+
+
+                    </div>
+
+
+                    <p
+                        id="premiumDetails"
+                        class="premium-details">
+
+                        Checking your premium status...
+
+                    </p>
+
+
+                    <a
+                        id="premiumCta"
+                        href="premium.html"
+                        class="premium-cta">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                        Get Premium
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 CONNECTIONS
+            ================================================== -->
+
+            <section class="side-card">
+
+
+                <div class="side-card-header">
+
+                    <h3>
+                        Recent Connections
+                    </h3>
+
+                    <a href="connections.html">
+                        View all
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="connectionsList"
+                    class="connection-list">
+
+
+                    <div class="loading-card"
+                         style="min-height:90px;padding:15px;">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Loading...
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 QUICK LINKS
+            ================================================== -->
+
+            <section class="side-card">
+
+
+                <div class="side-card-header">
+
+                    <h3>
+                        Quick Access
+                    </h3>
+
+                </div>
+
+
+                <div class="quick-links">
+
+
+                    <a
+                        href="profile.html"
+                        class="quick-link">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        Profile
+
+                    </a>
+
+
+                    <a
+                        href="connections.html"
+                        class="quick-link">
+
+                        <i class="fa-solid fa-user-group"></i>
+
+                        Connections
+
+                    </a>
+
+
+                    <a
+                        href="messages.html"
+                        class="quick-link">
+
+                        <i class="fa-regular fa-message"></i>
+
+                        Messages
+
+                    </a>
+
+
+                    <a
+                        href="notifications.html"
+                        class="quick-link">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        Notifications
+
+                    </a>
+
+
+                    <a
+                        href="edit-profile.html"
+                        class="quick-link">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit Profile
+
+                    </a>
+
+
+                    <a
+                        href="settings.html"
+                        class="quick-link">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Settings
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 SAFETY
+            ================================================== -->
+
+            <section class="safety-card">
+
+
+                <strong>
+
+                    <i class="fa-solid fa-shield-heart"></i>
+
+                    Stay safe on LOVEMI
+
+                </strong>
+
+
+                Always use the platform's reporting and blocking tools
+                when something feels unsafe or inappropriate. Never
+                share sensitive personal information publicly.
+
+            </section>
+
+
+        </aside>
+
+
+    </div>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="footer-grid">
+
+
+            <div>
+
+
+                <a
+                    href="dashboard.html"
+                    class="brand">
+
+
+                    <img
+                        src="assets/logo1/logo1.png"
+                        alt="LOVEMI Logo"
+                        class="brand-image"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        ">
+
+
+                    <span class="brand-name">
+                        LOVEMI
+                    </span>
+
+
+                </a>
+
+
+                <p class="footer-description">
+
+                    Discover people, build meaningful connections,
+                    manage your account and access LOVEMI services.
+
+                </p>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+                    <a href="notifications.html">
+                        Notifications
+                    </a>
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+
+            <span>
+
+                ©
+                <span id="year"></span>
+                LOVEMI. All rights reserved.
+
+            </span>
+
+
+            <span>
+                Discover • Connect • Meet
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     CONNECTION MODAL
+========================================================== -->
+
+<div
+    id="connectionModal"
+    class="modal">
+
+
+    <div class="modal-dialog">
+
+
+        <div class="modal-header">
+
+
+            <h2
+                id="connectionModalTitle"
+                class="modal-title">
+
+                Connect with Member
+
+            </h2>
+
+
+            <button
+                type="button"
+                id="connectionModalClose"
+                class="modal-close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="connectionModalBody"
+            class="modal-body">
+
+            You are about to connect with this member.
+
+        </div>
+
+
+        <div class="modal-actions">
+
+
+            <button
+                type="button"
+                id="connectionCancel"
+                class="button-secondary">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                id="connectionConfirm"
+                class="button-primary">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Connect
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     NOTIFICATION SOUND
+========================================================== -->
+
+<audio
+    id="notificationAudio"
+    preload="auto">
+
+    <source
+        id="notificationAudioSource"
+        src="assets/audio/notification1.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API ENDPOINTS
+========================================================= */
+
+const API = {
+
+    session:
+        "api/auth/session.php",
+
+    posts:
+        "api/posts/list.php",
+
+    premium:
+        "api/premium/status.php",
+
+    premiumAccess:
+        "api/premium/check-access.php",
+
+    connections:
+        "api/connections/list.php",
+
+    createConnection:
+        "api/connections/create.php",
+
+    notifications:
+        "api/notifications/unread-count.php"
+
+};
+
+
+/* =========================================================
+   DEFAULT IMAGES
+========================================================= */
+
+const DEFAULT_MALE =
+    "assets/images/defaults/default-avatar-male.png";
+
+const DEFAULT_FEMALE =
+    "assets/images/defaults/default-avatar-female.png";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+    user:
+        null,
+
+    premium:
+        false,
+
+    posts:
+        [],
+
+    currentFilter:
+        "latest",
+
+    pendingConnectionUserId:
+        null,
+
+    notifications:
+        0
+
+};
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const feed =
+    document.getElementById(
+        "feed"
+    );
+
+
+const welcomeName =
+    document.getElementById(
+        "welcomeName"
+    );
+
+
+const accountName =
+    document.getElementById(
+        "accountName"
+    );
+
+
+const accountLocation =
+    document.getElementById(
+        "accountLocation"
+    );
+
+
+const accountAvatar =
+    document.getElementById(
+        "accountAvatar"
+    );
+
+
+const profileMiniAvatar =
+    document.getElementById(
+        "profileMiniAvatar"
+    );
+
+
+const profileMiniName =
+    document.getElementById(
+        "profileMiniName"
+    );
+
+
+const premiumBanner =
+    document.getElementById(
+        "premiumBanner"
+    );
+
+
+const premiumPill =
+    document.getElementById(
+        "premiumPill"
+    );
+
+
+const premiumDetails =
+    document.getElementById(
+        "premiumDetails"
+    );
+
+
+const premiumCta =
+    document.getElementById(
+        "premiumCta"
+    );
+
+
+const connectionsList =
+    document.getElementById(
+        "connectionsList"
+    );
+
+
+const notificationCount =
+    document.getElementById(
+        "notificationCount"
+    );
+
+
+const notificationAudio =
+    document.getElementById(
+        "notificationAudio"
+    );
+
+
+const connectionModal =
+    document.getElementById(
+        "connectionModal"
+    );
+
+
+const connectionModalBody =
+    document.getElementById(
+        "connectionModalBody"
+    );
+
+
+const connectionConfirm =
+    document.getElementById(
+        "connectionConfirm"
+    );
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   API JSON GET
+========================================================= */
+
+async function apiGet(
+    endpoint
+) {
+
+    const separator =
+        endpoint.includes("?")
+            ? "&"
+            : "?";
+
+
+    const response =
+        await fetch(
+            endpoint
+            +
+            separator
+            +
+            "_="
+            +
+            Date.now(),
+            {
+
+                method:
+                    "GET",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                }
+
+            }
+        );
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        !contentType.includes(
+            "application/json"
+        )
+    ) {
+
+        throw new Error(
+            "Invalid API response."
+        );
+
+    }
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   API JSON POST
+========================================================= */
+
+async function apiPost(
+    endpoint,
+    payload
+) {
+
+    const response =
+        await fetch(
+            endpoint,
+            {
+
+                method:
+                    "POST",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+
+            }
+        );
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        !contentType.includes(
+            "application/json"
+        )
+    ) {
+
+        throw new Error(
+            "Invalid API response."
+        );
+
+    }
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ??
+        ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(
+    value
+) {
+
+    if (
+        !value
+    ) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    return new Intl.DateTimeFormat(
+        undefined,
+        {
+            dateStyle:
+                "medium",
+            timeStyle:
+                "short"
+        }
+    ).format(
+        date
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE URL
+========================================================= */
+
+function safeImageUrl(
+    value,
+    gender = ""
+) {
+
+    if (
+        typeof value !==
+        "string"
+        ||
+        !value.trim()
+    ) {
+
+        return (
+            String(
+                gender
+            ).toLowerCase() ===
+            "female"
+        )
+            ?
+            DEFAULT_FEMALE
+            :
+            DEFAULT_MALE;
+
+    }
+
+
+    return value;
+
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+async function loadSession() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.session
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.authenticated !== true
+        ) {
+
+            /*
+             * The dashboard cannot be used with a partial
+             * password-only or unauthenticated session.
+             */
+
+            window.location.href =
+                "login.html?return=dashboard.html";
+
+            return false;
+
+        }
+
+
+        state.user =
+            result.user
+            ||
+            null;
+
+
+        if (
+            !state.user
+        ) {
+
+            window.location.href =
+                "login.html?return=dashboard.html";
+
+            return false;
+
+        }
+
+
+        renderAccount(
+            state.user
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "Session error:",
+            error
+        );
+
+
+        window.location.href =
+            "login.html?return=dashboard.html";
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER ACCOUNT
+========================================================= */
+
+function renderAccount(
+    user
+) {
+
+    const name =
+        user.full_name
+        ||
+        user.username
+        ||
+        "Member";
+
+
+    welcomeName.textContent =
+        name;
+
+
+    accountName.textContent =
+        name;
+
+
+    profileMiniName.textContent =
+        user.username
+        ||
+        name;
+
+
+    accountLocation.textContent =
+        user.country_name
+        ||
+        (
+            user.country_iso2
+            ||
+            "LOVEMI member"
+        );
+
+
+    const avatar =
+        safeImageUrl(
+            user.profile_photo
+            ||
+            user.avatar
+            ||
+            user.photo_url,
+            user.gender
+        );
+
+
+    accountAvatar.src =
+        avatar;
+
+
+    profileMiniAvatar.src =
+        avatar;
+
+}
+
+
+/* =========================================================
+   PREMIUM STATUS
+========================================================= */
+
+async function loadPremiumStatus() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.premium
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Premium status unavailable."
+            );
+
+        }
+
+
+        /*
+         * Support several response shapes while the backend
+         * is being completed.
+         */
+
+        state.premium =
+            Boolean(
+                result.premium
+                ??
+                result.is_premium
+                ??
+                result.active
+                ??
+                result.has_premium
+                ??
+                (
+                    result.data
+                    &&
+                    (
+                        result.data.premium
+                        ??
+                        result.data.is_premium
+                        ??
+                        result.data.active
+                    )
+                )
+            );
+
+
+        renderPremium(
+            result
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Premium status error:",
+            error
+        );
+
+
+        /*
+         * Fail closed.
+         */
+
+        state.premium =
+            false;
+
+
+        renderPremium(
+            {
+                active:
+                    false
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER PREMIUM
+========================================================= */
+
+function renderPremium(
+    result
+) {
+
+    if (
+        state.premium
+    ) {
+
+        premiumBanner.style.display =
+            "none";
+
+
+        premiumPill.textContent =
+            "Active";
+
+
+        premiumPill.className =
+            "premium-pill active";
+
+
+        const expiry =
+            result.expires_at
+            ??
+            result.expiry_date
+            ??
+            result.end_date
+            ??
+            (
+                result.data
+                &&
+                (
+                    result.data.expires_at
+                    ??
+                    result.data.expiry_date
+                )
+            );
+
+
+        premiumDetails.textContent =
+            expiry
+                ?
+                "Premium active until "
+                +
+                formatDate(
+                    expiry
+                )
+                :
+                "Premium access is active.";
+
+
+        premiumCta.href =
+            "premium.html";
+
+
+        premiumCta.innerHTML =
+            `
+            <i class="fa-solid fa-rotate"></i>
+            Manage Premium
+            `;
+
+
+    } else {
+
+        premiumBanner.style.display =
+            "grid";
+
+
+        premiumPill.textContent =
+            "Not Active";
+
+
+        premiumPill.className =
+            "premium-pill inactive";
+
+
+        premiumDetails.textContent =
+            "Premium is required for connection and messaging services.";
+
+
+        premiumCta.href =
+            "premium.html";
+
+
+        premiumCta.innerHTML =
+            `
+            <i class="fa-solid fa-crown"></i>
+            Get Premium
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD POSTS
+========================================================= */
+
+async function loadPosts() {
+
+    renderFeedLoading();
+
+
+    try {
+
+        /*
+         * Ask backend for approved content.
+         *
+         * The backend should enforce:
+         *
+         * - active account
+         * - approved posts
+         * - approved photos
+         * - deleted/suspended users hidden
+         */
+
+        const endpoint =
+            API.posts
+            +
+            "?status=approved"
+            +
+            "&limit=30";
+
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                endpoint
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Posts could not be loaded."
+            );
+
+        }
+
+
+        state.posts =
+            normalizePosts(
+                result
+            );
+
+
+        renderFeed();
+
+
+    } catch (error) {
+
+        console.error(
+            "Posts error:",
+            error
+        );
+
+
+        renderFeedError(
+            "Approved posts could not be loaded right now."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMALIZE POSTS
+========================================================= */
+
+function normalizePosts(
+    result
+) {
+
+    let data = [];
+
+
+    if (
+        Array.isArray(
+            result.posts
+        )
+    ) {
+
+        data =
+            result.posts;
+
+    } else if (
+        Array.isArray(
+            result.data
+        )
+    ) {
+
+        data =
+            result.data;
+
+    } else if (
+        result.data
+        &&
+        Array.isArray(
+            result.data.posts
+        )
+    ) {
+
+        data =
+            result.data.posts;
+
+    }
+
+
+    return data.map(
+        function(post) {
+
+            return {
+
+                id:
+                    post.id
+                    ??
+                    post.post_id,
+
+                userId:
+                    post.user_id
+                    ??
+                    post.author_id
+                    ??
+                    post.owner_id,
+
+                username:
+                    post.username
+                    ??
+                    post.author_username
+                    ??
+                    "Member",
+
+                fullName:
+                    post.full_name
+                    ??
+                    post.full_names
+                    ??
+                    post.author_name
+                    ??
+                    post.username
+                    ??
+                    "Member",
+
+                gender:
+                    post.gender
+                    ??
+                    "",
+
+                avatar:
+                    post.avatar
+                    ??
+                    post.profile_photo
+                    ??
+                    post.photo_url
+                    ??
+                    "",
+
+                text:
+                    post.content
+                    ??
+                    post.body
+                    ??
+                    post.caption
+                    ??
+                    "",
+
+                mediaUrl:
+                    post.media_url
+                    ??
+                    post.file_url
+                    ??
+                    post.image_url
+                    ??
+                    post.video_url
+                    ??
+                    post.photo_url
+                    ??
+                    "",
+
+                mediaType:
+                    String(
+                        post.media_type
+                        ??
+                        post.type
+                        ??
+                        (
+                            post.video_url
+                                ? "video"
+                                : "image"
+                        )
+                    ).toLowerCase(),
+
+                createdAt:
+                    post.created_at
+                    ??
+                    post.published_at
+                    ??
+                    post.date
+                    ??
+                    "",
+
+                verified:
+                    Boolean(
+                        post.verified
+                        ??
+                        post.email_verified
+                        ??
+                        false
+                    )
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FEED LOADING
+========================================================= */
+
+function renderFeedLoading() {
+
+    feed.innerHTML = `
+
+        <div class="loading-card">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading approved posts...
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   FEED ERROR
+========================================================= */
+
+function renderFeedError(
+    message
+) {
+
+    feed.innerHTML = `
+
+        <div class="empty-card">
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-cloud-exclamation"></i>
+
+            </div>
+
+            <h3>
+                Unable to load posts
+            </h3>
+
+            <p>
+                ${escapeHtml(message)}
+            </p>
+
+            <br>
+
+            <button
+                type="button"
+                class="button-primary"
+                id="retryPosts">
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Try Again
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "retryPosts"
+        )
+        ?.addEventListener(
+            "click",
+            loadPosts
+        );
+
+}
+
+
+/* =========================================================
+   FILTER POSTS
+========================================================= */
+
+function filteredPosts() {
+
+    if (
+        state.currentFilter ===
+        "photos"
+    ) {
+
+        return state.posts.filter(
+            post =>
+                post.mediaType === "image"
+                ||
+                post.mediaType === "photo"
+        );
+
+    }
+
+
+    if (
+        state.currentFilter ===
+        "videos"
+    ) {
+
+        return state.posts.filter(
+            post =>
+                post.mediaType === "video"
+        );
+
+    }
+
+
+    return state.posts;
+
+}
+
+
+/* =========================================================
+   RENDER FEED
+========================================================= */
+
+function renderFeed() {
+
+    const posts =
+        filteredPosts();
+
+
+    if (
+        !posts.length
+    ) {
+
+        feed.innerHTML = `
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+
+                    <i class="fa-regular fa-images"></i>
+
+                </div>
+
+                <h3>
+                    No approved posts yet
+                </h3>
+
+                <p>
+
+                    There are no approved posts matching this
+                    filter right now.
+
+                </p>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    feed.innerHTML =
+        posts
+            .map(
+                renderPost
+            )
+            .join("");
+
+
+    bindPostEvents();
+
+}
+
+
+/* =========================================================
+   RENDER POST
+========================================================= */
+
+function renderPost(
+    post
+) {
+
+    const avatar =
+        safeImageUrl(
+            post.avatar,
+            post.gender
+        );
+
+
+    const gender =
+        String(
+            post.gender
+        ).toLowerCase();
+
+
+    /*
+     * Only show connect action when the backend supplied
+     * another user's ID.
+     *
+     * We deliberately do not display phone/WhatsApp here.
+     */
+
+    const canConnect =
+        post.userId
+        &&
+        Number(post.userId)
+        !==
+        Number(
+            state.user?.id
+        );
+
+
+    const mediaUrl =
+        safeImageUrl(
+            post.mediaUrl,
+            post.gender
+        );
+
+
+    let mediaHtml =
+        "";
+
+
+    if (
+        post.mediaUrl
+        &&
+        post.mediaType === "video"
+    ) {
+
+        mediaHtml = `
+
+            <div class="media-wrapper">
+
+
+                <video
+                    class="post-media video"
+                    controls
+                    preload="metadata"
+                    playsinline
+                    data-user-id="${escapeHtml(post.userId)}"
+                    src="${escapeHtml(mediaUrl)}">
+
+                </video>
+
+
+                <span class="media-badge">
+
+                    <i class="fa-solid fa-video"></i>
+
+                    VIDEO
+
+                </span>
+
+
+                ${
+                    canConnect
+                    ?
+                    `
+                    <div class="connect-overlay">
+
+                        <span>
+                            Tap Connect to start a connection.
+                        </span>
+
+                        <button
+                            type="button"
+                            class="connect-button"
+                            data-connect-user="${escapeHtml(post.userId)}"
+                            data-connect-name="${escapeHtml(post.fullName)}">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            Connect
+
+                        </button>
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+            </div>
+
+        `;
+
+
+    } else if (
+        post.mediaUrl
+    ) {
+
+        mediaHtml = `
+
+            <div class="media-wrapper">
+
+
+                <img
+                    class="post-media"
+                    src="${escapeHtml(mediaUrl)}"
+                    alt="${escapeHtml(post.fullName)}"
+                    loading="lazy"
+                    data-connect-user="${escapeHtml(post.userId)}"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-cover.png';
+                    ">
+
+
+                <span class="media-badge">
+
+                    <i class="fa-regular fa-image"></i>
+
+                    PHOTO
+
+                </span>
+
+
+                ${
+                    canConnect
+                    ?
+                    `
+                    <div class="connect-overlay">
+
+                        <span>
+                            Select Connect to start a connection.
+                        </span>
+
+                        <button
+                            type="button"
+                            class="connect-button"
+                            data-connect-user="${escapeHtml(post.userId)}"
+                            data-connect-name="${escapeHtml(post.fullName)}">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            Connect
+
+                        </button>
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <article
+            class="post-card"
+            data-post-id="${escapeHtml(post.id)}"
+            data-user-id="${escapeHtml(post.userId)}"
+            data-gender="${escapeHtml(gender)}">
+
+
+            <header class="post-header">
+
+
+                <a
+                    href="profile.html?user=${encodeURIComponent(post.userId || "")}"
+                    class="post-user">
+
+
+                    <img
+                        class="post-avatar"
+                        src="${escapeHtml(avatar)}"
+                        alt="${escapeHtml(post.fullName)}"
+                        loading="lazy"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/images/defaults/default-avatar-male.png';
+                        ">
+
+
+                    <span class="post-user-text">
+
+
+                        <span class="post-user-name">
+
+                            ${escapeHtml(
+                                post.fullName
+                            )}
+
+                            ${
+                                post.verified
+                                ?
+                                `
+                                <i
+                                    class="fa-solid fa-circle-check verified-badge"
+                                    title="Verified account">
+                                </i>
+                                `
+                                :
+                                ""
+                            }
+
+                        </span>
+
+
+                        <span class="post-meta">
+
+                            ${escapeHtml(
+                                formatDate(
+                                    post.createdAt
+                                )
+                            )}
+
+                        </span>
+
+
+                    </span>
+
+
+                </a>
+
+
+                <button
+                    type="button"
+                    class="post-menu"
+                    aria-label="Post options"
+                    data-report-user="${escapeHtml(post.userId)}">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+
+                </button>
+
+
+            </header>
+
+
+            ${
+                post.text
+                ?
+                `
+                <div class="post-text">
+
+                    ${escapeHtml(post.text)}
+
+                </div>
+                `
+                :
+                ""
+            }
+
+
+            ${mediaHtml}
+
+
+            <footer class="post-footer">
+
+
+                ${
+                    canConnect
+                    ?
+                    `
+                    <button
+                        type="button"
+                        class="post-action"
+                        data-connect-user="${escapeHtml(post.userId)}"
+                        data-connect-name="${escapeHtml(post.fullName)}">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Connect
+
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+
+                <a
+                    href="profile.html?user=${encodeURIComponent(post.userId || "")}"
+                    class="post-action">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    View Profile
+
+                </a>
+
+
+                <a
+                    href="reports.html?user=${encodeURIComponent(post.userId || "")}"
+                    class="post-action">
+
+                    <i class="fa-regular fa-flag"></i>
+
+                    Report
+
+                </a>
+
+
+            </footer>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   POST EVENTS
+========================================================= */
+
+function bindPostEvents() {
+
+    document
+        .querySelectorAll(
+            "[data-connect-user]"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        const targetUserId =
+                            this.dataset.connectUser;
+
+
+                        const targetName =
+                            this.dataset.connectName
+                            ||
+                            "this member";
+
+
+                        if (
+                            !targetUserId
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        openConnectionModal(
+                            targetUserId,
+                            targetName
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /*
+     * Clicking a member's actual photo also follows
+     * the premium connection rule.
+     */
+
+    document
+        .querySelectorAll(
+            "img.post-media[data-connect-user]"
+        )
+        .forEach(
+            function(image) {
+
+                image.addEventListener(
+                    "click",
+                    function() {
+
+                        const targetUserId =
+                            this.dataset.connectUser;
+
+
+                        const card =
+                            this.closest(
+                                ".post-card"
+                            );
+
+
+                        const name =
+                            card
+                            ?.querySelector(
+                                ".post-user-name"
+                            )
+                            ?.textContent
+                            ?.trim()
+                            ||
+                            "this member";
+
+
+                        if (
+                            targetUserId
+                        ) {
+
+                            openConnectionModal(
+                                targetUserId,
+                                name
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            "[data-report-user]"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const userId =
+                            this.dataset.reportUser
+                            ||
+                            "";
+
+
+                        window.location.href =
+                            "reports.html?user="
+                            +
+                            encodeURIComponent(
+                                userId
+                            );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   CONNECTION MODAL
+========================================================= */
+
+function openConnectionModal(
+    userId,
+    name
+) {
+
+    state.pendingConnectionUserId =
+        Number(
+            userId
+        );
+
+
+    connectionModalBody.textContent =
+        state.premium
+            ?
+            (
+                "You are about to connect with "
+                +
+                name
+                +
+                ". Your connection request will be processed securely."
+            )
+            :
+            (
+                "Premium access is required to start a connection with "
+                +
+                name
+                +
+                ". You will be taken to the Premium page."
+            );
+
+
+    connectionModal.classList.add(
+        "show"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    connectionConfirm.innerHTML =
+        state.premium
+            ?
+            `
+            <i class="fa-solid fa-user-plus"></i>
+            Connect
+            `
+            :
+            `
+            <i class="fa-solid fa-crown"></i>
+            Get Premium
+            `;
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeConnectionModal() {
+
+    connectionModal.classList.remove(
+        "show"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    state.pendingConnectionUserId =
+        null;
+
+}
+
+
+/* =========================================================
+   CONFIRM CONNECTION
+========================================================= */
+
+connectionConfirm.addEventListener(
+    "click",
+    async function() {
+
+        const targetUserId =
+            state.pendingConnectionUserId;
+
+
+        if (
+            !targetUserId
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Premium gate.
+         *
+         * The backend must enforce this too.
+         */
+
+        if (
+            !state.premium
+        ) {
+
+            window.location.href =
+                "premium.html?return=dashboard.html";
+
+            return;
+
+        }
+
+
+        this.disabled =
+            true;
+
+
+        this.innerHTML =
+            `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Connecting...
+            `;
+
+
+        try {
+
+            /*
+             * Do a fresh access check immediately before
+             * creating the connection.
+             *
+             * This prevents stale frontend state from granting
+             * premium access after it has expired.
+             */
+
+            const access =
+                await apiPost(
+                    API.premiumAccess,
+                    {
+                        service:
+                            "connections"
+                    }
+                );
+
+
+            if (
+                !access.response.ok
+                ||
+                access.result.success !== true
+                ||
+                access.result.allowed !== true
+            ) {
+
+                window.location.href =
+                    "premium.html?return=dashboard.html";
+
+                return;
+
+            }
+
+
+            const {
+                response,
+                result
+            } =
+                await apiPost(
+                    API.createConnection,
+                    {
+                        user_id:
+                            targetUserId,
+
+                        source:
+                            "dashboard_post_click"
+                    }
+                );
+
+
+            if (
+                !response.ok
+                ||
+                result.success !== true
+            ) {
+
+                throw new Error(
+                    result.message
+                    ||
+                    "Connection could not be created."
+                );
+
+            }
+
+
+            closeConnectionModal();
+
+
+            /*
+             * If the backend says there is a direct connection,
+             * move to messages/connections.
+             */
+
+            if (
+                result.redirect
+            ) {
+
+                window.location.href =
+                    result.redirect;
+
+                return;
+
+            }
+
+
+            await loadConnections();
+
+
+            showTemporaryMessage(
+                result.message
+                ||
+                "Connection created successfully."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Connection error:",
+                error
+            );
+
+
+            showTemporaryMessage(
+                error.message
+                ||
+                "Unable to create the connection.",
+                true
+            );
+
+
+        } finally {
+
+            this.disabled =
+                false;
+
+
+            this.innerHTML =
+                state.premium
+                    ?
+                    `
+                    <i class="fa-solid fa-user-plus"></i>
+                    Connect
+                    `
+                    :
+                    `
+                    <i class="fa-solid fa-crown"></i>
+                    Get Premium
+                    `;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE MODAL EVENTS
+========================================================= */
+
+document
+    .getElementById(
+        "connectionModalClose"
+    )
+    .addEventListener(
+        "click",
+        closeConnectionModal
+    );
+
+
+document
+    .getElementById(
+        "connectionCancel"
+    )
+    .addEventListener(
+        "click",
+        closeConnectionModal
+    );
+
+
+connectionModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            connectionModal
+        ) {
+
+            closeConnectionModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TEMPORARY MESSAGE
+========================================================= */
+
+function showTemporaryMessage(
+    message,
+    error = false
+) {
+
+    const existing =
+        document.getElementById(
+            "dashboardToast"
+        );
+
+
+    existing?.remove();
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.id =
+        "dashboardToast";
+
+
+    toast.textContent =
+        message;
+
+
+    toast.style.position =
+        "fixed";
+
+
+    toast.style.left =
+        "50%";
+
+
+    toast.style.bottom =
+        "25px";
+
+
+    toast.style.transform =
+        "translateX(-50%)";
+
+
+    toast.style.zIndex =
+        "3000";
+
+
+    toast.style.padding =
+        "11px 15px";
+
+
+    toast.style.borderRadius =
+        "10px";
+
+
+    toast.style.background =
+        error
+            ?
+            "#fef2f2"
+            :
+            "#f0fdf4";
+
+
+    toast.style.color =
+        error
+            ?
+            "#991b1b"
+            :
+            "#166534";
+
+
+    toast.style.border =
+        error
+            ?
+            "1px solid #fecaca"
+            :
+            "1px solid #bbf7d0";
+
+
+    toast.style.fontSize =
+        "9px";
+
+
+    toast.style.fontWeight =
+        "700";
+
+
+    document.body.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        function() {
+
+            toast.remove();
+
+        },
+        3500
+    );
+
+}
+
+
+/* =========================================================
+   LOAD CONNECTIONS
+========================================================= */
+
+async function loadConnections() {
+
+    connectionsList.innerHTML = `
+
+        <div class="loading-card"
+             style="min-height:90px;padding:15px;">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading...
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.connections
+                +
+                "?limit=5"
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Connections unavailable."
+            );
+
+        }
+
+
+        let connections = [];
+
+
+        if (
+            Array.isArray(
+                result.connections
+            )
+        ) {
+
+            connections =
+                result.connections;
+
+        } else if (
+            Array.isArray(
+                result.data
+            )
+        ) {
+
+            connections =
+                result.data;
+
+        } else if (
+            result.data
+            &&
+            Array.isArray(
+                result.data.connections
+            )
+        ) {
+
+            connections =
+                result.data.connections;
+
+        }
+
+
+        renderConnections(
+            connections
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Connections error:",
+            error
+        );
+
+
+        connectionsList.innerHTML = `
+
+            <div class="empty-card"
+                 style="padding:20px 10px;">
+
+                <div class="empty-icon"
+                     style="width:40px;height:40px;">
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                </div>
+
+                <h3>
+                    No connections yet
+                </h3>
+
+                <p>
+                    Your recent connections will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER CONNECTIONS
+========================================================= */
+
+function renderConnections(
+    connections
+) {
+
+    if (
+        !connections.length
+    ) {
+
+        connectionsList.innerHTML = `
+
+            <div class="empty-card"
+                 style="padding:20px 10px;">
+
+                <div class="empty-icon"
+                     style="width:40px;height:40px;">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                </div>
+
+                <h3>
+                    No connections yet
+                </h3>
+
+                <p>
+                    Connect with approved profiles to start building your network.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    connectionsList.innerHTML =
+        connections
+            .slice(
+                0,
+                5
+            )
+            .map(
+                function(connection) {
+
+                    const name =
+                        connection.full_name
+                        ??
+                        connection.full_names
+                        ??
+                        connection.username
+                        ??
+                        "Member";
+
+
+                    const avatar =
+                        safeImageUrl(
+                            connection.avatar
+                            ??
+                            connection.profile_photo
+                            ??
+                            connection.photo_url,
+                            connection.gender
+                        );
+
+
+                    const online =
+                        Boolean(
+                            connection.is_online
+                            ??
+                            connection.online
+                            ??
+                            false
+                        );
+
+
+                    return `
+
+                        <a
+                            href="profile.html?user=${encodeURIComponent(
+                                connection.user_id
+                                ??
+                                connection.id
+                                ??
+                                ""
+                            )}"
+                            class="connection-item">
+
+
+                            <img
+                                class="connection-avatar"
+                                src="${escapeHtml(avatar)}"
+                                alt="${escapeHtml(name)}"
+                                onerror="
+                                    this.onerror=null;
+                                    this.src='assets/images/defaults/default-avatar-male.png';
+                                ">
+
+
+                            <span style="min-width:0;">
+
+
+                                <span class="connection-name">
+
+                                    ${escapeHtml(name)}
+
+                                </span>
+
+
+                                <span class="connection-meta">
+
+                                    Connected
+
+                                </span>
+
+
+                            </span>
+
+
+                            ${
+                                online
+                                ?
+                                `
+                                <span class="online-dot"></span>
+                                `
+                                :
+                                ""
+                            }
+
+
+                        </a>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   NOTIFICATION COUNT
+========================================================= */
+
+async function loadNotificationCount() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.notifications
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            return;
+
+        }
+
+
+        const count =
+            Number(
+                result.count
+                ??
+                result.unread_count
+                ??
+                (
+                    result.data
+                    &&
+                    (
+                        result.data.count
+                        ??
+                        result.data.unread_count
+                    )
+                )
+                ??
+                0
+            );
+
+
+        updateNotificationCount(
+            count
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Notification count error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION COUNT UI
+========================================================= */
+
+function updateNotificationCount(
+    count
+) {
+
+    state.notifications =
+        Math.max(
+            0,
+            Number(count) || 0
+        );
+
+
+    if (
+        state.notifications <= 0
+    ) {
+
+        notificationCount.style.display =
+            "none";
+
+        notificationCount.textContent =
+            "0";
+
+        return;
+
+    }
+
+
+    notificationCount.style.display =
+        "flex";
+
+
+    notificationCount.textContent =
+        state.notifications > 99
+            ?
+            "99+"
+            :
+            String(
+                state.notifications
+            );
+
+}
+
+
+/* =========================================================
+   NOTIFICATION BUTTON
+========================================================= */
+
+document
+    .getElementById(
+        "notificationButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            /*
+             * Direct navigation prevents sensitive notification
+             * content from being embedded in this page.
+             */
+
+            window.location.href =
+                "notifications.html";
+
+        }
+    );
+
+
+/* =========================================================
+   FILTER BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-filter]"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    state.currentFilter =
+                        this.dataset.filter;
+
+
+                    document
+                        .querySelectorAll(
+                            "[data-filter]"
+                        )
+                        .forEach(
+                            btn =>
+                                btn.classList.toggle(
+                                    "active",
+                                    btn === this
+                                )
+                        );
+
+
+                    renderFeed();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   GLOBAL SEARCH
+========================================================= */
+
+document
+    .getElementById(
+        "globalSearch"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                const value =
+                    this.value.trim();
+
+
+                if (
+                    value
+                ) {
+
+                    window.location.href =
+                        "discover.html?search="
+                        +
+                        encodeURIComponent(
+                            value
+                        );
+
+                }
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+const mobileNav =
+    document.getElementById(
+        "mobileNav"
+    );
+
+
+mobileMenu.addEventListener(
+    "click",
+    function() {
+
+        const open =
+            mobileNav.style.display ===
+            "block";
+
+
+        mobileNav.style.display =
+            open
+                ?
+                "none"
+                :
+                "block";
+
+
+        this.innerHTML =
+            open
+                ?
+                '<i class="fa-solid fa-bars"></i>'
+                :
+                '<i class="fa-solid fa-xmark"></i>';
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE MOBILE NAV
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !mobileNav.contains(
+                event.target
+            )
+            &&
+            !mobileMenu.contains(
+                event.target
+            )
+        ) {
+
+            mobileNav.style.display =
+                "none";
+
+            mobileMenu.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   NOTIFICATION SOUND
+========================================================= */
+
+function playNotificationSound(
+    number = 1
+) {
+
+    const source =
+        document.getElementById(
+            "notificationAudioSource"
+        );
+
+
+    const safeNumber =
+        Math.max(
+            1,
+            Math.min(
+                9,
+                Number(number) || 1
+            )
+        );
+
+
+    source.src =
+        "assets/audio/notification"
+        +
+        safeNumber
+        +
+        ".mp3";
+
+
+    notificationAudio.load();
+
+
+    notificationAudio
+        .play()
+        .catch(
+            function() {
+
+                /*
+                 * Browser autoplay restrictions may block
+                 * playback until the user interacts with the page.
+                 */
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   PERIODIC NOTIFICATION CHECK
+========================================================= */
+
+let previousNotificationCount =
+    state.notifications;
+
+
+async function pollNotifications() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.notifications
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            return;
+
+        }
+
+
+        const count =
+            Number(
+                result.count
+                ??
+                result.unread_count
+                ??
+                (
+                    result.data
+                    &&
+                    (
+                        result.data.count
+                        ??
+                        result.data.unread_count
+                    )
+                )
+                ??
+                0
+            );
+
+
+        updateNotificationCount(
+            count
+        );
+
+
+        if (
+            count >
+            previousNotificationCount
+        ) {
+
+            /*
+             * New notification.
+             *
+             * The backend can later return notification_type
+             * or sound_number. Default to notification1.mp3.
+             */
+
+            playNotificationSound(
+                result.sound_number
+                ??
+                1
+            );
+
+        }
+
+
+        previousNotificationCount =
+            count;
+
+
+    } catch (error) {
+
+        console.error(
+            "Notification polling error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT SAFETY
+========================================================= */
+
+window.addEventListener(
+    "pageshow",
+    function() {
+
+        /*
+         * Prevent a cached old dashboard from appearing after
+         * logout or account suspension.
+         */
+
+        if (
+            performance.getEntriesByType(
+                "navigation"
+            )[0]
+            ?.type ===
+            "back_forward"
+        ) {
+
+            loadSession();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        const authenticated =
+            await loadSession();
+
+
+        if (
+            !authenticated
+        ) {
+
+            return;
+
+        }
+
+
+        await Promise.allSettled(
+            [
+                loadPremiumStatus(),
+                loadPosts(),
+                loadConnections(),
+                loadNotificationCount()
+            ]
+        );
+
+
+        /*
+         * Poll notification count periodically.
+         * Database remains the source of truth.
+         */
+
+        setInterval(
+            pollNotifications,
+            30000
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
