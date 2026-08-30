@@ -1,0 +1,5401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+    <title>Pending Accounts | LOVEMI Admin</title>
+
+    <!-- =====================================================
+         LOVEMI TAB ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+    <style>
+
+        :root {
+
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
+
+            --accent:#db2777;
+
+            --green:#16a34a;
+            --green-soft:#ecfdf5;
+
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+
+            --orange:#d97706;
+            --orange-soft:#fffbeb;
+
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
+
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9898a1;
+
+            --background:#f6f6fa;
+
+            --border:#e6e6ed;
+
+            --sidebar-width:258px;
+
+        }
+
+        * {
+
+            margin:0;
+
+            padding:0;
+
+            box-sizing:border-box;
+
+        }
+
+        html {
+
+            scroll-behavior:smooth;
+
+        }
+
+        body {
+
+            min-height:100vh;
+
+            font-family:"Inter",sans-serif;
+
+            color:var(--text);
+
+            background:var(--background);
+
+            line-height:1.55;
+
+        }
+
+        a {
+
+            color:inherit;
+
+            text-decoration:none;
+
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+
+            font:inherit;
+
+        }
+
+        button {
+
+            cursor:pointer;
+
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position:fixed;
+
+            inset:0 auto 0 0;
+
+            width:var(--sidebar-width);
+
+            z-index:1200;
+
+            overflow-y:auto;
+
+            background:#17141f;
+
+            color:white;
+
+            transition:.25s ease;
+
+        }
+
+        .sidebar-header {
+
+            min-height:82px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:10px;
+
+            padding:17px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+
+        }
+
+        .sidebar-logo {
+
+            width:46px;
+
+            height:46px;
+
+            object-fit:contain;
+
+            border-radius:12px;
+
+        }
+
+        .sidebar-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:22px;
+
+            font-weight:800;
+
+        }
+
+        .sidebar-subtitle {
+
+            display:block;
+
+            margin-top:2px;
+
+            color:#9b96a7;
+
+            font-size:8px;
+
+            font-weight:800;
+
+            letter-spacing:1px;
+
+        }
+
+        .admin-badge {
+
+            display:inline-flex;
+
+            align-items:center;
+
+            gap:6px;
+
+            margin:16px;
+
+            padding:7px 10px;
+
+            border-radius:999px;
+
+            color:#eadfff;
+
+            background:
+                rgba(109,40,217,.18);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            font-size:8px;
+
+            font-weight:800;
+
+        }
+
+        .sidebar-section {
+
+            padding:0 11px 5px;
+
+        }
+
+        .sidebar-label {
+
+            padding:12px 10px 6px;
+
+            color:#6f697b;
+
+            font-size:8px;
+
+            font-weight:800;
+
+            letter-spacing:1px;
+
+            text-transform:uppercase;
+
+        }
+
+        .sidebar-link {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:11px;
+
+            margin:2px 0;
+
+            padding:10px 11px;
+
+            color:#b9b3c4;
+
+            border-radius:10px;
+
+            font-size:9px;
+
+            font-weight:600;
+
+            transition:.2s ease;
+
+        }
+
+        .sidebar-link i {
+
+            width:17px;
+
+            text-align:center;
+
+        }
+
+        .sidebar-link:hover {
+
+            color:#fff;
+
+            background:
+                rgba(255,255,255,.06);
+
+        }
+
+        .sidebar-link.active {
+
+            color:white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+        }
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            min-height:100vh;
+
+            margin-left:var(--sidebar-width);
+
+        }
+
+        .topbar {
+
+            position:sticky;
+
+            top:0;
+
+            z-index:900;
+
+            min-height:76px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:15px;
+
+            padding:0 28px;
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+        }
+
+        .topbar-left {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+
+        }
+
+        .menu-button {
+
+            display:none;
+
+            width:40px;
+
+            height:40px;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            background:white;
+
+        }
+
+        .page-title h1 {
+
+            font-size:19px;
+
+            font-weight:800;
+
+        }
+
+        .page-title p {
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+
+        }
+
+        .top-actions {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+
+        }
+
+        .top-icon {
+
+            width:38px;
+
+            height:38px;
+
+            display:grid;
+
+            place-items:center;
+
+            color:var(--text-soft);
+
+            background:white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+        }
+
+        .admin-user {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+
+            padding-left:11px;
+
+            border-left:
+                1px solid
+                var(--border);
+
+        }
+
+        .admin-avatar {
+
+            width:37px;
+
+            height:37px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+        }
+
+        .admin-user strong {
+
+            display:block;
+
+            font-size:8px;
+
+        }
+
+        .admin-user span {
+
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+
+        }
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            width:
+                min(
+                    calc(100% - 48px),
+                    1500px
+                );
+
+            margin:auto;
+
+            padding:28px 0 45px;
+
+        }
+
+        .page-heading {
+
+            margin-bottom:18px;
+
+        }
+
+        .page-heading h2 {
+
+            font-size:24px;
+
+            font-weight:800;
+
+        }
+
+        .page-heading p {
+
+            margin-top:4px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+
+        }
+
+        /* =====================================================
+           ALERT
+        ====================================================== */
+
+        .alert {
+
+            display:none;
+
+            margin-bottom:15px;
+
+            padding:11px 13px;
+
+            border-radius:10px;
+
+            font-size:9px;
+
+        }
+
+        .alert.show {
+
+            display:block;
+
+        }
+
+        .alert.success {
+
+            color:#166534;
+
+            background:var(--green-soft);
+
+            border:
+                1px solid
+                #bbf7d0;
+
+        }
+
+        .alert.error {
+
+            color:#991b1b;
+
+            background:var(--red-soft);
+
+            border:
+                1px solid
+                #fecaca;
+
+        }
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0,1fr)
+                );
+
+            gap:12px;
+
+            margin-bottom:15px;
+
+        }
+
+        .stat-card {
+
+            padding:17px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:15px;
+
+            background:white;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.035);
+
+        }
+
+        .stat-top {
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+        }
+
+        .stat-label {
+
+            color:var(--text-muted);
+
+            font-size:8px;
+
+        }
+
+        .stat-value {
+
+            display:block;
+
+            margin-top:5px;
+
+            font-size:22px;
+
+            font-weight:800;
+
+        }
+
+        .stat-icon {
+
+            width:38px;
+
+            height:38px;
+
+            display:grid;
+
+            place-items:center;
+
+            border-radius:10px;
+
+        }
+
+        .stat-card:nth-child(1)
+        .stat-icon {
+
+            color:var(--orange);
+
+            background:var(--orange-soft);
+
+        }
+
+        .stat-card:nth-child(2)
+        .stat-icon {
+
+            color:var(--green);
+
+            background:var(--green-soft);
+
+        }
+
+        .stat-card:nth-child(3)
+        .stat-icon {
+
+            color:var(--blue);
+
+            background:var(--blue-soft);
+
+        }
+
+        .stat-card:nth-child(4)
+        .stat-icon {
+
+            color:var(--primary);
+
+            background:var(--primary-soft);
+
+        }
+
+        /* =====================================================
+           FILTER PANEL
+        ====================================================== */
+
+        .filter-panel {
+
+            display:grid;
+
+            grid-template-columns:
+                minmax(220px,1fr)
+                180px
+                180px
+                42px;
+
+            gap:8px;
+
+            margin-bottom:15px;
+
+            padding:14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:15px;
+
+            background:white;
+
+        }
+
+        .field {
+
+            width:100%;
+
+            height:42px;
+
+            padding:0 12px;
+
+            outline:none;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:9px;
+
+            background:white;
+
+            color:var(--text);
+
+            font-size:8px;
+
+        }
+
+        .field:focus {
+
+            border-color:#c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+
+        }
+
+        .refresh-btn {
+
+            width:42px;
+
+            height:42px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:9px;
+
+            background:white;
+
+            color:var(--text-soft);
+
+        }
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .panel {
+
+            overflow:hidden;
+
+            background:white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:17px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.045);
+
+        }
+
+        .panel-header {
+
+            min-height:65px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            padding:0 18px;
+
+            border-bottom:
+                1px solid
+                #f0f0f4;
+
+        }
+
+        .panel-header h3 {
+
+            font-size:11px;
+
+            font-weight:800;
+
+        }
+
+        .panel-header p {
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+
+        }
+
+        .table-wrap {
+
+            overflow-x:auto;
+
+        }
+
+        table {
+
+            width:100%;
+
+            min-width:1150px;
+
+            border-collapse:collapse;
+
+        }
+
+        th,
+        td {
+
+            padding:11px 13px;
+
+            border-bottom:
+                1px solid
+                #f0f0f4;
+
+            text-align:left;
+
+        }
+
+        th {
+
+            color:#77747e;
+
+            background:#fafafe;
+
+            font-size:7px;
+
+            letter-spacing:.6px;
+
+            text-transform:uppercase;
+
+        }
+
+        td {
+
+            font-size:8px;
+
+            vertical-align:middle;
+
+        }
+
+        tbody tr:hover {
+
+            background:#fcfbff;
+
+        }
+
+        .person {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:9px;
+
+        }
+
+        .avatar {
+
+            width:39px;
+
+            height:39px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+        }
+
+        .person-name strong {
+
+            display:block;
+
+            font-size:8px;
+
+        }
+
+        .person-name span {
+
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+
+        }
+
+        .chip {
+
+            display:inline-flex;
+
+            align-items:center;
+
+            gap:5px;
+
+            padding:5px 8px;
+
+            border-radius:999px;
+
+            font-size:7px;
+
+            font-weight:800;
+
+        }
+
+        .chip.pending {
+
+            color:#92400e;
+
+            background:#fffbeb;
+
+        }
+
+        .chip.verified {
+
+            color:#166534;
+
+            background:#ecfdf5;
+
+        }
+
+        .chip.unverified {
+
+            color:#71717a;
+
+            background:#f4f4f5;
+
+        }
+
+        .chip.suspended {
+
+            color:#991b1b;
+
+            background:#fef2f2;
+
+        }
+
+        .chip.admin {
+
+            color:#5b21b6;
+
+            background:#f5f3ff;
+
+        }
+
+        .action-group {
+
+            display:flex;
+
+            flex-wrap:wrap;
+
+            gap:5px;
+
+        }
+
+        .action {
+
+            min-height:31px;
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:5px;
+
+            padding:0 9px;
+
+            border:1px solid var(--border);
+
+            border-radius:8px;
+
+            background:white;
+
+            font-size:7px;
+
+            font-weight:800;
+
+        }
+
+        .action.view {
+
+            color:var(--blue);
+
+            background:var(--blue-soft);
+
+            border-color:#bfdbfe;
+
+        }
+
+        .action.approve {
+
+            color:var(--green);
+
+            background:var(--green-soft);
+
+            border-color:#bbf7d0;
+
+        }
+
+        .action.reject {
+
+            color:var(--red);
+
+            background:var(--red-soft);
+
+            border-color:#fecaca;
+
+        }
+
+        .action.suspend {
+
+            color:#b91c1c;
+
+            background:#fff1f2;
+
+            border-color:#fecdd3;
+
+        }
+
+        .loading-row,
+        .empty-row {
+
+            height:230px;
+
+            color:var(--text-muted);
+
+            text-align:center;
+
+        }
+
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        .pagination {
+
+            min-height:64px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:10px;
+
+            padding:0 18px;
+
+        }
+
+        .pagination-info {
+
+            color:var(--text-muted);
+
+            font-size:8px;
+
+        }
+
+        .pagination-buttons {
+
+            display:flex;
+
+            gap:5px;
+
+        }
+
+        .page-btn {
+
+            width:31px;
+
+            height:31px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:8px;
+
+            background:white;
+
+            font-size:8px;
+
+            font-weight:700;
+
+        }
+
+        .page-btn.active {
+
+            color:white;
+
+            background:var(--primary);
+
+            border-color:var(--primary);
+
+        }
+
+        .page-btn:disabled {
+
+            opacity:.45;
+
+            cursor:not-allowed;
+
+        }
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal {
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:2200;
+
+            display:none;
+
+            align-items:center;
+
+            justify-content:center;
+
+            padding:15px;
+
+            background:
+                rgba(0,0,0,.62);
+
+        }
+
+        .modal.show {
+
+            display:flex;
+
+        }
+
+        .modal-card {
+
+            width:
+                min(
+                    100%,
+                    800px
+                );
+
+            max-height:95vh;
+
+            display:flex;
+
+            flex-direction:column;
+
+            overflow:hidden;
+
+            background:white;
+
+            border-radius:18px;
+
+            box-shadow:
+                0 35px 90px
+                rgba(0,0,0,.26);
+
+        }
+
+        .modal-header {
+
+            min-height:64px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            padding:0 18px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+        }
+
+        .modal-header h3 {
+
+            font-size:13px;
+
+            font-weight:800;
+
+        }
+
+        .close-btn {
+
+            width:35px;
+
+            height:35px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:0;
+
+            border-radius:9px;
+
+            background:#f4f4f6;
+
+        }
+
+        .modal-body {
+
+            padding:20px;
+
+            overflow-y:auto;
+
+        }
+
+        .profile-header {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:13px;
+
+            padding:14px;
+
+            margin-bottom:14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fcfaff,
+                    #fff7fb
+                );
+
+            border:
+                1px solid
+                #eee7fa;
+
+            border-radius:14px;
+
+        }
+
+        .large-avatar {
+
+            width:66px;
+
+            height:66px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+        }
+
+        .profile-header h4 {
+
+            font-size:13px;
+
+        }
+
+        .profile-header p {
+
+            margin-top:3px;
+
+            color:var(--text-muted);
+
+            font-size:8px;
+
+        }
+
+        .details-grid {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0,1fr)
+                );
+
+            gap:10px;
+
+        }
+
+        .detail-box {
+
+            padding:13px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:12px;
+
+        }
+
+        .detail-box h5 {
+
+            margin-bottom:8px;
+
+            font-size:8px;
+
+        }
+
+        .detail-row {
+
+            display:flex;
+
+            align-items:flex-start;
+
+            justify-content:space-between;
+
+            gap:15px;
+
+            padding:6px 0;
+
+            border-bottom:
+                1px solid
+                #f3f3f6;
+
+            font-size:7px;
+
+        }
+
+        .detail-row:last-child {
+
+            border-bottom:0;
+
+        }
+
+        .detail-label {
+
+            color:var(--text-muted);
+
+        }
+
+        .detail-value {
+
+            text-align:right;
+
+            word-break:break-word;
+
+        }
+
+        .modal-footer {
+
+            display:flex;
+
+            justify-content:flex-end;
+
+            gap:8px;
+
+            padding:12px 18px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+        }
+
+        .modal-button {
+
+            min-height:39px;
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:7px;
+
+            padding:0 14px;
+
+            border:1px solid var(--border);
+
+            border-radius:9px;
+
+            background:white;
+
+            font-size:8px;
+
+            font-weight:800;
+
+        }
+
+        .modal-button.success {
+
+            color:white;
+
+            background:var(--green);
+
+            border-color:var(--green);
+
+        }
+
+        .modal-button.danger {
+
+            color:white;
+
+            background:var(--red);
+
+            border-color:var(--red);
+
+        }
+
+        .modal-button.primary {
+
+            color:white;
+
+            background:var(--primary);
+
+            border-color:var(--primary);
+
+        }
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            margin-left:var(--sidebar-width);
+
+            padding:18px 20px;
+
+            color:#817d89;
+
+            background:white;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            text-align:center;
+
+            font-size:7px;
+
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media(max-width:1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+
+            }
+
+            .filter-panel {
+
+                grid-template-columns:
+                    minmax(180px,1fr)
+                    160px
+                    160px
+                    42px;
+
+            }
+
+        }
+
+        @media(max-width:900px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+
+            }
+
+            .main {
+
+                margin-left:0;
+
+            }
+
+            .footer {
+
+                margin-left:0;
+
+            }
+
+            .menu-button {
+
+                display:grid;
+
+            }
+
+            .topbar {
+
+                padding:0 13px;
+
+            }
+
+            .content {
+
+                width:
+                    calc(100% - 24px);
+
+            }
+
+        }
+
+        @media(max-width:700px) {
+
+            .top-icon {
+
+                display:none;
+
+            }
+
+            .admin-user {
+
+                padding-left:0;
+
+                border-left:0;
+
+            }
+
+            .admin-user > div {
+
+                display:none;
+
+            }
+
+            .stats {
+
+                grid-template-columns:1fr;
+
+            }
+
+            .filter-panel {
+
+                grid-template-columns:
+                    1fr
+                    42px;
+
+            }
+
+            .filter-panel .field:nth-child(2) {
+
+                grid-column:
+                    1 / -1;
+
+            }
+
+            .filter-panel .field:nth-child(3) {
+
+                grid-column:
+                    1 / -1;
+
+            }
+
+            .details-grid {
+
+                grid-template-columns:1fr;
+
+            }
+
+        }
+
+        @media(max-width:500px) {
+
+            .page-heading h2 {
+
+                font-size:20px;
+
+            }
+
+            .modal {
+
+                padding:0;
+
+            }
+
+            .modal-card {
+
+                width:100%;
+
+                height:100%;
+
+                max-height:none;
+
+                border-radius:0;
+
+            }
+
+            .modal-footer {
+
+                flex-direction:column;
+
+            }
+
+            .modal-button {
+
+                width:100%;
+
+            }
+
+            .pagination {
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                padding:14px 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+    <div class="sidebar-header">
+
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="dashboard.html"
+        >
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="users.html"
+        >
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="profiles.html"
+        >
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="admins.html"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="roles.html"
+        >
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="permissions.html"
+        >
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="photos.html"
+        >
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="posts.html"
+        >
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="connections.html"
+        >
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="conversations.html"
+        >
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="messages.html"
+        >
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="premium-users.html"
+        >
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="subscriptions.html"
+        >
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="payments.html"
+        >
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="reports.html"
+        >
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="blocked-users.html"
+        >
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="verification.html"
+        >
+            <i class="fa-solid fa-circle-check"></i>
+            Verification
+        </a>
+
+
+        <a
+            class="sidebar-link active"
+            href="pending-accounts.html"
+        >
+            <i class="fa-solid fa-user-clock"></i>
+            Pending Accounts
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="pending-posts.html"
+        >
+            <i class="fa-solid fa-file-circle-exclamation"></i>
+            Pending Posts
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="pending-photos.html"
+        >
+            <i class="fa-solid fa-image"></i>
+            Pending Photos
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+
+        <a
+            class="sidebar-link"
+            href="notifications.html"
+        >
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="system-settings.html"
+        >
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="audit-logs.html"
+        >
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="backup.html"
+        >
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="profile.html"
+        >
+            <i class="fa-solid fa-user"></i>
+            My Profile
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="../dashboard.html"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+
+        <a
+            class="sidebar-link"
+            href="#"
+            id="logoutLink"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+
+        <div class="topbar-left">
+
+
+            <button
+                type="button"
+                class="menu-button"
+                id="menuButton"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="page-title">
+
+                <h1>
+                    Pending Accounts
+                </h1>
+
+                <p>
+                    Review newly created accounts before granting normal LOVEMI access.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="top-actions">
+
+
+            <a
+                class="top-icon"
+                href="notifications.html"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+
+            <a
+                class="top-icon"
+                href="verification.html"
+                title="Verification"
+            >
+                <i class="fa-solid fa-circle-check"></i>
+            </a>
+
+
+            <a
+                class="top-icon"
+                href="../index.html"
+                title="Website"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+
+            <div class="admin-user">
+
+
+                <img
+                    id="adminAvatar"
+                    class="admin-avatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                >
+
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <main class="content">
+
+
+        <section class="page-heading">
+
+            <h2>
+                Pending Account Queue
+            </h2>
+
+            <p>
+                Accounts awaiting approval are displayed here. Review verification status before approving.
+            </p>
+
+        </section>
+
+
+        <div
+            id="alert"
+            class="alert"
+            role="alert"
+        ></div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span class="stat-label">
+                            Pending
+                        </span>
+
+                        <strong
+                            id="statPending"
+                            class="stat-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-clock"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span class="stat-label">
+                            Email Verified
+                        </span>
+
+                        <strong
+                            id="statEmail"
+                            class="stat-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-envelope-circle-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span class="stat-label">
+                            Fully Verified
+                        </span>
+
+                        <strong
+                            id="statComplete"
+                            class="stat-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span class="stat-label">
+                            Today
+                        </span>
+
+                        <strong
+                            id="statToday"
+                            class="stat-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-calendar-day"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-panel">
+
+
+            <input
+                type="search"
+                class="field"
+                id="searchInput"
+                placeholder="Search username, name or email..."
+            >
+
+
+            <select
+                class="field"
+                id="verificationFilter"
+            >
+
+                <option value="all">
+                    All verification states
+                </option>
+
+                <option value="incomplete">
+                    Incomplete
+                </option>
+
+                <option value="email_verified">
+                    Email verified
+                </option>
+
+                <option value="fully_verified">
+                    Fully verified
+                </option>
+
+            </select>
+
+
+            <select
+                class="field"
+                id="roleFilter"
+            >
+
+                <option value="all">
+                    All roles
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshBtn"
+                title="Refresh"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+            </button>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <section class="panel">
+
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <h3>
+                        Accounts Awaiting Approval
+                    </h3>
+
+                    <p>
+                        Only accounts that are not deleted are shown.
+                    </p>
+
+                </div>
+
+
+                <span
+                    id="resultCount"
+                    class="chip pending"
+                >
+                    Loading...
+                </span>
+
+
+            </div>
+
+
+            <div class="table-wrap">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Account
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Country
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                2FA
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Created
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="accountsBody">
+
+
+                        <tr>
+
+                            <td
+                                colspan="10"
+                                class="loading-row"
+                            >
+
+                                <i
+                                    class="fa-solid fa-spinner fa-spin"
+                                ></i>
+
+                                <br><br>
+
+                                Loading pending accounts...
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            <div class="pagination">
+
+
+                <div
+                    id="paginationInfo"
+                    class="pagination-info"
+                >
+                    Loading...
+                </div>
+
+
+                <div
+                    id="paginationButtons"
+                    class="pagination-buttons"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     DETAILS MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="detailsModal"
+>
+
+
+    <div class="modal-card">
+
+
+        <div class="modal-header">
+
+
+            <h3>
+                Account Review
+            </h3>
+
+
+            <button
+                type="button"
+                class="close-btn"
+                onclick="closeDetails()"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="modal-body"
+            id="detailsBody"
+        >
+
+            <div class="loading-row">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+
+            <button
+                type="button"
+                class="modal-button"
+                onclick="closeDetails()"
+            >
+                Close
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-button danger"
+                id="modalRejectBtn"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Reject
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-button"
+                id="modalSuspendBtn"
+            >
+
+                <i class="fa-solid fa-user-slash"></i>
+
+                Suspend
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-button success"
+                id="modalApproveBtn"
+            >
+
+                <i class="fa-solid fa-user-check"></i>
+
+                Approve Account
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    ©
+    <span id="year"></span>
+    LOVEMI Administration.
+    All rights reserved.
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API = {
+
+    list:
+        "../admin-api/users/list.php",
+
+    get:
+        "../admin-api/users/get.php",
+
+    verify:
+        "../admin-api/users/verify.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentPage = 1;
+
+let totalPages = 1;
+
+let selectedUserId = 0;
+
+let selectedUser = null;
+
+let searchTimer = null;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const accountsBody =
+    document.getElementById(
+        "accountsBody"
+    );
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value === null
+        ||
+        value === undefined
+            ? ""
+            :
+            String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   IMAGE URL
+========================================================= */
+
+function imageURL(
+    value
+) {
+
+    if (
+        !value
+    ) {
+
+        return "../assets/images/defaults/default-avatar-male.png";
+
+    }
+
+
+    const path =
+        String(value).trim();
+
+
+    if (
+        path.startsWith("http://")
+        ||
+        path.startsWith("https://")
+        ||
+        path.startsWith("/")
+    ) {
+
+        return path;
+
+    }
+
+
+    return "../"
+        +
+        path.replace(
+            /^\/+/,
+            ""
+        );
+
+}
+
+
+/* =========================================================
+   BOOLEAN
+========================================================= */
+
+function isTrue(
+    value
+) {
+
+    return (
+        value === true
+        ||
+        value === 1
+        ||
+        value === "1"
+        ||
+        value === "true"
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(
+    value
+) {
+
+    if (
+        !value
+    ) {
+
+        return "—";
+
+    }
+
+
+    const date =
+        new Date(
+            String(value).replace(
+                " ",
+                "T"
+            )
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleString();
+
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    const alert =
+        document.getElementById(
+            "alert"
+        );
+
+
+    alert.className =
+        "alert show "
+        +
+        type;
+
+
+    alert.textContent =
+        message;
+
+
+    setTimeout(
+        function() {
+
+            alert.className =
+                "alert";
+
+        },
+        5000
+    );
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function requestJSON(
+    url,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            url,
+            {
+
+                credentials:
+                    "include",
+
+                cache:
+                    "no-store",
+
+                ...options,
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    ...(options.body
+                        ?
+                        {
+                            "Content-Type":
+                                "application/json"
+                        }
+                        :
+                        {}
+                    ),
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
+
+
+    let result;
+
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch (
+        error
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    if (
+        response.status === 401
+    ) {
+
+        window.location.href =
+            "../login.html?redirect="
+            +
+            encodeURIComponent(
+                "admin/pending-accounts.html"
+            );
+
+
+        throw new Error(
+            "Administrator session expired."
+        );
+
+    }
+
+
+    if (
+        !response.ok
+        ||
+        result.success !== true
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "The request could not be completed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   LOAD PENDING ACCOUNTS
+========================================================= */
+
+async function loadAccounts() {
+
+    accountsBody.innerHTML =
+        `
+
+        <tr>
+
+            <td
+                colspan="10"
+                class="loading-row"
+            >
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <br><br>
+
+                Loading pending accounts...
+
+            </td>
+
+        </tr>
+
+        `;
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value.trim();
+
+
+    const verification =
+        document.getElementById(
+            "verificationFilter"
+        ).value;
+
+
+    const role =
+        document.getElementById(
+            "roleFilter"
+        ).value;
+
+
+    const params =
+        new URLSearchParams({
+
+            page:
+                String(currentPage),
+
+            limit:
+                "20",
+
+            search:
+                search,
+
+            account_status:
+                "pending",
+
+            verification:
+                verification,
+
+            role:
+                role
+
+        });
+
+
+    try {
+
+        const result =
+            await requestJSON(
+                API.list
+                +
+                "?"
+                +
+                params.toString()
+            );
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        renderAdmin(
+            data.admin
+            ||
+            {}
+        );
+
+
+        let users =
+            data.users
+            ||
+            data.items
+            ||
+            [];
+
+
+        /*
+         * Safety filtering on the client.
+         * The server must still enforce the restriction.
+         */
+
+        users =
+            users.filter(
+                function(user) {
+
+                    return (
+                        String(
+                            user.account_status
+                            ||
+                            ""
+                        ).toLowerCase()
+                        ===
+                        "pending"
+                        &&
+                        !isTrue(
+                            user.is_deleted
+                        )
+                    );
+
+                }
+            );
+
+
+        populateRoles(
+            data.roles
+            ||
+            users.map(
+                function(user) {
+
+                    return {
+
+                        id:
+                            user.role_id,
+
+                        name:
+                            user.role_name,
+
+                        slug:
+                            user.role_slug
+
+                    };
+
+                }
+            )
+        );
+
+
+        renderStats(
+            data.summary
+            ||
+            buildStats(
+                users
+            )
+        );
+
+
+        renderAccounts(
+            users,
+            data.pagination
+            ||
+            {}
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        accountsBody.innerHTML =
+            `
+
+            <tr>
+
+                <td
+                    colspan="10"
+                    class="empty-row"
+                >
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function renderAdmin(
+    admin
+) {
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            imageURL(
+                admin.avatar_url
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   ROLES
+========================================================= */
+
+function populateRoles(
+    roles
+) {
+
+    const select =
+        document.getElementById(
+            "roleFilter"
+        );
+
+
+    const current =
+        select.value;
+
+
+    const unique = new Map();
+
+
+    (
+        Array.isArray(
+            roles
+        )
+            ?
+            roles
+            :
+            []
+    ).forEach(
+        function(role) {
+
+            if (
+                !role
+                ||
+                (
+                    role.id ===
+                    undefined
+                    &&
+                    role.slug ===
+                    undefined
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const key =
+                String(
+                    role.id
+                    ??
+                    role.slug
+                );
+
+
+            unique.set(
+                key,
+                role
+            );
+
+        }
+    );
+
+
+    select.innerHTML =
+        `<option value="all">All roles</option>`;
+
+
+    unique.forEach(
+        function(role) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                role.slug
+                ||
+                role.id;
+
+
+            option.textContent =
+                role.name
+                ||
+                role.slug
+                ||
+                "Role";
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    if (
+        Array.from(
+            select.options
+        ).some(
+            function(option) {
+
+                return option.value === current;
+
+            }
+        )
+    ) {
+
+        select.value =
+            current;
+
+    }
+
+}
+
+
+/* =========================================================
+   FALLBACK STATISTICS
+========================================================= */
+
+function buildStats(
+    users
+) {
+
+    let pending = 0;
+
+    let email = 0;
+
+    let complete = 0;
+
+    let today = 0;
+
+
+    const now =
+        new Date();
+
+
+    users.forEach(
+        function(user) {
+
+            pending++;
+
+
+            if (
+                isTrue(
+                    user.email_verified
+                )
+            ) {
+
+                email++;
+
+            }
+
+
+            const completeVerification =
+                isTrue(user.email_verified)
+                &&
+                isTrue(user.phone_verified)
+                &&
+                isTrue(user.identity_verified)
+                &&
+                isTrue(user.age_verified)
+                &&
+                isTrue(user.two_factor_enabled);
+
+
+            if (
+                completeVerification
+            ) {
+
+                complete++;
+
+            }
+
+
+            if (
+                user.created_at
+            ) {
+
+                const date =
+                    new Date(
+                        String(
+                            user.created_at
+                        ).replace(
+                            " ",
+                            "T"
+                        )
+                    );
+
+
+                if (
+                    date.getFullYear()
+                    ===
+                    now.getFullYear()
+                    &&
+                    date.getMonth()
+                    ===
+                    now.getMonth()
+                    &&
+                    date.getDate()
+                    ===
+                    now.getDate()
+                ) {
+
+                    today++;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    return {
+
+        pending:
+            pending,
+
+        email_verified:
+            email,
+
+        complete:
+            complete,
+
+        today:
+            today
+
+    };
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(
+    summary
+) {
+
+    document.getElementById(
+        "statPending"
+    ).textContent =
+        Number(
+            summary.pending
+            ??
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statEmail"
+    ).textContent =
+        Number(
+            summary.email_verified
+            ??
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statComplete"
+    ).textContent =
+        Number(
+            summary.complete
+            ??
+            summary.ready
+            ??
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statToday"
+    ).textContent =
+        Number(
+            summary.today
+            ??
+            0
+        ).toLocaleString();
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderAccounts(
+    users,
+    pagination
+) {
+
+    if (
+        users.length === 0
+    ) {
+
+        accountsBody.innerHTML =
+            `
+
+            <tr>
+
+                <td
+                    colspan="10"
+                    class="empty-row"
+                >
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <br><br>
+
+                    No pending accounts found.
+
+                </td>
+
+            </tr>
+
+            `;
+
+    } else {
+
+        accountsBody.innerHTML =
+            users
+                .map(
+                    renderAccount
+                )
+                .join("");
+
+    }
+
+
+    const total =
+        Number(
+            pagination.total
+            ??
+            users.length
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ??
+            20
+        );
+
+
+    currentPage =
+        Number(
+            pagination.page
+            ??
+            currentPage
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                (
+                    pagination.pages
+                    ??
+                    Math.ceil(
+                        total / limit
+                    )
+                )
+                ||
+                1
+            )
+        );
+
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        total.toLocaleString()
+        +
+        (
+            total === 1
+                ? " account"
+                : " accounts"
+        );
+
+
+    const first =
+        total > 0
+            ?
+            (
+                (
+                    currentPage - 1
+                )
+                *
+                limit
+            )
+            +
+            1
+            :
+            0;
+
+
+    const last =
+        Math.min(
+            currentPage * limit,
+            total
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total > 0
+            ?
+            `Showing ${first}–${last} of ${total.toLocaleString()}`
+            :
+            "No results";
+
+
+    renderPagination();
+
+}
+
+
+/* =========================================================
+   ACCOUNT ROW
+========================================================= */
+
+function renderAccount(
+    user
+) {
+
+    const emailVerified =
+        isTrue(
+            user.email_verified
+        );
+
+
+    const phoneVerified =
+        isTrue(
+            user.phone_verified
+        );
+
+
+    const identityVerified =
+        isTrue(
+            user.identity_verified
+        );
+
+
+    const ageVerified =
+        isTrue(
+            user.age_verified
+        );
+
+
+    const twoFactor =
+        isTrue(
+            user.two_factor_enabled
+        );
+
+
+    const fullyVerified =
+        emailVerified
+        &&
+        phoneVerified
+        &&
+        identityVerified
+        &&
+        ageVerified
+        &&
+        twoFactor;
+
+
+    const roleSlug =
+        String(
+            user.role_slug
+            ||
+            ""
+        ).toLowerCase();
+
+
+    const roleClass =
+        roleSlug === "admin"
+            ||
+        roleSlug === "moderator"
+            ||
+        roleSlug === "support"
+            ?
+            "admin"
+            :
+            "";
+
+
+    return `
+
+        <tr>
+
+
+            <td>
+
+                <div class="person">
+
+
+                    <img
+                        class="avatar"
+                        src="${escapeHTML(
+                            imageURL(
+                                user.avatar_url
+                                ||
+                                user.profile_photo
+                            )
+                        )}"
+                        alt=""
+                    >
+
+
+                    <div class="person-name">
+
+                        <strong>
+
+                            ${escapeHTML(
+                                user.full_names
+                                ||
+                                user.display_name
+                                ||
+                                user.username
+                                ||
+                                "Unknown"
+                            )}
+
+                        </strong>
+
+
+                        <span>
+
+                            @${escapeHTML(
+                                user.username
+                                ||
+                                ""
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="chip ${roleClass}"
+                >
+
+                    <i class="fa-solid fa-user-tag"></i>
+
+                    ${escapeHTML(
+                        user.role_name
+                        ||
+                        user.role_slug
+                        ||
+                        "Member"
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    user.country_name
+                    ||
+                    "—"
+                )}
+
+                ${
+                    user.country_iso2
+                        ?
+                        `
+                        <span
+                            style="
+                            color:#9898a1;
+                            font-size:7px;
+                            "
+                        >
+                            (${escapeHTML(
+                                user.country_iso2
+                            )})
+                        </span>
+                        `
+                        :
+                        ""
+                }
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    user.email
+                    ||
+                    "—"
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${
+                    emailVerified
+                        ?
+                        `
+                        <span class="chip verified">
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Verified
+
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="chip unverified">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Pending
+
+                        </span>
+                        `
+                }
+
+            </td>
+
+
+            <td>
+
+                ${
+                    phoneVerified
+                        ?
+                        `
+                        <span class="chip verified">
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Verified
+
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="chip unverified">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Pending
+
+                        </span>
+                        `
+                }
+
+            </td>
+
+
+            <td>
+
+                ${
+                    twoFactor
+                        ?
+                        `
+                        <span class="chip verified">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            Enabled
+
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="chip unverified">
+
+                            <i class="fa-solid fa-shield"></i>
+
+                            Not Ready
+
+                        </span>
+                        `
+                }
+
+            </td>
+
+
+            <td>
+
+                ${
+                    fullyVerified
+                        ?
+                        `
+                        <span class="chip verified">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Ready
+
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="chip pending">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Pending
+
+                        </span>
+                        `
+                }
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    formatDate(
+                        user.created_at
+                    )
+                )}
+
+            </td>
+
+
+            <td>
+
+
+                <div class="action-group">
+
+
+                    <button
+                        type="button"
+                        class="action view"
+                        onclick="openAccount(
+                            ${Number(user.id)}
+                        )"
+                    >
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        Review
+
+                    </button>
+
+
+                    ${
+                        fullyVerified
+                            ?
+                            `
+                            <button
+                                type="button"
+                                class="action approve"
+                                onclick="approveAccount(
+                                    ${Number(user.id)}
+                                )"
+                            >
+
+                                <i class="fa-solid fa-check"></i>
+
+                                Approve
+
+                            </button>
+                            `
+                            :
+                            ""
+                    }
+
+
+                    <button
+                        type="button"
+                        class="action reject"
+                        onclick="rejectAccount(
+                            ${Number(user.id)}
+                        )"
+                    >
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        Reject
+
+                    </button>
+
+
+                </div>
+
+
+            </td>
+
+
+        </tr>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination() {
+
+    const container =
+        document.getElementById(
+            "paginationButtons"
+        );
+
+
+    let html =
+        `
+
+        <button
+            type="button"
+            class="page-btn"
+            onclick="changePage(
+                ${currentPage - 1}
+            )"
+            ${
+                currentPage <= 1
+                    ? "disabled"
+                    : ""
+            }
+        >
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let page = start;
+        page <= end;
+        page++
+    ) {
+
+        html +=
+            `
+
+            <button
+                type="button"
+                class="page-btn ${
+                    page === currentPage
+                        ? "active"
+                        : ""
+                }"
+                onclick="changePage(${page})"
+            >
+
+                ${page}
+
+            </button>
+
+            `;
+
+    }
+
+
+    html +=
+        `
+
+        <button
+            type="button"
+            class="page-btn"
+            onclick="changePage(
+                ${currentPage + 1}
+            )"
+            ${
+                currentPage >= totalPages
+                    ? "disabled"
+                    : ""
+            }
+        >
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+        `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+function changePage(
+    page
+) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    loadAccounts();
+
+}
+
+
+/* =========================================================
+   GET SINGLE ACCOUNT
+========================================================= */
+
+async function openAccount(
+    id
+) {
+
+    selectedUserId =
+        Number(id);
+
+
+    const modal =
+        document.getElementById(
+            "detailsModal"
+        );
+
+
+    const body =
+        document.getElementById(
+            "detailsBody"
+        );
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    body.innerHTML =
+        `
+
+        <div class="loading-row">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <br><br>
+
+            Loading account details...
+
+        </div>
+
+        `;
+
+
+    try {
+
+        let result;
+
+
+        try {
+
+            result =
+                await requestJSON(
+                    API.get
+                    +
+                    "?id="
+                    +
+                    encodeURIComponent(
+                        id
+                    )
+                );
+
+        } catch (
+            firstError
+        ) {
+
+            /*
+             * Some implementations use user_id.
+             */
+
+            result =
+                await requestJSON(
+                    API.get
+                    +
+                    "?user_id="
+                    +
+                    encodeURIComponent(
+                        id
+                    )
+                );
+
+        }
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        selectedUser =
+            data.user
+            ||
+            data;
+
+
+        if (
+            !selectedUser
+            ||
+            !selectedUser.id
+        ) {
+
+            throw new Error(
+                "The selected account could not be found."
+            );
+
+        }
+
+
+        renderDetails(
+            selectedUser
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        body.innerHTML =
+            `
+
+            <div class="empty-row">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+function renderDetails(
+    user
+) {
+
+    const body =
+        document.getElementById(
+            "detailsBody"
+        );
+
+
+    body.innerHTML =
+        `
+
+        <div class="profile-header">
+
+
+            <img
+                class="large-avatar"
+                src="${escapeHTML(
+                    imageURL(
+                        user.avatar_url
+                        ||
+                        user.profile_photo
+                    )
+                )}"
+                alt=""
+            >
+
+
+            <div>
+
+                <h4>
+
+                    ${escapeHTML(
+                        user.full_names
+                        ||
+                        user.username
+                        ||
+                        "Unknown"
+                    )}
+
+                </h4>
+
+
+                <p>
+
+                    @${escapeHTML(
+                        user.username
+                        ||
+                        ""
+                    )}
+
+                    ·
+
+                    ${escapeHTML(
+                        user.email
+                        ||
+                        ""
+                    )}
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="details-grid">
+
+
+            <div class="detail-box">
+
+                <h5>
+                    Account Information
+                </h5>
+
+
+                ${detailRow(
+                    "Username",
+                    user.username
+                )}
+
+
+                ${detailRow(
+                    "Full Names",
+                    user.full_names
+                )}
+
+
+                ${detailRow(
+                    "Gender",
+                    user.gender
+                )}
+
+
+                ${detailRow(
+                    "Role",
+                    user.role_name
+                    ||
+                    user.role_slug
+                )}
+
+
+                ${detailRow(
+                    "Account Status",
+                    user.account_status
+                )}
+
+
+                ${detailRow(
+                    "Created",
+                    formatDate(
+                        user.created_at
+                    )
+                )}
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h5>
+                    Contact Information
+                </h5>
+
+
+                ${detailRow(
+                    "Email",
+                    user.email
+                )}
+
+
+                ${detailRow(
+                    "Phone",
+                    user.phone_e164
+                    ||
+                    user.phone_number
+                )}
+
+
+                ${detailRow(
+                    "Country",
+                    user.country_name
+                )}
+
+
+                ${detailRow(
+                    "Country Code",
+                    user.country_iso2
+                )}
+
+
+                ${detailRow(
+                    "Phone Code",
+                    user.phone_code
+                )}
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h5>
+                    Verification
+                </h5>
+
+
+                ${verificationRow(
+                    "Email",
+                    user.email_verified
+                )}
+
+
+                ${verificationRow(
+                    "Phone",
+                    user.phone_verified
+                )}
+
+
+                ${verificationRow(
+                    "Identity",
+                    user.identity_verified
+                )}
+
+
+                ${verificationRow(
+                    "Age",
+                    user.age_verified
+                )}
+
+
+                ${verificationRow(
+                    "Google Authenticator",
+                    user.two_factor_enabled
+                )}
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <h5>
+                    Security & Activity
+                </h5>
+
+
+                ${detailRow(
+                    "2FA Verified",
+                    user.two_factor_verified_at
+                        ?
+                        formatDate(
+                            user.two_factor_verified_at
+                        )
+                        :
+                        "Not completed"
+                )}
+
+
+                ${detailRow(
+                    "Last Login",
+                    formatDate(
+                        user.last_login_at
+                    )
+                )}
+
+
+                ${detailRow(
+                    "Last Seen",
+                    formatDate(
+                        user.last_seen_at
+                    )
+                )}
+
+
+                ${detailRow(
+                    "Active",
+                    isTrue(
+                        user.is_active
+                    )
+                        ?
+                        "Yes"
+                        :
+                        "No"
+                )}
+
+
+                ${detailRow(
+                    "Suspended",
+                    isTrue(
+                        user.is_suspended
+                    )
+                        ?
+                        "Yes"
+                        :
+                        "No"
+                )}
+
+            </div>
+
+
+        </div>
+
+        `;
+
+
+    document.getElementById(
+        "modalApproveBtn"
+    ).style.display =
+        accountFullyVerified(
+            user
+        )
+        &&
+        String(
+            user.account_status
+            ||
+            ""
+        ).toLowerCase()
+        !==
+        "approved"
+            ?
+            "inline-flex"
+            :
+            "none";
+
+
+    document.getElementById(
+        "modalSuspendBtn"
+    ).style.display =
+        isTrue(
+            user.is_suspended
+        )
+            ?
+            "none"
+            :
+            "inline-flex";
+
+}
+
+
+function detailRow(
+    label,
+    value
+) {
+
+    return `
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+
+                ${escapeHTML(
+                    label
+                )}
+
+            </span>
+
+            <span class="detail-value">
+
+                ${escapeHTML(
+                    value
+                    ||
+                    "—"
+                )}
+
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+function verificationRow(
+    label,
+    value
+) {
+
+    const verified =
+        isTrue(
+            value
+        );
+
+
+    return `
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+
+                ${escapeHTML(
+                    label
+                )}
+
+            </span>
+
+            <span class="detail-value">
+
+
+                ${
+                    verified
+                        ?
+                        `
+                        <span class="chip verified">
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Verified
+
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="chip unverified">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Not verified
+
+                        </span>
+                        `
+                }
+
+
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   FULL VERIFICATION
+========================================================= */
+
+function accountFullyVerified(
+    user
+) {
+
+    return (
+        isTrue(
+            user.email_verified
+        )
+        &&
+        isTrue(
+            user.phone_verified
+        )
+        &&
+        isTrue(
+            user.identity_verified
+        )
+        &&
+        isTrue(
+            user.age_verified
+        )
+        &&
+        isTrue(
+            user.two_factor_enabled
+        )
+    );
+
+}
+
+
+/* =========================================================
+   APPROVE
+========================================================= */
+
+async function approveAccount(
+    id
+) {
+
+    try {
+
+        if (
+            selectedUserId !==
+            Number(id)
+        ) {
+
+            selectedUserId =
+                Number(id);
+
+        }
+
+
+        if (
+            selectedUser
+            &&
+            Number(
+                selectedUser.id
+            )
+            ===
+            Number(id)
+            &&
+            !accountFullyVerified(
+                selectedUser
+            )
+        ) {
+
+            showAlert(
+                "This account has not completed all required verification steps."
+            );
+
+
+            return;
+
+        }
+
+
+        const confirmed =
+            window.confirm(
+                "Approve this account?"
+            );
+
+
+        if (
+            !confirmed
+        ) {
+
+            return;
+
+        }
+
+
+        const result =
+            await requestJSON(
+                API.verify,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                user_id:
+                                    Number(id),
+
+                                action:
+                                    "approve_account"
+
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Account approved successfully.",
+            "success"
+        );
+
+
+        closeDetails();
+
+
+        selectedUser =
+            null;
+
+
+        loadAccounts();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REJECT
+========================================================= */
+
+async function rejectAccount(
+    id
+) {
+
+    const reason =
+        window.prompt(
+            "Enter the reason for rejecting this account:"
+        );
+
+
+    if (
+        reason ===
+        null
+    ) {
+
+        return;
+
+    }
+
+
+    const cleanReason =
+        reason.trim();
+
+
+    if (
+        cleanReason === ""
+    ) {
+
+        showAlert(
+            "A rejection reason is required."
+        );
+
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await requestJSON(
+                API.verify,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                user_id:
+                                    Number(id),
+
+                                action:
+                                    "reject_account",
+
+                                reason:
+                                    cleanReason
+
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Account rejected.",
+            "success"
+        );
+
+
+        closeDetails();
+
+        loadAccounts();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SUSPEND
+========================================================= */
+
+async function suspendAccount() {
+
+    if (
+        !selectedUserId
+    ) {
+
+        return;
+
+    }
+
+
+    const reason =
+        window.prompt(
+            "Enter the reason for suspending this account:"
+        );
+
+
+    if (
+        reason ===
+        null
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await requestJSON(
+                API.verify,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                user_id:
+                                    selectedUserId,
+
+                                action:
+                                    "suspend_account",
+
+                                reason:
+                                    reason.trim()
+
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Account suspended.",
+            "success"
+        );
+
+
+        closeDetails();
+
+        loadAccounts();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL APPROVE
+========================================================= */
+
+document.getElementById(
+    "modalApproveBtn"
+).addEventListener(
+    "click",
+    function() {
+
+        if (
+            selectedUserId
+        ) {
+
+            approveAccount(
+                selectedUserId
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MODAL REJECT
+========================================================= */
+
+document.getElementById(
+    "modalRejectBtn"
+).addEventListener(
+    "click",
+    function() {
+
+        if (
+            selectedUserId
+        ) {
+
+            rejectAccount(
+                selectedUserId
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MODAL SUSPEND
+========================================================= */
+
+document.getElementById(
+    "modalSuspendBtn"
+).addEventListener(
+    "click",
+    suspendAccount
+);
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeDetails() {
+
+    document.getElementById(
+        "detailsModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    selectedUserId =
+        0;
+
+    selectedUser =
+        null;
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+document.getElementById(
+    "verificationFilter"
+).addEventListener(
+    "change",
+    function() {
+
+        currentPage =
+            1;
+
+        loadAccounts();
+
+    }
+);
+
+
+document.getElementById(
+    "roleFilter"
+).addEventListener(
+    "change",
+    function() {
+
+        currentPage =
+            1;
+
+        loadAccounts();
+
+    }
+);
+
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "input",
+    function() {
+
+        clearTimeout(
+            searchTimer
+        );
+
+
+        searchTimer =
+            setTimeout(
+                function() {
+
+                    currentPage =
+                        1;
+
+                    loadAccounts();
+
+                },
+                350
+            );
+
+    }
+);
+
+
+document.getElementById(
+    "refreshBtn"
+).addEventListener(
+    "click",
+    function() {
+
+        loadAccounts();
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document.getElementById(
+    "menuButton"
+).addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "sidebar"
+        ).classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.getElementById(
+    "detailsModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            this
+        ) {
+
+            closeDetails();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeDetails();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document.getElementById(
+    "logoutLink"
+).addEventListener(
+    "click",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        try {
+
+            await fetch(
+                API.logout,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store"
+
+                }
+            );
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+        }
+
+
+        window.location.href =
+            "../login.html";
+
+    }
+);
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadAccounts();
+
+</script>
+
+</body>
+
+</html>
