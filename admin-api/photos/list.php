@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+
+/* ============================================================
+   LOVEMI - ADMIN PHOTOS LIST API
+============================================================ */
+
 require_once __DIR__ . '/../../config/database.php';
 
 
@@ -31,10 +36,6 @@ ini_set(
     '0'
 );
 
-error_reporting(
-    E_ALL
-);
-
 
 /* ============================================================
    SESSION
@@ -45,26 +46,16 @@ $isHttps =
         $_SERVER['HTTPS']
     )
     &&
-    $_SERVER['HTTPS'] !==
-    'off';
+    $_SERVER['HTTPS'] !== 'off';
 
 
 session_set_cookie_params(
     [
-        'lifetime' =>
-            0,
-
-        'path' =>
-            '/',
-
-        'secure' =>
-            $isHttps,
-
-        'httponly' =>
-            true,
-
-        'samesite' =>
-            'Lax'
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax'
     ]
 );
 
@@ -84,7 +75,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesListResponse(
+function photoListResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -97,16 +88,16 @@ function rolesListResponse(
 
 
     echo json_encode(
-        array_merge(
-            [
-                'success' =>
-                    $success,
+        [
+            'success' =>
+                $success,
 
-                'message' =>
-                    $message
-            ],
-            $data
-        ),
+            'message' =>
+                $message,
+
+            'data' =>
+                $data
+        ],
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
     );
@@ -130,13 +121,13 @@ try {
 ) {
 
     error_log(
-        '[LOVEMI ROLES LIST DB] '
+        '[LOVEMI PHOTOS LIST DB] '
         .
         $e->getMessage()
     );
 
 
-    rolesListResponse(
+    photoListResponse(
         false,
         'Database connection failed.',
         [],
@@ -147,10 +138,10 @@ try {
 
 
 /* ============================================================
-   AUTH
+   CURRENT SESSION
 ============================================================ */
 
-$currentAdminId =
+$userId =
     (int)(
         $_SESSION[
             'lovemi_user_id'
@@ -181,14 +172,14 @@ $sessionToken =
 
 
 if (
-    $currentAdminId <= 0
+    $userId <= 0
     ||
     $sessionId <= 0
     ||
     $sessionToken === ''
 ) {
 
-    rolesListResponse(
+    photoListResponse(
         false,
         'You must log in first.',
         [
@@ -209,7 +200,7 @@ $tokenHash =
 
 
 /* ============================================================
-   ADMIN AUTHORIZATION
+   ADMIN AUTHENTICATION
 ============================================================ */
 
 try {
@@ -221,13 +212,13 @@ try {
 
                 u.id,
 
-                u.full_names,
+                u.role_id,
 
                 u.username,
 
-                u.email,
+                u.full_names,
 
-                u.role_id,
+                u.email,
 
                 r.name AS role_name,
 
@@ -265,13 +256,15 @@ try {
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
                 AND s.revoked_at IS NULL
 
-                AND s.expires_at > CURRENT_TIMESTAMP
+                AND s.expires_at >
+                    CURRENT_TIMESTAMP
 
                 AND u.is_active = 1
 
@@ -289,7 +282,7 @@ try {
     $auth->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $userId,
 
             ':session_id' =>
                 $sessionId,
@@ -300,7 +293,7 @@ try {
     );
 
 
-    $currentAdmin =
+    $admin =
         $auth->fetch();
 
 } catch (
@@ -308,13 +301,13 @@ try {
 ) {
 
     error_log(
-        '[LOVEMI ROLES AUTH] '
+        '[LOVEMI PHOTOS ADMIN AUTH] '
         .
         $e->getMessage()
     );
 
 
-    rolesListResponse(
+    photoListResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -325,10 +318,10 @@ try {
 
 
 if (
-    !$currentAdmin
+    !$admin
 ) {
 
-    rolesListResponse(
+    photoListResponse(
         false,
         'Administrator access is required.',
         [
@@ -347,7 +340,7 @@ if (
 
 try {
 
-    $permission =
+    $permissionStmt =
         $pdo->prepare(
             "
             SELECT COUNT(*)
@@ -355,7 +348,8 @@ try {
             FROM role_permissions rp
 
             INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                ON p.id =
+                    rp.permission_id
 
             WHERE
 
@@ -363,15 +357,16 @@ try {
                     :role_id
 
                 AND p.slug =
-                    'roles.manage'
+                    'photos.manage'
             "
         );
 
 
-    $permission->execute(
+    $permissionStmt->execute(
         [
             ':role_id' =>
-                (int)$currentAdmin[
+                (int)
+                $admin[
                     'role_id'
                 ]
         ]
@@ -379,7 +374,8 @@ try {
 
 
     $allowed =
-        (int)$permission->fetchColumn()
+        (int)
+        $permissionStmt->fetchColumn()
         >
         0;
 
@@ -387,9 +383,9 @@ try {
     Throwable $e
 ) {
 
-    rolesListResponse(
+    photoListResponse(
         false,
-        'Unable to verify role-management permission.',
+        'Unable to verify photo-management permission.',
         [],
         500
     );
@@ -401,9 +397,9 @@ if (
     !$allowed
 ) {
 
-    rolesListResponse(
+    photoListResponse(
         false,
-        'You do not have permission to manage roles.',
+        'You do not have permission to manage photos.',
         [
             'code' =>
                 'PERMISSION_DENIED'
@@ -431,13 +427,13 @@ $page =
 
 $limit =
     max(
-        5,
+        4,
         min(
             100,
             (int)(
                 $_GET['limit']
                 ??
-                20
+                16
             )
         )
     );
@@ -462,11 +458,11 @@ $search =
     );
 
 
-$adminFilter =
+$status =
     strtolower(
         trim(
             (string)(
-                $_GET['admin']
+                $_GET['status']
                 ??
                 ''
             )
@@ -474,11 +470,11 @@ $adminFilter =
     );
 
 
-$systemFilter =
+$photoType =
     strtolower(
         trim(
             (string)(
-                $_GET['system']
+                $_GET['photo_type']
                 ??
                 ''
             )
@@ -486,16 +482,53 @@ $systemFilter =
     );
 
 
-$singleRoleId =
-    (int)(
-        $_GET['role_id']
-        ??
-        0
-    );
+$validStatuses = [
+
+    'pending',
+    'approved',
+    'rejected'
+
+];
+
+
+$validTypes = [
+
+    'profile',
+    'post',
+    'gallery',
+    'other'
+
+];
+
+
+if (
+    !in_array(
+        $status,
+        $validStatuses,
+        true
+    )
+) {
+
+    $status = '';
+
+}
+
+
+if (
+    !in_array(
+        $photoType,
+        $validTypes,
+        true
+    )
+) {
+
+    $photoType = '';
+
+}
 
 
 /* ============================================================
-   CONDITIONS
+   FILTER CONDITIONS
 ============================================================ */
 
 $where = [];
@@ -510,9 +543,9 @@ if (
     $where[] =
         "
         (
-            r.name LIKE :search
-            OR r.slug LIKE :search
-            OR r.description LIKE :search
+            u.username LIKE :search
+            OR u.full_names LIKE :search
+            OR ph.file_name LIKE :search
         )
         ";
 
@@ -527,60 +560,31 @@ if (
 
 
 if (
-    $adminFilter ===
-    'admin'
+    $status !== ''
 ) {
 
     $where[] =
-        'r.is_admin_role = 1';
-
-}
-
-
-if (
-    $adminFilter ===
-    'member'
-) {
-
-    $where[] =
-        'r.is_admin_role = 0';
-
-}
-
-
-if (
-    $systemFilter ===
-    'system'
-) {
-
-    $where[] =
-        'r.is_system_role = 1';
-
-}
-
-
-if (
-    $systemFilter ===
-    'custom'
-) {
-
-    $where[] =
-        'r.is_system_role = 0';
-
-}
-
-
-if (
-    $singleRoleId > 0
-) {
-
-    $where[] =
-        'r.id = :single_role_id';
+        'ph.approval_status = :status';
 
     $params[
-        ':single_role_id'
+        ':status'
     ] =
-        $singleRoleId;
+        $status;
+
+}
+
+
+if (
+    $photoType !== ''
+) {
+
+    $where[] =
+        'ph.photo_type = :photo_type';
+
+    $params[
+        ':photo_type'
+    ] =
+        $photoType;
 
 }
 
@@ -588,20 +592,17 @@ if (
 $whereSql =
     $where
         ?
-        (
-            'WHERE '
-            .
-            implode(
-                ' AND ',
-                $where
-            )
+        'WHERE ' .
+        implode(
+            ' AND ',
+            $where
         )
         :
         '';
 
 
 /* ============================================================
-   COUNT
+   TOTAL COUNT
 ============================================================ */
 
 try {
@@ -611,7 +612,11 @@ try {
             "
             SELECT COUNT(*)
 
-            FROM roles r
+            FROM photos ph
+
+            INNER JOIN users u
+                ON u.id =
+                    ph.user_id
 
             {$whereSql}
             "
@@ -624,22 +629,23 @@ try {
 
 
     $total =
-        (int)$countStmt->fetchColumn();
+        (int)
+        $countStmt->fetchColumn();
 
 } catch (
     Throwable $e
 ) {
 
     error_log(
-        '[LOVEMI ROLES COUNT] '
+        '[LOVEMI PHOTOS COUNT] '
         .
         $e->getMessage()
     );
 
 
-    rolesListResponse(
+    photoListResponse(
         false,
-        'Unable to count roles.',
+        'Unable to count photos.',
         [],
         500
     );
@@ -648,7 +654,7 @@ try {
 
 
 /* ============================================================
-   LOAD ROLES
+   LOAD PHOTOS
 ============================================================ */
 
 try {
@@ -658,55 +664,78 @@ try {
             "
             SELECT
 
-                r.id,
+                ph.id,
 
-                r.name,
+                ph.user_id,
 
-                r.slug,
+                ph.file_name,
 
-                r.description,
+                ph.file_path,
 
-                r.is_admin_role,
+                ph.thumbnail_path,
 
-                r.is_system_role,
+                ph.mime_type,
 
-                r.created_at,
+                ph.file_size,
 
-                r.updated_at,
+                ph.width,
 
-                (
-                    SELECT COUNT(*)
+                ph.height,
 
-                    FROM users u
+                ph.photo_type,
 
-                    WHERE
-                        u.role_id =
-                            r.id
+                ph.approval_status,
 
-                        AND u.is_deleted = 0
-                ) AS user_count,
+                ph.is_primary,
 
-                (
-                    SELECT COUNT(*)
+                ph.is_featured,
 
-                    FROM role_permissions rp
+                ph.uploaded_at,
 
-                    WHERE
-                        rp.role_id =
-                            r.id
-                ) AS permission_count
+                ph.approved_at,
 
-            FROM roles r
+                ph.approved_by,
+
+                u.username,
+
+                u.full_names,
+
+                u.email,
+
+                p.display_name,
+
+                c.name AS country_name
+
+            FROM photos ph
+
+            INNER JOIN users u
+                ON u.id =
+                    ph.user_id
+
+            LEFT JOIN profiles p
+                ON p.user_id =
+                    u.id
+
+            LEFT JOIN countries c
+                ON c.id =
+                    u.country_id
 
             {$whereSql}
 
             ORDER BY
 
-                r.is_system_role DESC,
+                CASE
+                    WHEN ph.approval_status = 'pending'
+                    THEN 0
 
-                r.is_admin_role DESC,
+                    WHEN ph.approval_status = 'approved'
+                    THEN 1
 
-                r.id ASC
+                    ELSE 2
+
+                END,
+
+                ph.uploaded_at DESC
 
             LIMIT :limit
 
@@ -716,8 +745,7 @@ try {
 
 
     foreach (
-        $params
-        as $key =>
+        $params as $key =>
         $value
     ) {
 
@@ -746,7 +774,7 @@ try {
     $stmt->execute();
 
 
-    $roles =
+    $photos =
         $stmt->fetchAll();
 
 } catch (
@@ -754,15 +782,15 @@ try {
 ) {
 
     error_log(
-        '[LOVEMI ROLES LOAD] '
+        '[LOVEMI PHOTOS LOAD] '
         .
         $e->getMessage()
     );
 
 
-    rolesListResponse(
+    photoListResponse(
         false,
-        'Unable to load roles.',
+        'Unable to load photos.',
         [],
         500
     );
@@ -781,62 +809,27 @@ try {
             "
             SELECT
 
-                COUNT(*) AS total_roles,
+                COUNT(*) AS total,
 
-                COALESCE(
-                    SUM(
-                        CASE
-                            WHEN is_admin_role = 1
-                            THEN 1
-                            ELSE 0
-                        END
-                    ),
-                    0
-                ) AS admin_roles,
+                SUM(
+                    approval_status = 'pending'
+                ) AS pending,
 
-                COALESCE(
-                    SUM(
-                        CASE
-                            WHEN is_system_role = 1
-                            THEN 1
-                            ELSE 0
-                        END
-                    ),
-                    0
-                ) AS system_roles,
+                SUM(
+                    approval_status = 'approved'
+                ) AS approved,
 
-                COALESCE(
-                    SUM(
-                        CASE
-                            WHEN is_system_role = 0
-                            THEN 1
-                            ELSE 0
-                        END
-                    ),
-                    0
-                ) AS custom_roles
+                SUM(
+                    approval_status = 'rejected'
+                ) AS rejected
 
-            FROM roles
+            FROM photos
             "
         );
 
 
     $summary =
-        $summaryStmt->fetch()
-        ?:
-        [
-            'total_roles' =>
-                0,
-
-            'admin_roles' =>
-                0,
-
-            'system_roles' =>
-                0,
-
-            'custom_roles' =>
-                0
-        ];
+        $summaryStmt->fetch();
 
 } catch (
     Throwable $e
@@ -844,16 +837,16 @@ try {
 
     $summary = [
 
-        'total_roles' =>
+        'total' =>
             0,
 
-        'admin_roles' =>
+        'pending' =>
             0,
 
-        'system_roles' =>
+        'approved' =>
             0,
 
-        'custom_roles' =>
+        'rejected' =>
             0
 
     ];
@@ -862,7 +855,7 @@ try {
 
 
 /* ============================================================
-   SESSION ACTIVITY
+   UPDATE ACTIVITY
 ============================================================ */
 
 try {
@@ -873,15 +866,16 @@ try {
             UPDATE user_sessions
 
             SET
-
                 last_activity_at =
                     CURRENT_TIMESTAMP
 
             WHERE
 
-                id = :session_id
+                id =
+                    :session_id
 
-                AND user_id = :user_id
+                AND user_id =
+                    :user_id
 
             LIMIT 1
             "
@@ -894,7 +888,7 @@ try {
                 $sessionId,
 
             ':user_id' =>
-                $currentAdminId
+                $userId
         ]
     );
 
@@ -903,7 +897,7 @@ try {
 ) {
 
     error_log(
-        '[LOVEMI ROLES ACTIVITY] '
+        '[LOVEMI PHOTOS ACTIVITY] '
         .
         $e->getMessage()
     );
@@ -912,7 +906,7 @@ try {
 
 
 /* ============================================================
-   PAGINATION
+   RESPONSE
 ============================================================ */
 
 $pages =
@@ -926,121 +920,92 @@ $pages =
         1;
 
 
-/* ============================================================
-   RESPONSE
-============================================================ */
+$adminAvatar =
+    $admin[
+        'avatar_url'
+    ]
+    ??
+    null;
 
-rolesListResponse(
+
+photoListResponse(
     true,
-    'Roles loaded successfully.',
+    'Photos loaded successfully.',
     [
+        'current_admin' => [
 
-        'data' => [
+            'id' =>
+                (int)
+                $admin['id'],
 
-            'current_admin' => [
+            'username' =>
+                $admin['username'],
 
-                'id' =>
-                    (int)$currentAdmin[
-                        'id'
-                    ],
+            'full_names' =>
+                $admin['full_names'],
 
-                'username' =>
-                    $currentAdmin[
-                        'username'
-                    ],
+            'email' =>
+                $admin['email'],
 
-                'full_names' =>
-                    $currentAdmin[
-                        'full_names'
-                    ],
+            'role_name' =>
+                $admin['role_name'],
 
-                'email' =>
-                    $currentAdmin[
-                        'email'
-                    ],
+            'role_slug' =>
+                $admin['role_slug'],
 
-                'role_id' =>
-                    (int)$currentAdmin[
-                        'role_id'
-                    ],
+            'avatar_url' =>
+                $adminAvatar
 
-                'role_name' =>
-                    $currentAdmin[
-                        'role_name'
-                    ],
+        ],
 
-                'role_slug' =>
-                    $currentAdmin[
-                        'role_slug'
-                    ],
+        'photos' =>
+            $photos,
 
-                'avatar_url' =>
-                    $currentAdmin[
-                        'avatar_url'
-                    ]
+        'summary' => [
+
+            'total' =>
+                (int)(
+                    $summary['total']
                     ??
-                    null
+                    0
+                ),
 
-            ],
+            'pending' =>
+                (int)(
+                    $summary['pending']
+                    ??
+                    0
+                ),
 
-            'roles' =>
-                $roles,
+            'approved' =>
+                (int)(
+                    $summary['approved']
+                    ??
+                    0
+                ),
 
-            'summary' => [
+            'rejected' =>
+                (int)(
+                    $summary['rejected']
+                    ??
+                    0
+                )
 
-                'total_roles' =>
-                    (int)(
-                        $summary[
-                            'total_roles'
-                        ]
-                        ??
-                        0
-                    ),
+        ],
 
-                'admin_roles' =>
-                    (int)(
-                        $summary[
-                            'admin_roles'
-                        ]
-                        ??
-                        0
-                    ),
+        'pagination' => [
 
-                'system_roles' =>
-                    (int)(
-                        $summary[
-                            'system_roles'
-                        ]
-                        ??
-                        0
-                    ),
+            'page' =>
+                $page,
 
-                'custom_roles' =>
-                    (int)(
-                        $summary[
-                            'custom_roles'
-                        ]
-                        ??
-                        0
-                    )
+            'limit' =>
+                $limit,
 
-            ],
+            'total' =>
+                $total,
 
-            'pagination' => [
-
-                'page' =>
-                    $page,
-
-                'limit' =>
-                    $limit,
-
-                'total' =>
-                    $total,
-
-                'pages' =>
-                    $pages
-
-            ]
+            'pages' =>
+                $pages
 
         ]
 

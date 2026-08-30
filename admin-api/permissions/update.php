@@ -2,8 +2,13 @@
 
 declare(strict_types=1);
 
+
 require_once __DIR__ . '/../../config/database.php';
 
+
+/* ============================================================
+   HEADERS
+============================================================ */
 
 header(
     'Content-Type: application/json; charset=utf-8'
@@ -84,7 +89,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesUpdateResponse(
+function permissionsUpdateResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -126,7 +131,7 @@ if (
     'POST'
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -163,9 +168,9 @@ if (
 }
 
 
-$roleId =
+$permissionId =
     (int)(
-        $data['role_id']
+        $data['permission_id']
         ??
         0
     );
@@ -203,33 +208,47 @@ $description =
     );
 
 
-$isAdminRole =
-    !empty(
-        $data['is_admin_role']
+$roleIds =
+    isset(
+        $data['role_ids']
+    )
+    &&
+    is_array(
+        $data['role_ids']
     )
         ?
-        1
+        array_values(
+            array_unique(
+                array_filter(
+                    array_map(
+                        'intval',
+                        $data['role_ids']
+                    ),
+                    static function (
+                        int $value
+                    ): bool {
+
+                        return $value > 0;
+
+                    }
+                )
+            )
+        )
         :
-        0;
+        [];
 
 
-$isSystemRole =
-    !empty(
-        $data['is_system_role']
-    )
-        ?
-        1
-        :
-        0;
-
+/* ============================================================
+   VALIDATION
+============================================================ */
 
 if (
-    $roleId <= 0
+    $permissionId <= 0
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'A valid role ID is required.',
+        'A valid permission ID is required.',
         [],
         422
     );
@@ -243,26 +262,9 @@ if (
     $slug === ''
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Role name and slug are required.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    !preg_match(
-        '/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/',
-        $slug
-    )
-) {
-
-    rolesUpdateResponse(
-        false,
-        'Role slug may contain only lowercase letters, numbers, underscores and hyphens.',
+        'Permission name and slug are required.',
         [],
         422
     );
@@ -273,20 +275,37 @@ if (
 if (
     strlen(
         $name
-    ) > 80
+    ) > 100
     ||
     strlen(
         $slug
-    ) > 80
+    ) > 120
     ||
     strlen(
         $description
     ) > 255
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'One or more role fields are too long.',
+        'One or more permission fields are too long.',
+        [],
+        422
+    );
+
+}
+
+
+if (
+    !preg_match(
+        '/^[a-z0-9]+(?:[._-][a-z0-9]+)*$/',
+        $slug
+    )
+) {
+
+    permissionsUpdateResponse(
+        false,
+        'Permission slug contains invalid characters.',
         [],
         422
     );
@@ -307,7 +326,7 @@ try {
     Throwable $e
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
         'Database connection failed.',
         [],
@@ -359,7 +378,7 @@ if (
     $sessionToken === ''
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
         'You must log in first.',
         [],
@@ -405,7 +424,8 @@ try {
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -448,7 +468,7 @@ try {
     Throwable $e
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -462,7 +482,7 @@ if (
     !$admin
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
         'Administrator access is required.',
         [],
@@ -473,12 +493,12 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   PERMISSION TO MANAGE PERMISSIONS
 ============================================================ */
 
 try {
 
-    $permission =
+    $permissionCheck =
         $pdo->prepare(
             "
             SELECT COUNT(*)
@@ -486,18 +506,21 @@ try {
             FROM role_permissions rp
 
             INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                ON p.id =
+                    rp.permission_id
 
             WHERE
 
-                rp.role_id = :role_id
+                rp.role_id =
+                    :role_id
 
-                AND p.slug = 'roles.manage'
+                AND p.slug =
+                    'permissions.manage'
             "
         );
 
 
-    $permission->execute(
+    $permissionCheck->execute(
         [
             ':role_id' =>
                 (int)$admin[
@@ -508,14 +531,15 @@ try {
 
 
     if (
-        (int)$permission->fetchColumn()
+        (int)
+        $permissionCheck->fetchColumn()
         <=
         0
     ) {
 
-        rolesUpdateResponse(
+        permissionsUpdateResponse(
             false,
-            'You do not have permission to update roles.',
+            'You do not have permission to update permissions.',
             [],
             403
         );
@@ -526,9 +550,9 @@ try {
     Throwable $e
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Unable to verify permission.',
+        'Unable to verify permission-management access.',
         [],
         500
     );
@@ -553,16 +577,12 @@ try {
 
                 slug,
 
-                description,
+                description
 
-                is_admin_role,
-
-                is_system_role
-
-            FROM roles
+            FROM permissions
 
             WHERE
-                id = :role_id
+                id = :permission_id
 
             LIMIT 1
             "
@@ -571,8 +591,8 @@ try {
 
     $targetStmt->execute(
         [
-            ':role_id' =>
-                $roleId
+            ':permission_id' =>
+                $permissionId
         ]
     );
 
@@ -584,9 +604,9 @@ try {
     Throwable $e
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Unable to load role.',
+        'Unable to load permission.',
         [],
         500
     );
@@ -598,9 +618,9 @@ if (
     !$target
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Role not found.',
+        'Permission not found.',
         [],
         404
     );
@@ -609,33 +629,151 @@ if (
 
 
 /* ============================================================
-   SYSTEM ROLE PROTECTION
+   PROTECT CORE PERMISSION SLUGS
+============================================================ */
+
+/*
+ * The system permission records are referenced by many
+ * protected APIs. The administrator may edit descriptions
+ * and assignments, but cannot rename the core slug.
+ */
+
+$coreSlugs = [
+
+    'dashboard.view',
+    'users.manage',
+    'users.view',
+    'profiles.manage',
+    'photos.manage',
+    'posts.manage',
+    'connections.manage',
+    'conversations.manage',
+    'messages.manage',
+    'premium.manage',
+    'payments.manage',
+    'services.manage',
+    'countries.manage',
+    'currencies.manage',
+    'exchange_rates.manage',
+    'notifications.manage',
+    'audio.manage',
+    'reports.manage',
+    'blocks.manage',
+    'admins.manage',
+    'roles.manage',
+    'permissions.manage',
+    'audit.view',
+    'login_logs.view',
+    'settings.manage',
+    'backups.manage'
+
+];
+
+
+if (
+    in_array(
+        (string)$target['slug'],
+        $coreSlugs,
+        true
+    )
+) {
+
+    if (
+        $slug !==
+        $target['slug']
+    ) {
+
+        permissionsUpdateResponse(
+            false,
+            'The slug of a protected system permission cannot be changed.',
+            [
+                'code' =>
+                    'SYSTEM_PERMISSION_PROTECTED'
+            ],
+            409
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   VALIDATE ROLES
 ============================================================ */
 
 if (
-    (int)$target[
-        'is_system_role'
-    ]
-    ===
-    1
+    $roleIds
 ) {
 
-    /*
-     * Protect the defining identity of system roles.
-     * Their names/slugs and system flag cannot be changed.
-     *
-     * Description and administrator status may still be
-     * controlled by a sufficiently privileged administrator.
-     */
+    $placeholders =
+        implode(
+            ',',
+            array_fill(
+                0,
+                count($roleIds),
+                '?'
+            )
+        );
 
-    $name =
-        $target['name'];
 
-    $slug =
-        $target['slug'];
+    try {
 
-    $isSystemRole =
-        1;
+        $roleCheck =
+            $pdo->prepare(
+                "
+                SELECT COUNT(*)
+
+                FROM roles
+
+                WHERE
+
+                    id IN (
+                        {$placeholders}
+                    )
+                "
+            );
+
+
+        $roleCheck->execute(
+            $roleIds
+        );
+
+
+        $foundRoles =
+            (int)
+            $roleCheck->fetchColumn();
+
+    } catch (
+        Throwable $e
+    ) {
+
+        permissionsUpdateResponse(
+            false,
+            'Unable to validate selected roles.',
+            [],
+            500
+        );
+
+    }
+
+
+    if (
+        $foundRoles
+        !==
+        count(
+            $roleIds
+        )
+    ) {
+
+        permissionsUpdateResponse(
+            false,
+            'One or more selected roles do not exist.',
+            [],
+            422
+        );
+
+    }
 
 }
 
@@ -651,11 +789,11 @@ try {
             "
             SELECT id
 
-            FROM roles
+            FROM permissions
 
             WHERE
 
-                id <> :role_id
+                id <> :permission_id
 
                 AND
                 (
@@ -673,8 +811,8 @@ try {
 
     $duplicate->execute(
         [
-            ':role_id' =>
-                $roleId,
+            ':permission_id' =>
+                $permissionId,
 
             ':name' =>
                 $name,
@@ -689,12 +827,12 @@ try {
         $duplicate->fetch()
     ) {
 
-        rolesUpdateResponse(
+        permissionsUpdateResponse(
             false,
-            'Another role already uses this name or slug.',
+            'Another permission already uses this name or slug.',
             [
                 'code' =>
-                    'DUPLICATE_ROLE'
+                    'DUPLICATE_PERMISSION'
             ],
             409
         );
@@ -705,9 +843,9 @@ try {
     Throwable $e
 ) {
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Unable to validate duplicate roles.',
+        'Unable to validate duplicate permissions.',
         [],
         500
     );
@@ -716,79 +854,90 @@ try {
 
 
 /* ============================================================
-   SAFETY: LAST ADMIN ROLE
+   SAFETY: CURRENT ADMIN ROLE
 ============================================================ */
 
+/*
+ * Prevent an administrator from removing the
+ * permissions.manage permission from their own role.
+ */
+
+$currentAdminRoleId =
+    (int)$admin[
+        'role_id'
+    ];
+
+
 if (
-    (int)$target[
-        'is_admin_role'
-    ]
-    ===
-    1
-    &&
-    $isAdminRole ===
+    $permissionId
+    >
     0
 ) {
 
     try {
 
-        $activeAdminUsersStmt =
-            $pdo->query(
+        $currentAssignment =
+            $pdo->prepare(
                 "
                 SELECT COUNT(*)
 
-                FROM users u
-
-                INNER JOIN roles r
-                    ON r.id = u.role_id
+                FROM role_permissions
 
                 WHERE
 
-                    r.is_admin_role = 1
+                    role_id =
+                        :role_id
 
-                    AND u.is_active = 1
-
-                    AND u.is_suspended = 0
-
-                    AND u.is_deleted = 0
+                    AND permission_id =
+                        :permission_id
                 "
             );
 
 
-        $activeAdminUsers =
-            (int)$activeAdminUsersStmt
-                ->fetchColumn();
+        $currentAssignment->execute(
+            [
+                ':role_id' =>
+                    $currentAdminRoleId,
+
+                ':permission_id' =>
+                    $permissionId
+            ]
+        );
+
+
+        $assignedToCurrentRole =
+            (int)
+            $currentAssignment->fetchColumn()
+            >
+            0;
 
     } catch (
         Throwable $e
     ) {
 
-        rolesUpdateResponse(
-            false,
-            'Unable to check administrator safety rules.',
-            [],
-            500
-        );
+        $assignedToCurrentRole =
+            false;
 
     }
 
 
-    /*
-     * Do not remove administrator status from the role if
-     * active administrators are still using it.
-     */
-
     if (
-        $activeAdminUsers >
-        0
+        $target['slug'] ===
+        'permissions.manage'
+        &&
+        !in_array(
+            $currentAdminRoleId,
+            $roleIds,
+            true
+        )
     ) {
 
-        rolesUpdateResponse(
+        permissionsUpdateResponse(
             false,
-            'This administrator role is currently assigned to active administrators. Move those accounts to another administrator role before removing administrator access from this role.',
+            'You cannot remove permissions.manage from your own administrator role.',
             [
                 'code' =>
-                    'ADMIN_ROLE_IN_USE'
+                    'SELF_LOCKOUT_PREVENTED'
             ],
             409
         );
@@ -810,7 +959,7 @@ try {
     $update =
         $pdo->prepare(
             "
-            UPDATE roles
+            UPDATE permissions
 
             SET
 
@@ -821,21 +970,12 @@ try {
                     :slug,
 
                 description =
-                    :description,
-
-                is_admin_role =
-                    :is_admin_role,
-
-                is_system_role =
-                    :is_system_role,
-
-                updated_at =
-                    CURRENT_TIMESTAMP
+                    :description
 
             WHERE
 
                 id =
-                    :role_id
+                    :permission_id
 
             LIMIT 1
             "
@@ -857,17 +997,79 @@ try {
                     :
                     null,
 
-            ':is_admin_role' =>
-                $isAdminRole,
-
-            ':is_system_role' =>
-                $isSystemRole,
-
-            ':role_id' =>
-                $roleId
+            ':permission_id' =>
+                $permissionId
         ]
     );
 
+
+    /*
+     * Replace role assignments atomically.
+     */
+
+    $deleteAssignments =
+        $pdo->prepare(
+            "
+            DELETE FROM role_permissions
+
+            WHERE
+                permission_id =
+                    :permission_id
+            "
+        );
+
+
+    $deleteAssignments->execute(
+        [
+            ':permission_id' =>
+                $permissionId
+        ]
+    );
+
+
+    if (
+        $roleIds
+    ) {
+
+        $insertAssignment =
+            $pdo->prepare(
+                "
+                INSERT INTO role_permissions
+                (
+                    role_id,
+                    permission_id
+                )
+                VALUES
+                (
+                    :role_id,
+                    :permission_id
+                )
+                "
+            );
+
+
+        foreach (
+            $roleIds as $roleId
+        ) {
+
+            $insertAssignment->execute(
+                [
+                    ':role_id' =>
+                        $roleId,
+
+                    ':permission_id' =>
+                        $permissionId
+                ]
+            );
+
+        }
+
+    }
+
+
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -886,8 +1088,8 @@ try {
             VALUES
             (
                 :user_id,
-                'role_updated',
-                'role',
+                'permission_updated',
+                'permission',
                 :entity_id,
                 :old_values,
                 :new_values,
@@ -904,7 +1106,7 @@ try {
                 $currentAdminId,
 
             ':entity_id' =>
-                $roleId,
+                $permissionId,
 
             ':old_values' =>
                 json_encode(
@@ -922,16 +1124,6 @@ try {
                         'description' =>
                             $target[
                                 'description'
-                            ],
-
-                        'is_admin_role' =>
-                            (int)$target[
-                                'is_admin_role'
-                            ],
-
-                        'is_system_role' =>
-                            (int)$target[
-                                'is_system_role'
                             ]
                     ],
                     JSON_UNESCAPED_UNICODE
@@ -949,11 +1141,8 @@ try {
                         'description' =>
                             $description,
 
-                        'is_admin_role' =>
-                            $isAdminRole,
-
-                        'is_system_role' =>
-                            $isSystemRole
+                        'role_ids' =>
+                            $roleIds
                     ],
                     JSON_UNESCAPED_UNICODE
                 ),
@@ -991,15 +1180,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE UPDATE] '
+        '[LOVEMI PERMISSION UPDATE] '
         .
         $e->getMessage()
     );
 
 
-    rolesUpdateResponse(
+    permissionsUpdateResponse(
         false,
-        'Unable to update role.',
+        'Unable to update permission.',
         [],
         500
     );
@@ -1007,20 +1196,23 @@ try {
 }
 
 
-rolesUpdateResponse(
+permissionsUpdateResponse(
     true,
-    'Role updated successfully.',
+    'Permission updated successfully.',
     [
         'data' => [
 
-            'role_id' =>
-                $roleId,
+            'permission_id' =>
+                $permissionId,
 
             'name' =>
                 $name,
 
             'slug' =>
-                $slug
+                $slug,
+
+            'role_ids' =>
+                $roleIds
 
         ]
     ]

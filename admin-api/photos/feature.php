@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+
+/* ============================================================
+   LOVEMI - FEATURE / UNFEATURE PHOTO
+============================================================ */
+
 require_once __DIR__ . '/../../config/database.php';
 
 
@@ -21,18 +26,10 @@ header(
     'Expires: 0'
 );
 
-header(
-    'X-Content-Type-Options: nosniff'
-);
-
 
 ini_set(
     'display_errors',
     '0'
-);
-
-error_reporting(
-    E_ALL
 );
 
 
@@ -41,30 +38,18 @@ error_reporting(
 ============================================================ */
 
 $isHttps =
-    !empty(
-        $_SERVER['HTTPS']
-    )
+    !empty($_SERVER['HTTPS'])
     &&
-    $_SERVER['HTTPS'] !==
-    'off';
+    $_SERVER['HTTPS'] !== 'off';
 
 
 session_set_cookie_params(
     [
-        'lifetime' =>
-            0,
-
-        'path' =>
-            '/',
-
-        'secure' =>
-            $isHttps,
-
-        'httponly' =>
-            true,
-
-        'samesite' =>
-            'Lax'
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax'
     ]
 );
 
@@ -84,7 +69,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesCreateResponse(
+function featurePhotoResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -97,16 +82,16 @@ function rolesCreateResponse(
 
 
     echo json_encode(
-        array_merge(
-            [
-                'success' =>
-                    $success,
+        [
+            'success' =>
+                $success,
 
-                'message' =>
-                    $message
-            ],
-            $data
-        ),
+            'message' =>
+                $message,
+
+            'data' =>
+                $data
+        ],
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
     );
@@ -117,7 +102,7 @@ function rolesCreateResponse(
 
 
 /* ============================================================
-   REQUEST
+   METHOD
 ============================================================ */
 
 if (
@@ -126,7 +111,7 @@ if (
     'POST'
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -163,136 +148,30 @@ if (
 }
 
 
-$name =
-    trim(
-        (string)(
-            $data['name']
-            ??
-            ''
-        )
+$photoId =
+    (int)(
+        $data['photo_id']
+        ??
+        0
     );
 
 
-$slug =
-    strtolower(
-        trim(
-            (string)(
-                $data['slug']
-                ??
-                ''
-            )
-        )
-    );
-
-
-$description =
-    trim(
-        (string)(
-            $data['description']
-            ??
-            ''
-        )
-    );
-
-
-$isAdminRole =
-    !empty(
-        $data['is_admin_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-$isSystemRole =
-    !empty(
-        $data['is_system_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-/* ============================================================
-   VALIDATION
-============================================================ */
-
-if (
-    $name === ''
-    ||
-    $slug === ''
-) {
-
-    rolesCreateResponse(
+$featured =
+    filter_var(
+        $data['featured']
+        ??
         false,
-        'Role name and slug are required.',
-        [],
-        422
+        FILTER_VALIDATE_BOOLEAN
     );
-
-}
 
 
 if (
-    strlen(
-        $name
-    ) > 80
+    $photoId <= 0
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
-        'Role name is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $slug
-    ) > 80
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    !preg_match(
-        '/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/',
-        $slug
-    )
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug may contain only lowercase letters, numbers, underscores and hyphens.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $description
-    ) > 255
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role description is too long.',
+        'A valid photo ID is required.',
         [],
         422
     );
@@ -313,7 +192,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
         'Database connection failed.',
         [],
@@ -324,10 +203,10 @@ try {
 
 
 /* ============================================================
-   CURRENT ADMIN
+   ADMIN SESSION
 ============================================================ */
 
-$currentAdminId =
+$adminId =
     (int)(
         $_SESSION[
             'lovemi_user_id'
@@ -358,14 +237,14 @@ $sessionToken =
 
 
 if (
-    $currentAdminId <= 0
+    $adminId <= 0
     ||
     $sessionId <= 0
     ||
     $sessionToken === ''
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
         'You must log in first.',
         [],
@@ -383,7 +262,7 @@ $tokenHash =
 
 
 /* ============================================================
-   AUTHORIZE
+   AUTH + PERMISSION
 ============================================================ */
 
 try {
@@ -405,13 +284,20 @@ try {
             INNER JOIN user_sessions s
                 ON s.user_id = u.id
 
+            INNER JOIN role_permissions rp
+                ON rp.role_id = r.id
+
+            INNER JOIN permissions p
+                ON p.id = rp.permission_id
+
             WHERE
 
                 u.id = :user_id
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -428,6 +314,9 @@ try {
 
                 AND r.is_admin_role = 1
 
+                AND p.slug =
+                    'photos.manage'
+
             LIMIT 1
             "
         );
@@ -436,7 +325,7 @@ try {
     $auth->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
 
             ':session_id' =>
                 $sessionId,
@@ -454,7 +343,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -468,9 +357,9 @@ if (
     !$admin
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
-        'Administrator access is required.',
+        'You do not have permission to feature photos.',
         [],
         403
     );
@@ -479,130 +368,55 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   LOAD PHOTO
 ============================================================ */
 
 try {
 
-    $permission =
+    $stmt =
         $pdo->prepare(
             "
-            SELECT COUNT(*)
+            SELECT
 
-            FROM role_permissions rp
+                id,
 
-            INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                user_id,
 
-            WHERE
+                file_name,
 
-                rp.role_id = :role_id
+                approval_status,
 
-                AND p.slug = 'roles.manage'
-            "
-        );
+                is_featured
 
-
-    $permission->execute(
-        [
-            ':role_id' =>
-                (int)$admin[
-                    'role_id'
-                ]
-        ]
-    );
-
-
-    if (
-        (int)$permission->fetchColumn()
-        <=
-        0
-    ) {
-
-        rolesCreateResponse(
-            false,
-            'You do not have permission to create roles.',
-            [],
-            403
-        );
-
-    }
-
-} catch (
-    Throwable $e
-) {
-
-    rolesCreateResponse(
-        false,
-        'Unable to verify role-management permission.',
-        [],
-        500
-    );
-
-}
-
-
-/* ============================================================
-   DUPLICATE CHECK
-============================================================ */
-
-try {
-
-    $duplicate =
-        $pdo->prepare(
-            "
-            SELECT id
-
-            FROM roles
+            FROM photos
 
             WHERE
-
-                LOWER(name) =
-                    LOWER(:name)
-
-                OR
-                slug =
-                    :slug
+                id =
+                    :photo_id
 
             LIMIT 1
             "
         );
 
 
-    $duplicate->execute(
+    $stmt->execute(
         [
-            ':name' =>
-                $name,
-
-            ':slug' =>
-                $slug
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
-    if (
-        $duplicate->fetch()
-    ) {
-
-        rolesCreateResponse(
-            false,
-            'A role with this name or slug already exists.',
-            [
-                'code' =>
-                    'DUPLICATE_ROLE'
-            ],
-            409
-        );
-
-    }
+    $photo =
+        $stmt->fetch();
 
 } catch (
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
-        'Unable to check duplicate roles.',
+        'Unable to load the photo.',
         [],
         500
     );
@@ -610,8 +424,49 @@ try {
 }
 
 
+if (
+    !$photo
+) {
+
+    featurePhotoResponse(
+        false,
+        'Photo not found.',
+        [],
+        404
+    );
+
+}
+
+
 /* ============================================================
-   CREATE
+   ONLY APPROVED PHOTOS
+============================================================ */
+
+if (
+    $featured
+    &&
+    $photo[
+        'approval_status'
+    ]
+    !==
+    'approved'
+) {
+
+    featurePhotoResponse(
+        false,
+        'Only approved photos can be featured.',
+        [
+            'code' =>
+                'PHOTO_NOT_APPROVED'
+        ],
+        409
+    );
+
+}
+
+
+/* ============================================================
+   UPDATE
 ============================================================ */
 
 try {
@@ -619,56 +474,40 @@ try {
     $pdo->beginTransaction();
 
 
-    $stmt =
+    $update =
         $pdo->prepare(
             "
-            INSERT INTO roles
-            (
-                name,
-                slug,
-                description,
-                is_admin_role,
-                is_system_role
-            )
-            VALUES
-            (
-                :name,
-                :slug,
-                :description,
-                :is_admin_role,
-                :is_system_role
-            )
+            UPDATE photos
+
+            SET
+
+                is_featured =
+                    :featured
+
+            WHERE
+
+                id =
+                    :photo_id
+
+            LIMIT 1
             "
         );
 
 
-    $stmt->execute(
+    $update->execute(
         [
-            ':name' =>
-                $name,
+            ':featured' =>
+                $featured ? 1 : 0,
 
-            ':slug' =>
-                $slug,
-
-            ':description' =>
-                $description !== ''
-                    ?
-                    $description
-                    :
-                    null,
-
-            ':is_admin_role' =>
-                $isAdminRole,
-
-            ':is_system_role' =>
-                $isSystemRole
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
-    $roleId =
-        (int)$pdo->lastInsertId();
-
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -687,10 +526,10 @@ try {
             VALUES
             (
                 :user_id,
-                'role_created',
-                'role',
+                :action,
+                'photo',
                 :entity_id,
-                NULL,
+                :old_values,
                 :new_values,
                 :ip,
                 :agent
@@ -702,28 +541,35 @@ try {
     $audit->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
+
+            ':action' =>
+                $featured
+                    ?
+                    'photo_featured'
+                    :
+                    'photo_unfeatured',
 
             ':entity_id' =>
-                $roleId,
+                $photoId,
+
+            ':old_values' =>
+                json_encode(
+                    [
+                        'is_featured' =>
+                            (int)
+                            $photo[
+                                'is_featured'
+                            ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
+                ),
 
             ':new_values' =>
                 json_encode(
                     [
-                        'name' =>
-                            $name,
-
-                        'slug' =>
-                            $slug,
-
-                        'description' =>
-                            $description,
-
-                        'is_admin_role' =>
-                            $isAdminRole,
-
-                        'is_system_role' =>
-                            $isSystemRole
+                        'is_featured' =>
+                            $featured ? 1 : 0
                     ],
                     JSON_UNESCAPED_UNICODE
                 ),
@@ -761,15 +607,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE CREATE] '
+        '[LOVEMI FEATURE PHOTO] '
         .
         $e->getMessage()
     );
 
 
-    rolesCreateResponse(
+    featurePhotoResponse(
         false,
-        'Unable to create role.',
+        'Unable to update featured status.',
         [],
         500
     );
@@ -781,21 +627,19 @@ try {
    RESPONSE
 ============================================================ */
 
-rolesCreateResponse(
+featurePhotoResponse(
     true,
-    'Role created successfully.',
+    $featured
+        ?
+        'Photo has been featured successfully.'
+        :
+        'Photo has been removed from featured photos.',
     [
-        'data' => [
+        'photo_id' =>
+            $photoId,
 
-            'role_id' =>
-                $roleId,
+        'is_featured' =>
+            $featured ? 1 : 0
 
-            'name' =>
-                $name,
-
-            'slug' =>
-                $slug
-
-        ]
     ]
 );

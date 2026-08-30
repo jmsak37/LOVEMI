@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+
+/* ============================================================
+   LOVEMI - APPROVE PHOTO
+============================================================ */
+
 require_once __DIR__ . '/../../config/database.php';
 
 
@@ -21,18 +26,10 @@ header(
     'Expires: 0'
 );
 
-header(
-    'X-Content-Type-Options: nosniff'
-);
-
 
 ini_set(
     'display_errors',
     '0'
-);
-
-error_reporting(
-    E_ALL
 );
 
 
@@ -41,30 +38,18 @@ error_reporting(
 ============================================================ */
 
 $isHttps =
-    !empty(
-        $_SERVER['HTTPS']
-    )
+    !empty($_SERVER['HTTPS'])
     &&
-    $_SERVER['HTTPS'] !==
-    'off';
+    $_SERVER['HTTPS'] !== 'off';
 
 
 session_set_cookie_params(
     [
-        'lifetime' =>
-            0,
-
-        'path' =>
-            '/',
-
-        'secure' =>
-            $isHttps,
-
-        'httponly' =>
-            true,
-
-        'samesite' =>
-            'Lax'
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax'
     ]
 );
 
@@ -84,7 +69,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesCreateResponse(
+function approvePhotoResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -97,16 +82,16 @@ function rolesCreateResponse(
 
 
     echo json_encode(
-        array_merge(
-            [
-                'success' =>
-                    $success,
+        [
+            'success' =>
+                $success,
 
-                'message' =>
-                    $message
-            ],
-            $data
-        ),
+            'message' =>
+                $message,
+
+            'data' =>
+                $data
+        ],
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
     );
@@ -117,7 +102,7 @@ function rolesCreateResponse(
 
 
 /* ============================================================
-   REQUEST
+   METHOD
 ============================================================ */
 
 if (
@@ -126,7 +111,7 @@ if (
     'POST'
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -163,136 +148,21 @@ if (
 }
 
 
-$name =
-    trim(
-        (string)(
-            $data['name']
-            ??
-            ''
-        )
+$photoId =
+    (int)(
+        $data['photo_id']
+        ??
+        0
     );
-
-
-$slug =
-    strtolower(
-        trim(
-            (string)(
-                $data['slug']
-                ??
-                ''
-            )
-        )
-    );
-
-
-$description =
-    trim(
-        (string)(
-            $data['description']
-            ??
-            ''
-        )
-    );
-
-
-$isAdminRole =
-    !empty(
-        $data['is_admin_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-$isSystemRole =
-    !empty(
-        $data['is_system_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-/* ============================================================
-   VALIDATION
-============================================================ */
-
-if (
-    $name === ''
-    ||
-    $slug === ''
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role name and slug are required.',
-        [],
-        422
-    );
-
-}
 
 
 if (
-    strlen(
-        $name
-    ) > 80
+    $photoId <= 0
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
-        'Role name is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $slug
-    ) > 80
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    !preg_match(
-        '/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/',
-        $slug
-    )
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug may contain only lowercase letters, numbers, underscores and hyphens.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $description
-    ) > 255
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role description is too long.',
+        'A valid photo ID is required.',
         [],
         422
     );
@@ -313,7 +183,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
         'Database connection failed.',
         [],
@@ -327,7 +197,7 @@ try {
    CURRENT ADMIN
 ============================================================ */
 
-$currentAdminId =
+$adminId =
     (int)(
         $_SESSION[
             'lovemi_user_id'
@@ -358,14 +228,14 @@ $sessionToken =
 
 
 if (
-    $currentAdminId <= 0
+    $adminId <= 0
     ||
     $sessionId <= 0
     ||
     $sessionToken === ''
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
         'You must log in first.',
         [],
@@ -383,7 +253,7 @@ $tokenHash =
 
 
 /* ============================================================
-   AUTHORIZE
+   AUTH + PERMISSION
 ============================================================ */
 
 try {
@@ -405,13 +275,20 @@ try {
             INNER JOIN user_sessions s
                 ON s.user_id = u.id
 
+            INNER JOIN role_permissions rp
+                ON rp.role_id = r.id
+
+            INNER JOIN permissions p
+                ON p.id = rp.permission_id
+
             WHERE
 
                 u.id = :user_id
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -428,6 +305,9 @@ try {
 
                 AND r.is_admin_role = 1
 
+                AND p.slug =
+                    'photos.manage'
+
             LIMIT 1
             "
         );
@@ -436,7 +316,7 @@ try {
     $auth->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
 
             ':session_id' =>
                 $sessionId,
@@ -454,7 +334,14 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    error_log(
+        '[LOVEMI APPROVE PHOTO AUTH] '
+        .
+        $e->getMessage()
+    );
+
+
+    approvePhotoResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -468,9 +355,9 @@ if (
     !$admin
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
-        'Administrator access is required.',
+        'You do not have permission to approve photos.',
         [],
         403
     );
@@ -479,130 +366,57 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   GET CURRENT PHOTO
 ============================================================ */
 
 try {
 
-    $permission =
+    $stmt =
         $pdo->prepare(
             "
-            SELECT COUNT(*)
+            SELECT
 
-            FROM role_permissions rp
+                id,
 
-            INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                user_id,
 
-            WHERE
+                file_name,
 
-                rp.role_id = :role_id
+                approval_status,
 
-                AND p.slug = 'roles.manage'
-            "
-        );
+                is_featured,
 
+                photo_type
 
-    $permission->execute(
-        [
-            ':role_id' =>
-                (int)$admin[
-                    'role_id'
-                ]
-        ]
-    );
-
-
-    if (
-        (int)$permission->fetchColumn()
-        <=
-        0
-    ) {
-
-        rolesCreateResponse(
-            false,
-            'You do not have permission to create roles.',
-            [],
-            403
-        );
-
-    }
-
-} catch (
-    Throwable $e
-) {
-
-    rolesCreateResponse(
-        false,
-        'Unable to verify role-management permission.',
-        [],
-        500
-    );
-
-}
-
-
-/* ============================================================
-   DUPLICATE CHECK
-============================================================ */
-
-try {
-
-    $duplicate =
-        $pdo->prepare(
-            "
-            SELECT id
-
-            FROM roles
+            FROM photos
 
             WHERE
-
-                LOWER(name) =
-                    LOWER(:name)
-
-                OR
-                slug =
-                    :slug
+                id =
+                    :photo_id
 
             LIMIT 1
             "
         );
 
 
-    $duplicate->execute(
+    $stmt->execute(
         [
-            ':name' =>
-                $name,
-
-            ':slug' =>
-                $slug
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
-    if (
-        $duplicate->fetch()
-    ) {
-
-        rolesCreateResponse(
-            false,
-            'A role with this name or slug already exists.',
-            [
-                'code' =>
-                    'DUPLICATE_ROLE'
-            ],
-            409
-        );
-
-    }
+    $photo =
+        $stmt->fetch();
 
 } catch (
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
-        'Unable to check duplicate roles.',
+        'Unable to load the photo.',
         [],
         500
     );
@@ -610,8 +424,48 @@ try {
 }
 
 
+if (
+    !$photo
+) {
+
+    approvePhotoResponse(
+        false,
+        'Photo not found.',
+        [],
+        404
+    );
+
+}
+
+
 /* ============================================================
-   CREATE
+   ALREADY APPROVED
+============================================================ */
+
+if (
+    $photo['approval_status']
+    ===
+    'approved'
+) {
+
+    approvePhotoResponse(
+        true,
+        'This photo is already approved.',
+        [
+            'photo_id' =>
+                $photoId,
+
+            'approval_status' =>
+                'approved'
+
+        ]
+    );
+
+}
+
+
+/* ============================================================
+   APPROVE
 ============================================================ */
 
 try {
@@ -619,56 +473,59 @@ try {
     $pdo->beginTransaction();
 
 
-    $stmt =
+    $update =
         $pdo->prepare(
             "
-            INSERT INTO roles
-            (
-                name,
-                slug,
-                description,
-                is_admin_role,
-                is_system_role
-            )
-            VALUES
-            (
-                :name,
-                :slug,
-                :description,
-                :is_admin_role,
-                :is_system_role
-            )
+            UPDATE photos
+
+            SET
+
+                approval_status =
+                    'approved',
+
+                approved_at =
+                    CURRENT_TIMESTAMP,
+
+                approved_by =
+                    :admin_id
+
+            WHERE
+
+                id =
+                    :photo_id
+
+            LIMIT 1
             "
         );
 
 
-    $stmt->execute(
+    $update->execute(
         [
-            ':name' =>
-                $name,
+            ':admin_id' =>
+                $adminId,
 
-            ':slug' =>
-                $slug,
-
-            ':description' =>
-                $description !== ''
-                    ?
-                    $description
-                    :
-                    null,
-
-            ':is_admin_role' =>
-                $isAdminRole,
-
-            ':is_system_role' =>
-                $isSystemRole
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
-    $roleId =
-        (int)$pdo->lastInsertId();
+    if (
+        $update->rowCount()
+        <
+        1
+    ) {
 
+        throw new RuntimeException(
+            'Photo approval failed.'
+        );
+
+    }
+
+
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -687,10 +544,10 @@ try {
             VALUES
             (
                 :user_id,
-                'role_created',
-                'role',
+                'photo_approved',
+                'photo',
                 :entity_id,
-                NULL,
+                :old_values,
                 :new_values,
                 :ip,
                 :agent
@@ -702,28 +559,30 @@ try {
     $audit->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
 
             ':entity_id' =>
-                $roleId,
+                $photoId,
+
+            ':old_values' =>
+                json_encode(
+                    [
+                        'approval_status' =>
+                            $photo[
+                                'approval_status'
+                            ]
+                    ],
+                    JSON_UNESCAPED_UNICODE
+                ),
 
             ':new_values' =>
                 json_encode(
                     [
-                        'name' =>
-                            $name,
+                        'approval_status' =>
+                            'approved',
 
-                        'slug' =>
-                            $slug,
-
-                        'description' =>
-                            $description,
-
-                        'is_admin_role' =>
-                            $isAdminRole,
-
-                        'is_system_role' =>
-                            $isSystemRole
+                        'approved_by' =>
+                            $adminId
                     ],
                     JSON_UNESCAPED_UNICODE
                 ),
@@ -761,15 +620,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE CREATE] '
+        '[LOVEMI APPROVE PHOTO] '
         .
         $e->getMessage()
     );
 
 
-    rolesCreateResponse(
+    approvePhotoResponse(
         false,
-        'Unable to create role.',
+        'Unable to approve photo.',
         [],
         500
     );
@@ -781,21 +640,15 @@ try {
    RESPONSE
 ============================================================ */
 
-rolesCreateResponse(
+approvePhotoResponse(
     true,
-    'Role created successfully.',
+    'Photo approved successfully.',
     [
-        'data' => [
+        'photo_id' =>
+            $photoId,
 
-            'role_id' =>
-                $roleId,
+        'approval_status' =>
+            'approved'
 
-            'name' =>
-                $name,
-
-            'slug' =>
-                $slug
-
-        ]
     ]
 );

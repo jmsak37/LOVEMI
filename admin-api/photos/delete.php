@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+
+/* ============================================================
+   LOVEMI - DELETE PHOTO
+============================================================ */
+
 require_once __DIR__ . '/../../config/database.php';
 
 
@@ -21,18 +26,10 @@ header(
     'Expires: 0'
 );
 
-header(
-    'X-Content-Type-Options: nosniff'
-);
-
 
 ini_set(
     'display_errors',
     '0'
-);
-
-error_reporting(
-    E_ALL
 );
 
 
@@ -41,30 +38,18 @@ error_reporting(
 ============================================================ */
 
 $isHttps =
-    !empty(
-        $_SERVER['HTTPS']
-    )
+    !empty($_SERVER['HTTPS'])
     &&
-    $_SERVER['HTTPS'] !==
-    'off';
+    $_SERVER['HTTPS'] !== 'off';
 
 
 session_set_cookie_params(
     [
-        'lifetime' =>
-            0,
-
-        'path' =>
-            '/',
-
-        'secure' =>
-            $isHttps,
-
-        'httponly' =>
-            true,
-
-        'samesite' =>
-            'Lax'
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax'
     ]
 );
 
@@ -84,7 +69,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesDeleteResponse(
+function deletePhotoResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -97,16 +82,16 @@ function rolesDeleteResponse(
 
 
     echo json_encode(
-        array_merge(
-            [
-                'success' =>
-                    $success,
+        [
+            'success' =>
+                $success,
 
-                'message' =>
-                    $message
-            ],
-            $data
-        ),
+            'message' =>
+                $message,
+
+            'data' =>
+                $data
+        ],
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
     );
@@ -126,7 +111,7 @@ if (
     'POST'
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -163,21 +148,21 @@ if (
 }
 
 
-$roleId =
+$photoId =
     (int)(
-        $data['role_id']
+        $data['photo_id']
         ??
         0
     );
 
 
 if (
-    $roleId <= 0
+    $photoId <= 0
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
-        'A valid role ID is required.',
+        'A valid photo ID is required.',
         [],
         422
     );
@@ -198,7 +183,7 @@ try {
     Throwable $e
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
         'Database connection failed.',
         [],
@@ -209,10 +194,10 @@ try {
 
 
 /* ============================================================
-   CURRENT ADMIN
+   ADMIN SESSION
 ============================================================ */
 
-$currentAdminId =
+$adminId =
     (int)(
         $_SESSION[
             'lovemi_user_id'
@@ -243,14 +228,14 @@ $sessionToken =
 
 
 if (
-    $currentAdminId <= 0
+    $adminId <= 0
     ||
     $sessionId <= 0
     ||
     $sessionToken === ''
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
         'You must log in first.',
         [],
@@ -268,7 +253,7 @@ $tokenHash =
 
 
 /* ============================================================
-   ADMIN AUTHORIZATION
+   AUTH + PERMISSION
 ============================================================ */
 
 try {
@@ -290,13 +275,20 @@ try {
             INNER JOIN user_sessions s
                 ON s.user_id = u.id
 
+            INNER JOIN role_permissions rp
+                ON rp.role_id = r.id
+
+            INNER JOIN permissions p
+                ON p.id = rp.permission_id
+
             WHERE
 
                 u.id = :user_id
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -313,6 +305,9 @@ try {
 
                 AND r.is_admin_role = 1
 
+                AND p.slug =
+                    'photos.manage'
+
             LIMIT 1
             "
         );
@@ -321,7 +316,7 @@ try {
     $auth->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
 
             ':session_id' =>
                 $sessionId,
@@ -339,7 +334,7 @@ try {
     Throwable $e
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -353,9 +348,9 @@ if (
     !$admin
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
-        'Administrator access is required.',
+        'You do not have permission to delete photos.',
         [],
         403
     );
@@ -364,120 +359,61 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   LOAD PHOTO
 ============================================================ */
 
 try {
 
-    $permission =
-        $pdo->prepare(
-            "
-            SELECT COUNT(*)
-
-            FROM role_permissions rp
-
-            INNER JOIN permissions p
-                ON p.id = rp.permission_id
-
-            WHERE
-
-                rp.role_id = :role_id
-
-                AND p.slug = 'roles.manage'
-            "
-        );
-
-
-    $permission->execute(
-        [
-            ':role_id' =>
-                (int)$admin[
-                    'role_id'
-                ]
-        ]
-    );
-
-
-    if (
-        (int)$permission->fetchColumn()
-        <=
-        0
-    ) {
-
-        rolesDeleteResponse(
-            false,
-            'You do not have permission to delete roles.',
-            [],
-            403
-        );
-
-    }
-
-} catch (
-    Throwable $e
-) {
-
-    rolesDeleteResponse(
-        false,
-        'Unable to verify permission.',
-        [],
-        500
-    );
-
-}
-
-
-/* ============================================================
-   LOAD ROLE
-============================================================ */
-
-try {
-
-    $roleStmt =
+    $stmt =
         $pdo->prepare(
             "
             SELECT
 
                 id,
 
-                name,
+                user_id,
 
-                slug,
+                file_name,
 
-                description,
+                file_path,
 
-                is_admin_role,
+                thumbnail_path,
 
-                is_system_role
+                approval_status,
 
-            FROM roles
+                is_primary,
+
+                is_featured
+
+            FROM photos
 
             WHERE
-                id = :role_id
+                id =
+                    :photo_id
 
             LIMIT 1
             "
         );
 
 
-    $roleStmt->execute(
+    $stmt->execute(
         [
-            ':role_id' =>
-                $roleId
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
-    $role =
-        $roleStmt->fetch();
+    $photo =
+        $stmt->fetch();
 
 } catch (
     Throwable $e
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
-        'Unable to load role.',
+        'Unable to load the photo.',
         [],
         500
     );
@@ -486,106 +422,14 @@ try {
 
 
 if (
-    !$role
+    !$photo
 ) {
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
-        'Role not found.',
+        'Photo not found.',
         [],
         404
-    );
-
-}
-
-
-/* ============================================================
-   SYSTEM ROLE
-============================================================ */
-
-if (
-    (int)$role[
-        'is_system_role'
-    ]
-    ===
-    1
-) {
-
-    rolesDeleteResponse(
-        false,
-        'System roles cannot be deleted.',
-        [
-            'code' =>
-                'SYSTEM_ROLE_PROTECTED'
-        ],
-        409
-    );
-
-}
-
-
-/* ============================================================
-   CHECK USERS
-============================================================ */
-
-try {
-
-    $usersStmt =
-        $pdo->prepare(
-            "
-            SELECT COUNT(*)
-
-            FROM users
-
-            WHERE
-
-                role_id = :role_id
-
-                AND is_deleted = 0
-            "
-        );
-
-
-    $usersStmt->execute(
-        [
-            ':role_id' =>
-                $roleId
-        ]
-    );
-
-
-    $assignedUsers =
-        (int)$usersStmt->fetchColumn();
-
-} catch (
-    Throwable $e
-) {
-
-    rolesDeleteResponse(
-        false,
-        'Unable to check users assigned to this role.',
-        [],
-        500
-    );
-
-}
-
-
-if (
-    $assignedUsers > 0
-) {
-
-    rolesDeleteResponse(
-        false,
-        'This role is currently assigned to users. Move those users to another role before deleting it.',
-        [
-            'code' =>
-                'ROLE_IN_USE',
-
-            'assigned_users' =>
-                $assignedUsers
-        ],
-        409
     );
 
 }
@@ -601,39 +445,41 @@ try {
 
 
     /*
-     * Delete role-permission mappings first.
+     * Remove references from post_photos first.
      */
 
-    $permissionDelete =
+    $unlink =
         $pdo->prepare(
             "
-            DELETE FROM role_permissions
+            DELETE FROM post_photos
 
             WHERE
-                role_id = :role_id
+                photo_id =
+                    :photo_id
             "
         );
 
 
-    $permissionDelete->execute(
+    $unlink->execute(
         [
-            ':role_id' =>
-                $roleId
+            ':photo_id' =>
+                $photoId
         ]
     );
 
 
     /*
-     * Delete role.
+     * Delete database photo record.
      */
 
     $delete =
         $pdo->prepare(
             "
-            DELETE FROM roles
+            DELETE FROM photos
 
             WHERE
-                id = :role_id
+                id =
+                    :photo_id
 
             LIMIT 1
             "
@@ -642,8 +488,8 @@ try {
 
     $delete->execute(
         [
-            ':role_id' =>
-                $roleId
+            ':photo_id' =>
+                $photoId
         ]
     );
 
@@ -655,15 +501,15 @@ try {
     ) {
 
         throw new RuntimeException(
-            'ROLE_DELETE_FAILED'
+            'Photo deletion failed.'
         );
 
     }
 
 
-    /*
-     * Audit.
-     */
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -682,8 +528,8 @@ try {
             VALUES
             (
                 :user_id,
-                'role_deleted',
-                'role',
+                'photo_deleted',
+                'photo',
                 :entity_id,
                 :old_values,
                 NULL,
@@ -697,37 +543,45 @@ try {
     $audit->execute(
         [
             ':user_id' =>
-                $currentAdminId,
+                $adminId,
 
             ':entity_id' =>
-                $roleId,
+                $photoId,
 
             ':old_values' =>
                 json_encode(
                     [
-                        'name' =>
-                            $role[
-                                'name'
+                        'user_id' =>
+                            (int)
+                            $photo[
+                                'user_id'
                             ],
 
-                        'slug' =>
-                            $role[
-                                'slug'
+                        'file_name' =>
+                            $photo[
+                                'file_name'
                             ],
 
-                        'description' =>
-                            $role[
-                                'description'
+                        'file_path' =>
+                            $photo[
+                                'file_path'
                             ],
 
-                        'is_admin_role' =>
-                            (int)$role[
-                                'is_admin_role'
+                        'approval_status' =>
+                            $photo[
+                                'approval_status'
                             ],
 
-                        'is_system_role' =>
-                            (int)$role[
-                                'is_system_role'
+                        'is_primary' =>
+                            (int)
+                            $photo[
+                                'is_primary'
+                            ],
+
+                        'is_featured' =>
+                            (int)
+                            $photo[
+                                'is_featured'
                             ]
                     ],
                     JSON_UNESCAPED_UNICODE
@@ -766,15 +620,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE DELETE] '
+        '[LOVEMI DELETE PHOTO] '
         .
         $e->getMessage()
     );
 
 
-    rolesDeleteResponse(
+    deletePhotoResponse(
         false,
-        'Unable to delete role.',
+        'Unable to delete photo.',
         [],
         500
     );
@@ -782,15 +636,151 @@ try {
 }
 
 
-rolesDeleteResponse(
-    true,
-    'Role deleted successfully.',
+/* ============================================================
+   REMOVE PHYSICAL FILES
+============================================================ */
+
+/*
+ * Database deletion has already succeeded.
+ *
+ * File deletion is attempted separately so a filesystem
+ * problem does not undo the database transaction.
+ */
+
+$deletedFiles = [];
+
+$failedFiles = [];
+
+
+$rootPath =
+    dirname(
+        __DIR__,
+        2
+    );
+
+
+foreach (
     [
-        'data' => [
-
-            'role_id' =>
-                $roleId
-
+        $photo[
+            'file_path'
+        ],
+        $photo[
+            'thumbnail_path'
         ]
+    ]
+    as $relativePath
+) {
+
+    if (
+        !$relativePath
+    ) {
+
+        continue;
+
+    }
+
+
+    $relativePath =
+        str_replace(
+            '\\',
+            '/',
+            trim(
+                (string)
+                $relativePath
+            )
+        );
+
+
+    $relativePath =
+        ltrim(
+            $relativePath,
+            '/'
+        );
+
+
+    /*
+     * Do not allow path traversal.
+     */
+
+    if (
+        str_contains(
+            $relativePath,
+            '../'
+        )
+        ||
+        str_contains(
+            $relativePath,
+            '..\\'
+        )
+    ) {
+
+        $failedFiles[] =
+            $relativePath;
+
+        continue;
+
+    }
+
+
+    $physicalPath =
+        $rootPath
+        .
+        DIRECTORY_SEPARATOR
+        .
+        str_replace(
+            '/',
+            DIRECTORY_SEPARATOR,
+            $relativePath
+        );
+
+
+    if (
+        is_file(
+            $physicalPath
+        )
+    ) {
+
+        if (
+            @unlink(
+                $physicalPath
+            )
+        ) {
+
+            $deletedFiles[] =
+                $relativePath;
+
+        } else {
+
+            $failedFiles[] =
+                $relativePath;
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSE
+============================================================ */
+
+deletePhotoResponse(
+    true,
+    $failedFiles
+        ?
+        'Photo record deleted. One or more physical files could not be removed automatically.'
+        :
+        'Photo deleted successfully.',
+    [
+        'photo_id' =>
+            $photoId,
+
+        'files_deleted' =>
+            $deletedFiles,
+
+        'files_failed' =>
+            $failedFiles
+
     ]
 );

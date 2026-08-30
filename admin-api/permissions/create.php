@@ -2,8 +2,13 @@
 
 declare(strict_types=1);
 
+
 require_once __DIR__ . '/../../config/database.php';
 
+
+/* ============================================================
+   HEADERS
+============================================================ */
 
 header(
     'Content-Type: application/json; charset=utf-8'
@@ -84,7 +89,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesCreateResponse(
+function permissionsCreateResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -117,7 +122,7 @@ function rolesCreateResponse(
 
 
 /* ============================================================
-   REQUEST
+   METHOD
 ============================================================ */
 
 if (
@@ -126,7 +131,7 @@ if (
     'POST'
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -195,24 +200,34 @@ $description =
     );
 
 
-$isAdminRole =
-    !empty(
-        $data['is_admin_role']
+$roleIds =
+    isset(
+        $data['role_ids']
+    )
+    &&
+    is_array(
+        $data['role_ids']
     )
         ?
-        1
-        :
-        0;
+        array_values(
+            array_unique(
+                array_filter(
+                    array_map(
+                        'intval',
+                        $data['role_ids']
+                    ),
+                    static function (
+                        int $value
+                    ): bool {
 
+                        return $value > 0;
 
-$isSystemRole =
-    !empty(
-        $data['is_system_role']
-    )
-        ?
-        1
+                    }
+                )
+            )
+        )
         :
-        0;
+        [];
 
 
 /* ============================================================
@@ -225,9 +240,9 @@ if (
     $slug === ''
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Role name and slug are required.',
+        'Permission name and slug are required.',
         [],
         422
     );
@@ -238,12 +253,12 @@ if (
 if (
     strlen(
         $name
-    ) > 80
+    ) > 100
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Role name is too long.',
+        'Permission name is too long.',
         [],
         422
     );
@@ -254,12 +269,12 @@ if (
 if (
     strlen(
         $slug
-    ) > 80
+    ) > 120
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Role slug is too long.',
+        'Permission slug is too long.',
         [],
         422
     );
@@ -269,14 +284,14 @@ if (
 
 if (
     !preg_match(
-        '/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/',
+        '/^[a-z0-9]+(?:[._-][a-z0-9]+)*$/',
         $slug
     )
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Role slug may contain only lowercase letters, numbers, underscores and hyphens.',
+        'Permission slug must contain lowercase letters, numbers, dots, underscores or hyphens.',
         [],
         422
     );
@@ -290,9 +305,9 @@ if (
     ) > 255
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Role description is too long.',
+        'Permission description is too long.',
         [],
         422
     );
@@ -313,7 +328,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
         'Database connection failed.',
         [],
@@ -324,7 +339,7 @@ try {
 
 
 /* ============================================================
-   CURRENT ADMIN
+   AUTH
 ============================================================ */
 
 $currentAdminId =
@@ -365,7 +380,7 @@ if (
     $sessionToken === ''
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
         'You must log in first.',
         [],
@@ -383,7 +398,7 @@ $tokenHash =
 
 
 /* ============================================================
-   AUTHORIZE
+   ADMIN AUTHORIZATION
 ============================================================ */
 
 try {
@@ -411,7 +426,8 @@ try {
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -454,7 +470,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -468,7 +484,7 @@ if (
     !$admin
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
         'Administrator access is required.',
         [],
@@ -479,12 +495,12 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   MANAGE PERMISSIONS CHECK
 ============================================================ */
 
 try {
 
-    $permission =
+    $permissionCheck =
         $pdo->prepare(
             "
             SELECT COUNT(*)
@@ -492,18 +508,21 @@ try {
             FROM role_permissions rp
 
             INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                ON p.id =
+                    rp.permission_id
 
             WHERE
 
-                rp.role_id = :role_id
+                rp.role_id =
+                    :role_id
 
-                AND p.slug = 'roles.manage'
+                AND p.slug =
+                    'permissions.manage'
             "
         );
 
 
-    $permission->execute(
+    $permissionCheck->execute(
         [
             ':role_id' =>
                 (int)$admin[
@@ -514,14 +533,15 @@ try {
 
 
     if (
-        (int)$permission->fetchColumn()
+        (int)
+        $permissionCheck->fetchColumn()
         <=
         0
     ) {
 
-        rolesCreateResponse(
+        permissionsCreateResponse(
             false,
-            'You do not have permission to create roles.',
+            'You do not have permission to create permissions.',
             [],
             403
         );
@@ -532,12 +552,90 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Unable to verify role-management permission.',
+        'Unable to verify permission-management access.',
         [],
         500
     );
+
+}
+
+
+/* ============================================================
+   VALIDATE ROLES
+============================================================ */
+
+if (
+    $roleIds
+) {
+
+    $placeholders =
+        implode(
+            ',',
+            array_fill(
+                0,
+                count($roleIds),
+                '?'
+            )
+        );
+
+
+    try {
+
+        $roleCheck =
+            $pdo->prepare(
+                "
+                SELECT COUNT(*)
+
+                FROM roles
+
+                WHERE
+                    id IN (
+                        {$placeholders}
+                    )
+                "
+            );
+
+
+        $roleCheck->execute(
+            $roleIds
+        );
+
+
+        $foundRoles =
+            (int)
+            $roleCheck->fetchColumn();
+
+
+    } catch (
+        Throwable $e
+    ) {
+
+        permissionsCreateResponse(
+            false,
+            'Unable to validate selected roles.',
+            [],
+            500
+        );
+
+    }
+
+
+    if (
+        $foundRoles
+        !==
+        count($roleIds)
+    ) {
+
+        permissionsCreateResponse(
+            false,
+            'One or more selected roles do not exist.',
+            [],
+            422
+        );
+
+    }
 
 }
 
@@ -553,15 +651,14 @@ try {
             "
             SELECT id
 
-            FROM roles
+            FROM permissions
 
             WHERE
 
                 LOWER(name) =
                     LOWER(:name)
 
-                OR
-                slug =
+                OR slug =
                     :slug
 
             LIMIT 1
@@ -584,12 +681,12 @@ try {
         $duplicate->fetch()
     ) {
 
-        rolesCreateResponse(
+        permissionsCreateResponse(
             false,
-            'A role with this name or slug already exists.',
+            'A permission with this name or slug already exists.',
             [
                 'code' =>
-                    'DUPLICATE_ROLE'
+                    'DUPLICATE_PERMISSION'
             ],
             409
         );
@@ -600,9 +697,9 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Unable to check duplicate roles.',
+        'Unable to check for duplicate permissions.',
         [],
         500
     );
@@ -619,30 +716,26 @@ try {
     $pdo->beginTransaction();
 
 
-    $stmt =
+    $insert =
         $pdo->prepare(
             "
-            INSERT INTO roles
+            INSERT INTO permissions
             (
                 name,
                 slug,
-                description,
-                is_admin_role,
-                is_system_role
+                description
             )
             VALUES
             (
                 :name,
                 :slug,
-                :description,
-                :is_admin_role,
-                :is_system_role
+                :description
             )
             "
         );
 
 
-    $stmt->execute(
+    $insert->execute(
         [
             ':name' =>
                 $name,
@@ -655,20 +748,59 @@ try {
                     ?
                     $description
                     :
-                    null,
-
-            ':is_admin_role' =>
-                $isAdminRole,
-
-            ':is_system_role' =>
-                $isSystemRole
+                    null
         ]
     );
 
 
-    $roleId =
-        (int)$pdo->lastInsertId();
+    $permissionId =
+        (int)
+        $pdo->lastInsertId();
 
+
+    if (
+        $roleIds
+    ) {
+
+        $assign =
+            $pdo->prepare(
+                "
+                INSERT INTO role_permissions
+                (
+                    role_id,
+                    permission_id
+                )
+                VALUES
+                (
+                    :role_id,
+                    :permission_id
+                )
+                "
+            );
+
+
+        foreach (
+            $roleIds as $roleId
+        ) {
+
+            $assign->execute(
+                [
+                    ':role_id' =>
+                        $roleId,
+
+                    ':permission_id' =>
+                        $permissionId
+                ]
+            );
+
+        }
+
+    }
+
+
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -687,8 +819,8 @@ try {
             VALUES
             (
                 :user_id,
-                'role_created',
-                'role',
+                'permission_created',
+                'permission',
                 :entity_id,
                 NULL,
                 :new_values,
@@ -705,7 +837,7 @@ try {
                 $currentAdminId,
 
             ':entity_id' =>
-                $roleId,
+                $permissionId,
 
             ':new_values' =>
                 json_encode(
@@ -719,11 +851,8 @@ try {
                         'description' =>
                             $description,
 
-                        'is_admin_role' =>
-                            $isAdminRole,
-
-                        'is_system_role' =>
-                            $isSystemRole
+                        'role_ids' =>
+                            $roleIds
                     ],
                     JSON_UNESCAPED_UNICODE
                 ),
@@ -761,15 +890,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE CREATE] '
+        '[LOVEMI PERMISSION CREATE] '
         .
         $e->getMessage()
     );
 
 
-    rolesCreateResponse(
+    permissionsCreateResponse(
         false,
-        'Unable to create role.',
+        'Unable to create permission.',
         [],
         500
     );
@@ -781,20 +910,23 @@ try {
    RESPONSE
 ============================================================ */
 
-rolesCreateResponse(
+permissionsCreateResponse(
     true,
-    'Role created successfully.',
+    'Permission created successfully.',
     [
         'data' => [
 
-            'role_id' =>
-                $roleId,
+            'permission_id' =>
+                $permissionId,
 
             'name' =>
                 $name,
 
             'slug' =>
-                $slug
+                $slug,
+
+            'role_ids' =>
+                $roleIds
 
         ]
     ]

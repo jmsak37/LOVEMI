@@ -2,8 +2,13 @@
 
 declare(strict_types=1);
 
+
 require_once __DIR__ . '/../../config/database.php';
 
+
+/* ============================================================
+   HEADERS
+============================================================ */
 
 header(
     'Content-Type: application/json; charset=utf-8'
@@ -84,7 +89,7 @@ if (
    RESPONSE
 ============================================================ */
 
-function rolesCreateResponse(
+function permissionsDeleteResponse(
     bool $success,
     string $message,
     array $data = [],
@@ -117,7 +122,7 @@ function rolesCreateResponse(
 
 
 /* ============================================================
-   REQUEST
+   METHOD
 ============================================================ */
 
 if (
@@ -126,7 +131,7 @@ if (
     'POST'
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
         'Only POST requests are allowed.',
         [],
@@ -163,136 +168,21 @@ if (
 }
 
 
-$name =
-    trim(
-        (string)(
-            $data['name']
-            ??
-            ''
-        )
+$permissionId =
+    (int)(
+        $data['permission_id']
+        ??
+        0
     );
-
-
-$slug =
-    strtolower(
-        trim(
-            (string)(
-                $data['slug']
-                ??
-                ''
-            )
-        )
-    );
-
-
-$description =
-    trim(
-        (string)(
-            $data['description']
-            ??
-            ''
-        )
-    );
-
-
-$isAdminRole =
-    !empty(
-        $data['is_admin_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-$isSystemRole =
-    !empty(
-        $data['is_system_role']
-    )
-        ?
-        1
-        :
-        0;
-
-
-/* ============================================================
-   VALIDATION
-============================================================ */
-
-if (
-    $name === ''
-    ||
-    $slug === ''
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role name and slug are required.',
-        [],
-        422
-    );
-
-}
 
 
 if (
-    strlen(
-        $name
-    ) > 80
+    $permissionId <= 0
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
-        'Role name is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $slug
-    ) > 80
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug is too long.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    !preg_match(
-        '/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/',
-        $slug
-    )
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role slug may contain only lowercase letters, numbers, underscores and hyphens.',
-        [],
-        422
-    );
-
-}
-
-
-if (
-    strlen(
-        $description
-    ) > 255
-) {
-
-    rolesCreateResponse(
-        false,
-        'Role description is too long.',
+        'A valid permission ID is required.',
         [],
         422
     );
@@ -313,7 +203,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
         'Database connection failed.',
         [],
@@ -365,7 +255,7 @@ if (
     $sessionToken === ''
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
         'You must log in first.',
         [],
@@ -383,7 +273,7 @@ $tokenHash =
 
 
 /* ============================================================
-   AUTHORIZE
+   ADMIN AUTH
 ============================================================ */
 
 try {
@@ -411,7 +301,8 @@ try {
 
                 AND s.id = :session_id
 
-                AND s.session_token_hash = :token_hash
+                AND s.session_token_hash =
+                    :token_hash
 
                 AND s.two_factor_passed = 1
 
@@ -454,7 +345,7 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
         'Unable to verify administrator access.',
         [],
@@ -468,7 +359,7 @@ if (
     !$admin
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
         'Administrator access is required.',
         [],
@@ -479,12 +370,12 @@ if (
 
 
 /* ============================================================
-   PERMISSION
+   PERMISSION CHECK
 ============================================================ */
 
 try {
 
-    $permission =
+    $permissionCheck =
         $pdo->prepare(
             "
             SELECT COUNT(*)
@@ -492,18 +383,21 @@ try {
             FROM role_permissions rp
 
             INNER JOIN permissions p
-                ON p.id = rp.permission_id
+                ON p.id =
+                    rp.permission_id
 
             WHERE
 
-                rp.role_id = :role_id
+                rp.role_id =
+                    :role_id
 
-                AND p.slug = 'roles.manage'
+                AND p.slug =
+                    'permissions.manage'
             "
         );
 
 
-    $permission->execute(
+    $permissionCheck->execute(
         [
             ':role_id' =>
                 (int)$admin[
@@ -514,14 +408,15 @@ try {
 
 
     if (
-        (int)$permission->fetchColumn()
+        (int)
+        $permissionCheck->fetchColumn()
         <=
         0
     ) {
 
-        rolesCreateResponse(
+        permissionsDeleteResponse(
             false,
-            'You do not have permission to create roles.',
+            'You do not have permission to delete permissions.',
             [],
             403
         );
@@ -532,9 +427,9 @@ try {
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
-        'Unable to verify role-management permission.',
+        'Unable to verify permission-management access.',
         [],
         500
     );
@@ -543,66 +438,54 @@ try {
 
 
 /* ============================================================
-   DUPLICATE CHECK
+   LOAD PERMISSION
 ============================================================ */
 
 try {
 
-    $duplicate =
+    $permissionStmt =
         $pdo->prepare(
             "
-            SELECT id
+            SELECT
 
-            FROM roles
+                id,
+
+                name,
+
+                slug,
+
+                description
+
+            FROM permissions
 
             WHERE
 
-                LOWER(name) =
-                    LOWER(:name)
-
-                OR
-                slug =
-                    :slug
+                id =
+                    :permission_id
 
             LIMIT 1
             "
         );
 
 
-    $duplicate->execute(
+    $permissionStmt->execute(
         [
-            ':name' =>
-                $name,
-
-            ':slug' =>
-                $slug
+            ':permission_id' =>
+                $permissionId
         ]
     );
 
 
-    if (
-        $duplicate->fetch()
-    ) {
-
-        rolesCreateResponse(
-            false,
-            'A role with this name or slug already exists.',
-            [
-                'code' =>
-                    'DUPLICATE_ROLE'
-            ],
-            409
-        );
-
-    }
+    $permission =
+        $permissionStmt->fetch();
 
 } catch (
     Throwable $e
 ) {
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
-        'Unable to check duplicate roles.',
+        'Unable to load permission.',
         [],
         500
     );
@@ -610,8 +493,146 @@ try {
 }
 
 
+if (
+    !$permission
+) {
+
+    permissionsDeleteResponse(
+        false,
+        'Permission not found.',
+        [],
+        404
+    );
+
+}
+
+
 /* ============================================================
-   CREATE
+   PROTECT SYSTEM PERMISSIONS
+============================================================ */
+
+$coreSlugs = [
+
+    'dashboard.view',
+    'users.manage',
+    'users.view',
+    'profiles.manage',
+    'photos.manage',
+    'posts.manage',
+    'connections.manage',
+    'conversations.manage',
+    'messages.manage',
+    'premium.manage',
+    'payments.manage',
+    'services.manage',
+    'countries.manage',
+    'currencies.manage',
+    'exchange_rates.manage',
+    'notifications.manage',
+    'audio.manage',
+    'reports.manage',
+    'blocks.manage',
+    'admins.manage',
+    'roles.manage',
+    'permissions.manage',
+    'audit.view',
+    'login_logs.view',
+    'settings.manage',
+    'backups.manage'
+
+];
+
+
+if (
+    in_array(
+        (string)$permission['slug'],
+        $coreSlugs,
+        true
+    )
+) {
+
+    permissionsDeleteResponse(
+        false,
+        'Core LOVEMI system permissions cannot be deleted.',
+        [
+            'code' =>
+                'SYSTEM_PERMISSION_PROTECTED'
+        ],
+        409
+    );
+
+}
+
+
+/* ============================================================
+   CHECK ROLE ASSIGNMENTS
+============================================================ */
+
+try {
+
+    $assignmentStmt =
+        $pdo->prepare(
+            "
+            SELECT COUNT(*)
+
+            FROM role_permissions
+
+            WHERE
+                permission_id =
+                    :permission_id
+            "
+        );
+
+
+    $assignmentStmt->execute(
+        [
+            ':permission_id' =>
+                $permissionId
+        ]
+    );
+
+
+    $roleCount =
+        (int)
+        $assignmentStmt->fetchColumn();
+
+} catch (
+    Throwable $e
+) {
+
+    permissionsDeleteResponse(
+        false,
+        'Unable to check permission assignments.',
+        [],
+        500
+    );
+
+}
+
+
+if (
+    $roleCount >
+    0
+) {
+
+    permissionsDeleteResponse(
+        false,
+        'This permission is currently assigned to one or more roles. Remove its role assignments before deleting it.',
+        [
+            'code' =>
+                'PERMISSION_IN_USE',
+
+            'assigned_roles' =>
+                $roleCount
+        ],
+        409
+    );
+
+}
+
+
+/* ============================================================
+   DELETE
 ============================================================ */
 
 try {
@@ -619,56 +640,44 @@ try {
     $pdo->beginTransaction();
 
 
-    $stmt =
+    $delete =
         $pdo->prepare(
             "
-            INSERT INTO roles
-            (
-                name,
-                slug,
-                description,
-                is_admin_role,
-                is_system_role
-            )
-            VALUES
-            (
-                :name,
-                :slug,
-                :description,
-                :is_admin_role,
-                :is_system_role
-            )
+            DELETE FROM permissions
+
+            WHERE
+                id =
+                    :permission_id
+
+            LIMIT 1
             "
         );
 
 
-    $stmt->execute(
+    $delete->execute(
         [
-            ':name' =>
-                $name,
-
-            ':slug' =>
-                $slug,
-
-            ':description' =>
-                $description !== ''
-                    ?
-                    $description
-                    :
-                    null,
-
-            ':is_admin_role' =>
-                $isAdminRole,
-
-            ':is_system_role' =>
-                $isSystemRole
+            ':permission_id' =>
+                $permissionId
         ]
     );
 
 
-    $roleId =
-        (int)$pdo->lastInsertId();
+    if (
+        $delete->rowCount()
+        !==
+        1
+    ) {
 
+        throw new RuntimeException(
+            'PERMISSION_DELETE_FAILED'
+        );
+
+    }
+
+
+    /* ========================================================
+       AUDIT
+    ======================================================== */
 
     $audit =
         $pdo->prepare(
@@ -687,11 +696,11 @@ try {
             VALUES
             (
                 :user_id,
-                'role_created',
-                'role',
+                'permission_deleted',
+                'permission',
                 :entity_id,
+                :old_values,
                 NULL,
-                :new_values,
                 :ip,
                 :agent
             )
@@ -705,25 +714,25 @@ try {
                 $currentAdminId,
 
             ':entity_id' =>
-                $roleId,
+                $permissionId,
 
-            ':new_values' =>
+            ':old_values' =>
                 json_encode(
                     [
                         'name' =>
-                            $name,
+                            $permission[
+                                'name'
+                            ],
 
                         'slug' =>
-                            $slug,
+                            $permission[
+                                'slug'
+                            ],
 
                         'description' =>
-                            $description,
-
-                        'is_admin_role' =>
-                            $isAdminRole,
-
-                        'is_system_role' =>
-                            $isSystemRole
+                            $permission[
+                                'description'
+                            ]
                     ],
                     JSON_UNESCAPED_UNICODE
                 ),
@@ -761,15 +770,15 @@ try {
 
 
     error_log(
-        '[LOVEMI ROLE CREATE] '
+        '[LOVEMI PERMISSION DELETE] '
         .
         $e->getMessage()
     );
 
 
-    rolesCreateResponse(
+    permissionsDeleteResponse(
         false,
-        'Unable to create role.',
+        'Unable to delete permission.',
         [],
         500
     );
@@ -777,24 +786,14 @@ try {
 }
 
 
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-rolesCreateResponse(
+permissionsDeleteResponse(
     true,
-    'Role created successfully.',
+    'Permission deleted successfully.',
     [
         'data' => [
 
-            'role_id' =>
-                $roleId,
-
-            'name' =>
-                $name,
-
-            'slug' =>
-                $slug
+            'permission_id' =>
+                $permissionId
 
         ]
     ]

@@ -23,6 +23,10 @@
     <title>Roles | LOVEMI Admin</title>
 
 
+    <!-- =====================================================
+         TAB ICONS
+    ====================================================== -->
+
     <link
         rel="icon"
         type="image/x-icon"
@@ -37,11 +41,27 @@
     >
 
     <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
         rel="apple-touch-icon"
         sizes="180x180"
         href="../assets/logo1/apple-touch-icon.png"
     >
 
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+
+    <!-- =====================================================
+         NO CACHE
+    ====================================================== -->
 
     <meta
         http-equiv="Cache-Control"
@@ -58,6 +78,10 @@
         content="0"
     >
 
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
 
     <link
         rel="preconnect"
@@ -76,6 +100,10 @@
     >
 
 
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -89,8 +117,11 @@
         :root {
 
             --primary: #6d28d9;
+            --primary-dark: #4c1d95;
             --primary-soft: #f3e8ff;
+
             --accent: #db2777;
+            --accent-soft: #fce7f3;
 
             --green: #16a34a;
             --green-soft: #ecfdf5;
@@ -105,21 +136,24 @@
             --blue-soft: #eff6ff;
 
             --text: #18181b;
-            --soft: #68686f;
-            --muted: #9696a1;
+            --text-soft: #68686f;
+            --text-muted: #9696a1;
 
-            --bg: #f6f6fa;
+            --background: #f6f6fa;
+            --border: #e7e7ee;
             --white: #ffffff;
-            --border: #e8e8ef;
 
-            --sidebar: 258px;
+            --sidebar-width: 258px;
+
         }
 
 
         * {
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
         }
 
 
@@ -128,44 +162,65 @@
             min-height: 100vh;
 
             font-family:
-                Inter,
+                "Inter",
                 sans-serif;
 
             color:
                 var(--text);
 
             background:
-                var(--bg);
+                var(--background);
+
+            line-height:
+                1.5;
+
         }
 
 
         a {
-            color: inherit;
-            text-decoration: none;
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
         }
 
 
         button,
         input,
+        textarea,
         select {
-            font-family: inherit;
+
+            font-family:
+                inherit;
+
         }
 
 
         button {
-            cursor: pointer;
+
+            cursor:
+                pointer;
+
         }
 
 
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
         .sidebar {
 
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
+            position:
+                fixed;
+
+            inset:
+                0 auto 0 0;
 
             width:
-                var(--sidebar);
+                var(--sidebar-width);
 
             z-index:
                 1200;
@@ -178,6 +233,7 @@
 
             color:
                 white;
+
         }
 
 
@@ -199,8 +255,8 @@
                 10px;
 
             border-bottom:
-                1px solid
-                rgba(255,255,255,.06);
+                1px solid rgba(255,255,255,.06);
+
         }
 
 
@@ -217,6 +273,7 @@
 
             border-radius:
                 12px;
+
         }
 
 
@@ -228,6 +285,10 @@
 
             font-size:
                 22px;
+
+            font-weight:
+                800;
+
         }
 
 
@@ -245,8 +306,12 @@
             font-size:
                 8px;
 
+            font-weight:
+                800;
+
             letter-spacing:
                 .7px;
+
         }
 
 
@@ -268,8 +333,7 @@
                 7px 10px;
 
             border:
-                1px solid
-                rgba(255,255,255,.1);
+                1px solid rgba(255,255,255,.1);
 
             border-radius:
                 999px;
@@ -284,14 +348,16 @@
                 9px;
 
             font-weight:
-                700;
+                800;
+
         }
 
 
         .sidebar-section {
 
             padding:
-                5px 12px;
+                4px 12px;
+
         }
 
 
@@ -309,11 +375,12 @@
             font-weight:
                 800;
 
+            text-transform:
+                uppercase;
+
             letter-spacing:
                 1px;
 
-            text-transform:
-                uppercase;
         }
 
 
@@ -345,6 +412,10 @@
 
             font-weight:
                 600;
+
+            transition:
+                .2s ease;
+
         }
 
 
@@ -355,6 +426,7 @@
 
             text-align:
                 center;
+
         }
 
 
@@ -365,6 +437,7 @@
 
             background:
                 rgba(255,255,255,.06);
+
         }
 
 
@@ -376,19 +449,25 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(109,40,217,.75),
-                    rgba(219,39,119,.55)
+                    rgba(109,40,217,.82),
+                    rgba(219,39,119,.58)
                 );
+
         }
 
 
-        .main {
+        /* =====================================================
+           MAIN
+        ====================================================== */
 
-            margin-left:
-                var(--sidebar);
+        .main {
 
             min-height:
                 100vh;
+
+            margin-left:
+                var(--sidebar-width);
+
         }
 
 
@@ -419,17 +498,17 @@
                 space-between;
 
             gap:
-                15px;
+                16px;
+
+            border-bottom:
+                1px solid var(--border);
 
             background:
-                rgba(255,255,255,.95);
+                rgba(255,255,255,.96);
 
             backdrop-filter:
                 blur(14px);
 
-            border-bottom:
-                1px solid
-                var(--border);
         }
 
 
@@ -443,6 +522,7 @@
 
             gap:
                 12px;
+
         }
 
 
@@ -461,14 +541,14 @@
                 center;
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
             border-radius:
                 10px;
 
             background:
                 white;
+
         }
 
 
@@ -479,6 +559,7 @@
 
             font-weight:
                 800;
+
         }
 
 
@@ -488,10 +569,11 @@
                 2px;
 
             color:
-                var(--muted);
+                var(--text-muted);
 
             font-size:
                 9px;
+
         }
 
 
@@ -505,6 +587,7 @@
 
             gap:
                 8px;
+
         }
 
 
@@ -523,8 +606,7 @@
                 center;
 
             border:
-                1px solid
-                var(--border);
+                1px solid var(--border);
 
             border-radius:
                 10px;
@@ -533,10 +615,8 @@
                 white;
 
             color:
-                var(--soft);
+                var(--text-soft);
 
-            font-size:
-                11px;
         }
 
 
@@ -555,8 +635,8 @@
                 10px;
 
             border-left:
-                1px solid
-                var(--border);
+                1px solid var(--border);
+
         }
 
 
@@ -568,11 +648,15 @@
             height:
                 37px;
 
+            border-radius:
+                50%;
+
             object-fit:
                 cover;
 
-            border-radius:
-                50%;
+            background:
+                var(--primary-soft);
+
         }
 
 
@@ -583,6 +667,7 @@
 
             font-size:
                 8px;
+
         }
 
 
@@ -591,30 +676,33 @@
             display:
                 block;
 
-            margin-top:
-                2px;
-
             color:
-                var(--muted);
+                var(--text-muted);
 
             font-size:
                 7px;
+
         }
 
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
 
         .content {
 
             width:
                 min(
                     calc(100% - 48px),
-                    1450px
+                    1500px
                 );
 
             margin:
                 auto;
 
             padding:
-                28px 0 50px;
+                28px 0 55px;
+
         }
 
 
@@ -630,10 +718,11 @@
                 space-between;
 
             gap:
-                20px;
+                18px;
 
             margin-bottom:
                 18px;
+
         }
 
 
@@ -644,6 +733,7 @@
 
             font-weight:
                 800;
+
         }
 
 
@@ -653,20 +743,21 @@
                 4px;
 
             color:
-                var(--muted);
+                var(--text-muted);
 
             font-size:
                 9px;
+
         }
 
 
         .btn {
 
             min-height:
-                43px;
+                42px;
 
             padding:
-                0 15px;
+                0 14px;
 
             display:
                 inline-flex;
@@ -691,6 +782,7 @@
 
             font-weight:
                 800;
+
         }
 
 
@@ -705,19 +797,21 @@
                     var(--primary),
                     var(--accent)
                 );
+
         }
 
 
         .btn-light {
 
             color:
-                var(--soft);
+                var(--text-soft);
+
+            background:
+                white;
 
             border:
                 1px solid var(--border);
 
-            background:
-                white;
         }
 
 
@@ -737,11 +831,15 @@
 
             font-size:
                 9px;
+
         }
 
 
         .alert.show {
-            display: block;
+
+            display:
+                block;
+
         }
 
 
@@ -755,6 +853,7 @@
 
             border:
                 1px solid #fecaca;
+
         }
 
 
@@ -768,32 +867,35 @@
 
             border:
                 1px solid #bbf7d0;
+
         }
 
 
-        .grid {
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
 
             display:
                 grid;
 
             grid-template-columns:
-                repeat(
-                    4,
-                    minmax(0,1fr)
-                );
+                repeat(4, minmax(0,1fr));
 
             gap:
                 12px;
 
             margin-bottom:
-                17px;
+                16px;
+
         }
 
 
-        .stat {
+        .stat-card {
 
             padding:
-                17px;
+                18px;
 
             border:
                 1px solid var(--border);
@@ -805,59 +907,12 @@
                 white;
 
             box-shadow:
-                0 8px 25px rgba(0,0,0,.04);
+                0 7px 22px rgba(0,0,0,.04);
+
         }
 
 
-        .stat span {
-
-            color:
-                var(--muted);
-
-            font-size:
-                8px;
-        }
-
-
-        .stat strong {
-
-            display:
-                block;
-
-            margin-top:
-                5px;
-
-            font-size:
-                22px;
-        }
-
-
-        .card {
-
-            overflow:
-                hidden;
-
-            background:
-                white;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                17px;
-
-            box-shadow:
-                0 10px 30px rgba(0,0,0,.05);
-        }
-
-
-        .card-header {
-
-            min-height:
-                59px;
-
-            padding:
-                0 18px;
+        .stat-top {
 
             display:
                 flex;
@@ -869,120 +924,40 @@
                 space-between;
 
             gap:
-                15px;
+                10px;
 
-            border-bottom:
-                1px solid #f0f0f4;
         }
 
 
-        .card-header h3 {
+        .stat-card span {
+
+            display:
+                block;
+
+            color:
+                var(--text-muted);
 
             font-size:
-                11px;
+                8px;
 
-            font-weight:
-                800;
         }
 
 
-        .card-header span {
+        .stat-card strong {
 
             display:
                 block;
 
             margin-top:
-                2px;
-
-            color:
-                var(--muted);
+                6px;
 
             font-size:
-                7px;
+                21px;
+
         }
 
 
-        .table-wrap {
-
-            overflow-x:
-                auto;
-        }
-
-
-        table {
-
-            width:
-                100%;
-
-            min-width:
-                800px;
-
-            border-collapse:
-                collapse;
-        }
-
-
-        th {
-
-            padding:
-                11px 13px;
-
-            text-align:
-                left;
-
-            color:
-                var(--muted);
-
-            background:
-                #fafafd;
-
-            border-bottom:
-                1px solid var(--border);
-
-            font-size:
-                7px;
-
-            text-transform:
-                uppercase;
-
-            letter-spacing:
-                .4px;
-        }
-
-
-        td {
-
-            padding:
-                13px;
-
-            border-bottom:
-                1px solid #f0f0f4;
-
-            font-size:
-                8px;
-
-            color:
-                #4f5159;
-
-            vertical-align:
-                middle;
-        }
-
-
-        .role-name {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                9px;
-        }
-
-
-        .role-icon {
+        .stat-icon {
 
             width:
                 35px;
@@ -1004,10 +979,279 @@
 
             background:
                 var(--primary-soft);
+
+            font-size:
+                10px;
+
         }
 
 
-        .role-name strong {
+        /* =====================================================
+           FILTER
+        ====================================================== */
+
+        .filter-card {
+
+            padding:
+                14px;
+
+            margin-bottom:
+                16px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+
+        }
+
+
+        .filters {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(260px,1fr)
+                180px
+                180px
+                42px;
+
+            gap:
+                9px;
+
+        }
+
+
+        .field {
+
+            width:
+                100%;
+
+            min-height:
+                42px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            outline:
+                none;
+
+            background:
+                white;
+
+            color:
+                var(--text);
+
+            font-size:
+                8px;
+
+        }
+
+
+        textarea.field {
+
+            padding-top:
+                10px;
+
+            min-height:
+                100px;
+
+            resize:
+                vertical;
+
+        }
+
+
+        .field:focus {
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+
+        }
+
+
+        .refresh-btn {
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .table-card {
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+
+        }
+
+
+        .table-header {
+
+            min-height:
+                62px;
+
+            padding:
+                0 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid #f0f0f4;
+
+        }
+
+
+        .table-header h3 {
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .table-header span {
+
+            display:
+                block;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+
+        }
+
+
+        .table-wrap {
+
+            overflow-x:
+                auto;
+
+        }
+
+
+        table {
+
+            width:
+                100%;
+
+            min-width:
+                1000px;
+
+            border-collapse:
+                collapse;
+
+        }
+
+
+        th {
+
+            padding:
+                11px 13px;
+
+            text-align:
+                left;
+
+            color:
+                var(--text-muted);
+
+            background:
+                #fafafd;
+
+            border-bottom:
+                1px solid var(--border);
+
+            font-size:
+                7px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .4px;
+
+        }
+
+
+        td {
+
+            padding:
+                12px 13px;
+
+            border-bottom:
+                1px solid #f0f0f4;
+
+            color:
+                #4f5159;
+
+            font-size:
+                8px;
+
+            vertical-align:
+                middle;
+
+        }
+
+
+        .role-cell strong {
 
             display:
                 block;
@@ -1016,11 +1260,12 @@
                 var(--text);
 
             font-size:
-                8px;
+                9px;
+
         }
 
 
-        .role-name span {
+        .role-cell span {
 
             display:
                 block;
@@ -1029,17 +1274,24 @@
                 2px;
 
             color:
-                var(--muted);
+                var(--text-muted);
 
             font-size:
                 7px;
+
         }
 
 
-        .badge {
+        .pill {
 
             display:
                 inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
 
             padding:
                 5px 8px;
@@ -1052,66 +1304,83 @@
 
             font-weight:
                 800;
+
         }
 
 
-        .badge.admin {
-
-            color:
-                var(--primary);
-
-            background:
-                var(--primary-soft);
-        }
-
-
-        .badge.member {
-
-            color:
-                var(--soft);
-
-            background:
-                #f3f4f6;
-        }
-
-
-        .badge.system {
-
-            color:
-                var(--blue);
-
-            background:
-                var(--blue-soft);
-        }
-
-
-        .badge.custom {
+        .pill.green {
 
             color:
                 var(--green);
 
             background:
                 var(--green-soft);
+
         }
 
 
-        .actions {
+        .pill.red {
+
+            color:
+                var(--red);
+
+            background:
+                var(--red-soft);
+
+        }
+
+
+        .pill.orange {
+
+            color:
+                var(--orange);
+
+            background:
+                var(--orange-soft);
+
+        }
+
+
+        .pill.blue {
+
+            color:
+                var(--blue);
+
+            background:
+                var(--blue-soft);
+
+        }
+
+
+        .pill.gray {
+
+            color:
+                var(--text-soft);
+
+            background:
+                #f3f4f6;
+
+        }
+
+
+        .action-group {
 
             display:
                 flex;
 
             gap:
                 5px;
+
         }
 
 
         .action {
 
             width:
-                32px;
+                31px;
 
             height:
-                32px;
+                31px;
 
             display:
                 grid;
@@ -1125,11 +1394,12 @@
             border-radius:
                 9px;
 
-            color:
-                var(--soft);
-
             background:
                 white;
+
+            color:
+                var(--text-soft);
+
         }
 
 
@@ -1139,28 +1409,154 @@
                 var(--primary);
 
             border-color:
-                #d7cbed;
+                #d9cef3;
+
         }
 
 
-        .empty,
-        .loading {
+        .action.danger:hover {
+
+            color:
+                var(--red);
+
+            background:
+                var(--red-soft);
+
+            border-color:
+                #fecaca;
+
+        }
+
+
+        .loading,
+        .empty {
 
             padding:
-                55px 20px;
+                60px 20px;
 
             text-align:
                 center;
 
             color:
-                var(--muted);
+                var(--text-muted);
 
             font-size:
                 9px;
+
         }
 
 
-        .overlay {
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        .pagination {
+
+            min-height:
+                64px;
+
+            padding:
+                0 18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+        }
+
+
+        .pagination-info {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+        }
+
+
+        .pages {
+
+            display:
+                flex;
+
+            gap:
+                5px;
+
+        }
+
+
+        .page-btn {
+
+            width:
+                31px;
+
+            height:
+                31px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            background:
+                white;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .page-btn.active {
+
+            color:
+                white;
+
+            background:
+                var(--primary);
+
+            border-color:
+                var(--primary);
+
+        }
+
+
+        .page-btn:disabled {
+
+            opacity:
+                .4;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal-backdrop {
 
             display:
                 none;
@@ -1172,25 +1568,274 @@
                 0;
 
             z-index:
-                1100;
+                2000;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
 
             background:
-                rgba(0,0,0,.45);
+                rgba(12,10,18,.58);
+
         }
 
 
-        @media (max-width: 1050px) {
+        .modal-backdrop.show {
 
-            .grid {
+            display:
+                flex;
+
+        }
+
+
+        .modal {
+
+            width:
+                min(100%, 620px);
+
+            max-height:
+                90vh;
+
+            overflow:
+                auto;
+
+            border-radius:
+                18px;
+
+            background:
+                white;
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,.18);
+
+        }
+
+
+        .modal-header {
+
+            padding:
+                18px 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .modal-header h3 {
+
+            font-size:
+                14px;
+
+        }
+
+
+        .close-modal {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+        }
+
+
+        .modal-body {
+
+            padding:
+                20px;
+
+        }
+
+
+        .form-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                12px;
+
+        }
+
+
+        .form-group {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-label {
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .checkbox-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            min-height:
+                42px;
+
+            padding:
+                0 11px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+        }
+
+
+        .checkbox-row input {
+
+            accent-color:
+                var(--primary);
+
+        }
+
+
+        .checkbox-row span {
+
+            font-size:
+                8px;
+
+            color:
+                var(--text-soft);
+
+        }
+
+
+        .modal-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                flex-end;
+
+            gap:
+                8px;
+
+            margin-top:
+                18px;
+
+        }
+
+
+        .delete-note {
+
+            padding:
+                11px 12px;
+
+            margin-top:
+                15px;
+
+            color:
+                #991b1b;
+
+            background:
+                var(--red-soft);
+
+            border:
+                1px solid #fecaca;
+
+            border-radius:
+                10px;
+
+            font-size:
+                8px;
+
+        }
+
+
+        @media (max-width:1050px) {
+
+            .stats {
 
                 grid-template-columns:
-                    repeat(2,1fr);
+                    repeat(2, 1fr);
+
+            }
+
+
+            .filters {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .refresh-btn {
+
+                width:
+                    100%;
+
             }
 
         }
 
 
-        @media (max-width: 850px) {
+        @media (max-width:850px) {
 
             .sidebar {
 
@@ -1199,6 +1844,7 @@
 
                 transition:
                     .25s ease;
+
             }
 
 
@@ -1206,6 +1852,7 @@
 
                 transform:
                     translateX(0);
+
             }
 
 
@@ -1213,6 +1860,7 @@
 
                 margin-left:
                     0;
+
             }
 
 
@@ -1220,27 +1868,19 @@
 
                 display:
                     grid;
-            }
 
-
-            .overlay.show {
-
-                display:
-                    block;
             }
 
         }
 
 
-        @media (max-width: 650px) {
+        @media (max-width:650px) {
 
             .content {
 
                 width:
-                    min(
-                        calc(100% - 24px),
-                        1450px
-                    );
+                    calc(100% - 24px);
+
             }
 
 
@@ -1248,6 +1888,7 @@
 
                 padding:
                     0 13px;
+
             }
 
 
@@ -1255,6 +1896,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1265,6 +1907,7 @@
 
                 padding-left:
                     0;
+
             }
 
 
@@ -1272,6 +1915,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1282,20 +1926,46 @@
 
                 flex-direction:
                     column;
+
             }
 
-        }
 
-
-        @media (max-width: 420px) {
-
-            .grid {
+            .stats,
+            .filters,
+            .form-grid {
 
                 grid-template-columns:
                     1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+
+            .pagination {
+
+                min-height:
+                    auto;
+
+                padding:
+                    14px 18px;
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
             }
 
         }
+
 
     </style>
 
@@ -1305,18 +1975,18 @@
 <body>
 
 
-<div
-    class="overlay"
-    id="overlay"
-></div>
-
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
 
 <aside
     class="sidebar"
     id="sidebar"
 >
 
+
     <div class="sidebar-header">
+
 
         <img
             src="../assets/logo1/logo1.png"
@@ -1327,6 +1997,7 @@
                 this.src='../assets/logo1/apple-touch-icon.png';
             "
         >
+
 
         <div>
 
@@ -1339,6 +2010,7 @@
             </span>
 
         </div>
+
 
     </div>
 
@@ -1354,9 +2026,11 @@
 
     <div class="sidebar-section">
 
+
         <div class="sidebar-label">
             Overview
         </div>
+
 
         <a
             href="dashboard.html"
@@ -1369,10 +2043,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             Members
@@ -1438,10 +2114,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             Content
@@ -1471,10 +2149,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             Connections
@@ -1516,10 +2196,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             Premium & Payments
@@ -1561,10 +2243,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             Safety
@@ -1606,10 +2290,12 @@
 
         </a>
 
+
     </div>
 
 
     <div class="sidebar-section">
+
 
         <div class="sidebar-label">
             System
@@ -1688,10 +2374,16 @@
 
         </a>
 
+
     </div>
+
 
 </aside>
 
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
 
 <div class="main">
 
@@ -1703,9 +2395,9 @@
 
 
             <button
+                type="button"
                 class="menu-btn"
                 id="menuBtn"
-                type="button"
             >
 
                 <i class="fa-solid fa-bars"></i>
@@ -1720,7 +2412,7 @@
                 </h1>
 
                 <p>
-                    Manage access roles used across LOVEMI.
+                    Define LOVEMI access levels and administrative roles.
                 </p>
 
             </div>
@@ -1757,7 +2449,7 @@
             <a
                 href="../index.html"
                 class="top-icon"
-                title="Website"
+                title="Open website"
             >
 
                 <i class="fa-solid fa-globe"></i>
@@ -1770,9 +2462,9 @@
 
                 <img
                     id="adminAvatar"
-                    class="admin-avatar"
                     src="../assets/images/defaults/default-avatar-male.png"
                     alt="Administrator"
+                    class="admin-avatar"
                 >
 
 
@@ -1811,85 +2503,146 @@
                 </h2>
 
                 <p>
-                    Control which areas of LOVEMI each role can access.
+                    Create and maintain system and custom LOVEMI roles.
                 </p>
 
             </div>
 
 
-            <a
-                href="admin-details.html?role=create"
+            <button
+                type="button"
                 class="btn btn-primary"
-                id="createRoleLink"
+                id="addRoleBtn"
             >
 
-                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-user-tag"></i>
 
-                Create Role
+                Add Role
 
-            </a>
+            </button>
 
 
         </div>
 
 
         <div
-            class="alert"
             id="alertBox"
+            class="alert"
+            role="alert"
         ></div>
 
 
-        <section class="grid">
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
 
 
-            <div class="stat">
+            <div class="stat-card">
 
-                <span>
-                    Total Roles
-                </span>
+                <div class="stat-top">
 
-                <strong id="totalRoles">
-                    —
-                </strong>
+                    <div>
 
-            </div>
+                        <span>
+                            Total Roles
+                        </span>
 
+                        <strong id="totalRoles">
+                            —
+                        </strong>
 
-            <div class="stat">
+                    </div>
 
-                <span>
-                    Admin Roles
-                </span>
+                    <div class="stat-icon">
 
-                <strong id="adminRoles">
-                    —
-                </strong>
+                        <i class="fa-solid fa-user-tag"></i>
 
-            </div>
+                    </div>
 
-
-            <div class="stat">
-
-                <span>
-                    System Roles
-                </span>
-
-                <strong id="systemRoles">
-                    —
-                </strong>
+                </div>
 
             </div>
 
 
-            <div class="stat">
+            <div class="stat-card">
 
-                <span>
-                    Custom Roles
-                </span>
+                <div class="stat-top">
 
-                <strong id="customRoles">
-                    —
-                </strong>
+                    <div>
+
+                        <span>
+                            Admin Roles
+                        </span>
+
+                        <strong id="adminRoles">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            System Roles
+                        </span>
+
+                        <strong id="systemRoles">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Custom Roles
+                        </span>
+
+                        <strong id="customRoles">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1897,35 +2650,104 @@
         </section>
 
 
-        <section class="card">
+        <!-- =================================================
+             FILTER
+        ================================================== -->
+
+        <section class="filter-card">
 
 
-            <div class="card-header">
+            <div class="filters">
 
-                <div>
 
-                    <h3>
-                        Available Roles
-                    </h3>
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="field"
+                    placeholder="Search role name, slug or description..."
+                >
 
-                    <span>
-                        Roles are stored in the LOVEMI roles table.
-                    </span>
 
-                </div>
+                <select
+                    id="adminFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Types
+                    </option>
+
+                    <option value="admin">
+                        Admin Roles
+                    </option>
+
+                    <option value="member">
+                        Member / Non-admin
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="systemFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Role Classes
+                    </option>
+
+                    <option value="system">
+                        System Roles
+                    </option>
+
+                    <option value="custom">
+                        Custom Roles
+                    </option>
+
+                </select>
 
 
                 <button
                     type="button"
-                    class="btn btn-light"
-                    id="refreshButton"
+                    class="refresh-btn"
+                    id="refreshBtn"
+                    title="Refresh"
                 >
 
                     <i class="fa-solid fa-rotate"></i>
 
-                    Refresh
-
                 </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <section class="table-card">
+
+
+            <div class="table-header">
+
+
+                <div>
+
+                    <h3>
+                        LOVEMI Roles
+                    </h3>
+
+                    <span>
+                        Roles control which users are members or administrators.
+                    </span>
+
+                </div>
+
 
             </div>
 
@@ -1949,15 +2771,15 @@
                             </th>
 
                             <th>
+                                Description
+                            </th>
+
+                            <th>
                                 Type
                             </th>
 
                             <th>
-                                Admin Role
-                            </th>
-
-                            <th>
-                                Permissions
+                                Class
                             </th>
 
                             <th>
@@ -1975,7 +2797,6 @@
 
                     <tbody id="rolesBody">
 
-
                         <tr>
 
                             <td
@@ -1991,11 +2812,30 @@
 
                         </tr>
 
-
                     </tbody>
 
 
                 </table>
+
+
+            </div>
+
+
+            <div class="pagination">
+
+
+                <div
+                    class="pagination-info"
+                    id="paginationInfo"
+                >
+                    Loading...
+                </div>
+
+
+                <div
+                    class="pages"
+                    id="pages"
+                ></div>
 
 
             </div>
@@ -2010,35 +2850,354 @@
 </div>
 
 
+<!-- =========================================================
+     ROLE MODAL
+========================================================== -->
+
+<div
+    class="modal-backdrop"
+    id="roleModal"
+>
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+
+            <h3 id="modalTitle">
+                Add Role
+            </h3>
+
+
+            <button
+                type="button"
+                class="close-modal"
+                id="closeModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <form id="roleForm">
+
+
+                <input
+                    type="hidden"
+                    id="roleId"
+                    name="role_id"
+                    value=""
+                >
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="roleName"
+                        >
+                            Role Name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="roleName"
+                            class="field"
+                            name="name"
+                            maxlength="80"
+                            placeholder="Example: Content Manager"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="roleSlug"
+                        >
+                            Role Slug
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="roleSlug"
+                            class="field"
+                            name="slug"
+                            maxlength="80"
+                            placeholder="Example: content_manager"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label
+                            class="form-label"
+                            for="roleDescription"
+                        >
+                            Description
+                        </label>
+
+
+                        <textarea
+                            id="roleDescription"
+                            class="field"
+                            name="description"
+                            maxlength="255"
+                            placeholder="Describe what this role is used for..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                        >
+                            Access Type
+                        </label>
+
+
+                        <label class="checkbox-row">
+
+                            <input
+                                type="checkbox"
+                                id="isAdminRole"
+                                name="is_admin_role"
+                                value="1"
+                            >
+
+                            <span>
+                                This is an administrator role
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                        >
+                            System Role
+                        </label>
+
+
+                        <label class="checkbox-row">
+
+                            <input
+                                type="checkbox"
+                                id="isSystemRole"
+                                name="is_system_role"
+                                value="1"
+                            >
+
+                            <span>
+                                Mark as a system role
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="delete-note">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    System roles are protected from deletion.
+                    Changing administrator status can change who can access the Admin Panel.
+
+                </div>
+
+
+                <div class="modal-actions">
+
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        id="cancelModal"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveRoleBtn"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Role
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
 <script>
 
 "use strict";
 
 
-const API =
-    "../admin-api/roles/list.php";
+/* =========================================================
+   API
+========================================================= */
 
-const LOGOUT_API =
-    "../api/auth/logout.php";
+const API = {
+
+    list:
+        "../admin-api/roles/list.php",
+
+    create:
+        "../admin-api/roles/create.php",
+
+    update:
+        "../admin-api/roles/update.php",
+
+    delete:
+        "../admin-api/roles/delete.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
 
 
-const sidebar =
-    document.getElementById("sidebar");
+let currentPage = 1;
 
-const overlay =
-    document.getElementById("overlay");
+let totalPages = 1;
+
+let searchTimer = null;
+
+let editingRole = false;
+
+
+/* =========================================================
+   DOM
+========================================================= */
 
 const rolesBody =
-    document.getElementById("rolesBody");
+    document.getElementById(
+        "rolesBody"
+    );
+
 
 const alertBox =
-    document.getElementById("alertBox");
+    document.getElementById(
+        "alertBox"
+    );
 
 
-function escapeHTML(value) {
+const roleModal =
+    document.getElementById(
+        "roleModal"
+    );
+
+
+const roleForm =
+    document.getElementById(
+        "roleForm"
+    );
+
+
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
+
+
+const roleId =
+    document.getElementById(
+        "roleId"
+    );
+
+
+const roleName =
+    document.getElementById(
+        "roleName"
+    );
+
+
+const roleSlug =
+    document.getElementById(
+        "roleSlug"
+    );
+
+
+const roleDescription =
+    document.getElementById(
+        "roleDescription"
+    );
+
+
+const isAdminRole =
+    document.getElementById(
+        "isAdminRole"
+    );
+
+
+const isSystemRole =
+    document.getElementById(
+        "isSystemRole"
+    );
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(
+    value
+) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     div.textContent =
         value ?? "";
@@ -2048,33 +3207,40 @@ function escapeHTML(value) {
 }
 
 
-function formatDate(value) {
+function formatDate(
+    value
+) {
 
     if (!value) {
+
         return "—";
+
     }
 
-    const d =
+
+    const date =
         new Date(
-            String(value).replace(" ", "T")
+            String(
+                value
+            ).replace(
+                " ",
+                "T"
+            )
         );
+
 
     if (
         Number.isNaN(
-            d.getTime()
+            date.getTime()
         )
     ) {
+
         return value;
+
     }
 
-    return d.toLocaleString(
-        undefined,
-        {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-        }
-    );
+
+    return date.toLocaleString();
 
 }
 
@@ -2104,38 +3270,42 @@ function hideAlert() {
 }
 
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+function openRoleModal() {
 
-document
-    .getElementById("menuBtn")
-    .addEventListener(
-        "click",
-        function() {
-
-            sidebar.classList.toggle("open");
-
-            overlay.classList.toggle("show");
-
-        }
+    roleModal.classList.add(
+        "show"
     );
 
+}
 
-overlay.addEventListener(
-    "click",
-    function() {
 
-        sidebar.classList.remove("open");
+function closeRoleModal() {
 
-        overlay.classList.remove("show");
+    roleModal.classList.remove(
+        "show"
+    );
 
-    }
-);
+}
+
+
+function resetRoleForm() {
+
+    roleForm.reset();
+
+    roleId.value =
+        "";
+
+    isAdminRole.checked =
+        false;
+
+    isSystemRole.checked =
+        false;
+
+}
 
 
 /* =========================================================
-   LOAD
+   LOAD ROLES
 ========================================================= */
 
 async function loadRoles() {
@@ -2162,12 +3332,53 @@ async function loadRoles() {
         `;
 
 
+    const params =
+        new URLSearchParams({
+
+            page:
+                String(
+                    currentPage
+                ),
+
+            limit:
+                "20",
+
+            search:
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value
+                    .trim(),
+
+            admin:
+                document
+                    .getElementById(
+                        "adminFilter"
+                    )
+                    .value,
+
+            system:
+                document
+                    .getElementById(
+                        "systemFilter"
+                    )
+                    .value
+
+        });
+
+
     try {
 
         const response =
             await fetch(
-                API,
+                API.list
+                +
+                "?"
+                +
+                params.toString(),
                 {
+
                     method:
                         "GET",
 
@@ -2183,7 +3394,7 @@ async function loadRoles() {
                             "application/json",
 
                         "Cache-Control":
-                            "no-cache, no-store, max-age=0"
+                            "no-cache"
 
                     }
 
@@ -2196,7 +3407,8 @@ async function loadRoles() {
 
 
         if (
-            response.status === 401
+            response.status ===
+            401
         ) {
 
             window.location.href =
@@ -2212,7 +3424,8 @@ async function loadRoles() {
 
 
         if (
-            response.status === 403
+            response.status ===
+            403
         ) {
 
             window.location.href =
@@ -2241,13 +3454,17 @@ async function loadRoles() {
         renderRoles(
             result.data
             ||
-            result
+            {}
         );
 
 
-    } catch(error) {
+    } catch (
+        error
+    ) {
 
-        console.error(error);
+        console.error(
+            error
+        );
 
 
         rolesBody.innerHTML =
@@ -2258,8 +3475,6 @@ async function loadRoles() {
                     colspan="7"
                     class="empty"
                 >
-
-                    <i class="fa-solid fa-triangle-exclamation"></i>
 
                     ${escapeHTML(
                         error.message
@@ -2273,8 +3488,6 @@ async function loadRoles() {
 
         showAlert(
             error.message
-            ||
-            "Unable to load roles."
         );
 
     }
@@ -2286,32 +3499,34 @@ async function loadRoles() {
    RENDER
 ========================================================= */
 
-function renderRoles(data) {
+function renderRoles(
+    data
+) {
 
     const roles =
-        Array.isArray(data.roles)
+        Array.isArray(
+            data.roles
+        )
             ?
             data.roles
             :
             [];
 
 
-    const currentAdmin =
-        data.current_admin
+    const summary =
+        data.summary
         ||
         {};
 
 
-    const permissions =
-        Array.isArray(data.permissions)
-            ?
-            data.permissions
-            :
-            [];
+    const pagination =
+        data.pagination
+        ||
+        {};
 
 
-    const summary =
-        data.summary
+    const currentAdmin =
+        data.current_admin
         ||
         {};
 
@@ -2352,10 +3567,8 @@ function renderRoles(data) {
         Number(
             summary.total_roles
             ||
-            roles.length
-            ||
             0
-        );
+        ).toLocaleString();
 
 
     document.getElementById(
@@ -2365,7 +3578,7 @@ function renderRoles(data) {
             summary.admin_roles
             ||
             0
-        );
+        ).toLocaleString();
 
 
     document.getElementById(
@@ -2375,7 +3588,7 @@ function renderRoles(data) {
             summary.system_roles
             ||
             0
-        );
+        ).toLocaleString();
 
 
     document.getElementById(
@@ -2385,7 +3598,7 @@ function renderRoles(data) {
             summary.custom_roles
             ||
             0
-        );
+        ).toLocaleString();
 
 
     if (
@@ -2401,6 +3614,8 @@ function renderRoles(data) {
                     class="empty"
                 >
 
+                    <i class="fa-solid fa-user-tag"></i>
+
                     No roles found.
 
                 </td>
@@ -2408,219 +3623,1146 @@ function renderRoles(data) {
             </tr>
             `;
 
-        return;
+    } else {
 
-    }
-
-
-    rolesBody.innerHTML =
-        roles.map(
-            role => {
-
-                const isAdmin =
-                    Number(
-                        role.is_admin_role
-                        ||
-                        0
-                    ) === 1;
+        rolesBody.innerHTML =
+            roles.map(
+                role => {
 
 
-                const isSystem =
-                    Number(
-                        role.is_system_role
-                        ||
-                        0
-                    ) === 1;
+                    const admin =
+                        Number(
+                            role.is_admin_role
+                        ) ===
+                        1;
 
 
-                let typeClass =
-                    isSystem
-                        ?
-                        "system"
-                        :
-                        "custom";
+                    const system =
+                        Number(
+                            role.is_system_role
+                        ) ===
+                        1;
 
 
-                let typeText =
-                    isSystem
-                        ?
-                        "System"
-                        :
-                        "Custom";
+                    const adminClass =
+                        admin
+                            ?
+                            "blue"
+                            :
+                            "gray";
 
 
-                const permissionCount =
-                    Number(
-                        role.permission_count
-                        ||
-                        0
-                    );
+                    const systemClass =
+                        system
+                            ?
+                            "orange"
+                            :
+                            "green";
 
 
-                return `
+                    return `
 
-                <tr>
-
-
-                    <td>
-
-                        <div class="role-name">
+                    <tr>
 
 
-                            <div class="role-icon">
+                        <td>
 
-                                <i class="fa-solid fa-user-tag"></i>
-
-                            </div>
-
-
-                            <div>
+                            <div class="role-cell">
 
                                 <strong>
                                     ${escapeHTML(
                                         role.name
                                         ||
-                                        ""
+                                        "Unnamed role"
                                     )}
                                 </strong>
 
                                 <span>
-                                    ${escapeHTML(
-                                        role.description
-                                        ||
-                                        "No description"
+                                    ID: ${Number(
+                                        role.id
                                     )}
                                 </span>
 
                             </div>
 
-
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <code>
+                            <code>
+                                ${escapeHTML(
+                                    role.slug
+                                    ||
+                                    ""
+                                )}
+                            </code>
+
+                        </td>
+
+
+                        <td>
+
                             ${escapeHTML(
-                                role.slug
+                                role.description
                                 ||
-                                ""
+                                "No description"
                             )}
-                        </code>
 
-                    </td>
-
-
-                    <td>
-
-                        <span
-                            class="badge ${typeClass}"
-                        >
-
-                            ${typeText}
-
-                        </span>
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <span
-                            class="badge ${
-                                isAdmin
-                                    ?
-                                    "admin"
-                                    :
-                                    "member"
-                            }"
-                        >
-
-                            ${
-                                isAdmin
-                                    ?
-                                    "Yes"
-                                    :
-                                    "No"
-                            }
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-
-                        <span
-                            class="badge custom"
-                        >
-
-                            ${permissionCount}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-
-                        ${escapeHTML(
-                            formatDate(
-                                role.created_at
-                            )
-                        )}
-
-                    </td>
-
-
-                    <td>
-
-                        <div class="actions">
-
-
-                            <a
-                                class="action"
-                                title="Manage permissions"
-                                href="permissions.html?role_id=${encodeURIComponent(
-                                    role.id
-                                )}"
+                            <span
+                                class="pill ${adminClass}"
                             >
 
-                                <i class="fa-solid fa-key"></i>
+                                ${
+                                    admin
+                                        ?
+                                        "Administrator"
+                                        :
+                                        "Member Access"
+                                }
 
-                            </a>
+                            </span>
+
+                        </td>
 
 
-                        </div>
+                        <td>
 
-                    </td>
+                            <span
+                                class="pill ${systemClass}"
+                            >
+
+                                ${
+                                    system
+                                        ?
+                                        "System"
+                                        :
+                                        "Custom"
+                                }
+
+                            </span>
+
+                        </td>
 
 
-                </tr>
+                        <td>
 
-                `;
+                            ${escapeHTML(
+                                formatDate(
+                                    role.created_at
+                                )
+                            )}
 
-            }
-        ).join("");
+                        </td>
+
+
+                        <td>
+
+                            <div class="action-group">
+
+
+                                <button
+                                    type="button"
+                                    class="action"
+                                    title="Edit role"
+                                    onclick="editRole(${Number(
+                                        role.id
+                                    )})"
+                                >
+
+                                    <i class="fa-regular fa-pen-to-square"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="action"
+                                    title="View permissions"
+                                    onclick="viewPermissions(${Number(
+                                        role.id
+                                    )})"
+                                >
+
+                                    <i class="fa-solid fa-key"></i>
+
+                                </button>
+
+
+                                ${
+                                    system
+                                        ?
+                                        `
+                                        <button
+                                            type="button"
+                                            class="action"
+                                            title="System role cannot be deleted"
+                                            disabled
+                                        >
+
+                                            <i class="fa-solid fa-lock"></i>
+
+                                        </button>
+                                        `
+                                        :
+                                        `
+                                        <button
+                                            type="button"
+                                            class="action danger"
+                                            title="Delete role"
+                                            onclick="deleteRole(${Number(
+                                                role.id
+                                            )}, '${escapeJS(
+                                                role.name
+                                            )}')"
+                                        >
+
+                                            <i class="fa-solid fa-trash"></i>
+
+                                        </button>
+                                        `
+                                }
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    currentPage =
+        Number(
+            pagination.page
+            ||
+            1
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                pagination.pages
+                ||
+                1
+            )
+        );
+
+
+    const total =
+        Number(
+            pagination.total
+            ||
+            0
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ||
+            20
+        );
+
+
+    const first =
+        total
+            ?
+            (
+                (
+                    currentPage -
+                    1
+                )
+                *
+                limit
+            )
+            +
+            1
+            :
+            0;
+
+
+    const last =
+        Math.min(
+            currentPage * limit,
+            total
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total
+            ?
+            `Showing ${first}–${last} of ${total.toLocaleString()} roles`
+            :
+            "No roles";
+
+
+    renderPages();
 
 }
 
 
+function escapeJS(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        )
+        .replace(
+            /\r/g,
+            "\\r"
+        );
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPages() {
+
+    const pages =
+        document.getElementById(
+            "pages"
+        );
+
+
+    let html =
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage - 1})"
+            ${currentPage <= 1 ? "disabled" : ""}
+        >
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let page = start;
+        page <= end;
+        page++
+    ) {
+
+        html +=
+            `
+            <button
+                type="button"
+                class="page-btn ${
+                    page === currentPage
+                        ?
+                        "active"
+                        :
+                        ""
+                }"
+                onclick="goPage(${page})"
+            >
+
+                ${page}
+
+            </button>
+            `;
+
+    }
+
+
+    html +=
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage + 1})"
+            ${currentPage >= totalPages ? "disabled" : ""}
+        >
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+        `;
+
+
+    pages.innerHTML =
+        html;
+
+}
+
+
+function goPage(
+    page
+) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    loadRoles();
+
+}
+
+
+/* =========================================================
+   OPEN ADD
+========================================================= */
+
 document
-    .getElementById("refreshButton")
+    .getElementById(
+        "addRoleBtn"
+    )
     .addEventListener(
         "click",
-        loadRoles
+        () => {
+
+            editingRole =
+                false;
+
+            modalTitle.textContent =
+                "Add Role";
+
+            resetRoleForm();
+
+            openRoleModal();
+
+        }
+    );
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+document
+    .getElementById(
+        "closeModal"
+    )
+    .addEventListener(
+        "click",
+        closeRoleModal
     );
 
 
 document
-    .getElementById("logoutLink")
+    .getElementById(
+        "cancelModal"
+    )
     .addEventListener(
         "click",
-        async function(event) {
+        closeRoleModal
+    );
+
+
+roleModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            roleModal
+        ) {
+
+            closeRoleModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTO SLUG
+========================================================= */
+
+roleName.addEventListener(
+    "input",
+    function() {
+
+        if (
+            editingRole
+        ) {
+
+            return;
+
+        }
+
+
+        roleSlug.value =
+            this.value
+                .toLowerCase()
+                .trim()
+                .replace(
+                    /[^a-z0-9]+/g,
+                    "_"
+                )
+                .replace(
+                    /^_+|_+$/g,
+                    ""
+                );
+
+    }
+);
+
+
+/* =========================================================
+   CREATE / UPDATE
+========================================================= */
+
+roleForm.addEventListener(
+    "submit",
+    async function(
+        event
+    ) {
+
+        event.preventDefault();
+
+
+        const saveButton =
+            document.getElementById(
+                "saveRoleBtn"
+            );
+
+
+        const payload = {
+
+            role_id:
+                roleId.value
+                    ?
+                    Number(
+                        roleId.value
+                    )
+                    :
+                    null,
+
+            name:
+                roleName.value.trim(),
+
+            slug:
+                roleSlug.value
+                    .trim()
+                    .toLowerCase(),
+
+            description:
+                roleDescription.value.trim(),
+
+            is_admin_role:
+                isAdminRole.checked
+                    ?
+                    1
+                    :
+                    0,
+
+            is_system_role:
+                isSystemRole.checked
+                    ?
+                    1
+                    :
+                    0
+
+        };
+
+
+        if (
+            !payload.name
+            ||
+            !payload.slug
+        ) {
+
+            showAlert(
+                "Role name and slug are required."
+            );
+
+            return;
+
+        }
+
+
+        saveButton.disabled =
+            true;
+
+
+        saveButton.innerHTML =
+            `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Saving...
+            `;
+
+
+        try {
+
+            const endpoint =
+                editingRole
+                    ?
+                    API.update
+                    :
+                    API.create;
+
+
+            const response =
+                await fetch(
+                    endpoint,
+                    {
+
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store",
+
+                        headers: {
+
+                            "Accept":
+                                "application/json",
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (
+                response.status ===
+                401
+            ) {
+
+                window.location.href =
+                    "../login.html?redirect="
+                    +
+                    encodeURIComponent(
+                        "admin/roles.html"
+                    );
+
+                return;
+
+            }
+
+
+            if (
+                !response.ok
+                ||
+                result.success !== true
+            ) {
+
+                throw new Error(
+                    result.message
+                    ||
+                    "Unable to save role."
+                );
+
+            }
+
+
+            closeRoleModal();
+
+
+            showAlert(
+                result.message
+                ||
+                "Role saved successfully.",
+                "success"
+            );
+
+
+            currentPage =
+                1;
+
+
+            loadRoles();
+
+
+        } catch (
+            error
+        ) {
+
+            showAlert(
+                error.message
+            );
+
+        } finally {
+
+            saveButton.disabled =
+                false;
+
+
+            saveButton.innerHTML =
+                `
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Role
+                `;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   EDIT ROLE
+========================================================= */
+
+async function editRole(
+    id
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                API.list
+                +
+                "?role_id="
+                +
+                encodeURIComponent(
+                    id
+                ),
+                {
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json"
+
+                    }
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load role."
+            );
+
+        }
+
+
+        const roles =
+            result.data
+            &&
+            Array.isArray(
+                result.data.roles
+            )
+                ?
+                result.data.roles
+                :
+                [];
+
+
+        const role =
+            roles.find(
+                item =>
+                    Number(
+                        item.id
+                    ) ===
+                    Number(
+                        id
+                    )
+            );
+
+
+        if (
+            !role
+        ) {
+
+            throw new Error(
+                "Role could not be found."
+            );
+
+        }
+
+
+        editingRole =
+            true;
+
+
+        modalTitle.textContent =
+            "Edit Role";
+
+
+        resetRoleForm();
+
+
+        roleId.value =
+            role.id;
+
+
+        roleName.value =
+            role.name
+            ||
+            "";
+
+
+        roleSlug.value =
+            role.slug
+            ||
+            "";
+
+
+        roleDescription.value =
+            role.description
+            ||
+            "";
+
+
+        isAdminRole.checked =
+            Number(
+                role.is_admin_role
+            ) === 1;
+
+
+        isSystemRole.checked =
+            Number(
+                role.is_system_role
+            ) === 1;
+
+
+        openRoleModal();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   VIEW PERMISSIONS
+========================================================= */
+
+function viewPermissions(
+    id
+) {
+
+    window.location.href =
+        "permissions.html?role_id="
+        +
+        encodeURIComponent(
+            id
+        );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteRole(
+    id,
+    name
+) {
+
+    if (
+        !window.confirm(
+            `Delete the role "${name}"? This cannot be undone.`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.delete,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                role_id:
+                                    Number(
+                                        id
+                                    )
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to delete role."
+            );
+
+        }
+
+
+        showAlert(
+            result.message
+            ||
+            "Role deleted successfully.",
+            "success"
+        );
+
+
+        loadRoles();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH / FILTER
+========================================================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            clearTimeout(
+                searchTimer
+            );
+
+
+            searchTimer =
+                setTimeout(
+                    () => {
+
+                        currentPage =
+                            1;
+
+                        loadRoles();
+
+                    },
+                    350
+                );
+
+        }
+    );
+
+
+[
+    "adminFilter",
+    "systemFilter"
+].forEach(
+    id => {
+
+        document
+            .getElementById(
+                id
+            )
+            .addEventListener(
+                "change",
+                () => {
+
+                    currentPage =
+                        1;
+
+                    loadRoles();
+
+                }
+            );
+
+    }
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+document
+    .getElementById(
+        "refreshBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            currentPage =
+                1;
+
+            loadRoles();
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutLink"
+    )
+    .addEventListener(
+        "click",
+        async event => {
 
             event.preventDefault();
 
@@ -2628,8 +4770,9 @@ document
             try {
 
                 await fetch(
-                    LOGOUT_API,
+                    API.logout,
                     {
+
                         method:
                             "POST",
 
@@ -2638,12 +4781,17 @@ document
 
                         cache:
                             "no-store"
+
                     }
                 );
 
-            } catch(error) {
+            } catch (
+                error
+            ) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
             }
 
@@ -2654,6 +4802,10 @@ document
         }
     );
 
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 loadRoles();
 
