@@ -1,0 +1,4178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots"
+          content="noindex,nofollow">
+
+    <meta name="theme-color"
+          content="#6d28d9">
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+    <title>Connections | LOVEMI Admin</title>
+
+    <!-- =====================================================
+         LOVEMI TAB ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+    <style>
+
+        :root {
+
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
+
+            --accent:#db2777;
+            --green:#16a34a;
+            --green-soft:#ecfdf5;
+
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+
+            --orange:#d97706;
+            --orange-soft:#fffbeb;
+
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
+
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9898a1;
+
+            --background:#f6f6fa;
+            --border:#e7e7ee;
+
+            --sidebar-width:258px;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html {
+            scroll-behavior:smooth;
+        }
+
+        body {
+
+            min-height:100vh;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            color:var(--text);
+
+            background:var(--background);
+
+            line-height:1.55;
+        }
+
+        a {
+            color:inherit;
+            text-decoration:none;
+        }
+
+        button,
+        input,
+        select {
+            font-family:inherit;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position:fixed;
+
+            inset:0 auto 0 0;
+
+            width:var(--sidebar-width);
+
+            z-index:1200;
+
+            overflow-y:auto;
+
+            color:#fff;
+
+            background:#17141f;
+        }
+
+        .sidebar-header {
+
+            min-height:82px;
+
+            padding:17px 18px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:10px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+        .sidebar-logo {
+
+            width:46px;
+
+            height:46px;
+
+            object-fit:contain;
+
+            border-radius:12px;
+        }
+
+        .sidebar-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:22px;
+
+            font-weight:800;
+        }
+
+        .sidebar-subtitle {
+
+            display:block;
+
+            margin-top:2px;
+
+            color:#9f9aa8;
+
+            font-size:8px;
+
+            font-weight:800;
+
+            letter-spacing:.8px;
+        }
+
+        .admin-badge {
+
+            display:inline-flex;
+
+            align-items:center;
+
+            gap:6px;
+
+            margin:16px;
+
+            padding:7px 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius:999px;
+
+            color:#e9ddff;
+
+            background:
+                rgba(109,40,217,.16);
+
+            font-size:9px;
+
+            font-weight:800;
+        }
+
+        .sidebar-section {
+
+            padding:4px 12px;
+        }
+
+        .sidebar-label {
+
+            padding:
+                12px 10px 7px;
+
+            color:#716c7d;
+
+            font-size:8px;
+
+            font-weight:800;
+
+            text-transform:uppercase;
+
+            letter-spacing:1px;
+        }
+
+        .sidebar-link {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:11px;
+
+            margin:2px 0;
+
+            padding:10px 11px;
+
+            border-radius:10px;
+
+            color:#b7b1c2;
+
+            font-size:9px;
+
+            font-weight:600;
+
+            transition:.2s ease;
+        }
+
+        .sidebar-link i {
+
+            width:17px;
+
+            text-align:center;
+        }
+
+        .sidebar-link:hover {
+
+            color:#fff;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .sidebar-link.active {
+
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.90),
+                    rgba(219,39,119,.58)
+                );
+        }
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            min-height:100vh;
+
+            margin-left:
+                var(--sidebar-width);
+        }
+
+        .topbar {
+
+            position:sticky;
+
+            top:0;
+
+            z-index:900;
+
+            min-height:76px;
+
+            padding:
+                0 28px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:18px;
+
+            background:
+                rgba(255,255,255,.96);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            backdrop-filter:
+                blur(14px);
+        }
+
+        .topbar-left {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+        }
+
+        .menu-btn {
+
+            display:none;
+
+            width:40px;
+
+            height:40px;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+        }
+
+        .page-title h1 {
+
+            font-size:18px;
+
+            font-weight:800;
+        }
+
+        .page-title p {
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .topbar-right {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+        }
+
+        .top-icon {
+
+            width:38px;
+
+            height:38px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            color:var(--text-soft);
+
+            background:#fff;
+        }
+
+        .admin-user {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+
+            padding-left:10px;
+
+            border-left:
+                1px solid
+                var(--border);
+        }
+
+        .admin-avatar {
+
+            width:37px;
+
+            height:37px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .admin-user strong {
+
+            display:block;
+
+            font-size:8px;
+        }
+
+        .admin-user span {
+
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            width:
+                min(
+                    calc(100% - 48px),
+                    1450px
+                );
+
+            margin:auto;
+
+            padding:
+                28px 0 55px;
+        }
+
+        .heading-row {
+
+            display:flex;
+
+            align-items:flex-end;
+
+            justify-content:space-between;
+
+            gap:18px;
+
+            margin-bottom:18px;
+        }
+
+        .heading-row h2 {
+
+            font-size:23px;
+
+            font-weight:800;
+        }
+
+        .heading-row p {
+
+            margin-top:4px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .btn {
+
+            min-height:40px;
+
+            padding:
+                0 13px;
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:7px;
+
+            border:
+                1px solid transparent;
+
+            border-radius:10px;
+
+            font-size:8px;
+
+            font-weight:800;
+        }
+
+        .btn-light {
+
+            color:var(--text-soft);
+
+            background:#fff;
+
+            border-color:var(--border);
+        }
+
+        .btn-primary {
+
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+        }
+
+        .btn-danger {
+
+            color:#fff;
+
+            background:var(--red);
+        }
+
+        .btn-warning {
+
+            color:#fff;
+
+            background:var(--orange);
+        }
+
+        .alert {
+
+            display:none;
+
+            margin-bottom:16px;
+
+            padding:12px 14px;
+
+            border-radius:11px;
+
+            font-size:9px;
+        }
+
+        .alert.show {
+
+            display:block;
+        }
+
+        .alert.success {
+
+            color:#166534;
+
+            background:
+                var(--green-soft);
+
+            border:
+                1px solid
+                #bbf7d0;
+        }
+
+        .alert.error {
+
+            color:#991b1b;
+
+            background:
+                var(--red-soft);
+
+            border:
+                1px solid
+                #fecaca;
+        }
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(4,minmax(0,1fr));
+
+            gap:12px;
+
+            margin-bottom:16px;
+        }
+
+        .stat-card {
+
+            padding:18px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:15px;
+
+            background:#fff;
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,.04);
+        }
+
+        .stat-top {
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+        }
+
+        .stat-card span {
+
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .stat-card strong {
+
+            display:block;
+
+            margin-top:6px;
+
+            font-size:21px;
+        }
+
+        .stat-icon {
+
+            width:35px;
+
+            height:35px;
+
+            display:grid;
+
+            place-items:center;
+
+            border-radius:10px;
+
+            color:var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            font-size:10px;
+        }
+
+        /* =====================================================
+           FILTERS
+        ====================================================== */
+
+        .filter-card {
+
+            margin-bottom:16px;
+
+            padding:14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.04);
+        }
+
+        .filters {
+
+            display:grid;
+
+            grid-template-columns:
+                minmax(220px,1fr)
+                180px
+                165px
+                42px;
+
+            gap:9px;
+        }
+
+        .field {
+
+            width:100%;
+
+            min-height:42px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            outline:none;
+
+            color:var(--text);
+
+            background:#fff;
+
+            font-size:8px;
+        }
+
+        .field:focus {
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+        }
+
+        .refresh-btn {
+
+            width:42px;
+
+            height:42px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            color:var(--text-soft);
+
+            background:#fff;
+        }
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .panel {
+
+            overflow:hidden;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+        .panel-header {
+
+            min-height:65px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            border-bottom:
+                1px solid
+                #f0f0f4;
+        }
+
+        .panel-header h3 {
+
+            font-size:11px;
+
+            font-weight:800;
+        }
+
+        .panel-header span {
+
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .table-wrap {
+
+            overflow-x:auto;
+        }
+
+        table {
+
+            width:100%;
+
+            min-width:1050px;
+
+            border-collapse:collapse;
+        }
+
+        th,
+        td {
+
+            padding:
+                12px 14px;
+
+            text-align:left;
+
+            border-bottom:
+                1px solid
+                #f0f0f4;
+        }
+
+        th {
+
+            color:#76737c;
+
+            background:#fafafe;
+
+            font-size:7px;
+
+            text-transform:uppercase;
+
+            letter-spacing:.6px;
+        }
+
+        td {
+
+            vertical-align:middle;
+
+            font-size:8px;
+        }
+
+        tbody tr:hover {
+
+            background:#fcfbff;
+        }
+
+        .id {
+
+            color:var(--text-muted);
+
+            font-size:7px;
+
+            font-weight:800;
+        }
+
+        .person {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:9px;
+        }
+
+        .avatar {
+
+            width:36px;
+
+            height:36px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .person strong {
+
+            display:block;
+
+            font-size:8px;
+        }
+
+        .person span {
+
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .arrow {
+
+            width:30px;
+
+            height:30px;
+
+            display:grid;
+
+            place-items:center;
+
+            color:var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            border-radius:50%;
+        }
+
+        .status {
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            padding:
+                5px 8px;
+
+            border-radius:999px;
+
+            font-size:6px;
+
+            font-weight:800;
+
+            text-transform:uppercase;
+        }
+
+        .status.pending {
+
+            color:var(--orange);
+
+            background:
+                var(--orange-soft);
+        }
+
+        .status.accepted,
+        .status.connected {
+
+            color:var(--green);
+
+            background:
+                var(--green-soft);
+        }
+
+        .status.rejected,
+        .status.cancelled {
+
+            color:var(--red);
+
+            background:
+                var(--red-soft);
+        }
+
+        .status.blocked {
+
+            color:#7f1d1d;
+
+            background:#fee2e2;
+        }
+
+        .initiator {
+
+            color:var(--text-soft);
+
+            font-size:7px;
+        }
+
+        .actions {
+
+            display:flex;
+
+            gap:5px;
+        }
+
+        .action-btn {
+
+            width:31px;
+
+            height:31px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:8px;
+
+            background:#fff;
+
+            font-size:7px;
+        }
+
+        .action-btn.view {
+
+            color:var(--blue);
+
+            border-color:#bfdbfe;
+
+            background:
+                var(--blue-soft);
+        }
+
+        .action-btn.block {
+
+            color:var(--orange);
+
+            border-color:#fed7aa;
+
+            background:
+                var(--orange-soft);
+        }
+
+        .action-btn.delete {
+
+            color:#fff;
+
+            border-color:var(--red);
+
+            background:var(--red);
+        }
+
+        .loading-cell,
+        .empty-cell {
+
+            height:220px;
+
+            text-align:center;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        .pagination {
+
+            min-height:65px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:12px;
+        }
+
+        .pagination-info {
+
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .pages {
+
+            display:flex;
+
+            gap:5px;
+        }
+
+        .page-btn {
+
+            width:31px;
+
+            height:31px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:8px;
+
+            background:#fff;
+
+            font-size:8px;
+
+            font-weight:700;
+        }
+
+        .page-btn.active {
+
+            color:#fff;
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--primary);
+        }
+
+        .page-btn:disabled {
+
+            opacity:.4;
+
+            cursor:not-allowed;
+        }
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal {
+
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:2200;
+
+            align-items:center;
+
+            justify-content:center;
+
+            padding:18px;
+
+            background:
+                rgba(0,0,0,.60);
+        }
+
+        .modal.show {
+
+            display:flex;
+        }
+
+        .modal-card {
+
+            width:
+                min(
+                    100%,
+                    680px
+                );
+
+            max-height:92vh;
+
+            overflow-y:auto;
+
+            border-radius:18px;
+
+            background:#fff;
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,.25);
+        }
+
+        .modal-head {
+
+            min-height:64px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .modal-head h3 {
+
+            font-size:13px;
+        }
+
+        .close-btn {
+
+            width:35px;
+
+            height:35px;
+
+            display:grid;
+
+            place-items:center;
+
+            border:none;
+
+            border-radius:9px;
+
+            background:#f5f5f7;
+        }
+
+        .modal-body {
+
+            padding:18px;
+        }
+
+        .connection-large {
+
+            display:grid;
+
+            grid-template-columns:
+                1fr 60px 1fr;
+
+            align-items:center;
+
+            gap:12px;
+        }
+
+        .profile-box {
+
+            padding:18px;
+
+            text-align:center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:14px;
+
+            background:#fafafe;
+        }
+
+        .profile-avatar {
+
+            width:65px;
+
+            height:65px;
+
+            margin:0 auto 10px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+        }
+
+        .profile-box strong {
+
+            display:block;
+
+            font-size:10px;
+        }
+
+        .profile-box span {
+
+            display:block;
+
+            margin-top:3px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .info-grid {
+
+            display:grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:9px;
+
+            margin-top:15px;
+        }
+
+        .info-item {
+
+            padding:11px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+        }
+
+        .info-item label {
+
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .info-item strong {
+
+            display:block;
+
+            margin-top:3px;
+
+            font-size:8px;
+        }
+
+        .modal-actions {
+
+            display:flex;
+
+            gap:8px;
+
+            margin-top:16px;
+
+            justify-content:flex-end;
+        }
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width:1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+            .filters {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+        @media (max-width:850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    .25s ease;
+            }
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+
+                margin-left:0;
+            }
+
+            .menu-btn {
+
+                display:grid;
+            }
+
+        }
+
+        @media (max-width:680px) {
+
+            .topbar {
+
+                padding:0 13px;
+            }
+
+            .content {
+
+                width:
+                    calc(100% - 24px);
+            }
+
+            .top-icon {
+
+                display:none;
+            }
+
+            .admin-user {
+
+                padding-left:0;
+
+                border-left:none;
+            }
+
+            .admin-user > div {
+
+                display:none;
+            }
+
+            .heading-row {
+
+                align-items:flex-start;
+
+                flex-direction:column;
+            }
+
+            .filters {
+
+                grid-template-columns:1fr;
+            }
+
+            .refresh-btn {
+
+                width:100%;
+            }
+
+            .pagination {
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                padding:
+                    15px 18px;
+            }
+
+            .connection-large {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+        @media (max-width:430px) {
+
+            .stats {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap:8px;
+            }
+
+            .stat-card {
+
+                padding:13px;
+            }
+
+            .stat-card strong {
+
+                font-size:17px;
+            }
+
+            .info-grid {
+
+                grid-template-columns:1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+        <a
+            href="users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+        <a
+            href="profiles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+        <a
+            href="admins.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+        <a
+            href="roles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+        <a
+            href="permissions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+        <a
+            href="photos.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+        <a
+            href="posts.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+        <a
+            href="connections.html"
+            class="sidebar-link active"
+        >
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+        <a
+            href="conversations.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+        <a
+            href="messages.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+        <a
+            href="premium-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+        <a
+            href="subscriptions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+        <a
+            href="payments.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+        <a
+            href="reports.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+        <a
+            href="blocked-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+        <a
+            href="notifications.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+        <a
+            href="system-settings.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+        <a
+            href="audit-logs.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+        <a
+            href="backup.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+        <a
+            href="../dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+        <a
+            href="#"
+            class="sidebar-link"
+            id="logoutLink"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                id="menuBtn"
+                class="menu-btn"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <div class="page-title">
+
+                <h1>
+                    Connections
+                </h1>
+
+                <p>
+                    Manage member connection relationships.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="top-icon"
+            >
+                <i class="fa-regular fa-message"></i>
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="top-icon"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+
+            <div class="admin-user">
+
+                <img
+                    id="adminAvatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    class="admin-avatar"
+                    alt="Administrator"
+                >
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+
+        <div class="heading-row">
+
+            <div>
+
+                <h2>
+                    Connection Management
+                </h2>
+
+                <p>
+                    View relationships, inspect their status, remove connections and block members.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-light"
+                id="refreshTop"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            id="alertBox"
+            class="alert"
+            role="alert"
+        ></div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Total Connections
+                        </span>
+
+                        <strong id="total">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-link"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="pending">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Accepted
+                        </span>
+
+                        <strong id="accepted">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong id="rejected">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-user-xmark"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FILTER
+        ================================================== -->
+
+        <section class="filter-card">
+
+            <div class="filters">
+
+
+                <input
+                    type="search"
+                    id="search"
+                    class="field"
+                    placeholder="Search username or full name..."
+                >
+
+
+                <select
+                    id="status"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="accepted">
+                        Accepted
+                    </option>
+
+                    <option value="connected">
+                        Connected
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                    <option value="cancelled">
+                        Cancelled
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="initiatedBy"
+                    class="field"
+                >
+
+                    <option value="">
+                        Any Initiator
+                    </option>
+
+                    <option value="user">
+                        User
+                    </option>
+
+                    <option value="connected_user">
+                        Connected User
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    id="refreshBtn"
+                    title="Refresh"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <section class="panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>
+                        Connections
+                    </h3>
+
+                    <span>
+                        Records are loaded directly from the database.
+                    </span>
+
+                </div>
+
+
+                <span id="resultCount">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Member
+                            </th>
+
+                            <th></th>
+
+                            <th>
+                                Connected Member
+                            </th>
+
+                            <th>
+                                Initiated By
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Created
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="connectionsBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="loading-cell"
+                            >
+
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                <br><br>
+
+                                Loading connections...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="pagination">
+
+                <div
+                    id="paginationInfo"
+                    class="pagination-info"
+                >
+                    Loading...
+                </div>
+
+
+                <div
+                    id="pages"
+                    class="pages"
+                ></div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     VIEW MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="viewModal"
+>
+
+    <div class="modal-card">
+
+
+        <div class="modal-head">
+
+            <h3>
+                Connection Details
+            </h3>
+
+
+            <button
+                type="button"
+                id="closeModal"
+                class="close-btn"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <div
+                class="connection-large"
+                id="connectionLarge"
+            ></div>
+
+
+            <div
+                class="info-grid"
+                id="infoGrid"
+            ></div>
+
+
+            <div class="modal-actions">
+
+
+                <button
+                    type="button"
+                    class="btn btn-warning"
+                    id="blockModal"
+                >
+
+                    <i class="fa-solid fa-ban"></i>
+
+                    Block Member
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="deleteModal"
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Remove Connection
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+const API = {
+
+    list:
+        "../admin-api/connections/list.php",
+
+    get:
+        "../admin-api/connections/get.php",
+
+    delete:
+        "../admin-api/connections/delete.php",
+
+    block:
+        "../admin-api/connections/block.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+let currentPage = 1;
+
+let totalPages = 1;
+
+let selectedConnectionId = 0;
+
+let searchTimer = null;
+
+
+const body =
+    document.getElementById(
+        "connectionsBody"
+    );
+
+
+const alertBox =
+    document.getElementById(
+        "alertBox"
+    );
+
+
+function escapeHTML(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function safeImageUrl(
+    value
+) {
+
+    if (!value) {
+
+        return "../assets/images/defaults/default-avatar-male.png";
+
+    }
+
+
+    const valueString =
+        String(value).trim();
+
+
+    if (
+        valueString.startsWith("http://")
+        ||
+        valueString.startsWith("https://")
+        ||
+        valueString.startsWith("/")
+    ) {
+
+        return valueString;
+
+    }
+
+
+    return "../"
+        +
+        valueString.replace(
+            /^\/+/,
+            ""
+        );
+
+}
+
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+
+        return "—";
+
+    }
+
+
+    const date =
+        new Date(
+            String(value)
+                .replace(
+                    " ",
+                    "T"
+                )
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleString();
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show "
+        +
+        type;
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    alertBox.className =
+        "alert";
+
+    alertBox.textContent =
+        "";
+
+}
+
+
+async function apiJSON(
+    endpoint,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            endpoint,
+            {
+
+                credentials:
+                    "include",
+
+                cache:
+                    "no-store",
+
+                ...options,
+
+                headers: {
+
+                    Accept:
+                        "application/json",
+
+                    ...(options.body
+                        ?
+                        {
+                            "Content-Type":
+                                "application/json"
+                        }
+                        :
+                        {}),
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
+
+
+    let result;
+
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch (
+        error
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    if (
+        response.status === 401
+    ) {
+
+        window.location.href =
+            "../login.html?redirect="
+            +
+            encodeURIComponent(
+                "admin/connections.html"
+            );
+
+        throw new Error(
+            "Authentication required."
+        );
+
+    }
+
+
+    if (
+        response.status === 403
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "Administrator permission required."
+        );
+
+    }
+
+
+    if (
+        !response.ok
+        ||
+        result.success !== true
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "The requested operation failed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+async function loadConnections() {
+
+    hideAlert();
+
+
+    body.innerHTML =
+        `
+        <tr>
+
+            <td
+                colspan="8"
+                class="loading-cell"
+            >
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <br><br>
+
+                Loading connections...
+
+            </td>
+
+        </tr>
+        `;
+
+
+    const query =
+        new URLSearchParams({
+
+            page:
+                String(
+                    currentPage
+                ),
+
+            limit:
+                "20",
+
+            search:
+                document.getElementById(
+                    "search"
+                ).value.trim(),
+
+            status:
+                document.getElementById(
+                    "status"
+                ).value,
+
+            initiated_by:
+                document.getElementById(
+                    "initiatedBy"
+                ).value
+
+        });
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.list
+                +
+                "?"
+                +
+                query.toString()
+            );
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        renderAdmin(
+            data.current_admin
+            ||
+            {}
+        );
+
+
+        renderStats(
+            data.summary
+            ||
+            {}
+        );
+
+
+        renderConnections(
+            data.connections
+            ||
+            [],
+            data.pagination
+            ||
+            {}
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        body.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-cell"
+                >
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+function renderAdmin(
+    admin
+) {
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            safeImageUrl(
+                admin.avatar_url
+            );
+
+    }
+
+}
+
+
+function renderStats(
+    summary
+) {
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        Number(
+            summary.total
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "pending"
+    ).textContent =
+        Number(
+            summary.pending
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "accepted"
+    ).textContent =
+        Number(
+            summary.accepted
+            ||
+            summary.connected
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "rejected"
+    ).textContent =
+        Number(
+            summary.rejected
+            ||
+            0
+        ).toLocaleString();
+
+}
+
+
+function renderConnections(
+    connections,
+    pagination
+) {
+
+    if (
+        !connections.length
+    ) {
+
+        body.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-cell"
+                >
+
+                    <i class="fa-solid fa-link"></i>
+
+                    <br><br>
+
+                    No connections found.
+
+                </td>
+
+            </tr>
+            `;
+
+    } else {
+
+        body.innerHTML =
+            connections
+                .map(
+                    connection =>
+                        renderConnection(
+                            connection
+                        )
+                )
+                .join("");
+
+    }
+
+
+    currentPage =
+        Math.max(
+            1,
+            Number(
+                pagination.page
+                ||
+                1
+            )
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                pagination.pages
+                ||
+                1
+            )
+        );
+
+
+    const total =
+        Number(
+            pagination.total
+            ||
+            0
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ||
+            20
+        );
+
+
+    const start =
+        total
+            ?
+            (
+                (
+                    currentPage - 1
+                )
+                *
+                limit
+            ) + 1
+            :
+            0;
+
+
+    const end =
+        Math.min(
+            currentPage * limit,
+            total
+        );
+
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        total.toLocaleString()
+        +
+        " connection"
+        +
+        (
+            total === 1
+                ? ""
+                : "s"
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total
+            ?
+            `Showing ${start}–${end} of ${total.toLocaleString()} connections`
+            :
+            "No connections";
+
+
+    renderPagination();
+
+}
+
+
+function statusClass(
+    status
+) {
+
+    const clean =
+        String(
+            status
+            ||
+            "pending"
+        ).toLowerCase();
+
+
+    if (
+        [
+            "accepted",
+            "connected"
+        ].includes(
+            clean
+        )
+    ) {
+
+        return "accepted";
+
+    }
+
+
+    if (
+        [
+            "rejected",
+            "cancelled"
+        ].includes(
+            clean
+        )
+    ) {
+
+        return "rejected";
+
+    }
+
+
+    if (
+        clean === "blocked"
+    ) {
+
+        return "blocked";
+
+    }
+
+
+    return "pending";
+
+}
+
+
+function renderConnection(
+    connection
+) {
+
+    const firstName =
+        connection.user_full_name
+        ||
+        connection.user_fullname
+        ||
+        connection.user_username
+        ||
+        "Unknown";
+
+
+    const secondName =
+        connection.connected_full_name
+        ||
+        connection.connected_fullname
+        ||
+        connection.connected_username
+        ||
+        "Unknown";
+
+
+    const firstAvatar =
+        safeImageUrl(
+            connection.user_avatar
+            ||
+            connection.user_avatar_url
+        );
+
+
+    const secondAvatar =
+        safeImageUrl(
+            connection.connected_avatar
+            ||
+            connection.connected_avatar_url
+        );
+
+
+    const status =
+        String(
+            connection.status
+            ||
+            "pending"
+        ).toLowerCase();
+
+
+    let initiator =
+        "Unknown";
+
+
+    if (
+        Number(
+            connection.initiated_by
+        )
+        ===
+        Number(
+            connection.user_id
+        )
+    ) {
+
+        initiator =
+            connection.user_username
+            ||
+            connection.user_full_name
+            ||
+            "Member";
+
+    } else if (
+        Number(
+            connection.initiated_by
+        )
+        ===
+        Number(
+            connection.connected_user_id
+        )
+    ) {
+
+        initiator =
+            connection.connected_username
+            ||
+            connection.connected_full_name
+            ||
+            "Member";
+
+    }
+
+
+    return `
+    <tr>
+
+        <td>
+
+            <span class="id">
+                #${Number(connection.id || connection.connection_id || 0)}
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <div class="person">
+
+                <img
+                    src="${escapeHTML(firstAvatar)}"
+                    class="avatar"
+                    alt=""
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(firstName)}
+                    </strong>
+
+                    <span>
+                        @${escapeHTML(
+                            connection.user_username
+                            ||
+                            ""
+                        )}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <div class="arrow">
+
+                <i class="fa-solid fa-link"></i>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <div class="person">
+
+                <img
+                    src="${escapeHTML(secondAvatar)}"
+                    class="avatar"
+                    alt=""
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(secondName)}
+                    </strong>
+
+                    <span>
+                        @${escapeHTML(
+                            connection.connected_username
+                            ||
+                            ""
+                        )}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <span class="initiator">
+
+                ${escapeHTML(initiator)}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="status ${statusClass(status)}"
+            >
+
+                ${escapeHTML(status)}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            ${escapeHTML(
+                formatDate(
+                    connection.created_at
+                )
+            )}
+
+        </td>
+
+
+        <td>
+
+            <div class="actions">
+
+                <button
+                    type="button"
+                    class="action-btn view"
+                    title="View details"
+                    onclick="viewConnection(
+                        ${Number(
+                            connection.id
+                            ||
+                            connection.connection_id
+                            ||
+                            0
+                        )}
+                    )"
+                >
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="action-btn block"
+                    title="Block member"
+                    onclick="blockConnection(
+                        ${Number(
+                            connection.id
+                            ||
+                            connection.connection_id
+                            ||
+                            0
+                        )}
+                    )"
+                >
+
+                    <i class="fa-solid fa-ban"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="action-btn delete"
+                    title="Remove connection"
+                    onclick="deleteConnection(
+                        ${Number(
+                            connection.id
+                            ||
+                            connection.connection_id
+                            ||
+                            0
+                        )}
+                    )"
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </div>
+
+        </td>
+
+    </tr>
+    `;
+
+}
+
+
+function renderPagination() {
+
+    const container =
+        document.getElementById(
+            "pages"
+        );
+
+
+    let html =
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage - 1})"
+            ${
+                currentPage <= 1
+                    ? "disabled"
+                    : ""
+            }
+        >
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let i = start;
+        i <= end;
+        i++
+    ) {
+
+        html +=
+            `
+            <button
+                type="button"
+                class="page-btn ${
+                    i === currentPage
+                        ? "active"
+                        : ""
+                }"
+                onclick="goPage(${i})"
+            >
+
+                ${i}
+
+            </button>
+            `;
+
+    }
+
+
+    html +=
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage + 1})"
+            ${
+                currentPage >= totalPages
+                    ? "disabled"
+                    : ""
+            }
+        >
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+        `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+function goPage(
+    page
+) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    loadConnections();
+
+}
+
+
+async function viewConnection(
+    id
+) {
+
+    selectedConnectionId =
+        Number(id);
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.get
+                +
+                "?id="
+                +
+                encodeURIComponent(
+                    selectedConnectionId
+                )
+            );
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        const connection =
+            data.connection
+            ||
+            {};
+
+
+        const firstAvatar =
+            safeImageUrl(
+                connection.user_avatar
+                ||
+                connection.user_avatar_url
+            );
+
+
+        const secondAvatar =
+            safeImageUrl(
+                connection.connected_avatar
+                ||
+                connection.connected_avatar_url
+            );
+
+
+        document.getElementById(
+            "connectionLarge"
+        ).innerHTML =
+            `
+
+            <div class="profile-box">
+
+                <img
+                    src="${escapeHTML(firstAvatar)}"
+                    class="profile-avatar"
+                    alt=""
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <strong>
+                    ${escapeHTML(
+                        connection.user_full_name
+                        ||
+                        connection.user_username
+                        ||
+                        "Unknown"
+                    )}
+                </strong>
+
+                <span>
+                    @${escapeHTML(
+                        connection.user_username
+                        ||
+                        ""
+                    )}
+                </span>
+
+            </div>
+
+
+            <div class="arrow">
+
+                <i class="fa-solid fa-link"></i>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <img
+                    src="${escapeHTML(secondAvatar)}"
+                    class="profile-avatar"
+                    alt=""
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <strong>
+                    ${escapeHTML(
+                        connection.connected_full_name
+                        ||
+                        connection.connected_username
+                        ||
+                        "Unknown"
+                    )}
+                </strong>
+
+                <span>
+                    @${escapeHTML(
+                        connection.connected_username
+                        ||
+                        ""
+                    )}
+                </span>
+
+            </div>
+
+            `;
+
+
+        document.getElementById(
+            "infoGrid"
+        ).innerHTML =
+            `
+
+            <div class="info-item">
+
+                <label>
+                    Connection ID
+                </label>
+
+                <strong>
+                    #${Number(
+                        connection.id
+                        ||
+                        connection.connection_id
+                        ||
+                        0
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <label>
+                    Status
+                </label>
+
+                <strong>
+                    ${escapeHTML(
+                        connection.status
+                        ||
+                        "pending"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <label>
+                    Initiated By
+                </label>
+
+                <strong>
+                    ${escapeHTML(
+                        connection.initiator_name
+                        ||
+                        connection.initiator_username
+                        ||
+                        "Unknown"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <label>
+                    Created
+                </label>
+
+                <strong>
+                    ${escapeHTML(
+                        formatDate(
+                            connection.created_at
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <label>
+                    Connected At
+                </label>
+
+                <strong>
+                    ${escapeHTML(
+                        formatDate(
+                            connection.connected_at
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <label>
+                    User IDs
+                </label>
+
+                <strong>
+                    ${Number(
+                        connection.user_id
+                        ||
+                        0
+                    )}
+                    →
+                    ${Number(
+                        connection.connected_user_id
+                        ||
+                        0
+                    )}
+                </strong>
+
+            </div>
+
+            `;
+
+
+        document.getElementById(
+            "viewModal"
+        ).classList.add(
+            "show"
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+async function deleteConnection(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Remove this connection? This action will remove the relationship."
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.delete,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                connection_id:
+                                    Number(id)
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Connection removed successfully.",
+            "success"
+        );
+
+
+        closeModal();
+
+        loadConnections();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+async function blockConnection(
+    id
+) {
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.get
+                +
+                "?id="
+                +
+                encodeURIComponent(
+                    Number(id)
+                )
+            );
+
+
+        const connection =
+            result.data.connection
+            ||
+            {};
+
+
+        const firstId =
+            Number(
+                connection.user_id
+                ||
+                0
+            );
+
+
+        const secondId =
+            Number(
+                connection.connected_user_id
+                ||
+                0
+            );
+
+
+        const firstName =
+            connection.user_full_name
+            ||
+            connection.user_username
+            ||
+            `User ${firstId}`;
+
+
+        const secondName =
+            connection.connected_full_name
+            ||
+            connection.connected_username
+            ||
+            `User ${secondId}`;
+
+
+        const blockTarget =
+            window.prompt(
+                `Enter 1 to block ${firstName}, or 2 to block ${secondName}:`,
+                "1"
+            );
+
+
+        if (
+            blockTarget !== "1"
+            &&
+            blockTarget !== "2"
+        ) {
+
+            return;
+
+        }
+
+
+        const blockedUserId =
+            blockTarget === "1"
+                ?
+                firstId
+                :
+                secondId;
+
+
+        if (
+            blockedUserId <= 0
+        ) {
+
+            showAlert(
+                "The selected member could not be identified."
+            );
+
+            return;
+
+        }
+
+
+        const reason =
+            window.prompt(
+                "Optional reason for blocking:"
+            )
+            ||
+            "Blocked by administrator";
+
+
+        const blockResult =
+            await apiJSON(
+                API.block,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                connection_id:
+                                    Number(id),
+
+                                blocked_user_id:
+                                    blockedUserId,
+
+                                reason:
+                                    reason
+
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            blockResult.message
+            ||
+            "Member blocked successfully.",
+            "success"
+        );
+
+
+        closeModal();
+
+        loadConnections();
+
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+document.getElementById(
+    "blockModal"
+).addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedConnectionId > 0
+        ) {
+
+            blockConnection(
+                selectedConnectionId
+            );
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "deleteModal"
+).addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedConnectionId > 0
+        ) {
+
+            deleteConnection(
+                selectedConnectionId
+            );
+
+        }
+
+    }
+);
+
+
+function closeModal() {
+
+    document.getElementById(
+        "viewModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+document.getElementById(
+    "closeModal"
+).addEventListener(
+    "click",
+    closeModal
+);
+
+
+document.getElementById(
+    "viewModal"
+).addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target.id ===
+            "viewModal"
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+[
+    "status",
+    "initiatedBy"
+].forEach(
+    id => {
+
+        document.getElementById(
+            id
+        ).addEventListener(
+            "change",
+            () => {
+
+                currentPage =
+                    1;
+
+                loadConnections();
+
+            }
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "search"
+).addEventListener(
+    "input",
+    () => {
+
+        clearTimeout(
+            searchTimer
+        );
+
+
+        searchTimer =
+            setTimeout(
+                () => {
+
+                    currentPage =
+                        1;
+
+                    loadConnections();
+
+                },
+                350
+            );
+
+    }
+);
+
+
+document.getElementById(
+    "refreshBtn"
+).addEventListener(
+    "click",
+    loadConnections
+);
+
+
+document.getElementById(
+    "refreshTop"
+).addEventListener(
+    "click",
+    loadConnections
+);
+
+
+document.getElementById(
+    "menuBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        document.getElementById(
+            "sidebar"
+        ).classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "logoutLink"
+).addEventListener(
+    "click",
+    async event => {
+
+        event.preventDefault();
+
+
+        try {
+
+            await fetch(
+                API.logout,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store"
+
+                }
+            );
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+        }
+
+
+        window.location.href =
+            "../login.html";
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+loadConnections();
+
+</script>
+
+
+</body>
+
+</html>

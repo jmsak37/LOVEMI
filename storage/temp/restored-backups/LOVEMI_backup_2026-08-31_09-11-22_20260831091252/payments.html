@@ -1,0 +1,2602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="LOVEMI Premium payment">
+
+<meta name="theme-color"
+      content="#6d28d9">
+
+
+<link rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/logo1/favicon-16x16.png">
+
+<link rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/logo1/favicon-32x32.png">
+
+<link rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/logo1/apple-touch-icon.png">
+
+<link rel="manifest"
+      href="assets/logo1/site.webmanifest">
+
+
+<meta http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate">
+
+<meta http-equiv="Pragma"
+      content="no-cache">
+
+<meta http-equiv="Expires"
+      content="0">
+
+
+<title>Payment | LOVEMI</title>
+
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+      rel="stylesheet">
+
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
+
+
+<style>
+
+:root {
+
+    --primary:#6d28d9;
+
+    --primary-dark:#4c1d95;
+
+    --primary-soft:#f3e8ff;
+
+    --accent:#db2777;
+
+    --text:#18181b;
+
+    --soft:#68686f;
+
+    --muted:#9898a1;
+
+    --background:#f7f7fb;
+
+    --white:#fff;
+
+    --border:#e9e9ef;
+
+    --green:#16a34a;
+
+    --green-soft:#f0fdf4;
+
+    --orange:#d97706;
+
+    --orange-soft:#fff7ed;
+
+    --red:#dc2626;
+
+    --red-soft:#fef2f2;
+
+    --shadow:
+        0 18px 55px
+        rgba(0,0,0,.08);
+
+    --container:1380px;
+
+}
+
+
+* {
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+body {
+
+    min-height:100vh;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    color:var(--text);
+
+    background:var(--background);
+
+}
+
+
+a {
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+button {
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   HEADER
+====================================================== */
+
+.header {
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:
+        rgba(255,255,255,.97);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+}
+
+
+.header-inner {
+
+    width:
+        min(
+            calc(100% - 30px),
+            var(--container)
+        );
+
+    min-height:74px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        auto 1fr auto;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+
+.brand {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.brand-logo {
+
+    width:44px;
+
+    height:44px;
+
+    object-fit:contain;
+
+    border-radius:11px;
+
+}
+
+
+.brand-name {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:25px;
+
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.brand-tagline {
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:6px;
+
+    letter-spacing:.7px;
+
+}
+
+
+.navigation {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:3px;
+
+}
+
+
+.nav-link {
+
+    min-height:39px;
+
+    padding:
+        0 9px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    border-radius:9px;
+
+    color:var(--soft);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.nav-link i {
+
+    font-size:9px;
+
+}
+
+
+.header-actions {
+
+    display:flex;
+
+    gap:6px;
+
+    align-items:center;
+
+}
+
+
+.header-icon {
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    color:var(--soft);
+
+    background:white;
+
+    font-size:10px;
+
+}
+
+
+.mobile-menu {
+
+    display:none;
+
+    width:39px;
+
+    height:39px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    background:white;
+
+}
+
+
+/* =====================================================
+   MOBILE NAV
+====================================================== */
+
+.mobile-nav {
+
+    position:fixed;
+
+    top:74px;
+
+    left:8px;
+
+    right:8px;
+
+    z-index:999;
+
+    display:none;
+
+    padding:8px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:13px;
+
+    background:white;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.12);
+
+}
+
+
+.mobile-nav.open {
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:6px;
+
+}
+
+
+.mobile-nav a {
+
+    min-height:43px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    color:var(--soft);
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.mobile-nav a i {
+
+    color:var(--primary);
+
+}
+
+
+/* =====================================================
+   PAGE
+====================================================== */
+
+.page {
+
+    width:
+        min(
+            calc(100% - 30px),
+            880px
+        );
+
+    margin:auto;
+
+    padding:
+        32px 0 60px;
+
+}
+
+
+.heading {
+
+    margin-bottom:17px;
+
+}
+
+
+.heading h1 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            46px
+        );
+
+}
+
+
+.heading h1 span {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+    background-clip:text;
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.heading p {
+
+    margin-top:7px;
+
+    color:var(--soft);
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+   ALERT
+====================================================== */
+
+.alert {
+
+    display:none;
+
+    padding:
+        11px 13px;
+
+    margin-bottom:15px;
+
+    border-radius:10px;
+
+    font-size:9px;
+
+}
+
+
+.alert.show {
+
+    display:block;
+
+}
+
+
+.alert.error {
+
+    color:#991b1b;
+
+    background:var(--red-soft);
+
+    border:
+        1px solid
+        #fecaca;
+
+}
+
+
+.alert.success {
+
+    color:#166534;
+
+    background:var(--green-soft);
+
+    border:
+        1px solid
+        #bbf7d0;
+
+}
+
+
+/* =====================================================
+   PAYMENT CARD
+====================================================== */
+
+.payment-card {
+
+    padding:22px;
+
+    background:white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:19px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+.order-header {
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding-bottom:17px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+}
+
+
+.order-title h2 {
+
+    font-size:17px;
+
+}
+
+
+.order-title p {
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+.pending {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    padding:
+        6px 8px;
+
+    border-radius:999px;
+
+    color:#92400e;
+
+    background:#fef3c7;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   AMOUNT
+====================================================== */
+
+.amount-box {
+
+    margin-top:17px;
+
+    padding:17px;
+
+    border:
+        1px solid
+        #eadcff;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fcfaff,
+            #fff9fc
+        );
+
+}
+
+
+.amount-label {
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+.amount {
+
+    margin-top:3px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    color:var(--primary);
+
+    font-size:36px;
+
+    font-weight:800;
+
+}
+
+
+.reference {
+
+    margin-top:6px;
+
+    color:var(--soft);
+
+    font-size:8px;
+
+}
+
+
+/* =====================================================
+   DETAILS
+====================================================== */
+
+.details {
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+    margin-top:15px;
+
+}
+
+
+.detail {
+
+    padding:11px;
+
+    border-radius:10px;
+
+    background:#fafafa;
+
+}
+
+
+.detail strong {
+
+    display:block;
+
+    font-size:8px;
+
+}
+
+
+.detail span {
+
+    display:block;
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+}
+
+
+/* =====================================================
+   PAYMENT METHODS
+====================================================== */
+
+.methods {
+
+    margin-top:20px;
+
+}
+
+
+.methods h3 {
+
+    font-size:12px;
+
+}
+
+
+.method-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:10px;
+
+}
+
+
+.method {
+
+    min-height:78px;
+
+    padding:11px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:11px;
+
+    background:white;
+
+    color:var(--soft);
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.method:hover {
+
+    border-color:#c4b5fd;
+
+    background:var(--primary-soft);
+
+    color:var(--primary);
+
+}
+
+
+.method i {
+
+    font-size:16px;
+
+    color:var(--primary);
+
+}
+
+
+.method-note {
+
+    margin-top:10px;
+
+    padding:10px;
+
+    border:
+        1px solid
+        #dbeafe;
+
+    border-radius:10px;
+
+    background:#f8fbff;
+
+    color:#475569;
+
+    font-size:8px;
+
+    line-height:1.55;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+====================================================== */
+
+.actions {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    margin-top:20px;
+
+    padding-top:17px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+
+.button {
+
+    min-height:42px;
+
+    padding:
+        0 13px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    border-radius:10px;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.button-secondary {
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    color:var(--primary);
+
+    background:white;
+
+}
+
+
+/* Disabled until payment gateway API is connected */
+
+.gateway-button {
+
+    border:none;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+}
+
+
+.gateway-button:disabled {
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   SECURITY
+====================================================== */
+
+.security {
+
+    margin-top:15px;
+
+    padding:11px;
+
+    display:flex;
+
+    gap:8px;
+
+    border:
+        1px solid
+        #dbeafe;
+
+    border-radius:10px;
+
+    color:#475569;
+
+    background:#f8fbff;
+
+    font-size:8px;
+
+    line-height:1.55;
+
+}
+
+
+.security i {
+
+    color:#2563eb;
+
+}
+
+
+/* =====================================================
+   LOADING
+====================================================== */
+
+.loading {
+
+    min-height:270px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+====================================================== */
+
+.footer {
+
+    background:#17151b;
+
+    color:white;
+
+}
+
+
+.footer-inner {
+
+    width:
+        min(
+            calc(100% - 30px),
+            1380px
+        );
+
+    margin:auto;
+
+    padding:
+        38px 0 18px;
+
+}
+
+
+.footer-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+
+    gap:30px;
+
+    padding-bottom:25px;
+
+}
+
+
+.footer-description {
+
+    max-width:320px;
+
+    margin-top:10px;
+
+    color:#9d99a5;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+}
+
+
+.footer-heading {
+
+    margin-bottom:9px;
+
+    font-size:10px;
+
+}
+
+
+.footer-links {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+.footer-links a {
+
+    color:#9d99a5;
+
+    font-size:8px;
+
+}
+
+
+.footer-links a:hover {
+
+    color:white;
+
+}
+
+
+.footer-bottom {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding-top:15px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:#716d78;
+
+    font-size:7px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+====================================================== */
+
+@media(max-width:1100px) {
+
+    .navigation {
+
+        display:none;
+
+    }
+
+
+    .mobile-menu {
+
+        display:flex;
+
+    }
+
+}
+
+
+@media(max-width:700px) {
+
+    .details {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .method-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .actions {
+
+        flex-direction:column;
+
+    }
+
+
+    .button {
+
+        width:100%;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:520px) {
+
+    .brand-name,
+    .brand-tagline {
+
+        display:none;
+
+    }
+
+
+    .page {
+
+        width:
+            calc(100% - 20px);
+
+        padding-top:18px;
+
+    }
+
+
+    .payment-card {
+
+        padding:15px;
+
+    }
+
+
+    .order-header {
+
+        flex-direction:column;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:6px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+
+        <a
+            href="dashboard.html"
+            class="brand">
+
+
+            <img
+                src="assets/logo1/LOGO1.ico"
+                alt="LOVEMI"
+                class="brand-logo"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                ">
+
+
+            <span>
+
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+
+            </span>
+
+
+        </a>
+
+
+        <nav class="navigation">
+
+
+            <a href="dashboard.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="discover.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-compass"></i>
+
+                Discover
+
+            </a>
+
+
+            <a href="connections.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-user-group"></i>
+
+                Connections
+
+            </a>
+
+
+            <a href="messages.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-message"></i>
+
+                Messages
+
+            </a>
+
+
+            <a href="profile.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-user"></i>
+
+                Profile
+
+            </a>
+
+
+            <a href="notifications.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                Notifications
+
+            </a>
+
+
+            <a href="settings.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </a>
+
+
+            <a href="premium.html"
+               class="nav-link active">
+
+                <i class="fa-solid fa-crown"></i>
+
+                Premium
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="header-actions">
+
+
+            <a
+                href="notifications.html"
+                class="header-icon">
+
+                <i class="fa-regular fa-bell"></i>
+
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="header-icon">
+
+                <i class="fa-regular fa-message"></i>
+
+            </a>
+
+
+            <button
+                type="button"
+                id="mobileMenu"
+                class="mobile-menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE NAV
+========================================================== -->
+
+<nav
+    id="mobileNavigation"
+    class="mobile-nav">
+
+
+    <a href="dashboard.html">
+
+        <i class="fa-solid fa-house"></i>
+
+        Dashboard
+
+    </a>
+
+
+    <a href="discover.html">
+
+        <i class="fa-solid fa-compass"></i>
+
+        Discover
+
+    </a>
+
+
+    <a href="connections.html">
+
+        <i class="fa-solid fa-user-group"></i>
+
+        Connections
+
+    </a>
+
+
+    <a href="messages.html">
+
+        <i class="fa-regular fa-message"></i>
+
+        Messages
+
+    </a>
+
+
+    <a href="profile.html">
+
+        <i class="fa-regular fa-user"></i>
+
+        Profile
+
+    </a>
+
+
+    <a href="notifications.html">
+
+        <i class="fa-regular fa-bell"></i>
+
+        Notifications
+
+    </a>
+
+
+    <a href="settings.html">
+
+        <i class="fa-solid fa-gear"></i>
+
+        Settings
+
+    </a>
+
+
+    <a
+        href="premium.html"
+        class="active">
+
+        <i class="fa-solid fa-crown"></i>
+
+        Premium
+
+    </a>
+
+
+</nav>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main class="page">
+
+
+    <div class="heading">
+
+
+        <h1>
+
+            Complete your
+            <span>Premium payment</span>
+
+        </h1>
+
+
+        <p>
+
+            Review your Premium order before continuing.
+
+        </p>
+
+
+    </div>
+
+
+    <div
+        id="alert"
+        class="alert">
+    </div>
+
+
+    <section
+        id="loading"
+        class="payment-card loading">
+
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        &nbsp;
+
+        Loading payment details...
+
+    </section>
+
+
+    <section
+        id="paymentCard"
+        class="payment-card"
+        style="display:none;">
+
+
+        <div class="order-header">
+
+
+            <div class="order-title">
+
+
+                <h2 id="serviceName">
+                    LOVEMI Premium
+                </h2>
+
+
+                <p id="paymentReference">
+                    Payment reference
+                </p>
+
+
+            </div>
+
+
+            <span class="pending">
+
+                <i class="fa-solid fa-clock"></i>
+
+                Payment Pending
+
+            </span>
+
+
+        </div>
+
+
+        <div class="amount-box">
+
+
+            <div class="amount-label">
+                Amount to pay
+            </div>
+
+
+            <div
+                id="amount"
+                class="amount">
+
+                -
+
+            </div>
+
+
+            <div
+                id="reference"
+                class="reference">
+
+                Reference: -
+
+            </div>
+
+
+        </div>
+
+
+        <div class="details">
+
+
+            <div class="detail">
+
+
+                <strong>
+                    Base Price
+                </strong>
+
+
+                <span id="baseAmount">
+                    -
+                </span>
+
+
+            </div>
+
+
+            <div class="detail">
+
+
+                <strong>
+                    Exchange Rate
+                </strong>
+
+
+                <span id="exchangeRate">
+                    -
+                </span>
+
+
+            </div>
+
+
+            <div class="detail">
+
+
+                <strong>
+                    Currency
+                </strong>
+
+
+                <span id="currency">
+                    -
+                </span>
+
+
+            </div>
+
+
+            <div class="detail">
+
+
+                <strong>
+                    Duration
+                </strong>
+
+
+                <span id="duration">
+                    -
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="methods">
+
+
+            <h3>
+                Payment method
+            </h3>
+
+
+            <div class="method-grid">
+
+
+                <button
+                    type="button"
+                    class="method"
+                    data-method="mpesa">
+
+
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    M-Pesa
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="method"
+                    data-method="card">
+
+
+                    <i class="fa-regular fa-credit-card"></i>
+
+                    Card
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="method"
+                    data-method="paypal">
+
+
+                    <i class="fa-brands fa-paypal"></i>
+
+                    PayPal
+
+                </button>
+
+
+            </div>
+
+
+            <div class="method-note">
+
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                Select your preferred payment method.
+                The payment provider confirmation will be used
+                by LOVEMI before Premium is activated.
+
+            </div>
+
+
+        </div>
+
+
+        <div class="actions">
+
+
+            <a
+                href="premium.html"
+                class="button button-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Premium
+
+            </a>
+
+
+            <!--
+                The button is intentionally enabled only when
+                the payment gateway API is available.
+
+                It will be wired to:
+                api/payments/initiate.php
+            -->
+
+            <button
+                type="button"
+                id="payButton"
+                class="button gateway-button"
+                disabled>
+
+
+                <i class="fa-solid fa-lock"></i>
+
+                Payment Gateway Setup Pending
+
+            </button>
+
+
+        </div>
+
+
+        <div class="security">
+
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+
+            <span>
+
+                Your browser does not decide whether Premium
+                has been purchased. LOVEMI activates Premium only
+                after the payment backend verifies the provider
+                transaction.
+
+            </span>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="footer-grid">
+
+
+            <div>
+
+
+                <a
+                    href="dashboard.html"
+                    class="brand">
+
+
+                    <img
+                        src="assets/logo1/LOGO1.ico"
+                        alt="LOVEMI"
+                        class="brand-logo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        ">
+
+
+                    <span class="brand-name">
+                        LOVEMI
+                    </span>
+
+
+                </a>
+
+
+                <p class="footer-description">
+
+                    Discover approved profiles, create connections
+                    and access LOVEMI Premium services.
+
+                </p>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+                    <a href="payments.html">
+                        Payments
+                    </a>
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+
+                © <span id="year"></span>
+                LOVEMI. All rights reserved.
+
+            </span>
+
+
+            <span>
+
+                Discover • Connect • Meet
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const SERVICE_API =
+    "api/premium/services.php";
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+
+const paymentCard =
+    document.getElementById(
+        "paymentCard"
+    );
+
+
+const alertBox =
+    document.getElementById(
+        "alert"
+    );
+
+
+const payButton =
+    document.getElementById(
+        "payButton"
+    );
+
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const paymentId =
+    urlParams.get(
+        "payment_id"
+    );
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show "
+        +
+        type;
+
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+/* =========================================================
+   GET JSON
+========================================================= */
+
+async function getJson(
+    url
+) {
+
+    const response =
+        await fetch(
+            url
+            +
+            (
+                url.includes("?")
+                    ?
+                    "&"
+                    :
+                    "?"
+            )
+            +
+            "_="
+            +
+            Date.now(),
+            {
+
+                method:
+                    "GET",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                }
+
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadPayment() {
+
+    /*
+     * The payment ID is expected because subscribe.php sends:
+     *
+     * payments.html?payment_id=123
+     */
+
+    if (
+        !paymentId
+    ) {
+
+        loading.style.display =
+            "none";
+
+
+        paymentCard.style.display =
+            "block";
+
+
+        showAlert(
+            "No payment order was selected. Please return to Premium and start a new order.",
+            "error"
+        );
+
+
+        paymentCard.innerHTML = `
+
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#68686f;
+                    font-size:9px;
+                ">
+
+
+                <i
+                    class="fa-solid fa-receipt"
+                    style="
+                        font-size:28px;
+                        color:#6d28d9;
+                    ">
+                </i>
+
+
+                <br><br>
+
+
+                No payment order found.
+
+
+                <br><br>
+
+
+                <a
+                    href="premium.html"
+                    class="button button-secondary">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                    Return to Premium
+
+                </a>
+
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * The subscription API already created the order.
+         *
+         * services.php gives us current service/currency data.
+         *
+         * The final payment status must eventually come from:
+         * api/payments/status.php
+         *
+         * until that API exists, we display the order identifier
+         * and current Premium pricing.
+         */
+
+        const {
+            response,
+            result
+        } =
+            await getJson(
+                SERVICE_API
+            );
+
+
+        if (
+            response.status === 401
+            &&
+            result.redirect
+        ) {
+
+            window.location.href =
+                result.redirect;
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load payment information."
+            );
+
+        }
+
+
+        const service =
+            (
+                result.services
+                ||
+                []
+            )[0];
+
+
+        if (
+            !service
+        ) {
+
+            throw new Error(
+                "Premium service information is unavailable."
+            );
+
+        }
+
+
+        renderPayment(
+            service
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        paymentCard.style.display =
+            "block";
+
+
+        showAlert(
+            error.message
+            ||
+            "Unable to load payment information.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER PAYMENT
+========================================================= */
+
+function renderPayment(
+    service
+) {
+
+    loading.style.display =
+        "none";
+
+
+    paymentCard.style.display =
+        "block";
+
+
+    document.getElementById(
+        "serviceName"
+    ).textContent =
+        service.name
+        ||
+        "LOVEMI Premium";
+
+
+    document.getElementById(
+        "paymentReference"
+    ).textContent =
+        "Payment Order #" +
+        paymentId;
+
+
+    document.getElementById(
+        "amount"
+    ).textContent =
+        service.local_amount_display
+        ||
+        (
+            service.currency.symbol
+            +
+            service.local_amount
+        );
+
+
+    document.getElementById(
+        "reference"
+    ).textContent =
+        "Payment ID: "
+        +
+        paymentId;
+
+
+    document.getElementById(
+        "baseAmount"
+    ).textContent =
+        service.price_usd_display
+        ||
+        "$2.00";
+
+
+    document.getElementById(
+        "exchangeRate"
+    ).textContent =
+        "1 USD = "
+        +
+        service.exchange_rate
+        +
+        " "
+        +
+        service.currency.code;
+
+
+    document.getElementById(
+        "currency"
+    ).textContent =
+        service.currency.code
+        +
+        " "
+        +
+        service.currency.name;
+
+
+    document.getElementById(
+        "duration"
+    ).textContent =
+        service.duration_days
+        +
+        " days";
+
+
+    /*
+     * Payment gateway has not been wired in this set yet.
+     *
+     * Do not pretend a click successfully paid.
+     */
+
+    payButton.disabled =
+        true;
+
+
+    payButton.innerHTML =
+        `
+        <i class="fa-solid fa-lock"></i>
+        Payment Gateway Setup Pending
+        `;
+
+}
+
+
+/* =========================================================
+   PAYMENT METHOD BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".method"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    const method =
+                        this.dataset.method;
+
+
+                    document
+                        .querySelectorAll(
+                            ".method"
+                        )
+                        .forEach(
+                            item => {
+
+                                item.style.borderColor =
+                                    "#e9e9ef";
+
+                                item.style.background =
+                                    "#ffffff";
+
+                                item.style.color =
+                                    "#68686f";
+
+                            }
+                        );
+
+
+                    this.style.borderColor =
+                        "#c4b5fd";
+
+
+                    this.style.background =
+                        "#f3e8ff";
+
+
+                    this.style.color =
+                        "#6d28d9";
+
+
+                    /*
+                     * Payment gateway API is the next backend step.
+                     */
+
+                    showAlert(
+                        method.toUpperCase()
+                        +
+                        " selected. The payment gateway will be connected in the next payment API.",
+                        "success"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+const mobileNavigation =
+    document.getElementById(
+        "mobileNavigation"
+    );
+
+
+mobileMenu.addEventListener(
+    "click",
+    function() {
+
+        const open =
+            mobileNavigation.classList.contains(
+                "open"
+            );
+
+
+        mobileNavigation.classList.toggle(
+            "open"
+        );
+
+
+        this.innerHTML =
+            !open
+                ?
+                '<i class="fa-solid fa-xmark"></i>'
+                :
+                '<i class="fa-solid fa-bars"></i>';
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadPayment
+);
+
+</script>
+
+</body>
+
+</html>

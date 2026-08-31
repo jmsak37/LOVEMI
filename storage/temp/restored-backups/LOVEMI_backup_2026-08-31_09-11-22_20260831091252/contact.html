@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Contact LOVEMI support"
+    >
+
+    <meta
+        name="robots"
+        content="index,follow"
+    >
+
+    <title>Contact LOVEMI</title>
+
+    <!-- =====================================================
+         LOVEMI ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
+
+    <!-- =====================================================
+         FONT / ICON LIBRARY
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <style>
+
+        :root {
+            --primary: #e91e63;
+            --primary-dark: #c2185b;
+            --secondary: #7c3aed;
+            --text: #172033;
+            --muted: #687386;
+            --surface: #ffffff;
+            --surface-soft: #faf9fd;
+            --border: #e8e9ef;
+            --shadow: 0 12px 35px rgba(25, 25, 45, .08);
+            --radius: 18px;
+            --max-width: 1180px;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #faf9fd 100%
+                );
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+
+        img {
+            max-width: 100%;
+        }
+
+
+        .container {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+            margin-inline: auto;
+        }
+
+
+        /* =================================================
+           HEADER
+        ================================================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.97);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+
+        .brand strong {
+            font-size: 1.35rem;
+            letter-spacing: -.4px;
+        }
+
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+
+        .nav-link {
+            padding: 10px 13px;
+            border-radius: 11px;
+            color: #566173;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #fff0f5;
+            color: var(--primary);
+        }
+
+
+        .nav-link.cta {
+            color: white;
+            background: var(--primary);
+        }
+
+
+        .nav-link.cta:hover {
+            color: white;
+            background: var(--primary-dark);
+        }
+
+
+        .mobile-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 12px;
+            background: #f3f4f8;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+
+        .mobile-menu {
+            display: none;
+            padding: 10px 0 16px;
+            border-top: 1px solid var(--border);
+            background: #fff;
+        }
+
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 5px;
+            border-bottom: 1px solid #f0f1f5;
+            color: #4b5565;
+            font-weight: 600;
+        }
+
+
+        /* =================================================
+           HERO
+        ================================================== */
+
+        .hero {
+            padding: 74px 0 42px;
+            text-align: center;
+        }
+
+
+        .hero-icon {
+            width: 76px;
+            height: 76px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 18px;
+            border-radius: 23px;
+            background: #fff0f5;
+            color: var(--primary);
+            font-size: 1.9rem;
+        }
+
+
+        .hero h1 {
+            font-size: clamp(
+                2rem,
+                5vw,
+                3.5rem
+            );
+            line-height: 1.06;
+            letter-spacing: -1px;
+            margin-bottom: 13px;
+        }
+
+
+        .hero p {
+            max-width: 720px;
+            margin-inline: auto;
+            color: var(--muted);
+        }
+
+
+        /* =================================================
+           CONTACT
+        ================================================== */
+
+        .contact-section {
+            padding-bottom: 80px;
+        }
+
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns:
+                .85fr
+                1.15fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(
+                22px,
+                4vw,
+                38px
+            );
+        }
+
+
+        .card h2 {
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+
+        .card > p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+
+        .contact-items {
+            display: grid;
+            gap: 14px;
+        }
+
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 16px;
+            background: var(--surface-soft);
+            border-radius: 14px;
+        }
+
+
+        .contact-icon {
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: #fff0f5;
+            color: var(--primary);
+        }
+
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+
+        .contact-item span,
+        .contact-item a {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: .88rem;
+            font-weight: 700;
+        }
+
+
+        .input {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #dfe1e8;
+            border-radius: 12px;
+            outline: none;
+            background: #fff;
+            transition: .2s ease;
+        }
+
+
+        .input:focus {
+            border-color: var(--primary);
+            box-shadow:
+                0 0 0 4px
+                rgba(233,30,99,.08);
+        }
+
+
+        textarea.input {
+            min-height: 145px;
+            resize: vertical;
+        }
+
+
+        .submit-btn {
+            width: 100%;
+            border: 0;
+            border-radius: 12px;
+            padding: 13px 16px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+
+        .submit-btn:disabled {
+            opacity: .65;
+            cursor: wait;
+        }
+
+
+        .form-status {
+            display: none;
+            margin-top: 14px;
+            border-radius: 11px;
+            padding: 12px 14px;
+            font-size: .88rem;
+        }
+
+
+        .form-status.show {
+            display: block;
+        }
+
+
+        .form-status.success {
+            color: #1e6b3d;
+            background: #eaf8ef;
+        }
+
+
+        .form-status.error {
+            color: #a52626;
+            background: #fff0f0;
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================== */
+
+        .site-footer {
+            background: #151827;
+            color: #d7dbe6;
+        }
+
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns:
+                1.4fr
+                repeat(3, 1fr);
+            gap: 34px;
+            padding: 52px 0 30px;
+        }
+
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 13px;
+        }
+
+
+        .footer-brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+
+        .footer-brand strong {
+            color: #fff;
+            font-size: 1.18rem;
+        }
+
+
+        .footer-description {
+            max-width: 330px;
+            color: #aab0bf;
+            font-size: .9rem;
+        }
+
+
+        .footer-column h3 {
+            color: #fff;
+            font-size: .95rem;
+            margin-bottom: 13px;
+        }
+
+
+        .footer-column a {
+            display: block;
+            color: #aab0bf;
+            font-size: .87rem;
+            margin: 8px 0;
+        }
+
+
+        .footer-column a:hover {
+            color: #fff;
+        }
+
+
+        .footer-bottom {
+            padding: 18px 0;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+
+
+        .footer-bottom-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            color: #9198a9;
+            font-size: .8rem;
+        }
+
+
+        @media (max-width: 900px) {
+
+            .desktop-nav {
+                display: none;
+            }
+
+
+            .mobile-toggle {
+                display: grid;
+                place-items: center;
+            }
+
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: min(
+                    calc(100% - 22px),
+                    var(--max-width)
+                );
+            }
+
+
+            .nav {
+                min-height: 68px;
+            }
+
+
+            .brand img {
+                width: 42px;
+                height: 42px;
+            }
+
+
+            .hero {
+                padding: 52px 0 30px;
+            }
+
+
+            .card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer-bottom-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="container nav">
+
+        <a
+            class="brand"
+            href="index.html"
+            aria-label="LOVEMI home"
+        >
+
+            <img
+                src="assets/logo1/LOGO1.ico"
+                alt="LOVEMI"
+            >
+
+            <strong>LOVEMI</strong>
+
+        </a>
+
+
+        <!-- GUEST NAV -->
+
+        <nav
+            id="guestNav"
+            class="desktop-nav"
+            aria-label="Guest navigation"
+        >
+
+            <a
+                class="nav-link"
+                href="index.html"
+            >
+                Home
+            </a>
+
+            <a
+                class="nav-link"
+                href="about.html"
+            >
+                About
+            </a>
+
+            <a
+                class="nav-link"
+                href="help.html"
+            >
+                Help
+            </a>
+
+            <a
+                class="nav-link active"
+                href="contact.html"
+            >
+                Contact
+            </a>
+
+            <a
+                class="nav-link"
+                href="login.html"
+            >
+                Login
+            </a>
+
+            <a
+                class="nav-link cta"
+                href="registration.html"
+            >
+                Create Account
+            </a>
+
+        </nav>
+
+
+        <!-- USER NAV -->
+
+        <nav
+            id="userNav"
+            class="desktop-nav"
+            aria-label="User navigation"
+            hidden
+        >
+
+            <a
+                class="nav-link"
+                href="dashboard.html"
+            >
+                Dashboard
+            </a>
+
+            <a
+                class="nav-link"
+                href="discover.html"
+            >
+                Discover
+            </a>
+
+            <a
+                class="nav-link"
+                href="connections.html"
+            >
+                Connections
+            </a>
+
+            <a
+                class="nav-link"
+                href="messages.html"
+            >
+                Messages
+            </a>
+
+            <a
+                class="nav-link"
+                href="profile.html"
+            >
+                Profile
+            </a>
+
+            <a
+                class="nav-link"
+                href="notifications.html"
+            >
+                Notifications
+            </a>
+
+            <a
+                class="nav-link"
+                href="settings.html"
+            >
+                Settings
+            </a>
+
+            <a
+                class="nav-link cta"
+                href="premium.html"
+            >
+                Premium
+            </a>
+
+        </nav>
+
+
+        <button
+            class="mobile-toggle"
+            id="mobileToggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <div
+            class="container"
+            id="mobileLinks"
+        ></div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="hero-icon">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <h1>
+                Contact LOVEMI
+            </h1>
+
+            <p>
+                Need assistance? Contact our support team or
+                send us a message using the form below.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="contact-section">
+
+        <div class="container">
+
+
+            <div class="contact-grid">
+
+
+                <section class="card">
+
+                    <h2>
+                        Get in Touch
+                    </h2>
+
+                    <p>
+                        Our support contact details are available
+                        below.
+                    </p>
+
+
+                    <div class="contact-items">
+
+
+                        <div class="contact-item">
+
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Email
+                                </strong>
+
+                                <a
+                                    href="mailto:eduassistasc@gmail.com"
+                                >
+                                    eduassistasc@gmail.com
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-item">
+
+                            <div class="contact-icon">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    WhatsApp
+                                </strong>
+
+                                <a
+                                    href="https://wa.me/254769089734"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    +254 769 089 734
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-item">
+
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-circle-question"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Help Center
+                                </strong>
+
+                                <a href="help.html">
+                                    Visit LOVEMI Help
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-item">
+
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Privacy
+                                </strong>
+
+                                <a href="privacy.html">
+                                    Privacy Policy
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h2>
+                        Send a Message
+                    </h2>
+
+                    <p>
+                        Describe your question or problem clearly
+                        so the support team can assist you.
+                    </p>
+
+
+                    <form
+                        id="contactForm"
+                        novalidate
+                    >
+
+                        <div class="form-group">
+
+                            <label for="contactName">
+                                Name
+                            </label>
+
+                            <input
+                                class="input"
+                                id="contactName"
+                                name="name"
+                                type="text"
+                                maxlength="120"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactEmail">
+                                Email
+                            </label>
+
+                            <input
+                                class="input"
+                                id="contactEmail"
+                                name="email"
+                                type="email"
+                                maxlength="190"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactSubject">
+                                Subject
+                            </label>
+
+                            <input
+                                class="input"
+                                id="contactSubject"
+                                name="subject"
+                                type="text"
+                                maxlength="180"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactMessage">
+                                Message
+                            </label>
+
+                            <textarea
+                                class="input"
+                                id="contactMessage"
+                                name="message"
+                                maxlength="5000"
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            class="submit-btn"
+                            id="contactSubmit"
+                            type="submit"
+                        >
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Send Message
+                        </button>
+
+
+                        <div
+                            class="form-status"
+                            id="contactStatus"
+                        ></div>
+
+                    </form>
+
+                </section>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/logo1/LOGO1.ico"
+                    alt="LOVEMI"
+                >
+
+                <strong>
+                    LOVEMI
+                </strong>
+
+            </div>
+
+            <p class="footer-description">
+                Discover meaningful connections and communicate
+                responsibly through the LOVEMI platform.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Explore</h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="help.html">
+                Help
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Account</h3>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="registration.html">
+                Register
+            </a>
+
+            <a href="premium.html">
+                Premium
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Legal</h3>
+
+            <a href="privacy.html">
+                Privacy
+            </a>
+
+            <a href="terms.html">
+                Terms
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container footer-bottom-inner">
+
+            <span>
+                © 2026 LOVEMI. All rights reserved.
+            </span>
+
+            <span>
+                eduassistasc@gmail.com
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    const guestNav =
+        document.getElementById(
+            "guestNav"
+        );
+
+
+    const userNav =
+        document.getElementById(
+            "userNav"
+        );
+
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    const mobileLinks =
+        document.getElementById(
+            "mobileLinks"
+        );
+
+
+    const mobileToggle =
+        document.getElementById(
+            "mobileToggle"
+        );
+
+
+    const guestItems = [
+
+        ["Home", "index.html"],
+
+        ["About", "about.html"],
+
+        ["Help", "help.html"],
+
+        ["Contact", "contact.html"],
+
+        ["Login", "login.html"],
+
+        ["Create Account", "registration.html"]
+
+    ];
+
+
+    const userItems = [
+
+        ["Dashboard", "dashboard.html"],
+
+        ["Discover", "discover.html"],
+
+        ["Connections", "connections.html"],
+
+        ["Messages", "messages.html"],
+
+        ["Profile", "profile.html"],
+
+        ["Notifications", "notifications.html"],
+
+        ["Settings", "settings.html"],
+
+        ["Premium", "premium.html"]
+
+    ];
+
+
+    async function getSession() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "api/auth/session.php",
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        cache: "no-store",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                return null;
+            }
+
+
+            return await response.json();
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    }
+
+
+    function buildMobile(
+        items
+    ) {
+
+        mobileLinks.innerHTML = "";
+
+
+        items.forEach(
+            function (item) {
+
+                const a =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                a.href =
+                    item[1];
+
+
+                a.textContent =
+                    item[0];
+
+
+                mobileLinks.appendChild(
+                    a
+                );
+
+            }
+        );
+
+    }
+
+
+    async function initializeNavigation() {
+
+        const data =
+            await getSession();
+
+
+        const loggedIn =
+            Boolean(
+                data &&
+                (
+                    data.authenticated === true
+                    ||
+                    data.logged_in === true
+                    ||
+                    (
+                        data.success === true &&
+                        data.user
+                    )
+                )
+            );
+
+
+        if (loggedIn) {
+
+            guestNav.hidden =
+                true;
+
+            userNav.hidden =
+                false;
+
+            buildMobile(
+                userItems
+            );
+
+        } else {
+
+            guestNav.hidden =
+                false;
+
+            userNav.hidden =
+                true;
+
+            buildMobile(
+                guestItems
+            );
+
+        }
+
+    }
+
+
+    mobileToggle.addEventListener(
+        "click",
+        function () {
+
+            const open =
+                mobileMenu.classList.toggle(
+                    "open"
+                );
+
+
+            mobileToggle.setAttribute(
+                "aria-expanded",
+                open
+                    ? "true"
+                    : "false"
+            );
+
+
+            mobileToggle.innerHTML =
+                open
+                    ?
+                    '<i class="fa-solid fa-xmark"></i>'
+                    :
+                    '<i class="fa-solid fa-bars"></i>';
+
+        }
+    );
+
+
+    initializeNavigation();
+
+
+    /* ======================================================
+       CONTACT FORM
+    ====================================================== */
+
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
+    const status =
+        document.getElementById(
+            "contactStatus"
+        );
+
+
+    const submit =
+        document.getElementById(
+            "contactSubmit"
+        );
+
+
+    contactForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            status.className =
+                "form-status";
+
+
+            const name =
+                document
+                    .getElementById(
+                        "contactName"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "contactEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const subject =
+                document
+                    .getElementById(
+                        "contactSubject"
+                    )
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById(
+                        "contactMessage"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                !name ||
+                !email ||
+                !subject ||
+                !message
+            ) {
+
+                status.textContent =
+                    "Please complete all fields.";
+
+                status.classList.add(
+                    "show",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            submit.disabled =
+                true;
+
+
+            submit.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "api/support/create-ticket.php",
+                        {
+                            method: "POST",
+                            credentials: "include",
+                            cache: "no-store",
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+                                "Accept":
+                                    "application/json"
+                            },
+                            body:
+                                JSON.stringify(
+                                    {
+                                        name,
+                                        email,
+                                        subject,
+                                        message,
+                                        category:
+                                            "contact"
+                                    }
+                                )
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Message could not be sent."
+                    );
+
+                }
+
+
+                status.textContent =
+                    data.message ||
+                    "Your message has been sent successfully.";
+
+                status.classList.add(
+                    "show",
+                    "success"
+                );
+
+
+                contactForm.reset();
+
+            } catch (error) {
+
+                status.textContent =
+                    error.message ||
+                    "Unable to send the message.";
+
+                status.classList.add(
+                    "show",
+                    "error"
+                );
+
+            } finally {
+
+                submit.disabled =
+                    false;
+
+
+                submit.innerHTML =
+                    '<i class="fa-solid fa-paper-plane"></i> Send Message';
+
+            }
+
+        }
+    );
+
+})();
+
+</script>
+
+
+</body>
+</html>

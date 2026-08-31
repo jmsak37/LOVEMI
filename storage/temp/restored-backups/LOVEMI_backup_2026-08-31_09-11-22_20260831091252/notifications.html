@@ -1,0 +1,3282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LOVEMI notifications"
+    >
+
+    <meta
+        name="theme-color"
+        content="#7c3aed"
+    >
+
+    <title>
+        Notifications | LOVEMI
+    </title>
+
+
+    <!-- ======================================================
+         LOVEMI LOGOS / TAB ICONS
+    ======================================================= -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
+
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+
+    <style>
+
+        :root {
+
+            --primary: #7c3aed;
+
+            --primary-dark: #5b21b6;
+
+            --primary-light: #ede9fe;
+
+            --accent: #ec4899;
+
+            --accent-light: #fce7f3;
+
+            --text: #18181b;
+
+            --muted: #71717a;
+
+            --soft: #a1a1aa;
+
+            --page: #f7f7fb;
+
+            --white: #ffffff;
+
+            --border: #e8e8ef;
+
+            --success: #16a34a;
+
+            --success-light: #f0fdf4;
+
+            --danger: #dc2626;
+
+            --shadow:
+                0 14px 42px
+                rgba(24,24,27,.07);
+
+            --radius:
+                18px;
+
+        }
+
+
+        * {
+
+            box-sizing:
+                border-box;
+
+            margin:
+                0;
+
+            padding:
+                0;
+
+        }
+
+
+        body {
+
+            min-height:
+                100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+        }
+
+
+        a {
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        button {
+
+            font:
+                inherit;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        /* ===================================================
+           HEADER
+        ==================================================== */
+
+        .topbar {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                1000;
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .topbar-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1380px
+                );
+
+            min-height:
+                74px;
+
+            margin:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                auto
+                1fr
+                auto;
+
+            align-items:
+                center;
+
+            gap:
+                18px;
+
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+        }
+
+
+        .brand-logo {
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                11px;
+
+        }
+
+
+        .brand-name {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                25px;
+
+            font-weight:
+                800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+        }
+
+
+        .brand-tagline {
+
+            display:
+                block;
+
+            margin-top:
+                1px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                7px;
+
+            letter-spacing:
+                .9px;
+
+        }
+
+
+        .desktop-nav {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                3px;
+
+        }
+
+
+        .nav-link {
+
+            min-height:
+                39px;
+
+            padding:
+                0 9px;
+
+            border-radius:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .nav-link:hover {
+
+            color:
+                var(--primary);
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .nav-link.active {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-light);
+
+        }
+
+
+        .top-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+        }
+
+
+        .top-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        .top-icon:hover {
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-light);
+
+        }
+
+
+        /* ===================================================
+           PAGE
+        ==================================================== */
+
+        main {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1180px
+                );
+
+            margin:
+                auto;
+
+            padding:
+                32px 0 60px;
+
+        }
+
+
+        .page-header {
+
+            display:
+                flex;
+
+            align-items:
+                end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .page-title h1 {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    31px,
+                    5vw,
+                    46px
+                );
+
+            line-height:
+                1.05;
+
+        }
+
+
+        .page-title p {
+
+            margin-top:
+                7px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+        }
+
+
+        .header-buttons {
+
+            display:
+                flex;
+
+            gap:
+                7px;
+
+        }
+
+
+        .button {
+
+            min-height:
+                40px;
+
+            padding:
+                0 13px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+            color:
+                var(--text);
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .button:hover {
+
+            border-color:
+                #d8c8fa;
+
+            color:
+                var(--primary);
+
+        }
+
+
+        .button.primary {
+
+            border-color:
+                var(--primary);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            color:
+                white;
+
+        }
+
+
+        /* ===================================================
+           SUMMARY
+        ==================================================== */
+
+        .summary-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                13px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .summary-card {
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding:
+                17px;
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .summary-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .summary-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                11px;
+
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
+
+            font-size:
+                17px;
+
+        }
+
+
+        .summary-number {
+
+            font-size:
+                27px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .summary-label {
+
+            margin-top:
+                9px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* ===================================================
+           NOTIFICATION CARD
+        ==================================================== */
+
+        .notification-list {
+
+            display:
+                grid;
+
+            gap:
+                10px;
+
+        }
+
+
+        .notification-card {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                48px
+                minmax(0,1fr)
+                auto;
+
+            align-items:
+                start;
+
+            gap:
+                13px;
+
+            padding:
+                15px;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                16px;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .notification-card:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 12px 32px
+                rgba(24,24,27,.06);
+
+        }
+
+
+        .notification-card.unread {
+
+            background:
+                #fcfaff;
+
+            border-color:
+                #ddd0fb;
+
+        }
+
+
+        .notification-icon {
+
+            width:
+                48px;
+
+            height:
+                48px;
+
+            border-radius:
+                14px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
+
+            font-size:
+                19px;
+
+        }
+
+
+        .notification-title-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .notification-title {
+
+            font-size:
+                13px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .new-label {
+
+            padding:
+                3px 7px;
+
+            color:
+                white;
+
+            background:
+                var(--primary);
+
+            border-radius:
+                999px;
+
+            font-size:
+                7px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .notification-message {
+
+            margin-top:
+                5px;
+
+            color:
+                #4b4b55;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .notification-meta {
+
+            margin-top:
+                7px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                8px;
+
+        }
+
+
+        .notification-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+        }
+
+
+        .small-button {
+
+            min-width:
+                33px;
+
+            min-height:
+                33px;
+
+            padding:
+                0 8px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--muted);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .small-button:hover {
+
+            border-color:
+                #d8c8fa;
+
+            color:
+                var(--primary);
+
+        }
+
+
+        /* ===================================================
+           EMPTY / ERROR
+        ==================================================== */
+
+        .state-card {
+
+            padding:
+                52px 20px;
+
+            text-align:
+                center;
+
+            background:
+                white;
+
+            border:
+                1px dashed
+                #d9d9e3;
+
+            border-radius:
+                var(--radius);
+
+        }
+
+
+        .state-icon {
+
+            width:
+                61px;
+
+            height:
+                61px;
+
+            margin:
+                0 auto 12px;
+
+            border-radius:
+                18px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
+
+            font-size:
+                25px;
+
+        }
+
+
+        .state-card h3 {
+
+            font-size:
+                15px;
+
+        }
+
+
+        .state-card p {
+
+            margin-top:
+                7px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+
+        }
+
+
+        /* ===================================================
+           SKELETON
+        ==================================================== */
+
+        .skeleton-list {
+
+            display:
+                grid;
+
+            gap:
+                10px;
+
+        }
+
+
+        .skeleton {
+
+            height:
+                88px;
+
+            border-radius:
+                16px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ededf2 25%,
+                    #f7f7f9 50%,
+                    #ededf2 75%
+                );
+
+            background-size:
+                200% 100%;
+
+            animation:
+                loading 1.2s infinite;
+
+        }
+
+
+        @keyframes loading {
+
+            from {
+                background-position:
+                    200% 0;
+            }
+
+            to {
+                background-position:
+                    -200% 0;
+            }
+
+        }
+
+
+        /* ===================================================
+           FOOTER
+        ==================================================== */
+
+        .footer {
+
+            background:
+                #17151b;
+
+            color:
+                white;
+
+        }
+
+
+        .footer-inner {
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    1380px
+                );
+
+            margin:
+                auto;
+
+            padding:
+                38px 0 18px;
+
+        }
+
+
+        .footer-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                1fr
+                1fr;
+
+            gap:
+                30px;
+
+            padding-bottom:
+                25px;
+
+        }
+
+
+        .footer-logo-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+        }
+
+
+        .footer-logo {
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            object-fit:
+                contain;
+
+            border-radius:
+                11px;
+
+        }
+
+
+        .footer-brand {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                24px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .footer-description {
+
+            max-width:
+                330px;
+
+            margin-top:
+                10px;
+
+            color:
+                #9d99a5;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        .footer-heading {
+
+            margin-bottom:
+                9px;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+
+        }
+
+
+        .footer-links a {
+
+            color:
+                #9d99a5;
+
+            font-size:
+                8px;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                white;
+
+        }
+
+
+        .footer-bottom {
+
+            padding-top:
+                15px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color:
+                #716d78;
+
+            font-size:
+                7px;
+
+        }
+
+
+        /* ===================================================
+           MOBILE NAV
+        ==================================================== */
+
+        .mobile-nav {
+
+            display:
+                none;
+
+        }
+
+
+        /* ===================================================
+           RESPONSIVE
+        ==================================================== */
+
+        @media (
+            max-width: 1100px
+        ) {
+
+            .desktop-nav {
+
+                display:
+                    none;
+
+            }
+
+            .mobile-nav {
+
+                display:
+                    block;
+
+                position:
+                    fixed;
+
+                left:
+                    0;
+
+                right:
+                    0;
+
+                bottom:
+                    0;
+
+                z-index:
+                    2000;
+
+                background:
+                    rgba(255,255,255,.97);
+
+                backdrop-filter:
+                    blur(16px);
+
+                border-top:
+                    1px solid
+                    var(--border);
+
+                padding:
+                    7px 7px
+                    env(safe-area-inset-bottom);
+
+            }
+
+
+            .mobile-nav-inner {
+
+                max-width:
+                    650px;
+
+                margin:
+                    auto;
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    repeat(5,1fr);
+
+                gap:
+                    4px;
+
+            }
+
+
+            .mobile-link {
+
+                min-height:
+                    50px;
+
+                display:
+                    flex;
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    center;
+
+                justify-content:
+                    center;
+
+                gap:
+                    3px;
+
+                border-radius:
+                    11px;
+
+                color:
+                    #8b8b95;
+
+                font-size:
+                    8px;
+
+                font-weight:
+                    800;
+
+                position:
+                    relative;
+
+            }
+
+
+            .mobile-link.active {
+
+                color:
+                    var(--primary);
+
+                background:
+                    var(--primary-light);
+
+            }
+
+
+            .mobile-link-icon {
+
+                font-size:
+                    16px;
+
+            }
+
+
+            main {
+
+                padding-bottom:
+                    95px;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 800px
+        ) {
+
+            .topbar-inner {
+
+                width:
+                    calc(100% - 20px);
+
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 580px
+        ) {
+
+            .brand-name {
+
+                font-size:
+                    20px;
+
+            }
+
+
+            .brand-tagline {
+
+                display:
+                    none;
+
+            }
+
+
+            .top-actions .top-icon {
+
+                display:
+                    none;
+
+            }
+
+
+            main {
+
+                width:
+                    calc(100% - 20px);
+
+                padding-top:
+                    22px;
+
+            }
+
+
+            .page-header {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+            }
+
+
+            .header-buttons {
+
+                width:
+                    100%;
+
+            }
+
+
+            .button {
+
+                flex:
+                    1;
+
+            }
+
+
+            .notification-card {
+
+                grid-template-columns:
+                    43px
+                    minmax(0,1fr);
+
+            }
+
+
+            .notification-icon {
+
+                width:
+                    43px;
+
+                height:
+                    43px;
+
+            }
+
+
+            .notification-actions {
+
+                grid-column:
+                    2;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .footer-bottom {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .footer {
+
+                padding-bottom:
+                    80px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     HEADER
+=========================================================== -->
+
+<header class="topbar">
+
+    <div class="topbar-inner">
+
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <img
+                src="assets/logo1/LOGO1.ico"
+                alt="LOVEMI"
+                class="brand-logo"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                "
+            >
+
+
+            <span>
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <nav class="desktop-nav">
+
+            <a
+                href="dashboard.html"
+                class="nav-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="discover.html"
+                class="nav-link"
+            >
+                Discover
+            </a>
+
+            <a
+                href="connections.html"
+                class="nav-link"
+            >
+                Connections
+            </a>
+
+            <a
+                href="messages.html"
+                class="nav-link"
+            >
+                Messages
+            </a>
+
+            <a
+                href="profile.html"
+                class="nav-link"
+            >
+                Profile
+            </a>
+
+            <a
+                href="notifications.html"
+                class="nav-link active"
+            >
+                Notifications
+            </a>
+
+            <a
+                href="settings.html"
+                class="nav-link"
+            >
+                Settings
+            </a>
+
+            <a
+                href="premium.html"
+                class="nav-link"
+            >
+                Premium
+            </a>
+
+        </nav>
+
+
+        <div class="top-actions">
+
+            <a
+                href="messages.html"
+                class="top-icon"
+                aria-label="Messages"
+            >
+                💬
+            </a>
+
+            <a
+                href="settings.html"
+                class="top-icon"
+                aria-label="Settings"
+            >
+                ⚙
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================================
+     MAIN
+=========================================================== -->
+
+<main>
+
+
+    <section class="page-header">
+
+
+        <div class="page-title">
+
+            <h1>
+                Notifications
+            </h1>
+
+            <p>
+                Keep up with your LOVEMI account activity.
+            </p>
+
+        </div>
+
+
+        <div class="header-buttons">
+
+
+            <button
+                type="button"
+                class="button"
+                id="refreshButton"
+            >
+
+                ↻
+                Refresh
+
+            </button>
+
+
+            <button
+                type="button"
+                class="button primary"
+                id="markAllButton"
+            >
+
+                ✓
+                Mark all read
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =======================================================
+         SUMMARY CARDS
+    ======================================================== -->
+
+    <section class="summary-grid">
+
+
+        <article class="summary-card">
+
+
+            <div class="summary-top">
+
+                <div class="summary-icon">
+                    🔔
+                </div>
+
+
+                <div
+                    class="summary-number"
+                    id="unreadNumber"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="summary-label">
+                Unread notifications
+            </div>
+
+
+        </article>
+
+
+        <article class="summary-card">
+
+
+            <div class="summary-top">
+
+                <div class="summary-icon">
+                    📬
+                </div>
+
+
+                <div
+                    class="summary-number"
+                    id="totalNumber"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="summary-label">
+                Notifications loaded
+            </div>
+
+
+        </article>
+
+
+        <article class="summary-card">
+
+
+            <div class="summary-top">
+
+                <div class="summary-icon">
+                    🔊
+                </div>
+
+
+                <div
+                    class="summary-number"
+                    id="soundNumber"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="summary-label">
+                Notifications with sounds
+            </div>
+
+
+        </article>
+
+
+    </section>
+
+
+    <!-- =======================================================
+         NOTIFICATION LIST
+    ======================================================== -->
+
+    <section id="notificationContainer">
+
+
+        <div class="skeleton-list">
+
+            <div class="skeleton"></div>
+
+            <div class="skeleton"></div>
+
+            <div class="skeleton"></div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================================
+     FOOTER
+=========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="footer-grid">
+
+
+            <div>
+
+
+                <div class="footer-logo-row">
+
+
+                    <img
+                        src="assets/logo1/LOGO1.ico"
+                        alt="LOVEMI"
+                        class="footer-logo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        "
+                    >
+
+
+                    <span class="footer-brand">
+                        LOVEMI
+                    </span>
+
+
+                </div>
+
+
+                <p class="footer-description">
+
+                    Discover approved profiles, build meaningful
+                    connections and use LOVEMI services securely.
+
+                </p>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                    <a href="edit-profile.html">
+                        Edit Profile
+                    </a>
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+
+                <div class="footer-links">
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+
+            <span>
+
+                ©
+                <span id="footerYear"></span>
+                LOVEMI. All rights reserved.
+
+            </span>
+
+
+            <span>
+
+                Discover • Connect • Meet
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================================
+     MOBILE NAVIGATION
+=========================================================== -->
+
+<nav
+    class="mobile-nav"
+    aria-label="Mobile navigation"
+>
+
+
+    <div class="mobile-nav-inner">
+
+
+        <a
+            href="dashboard.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-link-icon">
+                🏠
+            </span>
+
+            Dashboard
+
+        </a>
+
+
+        <a
+            href="discover.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-link-icon">
+                🔎
+            </span>
+
+            Discover
+
+        </a>
+
+
+        <a
+            href="connections.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-link-icon">
+                ❤️
+            </span>
+
+            Connect
+
+        </a>
+
+
+        <a
+            href="messages.html"
+            class="mobile-link"
+        >
+
+            <span class="mobile-link-icon">
+                💬
+            </span>
+
+            Messages
+
+        </a>
+
+
+        <a
+            href="notifications.html"
+            class="mobile-link active"
+        >
+
+            <span class="mobile-link-icon">
+                🔔
+            </span>
+
+            Alerts
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<script>
+
+/* ============================================================
+   API
+============================================================ */
+
+const API = {
+
+    list:
+        'api/notifications/list.php',
+
+    unread:
+        'api/notifications/unread-count.php',
+
+    markRead:
+        'api/notifications/mark-read.php',
+
+    markAll:
+        'api/notifications/mark-all-read.php',
+
+    sound:
+        'api/notifications/play-sound.php?id='
+
+};
+
+
+/* ============================================================
+   STATE
+============================================================ */
+
+let notifications =
+    [];
+
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const notificationContainer =
+    document.getElementById(
+        'notificationContainer'
+    );
+
+
+const unreadNumber =
+    document.getElementById(
+        'unreadNumber'
+    );
+
+
+const totalNumber =
+    document.getElementById(
+        'totalNumber'
+    );
+
+
+const soundNumber =
+    document.getElementById(
+        'soundNumber'
+    );
+
+
+const refreshButton =
+    document.getElementById(
+        'refreshButton'
+    );
+
+
+const markAllButton =
+    document.getElementById(
+        'markAllButton'
+    );
+
+
+document.getElementById(
+    'footerYear'
+).textContent =
+    new Date().getFullYear();
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ''
+    )
+    .replace(
+        /&/g,
+        '&amp;'
+    )
+    .replace(
+        /</g,
+        '&lt;'
+    )
+    .replace(
+        />/g,
+        '&gt;'
+    )
+    .replace(
+        /"/g,
+        '&quot;'
+    )
+    .replace(
+        /'/g,
+        '&#039;'
+    );
+
+}
+
+
+/* ============================================================
+   DATE
+============================================================ */
+
+function formatDate(
+    value
+) {
+
+    if (
+        !value
+    ) {
+
+        return '';
+
+    }
+
+
+    const parsed =
+        new Date(
+            String(
+                value
+            ).replace(
+                ' ',
+                'T'
+            )
+        );
+
+
+    if (
+        Number.isNaN(
+            parsed.getTime()
+        )
+    ) {
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return parsed.toLocaleString(
+        undefined,
+        {
+            dateStyle:
+                'medium',
+
+            timeStyle:
+                'short'
+        }
+    );
+
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+function getNotificationIcon(
+    slug
+) {
+
+    const icons = {
+
+        new_connection:
+            '❤️',
+
+        new_message:
+            '💬',
+
+        premium_activated:
+            '⭐',
+
+        premium_expiring:
+            '⏰',
+
+        premium_expired:
+            '⚠️',
+
+        payment_successful:
+            '💳',
+
+        payment_failed:
+            '❌',
+
+        post_approved:
+            '✅',
+
+        photo_approved:
+            '🖼️',
+
+        account_approved:
+            '✔️',
+
+        system:
+            '🔔'
+
+    };
+
+
+    return (
+        icons[
+            String(
+                slug || 'system'
+            ).toLowerCase()
+        ]
+        ||
+        '🔔'
+    );
+
+}
+
+
+/* ============================================================
+   LOAD NOTIFICATIONS
+============================================================ */
+
+async function loadNotifications() {
+
+    notificationContainer.innerHTML = `
+
+        <div class="skeleton-list">
+
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.list
+                +
+                '?limit=50&offset=0&_='
+                +
+                Date.now(),
+                {
+
+                    method:
+                        'GET',
+
+                    credentials:
+                        'same-origin',
+
+                    cache:
+                        'no-store',
+
+                    headers: {
+
+                        'Accept':
+                            'application/json',
+
+                        'Cache-Control':
+                            'no-cache'
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                'login.html?return=notifications.html';
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            data.success !== true
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                'Unable to load notifications.'
+            );
+
+        }
+
+
+        notifications =
+            Array.isArray(
+                data.notifications
+            )
+                ?
+                data.notifications
+                :
+                [];
+
+
+        updateSummary(
+            data
+        );
+
+
+        renderNotifications();
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        notificationContainer.innerHTML = `
+
+            <div class="state-card">
+
+                <div class="state-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Notifications could not be loaded
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                        ||
+                        'Please try again.'
+                    )}
+                </p>
+
+                <button
+                    type="button"
+                    class="button primary"
+                    style="margin-top:15px;"
+                    onclick="loadNotifications()"
+                >
+                    Try again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   UPDATE SUMMARY
+============================================================ */
+
+function updateSummary(
+    data
+) {
+
+    const unread =
+        Number(
+            data.unread_count
+            ??
+            0
+        );
+
+
+    unreadNumber.textContent =
+        String(
+            unread
+        );
+
+
+    totalNumber.textContent =
+        String(
+            notifications.length
+        );
+
+
+    soundNumber.textContent =
+        String(
+            notifications.filter(
+                item =>
+                    item.audio
+                    !==
+                    null
+            ).length
+        );
+
+}
+
+
+/* ============================================================
+   RENDER
+============================================================ */
+
+function renderNotifications() {
+
+    if (
+        notifications.length === 0
+    ) {
+
+        notificationContainer.innerHTML = `
+
+            <div class="state-card">
+
+                <div class="state-icon">
+                    🔔
+                </div>
+
+                <h3>
+                    You are all caught up
+                </h3>
+
+                <p>
+                    New LOVEMI activity will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    notificationContainer.innerHTML = `
+
+        <div class="notification-list">
+
+            ${
+                notifications
+                    .map(
+                        notification =>
+                            renderNotification(
+                                notification
+                            )
+                    )
+                    .join('')
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   NOTIFICATION CARD
+============================================================ */
+
+function renderNotification(
+    notification
+) {
+
+    const type =
+        notification.notification_type
+        ||
+        {};
+
+
+    const slug =
+        type.slug
+        ||
+        'system';
+
+
+    const isRead =
+        Boolean(
+            notification.is_read
+        );
+
+
+    const audio =
+        notification.audio;
+
+
+    const id =
+        Number(
+            notification.id
+        );
+
+
+    return `
+
+        <article
+            class="
+                notification-card
+                ${isRead ? '' : 'unread'}
+            "
+            id="
+                notification-${id}
+            "
+        >
+
+            <div
+                class="notification-icon"
+                aria-hidden="true"
+            >
+
+                ${getNotificationIcon(
+                    slug
+                )}
+
+            </div>
+
+
+            <div>
+
+
+                <div
+                    class="notification-title-row"
+                >
+
+                    <span
+                        class="notification-title"
+                    >
+                        ${escapeHtml(
+                            notification.title
+                        )}
+                    </span>
+
+
+                    ${
+                        !isRead
+                            ?
+                            `
+                                <span class="new-label">
+                                    NEW
+                                </span>
+                            `
+                            :
+                            ''
+                    }
+
+                </div>
+
+
+                <div
+                    class="notification-message"
+                >
+                    ${escapeHtml(
+                        notification.message
+                    )}
+                </div>
+
+
+                <div
+                    class="notification-meta"
+                >
+
+                    ${escapeHtml(
+                        type.name
+                        ||
+                        'System notification'
+                    )}
+
+                    •
+
+                    ${escapeHtml(
+                        formatDate(
+                            notification.created_at
+                        )
+                    )}
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="notification-actions"
+            >
+
+
+                ${
+                    !isRead
+                    ?
+                    `
+                        <button
+                            type="button"
+                            class="small-button"
+                            onclick="
+                                markNotificationRead(
+                                    ${id}
+                                )
+                            "
+                        >
+                            ✓
+                        </button>
+                    `
+                    :
+                    ''
+                }
+
+
+                ${
+                    audio
+                    ?
+                    `
+                        <button
+                            type="button"
+                            class="small-button"
+                            title="Play sound"
+                            onclick="
+                                playNotificationSound(
+                                    ${id}
+                                )
+                            "
+                        >
+                            🔊
+                        </button>
+                    `
+                    :
+                    ''
+                }
+
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* ============================================================
+   MARK ONE READ
+============================================================ */
+
+async function markNotificationRead(
+    notificationId
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                API.markRead,
+                {
+
+                    method:
+                        'POST',
+
+                    credentials:
+                        'same-origin',
+
+                    cache:
+                        'no-store',
+
+                    headers: {
+
+                        'Content-Type':
+                            'application/json',
+
+                        'Accept':
+                            'application/json'
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                notification_id:
+                                    Number(
+                                        notificationId
+                                    )
+                            }
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                'login.html?return=notifications.html';
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            data.success !== true
+        ) {
+
+            throw new Error(
+                data.message
+                ||
+                'Unable to mark notification as read.'
+            );
+
+        }
+
+
+        const notification =
+            notifications.find(
+                item =>
+                    Number(
+                        item.id
+                    )
+                    ===
+                    Number(
+                        notificationId
+                    )
+            );
+
+
+        if (
+            notification
+        ) {
+
+            notification.is_read =
+                true;
+
+            notification.read_at =
+                new Date().toISOString();
+
+        }
+
+
+        unreadNumber.textContent =
+            String(
+                Number(
+                    data.unread_count
+                    ??
+                    0
+                )
+            );
+
+
+        renderNotifications();
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+        window.alert(
+            error.message
+            ||
+            'Unable to update notification.'
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   MARK ALL
+============================================================ */
+
+markAllButton.addEventListener(
+    'click',
+    async function() {
+
+        const originalText =
+            this.textContent;
+
+
+        this.disabled =
+            true;
+
+
+        this.textContent =
+            'Updating...';
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API.markAll,
+                    {
+
+                        method:
+                            'POST',
+
+                        credentials:
+                            'same-origin',
+
+                        cache:
+                            'no-store',
+
+                        headers: {
+
+                            'Accept':
+                                'application/json'
+
+                        }
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                response.status ===
+                401
+            ) {
+
+                window.location.href =
+                    'login.html?return=notifications.html';
+
+                return;
+
+            }
+
+
+            if (
+                !response.ok
+                ||
+                data.success !== true
+            ) {
+
+                throw new Error(
+                    data.message
+                    ||
+                    'Unable to mark notifications as read.'
+                );
+
+            }
+
+
+            notifications =
+                notifications.map(
+                    item => ({
+
+                        ...item,
+
+                        is_read:
+                            true,
+
+                        read_at:
+                            new Date().toISOString()
+
+                    })
+                );
+
+
+            unreadNumber.textContent =
+                '0';
+
+
+            renderNotifications();
+
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+
+            window.alert(
+                error.message
+                ||
+                'Unable to update notifications.'
+            );
+
+        } finally {
+
+            this.disabled =
+                false;
+
+
+            this.textContent =
+                originalText;
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   REFRESH BUTTON
+============================================================ */
+
+refreshButton.addEventListener(
+    'click',
+    function() {
+
+        loadNotifications();
+
+    }
+);
+
+
+/* ============================================================
+   PLAY SOUND
+============================================================ */
+
+async function playNotificationSound(
+    notificationId
+) {
+
+    try {
+
+        const notification =
+            notifications.find(
+                item =>
+                    Number(
+                        item.id
+                    )
+                    ===
+                    Number(
+                        notificationId
+                    )
+            );
+
+
+        if (
+            notification
+            &&
+            !notification.audio
+        ) {
+
+            return;
+
+        }
+
+
+        const audio =
+            new Audio(
+                API.sound
+                +
+                encodeURIComponent(
+                    Number(
+                        notificationId
+                    )
+                )
+            );
+
+
+        audio.preload =
+            'auto';
+
+
+        await audio.play();
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        window.alert(
+            'The notification sound could not be played.'
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   LIVE UNREAD COUNT
+============================================================ */
+
+async function refreshUnreadCount() {
+
+    try {
+
+        const response =
+            await fetch(
+                API.unread
+                +
+                '?_='
+                +
+                Date.now(),
+                {
+
+                    method:
+                        'GET',
+
+                    credentials:
+                        'same-origin',
+
+                    cache:
+                        'no-store',
+
+                    headers: {
+
+                        'Accept':
+                            'application/json'
+
+                    }
+
+                }
+            );
+
+
+        if (
+            response.status ===
+            401
+        ) {
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.success === true
+        ) {
+
+            unreadNumber.textContent =
+                String(
+                    Number(
+                        data.unread_count
+                        ??
+                        0
+                    )
+                );
+
+        }
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            'Unread count update failed.',
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function() {
+
+        loadNotifications();
+
+        refreshUnreadCount();
+
+    }
+);
+
+
+/*
+ * Keep the database authoritative.
+ * No localStorage or sessionStorage is used for notifications.
+ */
+
+window.setInterval(
+    refreshUnreadCount,
+    30000
+);
+
+</script>
+
+
+</body>
+
+</html>

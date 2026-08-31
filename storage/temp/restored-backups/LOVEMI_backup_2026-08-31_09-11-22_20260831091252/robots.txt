@@ -1,0 +1,33 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin-api/
+Disallow: /admin/
+Disallow: /uploads/
+Disallow: /storage/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /services/
+Disallow: /cron/
+Disallow: /database/
+
+Disallow: /login.html
+Disallow: /registration.html
+Disallow: /forgot-password.html
+Disallow: /verify-account.html
+Disallow: /reset-password.html
+Disallow: /dashboard.html
+Disallow: /discover.html
+Disallow: /profile.html
+Disallow: /edit-profile.html
+Disallow: /connections.html
+Disallow: /messages.html
+Disallow: /premium.html
+Disallow: /payments.html
+Disallow: /notifications.html
+Disallow: /settings.html
+Disallow: /blocked-users.html
+Disallow: /reports.html
+
+Allow: /
+
+Sitemap: http://localhost/LOVEMI/sitemap.xml

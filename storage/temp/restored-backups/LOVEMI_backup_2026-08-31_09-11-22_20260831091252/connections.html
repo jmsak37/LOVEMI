@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Manage your LOVEMI connections.">
+
+    <meta name="theme-color"
+          content="#6d28d9">
+
+    <!-- =====================================================
+         LOVEMI TAB ICONS
+    ====================================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="assets/logo1/favicon-16x16.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/logo1/favicon-32x32.png">
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="assets/logo1/apple-touch-icon.png">
+
+    <link rel="manifest"
+          href="assets/logo1/site.webmanifest">
+
+    <!-- =====================================================
+         NO CACHE
+    ====================================================== -->
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+    <title>Connections | LOVEMI</title>
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <style>
+
+        :root {
+            --primary:#6d28d9;
+            --primary-soft:#f3e8ff;
+            --accent:#db2777;
+            --green:#16a34a;
+            --green-soft:#f0fdf4;
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+            --text:#18181b;
+            --soft:#68686f;
+            --muted:#9898a1;
+            --bg:#f7f7fb;
+            --white:#ffffff;
+            --border:#e9e9ef;
+            --shadow-sm:0 5px 18px rgba(0,0,0,.04);
+            --shadow-md:0 14px 38px rgba(0,0,0,.07);
+            --container:1380px;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html {
+            scroll-behavior:smooth;
+        }
+
+        body {
+            min-height:100vh;
+            font-family:"Inter",sans-serif;
+            color:var(--text);
+            background:var(--bg);
+            line-height:1.55;
+        }
+
+        body.menu-open {
+            overflow:hidden;
+        }
+
+        a {
+            color:inherit;
+            text-decoration:none;
+        }
+
+        button,
+        input,
+        select {
+            font-family:inherit;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+        img {
+            display:block;
+            max-width:100%;
+        }
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .header {
+            position:sticky;
+            top:0;
+            z-index:2000;
+            background:rgba(255,255,255,.97);
+            backdrop-filter:blur(18px);
+            border-bottom:1px solid rgba(0,0,0,.06);
+        }
+
+        .header-inner {
+            width:min(calc(100% - 30px),var(--container));
+            min-height:74px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:auto 1fr auto;
+            align-items:center;
+            gap:18px;
+        }
+
+        .brand {
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .brand-logo {
+            width:45px;
+            height:45px;
+            object-fit:contain;
+            border-radius:12px;
+        }
+
+        .brand-text {
+            display:flex;
+            flex-direction:column;
+        }
+
+        .brand-name {
+            font-family:"Playfair Display",serif;
+            font-size:26px;
+            font-weight:800;
+            line-height:1;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+            background-clip:text;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .brand-tagline {
+            margin-top:3px;
+            color:var(--muted);
+            font-size:7px;
+            letter-spacing:.7px;
+        }
+
+        .main-navigation {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:3px;
+        }
+
+        .nav-link {
+            position:relative;
+            min-height:40px;
+            padding:0 8px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            border-radius:9px;
+            color:var(--soft);
+            font-size:9px;
+            font-weight:700;
+            white-space:nowrap;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        .nav-link.active::after {
+            content:"";
+            position:absolute;
+            left:11px;
+            right:11px;
+            bottom:3px;
+            height:2px;
+            border-radius:2px;
+            background:linear-gradient(90deg,var(--primary),var(--accent));
+        }
+
+        .header-actions {
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+
+        .header-icon {
+            width:39px;
+            height:39px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--soft);
+            background:white;
+            font-size:10px;
+        }
+
+        .header-icon:hover {
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        .profile-shortcut {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            padding:3px 7px 3px 3px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:#fff;
+        }
+
+        .profile-shortcut img {
+            width:31px;
+            height:31px;
+            border-radius:8px;
+            object-fit:cover;
+        }
+
+        .profile-shortcut span {
+            max-width:70px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .mobile-menu {
+            display:none;
+            width:39px;
+            height:39px;
+            align-items:center;
+            justify-content:center;
+            border:1px solid var(--border);
+            border-radius:10px;
+            background:#fff;
+            color:var(--soft);
+        }
+
+        .mobile-navigation {
+            position:fixed;
+            top:74px;
+            left:0;
+            right:0;
+            z-index:1900;
+            display:none;
+            padding:8px;
+            background:rgba(255,255,255,.98);
+            border-bottom:1px solid var(--border);
+            box-shadow:0 20px 45px rgba(0,0,0,.10);
+        }
+
+        .mobile-navigation.open {
+            display:block;
+        }
+
+        .mobile-grid {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:6px;
+        }
+
+        .mobile-link {
+            min-height:45px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--soft);
+            background:#fff;
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .mobile-link i {
+            color:var(--primary);
+        }
+
+        .mobile-link.active {
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .page {
+            width:min(calc(100% - 30px),1120px);
+            margin:auto;
+            padding:28px 0 60px;
+        }
+
+        .page-heading {
+            margin-bottom:18px;
+        }
+
+        .page-heading h1 {
+            font-family:"Playfair Display",serif;
+            font-size:clamp(30px,4vw,45px);
+            line-height:1.08;
+        }
+
+        .page-heading h1 span {
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+            background-clip:text;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .page-heading p {
+            max-width:700px;
+            margin-top:7px;
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .status-card {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
+            padding:13px 15px;
+            margin-bottom:16px;
+            border:1px solid #eadcff;
+            border-radius:13px;
+            background:#fcfaff;
+        }
+
+        .status-left {
+            display:flex;
+            align-items:center;
+            gap:9px;
+        }
+
+        .status-icon {
+            width:38px;
+            height:38px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:10px;
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        .status-text strong {
+            display:block;
+            font-size:9px;
+        }
+
+        .status-text span {
+            display:block;
+            margin-top:2px;
+            color:var(--muted);
+            font-size:7px;
+        }
+
+        .status-button {
+            min-height:35px;
+            padding:0 10px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            border:none;
+            border-radius:9px;
+            color:white;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+            font-size:8px;
+            font-weight:800;
+        }
+
+        /* =====================================================
+           TABS
+        ====================================================== */
+
+        .tabs {
+            display:flex;
+            gap:6px;
+            margin-bottom:15px;
+            padding:6px;
+            border:1px solid var(--border);
+            border-radius:13px;
+            background:#fff;
+        }
+
+        .tab-button {
+            min-height:37px;
+            padding:0 12px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:6px;
+            border:none;
+            border-radius:9px;
+            color:var(--soft);
+            background:transparent;
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .tab-button.active {
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        /* =====================================================
+           GRID
+        ====================================================== */
+
+        .connection-grid {
+            display:grid;
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            gap:14px;
+        }
+
+        .connection-card {
+            overflow:hidden;
+            border:1px solid var(--border);
+            border-radius:16px;
+            background:#fff;
+            box-shadow:var(--shadow-sm);
+        }
+
+        .connection-photo {
+            position:relative;
+            aspect-ratio:1/1.02;
+            background:#efeff4;
+        }
+
+        .connection-photo img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .connection-online {
+            position:absolute;
+            top:9px;
+            left:9px;
+            padding:5px 7px;
+            border-radius:999px;
+            color:white;
+            background:rgba(0,0,0,.50);
+            font-size:6px;
+            font-weight:800;
+        }
+
+        .connection-online i {
+            color:#4ade80;
+            font-size:5px;
+        }
+
+        .connection-body {
+            padding:12px;
+        }
+
+        .connection-name {
+            display:flex;
+            align-items:center;
+            gap:5px;
+            font-size:10px;
+            font-weight:800;
+        }
+
+        .connection-name i {
+            color:#2563eb;
+            font-size:7px;
+        }
+
+        .connection-meta {
+            margin-top:3px;
+            color:var(--muted);
+            font-size:7px;
+        }
+
+        .connection-actions {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:6px;
+            margin-top:10px;
+        }
+
+        .action-primary,
+        .action-secondary,
+        .action-danger {
+            min-height:34px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            border-radius:9px;
+            font-size:7px;
+            font-weight:800;
+        }
+
+        .action-primary {
+            border:none;
+            color:#fff;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+        }
+
+        .action-secondary {
+            border:1px solid #ddd6fe;
+            color:var(--primary);
+            background:#fff;
+        }
+
+        .action-danger {
+            grid-column:1/-1;
+            border:1px solid #fecaca;
+            color:#b91c1c;
+            background:#fff;
+        }
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        .empty-state {
+            grid-column:1/-1;
+            min-height:260px;
+            padding:30px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            border:1px solid var(--border);
+            border-radius:16px;
+            background:#fff;
+        }
+
+        .empty-icon {
+            width:53px;
+            height:53px;
+            margin-bottom:10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:15px;
+            color:var(--primary);
+            background:var(--primary-soft);
+        }
+
+        .empty-state h3 {
+            font-size:12px;
+        }
+
+        .empty-state p {
+            max-width:450px;
+            margin-top:4px;
+            color:var(--muted);
+            font-size:8px;
+        }
+
+        .empty-state a {
+            margin-top:12px;
+            min-height:36px;
+            padding:0 12px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:5px;
+            border-radius:9px;
+            color:#fff;
+            background:var(--primary);
+            font-size:8px;
+            font-weight:800;
+        }
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading-state {
+            grid-column:1/-1;
+            min-height:220px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            border:1px solid var(--border);
+            border-radius:16px;
+            background:#fff;
+            color:var(--muted);
+            font-size:8px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+            background:#17151b;
+            color:#fff;
+        }
+
+        .footer-inner {
+            width:min(calc(100% - 30px),var(--container));
+            margin:auto;
+            padding:38px 0 18px;
+        }
+
+        .footer-grid {
+            display:grid;
+            grid-template-columns:1.5fr 1fr 1fr 1fr;
+            gap:30px;
+            padding-bottom:25px;
+        }
+
+        .footer-description {
+            max-width:320px;
+            margin-top:10px;
+            color:#9d99a5;
+            font-size:9px;
+            line-height:1.7;
+        }
+
+        .footer-heading {
+            margin-bottom:9px;
+            font-size:10px;
+        }
+
+        .footer-links {
+            display:flex;
+            flex-direction:column;
+            gap:6px;
+        }
+
+        .footer-links a {
+            color:#9d99a5;
+            font-size:8px;
+        }
+
+        .footer-links a:hover {
+            color:#fff;
+        }
+
+        .footer-bottom {
+            display:flex;
+            justify-content:space-between;
+            gap:15px;
+            padding-top:15px;
+            border-top:1px solid rgba(255,255,255,.08);
+            color:#716d78;
+            font-size:7px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media(max-width:1100px) {
+
+            .main-navigation {
+                display:none;
+            }
+
+            .mobile-menu {
+                display:inline-flex;
+            }
+
+            .connection-grid {
+                grid-template-columns:repeat(2,minmax(0,1fr));
+            }
+
+        }
+
+        @media(max-width:700px) {
+
+            .page {
+                width:calc(100% - 20px);
+                padding-top:18px;
+            }
+
+            .header-inner {
+                width:calc(100% - 20px);
+            }
+
+            .brand-text {
+                display:none;
+            }
+
+            .profile-shortcut {
+                display:none;
+            }
+
+            .status-card {
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .status-button {
+                width:100%;
+            }
+
+            .connection-grid {
+                grid-template-columns:repeat(2,minmax(0,1fr));
+                gap:9px;
+            }
+
+            .connection-body {
+                padding:9px;
+            }
+
+            .connection-name {
+                font-size:8.5px;
+            }
+
+            .connection-actions {
+                grid-template-columns:1fr;
+            }
+
+            .action-danger {
+                grid-column:auto;
+            }
+
+            .footer-grid {
+                grid-template-columns:1fr 1fr;
+            }
+
+        }
+
+        @media(max-width:430px) {
+
+            .connection-grid {
+                grid-template-columns:1fr;
+            }
+
+            .tabs {
+                overflow-x:auto;
+            }
+
+            .tab-button {
+                flex:0 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns:1fr;
+            }
+
+            .footer-bottom {
+                flex-direction:column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="dashboard.html"
+           class="brand">
+
+            <img
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI Logo"
+                class="brand-logo"
+                onerror="
+                    this.onerror=null;
+                    this.src='assets/logo1/apple-touch-icon.png';
+                ">
+
+            <span class="brand-text">
+
+                <span class="brand-name">
+                    LOVEMI
+                </span>
+
+                <span class="brand-tagline">
+                    DISCOVER • CONNECT • MEET
+                </span>
+
+            </span>
+
+        </a>
+
+        <!-- FULL NAVIGATION -->
+
+        <nav class="main-navigation"
+             aria-label="Main navigation">
+
+            <a href="dashboard.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+            <a href="discover.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-compass"></i>
+
+                Discover
+
+            </a>
+
+            <a href="connections.html"
+               class="nav-link active">
+
+                <i class="fa-solid fa-user-group"></i>
+
+                Connections
+
+            </a>
+
+            <a href="messages.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-message"></i>
+
+                Messages
+
+            </a>
+
+            <a href="profile.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-user"></i>
+
+                Profile
+
+            </a>
+
+            <a href="notifications.html"
+               class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                Notifications
+
+            </a>
+
+            <a href="settings.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </a>
+
+            <a href="premium.html"
+               class="nav-link">
+
+                <i class="fa-solid fa-crown"></i>
+
+                Premium
+
+            </a>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <a href="notifications.html"
+               class="header-icon"
+               aria-label="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+            </a>
+
+            <a href="messages.html"
+               class="header-icon"
+               aria-label="Messages">
+
+                <i class="fa-regular fa-message"></i>
+
+            </a>
+
+            <a href="profile.html"
+               class="header-icon"
+               aria-label="Profile">
+
+                <i class="fa-regular fa-user"></i>
+
+            </a>
+
+            <a href="profile.html"
+               class="profile-shortcut">
+
+                <img
+                    id="headerAvatar"
+                    src="assets/images/defaults/default-avatar-male.png"
+                    alt="Profile">
+
+                <span id="headerName">
+                    Account
+                </span>
+
+            </a>
+
+            <button
+                type="button"
+                id="mobileMenu"
+                class="mobile-menu"
+                aria-expanded="false"
+                aria-label="Open navigation">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================== -->
+
+<nav
+    id="mobileNavigation"
+    class="mobile-navigation">
+
+    <div class="mobile-grid">
+
+        <a href="dashboard.html"
+           class="mobile-link">
+
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+
+        </a>
+
+        <a href="discover.html"
+           class="mobile-link">
+
+            <i class="fa-solid fa-compass"></i>
+            Discover
+
+        </a>
+
+        <a href="connections.html"
+           class="mobile-link active">
+
+            <i class="fa-solid fa-user-group"></i>
+            Connections
+
+        </a>
+
+        <a href="messages.html"
+           class="mobile-link">
+
+            <i class="fa-regular fa-message"></i>
+            Messages
+
+        </a>
+
+        <a href="profile.html"
+           class="mobile-link">
+
+            <i class="fa-regular fa-user"></i>
+            Profile
+
+        </a>
+
+        <a href="notifications.html"
+           class="mobile-link">
+
+            <i class="fa-regular fa-bell"></i>
+            Notifications
+
+        </a>
+
+        <a href="settings.html"
+           class="mobile-link">
+
+            <i class="fa-solid fa-gear"></i>
+            Settings
+
+        </a>
+
+        <a href="premium.html"
+           class="mobile-link">
+
+            <i class="fa-solid fa-crown"></i>
+            Premium
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main class="page">
+
+    <section class="page-heading">
+
+        <h1>
+            Your <span>connections</span>
+        </h1>
+
+        <p>
+            See the members you are connected with and open
+            their profiles or conversations.
+        </p>
+
+    </section>
+
+
+    <section class="status-card">
+
+        <div class="status-left">
+
+            <div class="status-icon">
+
+                <i class="fa-solid fa-crown"></i>
+
+            </div>
+
+            <div class="status-text">
+
+                <strong id="premiumStatusTitle">
+                    Checking Premium...
+                </strong>
+
+                <span id="premiumStatusText">
+                    Loading your membership status.
+                </span>
+
+            </div>
+
+        </div>
+
+        <a href="premium.html"
+           class="status-button"
+           id="premiumButton">
+
+            <i class="fa-solid fa-crown"></i>
+
+            Premium
+
+        </a>
+
+    </section>
+
+
+    <!-- =====================================================
+         TABS
+    ====================================================== -->
+
+    <div class="tabs">
+
+        <button
+            type="button"
+            class="tab-button active"
+            data-status="accepted">
+
+            <i class="fa-solid fa-link"></i>
+
+            Connections
+
+        </button>
+
+        <button
+            type="button"
+            class="tab-button"
+            data-status="pending">
+
+            <i class="fa-regular fa-clock"></i>
+
+            Pending
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONNECTION GRID
+    ====================================================== -->
+
+    <section
+        id="connectionGrid"
+        class="connection-grid">
+
+        <div class="loading-state">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading connections...
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <a
+                    href="dashboard.html"
+                    class="brand">
+
+                    <img
+                        src="assets/logo1/logo1.png"
+                        alt="LOVEMI Logo"
+                        class="brand-logo"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/logo1/apple-touch-icon.png';
+                        ">
+
+                    <span class="brand-text">
+
+                        <span class="brand-name">
+                            LOVEMI
+                        </span>
+
+                        <span
+                            class="brand-tagline"
+                            style="color:#77717f;">
+
+                            DISCOVER • CONNECT • MEET
+
+                        </span>
+
+                    </span>
+
+                </a>
+
+                <p class="footer-description">
+
+                    Build connections, discover approved members
+                    and use LOVEMI services securely.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Explore
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                    <a href="discover.html">
+                        Discover
+                    </a>
+
+                    <a href="connections.html">
+                        Connections
+                    </a>
+
+                    <a href="messages.html">
+                        Messages
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Account
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                    <a href="edit-profile.html">
+                        Edit Profile
+                    </a>
+
+                    <a href="premium.html">
+                        Premium
+                    </a>
+
+                    <a href="settings.html">
+                        Settings
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="footer-heading">
+                    Help
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="help.html">
+                        Help Center
+                    </a>
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="terms.html">
+                        Terms
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © <span id="year"></span> LOVEMI. All rights reserved.
+            </span>
+
+            <span>
+                Discover • Connect • Meet
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API = {
+
+    session:
+        "api/auth/session.php",
+
+    premium:
+        "api/premium/status.php",
+
+    connections:
+        "api/connections/list.php"
+
+};
+
+
+/* =========================================================
+   DEFAULT IMAGE
+========================================================= */
+
+const DEFAULT_MALE =
+    "assets/images/defaults/default-avatar-male.png";
+
+const DEFAULT_FEMALE =
+    "assets/images/defaults/default-avatar-female.png";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+    premium:false,
+
+    currentStatus:"accepted",
+
+    connections:[]
+
+};
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const grid =
+    document.getElementById(
+        "connectionGrid"
+    );
+
+
+const headerAvatar =
+    document.getElementById(
+        "headerAvatar"
+    );
+
+
+const headerName =
+    document.getElementById(
+        "headerName"
+    );
+
+
+const premiumStatusTitle =
+    document.getElementById(
+        "premiumStatusTitle"
+    );
+
+
+const premiumStatusText =
+    document.getElementById(
+        "premiumStatusText"
+    );
+
+
+const premiumButton =
+    document.getElementById(
+        "premiumButton"
+    );
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   GET JSON
+========================================================= */
+
+async function getJson(
+    url
+) {
+
+    const separator =
+        url.includes("?")
+            ? "&"
+            : "?";
+
+
+    const response =
+        await fetch(
+            url
+            +
+            separator
+            +
+            "_="
+            +
+            Date.now(),
+            {
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers:{
+                    "Accept":
+                        "application/json",
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+                    "Pragma":
+                        "no-cache"
+                }
+
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    return {
+        response,
+        result
+    };
+
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+async function loadSession() {
+
+    const {
+        response,
+        result
+    } =
+        await getJson(
+            API.session
+        );
+
+
+    if (
+        !response.ok
+        ||
+        result.authenticated !== true
+    ) {
+
+        window.location.href =
+            "login.html?return=connections.html";
+
+        return false;
+
+    }
+
+
+    const user =
+        result.user
+        ||
+        null;
+
+
+    if (
+        !user
+    ) {
+
+        window.location.href =
+            "login.html?return=connections.html";
+
+        return false;
+
+    }
+
+
+    headerName.textContent =
+        user.username
+        ||
+        user.full_name
+        ||
+        "Account";
+
+
+    headerAvatar.src =
+        user.profile_photo
+        ||
+        user.avatar
+        ||
+        (
+            String(
+                user.gender
+                ||
+                ""
+            ).toLowerCase()
+            ===
+            "female"
+                ?
+                DEFAULT_FEMALE
+                :
+                DEFAULT_MALE
+        );
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   PREMIUM
+========================================================= */
+
+async function loadPremium() {
+
+    try {
+
+        const {
+            result
+        } =
+            await getJson(
+                API.premium
+            );
+
+
+        state.premium =
+            Boolean(
+                result.premium
+                ??
+                result.is_premium
+                ??
+                result.active
+                ??
+                result.has_premium
+                ??
+                result.data?.premium
+                ??
+                result.data?.is_premium
+                ??
+                result.data?.active
+            );
+
+
+    } catch {
+
+        state.premium =
+            false;
+
+    }
+
+
+    if (
+        state.premium
+    ) {
+
+        premiumStatusTitle.textContent =
+            "Premium Active";
+
+
+        premiumStatusText.textContent =
+            "You can use your connection services.";
+
+
+        premiumButton.innerHTML =
+            `
+            <i class="fa-solid fa-crown"></i>
+            Manage Premium
+            `;
+
+    } else {
+
+        premiumStatusTitle.textContent =
+            "Premium Required";
+
+
+        premiumStatusText.textContent =
+            "Premium is required to create new connections.";
+
+
+        premiumButton.innerHTML =
+            `
+            <i class="fa-solid fa-crown"></i>
+            Get Premium
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   CONNECTIONS
+========================================================= */
+
+async function loadConnections(
+    status = "accepted"
+) {
+
+    state.currentStatus =
+        status;
+
+
+    grid.innerHTML = `
+
+        <div class="loading-state">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading connections...
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await getJson(
+                API.connections
+                +
+                "?status="
+                +
+                encodeURIComponent(status)
+                +
+                "&limit=100"
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Connections could not be loaded."
+            );
+
+        }
+
+
+        state.connections =
+            Array.isArray(
+                result.connections
+            )
+                ?
+                result.connections
+                :
+                Array.isArray(
+                    result.data
+                )
+                    ?
+                    result.data
+                    :
+                    [];
+
+
+        renderConnections();
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+
+                <h3>
+                    Connections could not be loaded
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                        ||
+                        "Please try again."
+                    )}
+                </p>
+
+                <a href="javascript:loadConnections(state.currentStatus)">
+
+                    <i class="fa-solid fa-rotate-right"></i>
+
+                    Try Again
+
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderConnections() {
+
+    if (
+        state.connections.length === 0
+    ) {
+
+        const isPending =
+            state.currentStatus ===
+            "pending";
+
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid ${
+                        isPending
+                            ? "fa-clock"
+                            : "fa-user-group"
+                    }"></i>
+
+                </div>
+
+                <h3>
+
+                    ${
+                        isPending
+                            ?
+                            "No pending connections"
+                            :
+                            "No connections yet"
+                    }
+
+                </h3>
+
+                <p>
+
+                    ${
+                        isPending
+                            ?
+                            "Pending connection records will appear here."
+                            :
+                            "Discover approved LOVEMI members and connect with people you want to know."
+                    }
+
+                </p>
+
+                ${
+                    !isPending
+                        ?
+                        `
+                        <a href="discover.html">
+
+                            <i class="fa-solid fa-compass"></i>
+
+                            Discover Members
+
+                        </a>
+                        `
+                        :
+                        ""
+                }
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        state.connections
+            .map(
+                renderConnection
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   CONNECTION CARD
+========================================================= */
+
+function renderConnection(
+    connection
+) {
+
+    const userId =
+        connection.user_id
+        ??
+        connection.id
+        ??
+        "";
+
+
+    const name =
+        connection.full_name
+        ??
+        connection.full_names
+        ??
+        connection.username
+        ??
+        "Member";
+
+
+    const username =
+        connection.username
+        ??
+        "";
+
+
+    const gender =
+        connection.gender
+        ??
+        "";
+
+
+    const country =
+        connection.country_name
+        ??
+        "";
+
+
+    const avatar =
+        connection.profile_photo
+        ??
+        connection.photo_url
+        ??
+        (
+            String(
+                gender
+            ).toLowerCase()
+            ===
+            "female"
+                ?
+                DEFAULT_FEMALE
+                :
+                DEFAULT_MALE
+        );
+
+
+    const online =
+        Boolean(
+            connection.is_online
+            ??
+            connection.online
+            ??
+            false
+        );
+
+
+    const verified =
+        Boolean(
+            connection.email_verified
+            ??
+            connection.verified
+            ??
+            false
+        );
+
+
+    const pending =
+        state.currentStatus ===
+        "pending";
+
+
+    return `
+
+        <article class="connection-card">
+
+
+            <div class="connection-photo">
+
+
+                <img
+                    src="${escapeHtml(avatar)}"
+                    alt="${escapeHtml(name)}"
+                    loading="lazy"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-avatar-male.png';
+                    ">
+
+
+                ${
+                    online
+                        ?
+                        `
+                        <span class="connection-online">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            Online
+
+                        </span>
+                        `
+                        :
+                        ""
+                }
+
+
+            </div>
+
+
+            <div class="connection-body">
+
+
+                <div class="connection-name">
+
+
+                    ${escapeHtml(name)}
+
+
+                    ${
+                        verified
+                            ?
+                            `
+                            <i class="fa-solid fa-circle-check"></i>
+                            `
+                            :
+                            ""
+                    }
+
+
+                </div>
+
+
+                <div class="connection-meta">
+
+                    ${
+                        username
+                            ?
+                            "@"
+                            +
+                            escapeHtml(username)
+                            +
+                            (
+                                country
+                                    ?
+                                    " • "
+                                    +
+                                    escapeHtml(country)
+                                    :
+                                    ""
+                            )
+                            :
+                            (
+                                escapeHtml(country)
+                                ||
+                                escapeHtml(gender)
+                            )
+                    }
+
+                </div>
+
+
+                <div class="connection-actions">
+
+
+                    ${
+                        pending
+                            ?
+                            `
+                            <a
+                                href="profile.html?user=${encodeURIComponent(userId)}"
+                                class="action-secondary">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                View
+
+                            </a>
+
+
+                            <a
+                                href="connections.html"
+                                class="action-primary">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                Pending
+
+                            </a>
+                            `
+                            :
+                            `
+                            <a
+                                href="profile.html?user=${encodeURIComponent(userId)}"
+                                class="action-secondary">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                Profile
+
+                            </a>
+
+
+                            <a
+                                href="messages.html?user=${encodeURIComponent(userId)}"
+                                class="action-primary">
+
+                                <i class="fa-regular fa-message"></i>
+
+                                Message
+
+                            </a>
+                            `
+                    }
+
+
+                    ${
+                        !pending
+                            ?
+                            `
+                            <a
+                                href="reports.html?user=${encodeURIComponent(userId)}"
+                                class="action-danger">
+
+                                <i class="fa-regular fa-flag"></i>
+
+                                Report
+
+                            </a>
+                            `
+                            :
+                            ""
+                    }
+
+
+                </div>
+
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".tab-button"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(
+                            ".tab-button"
+                        )
+                        .forEach(
+                            btn =>
+                                btn.classList.toggle(
+                                    "active",
+                                    btn === this
+                                )
+                        );
+
+
+                    loadConnections(
+                        this.dataset.status
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+const mobileNavigation =
+    document.getElementById(
+        "mobileNavigation"
+    );
+
+
+mobileMenu.addEventListener(
+    "click",
+    function() {
+
+        const open =
+            mobileNavigation.classList.contains(
+                "open"
+            );
+
+
+        mobileNavigation.classList.toggle(
+            "open"
+        );
+
+
+        document.body.classList.toggle(
+            "menu-open",
+            !open
+        );
+
+
+        this.setAttribute(
+            "aria-expanded",
+            String(
+                !open
+            )
+        );
+
+
+        this.innerHTML =
+            !open
+                ?
+                '<i class="fa-solid fa-xmark"></i>'
+                :
+                '<i class="fa-solid fa-bars"></i>';
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        const authenticated =
+            await loadSession();
+
+
+        if (
+            !authenticated
+        ) {
+
+            return;
+
+        }
+
+
+        await loadPremium();
+
+        await loadConnections(
+            "accepted"
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

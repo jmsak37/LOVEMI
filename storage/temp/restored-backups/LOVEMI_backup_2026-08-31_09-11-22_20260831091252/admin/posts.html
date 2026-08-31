@@ -1,0 +1,4328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots"
+          content="noindex,nofollow">
+
+    <meta name="theme-color"
+          content="#6d28d9">
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+    <title>Posts | LOVEMI Admin</title>
+
+    <!-- =====================================================
+         LOVEMI TAB ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+    <style>
+
+        :root {
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
+
+            --accent:#db2777;
+            --accent-soft:#fce7f3;
+
+            --green:#16a34a;
+            --green-soft:#ecfdf5;
+
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+
+            --orange:#d97706;
+            --orange-soft:#fffbeb;
+
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
+
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9999a3;
+
+            --background:#f6f6fa;
+            --border:#e7e7ee;
+            --white:#fff;
+
+            --sidebar-width:258px;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html {
+            scroll-behavior:smooth;
+        }
+
+        body {
+            min-height:100vh;
+            font-family:"Inter",sans-serif;
+            color:var(--text);
+            background:var(--background);
+            line-height:1.55;
+        }
+
+        a {
+            color:inherit;
+            text-decoration:none;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font:inherit;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+            position:fixed;
+            inset:0 auto 0 0;
+
+            width:var(--sidebar-width);
+
+            z-index:1200;
+
+            overflow-y:auto;
+
+            color:#fff;
+
+            background:#17141f;
+        }
+
+        .sidebar-header {
+            min-height:82px;
+
+            padding:17px 18px;
+
+            display:flex;
+            align-items:center;
+            gap:10px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.06);
+        }
+
+        .sidebar-logo {
+            width:46px;
+            height:46px;
+
+            object-fit:contain;
+
+            border-radius:12px;
+        }
+
+        .sidebar-title {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:22px;
+            font-weight:800;
+        }
+
+        .sidebar-subtitle {
+            display:block;
+
+            margin-top:2px;
+
+            color:#9f9aa8;
+
+            font-size:8px;
+            font-weight:800;
+
+            letter-spacing:.8px;
+        }
+
+        .admin-badge {
+            display:inline-flex;
+
+            align-items:center;
+            gap:6px;
+
+            margin:16px;
+
+            padding:7px 10px;
+
+            border:
+                1px solid rgba(255,255,255,.1);
+
+            border-radius:999px;
+
+            color:#e9ddff;
+
+            background:
+                rgba(109,40,217,.16);
+
+            font-size:9px;
+            font-weight:800;
+        }
+
+        .sidebar-section {
+            padding:4px 12px;
+        }
+
+        .sidebar-label {
+            padding:
+                12px 10px 7px;
+
+            color:#716c7d;
+
+            font-size:8px;
+            font-weight:800;
+
+            text-transform:uppercase;
+
+            letter-spacing:1px;
+        }
+
+        .sidebar-link {
+            display:flex;
+            align-items:center;
+            gap:11px;
+
+            margin:2px 0;
+
+            padding:10px 11px;
+
+            border-radius:10px;
+
+            color:#b7b1c2;
+
+            font-size:9px;
+            font-weight:600;
+
+            transition:.2s ease;
+        }
+
+        .sidebar-link i {
+            width:17px;
+
+            text-align:center;
+        }
+
+        .sidebar-link:hover {
+            color:#fff;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .sidebar-link.active {
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.90),
+                    rgba(219,39,119,.58)
+                );
+        }
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+            min-height:100vh;
+
+            margin-left:
+                var(--sidebar-width);
+        }
+
+        .topbar {
+            position:sticky;
+
+            top:0;
+
+            z-index:900;
+
+            min-height:76px;
+
+            padding:0 28px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            gap:18px;
+
+            background:
+                rgba(255,255,255,.96);
+
+            border-bottom:
+                1px solid var(--border);
+
+            backdrop-filter:
+                blur(14px);
+        }
+
+        .topbar-left {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .menu-btn {
+            display:none;
+
+            width:40px;
+            height:40px;
+
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+        }
+
+        .page-title h1 {
+            font-size:18px;
+            font-weight:800;
+        }
+
+        .page-title p {
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .topbar-right {
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .top-icon {
+            width:38px;
+            height:38px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            color:var(--text-soft);
+
+            background:#fff;
+        }
+
+        .admin-user {
+            display:flex;
+            align-items:center;
+            gap:8px;
+
+            padding-left:10px;
+
+            border-left:
+                1px solid var(--border);
+        }
+
+        .admin-avatar {
+            width:37px;
+            height:37px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .admin-user strong {
+            display:block;
+
+            font-size:8px;
+        }
+
+        .admin-user span {
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+            width:
+                min(
+                    calc(100% - 48px),
+                    1450px
+                );
+
+            margin:auto;
+
+            padding:
+                28px 0 55px;
+        }
+
+        .heading-row {
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+
+            gap:18px;
+
+            margin-bottom:18px;
+        }
+
+        .heading-row h2 {
+            font-size:23px;
+            font-weight:800;
+        }
+
+        .heading-row p {
+            margin-top:4px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .btn {
+            min-height:40px;
+
+            padding:
+                0 13px;
+
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+
+            border:
+                1px solid transparent;
+
+            border-radius:10px;
+
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .btn-light {
+            color:var(--text-soft);
+
+            background:#fff;
+
+            border-color:
+                var(--border);
+        }
+
+        .btn-primary {
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+        }
+
+        .btn-success {
+            color:#fff;
+
+            background:
+                var(--green);
+        }
+
+        .btn-danger {
+            color:#fff;
+
+            background:
+                var(--red);
+        }
+
+        .alert {
+            display:none;
+
+            margin-bottom:16px;
+
+            padding:
+                12px 14px;
+
+            border-radius:11px;
+
+            font-size:9px;
+        }
+
+        .alert.show {
+            display:block;
+        }
+
+        .alert.success {
+            color:#166534;
+            background:var(--green-soft);
+            border:
+                1px solid #bbf7d0;
+        }
+
+        .alert.error {
+            color:#991b1b;
+            background:var(--red-soft);
+            border:
+                1px solid #fecaca;
+        }
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
+            display:grid;
+
+            grid-template-columns:
+                repeat(4,minmax(0,1fr));
+
+            gap:12px;
+
+            margin-bottom:16px;
+        }
+
+        .stat-card {
+            padding:18px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:15px;
+
+            background:#fff;
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,.04);
+        }
+
+        .stat-top {
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+        }
+
+        .stat-card span {
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .stat-card strong {
+            display:block;
+
+            margin-top:6px;
+
+            font-size:21px;
+        }
+
+        .stat-icon {
+            width:35px;
+            height:35px;
+
+            display:grid;
+            place-items:center;
+
+            border-radius:10px;
+
+            color:var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            font-size:10px;
+        }
+
+        /* =====================================================
+           FILTER
+        ====================================================== */
+
+        .filter-card {
+            margin-bottom:16px;
+
+            padding:14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.04);
+        }
+
+        .filters {
+            display:grid;
+
+            grid-template-columns:
+                minmax(220px,1fr)
+                165px
+                165px
+                165px
+                42px;
+
+            gap:9px;
+        }
+
+        .field {
+            width:100%;
+
+            min-height:42px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            outline:none;
+
+            color:var(--text);
+
+            background:#fff;
+
+            font-size:8px;
+        }
+
+        .field:focus {
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+        }
+
+        .refresh-btn {
+            width:42px;
+            height:42px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            color:var(--text-soft);
+
+            background:#fff;
+        }
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .panel {
+            overflow:hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+        .panel-header {
+            min-height:65px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+        .panel-header h3 {
+            font-size:11px;
+            font-weight:800;
+        }
+
+        .panel-header span {
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .table-wrap {
+            overflow-x:auto;
+        }
+
+        table {
+            width:100%;
+
+            border-collapse:
+                collapse;
+
+            min-width:1000px;
+        }
+
+        th,
+        td {
+            padding:
+                12px 14px;
+
+            text-align:left;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+        th {
+            color:#76737c;
+
+            background:#fafafe;
+
+            font-size:7px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:.6px;
+        }
+
+        td {
+            vertical-align:middle;
+
+            font-size:8px;
+        }
+
+        tbody tr:hover {
+            background:#fcfbff;
+        }
+
+        .post-id {
+            color:var(--text-muted);
+
+            font-size:7px;
+            font-weight:800;
+        }
+
+        .user-cell {
+            display:flex;
+
+            align-items:center;
+
+            gap:9px;
+        }
+
+        .user-avatar {
+            width:35px;
+            height:35px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .user-cell strong {
+            display:block;
+
+            font-size:8px;
+        }
+
+        .user-cell span {
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .content-cell {
+            max-width:350px;
+
+            white-space:nowrap;
+
+            overflow:hidden;
+
+            text-overflow:ellipsis;
+        }
+
+        .status {
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            padding:
+                5px 8px;
+
+            border-radius:999px;
+
+            font-size:6px;
+
+            font-weight:800;
+
+            text-transform:
+                uppercase;
+        }
+
+        .status.pending {
+            color:var(--orange);
+
+            background:
+                var(--orange-soft);
+        }
+
+        .status.approved {
+            color:var(--green);
+
+            background:
+                var(--green-soft);
+        }
+
+        .status.rejected {
+            color:var(--red);
+
+            background:
+                var(--red-soft);
+        }
+
+        .status.draft {
+            color:#475569;
+
+            background:#f1f5f9;
+        }
+
+        .visibility {
+            color:var(--text-soft);
+
+            font-size:7px;
+
+            text-transform:
+                capitalize;
+        }
+
+        .featured {
+            color:#a16207;
+
+            font-size:7px;
+        }
+
+        .not-featured {
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .actions {
+            display:flex;
+
+            gap:5px;
+        }
+
+        .action-btn {
+            width:31px;
+            height:31px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:8px;
+
+            background:#fff;
+
+            font-size:7px;
+        }
+
+        .action-btn:hover {
+            transform:
+                translateY(-1px);
+        }
+
+        .action-btn.view {
+            color:var(--blue);
+
+            border-color:#bfdbfe;
+
+            background:
+                var(--blue-soft);
+        }
+
+        .action-btn.approve {
+            color:var(--green);
+
+            border-color:#bbf7d0;
+
+            background:
+                var(--green-soft);
+        }
+
+        .action-btn.reject {
+            color:var(--red);
+
+            border-color:#fecaca;
+
+            background:
+                var(--red-soft);
+        }
+
+        .action-btn.edit {
+            color:var(--primary);
+
+            border-color:#ddd6fe;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .action-btn.delete {
+            color:#fff;
+
+            border-color:
+                var(--red);
+
+            background:
+                var(--red);
+        }
+
+        .loading-cell,
+        .empty-cell {
+            height:240px;
+
+            text-align:center;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        .pagination {
+            min-height:65px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            gap:12px;
+        }
+
+        .pagination-info {
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .pages {
+            display:flex;
+            gap:5px;
+        }
+
+        .page-btn {
+            width:31px;
+            height:31px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:8px;
+
+            background:#fff;
+
+            font-size:8px;
+            font-weight:700;
+        }
+
+        .page-btn.active {
+            color:#fff;
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--primary);
+        }
+
+        .page-btn:disabled {
+            opacity:.4;
+
+            cursor:not-allowed;
+        }
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal {
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:2200;
+
+            align-items:center;
+            justify-content:center;
+
+            padding:18px;
+
+            background:
+                rgba(0,0,0,.60);
+        }
+
+        .modal.show {
+            display:flex;
+        }
+
+        .modal-card {
+            width:
+                min(
+                    100%,
+                    820px
+                );
+
+            max-height:
+                92vh;
+
+            overflow-y:auto;
+
+            border-radius:18px;
+
+            background:#fff;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.25);
+        }
+
+        .modal-head {
+            min-height:64px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .modal-head h3 {
+            font-size:13px;
+        }
+
+        .close-btn {
+            width:35px;
+            height:35px;
+
+            display:grid;
+            place-items:center;
+
+            border:none;
+
+            border-radius:9px;
+
+            background:#f5f5f7;
+        }
+
+        .modal-body {
+            padding:18px;
+        }
+
+        .post-preview-text {
+            padding:15px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:12px;
+
+            color:var(--text-soft);
+
+            background:#fafafa;
+
+            font-size:10px;
+
+            white-space:pre-wrap;
+
+            overflow-wrap:anywhere;
+        }
+
+        .media-list {
+            display:grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap:10px;
+
+            margin-top:15px;
+        }
+
+        .media-item {
+            overflow:hidden;
+
+            aspect-ratio:
+                1 / 1;
+
+            border-radius:12px;
+
+            background:#f4f4f7;
+        }
+
+        .media-item img,
+        .media-item video {
+            width:100%;
+            height:100%;
+
+            object-fit:cover;
+        }
+
+        .modal-actions {
+            display:flex;
+
+            gap:8px;
+
+            margin-top:16px;
+        }
+
+        .edit-form {
+            display:grid;
+
+            gap:13px;
+        }
+
+        .edit-label {
+            display:block;
+
+            margin-bottom:5px;
+
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .edit-input,
+        .edit-textarea,
+        .edit-select {
+            width:100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            outline:none;
+
+            background:#fff;
+
+            font-size:9px;
+        }
+
+        .edit-input,
+        .edit-select {
+            min-height:43px;
+
+            padding:0 11px;
+        }
+
+        .edit-textarea {
+            min-height:150px;
+
+            padding:11px;
+
+            resize:vertical;
+        }
+
+        .edit-input:focus,
+        .edit-textarea:focus,
+        .edit-select:focus {
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+        }
+
+        .check-row {
+            display:flex;
+            align-items:center;
+            gap:7px;
+
+            font-size:8px;
+        }
+
+        .check-row input {
+            accent-color:
+                var(--primary);
+        }
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width:1100px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+            .filters {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+        @media (max-width:850px) {
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    .25s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                margin-left:0;
+            }
+
+            .menu-btn {
+                display:grid;
+            }
+
+        }
+
+        @media (max-width:680px) {
+
+            .topbar {
+                padding:
+                    0 13px;
+            }
+
+            .content {
+                width:
+                    calc(100% - 24px);
+            }
+
+            .top-icon {
+                display:none;
+            }
+
+            .admin-user {
+                border-left:none;
+
+                padding-left:0;
+            }
+
+            .admin-user > div {
+                display:none;
+            }
+
+            .heading-row {
+                align-items:flex-start;
+
+                flex-direction:column;
+            }
+
+            .filters {
+                grid-template-columns:1fr;
+            }
+
+            .refresh-btn {
+                width:100%;
+            }
+
+            .pagination {
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                padding:
+                    15px 18px;
+            }
+
+        }
+
+        @media (max-width:430px) {
+
+            .stats {
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap:8px;
+            }
+
+            .stat-card {
+                padding:13px;
+            }
+
+            .stat-card strong {
+                font-size:17px;
+            }
+
+            .media-list {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+        <a
+            href="users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+        <a
+            href="profiles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+        <a
+            href="admins.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+        <a
+            href="roles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+        <a
+            href="permissions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+        <a
+            href="photos.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+        <a
+            href="posts.html"
+            class="sidebar-link active"
+        >
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+        <a
+            href="connections.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+        <a
+            href="conversations.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+        <a
+            href="messages.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+        <a
+            href="premium-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+        <a
+            href="subscriptions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+        <a
+            href="payments.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+        <a
+            href="reports.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+        <a
+            href="blocked-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+        <a
+            href="verification.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-circle-check"></i>
+            Verification
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+        <a
+            href="notifications.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+        <a
+            href="system-settings.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+        <a
+            href="audit-logs.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+        <a
+            href="backup.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+        <a
+            href="../dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+        <a
+            href="#"
+            class="sidebar-link"
+            id="logoutLink"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open admin menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+
+                <h1>
+                    Posts
+                </h1>
+
+                <p>
+                    Review and manage LOVEMI member posts.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+            <a
+                href="messages.html"
+                class="top-icon"
+                title="Messages"
+            >
+                <i class="fa-regular fa-message"></i>
+            </a>
+
+            <a
+                href="../index.html"
+                class="top-icon"
+                title="Public website"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+            <div class="admin-user">
+
+                <img
+                    id="adminAvatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                    class="admin-avatar"
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+
+        <div class="heading-row">
+
+            <div>
+
+                <h2>
+                    Post Moderation
+                </h2>
+
+                <p>
+                    Approve, reject, edit, feature, view and remove posts.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-light"
+                id="refreshTop"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            id="alertBox"
+            class="alert"
+            role="alert"
+        ></div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Total Posts
+                        </span>
+
+                        <strong id="totalPosts">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="pendingPosts">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Approved
+                        </span>
+
+                        <strong id="approvedPosts">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong id="rejectedPosts">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-card">
+
+            <div class="filters">
+
+
+                <input
+                    type="search"
+                    id="search"
+                    class="field"
+                    placeholder="Search post content, username or name..."
+                >
+
+
+                <select
+                    id="status"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="approved">
+                        Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="visibility"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Visibility
+                    </option>
+
+                    <option value="public">
+                        Public
+                    </option>
+
+                    <option value="private">
+                        Private
+                    </option>
+
+                    <option value="connections">
+                        Connections
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="featured"
+                    class="field"
+                >
+
+                    <option value="">
+                        Featured / Normal
+                    </option>
+
+                    <option value="1">
+                        Featured
+                    </option>
+
+                    <option value="0">
+                        Normal
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    id="refreshBtn"
+                    title="Refresh"
+                >
+                    <i class="fa-solid fa-rotate"></i>
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <section class="panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>
+                        Posts Library
+                    </h3>
+
+                    <span>
+                        Loaded directly from the database.
+                    </span>
+
+                </div>
+
+
+                <span id="resultCount">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Member
+                            </th>
+
+                            <th>
+                                Content
+                            </th>
+
+                            <th>
+                                Visibility
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Featured
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="postsBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="loading-cell"
+                            >
+
+                                <i
+                                    class="fa-solid fa-spinner fa-spin"
+                                ></i>
+
+                                Loading posts...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="pagination">
+
+                <div
+                    id="paginationInfo"
+                    class="pagination-info"
+                >
+                    Loading...
+                </div>
+
+
+                <div
+                    id="pages"
+                    class="pages"
+                ></div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     VIEW POST MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="viewModal"
+>
+
+    <div class="modal-card">
+
+
+        <div class="modal-head">
+
+            <h3 id="viewTitle">
+                Post
+            </h3>
+
+
+            <button
+                type="button"
+                class="close-btn"
+                id="closeView"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div
+                id="viewPostText"
+                class="post-preview-text"
+            ></div>
+
+
+            <div
+                id="mediaList"
+                class="media-list"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    id="viewApprove"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="viewReject"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    id="viewEdit"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     EDIT POST MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="editModal"
+>
+
+    <div class="modal-card">
+
+
+        <div class="modal-head">
+
+            <h3>
+                Edit Post
+            </h3>
+
+
+            <button
+                type="button"
+                class="close-btn"
+                id="closeEdit"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <form
+                id="editForm"
+                class="edit-form"
+            >
+
+
+                <input
+                    type="hidden"
+                    id="editPostId"
+                >
+
+
+                <div>
+
+                    <label
+                        for="editContent"
+                        class="edit-label"
+                    >
+                        Content
+                    </label>
+
+                    <textarea
+                        id="editContent"
+                        class="edit-textarea"
+                        maxlength="10000"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        for="editVisibility"
+                        class="edit-label"
+                    >
+                        Visibility
+                    </label>
+
+                    <select
+                        id="editVisibility"
+                        class="edit-select"
+                    >
+
+                        <option value="public">
+                            Public
+                        </option>
+
+                        <option value="private">
+                            Private
+                        </option>
+
+                        <option value="connections">
+                            Connections
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <label class="check-row">
+
+                    <input
+                        type="checkbox"
+                        id="editFeatured"
+                    >
+
+                    Featured post
+
+                </label>
+
+
+                <div
+                    class="modal-actions"
+                    style="justify-content:flex-end;"
+                >
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        id="cancelEdit"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveEdit"
+                    >
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+const API = {
+
+    list:
+        "../admin-api/posts/list.php",
+
+    get:
+        "../admin-api/posts/get.php",
+
+    approve:
+        "../admin-api/posts/approve.php",
+
+    reject:
+        "../admin-api/posts/reject.php",
+
+    update:
+        "../admin-api/posts/update.php",
+
+    delete:
+        "../admin-api/posts/delete.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+let currentPage = 1;
+
+let totalPages = 1;
+
+let selectedPostId = 0;
+
+let searchTimer = null;
+
+
+const body =
+    document.getElementById(
+        "postsBody"
+    );
+
+
+const alertBox =
+    document.getElementById(
+        "alertBox"
+    );
+
+
+function escapeHTML(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const date =
+        new Date(
+            String(value)
+                .replace(
+                    " ",
+                    "T"
+                )
+        );
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+    return date.toLocaleString();
+
+}
+
+
+function safeImageUrl(
+    value
+) {
+
+    if (!value) {
+
+        return "../assets/images/defaults/default-avatar-male.png";
+
+    }
+
+    const raw =
+        String(value)
+            .trim();
+
+    if (
+        raw.startsWith(
+            "http://"
+        )
+        ||
+        raw.startsWith(
+            "https://"
+        )
+        ||
+        raw.startsWith("/")
+    ) {
+
+        return raw;
+
+    }
+
+    return "../"
+        +
+        raw.replace(
+            /^\/+/,
+            ""
+        );
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show "
+        +
+        type;
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    alertBox.className =
+        "alert";
+
+    alertBox.textContent =
+        "";
+
+}
+
+
+async function apiJSON(
+    endpoint,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            endpoint,
+            {
+                credentials:
+                    "include",
+
+                cache:
+                    "no-store",
+
+                ...options,
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    ...(options.body
+                        ? {
+                            "Content-Type":
+                                "application/json"
+                        }
+                        :
+                        {}),
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
+
+
+    let result;
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch (
+        error
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    if (
+        response.status === 401
+    ) {
+
+        window.location.href =
+            "../login.html?redirect="
+            +
+            encodeURIComponent(
+                "admin/posts.html"
+            );
+
+        throw new Error(
+            "Authentication required."
+        );
+
+    }
+
+
+    if (
+        response.status === 403
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "Administrator permission required."
+        );
+
+    }
+
+
+    if (
+        !response.ok
+        ||
+        result.success !== true
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "The requested operation failed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+async function loadPosts() {
+
+    hideAlert();
+
+
+    body.innerHTML =
+        `
+        <tr>
+
+            <td
+                colspan="8"
+                class="loading-cell"
+            >
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Loading posts...
+
+            </td>
+
+        </tr>
+        `;
+
+
+    const params =
+        new URLSearchParams({
+
+            page:
+                String(
+                    currentPage
+                ),
+
+            limit:
+                "20",
+
+            search:
+                document
+                    .getElementById(
+                        "search"
+                    )
+                    .value
+                    .trim(),
+
+            status:
+                document
+                    .getElementById(
+                        "status"
+                    )
+                    .value,
+
+            visibility:
+                document
+                    .getElementById(
+                        "visibility"
+                    )
+                    .value,
+
+            featured:
+                document
+                    .getElementById(
+                        "featured"
+                    )
+                    .value
+
+        });
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.list
+                +
+                "?"
+                +
+                params.toString()
+            );
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        renderAdmin(
+            data.current_admin
+            ||
+            {}
+        );
+
+
+        renderStats(
+            data.summary
+            ||
+            {}
+        );
+
+
+        renderPosts(
+            data.posts
+            ||
+            [],
+            data.pagination
+            ||
+            {}
+        );
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        body.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-cell"
+                >
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+function renderAdmin(
+    admin
+) {
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            safeImageUrl(
+                admin.avatar_url
+            );
+
+    }
+
+}
+
+
+function renderStats(
+    summary
+) {
+
+    document.getElementById(
+        "totalPosts"
+    ).textContent =
+        Number(
+            summary.total
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "pendingPosts"
+    ).textContent =
+        Number(
+            summary.pending
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "approvedPosts"
+    ).textContent =
+        Number(
+            summary.approved
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "rejectedPosts"
+    ).textContent =
+        Number(
+            summary.rejected
+            ||
+            0
+        ).toLocaleString();
+
+}
+
+
+function renderPosts(
+    posts,
+    pagination
+) {
+
+    if (
+        !posts.length
+    ) {
+
+        body.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-cell"
+                >
+
+                    <i class="fa-solid fa-newspaper"></i>
+
+                    <br><br>
+
+                    No posts found.
+
+                </td>
+
+            </tr>
+            `;
+
+    } else {
+
+        body.innerHTML =
+            posts
+                .map(
+                    post =>
+                        renderPost(
+                            post
+                        )
+                )
+                .join("");
+
+    }
+
+
+    currentPage =
+        Math.max(
+            1,
+            Number(
+                pagination.page
+                ||
+                1
+            )
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                pagination.pages
+                ||
+                1
+            )
+        );
+
+
+    const total =
+        Number(
+            pagination.total
+            ||
+            0
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ||
+            20
+        );
+
+
+    const first =
+        total
+            ?
+            (
+                (
+                    currentPage - 1
+                )
+                *
+                limit
+            )
+            +
+            1
+            :
+            0;
+
+
+    const last =
+        Math.min(
+            currentPage *
+            limit,
+            total
+        );
+
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        total.toLocaleString()
+        +
+        " post"
+        +
+        (
+            total === 1
+                ? ""
+                : "s"
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total
+            ?
+            `Showing ${first}–${last} of ${total.toLocaleString()} posts`
+            :
+            "No posts";
+
+
+    renderPagination();
+
+}
+
+
+function renderPost(
+    post
+) {
+
+    const status =
+        String(
+            post.approval_status
+            ||
+            "pending"
+        ).toLowerCase();
+
+
+    const featured =
+        Number(
+            post.is_featured
+            ||
+            0
+        ) === 1;
+
+
+    const avatar =
+        safeImageUrl(
+            post.avatar_url
+            ||
+            post.profile_photo
+        );
+
+
+    let statusClass =
+        "pending";
+
+
+    if (
+        status ===
+        "approved"
+    ) {
+
+        statusClass =
+            "approved";
+
+    }
+
+
+    if (
+        status ===
+        "rejected"
+    ) {
+
+        statusClass =
+            "rejected";
+
+    }
+
+
+    return `
+    <tr>
+
+        <td>
+            <span class="post-id">
+                #${Number(post.id || 0)}
+            </span>
+        </td>
+
+
+        <td>
+
+            <div class="user-cell">
+
+                <img
+                    src="${escapeHTML(avatar)}"
+                    alt=""
+                    class="user-avatar"
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(
+                            post.full_names
+                            ||
+                            post.username
+                            ||
+                            "Unknown member"
+                        )}
+                    </strong>
+
+                    <span>
+                        @${escapeHTML(
+                            post.username
+                            ||
+                            ""
+                        )}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <div
+                class="content-cell"
+                title="${escapeHTML(
+                    post.content
+                    ||
+                    "(No text)"
+                )}"
+            >
+
+                ${escapeHTML(
+                    post.content
+                    ||
+                    "(No text)"
+                )}
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <span class="visibility">
+                ${escapeHTML(
+                    post.visibility
+                    ||
+                    "public"
+                )}
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="status ${statusClass}"
+            >
+                ${escapeHTML(status)}
+            </span>
+
+        </td>
+
+
+        <td>
+
+            ${
+                featured
+                    ?
+                    `
+                    <span class="featured">
+                        <i class="fa-solid fa-star"></i>
+                        Featured
+                    </span>
+                    `
+                    :
+                    `
+                    <span class="not-featured">
+                        Normal
+                    </span>
+                    `
+            }
+
+        </td>
+
+
+        <td>
+            ${escapeHTML(
+                formatDate(
+                    post.created_at
+                )
+            )}
+        </td>
+
+
+        <td>
+
+            <div class="actions">
+
+
+                <button
+                    type="button"
+                    class="action-btn view"
+                    title="View"
+                    onclick="viewPost(
+                        ${Number(post.id)}
+                    )"
+                >
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+
+
+                ${
+                    status !== "approved"
+                        ?
+                        `
+                        <button
+                            type="button"
+                            class="action-btn approve"
+                            title="Approve"
+                            onclick="approvePost(
+                                ${Number(post.id)}
+                            )"
+                        >
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        `
+                        :
+                        ""
+                }
+
+
+                ${
+                    status !== "rejected"
+                        ?
+                        `
+                        <button
+                            type="button"
+                            class="action-btn reject"
+                            title="Reject"
+                            onclick="rejectPost(
+                                ${Number(post.id)}
+                            )"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        `
+                        :
+                        ""
+                }
+
+
+                <button
+                    type="button"
+                    class="action-btn edit"
+                    title="Edit"
+                    onclick="editPost(
+                        ${Number(post.id)}
+                    )"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="action-btn delete"
+                    title="Delete"
+                    onclick="deletePost(
+                        ${Number(post.id)}
+                    )"
+                >
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+
+            </div>
+
+        </td>
+
+    </tr>
+    `;
+
+}
+
+
+function renderPagination() {
+
+    const pages =
+        document.getElementById(
+            "pages"
+        );
+
+
+    let html =
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(
+                ${currentPage - 1}
+            )"
+            ${currentPage <= 1
+                ? "disabled"
+                : ""}
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let i = start;
+        i <= end;
+        i++
+    ) {
+
+        html +=
+            `
+            <button
+                type="button"
+                class="page-btn ${
+                    i === currentPage
+                        ? "active"
+                        : ""
+                }"
+                onclick="goPage(${i})"
+            >
+                ${i}
+            </button>
+            `;
+
+    }
+
+
+    html +=
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(
+                ${currentPage + 1}
+            )"
+            ${
+                currentPage >= totalPages
+                    ? "disabled"
+                    : ""
+            }
+        >
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        `;
+
+
+    pages.innerHTML =
+        html;
+
+}
+
+
+function goPage(
+    page
+) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    loadPosts();
+
+    window.scrollTo(
+        {
+            top:0,
+            behavior:"smooth"
+        }
+    );
+
+}
+
+
+async function viewPost(
+    id
+) {
+
+    selectedPostId =
+        Number(id);
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.get
+                +
+                "?id="
+                +
+                encodeURIComponent(
+                    selectedPostId
+                )
+            );
+
+
+        const post =
+            result.data.post
+            ||
+            {};
+
+
+        document.getElementById(
+            "viewTitle"
+        ).textContent =
+            "Post #"
+            +
+            selectedPostId;
+
+
+        document.getElementById(
+            "viewPostText"
+        ).textContent =
+            post.content
+            ||
+            "(No text content.)";
+
+
+        const media =
+            Array.isArray(
+                result.data.media
+            )
+                ?
+                result.data.media
+                :
+                [];
+
+
+        const mediaList =
+            document.getElementById(
+                "mediaList"
+            );
+
+
+        if (
+            !media.length
+        ) {
+
+            mediaList.innerHTML =
+                "";
+
+        } else {
+
+            mediaList.innerHTML =
+                media
+                    .map(
+                        item =>
+                            renderMedia(
+                                item
+                            )
+                    )
+                    .join("");
+
+        }
+
+
+        const status =
+            String(
+                post.approval_status
+                ||
+                ""
+            );
+
+
+        document.getElementById(
+            "viewApprove"
+        ).style.display =
+            status ===
+                "approved"
+                ?
+                "none"
+                :
+                "inline-flex";
+
+
+        document.getElementById(
+            "viewReject"
+        ).style.display =
+            status ===
+                "rejected"
+                ?
+                "none"
+                :
+                "inline-flex";
+
+
+        document.getElementById(
+            "viewModal"
+        ).classList.add(
+            "show"
+        );
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+function renderMedia(
+    item
+) {
+
+    const path =
+        safeImageUrl(
+            item.file_path
+            ||
+            item.thumbnail_path
+        );
+
+
+    const mime =
+        String(
+            item.mime_type
+            ||
+            ""
+        ).toLowerCase();
+
+
+    if (
+        mime.startsWith(
+            "video/"
+        )
+    ) {
+
+        return `
+        <div class="media-item">
+
+            <video
+                controls
+                preload="metadata"
+                src="${escapeHTML(path)}"
+            ></video>
+
+        </div>
+        `;
+
+    }
+
+
+    return `
+    <div class="media-item">
+
+        <img
+            src="${escapeHTML(path)}"
+            alt="Post media"
+            loading="lazy"
+            onerror="
+                this.style.display='none';
+            "
+        >
+
+    </div>
+    `;
+
+}
+
+
+async function approvePost(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Approve this post?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.approve,
+                {
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                post_id:
+                                    Number(id)
+                            }
+                        )
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Post approved.",
+            "success"
+        );
+
+
+        closeView();
+
+        loadPosts();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+async function rejectPost(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Reject this post?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.reject,
+                {
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                post_id:
+                                    Number(id)
+                            }
+                        )
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Post rejected.",
+            "success"
+        );
+
+
+        closeView();
+
+        loadPosts();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+async function editPost(
+    id
+) {
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.get
+                +
+                "?id="
+                +
+                encodeURIComponent(
+                    Number(id)
+                )
+            );
+
+
+        const post =
+            result.data.post
+            ||
+            {};
+
+
+        document.getElementById(
+            "editPostId"
+        ).value =
+            Number(
+                post.id
+            );
+
+
+        document.getElementById(
+            "editContent"
+        ).value =
+            post.content
+            ||
+            "";
+
+
+        document.getElementById(
+            "editVisibility"
+        ).value =
+            post.visibility
+            ||
+            "public";
+
+
+        document.getElementById(
+            "editFeatured"
+        ).checked =
+            Number(
+                post.is_featured
+                ||
+                0
+            ) === 1;
+
+
+        closeView();
+
+
+        document.getElementById(
+            "editModal"
+        ).classList.add(
+            "show"
+        );
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+document.getElementById(
+    "editForm"
+).addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const saveButton =
+            document.getElementById(
+                "saveEdit"
+            );
+
+
+        const postId =
+            Number(
+                document.getElementById(
+                    "editPostId"
+                ).value
+            );
+
+
+        const content =
+            document.getElementById(
+                "editContent"
+            ).value.trim();
+
+
+        const visibility =
+            document.getElementById(
+                "editVisibility"
+            ).value;
+
+
+        const featured =
+            document.getElementById(
+                "editFeatured"
+            ).checked;
+
+
+        if (
+            postId <= 0
+        ) {
+
+            showAlert(
+                "Invalid post."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !content
+        ) {
+
+            showAlert(
+                "Post content cannot be empty."
+            );
+
+            return;
+
+        }
+
+
+        saveButton.disabled =
+            true;
+
+
+        saveButton.innerHTML =
+            `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Saving...
+            `;
+
+
+        try {
+
+            const result =
+                await apiJSON(
+                    API.update,
+                    {
+                        method:
+                            "POST",
+
+                        body:
+                            JSON.stringify(
+                                {
+
+                                    post_id:
+                                        postId,
+
+                                    content:
+                                        content,
+
+                                    visibility:
+                                        visibility,
+
+                                    is_featured:
+                                        featured
+
+                                }
+                            )
+
+                    }
+                );
+
+
+            showAlert(
+                result.message
+                ||
+                "Post updated successfully.",
+                "success"
+            );
+
+
+            closeEdit();
+
+            loadPosts();
+
+        } catch (
+            error
+        ) {
+
+            showAlert(
+                error.message
+            );
+
+        } finally {
+
+            saveButton.disabled =
+                false;
+
+
+            saveButton.innerHTML =
+                `
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Changes
+                `;
+
+        }
+
+    }
+);
+
+
+async function deletePost(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Delete this post? The post will be removed from public display."
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.delete,
+                {
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                post_id:
+                                    Number(id)
+                            }
+                        )
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "Post deleted.",
+            "success"
+        );
+
+
+        loadPosts();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+function closeView() {
+
+    document.getElementById(
+        "viewModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+function closeEdit() {
+
+    document.getElementById(
+        "editModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+document.getElementById(
+    "viewApprove"
+).addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedPostId > 0
+        ) {
+
+            approvePost(
+                selectedPostId
+            );
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "viewReject"
+).addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedPostId > 0
+        ) {
+
+            rejectPost(
+                selectedPostId
+            );
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "viewEdit"
+).addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedPostId > 0
+        ) {
+
+            editPost(
+                selectedPostId
+            );
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "closeView"
+).addEventListener(
+    "click",
+    closeView
+);
+
+
+document.getElementById(
+    "closeEdit"
+).addEventListener(
+    "click",
+    closeEdit
+);
+
+
+document.getElementById(
+    "cancelEdit"
+).addEventListener(
+    "click",
+    closeEdit
+);
+
+
+document.getElementById(
+    "viewModal"
+).addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target.id ===
+            "viewModal"
+        ) {
+
+            closeView();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "editModal"
+).addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target.id ===
+            "editModal"
+        ) {
+
+            closeEdit();
+
+        }
+
+    }
+);
+
+
+[
+    "status",
+    "visibility",
+    "featured"
+].forEach(
+    id => {
+
+        document.getElementById(
+            id
+        ).addEventListener(
+            "change",
+            () => {
+
+                currentPage =
+                    1;
+
+                loadPosts();
+
+            }
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "search"
+).addEventListener(
+    "input",
+    () => {
+
+        clearTimeout(
+            searchTimer
+        );
+
+
+        searchTimer =
+            setTimeout(
+                () => {
+
+                    currentPage =
+                        1;
+
+                    loadPosts();
+
+                },
+                350
+            );
+
+    }
+);
+
+
+document.getElementById(
+    "refreshBtn"
+).addEventListener(
+    "click",
+    loadPosts
+);
+
+
+document.getElementById(
+    "refreshTop"
+).addEventListener(
+    "click",
+    loadPosts
+);
+
+
+document.getElementById(
+    "menuBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        document.getElementById(
+            "sidebar"
+        ).classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "logoutLink"
+).addEventListener(
+    "click",
+    async event => {
+
+        event.preventDefault();
+
+
+        try {
+
+            await fetch(
+                API.logout,
+                {
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store"
+                }
+            );
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+        }
+
+
+        window.location.href =
+            "../login.html";
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeView();
+
+            closeEdit();
+
+        }
+
+    }
+);
+
+
+loadPosts();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,3948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+    <title>Photos | LOVEMI Admin</title>
+
+    <!-- =====================================================
+         TAB ICONS
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+    <style>
+
+        :root {
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
+
+            --accent:#db2777;
+            --accent-soft:#fce7f3;
+
+            --green:#16a34a;
+            --green-soft:#ecfdf5;
+
+            --red:#dc2626;
+            --red-soft:#fef2f2;
+
+            --orange:#d97706;
+            --orange-soft:#fffbeb;
+
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
+
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9696a1;
+
+            --background:#f6f6fa;
+            --border:#e7e7ee;
+            --white:#fff;
+
+            --sidebar-width:258px;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html {
+            scroll-behavior:smooth;
+        }
+
+        body {
+            min-height:100vh;
+            font-family:"Inter",sans-serif;
+            color:var(--text);
+            background:var(--background);
+            line-height:1.5;
+        }
+
+        a {
+            color:inherit;
+            text-decoration:none;
+        }
+
+        button,
+        input,
+        select {
+            font:inherit;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+        img {
+            display:block;
+            max-width:100%;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+            position:fixed;
+            top:0;
+            left:0;
+            bottom:0;
+
+            width:var(--sidebar-width);
+
+            z-index:1200;
+
+            overflow-y:auto;
+
+            color:#fff;
+
+            background:#16131e;
+        }
+
+        .sidebar-header {
+            min-height:82px;
+
+            padding:17px 18px;
+
+            display:flex;
+            align-items:center;
+            gap:10px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.06);
+        }
+
+        .sidebar-logo {
+            width:46px;
+            height:46px;
+
+            object-fit:contain;
+
+            border-radius:12px;
+        }
+
+        .sidebar-title {
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:22px;
+            font-weight:800;
+        }
+
+        .sidebar-subtitle {
+            display:block;
+
+            margin-top:2px;
+
+            color:#9f9ba9;
+
+            font-size:8px;
+            font-weight:800;
+
+            letter-spacing:.8px;
+        }
+
+        .admin-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+
+            margin:16px;
+
+            padding:7px 10px;
+
+            border:
+                1px solid rgba(255,255,255,.1);
+
+            border-radius:999px;
+
+            color:#e9ddff;
+
+            background:
+                rgba(109,40,217,.16);
+
+            font-size:9px;
+            font-weight:800;
+        }
+
+        .sidebar-section {
+            padding:4px 12px;
+        }
+
+        .sidebar-label {
+            padding:12px 10px 7px;
+
+            color:#716c7d;
+
+            font-size:8px;
+            font-weight:800;
+
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .sidebar-link {
+            display:flex;
+            align-items:center;
+            gap:11px;
+
+            margin:2px 0;
+
+            padding:10px 11px;
+
+            border-radius:10px;
+
+            color:#b7b1c2;
+
+            font-size:9px;
+            font-weight:600;
+
+            transition:.2s ease;
+        }
+
+        .sidebar-link i {
+            width:17px;
+            text-align:center;
+        }
+
+        .sidebar-link:hover {
+            color:#fff;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .sidebar-link.active {
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.85),
+                    rgba(219,39,119,.58)
+                );
+        }
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+            min-height:100vh;
+
+            margin-left:
+                var(--sidebar-width);
+        }
+
+        .topbar {
+            position:sticky;
+
+            top:0;
+
+            z-index:900;
+
+            min-height:76px;
+
+            padding:
+                0 28px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            gap:16px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:
+                blur(14px);
+        }
+
+        .topbar-left {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .menu-btn {
+            display:none;
+
+            width:40px;
+            height:40px;
+
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+        }
+
+        .page-title h1 {
+            font-size:18px;
+            font-weight:800;
+        }
+
+        .page-title p {
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .topbar-right {
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .top-icon {
+            width:38px;
+            height:38px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+
+            color:var(--text-soft);
+        }
+
+        .admin-user {
+            display:flex;
+            align-items:center;
+            gap:8px;
+
+            padding-left:10px;
+
+            border-left:
+                1px solid var(--border);
+        }
+
+        .admin-avatar {
+            width:37px;
+            height:37px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .admin-user strong {
+            display:block;
+            font-size:8px;
+        }
+
+        .admin-user span {
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+            width:
+                min(
+                    calc(100% - 48px),
+                    1500px
+                );
+
+            margin:auto;
+
+            padding:
+                28px 0 55px;
+        }
+
+        .heading-row {
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+
+            gap:18px;
+
+            margin-bottom:18px;
+        }
+
+        .heading-row h2 {
+            font-size:23px;
+            font-weight:800;
+        }
+
+        .heading-row p {
+            margin-top:4px;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        .btn {
+            min-height:42px;
+
+            padding:0 14px;
+
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+
+            border:none;
+
+            border-radius:10px;
+
+            font-size:8px;
+            font-weight:800;
+        }
+
+        .btn-light {
+            color:var(--text-soft);
+
+            background:#fff;
+
+            border:
+                1px solid var(--border);
+        }
+
+        .btn-primary {
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+        }
+
+        .btn-success {
+            color:#fff;
+            background:var(--green);
+        }
+
+        .btn-danger {
+            color:#fff;
+            background:var(--red);
+        }
+
+        .alert {
+            display:none;
+
+            padding:12px 14px;
+
+            margin-bottom:16px;
+
+            border-radius:11px;
+
+            font-size:9px;
+        }
+
+        .alert.show {
+            display:block;
+        }
+
+        .alert.success {
+            color:#166534;
+            background:var(--green-soft);
+
+            border:
+                1px solid #bbf7d0;
+        }
+
+        .alert.error {
+            color:#991b1b;
+            background:var(--red-soft);
+
+            border:
+                1px solid #fecaca;
+        }
+
+        /* =====================================================
+           STATISTICS
+        ====================================================== */
+
+        .stats {
+            display:grid;
+
+            grid-template-columns:
+                repeat(4,minmax(0,1fr));
+
+            gap:12px;
+
+            margin-bottom:16px;
+        }
+
+        .stat-card {
+            padding:18px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:15px;
+
+            background:#fff;
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,.04);
+        }
+
+        .stat-top {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            gap:10px;
+        }
+
+        .stat-card span {
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .stat-card strong {
+            display:block;
+
+            margin-top:6px;
+
+            font-size:21px;
+        }
+
+        .stat-icon {
+            width:35px;
+            height:35px;
+
+            display:grid;
+            place-items:center;
+
+            border-radius:10px;
+
+            color:var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            font-size:10px;
+        }
+
+        /* =====================================================
+           FILTER
+        ====================================================== */
+
+        .filter-card {
+            padding:14px;
+
+            margin-bottom:16px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+        .filters {
+            display:grid;
+
+            grid-template-columns:
+                minmax(220px,1fr)
+                180px
+                170px
+                42px;
+
+            gap:9px;
+        }
+
+        .field {
+            width:100%;
+
+            min-height:42px;
+
+            padding:
+                0 12px;
+
+            outline:none;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            color:var(--text);
+
+            background:#fff;
+
+            font-size:8px;
+        }
+
+        .field:focus {
+            border-color:#c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+        }
+
+        .refresh-btn {
+            width:42px;
+            height:42px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:10px;
+
+            background:#fff;
+        }
+
+        /* =====================================================
+           PHOTO GRID
+        ====================================================== */
+
+        .photo-panel {
+            overflow:hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:17px;
+
+            background:#fff;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.05);
+        }
+
+        .panel-header {
+            min-height:62px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            border-bottom:
+                1px solid #f0f0f4;
+        }
+
+        .panel-header h3 {
+            font-size:11px;
+            font-weight:800;
+        }
+
+        .panel-header span {
+            display:block;
+
+            color:var(--text-muted);
+
+            font-size:7px;
+        }
+
+        .photo-grid {
+            padding:16px;
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(4,minmax(0,1fr));
+
+            gap:15px;
+        }
+
+        .photo-card {
+            overflow:hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:14px;
+
+            background:#fff;
+        }
+
+        .photo-preview {
+            position:relative;
+
+            aspect-ratio:
+                1 / 1;
+
+            overflow:hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5f3ff,
+                    #fdf2f8
+                );
+        }
+
+        .photo-preview img {
+            width:100%;
+            height:100%;
+
+            object-fit:cover;
+
+            cursor:pointer;
+
+            transition:
+                transform .2s ease;
+        }
+
+        .photo-preview img:hover {
+            transform:scale(1.035);
+        }
+
+        .photo-status {
+            position:absolute;
+
+            top:9px;
+            left:9px;
+
+            padding:
+                5px 8px;
+
+            border-radius:999px;
+
+            font-size:6px;
+            font-weight:800;
+
+            text-transform:uppercase;
+        }
+
+        .photo-status.pending {
+            color:
+                var(--orange);
+
+            background:
+                var(--orange-soft);
+        }
+
+        .photo-status.approved {
+            color:
+                var(--green);
+
+            background:
+                var(--green-soft);
+        }
+
+        .photo-status.rejected {
+            color:
+                var(--red);
+
+            background:
+                var(--red-soft);
+        }
+
+        .photo-featured {
+            position:absolute;
+
+            top:9px;
+            right:9px;
+
+            width:30px;
+            height:30px;
+
+            display:grid;
+            place-items:center;
+
+            border:none;
+
+            border-radius:50%;
+
+            color:#fff;
+
+            background:
+                rgba(109,40,217,.88);
+
+            box-shadow:
+                0 4px 12px rgba(0,0,0,.14);
+        }
+
+        .photo-info {
+            padding:12px;
+        }
+
+        .photo-user {
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .user-avatar {
+            width:32px;
+            height:32px;
+
+            object-fit:cover;
+
+            border-radius:50%;
+
+            background:
+                var(--primary-soft);
+        }
+
+        .photo-user strong {
+            display:block;
+
+            font-size:8px;
+
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+
+        .photo-user span {
+            display:block;
+
+            margin-top:2px;
+
+            color:var(--text-muted);
+
+            font-size:6px;
+
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+
+        .photo-meta {
+            display:flex;
+
+            align-items:center;
+            justify-content:space-between;
+
+            gap:7px;
+
+            margin-top:10px;
+        }
+
+        .meta-item {
+            color:var(--text-muted);
+
+            font-size:6px;
+        }
+
+        .photo-actions {
+            display:flex;
+
+            gap:5px;
+
+            margin-top:10px;
+        }
+
+        .photo-actions button {
+            flex:1;
+
+            min-height:31px;
+
+            border-radius:8px;
+
+            border:
+                1px solid var(--border);
+
+            background:#fff;
+
+            font-size:6px;
+            font-weight:800;
+        }
+
+        .photo-actions .approve {
+            color:var(--green);
+
+            border-color:#bbf7d0;
+
+            background:var(--green-soft);
+        }
+
+        .photo-actions .reject {
+            color:var(--red);
+
+            border-color:#fecaca;
+
+            background:var(--red-soft);
+        }
+
+        .photo-actions .feature {
+            color:var(--primary);
+
+            border-color:#ddd6fe;
+
+            background:var(--primary-soft);
+        }
+
+        .photo-actions .remove {
+            color:var(--text-soft);
+        }
+
+        .photo-actions button:hover {
+            transform:translateY(-1px);
+        }
+
+        .loading,
+        .empty {
+            min-height:260px;
+
+            display:flex;
+
+            align-items:center;
+            justify-content:center;
+
+            flex-direction:column;
+
+            gap:9px;
+
+            grid-column:1/-1;
+
+            color:var(--text-muted);
+
+            font-size:9px;
+        }
+
+        /* =====================================================
+           PAGINATION
+        ====================================================== */
+
+        .pagination {
+            min-height:64px;
+
+            padding:
+                0 18px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:12px;
+
+            border-top:
+                1px solid #f0f0f4;
+        }
+
+        .pagination-info {
+            color:var(--text-muted);
+
+            font-size:8px;
+        }
+
+        .pages {
+            display:flex;
+            gap:5px;
+        }
+
+        .page-btn {
+            width:31px;
+            height:31px;
+
+            display:grid;
+            place-items:center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:8px;
+
+            background:#fff;
+
+            font-size:8px;
+            font-weight:700;
+        }
+
+        .page-btn.active {
+            color:#fff;
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--primary);
+        }
+
+        .page-btn:disabled {
+            opacity:.4;
+
+            cursor:not-allowed;
+        }
+
+        /* =====================================================
+           IMAGE MODAL
+        ====================================================== */
+
+        .modal {
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:2000;
+
+            align-items:center;
+            justify-content:center;
+
+            padding:20px;
+
+            background:
+                rgba(0,0,0,.76);
+        }
+
+        .modal.show {
+            display:flex;
+        }
+
+        .modal-window {
+            position:relative;
+
+            width:
+                min(
+                    100%,
+                    900px
+                );
+
+            max-height:
+                92vh;
+
+            overflow:hidden;
+
+            border-radius:18px;
+
+            background:#111;
+        }
+
+        .modal-window img {
+            width:100%;
+            max-height:88vh;
+
+            object-fit:contain;
+
+            background:#111;
+        }
+
+        .modal-close {
+            position:absolute;
+
+            top:12px;
+            right:12px;
+
+            width:38px;
+            height:38px;
+
+            display:grid;
+            place-items:center;
+
+            border:none;
+
+            border-radius:50%;
+
+            color:#fff;
+
+            background:
+                rgba(0,0,0,.62);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width:1100px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .filters {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns:
+                    repeat(3,minmax(0,1fr));
+            }
+
+        }
+
+        @media (max-width:850px) {
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    .25s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                margin-left:0;
+            }
+
+            .menu-btn {
+                display:grid;
+            }
+
+        }
+
+        @media (max-width:680px) {
+
+            .content {
+                width:
+                    calc(100% - 24px);
+            }
+
+            .topbar {
+                padding:
+                    0 13px;
+            }
+
+            .top-icon {
+                display:none;
+            }
+
+            .admin-user {
+                padding-left:0;
+
+                border-left:none;
+            }
+
+            .admin-user > div {
+                display:none;
+            }
+
+            .heading-row {
+                align-items:flex-start;
+
+                flex-direction:column;
+            }
+
+            .filters {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .refresh-btn {
+                width:100%;
+            }
+
+            .photo-grid {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+
+                padding:10px;
+
+                gap:10px;
+            }
+
+            .pagination {
+                flex-direction:column;
+                align-items:flex-start;
+
+                padding:
+                    14px 18px;
+            }
+
+        }
+
+        @media (max-width:430px) {
+
+            .stats {
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap:8px;
+            }
+
+            .stat-card {
+                padding:13px;
+            }
+
+            .stat-card strong {
+                font-size:17px;
+            }
+
+            .photo-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-header">
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+        <div>
+
+            <div class="sidebar-title">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Overview
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Members
+        </div>
+
+        <a
+            href="users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+        <a
+            href="profiles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-id-card"></i>
+            Profiles
+        </a>
+
+        <a
+            href="admins.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            Administrators
+        </a>
+
+        <a
+            href="roles.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-user-tag"></i>
+            Roles
+        </a>
+
+        <a
+            href="permissions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-key"></i>
+            Permissions
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Content
+        </div>
+
+        <a
+            href="photos.html"
+            class="sidebar-link active"
+        >
+            <i class="fa-solid fa-images"></i>
+            Photos
+        </a>
+
+        <a
+            href="posts.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-newspaper"></i>
+            Posts
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Connections
+        </div>
+
+        <a
+            href="connections.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-link"></i>
+            Connections
+        </a>
+
+        <a
+            href="conversations.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-comments"></i>
+            Conversations
+        </a>
+
+        <a
+            href="messages.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-message"></i>
+            Messages
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Premium & Payments
+        </div>
+
+        <a
+            href="premium-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-crown"></i>
+            Premium Users
+        </a>
+
+        <a
+            href="subscriptions.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-rotate"></i>
+            Subscriptions
+        </a>
+
+        <a
+            href="payments.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            Safety
+        </div>
+
+        <a
+            href="reports.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-flag"></i>
+            Reports
+        </a>
+
+        <a
+            href="blocked-users.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-ban"></i>
+            Blocked Users
+        </a>
+
+        <a
+            href="verification.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-circle-check"></i>
+            Verification
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+        <div class="sidebar-label">
+            System
+        </div>
+
+        <a
+            href="notifications.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-bell"></i>
+            Notifications
+        </a>
+
+        <a
+            href="system-settings.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-sliders"></i>
+            System Settings
+        </a>
+
+        <a
+            href="audit-logs.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-list-check"></i>
+            Audit Logs
+        </a>
+
+        <a
+            href="backup.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-database"></i>
+            Backups
+        </a>
+
+        <a
+            href="../dashboard.html"
+            class="sidebar-link"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            User Dashboard
+        </a>
+
+        <a
+            href="#"
+            class="sidebar-link"
+            id="logoutLink"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+
+                <h1>
+                    Photos
+                </h1>
+
+                <p>
+                    Review, approve, reject, feature and remove uploaded photos.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a
+                href="notifications.html"
+                class="top-icon"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+            </a>
+
+            <a
+                href="messages.html"
+                class="top-icon"
+                title="Messages"
+            >
+                <i class="fa-regular fa-message"></i>
+            </a>
+
+            <a
+                href="../index.html"
+                class="top-icon"
+                title="Public Website"
+            >
+                <i class="fa-solid fa-globe"></i>
+            </a>
+
+            <div class="admin-user">
+
+                <img
+                    id="adminAvatar"
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                    class="admin-avatar"
+                >
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+
+        <div class="heading-row">
+
+            <div>
+
+                <h2>
+                    Photo Moderation
+                </h2>
+
+                <p>
+                    Every uploaded image can be reviewed before it becomes publicly available.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-light"
+                id="refreshBtnTop"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="alert"
+            id="alertBox"
+            role="alert"
+        ></div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Total Photos
+                        </span>
+
+                        <strong id="statTotal">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-images"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="statPending">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Approved
+                        </span>
+
+                        <strong id="statApproved">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong id="statRejected">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <section class="filter-card">
+
+
+            <div class="filters">
+
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="field"
+                    placeholder="Search by username, name or file name..."
+                >
+
+
+                <select
+                    id="statusFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="approved">
+                        Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="typeFilter"
+                    class="field"
+                >
+
+                    <option value="">
+                        All Photo Types
+                    </option>
+
+                    <option value="profile">
+                        Profile
+                    </option>
+
+                    <option value="post">
+                        Post
+                    </option>
+
+                    <option value="gallery">
+                        Gallery
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    id="refreshBtn"
+                    title="Refresh photos"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PHOTOS
+        ================================================== -->
+
+        <section class="photo-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>
+                        Photo Library
+                    </h3>
+
+                    <span>
+                        Photos are loaded directly from the database.
+                    </span>
+
+                </div>
+
+
+                <span id="resultCount">
+                    —
+                </span>
+
+            </div>
+
+
+            <div
+                class="photo-grid"
+                id="photoGrid"
+            >
+
+                <div class="loading">
+
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    Loading photos...
+
+                </div>
+
+            </div>
+
+
+            <div class="pagination">
+
+
+                <div
+                    class="pagination-info"
+                    id="paginationInfo"
+                >
+                    Loading...
+                </div>
+
+
+                <div
+                    class="pages"
+                    id="pages"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     IMAGE MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="imageModal"
+>
+
+
+    <div class="modal-window">
+
+
+        <button
+            type="button"
+            class="modal-close"
+            id="modalClose"
+            aria-label="Close image"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <img
+            src=""
+            alt="Photo preview"
+            id="modalImage"
+        >
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API = {
+
+    list:
+        "../admin-api/photos/list.php",
+
+    approve:
+        "../admin-api/photos/approve.php",
+
+    reject:
+        "../admin-api/photos/reject.php",
+
+    delete:
+        "../admin-api/photos/delete.php",
+
+    feature:
+        "../admin-api/photos/feature.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentPage =
+    1;
+
+let totalPages =
+    1;
+
+let searchTimer =
+    null;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const photoGrid =
+    document.getElementById(
+        "photoGrid"
+    );
+
+
+const alertBox =
+    document.getElementById(
+        "alertBox"
+    );
+
+
+const imageModal =
+    document.getElementById(
+        "imageModal"
+    );
+
+
+const modalImage =
+    document.getElementById(
+        "modalImage"
+    );
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        value ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function formatDate(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const date =
+        new Date(
+            String(
+                value
+            ).replace(
+                " ",
+                "T"
+            )
+        );
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+    return date.toLocaleString();
+
+}
+
+
+function formatBytes(bytes) {
+
+    const size =
+        Number(
+            bytes
+        );
+
+    if (
+        !Number.isFinite(
+            size
+        )
+        ||
+        size <= 0
+    ) {
+
+        return "—";
+
+    }
+
+
+    const units = [
+        "B",
+        "KB",
+        "MB",
+        "GB"
+    ];
+
+
+    let index =
+        0;
+
+
+    let amount =
+        size;
+
+
+    while (
+        amount >= 1024
+        &&
+        index <
+            units.length - 1
+    ) {
+
+        amount /=
+            1024;
+
+        index++;
+
+    }
+
+
+    return (
+        amount.toFixed(
+            index === 0
+                ? 0
+                : 1
+        )
+        +
+        " "
+        +
+        units[index]
+    );
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    alertBox.className =
+        "alert show "
+        +
+        type;
+
+    alertBox.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    alertBox.className =
+        "alert";
+
+    alertBox.textContent =
+        "";
+
+}
+
+
+function safeImageUrl(
+    value
+) {
+
+    if (!value) {
+
+        return "../assets/images/defaults/default-cover.png";
+
+    }
+
+
+    const raw =
+        String(
+            value
+        ).trim();
+
+
+    if (
+        raw.startsWith(
+            "http://"
+        )
+        ||
+        raw.startsWith(
+            "https://"
+        )
+        ||
+        raw.startsWith(
+            "/"
+        )
+    ) {
+
+        return raw;
+
+    }
+
+
+    /*
+     * Database paths such as:
+     *
+     * uploads/profiles/...
+     * uploads/posts/...
+     *
+     * are relative to LOVEMI root.
+     */
+
+    return "../"
+        +
+        raw.replace(
+            /^\/+/,
+            ""
+        );
+
+}
+
+
+/* =========================================================
+   LOAD PHOTOS
+========================================================= */
+
+async function loadPhotos() {
+
+    hideAlert();
+
+
+    photoGrid.innerHTML =
+        `
+        <div class="loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading photos...
+
+        </div>
+        `;
+
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .trim();
+
+
+    const status =
+        document
+            .getElementById(
+                "statusFilter"
+            )
+            .value;
+
+
+    const type =
+        document
+            .getElementById(
+                "typeFilter"
+            )
+            .value;
+
+
+    const params =
+        new URLSearchParams({
+
+            page:
+                String(
+                    currentPage
+                ),
+
+            limit:
+                "16",
+
+            search,
+
+            status,
+
+            photo_type:
+                type
+
+        });
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.list
+                +
+                "?"
+                +
+                params.toString(),
+                {
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Cache-Control":
+                            "no-cache"
+
+                    }
+
+                }
+            );
+
+
+        let result;
+
+
+        try {
+
+            result =
+                await response.json();
+
+        } catch (
+            parseError
+        ) {
+
+            throw new Error(
+                "The server returned an invalid response."
+            );
+
+        }
+
+
+        if (
+            response.status === 401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/photos.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            response.status === 403
+        ) {
+
+            window.location.href =
+                "../error.html?code=403";
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load photos."
+            );
+
+        }
+
+
+        renderPhotos(
+            result.data
+            ||
+            {}
+        );
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "LOVEMI photos:",
+            error
+        );
+
+
+        photoGrid.innerHTML =
+            `
+            <div class="empty">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <strong>
+                    Unable to load photos.
+                </strong>
+
+                <span>
+                    ${escapeHTML(
+                        error.message
+                    )}
+                </span>
+
+            </div>
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER PHOTOS
+========================================================= */
+
+function renderPhotos(
+    data
+) {
+
+    const photos =
+        Array.isArray(
+            data.photos
+        )
+            ?
+            data.photos
+            :
+            [];
+
+
+    const summary =
+        data.summary
+        ||
+        {};
+
+
+    const pagination =
+        data.pagination
+        ||
+        {};
+
+
+    const currentAdmin =
+        data.current_admin
+        ||
+        {};
+
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        currentAdmin.full_names
+        ||
+        currentAdmin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        currentAdmin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        currentAdmin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            safeImageUrl(
+                currentAdmin.avatar_url
+            );
+
+    }
+
+
+    document.getElementById(
+        "statTotal"
+    ).textContent =
+        Number(
+            summary.total
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statPending"
+    ).textContent =
+        Number(
+            summary.pending
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statApproved"
+    ).textContent =
+        Number(
+            summary.approved
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "statRejected"
+    ).textContent =
+        Number(
+            summary.rejected
+            ||
+            0
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        Number(
+            pagination.total
+            ||
+            photos.length
+        ).toLocaleString()
+        +
+        " result"
+        +
+        (
+            Number(
+                pagination.total
+                ||
+                photos.length
+            ) === 1
+                ?
+                ""
+                :
+                "s"
+        );
+
+
+    if (
+        !photos.length
+    ) {
+
+        photoGrid.innerHTML =
+            `
+            <div class="empty">
+
+                <i class="fa-solid fa-images"></i>
+
+                <strong>
+                    No photos found.
+                </strong>
+
+                <span>
+                    Try changing the search or filter.
+                </span>
+
+            </div>
+            `;
+
+    } else {
+
+        photoGrid.innerHTML =
+            photos.map(
+                photo =>
+                    createPhotoCard(
+                        photo
+                    )
+            ).join("");
+
+    }
+
+
+    currentPage =
+        Math.max(
+            1,
+            Number(
+                pagination.page
+                ||
+                1
+            )
+        );
+
+
+    totalPages =
+        Math.max(
+            1,
+            Number(
+                pagination.pages
+                ||
+                1
+            )
+        );
+
+
+    const total =
+        Number(
+            pagination.total
+            ||
+            0
+        );
+
+
+    const limit =
+        Number(
+            pagination.limit
+            ||
+            16
+        );
+
+
+    const first =
+        total
+            ?
+            (
+                (
+                    currentPage -
+                    1
+                )
+                *
+                limit
+            )
+            +
+            1
+            :
+            0;
+
+
+    const last =
+        Math.min(
+            currentPage *
+            limit,
+            total
+        );
+
+
+    document.getElementById(
+        "paginationInfo"
+    ).textContent =
+        total
+            ?
+            `Showing ${first}–${last} of ${total.toLocaleString()} photos`
+            :
+            "No photos";
+
+
+    renderPages();
+
+}
+
+
+/* =========================================================
+   PHOTO CARD
+========================================================= */
+
+function createPhotoCard(
+    photo
+) {
+
+    const id =
+        Number(
+            photo.id
+        );
+
+
+    const status =
+        String(
+            photo.approval_status
+            ||
+            "pending"
+        ).toLowerCase();
+
+
+    const featured =
+        Number(
+            photo.is_featured
+            ||
+            0
+        ) === 1;
+
+
+    const image =
+        safeImageUrl(
+            photo.thumbnail_path
+            ||
+            photo.file_path
+        );
+
+
+    const fullImage =
+        safeImageUrl(
+            photo.file_path
+        );
+
+
+    const avatar =
+        safeImageUrl(
+            photo.user_avatar
+            ||
+            "../assets/images/defaults/default-avatar-male.png"
+        );
+
+
+    let statusClass =
+        "pending";
+
+
+    if (
+        status ===
+        "approved"
+    ) {
+
+        statusClass =
+            "approved";
+
+    }
+
+
+    if (
+        status ===
+        "rejected"
+    ) {
+
+        statusClass =
+            "rejected";
+
+    }
+
+
+    return `
+    <article
+        class="photo-card"
+        data-photo-id="${id}"
+    >
+
+
+        <div class="photo-preview">
+
+
+            <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(
+                    photo.file_name
+                    ||
+                    "LOVEMI photo"
+                )}"
+                loading="lazy"
+                onclick="openImage(
+                    '${escapeHTML(
+                        fullImage
+                    )}',
+                    '${escapeHTML(
+                        photo.file_name
+                        ||
+                        "Photo"
+                    )}'
+                )"
+                onerror="
+                    this.onerror=null;
+                    this.src='../assets/images/defaults/default-cover.png';
+                "
+            >
+
+
+            <span
+                class="photo-status ${statusClass}"
+            >
+
+                ${escapeHTML(
+                    status
+                )}
+
+            </span>
+
+
+            ${
+                featured
+                    ?
+                    `
+                    <button
+                        type="button"
+                        class="photo-featured"
+                        title="Featured photo"
+                        onclick="toggleFeatured(
+                            ${id},
+                            true
+                        )"
+                    >
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </button>
+                    `
+                    :
+                    ""
+            }
+
+
+        </div>
+
+
+        <div class="photo-info">
+
+
+            <div class="photo-user">
+
+
+                <img
+                    src="${escapeHTML(
+                        avatar
+                    )}"
+                    alt=""
+                    class="user-avatar"
+                    onerror="
+                        this.onerror=null;
+                        this.src='../assets/images/defaults/default-avatar-male.png';
+                    "
+                >
+
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(
+                            photo.full_names
+                            ||
+                            photo.username
+                            ||
+                            "Unknown user"
+                        )}
+                    </strong>
+
+                    <span>
+                        @${escapeHTML(
+                            photo.username
+                            ||
+                            ""
+                        )}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="photo-meta">
+
+
+                <span class="meta-item">
+
+                    <i class="fa-solid fa-image"></i>
+
+                    ${escapeHTML(
+                        photo.photo_type
+                        ||
+                        "photo"
+                    )}
+
+                </span>
+
+
+                <span class="meta-item">
+
+                    ${formatBytes(
+                        photo.file_size
+                    )}
+
+                </span>
+
+
+            </div>
+
+
+            <div
+                class="photo-meta"
+                style="margin-top:5px;"
+            >
+
+
+                <span class="meta-item">
+
+                    ${escapeHTML(
+                        formatDate(
+                            photo.uploaded_at
+                        )
+                    )}
+
+                </span>
+
+
+                ${
+                    Number(
+                        photo.is_primary
+                        ||
+                        0
+                    ) === 1
+                        ?
+                        `
+                        <span class="meta-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Primary
+                        </span>
+                        `
+                        :
+                        ""
+                }
+
+
+            </div>
+
+
+            <div class="photo-actions">
+
+
+                ${
+                    status !==
+                    "approved"
+                        ?
+                        `
+                        <button
+                            type="button"
+                            class="approve"
+                            onclick="approvePhoto(
+                                ${id}
+                            )"
+                        >
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Approve
+
+                        </button>
+                        `
+                        :
+                        ""
+                }
+
+
+                ${
+                    status !==
+                    "rejected"
+                        ?
+                        `
+                        <button
+                            type="button"
+                            class="reject"
+                            onclick="rejectPhoto(
+                                ${id}
+                            )"
+                        >
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                            Reject
+
+                        </button>
+                        `
+                        :
+                        ""
+                }
+
+
+            </div>
+
+
+            <div class="photo-actions">
+
+
+                <button
+                    type="button"
+                    class="feature"
+                    onclick="toggleFeatured(
+                        ${id},
+                        ${featured ? "true" : "false"}
+                    )"
+                >
+
+                    <i class="fa-solid fa-star"></i>
+
+                    ${
+                        featured
+                            ?
+                            "Unfeature"
+                            :
+                            "Feature"
+                    }
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="remove"
+                    onclick="deletePhoto(
+                        ${id},
+                        '${escapeHTML(
+                            photo.file_name
+                            ||
+                            "this photo"
+                        )}'
+                    )"
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Delete
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </article>
+    `;
+
+}
+
+
+/* =========================================================
+   APPROVE
+========================================================= */
+
+async function approvePhoto(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Approve this photo?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    await performAction(
+        API.approve,
+        id,
+        "Photo approved successfully."
+    );
+
+}
+
+
+/* =========================================================
+   REJECT
+========================================================= */
+
+async function rejectPhoto(
+    id
+) {
+
+    if (
+        !window.confirm(
+            "Reject this photo?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    await performAction(
+        API.reject,
+        id,
+        "Photo rejected successfully."
+    );
+
+}
+
+
+/* =========================================================
+   FEATURE
+========================================================= */
+
+async function toggleFeatured(
+    id,
+    currentlyFeatured
+) {
+
+    const action =
+        currentlyFeatured
+            ?
+            "remove from featured photos"
+            :
+            "feature this photo";
+
+
+    if (
+        !window.confirm(
+            `Do you want to ${action}?`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.feature,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                photo_id:
+                                    Number(
+                                        id
+                                    ),
+
+                                featured:
+                                    !currentlyFeatured
+
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status ===
+            401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/photos.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to change featured status."
+            );
+
+        }
+
+
+        showAlert(
+            result.message
+            ||
+            "Featured status updated.",
+            "success"
+        );
+
+
+        loadPhotos();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deletePhoto(
+    id,
+    filename
+) {
+
+    if (
+        !window.confirm(
+            `Permanently delete "${filename}"? This action cannot be undone.`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API.delete,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                photo_id:
+                                    Number(
+                                        id
+                                    )
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status ===
+            401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/photos.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to delete photo."
+            );
+
+        }
+
+
+        showAlert(
+            result.message
+            ||
+            "Photo deleted successfully.",
+            "success"
+        );
+
+
+        loadPhotos();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GENERIC ACTION
+========================================================= */
+
+async function performAction(
+    endpoint,
+    id,
+    successMessage
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                endpoint,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                photo_id:
+                                    Number(
+                                        id
+                                    )
+
+                            }
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.status ===
+            401
+        ) {
+
+            window.location.href =
+                "../login.html?redirect="
+                +
+                encodeURIComponent(
+                    "admin/photos.html"
+                );
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "The requested operation failed."
+            );
+
+        }
+
+
+        showAlert(
+            result.message
+            ||
+            successMessage,
+            "success"
+        );
+
+
+        loadPhotos();
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPages() {
+
+    const pages =
+        document.getElementById(
+            "pages"
+        );
+
+
+    let html =
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage - 1})"
+            ${currentPage <= 1 ? "disabled" : ""}
+        >
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+        `;
+
+
+    const start =
+        Math.max(
+            1,
+            currentPage - 2
+        );
+
+
+    const end =
+        Math.min(
+            totalPages,
+            start + 4
+        );
+
+
+    for (
+        let page = start;
+        page <= end;
+        page++
+    ) {
+
+        html +=
+            `
+            <button
+                type="button"
+                class="page-btn ${
+                    page === currentPage
+                        ?
+                        "active"
+                        :
+                        ""
+                }"
+                onclick="goPage(${page})"
+            >
+
+                ${page}
+
+            </button>
+            `;
+
+    }
+
+
+    html +=
+        `
+        <button
+            type="button"
+            class="page-btn"
+            onclick="goPage(${currentPage + 1})"
+            ${currentPage >= totalPages ? "disabled" : ""}
+        >
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+        `;
+
+
+    pages.innerHTML =
+        html;
+
+}
+
+
+function goPage(
+    page
+) {
+
+    if (
+        page < 1
+        ||
+        page > totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    loadPhotos();
+
+
+    window.scrollTo(
+        {
+            top:0,
+            behavior:"smooth"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        () => {
+
+            clearTimeout(
+                searchTimer
+            );
+
+
+            searchTimer =
+                setTimeout(
+                    () => {
+
+                        currentPage =
+                            1;
+
+                        loadPhotos();
+
+                    },
+                    350
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+[
+    "statusFilter",
+    "typeFilter"
+].forEach(
+    id => {
+
+        document
+            .getElementById(
+                id
+            )
+            .addEventListener(
+                "change",
+                () => {
+
+                    currentPage =
+                        1;
+
+                    loadPhotos();
+
+                }
+            );
+
+    }
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+document
+    .getElementById(
+        "refreshBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            loadPhotos();
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "refreshBtnTop"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            loadPhotos();
+
+        }
+    );
+
+
+/* =========================================================
+   IMAGE MODAL
+========================================================= */
+
+function openImage(
+    source,
+    title
+) {
+
+    modalImage.src =
+        source;
+
+    modalImage.alt =
+        title
+        ||
+        "Photo preview";
+
+
+    imageModal.classList.add(
+        "show"
+    );
+
+}
+
+
+function closeImage() {
+
+    imageModal.classList.remove(
+        "show"
+    );
+
+    modalImage.src =
+        "";
+
+}
+
+
+document
+    .getElementById(
+        "modalClose"
+    )
+    .addEventListener(
+        "click",
+        closeImage
+    );
+
+
+imageModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            imageModal
+        ) {
+
+            closeImage();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeImage();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "sidebar"
+                )
+                .classList.toggle(
+                    "open"
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutLink"
+    )
+    .addEventListener(
+        "click",
+        async event => {
+
+            event.preventDefault();
+
+
+            try {
+
+                await fetch(
+                    API.logout,
+                    {
+
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store"
+
+                    }
+                );
+
+            } catch (
+                error
+            ) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+
+            window.location.href =
+                "../login.html";
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadPhotos();
+
+</script>
+
+
+</body>
+
+</html>

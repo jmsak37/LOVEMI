@@ -1,0 +1,3426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+    <title>System Settings | LOVEMI Admin</title>
+
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="../assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="../assets/logo1/site.webmanifest"
+    >
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+
+    <style>
+
+        :root {
+
+            --primary: #6d28d9;
+            --primary-dark: #4c1d95;
+            --primary-soft: #f3e8ff;
+
+            --accent: #db2777;
+
+            --green: #16a34a;
+            --green-soft: #ecfdf5;
+
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+
+            --orange: #d97706;
+            --orange-soft: #fffbeb;
+
+            --text: #18181b;
+            --text-soft: #68686f;
+            --text-muted: #9898a1;
+
+            --background: #f6f6fa;
+            --border: #e6e6ed;
+
+            --sidebar-width: 258px;
+
+        }
+
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--background);
+
+        }
+
+
+        a {
+
+            text-decoration: none;
+
+            color: inherit;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+
+            width:
+                var(--sidebar-width);
+
+            overflow-y: auto;
+
+            z-index: 1000;
+
+            color: white;
+
+            background:
+                #17141f;
+
+            transition:
+                transform .25s ease;
+
+        }
+
+
+        .sidebar-header {
+
+            min-height: 82px;
+
+            padding:
+                16px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+
+        }
+
+
+        .sidebar-logo {
+
+            width: 46px;
+
+            height: 46px;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+        }
+
+
+        .sidebar-brand {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+        }
+
+
+        .sidebar-subtitle {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: #9f9aa8;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .8px;
+
+        }
+
+
+        .admin-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin: 16px;
+
+            padding:
+                7px 10px;
+
+            color: #e9ddff;
+
+            background:
+                rgba(109,40,217,.15);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 999px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+        }
+
+
+        .side-section {
+
+            padding:
+                4px 12px;
+
+        }
+
+
+        .side-label {
+
+            padding:
+                12px 10px 7px;
+
+            color: #716b7d;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .side-link {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin:
+                2px 0;
+
+            padding:
+                10px 11px;
+
+            color: #b8b2c2;
+
+            border-radius: 10px;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .side-link:hover {
+
+            color: white;
+
+            background:
+                rgba(255,255,255,.06);
+
+        }
+
+
+        .side-link.active {
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(109,40,217,.92),
+                    rgba(219,39,119,.62)
+                );
+
+        }
+
+
+        .side-link i {
+
+            width: 17px;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            min-height: 100vh;
+
+            margin-left:
+                var(--sidebar-width);
+
+        }
+
+
+        .topbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+
+            min-height: 76px;
+
+            padding:
+                0 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 14px;
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:
+                blur(15px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .topbar-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .menu-button {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: none;
+
+            place-items: center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            background: white;
+
+        }
+
+
+        .page-heading h1 {
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+        }
+
+
+        .page-heading p {
+
+            margin-top: 2px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+
+        }
+
+
+        .top-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
+
+        .top-button {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            color: var(--text-soft);
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+        }
+
+
+        .admin-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding-left: 10px;
+
+            border-left:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .admin-avatar {
+
+            width: 37px;
+
+            height: 37px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+        }
+
+
+        .admin-user strong {
+
+            display: block;
+
+            font-size: 8px;
+
+        }
+
+
+        .admin-user span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            width:
+                min(
+                    calc(100% - 48px),
+                    1320px
+                );
+
+            margin: auto;
+
+            padding:
+                28px 0 45px;
+
+        }
+
+
+        .intro {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .intro h2 {
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+        }
+
+
+        .intro p {
+
+            margin-top: 4px;
+
+            max-width: 800px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================================
+           ALERT
+        ====================================================== */
+
+        .alert {
+
+            display: none;
+
+            margin-bottom: 15px;
+
+            padding:
+                11px 13px;
+
+            border-radius: 10px;
+
+            font-size: 9px;
+
+        }
+
+
+        .alert.show {
+
+            display: block;
+
+        }
+
+
+        .alert.success {
+
+            color: #166534;
+
+            background:
+                var(--green-soft);
+
+            border:
+                1px solid
+                #bbf7d0;
+
+        }
+
+
+        .alert.error {
+
+            color: #991b1b;
+
+            background:
+                var(--red-soft);
+
+            border:
+                1px solid
+                #fecaca;
+
+        }
+
+
+        /* =====================================================
+           SETTINGS GRID
+        ====================================================== */
+
+        .settings-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0,1fr)
+                );
+
+            gap: 15px;
+
+        }
+
+
+        .setting-card {
+
+            overflow: hidden;
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 17px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.04);
+
+        }
+
+
+        .setting-head {
+
+            min-height: 62px;
+
+            padding:
+                0 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            border-bottom:
+                1px solid
+                #f0f0f4;
+
+        }
+
+
+        .setting-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: grid;
+
+            place-items: center;
+
+            color: var(--primary);
+
+            background:
+                var(--primary-soft);
+
+            border-radius: 10px;
+
+        }
+
+
+        .setting-head h3 {
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .setting-head p {
+
+            margin-top: 2px;
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+        }
+
+
+        .setting-body {
+
+            padding: 16px;
+
+        }
+
+
+        .setting-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                190px;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                #f2f2f6;
+
+        }
+
+
+        .setting-row:first-child {
+
+            padding-top: 0;
+
+        }
+
+
+        .setting-row:last-child {
+
+            padding-bottom: 0;
+
+            border-bottom: 0;
+
+        }
+
+
+        .setting-name {
+
+            min-width: 0;
+
+        }
+
+
+        .setting-name strong {
+
+            display: block;
+
+            font-size: 9px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .setting-name span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+            line-height: 1.55;
+
+        }
+
+
+        .setting-key {
+
+            display: inline-block;
+
+            margin-top: 5px;
+
+            padding:
+                3px 6px;
+
+            color: #6b21a8;
+
+            background:
+                #faf5ff;
+
+            border:
+                1px solid
+                #e9d5ff;
+
+            border-radius: 5px;
+
+            font-family:
+                monospace;
+
+            font-size: 6px;
+
+        }
+
+
+        .setting-control {
+
+            min-width: 0;
+
+        }
+
+
+        .value-input {
+
+            width: 100%;
+
+            height: 39px;
+
+            padding:
+                0 10px;
+
+            outline: none;
+
+            color: var(--text);
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 9px;
+
+            font-size: 8px;
+
+        }
+
+
+        .value-input:focus {
+
+            border-color:
+                #c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
+
+        }
+
+
+        .value-input.number {
+
+            text-align: right;
+
+        }
+
+
+        .toggle {
+
+            position: relative;
+
+            width: 46px;
+
+            height: 25px;
+
+            display: inline-block;
+
+        }
+
+
+        .toggle input {
+
+            opacity: 0;
+
+            width: 0;
+
+            height: 0;
+
+        }
+
+
+        .toggle-slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            cursor: pointer;
+
+            background:
+                #d4d4d8;
+
+            border-radius: 999px;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .toggle-slider::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 19px;
+
+            height: 19px;
+
+            left: 3px;
+
+            top: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 2px 5px
+                rgba(0,0,0,.2);
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .toggle input:checked
+        + .toggle-slider {
+
+            background:
+                var(--primary);
+
+        }
+
+
+        .toggle input:checked
+        + .toggle-slider::before {
+
+            transform:
+                translateX(21px);
+
+        }
+
+
+        .boolean-control {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 7px;
+
+        }
+
+
+        .boolean-text {
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+        }
+
+
+        .type-badge {
+
+            display: inline-flex;
+
+            margin-top: 6px;
+
+            padding:
+                3px 6px;
+
+            color: var(--text-soft);
+
+            background:
+                #f4f4f5;
+
+            border-radius: 5px;
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* =====================================================
+           FOOTER / SAVE BAR
+        ====================================================== */
+
+        .save-bar {
+
+            position: sticky;
+
+            bottom: 12px;
+
+            z-index: 100;
+
+            margin-top: 18px;
+
+            padding:
+                12px 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            background:
+                rgba(255,255,255,.97);
+
+            backdrop-filter:
+                blur(12px);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(0,0,0,.10);
+
+        }
+
+
+        .save-note {
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .save-button {
+
+            min-height: 42px;
+
+            padding:
+                0 16px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+        }
+
+
+        .save-button:disabled {
+
+            opacity: .65;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .admin-footer {
+
+            margin-left:
+                var(--sidebar-width);
+
+            padding:
+                18px 20px;
+
+            color: #817d89;
+
+            text-align: center;
+
+            background: white;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            font-size: 7px;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading {
+
+            min-height: 350px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (
+            max-width: 1050px
+        ) {
+
+            .settings-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 850px
+        ) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+            }
+
+
+            .admin-footer {
+
+                margin-left: 0;
+
+            }
+
+
+            .menu-button {
+
+                display: grid;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 650px
+        ) {
+
+            .content {
+
+                width:
+                    calc(100% - 24px);
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 12px;
+
+            }
+
+
+            .top-button {
+
+                display: none;
+
+            }
+
+
+            .admin-user {
+
+                padding-left: 0;
+
+                border-left: 0;
+
+            }
+
+
+            .admin-user > div {
+
+                display: none;
+
+            }
+
+
+            .setting-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .boolean-control {
+
+                justify-content: flex-start;
+
+            }
+
+
+            .save-bar {
+
+                align-items: stretch;
+
+                flex-direction: column;
+
+            }
+
+
+            .save-button {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+    <div class="sidebar-header">
+
+
+        <img
+            src="../assets/logo1/logo1.png"
+            alt="LOVEMI"
+            class="sidebar-logo"
+            onerror="
+                this.onerror=null;
+                this.src='../assets/logo1/apple-touch-icon.png';
+            "
+        >
+
+
+        <div>
+
+            <div class="sidebar-brand">
+                LOVEMI
+            </div>
+
+            <span class="sidebar-subtitle">
+                ADMINISTRATION
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="admin-badge">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        ADMIN PANEL
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Overview
+        </div>
+
+
+        <a
+            href="dashboard.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-gauge-high"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Members
+        </div>
+
+
+        <a
+            href="users.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-users"></i>
+
+            Users
+
+        </a>
+
+
+        <a
+            href="profiles.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-id-card"></i>
+
+            Profiles
+
+        </a>
+
+
+        <a
+            href="admins.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            Administrators
+
+        </a>
+
+
+        <a
+            href="roles.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-user-tag"></i>
+
+            Roles
+
+        </a>
+
+
+        <a
+            href="permissions.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-key"></i>
+
+            Permissions
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Content
+        </div>
+
+
+        <a
+            href="photos.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-images"></i>
+
+            Photos
+
+        </a>
+
+
+        <a
+            href="posts.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-newspaper"></i>
+
+            Posts
+
+        </a>
+
+
+        <a
+            href="pending-posts.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-file-circle-exclamation"></i>
+
+            Pending Posts
+
+        </a>
+
+
+        <a
+            href="pending-photos.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-image"></i>
+
+            Pending Photos
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Connections
+        </div>
+
+
+        <a
+            href="connections.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-link"></i>
+
+            Connections
+
+        </a>
+
+
+        <a
+            href="conversations.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-comments"></i>
+
+            Conversations
+
+        </a>
+
+
+        <a
+            href="messages.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-message"></i>
+
+            Messages
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Premium
+        </div>
+
+
+        <a
+            href="premium-users.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-crown"></i>
+
+            Premium Users
+
+        </a>
+
+
+        <a
+            href="subscriptions.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Subscriptions
+
+        </a>
+
+
+        <a
+            href="payments.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-credit-card"></i>
+
+            Payments
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            Safety
+        </div>
+
+
+        <a
+            href="reports.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-flag"></i>
+
+            Reports
+
+        </a>
+
+
+        <a
+            href="blocked-users.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-ban"></i>
+
+            Blocked Users
+
+        </a>
+
+
+        <a
+            href="verification.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Verification
+
+        </a>
+
+
+        <a
+            href="pending-accounts.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-user-clock"></i>
+
+            Pending Accounts
+
+        </a>
+
+    </div>
+
+
+    <div class="side-section">
+
+        <div class="side-label">
+            System
+        </div>
+
+
+        <a
+            href="notifications.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-bell"></i>
+
+            Notifications
+
+        </a>
+
+
+ 
+
+        <a
+            href="system-settings.html"
+            class="side-link active"
+        >
+
+            <i class="fa-solid fa-sliders"></i>
+
+            System Settings
+
+        </a>
+
+
+        <a
+            href="audit-logs.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Audit Logs
+
+        </a>
+
+
+        <a
+            href="backup.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-database"></i>
+
+            Backups
+
+        </a>
+
+
+        <a
+            href="../dashboard.html"
+            class="side-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            User Dashboard
+
+        </a>
+
+
+        <a
+            href="#"
+            class="side-link"
+            id="logoutLink"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="main">
+
+
+    <header class="topbar">
+
+
+        <div class="topbar-left">
+
+
+            <button
+                type="button"
+                class="menu-button"
+                id="menuButton"
+                aria-label="Open menu"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="page-heading">
+
+                <h1>
+                    System Settings
+                </h1>
+
+                <p>
+                    Manage the core LOVEMI application configuration.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="top-actions">
+
+
+            <a
+                href="notifications.html"
+                class="top-button"
+                title="Notifications"
+            >
+
+                <i class="fa-regular fa-bell"></i>
+
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="top-button"
+                title="LOVEMI Website"
+            >
+
+                <i class="fa-solid fa-globe"></i>
+
+            </a>
+
+
+            <div class="admin-user">
+
+
+                <img
+                    src="../assets/images/defaults/default-avatar-male.png"
+                    alt="Administrator"
+                    class="admin-avatar"
+                    id="adminAvatar"
+                >
+
+
+                <div>
+
+                    <strong id="adminName">
+                        Administrator
+                    </strong>
+
+                    <span id="adminRole">
+                        Admin
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <main class="content">
+
+
+        <section class="intro">
+
+            <h2>
+                Application Configuration
+            </h2>
+
+            <p>
+                These settings control important LOVEMI behaviour such as premium pricing,
+                verification requirements, approved content, currency rules and notification sounds.
+                Changes are stored in the system settings database and are audit logged.
+            </p>
+
+        </section>
+
+
+        <div
+            id="alert"
+            class="alert"
+            role="alert"
+        ></div>
+
+
+        <div
+            id="settingsContainer"
+            class="loading"
+        >
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <br><br>
+
+            Loading system settings...
+
+        </div>
+
+
+        <div
+            class="save-bar"
+            id="saveBar"
+            style="display:none;"
+        >
+
+            <div class="save-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Changes are protected by administrator permission
+                <strong>settings.manage</strong>.
+
+            </div>
+
+
+            <button
+                type="button"
+                class="save-button"
+                id="saveButton"
+            >
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save All Changes
+
+            </button>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<footer class="admin-footer">
+
+    ©
+    <span id="year"></span>
+    LOVEMI Administration.
+    All rights reserved.
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API = {
+
+    get:
+        "../admin-api/system-settings/get.php",
+
+    update:
+        "../admin-api/system-settings/update.php",
+
+    logout:
+        "../api/auth/logout.php"
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let settings =
+    [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    const alert =
+        document.getElementById(
+            "alert"
+        );
+
+
+    alert.className =
+        "alert show "
+        +
+        type;
+
+
+    alert.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    const alert =
+        document.getElementById(
+            "alert"
+        );
+
+
+    alert.className =
+        "alert";
+
+
+    alert.textContent =
+        "";
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function apiJSON(
+    url,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            url,
+            {
+
+                credentials:
+                    "include",
+
+                cache:
+                    "no-store",
+
+                ...options,
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    ...(options.body
+                        ?
+                        {
+                            "Content-Type":
+                                "application/json"
+                        }
+                        :
+                        {}
+                    ),
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
+
+
+    let result;
+
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch (
+        error
+    ) {
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
+
+
+    if (
+        response.status ===
+        401
+    ) {
+
+        window.location.href =
+            "../login.html?redirect="
+            +
+            encodeURIComponent(
+                "admin/system-settings.html"
+            );
+
+
+        throw new Error(
+            "Your administrator session has expired."
+        );
+
+    }
+
+
+    if (
+        !response.ok
+        ||
+        result.success !== true
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "The request failed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadSettings() {
+
+    hideAlert();
+
+
+    const container =
+        document.getElementById(
+            "settingsContainer"
+        );
+
+
+    container.className =
+        "loading";
+
+
+    container.innerHTML =
+        `
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <br><br>
+
+        Loading system settings...
+
+        `;
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.get
+            );
+
+
+        const data =
+            result.data
+            ||
+            {};
+
+
+        renderAdmin(
+            data.admin
+            ||
+            {}
+        );
+
+
+        settings =
+            data.settings
+            ||
+            [];
+
+
+        if (
+            !settings.length
+        ) {
+
+            container.innerHTML =
+                `
+
+                <div class="loading">
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                    <br><br>
+
+                    No system settings were found.
+
+                </div>
+
+                `;
+
+
+            return;
+
+        }
+
+
+        renderSettings();
+
+
+        document.getElementById(
+            "saveBar"
+        ).style.display =
+            "flex";
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML =
+            `
+
+            <div class="loading">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+            `;
+
+
+        showAlert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function renderAdmin(
+    admin
+) {
+
+    document.getElementById(
+        "adminName"
+    ).textContent =
+        admin.full_names
+        ||
+        admin.username
+        ||
+        "Administrator";
+
+
+    document.getElementById(
+        "adminRole"
+    ).textContent =
+        admin.role_name
+        ||
+        "Admin";
+
+
+    if (
+        admin.avatar_url
+    ) {
+
+        document.getElementById(
+            "adminAvatar"
+        ).src =
+            (
+                String(
+                    admin.avatar_url
+                ).startsWith(
+                    "http"
+                )
+                ||
+                String(
+                    admin.avatar_url
+                ).startsWith("/")
+            )
+                ?
+                admin.avatar_url
+                :
+                "../"
+                +
+                String(
+                    admin.avatar_url
+                ).replace(
+                    /^\/+/,
+                    ""
+                );
+
+    }
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function categoryFor(
+    key
+) {
+
+    const app =
+        [
+            "app_name",
+            "base_currency",
+            "kenya_currency"
+        ];
+
+
+    const premium =
+        [
+            "premium_price_usd",
+            "premium_duration_days"
+        ];
+
+
+    const verification =
+        [
+            "minimum_age",
+            "require_email_verification",
+            "require_phone_verification",
+            "require_identity_verification"
+        ];
+
+
+    const content =
+        [
+            "public_posts_enabled",
+            "public_phone_numbers",
+            "public_whatsapp_numbers",
+            "automatic_post_approval",
+            "automatic_photo_approval",
+            "latest_post_rotation_seconds"
+        ];
+
+
+    const security =
+        [
+            "password_reset_max_attempts"
+        ];
+
+
+    const notifications =
+        [
+            "notification_sounds_enabled"
+        ];
+
+
+    if (
+        app.includes(key)
+    ) {
+
+        return {
+            title:
+                "Application",
+
+            description:
+                "General LOVEMI application configuration.",
+
+            icon:
+                "fa-solid fa-mobile-screen-button"
+
+        };
+
+    }
+
+
+    if (
+        premium.includes(key)
+    ) {
+
+        return {
+            title:
+                "Premium",
+
+            description:
+                "Premium subscription pricing and duration.",
+
+            icon:
+                "fa-solid fa-crown"
+
+        };
+
+    }
+
+
+    if (
+        verification.includes(key)
+    ) {
+
+        return {
+            title:
+                "Verification & Safety",
+
+            description:
+                "Age and account verification requirements.",
+
+            icon:
+                "fa-solid fa-shield-halved"
+
+        };
+
+    }
+
+
+    if (
+        content.includes(key)
+    ) {
+
+        return {
+            title:
+                "Content & Privacy",
+
+            description:
+                "Content publishing, visibility and approval controls.",
+
+            icon:
+                "fa-solid fa-photo-film"
+
+        };
+
+    }
+
+
+    if (
+        security.includes(key)
+    ) {
+
+        return {
+            title:
+                "Security",
+
+            description:
+                "Account recovery and security controls.",
+
+            icon:
+                "fa-solid fa-lock"
+
+        };
+
+    }
+
+
+    if (
+        notifications.includes(key)
+    ) {
+
+        return {
+            title:
+                "Notifications",
+
+            description:
+                "Notification and alert behaviour.",
+
+            icon:
+                "fa-solid fa-bell"
+
+        };
+
+    }
+
+
+    return {
+
+        title:
+            "Other Settings",
+
+        description:
+            "Additional LOVEMI configuration.",
+
+        icon:
+            "fa-solid fa-sliders"
+
+    };
+
+}
+
+
+/* =========================================================
+   GROUP
+========================================================= */
+
+function groupSettings() {
+
+    const groups =
+        {};
+
+
+    settings.forEach(
+        setting => {
+
+            const category =
+                categoryFor(
+                    setting.setting_key
+                );
+
+
+            if (
+                !groups[
+                    category.title
+                ]
+            ) {
+
+                groups[
+                    category.title
+                ] = {
+
+                    title:
+                        category.title,
+
+                    description:
+                        category.description,
+
+                    icon:
+                        category.icon,
+
+                    items:
+                        []
+
+                };
+
+            }
+
+
+            groups[
+                category.title
+            ].items.push(
+                setting
+            );
+
+        }
+    );
+
+
+    return Object.values(
+        groups
+    );
+
+}
+
+
+/* =========================================================
+   CONTROL
+========================================================= */
+
+function settingControl(
+    setting
+) {
+
+    const key =
+        String(
+            setting.setting_key
+        );
+
+
+    const type =
+        String(
+            setting.value_type
+            ||
+            "string"
+        ).toLowerCase();
+
+
+    const value =
+        String(
+            setting.setting_value
+            ??
+            ""
+        );
+
+
+    if (
+        type === "boolean"
+    ) {
+
+        const checked =
+            [
+                "1",
+                "true",
+                "yes",
+                "on"
+            ].includes(
+                value.toLowerCase()
+            );
+
+
+        return `
+
+            <div class="boolean-control">
+
+                <span
+                    class="boolean-text"
+                    id="boolean-text-${setting.id}"
+                >
+                    ${checked ? "Enabled" : "Disabled"}
+                </span>
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="setting-control-input"
+                        data-id="${setting.id}"
+                        data-key="${escapeHTML(key)}"
+                        data-type="boolean"
+                        ${checked ? "checked" : ""}
+                        onchange="
+                            document.getElementById(
+                                'boolean-text-${setting.id}'
+                            ).textContent =
+                                this.checked
+                                    ? 'Enabled'
+                                    : 'Disabled';
+                        "
+                    >
+
+                    <span class="toggle-slider"></span>
+
+                </label>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (
+        type === "integer"
+    ) {
+
+        return `
+
+            <input
+                type="number"
+                class="value-input setting-control-input number"
+                data-id="${setting.id}"
+                data-key="${escapeHTML(key)}"
+                data-type="integer"
+                value="${escapeHTML(value)}"
+                step="1"
+            >
+
+        `;
+
+    }
+
+
+    if (
+        type === "decimal"
+    ) {
+
+        return `
+
+            <input
+                type="number"
+                class="value-input setting-control-input number"
+                data-id="${setting.id}"
+                data-key="${escapeHTML(key)}"
+                data-type="decimal"
+                value="${escapeHTML(value)}"
+                step="0.01"
+            >
+
+        `;
+
+    }
+
+
+    return `
+
+        <input
+            type="text"
+            class="value-input setting-control-input"
+            data-id="${setting.id}"
+            data-key="${escapeHTML(key)}"
+            data-type="string"
+            value="${escapeHTML(value)}"
+            maxlength="500"
+        >
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderSettings() {
+
+    const container =
+        document.getElementById(
+            "settingsContainer"
+        );
+
+
+    const groups =
+        groupSettings();
+
+
+    container.className =
+        "settings-grid";
+
+
+    container.innerHTML =
+        groups
+            .map(
+                group => {
+
+                    return `
+
+                    <section
+                        class="setting-card"
+                    >
+
+
+                        <div class="setting-head">
+
+
+                            <div class="setting-icon">
+
+                                <i class="${group.icon}"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    ${escapeHTML(
+                                        group.title
+                                    )}
+                                </h3>
+
+                                <p>
+                                    ${escapeHTML(
+                                        group.description
+                                    )}
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="setting-body">
+
+
+                            ${group.items
+                                .map(
+                                    setting => {
+
+                                        return `
+
+                                        <div
+                                            class="setting-row"
+                                        >
+
+
+                                            <div class="setting-name">
+
+
+                                                <strong>
+                                                    ${escapeHTML(
+                                                        formatSettingName(
+                                                            setting.setting_key
+                                                        )
+                                                    )}
+                                                </strong>
+
+
+                                                <span>
+
+                                                    ${escapeHTML(
+                                                        setting.description
+                                                        ||
+                                                        "System configuration setting."
+                                                    )}
+
+                                                </span>
+
+
+                                                <span class="setting-key">
+
+                                                    ${escapeHTML(
+                                                        setting.setting_key
+                                                    )}
+
+                                                </span>
+
+
+                                                <span class="type-badge">
+
+                                                    ${escapeHTML(
+                                                        setting.value_type
+                                                    )}
+
+                                                </span>
+
+
+                                            </div>
+
+
+                                            <div class="setting-control">
+
+                                                ${settingControl(
+                                                    setting
+                                                )}
+
+                                            </div>
+
+
+                                        </div>
+
+                                        `;
+
+                                    }
+                                )
+                                .join("")
+                            }
+
+
+                        </div>
+
+
+                    </section>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   FORMAT SETTING NAME
+========================================================= */
+
+function formatSettingName(
+    key
+) {
+
+    return String(
+        key
+    )
+        .replace(
+            /_/g,
+            " "
+        )
+        .replace(
+            /\b\w/g,
+            char =>
+                char.toUpperCase()
+        );
+
+}
+
+
+/* =========================================================
+   COLLECT VALUES
+========================================================= */
+
+function collectChanges() {
+
+    return Array.from(
+        document.querySelectorAll(
+            ".setting-control-input"
+        )
+    ).map(
+        input => {
+
+            const type =
+                input.dataset.type;
+
+
+            let value;
+
+
+            if (
+                type ===
+                "boolean"
+            ) {
+
+                value =
+                    input.checked
+                        ?
+                        "1"
+                        :
+                        "0";
+
+            } else {
+
+                value =
+                    input.value.trim();
+
+            }
+
+
+            return {
+
+                id:
+                    Number(
+                        input.dataset.id
+                    ),
+
+                setting_key:
+                    input.dataset.key,
+
+                value_type:
+                    type,
+
+                setting_value:
+                    value
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function validateChanges(
+    changes
+) {
+
+    for (
+        const item of changes
+    ) {
+
+        if (
+            item.value_type ===
+            "integer"
+        ) {
+
+            if (
+                item.setting_value === ""
+                ||
+                !/^-?\d+$/.test(
+                    item.setting_value
+                )
+            ) {
+
+                throw new Error(
+                    `Invalid integer value for ${item.setting_key}.`
+                );
+
+            }
+
+        }
+
+
+        if (
+            item.value_type ===
+            "decimal"
+        ) {
+
+            if (
+                item.setting_value === ""
+                ||
+                !/^-?\d+(?:\.\d+)?$/.test(
+                    item.setting_value
+                )
+            ) {
+
+                throw new Error(
+                    `Invalid decimal value for ${item.setting_key}.`
+                );
+
+            }
+
+        }
+
+
+        if (
+            item.setting_key ===
+            "minimum_age"
+        ) {
+
+            const age =
+                Number(
+                    item.setting_value
+                );
+
+
+            if (
+                age < 13
+                ||
+                age > 120
+            ) {
+
+                throw new Error(
+                    "Minimum age must be between 13 and 120."
+                );
+
+            }
+
+        }
+
+
+        if (
+            item.setting_key ===
+            "premium_price_usd"
+        ) {
+
+            const price =
+                Number(
+                    item.setting_value
+                );
+
+
+            if (
+                !Number.isFinite(
+                    price
+                )
+                ||
+                price < 0
+            ) {
+
+                throw new Error(
+                    "Premium USD price cannot be negative."
+                );
+
+            }
+
+        }
+
+
+        if (
+            item.setting_key ===
+            "premium_duration_days"
+        ) {
+
+            if (
+                Number(
+                    item.setting_value
+                ) <= 0
+            ) {
+
+                throw new Error(
+                    "Premium duration must be greater than zero."
+                );
+
+            }
+
+        }
+
+
+        if (
+            item.setting_key ===
+            "password_reset_max_attempts"
+        ) {
+
+            if (
+                Number(
+                    item.setting_value
+                ) < 1
+            ) {
+
+                throw new Error(
+                    "Password reset attempts must be at least 1."
+                );
+
+            }
+
+        }
+
+
+        if (
+            (
+                item.setting_key ===
+                "require_email_verification"
+                ||
+                item.setting_key ===
+                "require_phone_verification"
+                ||
+                item.setting_key ===
+                "require_identity_verification"
+            )
+            &&
+            item.setting_value !==
+                "1"
+        ) {
+
+            if (
+                item.setting_key ===
+                "require_email_verification"
+            ) {
+
+                throw new Error(
+                    "LOVEMI email verification cannot be disabled from this page."
+                );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+async function saveSettings() {
+
+    hideAlert();
+
+
+    const button =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    const changes =
+        collectChanges();
+
+
+    try {
+
+        validateChanges(
+            changes
+        );
+
+    } catch (
+        error
+    ) {
+
+        showAlert(
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.innerHTML =
+        `
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        Saving...
+
+        `;
+
+
+    try {
+
+        const result =
+            await apiJSON(
+                API.update,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        JSON.stringify(
+                            {
+                                settings:
+                                    changes
+                            }
+                        )
+
+                }
+            );
+
+
+        showAlert(
+            result.message
+            ||
+            "System settings saved successfully.",
+            "success"
+        );
+
+
+        /*
+         * Refresh values from database so the UI always reflects
+         * the actual stored values.
+         */
+
+        await loadSettings();
+
+        window.scrollTo(
+            {
+                top: 0,
+                behavior: "smooth"
+            }
+        );
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        showAlert(
+            error.message
+        );
+
+    } finally {
+
+        button.disabled =
+            false;
+
+
+        button.innerHTML =
+            `
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save All Changes
+
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+document.getElementById(
+    "saveButton"
+).addEventListener(
+    "click",
+    saveSettings
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document.getElementById(
+    "menuButton"
+).addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "sidebar"
+        ).classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document.getElementById(
+    "logoutLink"
+).addEventListener(
+    "click",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        try {
+
+            await fetch(
+                API.logout,
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store"
+
+                }
+            );
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+        }
+
+
+        window.location.href =
+            "../login.html";
+
+    }
+);
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadSettings();
+
+</script>
+
+</body>
+
+</html>

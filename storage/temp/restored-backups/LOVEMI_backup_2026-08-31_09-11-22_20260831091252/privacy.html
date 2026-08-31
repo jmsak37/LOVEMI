@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LOVEMI Privacy Policy"
+    >
+
+    <meta
+        name="robots"
+        content="index,follow"
+    >
+
+    <title>Privacy Policy | LOVEMI</title>
+
+    <!-- =====================================================
+         FAVICONS / LOGO
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="assets/logo1/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
+
+    <!-- =====================================================
+         FONTS / ICONS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary: #e91e63;
+            --primary-dark: #c2185b;
+            --secondary: #7c3aed;
+            --text: #172033;
+            --muted: #687386;
+            --surface: #ffffff;
+            --surface-soft: #f8f8fc;
+            --border: #e8e9ef;
+            --shadow: 0 10px 35px rgba(25, 25, 45, .08);
+            --radius: 18px;
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff 0%,
+                    #faf9fd 100%
+                );
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+            margin-inline: auto;
+        }
+
+        /* =================================================
+           NAVIGATION
+        ================================================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand span {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -.5px;
+        }
+
+        .guest-nav,
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            padding: 10px 13px;
+            border-radius: 11px;
+            color: #566173;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: #fff0f5;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: #fff !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+
+        .mobile-toggle {
+            display: none;
+            border: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #f4f4f8;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 12px 0 18px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 6px;
+            border-bottom: 1px solid #f0f0f4;
+            font-weight: 600;
+            color: #4b5565;
+        }
+
+        /* =================================================
+           HERO
+        ================================================== */
+
+        .page-hero {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 22px;
+            background: #fff0f5;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .page-hero p {
+            max-width: 700px;
+            margin-inline: auto;
+            color: var(--muted);
+        }
+
+        /* =================================================
+           CONTENT
+        ================================================== */
+
+        .policy-layout {
+            padding-bottom: 80px;
+        }
+
+        .policy-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(22px, 4vw, 42px);
+        }
+
+        .policy-card section + section {
+            margin-top: 34px;
+        }
+
+        .policy-card h2 {
+            margin-bottom: 11px;
+            font-size: 1.35rem;
+        }
+
+        .policy-card p {
+            color: #5e6879;
+            margin-bottom: 11px;
+        }
+
+        .policy-card ul {
+            padding-left: 22px;
+            color: #5e6879;
+        }
+
+        .last-updated {
+            display: inline-flex;
+            padding: 8px 12px;
+            background: var(--surface-soft);
+            border-radius: 10px;
+            color: var(--muted);
+            font-size: .88rem;
+            margin-bottom: 24px;
+        }
+
+        /* =================================================
+           FOOTER
+        ================================================== */
+
+        .site-footer {
+            margin-top: 20px;
+            background: #151827;
+            color: #d7dbe6;
+        }
+
+        .footer-main {
+            padding: 52px 0 30px;
+            display: grid;
+            grid-template-columns:
+                1.4fr
+                repeat(3, 1fr);
+            gap: 34px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .footer-brand strong {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .footer-description {
+            color: #aab0bf;
+            font-size: .92rem;
+            max-width: 330px;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            font-size: .95rem;
+            margin-bottom: 14px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aab0bf;
+            margin: 8px 0;
+            font-size: .88rem;
+            transition: .2s;
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.08);
+            padding: 18px 0;
+        }
+
+        .footer-bottom-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            color: #9198a9;
+            font-size: .82rem;
+        }
+
+        @media (max-width: 900px) {
+
+            .guest-nav,
+            .user-nav {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: inline-grid;
+                place-items: center;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: min(
+                    calc(100% - 22px),
+                    var(--max-width)
+                );
+            }
+
+            .nav {
+                min-height: 68px;
+            }
+
+            .brand img {
+                width: 42px;
+                height: 42px;
+            }
+
+            .page-hero {
+                padding: 52px 0 30px;
+            }
+
+            .policy-card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                padding-top: 38px;
+            }
+
+            .footer-bottom-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container nav">
+
+        <a
+            href="index.html"
+            class="brand"
+            aria-label="LOVEMI Home"
+        >
+            <img
+                src="assets/logo1/LOGO1.ico"
+                alt="LOVEMI logo"
+            >
+            <span>LOVEMI</span>
+        </a>
+
+        <nav
+            id="desktopGuestNav"
+            class="guest-nav"
+            aria-label="Guest navigation"
+        >
+            <a class="nav-link" href="index.html">
+                Home
+            </a>
+
+            <a class="nav-link" href="about.html">
+                About
+            </a>
+
+            <a class="nav-link" href="help.html">
+                Help
+            </a>
+
+            <a class="nav-link" href="contact.html">
+                Contact
+            </a>
+
+            <a class="nav-link" href="login.html">
+                Login
+            </a>
+
+            <a
+                class="nav-link nav-cta"
+                href="registration.html"
+            >
+                Create Account
+            </a>
+        </nav>
+
+        <nav
+            id="desktopUserNav"
+            class="user-nav"
+            aria-label="User navigation"
+            hidden
+        >
+            <a class="nav-link" href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a class="nav-link" href="discover.html">
+                Discover
+            </a>
+
+            <a class="nav-link" href="connections.html">
+                Connections
+            </a>
+
+            <a class="nav-link" href="messages.html">
+                Messages
+            </a>
+
+            <a class="nav-link" href="profile.html">
+                Profile
+            </a>
+
+            <a class="nav-link" href="notifications.html">
+                Notifications
+            </a>
+
+            <a class="nav-link" href="settings.html">
+                Settings
+            </a>
+
+            <a
+                class="nav-link nav-cta"
+                href="premium.html"
+            >
+                Premium
+            </a>
+        </nav>
+
+        <button
+            type="button"
+            class="mobile-toggle"
+            id="mobileToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+
+    <div
+        id="mobileMenu"
+        class="mobile-menu"
+    >
+        <div class="container" id="mobileMenuLinks"></div>
+    </div>
+</header>
+
+
+<main>
+
+    <section class="page-hero">
+
+        <div class="container">
+
+            <div class="hero-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h1>Privacy Policy</h1>
+
+            <p>
+                Your privacy matters to LOVEMI. This page explains
+                how account, profile, communication and payment
+                information is handled.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="policy-layout">
+
+        <div class="container">
+
+            <article class="policy-card">
+
+                <span class="last-updated">
+                    Last updated: August 29, 2026
+                </span>
+
+
+                <section>
+                    <h2>1. Information We Collect</h2>
+
+                    <p>
+                        LOVEMI may collect information needed to
+                        create and operate an account, including
+                        username, full name, gender, email address,
+                        country, telephone number and account
+                        verification information.
+                    </p>
+
+                    <p>
+                        Information may also be generated through
+                        your use of the platform, such as profile
+                        activity, connections, messages,
+                        notifications, payments and security logs.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>2. Profile Information</h2>
+
+                    <p>
+                        Information displayed on a public profile
+                        is controlled by LOVEMI privacy settings
+                        and moderation rules.
+                    </p>
+
+                    <p>
+                        Private account information such as ID
+                        information, authentication secrets,
+                        passwords and private security information
+                        is not intended for public display.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>3. Photos, Posts and Videos</h2>
+
+                    <p>
+                        Premium members may submit permitted
+                        profile media, posts, photos and videos.
+                        Submitted media may require administrator
+                        moderation before becoming publicly
+                        available.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>4. Communications</h2>
+
+                    <p>
+                        LOVEMI may process messages and connection
+                        information to provide the communication
+                        service, enforce platform rules, prevent
+                        abuse and investigate reports.
+                    </p>
+
+                    <p>
+                        Users should avoid sharing passwords,
+                        security codes, identity documents or other
+                        sensitive information inside ordinary chats.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>5. Payments</h2>
+
+                    <p>
+                        Premium payments are processed using the
+                        payment systems configured by LOVEMI.
+                        Payment records may include payment
+                        references, currency, amount, gateway and
+                        transaction status.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>6. Security</h2>
+
+                    <p>
+                        LOVEMI uses authentication, access controls,
+                        database permissions, verification and
+                        security logging to protect the platform.
+                    </p>
+
+                    <p>
+                        No online system can guarantee absolute
+                        security. Users should keep their passwords
+                        and verification codes private.
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>7. Your Choices</h2>
+
+                    <ul>
+                        <li>Update your profile information.</li>
+                        <li>Adjust available privacy settings.</li>
+                        <li>Manage connections and blocked users.</li>
+                        <li>Delete your account where supported.</li>
+                        <li>Contact LOVEMI support about privacy concerns.</li>
+                    </ul>
+                </section>
+
+
+                <section>
+                    <h2>8. Contact</h2>
+
+                    <p>
+                        Privacy concerns may be sent through the
+                        LOVEMI support system or by contacting
+                        <strong>eduassistasc@gmail.com</strong>.
+                    </p>
+                </section>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-main">
+
+        <div>
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/logo1/LOGO1.ico"
+                    alt="LOVEMI"
+                >
+
+                <strong>LOVEMI</strong>
+
+            </div>
+
+            <p class="footer-description">
+                Connect with people, discover meaningful
+                connections and communicate through a safer,
+                moderated platform.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Explore</h3>
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="help.html">Help</a>
+            <a href="contact.html">Contact</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Account</h3>
+
+            <a href="login.html">Login</a>
+            <a href="registration.html">Register</a>
+            <a href="premium.html">Premium</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Legal</h3>
+
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container footer-bottom-inner">
+
+            <span>
+                © 2026 LOVEMI. All rights reserved.
+            </span>
+
+            <span>
+                Built for secure connections.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    "use strict";
+
+    const guestNav =
+        document.getElementById(
+            "desktopGuestNav"
+        );
+
+    const userNav =
+        document.getElementById(
+            "desktopUserNav"
+        );
+
+    const mobileToggle =
+        document.getElementById(
+            "mobileToggle"
+        );
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+    const mobileMenuLinks =
+        document.getElementById(
+            "mobileMenuLinks"
+        );
+
+
+    const guestLinks = [
+        ["Home", "index.html"],
+        ["About", "about.html"],
+        ["Help", "help.html"],
+        ["Contact", "contact.html"],
+        ["Login", "login.html"],
+        ["Create Account", "registration.html"]
+    ];
+
+
+    const userLinks = [
+        ["Dashboard", "dashboard.html"],
+        ["Discover", "discover.html"],
+        ["Connections", "connections.html"],
+        ["Messages", "messages.html"],
+        ["Profile", "profile.html"],
+        ["Notifications", "notifications.html"],
+        ["Settings", "settings.html"],
+        ["Premium", "premium.html"]
+    ];
+
+
+    async function getSession() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "api/auth/session.php",
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        cache: "no-store",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                return null;
+            }
+
+
+            const data =
+                await response.json();
+
+
+            return data;
+
+        } catch (error) {
+
+            console.error(
+                "Session check failed:",
+                error
+            );
+
+            return null;
+
+        }
+
+    }
+
+
+    function buildMobileMenu(
+        links
+    ) {
+
+        mobileMenuLinks.innerHTML = "";
+
+        links.forEach(
+            function (item) {
+
+                const a =
+                    document.createElement(
+                        "a"
+                    );
+
+                a.href =
+                    item[1];
+
+                a.textContent =
+                    item[0];
+
+                mobileMenuLinks.appendChild(
+                    a
+                );
+
+            }
+        );
+
+    }
+
+
+    async function setupNavigation() {
+
+        const session =
+            await getSession();
+
+
+        const loggedIn =
+            Boolean(
+                session &&
+                (
+                    session.authenticated === true
+                    ||
+                    session.logged_in === true
+                    ||
+                    session.success === true &&
+                    session.user
+                )
+            );
+
+
+        if (loggedIn) {
+
+            guestNav.hidden = true;
+            userNav.hidden = false;
+
+            buildMobileMenu(
+                userLinks
+            );
+
+        } else {
+
+            guestNav.hidden = false;
+            userNav.hidden = true;
+
+            buildMobileMenu(
+                guestLinks
+            );
+
+        }
+
+    }
+
+
+    mobileToggle.addEventListener(
+        "click",
+        function () {
+
+            const opened =
+                mobileMenu.classList.toggle(
+                    "open"
+                );
+
+
+            mobileToggle.setAttribute(
+                "aria-expanded",
+                opened
+                    ? "true"
+                    : "false"
+            );
+
+
+            mobileToggle.innerHTML =
+                opened
+                    ?
+                    '<i class="fa-solid fa-xmark"></i>'
+                    :
+                    '<i class="fa-solid fa-bars"></i>';
+
+        }
+    );
+
+
+    setupNavigation();
+
+})();
+</script>
+
+</body>
+</html>
