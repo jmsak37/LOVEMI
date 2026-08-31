@@ -1,6 +1,0 @@
-{
-    "require": {
-        "phpmailer/phpmailer": "^7.1",
-        "sonata-project/google-authenticator": "^2.3"
-    }
-}
