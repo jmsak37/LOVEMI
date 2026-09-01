@@ -1,23 +1,4 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - MARK CONVERSATION / MESSAGE AS READ
- * ============================================================
- *
- * POST JSON:
- *
- * {
- *     "conversation_id": 12
- * }
- *
- * OR:
- *
- * {
- *     "message_id": 45
- * }
- *
- * ============================================================
- */
 
 declare(strict_types=1);
 
@@ -32,12 +13,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-function markReadResponse(
+function markReadJson(
     bool $success,
     string $message,
     array $data = [],
@@ -61,80 +37,44 @@ function markReadResponse(
     exit;
 }
 
-
-/* ============================================================
-   METHOD
-============================================================ */
-
 if (
     ($_SERVER['REQUEST_METHOD'] ?? '')
     !==
     'POST'
 ) {
 
-    markReadResponse(
+    markReadJson(
         false,
         'Only POST requests are allowed.',
-        [
-            'code' =>
-                'METHOD_NOT_ALLOWED'
-        ],
+        [],
         405
     );
+
 }
-
-
-/* ============================================================
-   AUTH
-============================================================ */
 
 $userId =
-    isset(
-        $_SESSION['lovemi_user_id']
-    )
-        ?
-        (int)
-        $_SESSION['lovemi_user_id']
-        :
-        0;
+    isset($_SESSION['lovemi_user_id'])
+        ? (int) $_SESSION['lovemi_user_id']
+        : 0;
 
+if ($userId <= 0) {
 
-if (
-    $userId <= 0
-) {
-
-    markReadResponse(
+    markReadJson(
         false,
         'Please log in first.',
-        [
-            'code' =>
-                'AUTHENTICATION_REQUIRED',
-
-            'redirect' =>
-                'login.html'
-        ],
+        [],
         401
     );
+
 }
-
-
-/* ============================================================
-   INPUT
-============================================================ */
-
-$raw =
-    file_get_contents(
-        'php://input'
-    );
-
 
 $input =
     json_decode(
-        (string)
-        $raw,
+        file_get_contents(
+            'php://input'
+        ) ?: '{}',
         true
     );
-
 
 if (
     !is_array(
@@ -143,254 +83,139 @@ if (
 ) {
 
     $input =
-        $_POST;
+        [];
 
 }
 
+$chatCode =
+    strtolower(
+        trim(
+            (string)(
+                $input['chat']
+                ??
+                ''
+            )
+        )
+    );
 
-$conversationId =
-    isset(
-        $input['conversation_id']
+if (
+    !preg_match(
+        '/^[a-f0-9]{64}$/',
+        $chatCode
     )
-        ?
-        (int)
-        $input['conversation_id']
-        :
-        0;
+) {
 
+    markReadJson(
+        false,
+        'A valid chat code is required.',
+        [],
+        422
+    );
 
-$messageId =
-    isset(
-        $input['message_id']
-    )
-        ?
-        (int)
-        $input['message_id']
-        :
-        0;
-
-
-/* ============================================================
-   DATABASE
-============================================================ */
+}
 
 try {
 
     $pdo =
         db();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
-    error_log(
-        '[LOVEMI MARK READ DB] '
-        .
-        $e->getMessage()
-    );
-
-
-    markReadResponse(
+    markReadJson(
         false,
         'Database connection failed.',
-        [
-            'code' =>
-                'DATABASE_ERROR'
-        ],
+        [],
         500
     );
+
 }
 
 
 /* ============================================================
-   MESSAGE MODE
-============================================================ */
-
-if (
-    $messageId > 0
-) {
-
-    try {
-
-        $stmt =
-            $pdo->prepare(
-                "
-                UPDATE messages
-
-                SET
-
-                    is_read = 1,
-
-                    read_at =
-                        CURRENT_TIMESTAMP
-
-                WHERE id =
-                    :message_id
-
-                  AND receiver_id =
-                    :receiver_id
-
-                  AND is_read = 0
-
-                  AND deleted_by_receiver = 0
-
-                LIMIT 1
-                "
-            );
-
-
-        $stmt->execute(
-            [
-
-                ':message_id' =>
-                    $messageId,
-
-                ':receiver_id' =>
-                    $userId
-
-            ]
-        );
-
-
-        markReadResponse(
-            true,
-            'Message marked as read.',
-            [
-                'message_id' =>
-                    $messageId,
-
-                'updated' =>
-                    $stmt->rowCount()
-            ]
-        );
-
-
-    } catch (Throwable $e) {
-
-        error_log(
-            '[LOVEMI MARK MESSAGE READ] '
-            .
-            $e->getMessage()
-        );
-
-
-        markReadResponse(
-            false,
-            'Unable to mark the message as read.',
-            [
-                'code' =>
-                    'MESSAGE_READ_FAILED'
-            ],
-            500
-        );
-
-    }
-}
-
-
-/* ============================================================
-   CONVERSATION MODE
-============================================================ */
-
-if (
-    $conversationId <= 0
-) {
-
-    markReadResponse(
-        false,
-        'Conversation ID or message ID is required.',
-        [
-            'code' =>
-                'TARGET_REQUIRED'
-        ],
-        422
-    );
-}
-
-
-/* ============================================================
-   VERIFY PARTICIPATION
+   VERIFY CHAT
 ============================================================ */
 
 try {
 
-    $conversationStmt =
+    $stmt =
         $pdo->prepare(
             "
-            SELECT id
+            SELECT
 
-            FROM conversations
+                c.id AS conversation_id
 
-            WHERE id =
-                :conversation_id
+            FROM conversation_access_codes cac
 
-              AND
-              (
-                  user_one_id =
-                      :user_one
+            INNER JOIN conversations c
 
-                  OR
+                ON c.id =
+                    cac.conversation_id
 
-                  user_two_id =
-                      :user_two
-              )
+            WHERE
+
+                cac.access_code =
+                    :access_code
+
+                AND
+
+                (
+                    c.user_one_id =
+                        :user_one
+
+                    OR
+
+                    c.user_two_id =
+                        :user_two
+                )
+
+                AND c.status = 'active'
 
             LIMIT 1
             "
         );
 
-
-    $conversationStmt->execute(
+    $stmt->execute(
         [
-
-            ':conversation_id' =>
-                $conversationId,
+            ':access_code' =>
+                $chatCode,
 
             ':user_one' =>
                 $userId,
 
             ':user_two' =>
                 $userId
-
         ]
     );
 
+    $conversationId =
+        $stmt->fetchColumn();
 
-    $conversationExists =
-        $conversationStmt->fetchColumn();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI MARK CONVERSATION VERIFY] '
-        .
-        $e->getMessage()
-    );
-
-
-    markReadResponse(
-        false,
-        'Unable to verify the conversation.',
-        [
-            'code' =>
-                'CONVERSATION_VERIFY_FAILED'
-        ],
-        500
-    );
-}
-
-
-if (
-    !$conversationExists
+} catch (
+    Throwable $e
 ) {
 
-    markReadResponse(
+    markReadJson(
+        false,
+        'Unable to verify the conversation.',
+        [],
+        500
+    );
+
+}
+
+if (
+    !$conversationId
+) {
+
+    markReadJson(
         false,
         'Conversation not found or access denied.',
-        [
-            'code' =>
-                'CONVERSATION_NOT_FOUND'
-        ],
+        [],
         404
     );
+
 }
 
 
@@ -400,7 +225,7 @@ if (
 
 try {
 
-    $stmt =
+    $update =
         $pdo->prepare(
             "
             UPDATE messages
@@ -424,58 +249,49 @@ try {
             "
         );
 
-
-    $stmt->execute(
+    $update->execute(
         [
-
             ':conversation_id' =>
+                (int)
                 $conversationId,
 
             ':receiver_id' =>
                 $userId
-
         ]
     );
 
-
     $updated =
-        $stmt->rowCount();
+        $update->rowCount();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI MARK CONVERSATION READ] '
+        '[LOVEMI MARK READ] '
         .
         $e->getMessage()
     );
 
-
-    markReadResponse(
+    markReadJson(
         false,
-        'Unable to mark conversation messages as read.',
-        [
-            'code' =>
-                'CONVERSATION_READ_FAILED'
-        ],
+        'Unable to mark messages as read.',
+        [],
         500
     );
+
 }
 
 
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-markReadResponse(
+markReadJson(
     true,
-    'Conversation marked as read.',
+    'Messages marked as read.',
     [
-
         'conversation_id' =>
+            (int)
             $conversationId,
 
         'updated_messages' =>
             $updated
-
     ]
 );

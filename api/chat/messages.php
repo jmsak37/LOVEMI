@@ -1,24 +1,12 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - CONVERSATION MESSAGES API
- * ============================================================
- *
- * GET:
- *
- *   messages.php?conversation_id=123
- *
- * Optional:
- *
- *   &limit=50
- *   &before_id=500
- *
- * ============================================================
- */
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
+
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
@@ -29,7 +17,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-function messagesResponse(
+
+/* ============================================================
+   RESPONSE
+============================================================ */
+
+function messagesJson(
     bool $success,
     string $message,
     array $data = [],
@@ -53,100 +46,150 @@ function messagesResponse(
     exit;
 }
 
+
+/* ============================================================
+   METHOD
+============================================================ */
+
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET'
+    ($_SERVER['REQUEST_METHOD'] ?? '')
+    !==
+    'GET'
 ) {
 
-    messagesResponse(
+    messagesJson(
         false,
         'Only GET requests are allowed.',
         [],
         405
     );
+
 }
 
-$userId =
-    isset($_SESSION['lovemi_user_id'])
-        ? (int) $_SESSION['lovemi_user_id']
-        : 0;
 
-if ($userId <= 0) {
+/* ============================================================
+   AUTH
+============================================================ */
 
-    messagesResponse(
+$currentUserId =
+    isset(
+        $_SESSION['lovemi_user_id']
+    )
+        ?
+        (int)
+        $_SESSION['lovemi_user_id']
+        :
+        0;
+
+
+if (
+    $currentUserId <= 0
+) {
+
+    messagesJson(
         false,
         'Please log in first.',
         [
-            'code' => 'AUTHENTICATION_REQUIRED',
-            'redirect' => 'login.html'
+            'code' =>
+                'AUTHENTICATION_REQUIRED',
+
+            'redirect' =>
+                'login.html'
         ],
         401
     );
+
 }
 
-$conversationId =
-    isset($_GET['conversation_id'])
-        ? (int) $_GET['conversation_id']
-        : 0;
 
-if ($conversationId <= 0) {
+/* ============================================================
+   CHAT CODE
+============================================================ */
 
-    messagesResponse(
+$chatCode =
+    strtolower(
+        trim(
+            (string)(
+                $_GET['chat']
+                ??
+                ''
+            )
+        )
+    );
+
+
+if (
+    !preg_match(
+        '/^[a-f0-9]{64}$/',
+        $chatCode
+    )
+) {
+
+    messagesJson(
         false,
-        'Conversation ID is required.',
+        'A valid chat code is required.',
         [
-            'code' => 'CONVERSATION_ID_REQUIRED'
+            'code' =>
+                'INVALID_CHAT_CODE'
         ],
         422
     );
+
 }
+
+
+/* ============================================================
+   LIMIT
+============================================================ */
 
 $limit =
     max(
         1,
         min(
             100,
-            (int)
-            (
+            (int)(
                 $_GET['limit']
                 ??
-                50
+                100
             )
         )
     );
 
-$beforeId =
-    max(
-        0,
-        (int)
-        (
-            $_GET['before_id']
-            ??
-            0
-        )
-    );
+
+/* ============================================================
+   DATABASE
+============================================================ */
 
 try {
 
     $pdo =
         db();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI MESSAGES DB] ' .
+        '[LOVEMI MESSAGES DB] '
+        .
         $e->getMessage()
     );
 
-    messagesResponse(
+    messagesJson(
         false,
         'Database connection failed.',
-        [],
+        [
+            'code' =>
+                'DATABASE_ERROR'
+        ],
         500
     );
+
 }
 
+
 /* ============================================================
-   VERIFY CONVERSATION PARTICIPATION
+   RESOLVE CHAT CODE
 ============================================================ */
 
 try {
@@ -156,257 +199,502 @@ try {
             "
             SELECT
 
-                c.id,
+                cac.access_code,
+
+                c.id AS conversation_id,
+
                 c.connection_id,
+
                 c.user_one_id,
+
                 c.user_two_id,
+
                 c.status,
 
                 CASE
-                    WHEN c.user_one_id = :viewer_one
-                    THEN c.user_two_id
-                    ELSE c.user_one_id
-                END AS other_user_id,
 
-                ou.username AS other_username,
-                ou.full_names AS other_full_names,
-                ou.gender AS other_gender,
+                    WHEN c.user_one_id = :current_user_one
 
-                p.display_name,
-                p.allow_messages,
-
-                up.is_online,
-                up.last_seen_at
-
-            FROM conversations c
-
-            INNER JOIN users ou
-                ON ou.id =
-                    CASE
-                        WHEN c.user_one_id = :viewer_two
                         THEN c.user_two_id
-                        ELSE c.user_one_id
-                    END
 
-            LEFT JOIN profiles p
-                ON p.user_id = ou.id
+                    ELSE
 
-            LEFT JOIN user_presence up
-                ON up.user_id = ou.id
+                        c.user_one_id
 
-            WHERE c.id = :conversation_id
+                END AS other_user_id
+
+            FROM conversation_access_codes cac
+
+            INNER JOIN conversations c
+
+                ON c.id =
+                    cac.conversation_id
+
+            WHERE
+
+                cac.access_code =
+                    :access_code
 
               AND
-              (
-                  c.user_one_id = :viewer_three
-                  OR
-                  c.user_two_id = :viewer_four
-              )
+
+                (
+                    c.user_one_id =
+                        :current_user_two
+
+                    OR
+
+                    c.user_two_id =
+                        :current_user_three
+                )
+
+              AND c.status = 'active'
 
             LIMIT 1
             "
         );
 
+
     $conversationStmt->execute(
         [
 
-            ':viewer_one' =>
-                $userId,
+            ':current_user_one' =>
+                $currentUserId,
 
-            ':viewer_two' =>
-                $userId,
+            ':access_code' =>
+                $chatCode,
 
-            ':viewer_three' =>
-                $userId,
+            ':current_user_two' =>
+                $currentUserId,
 
-            ':viewer_four' =>
-                $userId,
-
-            ':conversation_id' =>
-                $conversationId
+            ':current_user_three' =>
+                $currentUserId
 
         ]
     );
 
-    $conversation =
-        $conversationStmt->fetch();
 
-} catch (Throwable $e) {
+    $conversation =
+        $conversationStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI MESSAGES CONVERSATION] ' .
+        '[LOVEMI MESSAGES CHAT LOOKUP] '
+        .
         $e->getMessage()
     );
 
-    messagesResponse(
+    messagesJson(
         false,
-        'Unable to verify the conversation.',
-        [],
+        'Unable to verify this conversation.',
+        [
+            'code' =>
+                'CONVERSATION_LOOKUP_FAILED'
+        ],
         500
     );
+
 }
 
-if (!$conversation) {
 
-    messagesResponse(
+if (
+    !$conversation
+) {
+
+    messagesJson(
         false,
         'Conversation not found or access denied.',
         [
-            'code' => 'CONVERSATION_NOT_FOUND'
+            'code' =>
+                'CONVERSATION_NOT_FOUND'
         ],
         404
     );
+
 }
 
 
+$conversationId =
+    (int)
+    $conversation['conversation_id'];
+
+
+$otherUserId =
+    (int)
+    $conversation['other_user_id'];
+
+
 /* ============================================================
-   MESSAGES
+   UPDATE CHAT CODE USAGE
 ============================================================ */
 
 try {
 
-    if ($beforeId > 0) {
+    $touch =
+        $pdo->prepare(
+            "
+            UPDATE conversation_access_codes
 
-        $messageStmt =
-            $pdo->prepare(
-                "
-                SELECT
+            SET last_used_at =
+                CURRENT_TIMESTAMP
 
-                    id,
-                    conversation_id,
-                    sender_id,
-                    receiver_id,
-                    message_type,
-                    message_text,
-                    attachment_path,
-                    attachment_name,
-                    attachment_mime,
-                    is_read,
-                    read_at,
-                    created_at
+            WHERE access_code =
+                :access_code
 
-                FROM messages
-
-                WHERE conversation_id =
-                    :conversation_id
-
-                  AND id < :before_id
-
-                  AND
-                  (
-                      (
-                          sender_id = :sender_id_1
-                          AND
-                          deleted_by_sender = 0
-                      )
-                      OR
-                      (
-                          receiver_id = :receiver_id_1
-                          AND
-                          deleted_by_receiver = 0
-                      )
-                  )
-
-                ORDER BY
-                    id DESC
-
-                LIMIT {$limit}
-                "
-            );
-
-        $messageStmt->execute(
-            [
-
-                ':conversation_id' =>
-                    $conversationId,
-
-                ':before_id' =>
-                    $beforeId,
-
-                ':sender_id_1' =>
-                    $userId,
-
-                ':receiver_id_1' =>
-                    $userId
-
-            ]
+            LIMIT 1
+            "
         );
 
-    } else {
 
-        $messageStmt =
-            $pdo->prepare(
-                "
-                SELECT
+    $touch->execute(
+        [
+            ':access_code' =>
+                $chatCode
+        ]
+    );
 
-                    id,
-                    conversation_id,
-                    sender_id,
-                    receiver_id,
-                    message_type,
-                    message_text,
-                    attachment_path,
-                    attachment_name,
-                    attachment_mime,
-                    is_read,
-                    read_at,
-                    created_at
-
-                FROM messages
-
-                WHERE conversation_id =
-                    :conversation_id
-
-                  AND
-                  (
-                      (
-                          sender_id = :sender_id_2
-                          AND
-                          deleted_by_sender = 0
-                      )
-                      OR
-                      (
-                          receiver_id = :receiver_id_2
-                          AND
-                          deleted_by_receiver = 0
-                      )
-                  )
-
-                ORDER BY
-                    id DESC
-
-                LIMIT {$limit}
-                "
-            );
-
-        $messageStmt->execute(
-            [
-
-                ':conversation_id' =>
-                    $conversationId,
-
-                ':sender_id_2' =>
-                    $userId,
-
-                ':receiver_id_2' =>
-                    $userId
-
-            ]
-        );
-
-    }
-
-    $rows =
-        $messageStmt->fetchAll();
-
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI MESSAGES QUERY] ' .
+        '[LOVEMI CHAT CODE TOUCH] '
+        .
         $e->getMessage()
     );
 
-    messagesResponse(
+}
+
+
+/* ============================================================
+   OTHER USER
+============================================================ */
+
+try {
+
+    $userStmt =
+        $pdo->prepare(
+            "
+            SELECT
+
+                u.id,
+
+                u.username,
+
+                u.full_names,
+
+                u.gender,
+
+                p.display_name,
+
+                p.bio,
+
+                up.is_online,
+
+                up.last_seen_at,
+
+                (
+                    SELECT
+                        ph.file_path
+
+                    FROM photos ph
+
+                    WHERE
+
+                        ph.user_id =
+                            u.id
+
+                      AND ph.photo_type =
+                            'profile'
+
+                      AND ph.approval_status =
+                            'approved'
+
+                    ORDER BY
+
+                        ph.is_primary DESC,
+
+                        ph.uploaded_at DESC,
+
+                        ph.id DESC
+
+                    LIMIT 1
+
+                ) AS profile_photo
+
+            FROM users u
+
+            LEFT JOIN profiles p
+
+                ON p.user_id =
+                    u.id
+
+            LEFT JOIN user_presence up
+
+                ON up.user_id =
+                    u.id
+
+            WHERE
+
+                u.id =
+                    :user_id
+
+              AND u.is_active = 1
+
+              AND u.is_suspended = 0
+
+              AND u.is_deleted = 0
+
+            LIMIT 1
+            "
+        );
+
+
+    $userStmt->execute(
+        [
+            ':user_id' =>
+                $otherUserId
+        ]
+    );
+
+
+    $otherUser =
+        $userStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI MESSAGES USER] '
+        .
+        $e->getMessage()
+    );
+
+    messagesJson(
+        false,
+        'Unable to load member information.',
+        [
+            'code' =>
+                'OTHER_USER_LOAD_FAILED'
+        ],
+        500
+    );
+
+}
+
+
+if (
+    !$otherUser
+) {
+
+    messagesJson(
+        false,
+        'The connected member is no longer available.',
+        [
+            'code' =>
+                'OTHER_USER_NOT_FOUND'
+        ],
+        404
+    );
+
+}
+
+
+/* ============================================================
+   PROFILE PHOTO
+============================================================ */
+
+$profilePhoto =
+    $otherUser['profile_photo']
+        ??
+        null;
+
+
+/* ============================================================
+   WHATSAPP AVAILABLE
+============================================================ */
+
+$whatsappAvailable =
+    false;
+
+
+try {
+
+    $waTable =
+        $pdo->query(
+            "
+            SHOW TABLES LIKE
+                'user_whatsapp_numbers'
+            "
+        );
+
+
+    if (
+        $waTable
+        &&
+        $waTable->fetch()
+    ) {
+
+        $waStmt =
+            $pdo->prepare(
+                "
+                SELECT COUNT(*)
+
+                FROM user_whatsapp_numbers
+
+                WHERE
+
+                    user_id =
+                        :user_id
+
+                  AND is_active = 1
+                "
+            );
+
+
+        $waStmt->execute(
+            [
+                ':user_id' =>
+                    $otherUserId
+            ]
+        );
+
+
+        $whatsappAvailable =
+            (int)
+            $waStmt->fetchColumn()
+            >
+            0;
+
+    }
+
+} catch (
+    Throwable $e
+) {
+
+    $whatsappAvailable =
+        false;
+
+}
+
+
+/* ============================================================
+   LOAD MESSAGES
+============================================================ */
+
+try {
+
+    $messageStmt =
+        $pdo->prepare(
+            "
+            SELECT
+
+                m.id,
+
+                m.conversation_id,
+
+                m.sender_id,
+
+                m.receiver_id,
+
+                m.message_type,
+
+                m.message_text,
+
+                m.attachment_path,
+
+                m.attachment_name,
+
+                m.attachment_mime,
+
+                m.is_read,
+
+                m.read_at,
+
+                m.created_at
+
+            FROM messages m
+
+            WHERE
+
+                m.conversation_id =
+                    :conversation_id
+
+              AND
+
+                (
+                    (
+                        m.sender_id =
+                            :viewer_sender
+
+                        AND
+
+                        m.deleted_by_sender = 0
+                    )
+
+                    OR
+
+                    (
+                        m.receiver_id =
+                            :viewer_receiver
+
+                        AND
+
+                        m.deleted_by_receiver = 0
+                    )
+                )
+
+            ORDER BY
+
+                m.id DESC
+
+            LIMIT {$limit}
+            "
+        );
+
+
+    $messageStmt->execute(
+        [
+
+            ':conversation_id' =>
+                $conversationId,
+
+            ':viewer_sender' =>
+                $currentUserId,
+
+            ':viewer_receiver' =>
+                $currentUserId
+
+        ]
+    );
+
+
+    $rows =
+        $messageStmt->fetchAll(
+            PDO::FETCH_ASSOC
+        );
+
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI MESSAGES QUERY] '
+        .
+        $e->getMessage()
+    );
+
+    messagesJson(
         false,
         'Unable to load messages.',
         [
@@ -415,11 +703,12 @@ try {
         ],
         500
     );
+
 }
 
 
 /* ============================================================
-   CHRONOLOGICAL ORDER
+   REVERSE TO CHRONOLOGICAL ORDER
 ============================================================ */
 
 $rows =
@@ -428,69 +717,256 @@ $rows =
     );
 
 
+/* ============================================================
+   LOAD REPLY INFORMATION WHEN TABLE EXISTS
+============================================================ */
+
+$replyMap = [];
+
+
+try {
+
+    $replyTable =
+        $pdo->query(
+            "
+            SHOW TABLES LIKE
+                'message_replies'
+            "
+        );
+
+
+    if (
+        $replyTable
+        &&
+        $replyTable->fetch()
+        &&
+        count($rows) > 0
+    ) {
+
+        $messageIds =
+            array_map(
+                static function (
+                    array $row
+                ): int {
+
+                    return (int)
+                        $row['id'];
+
+                },
+                $rows
+            );
+
+
+        $placeholders =
+            implode(
+                ',',
+                array_fill(
+                    0,
+                    count($messageIds),
+                    '?'
+                )
+            );
+
+
+        $replyStmt =
+            $pdo->prepare(
+                "
+                SELECT
+
+                    mr.message_id,
+
+                    mr.reply_to_message_id,
+
+                    replied.message_text,
+
+                    replied.attachment_name
+
+                FROM message_replies mr
+
+                LEFT JOIN messages replied
+
+                    ON replied.id =
+                        mr.reply_to_message_id
+
+                WHERE
+
+                    mr.message_id IN
+                    (
+                        {$placeholders}
+                    )
+                "
+            );
+
+
+        $replyStmt->execute(
+            $messageIds
+        );
+
+
+        while (
+            $replyRow =
+                $replyStmt->fetch(
+                    PDO::FETCH_ASSOC
+                )
+        ) {
+
+            $replyMap[
+                (int)
+                $replyRow['message_id']
+            ] =
+                [
+
+                    'id' =>
+                        (int)
+                        $replyRow[
+                            'reply_to_message_id'
+                        ],
+
+                    'message_text' =>
+                        $replyRow[
+                            'message_text'
+                        ],
+
+                    'attachment_name' =>
+                        $replyRow[
+                            'attachment_name'
+                        ]
+
+                ];
+
+        }
+
+    }
+
+} catch (
+    Throwable $e
+) {
+
+    /*
+     * Replies are optional.
+     * Message loading must continue.
+     */
+
+    error_log(
+        '[LOVEMI REPLY LOAD] '
+        .
+        $e->getMessage()
+    );
+
+}
+
+
+/* ============================================================
+   FORMAT MESSAGES
+============================================================ */
+
 $messages =
     [];
 
 
 foreach (
-    $rows
-    as $row
+    $rows as $row
 ) {
 
-    $messages[] = [
+    $attachment =
+        null;
 
-        'id' =>
-            (int)
-            $row['id'],
 
-        'conversation_id' =>
-            (int)
-            $row['conversation_id'],
+    if (
+        !empty(
+            $row['attachment_path']
+        )
+    ) {
 
-        'sender_id' =>
-            (int)
-            $row['sender_id'],
+        $attachment =
+            [
 
-        'receiver_id' =>
-            (int)
-            $row['receiver_id'],
+                'path' =>
+                    (string)
+                    $row['attachment_path'],
 
-        'from_me' =>
-            (int)
-            $row['sender_id']
-            ===
-            $userId,
+                'name' =>
+                    $row['attachment_name']
+                    !==
+                    null
+                        ?
+                        (string)
+                        $row['attachment_name']
+                        :
+                        'Attachment',
 
-        'message_type' =>
-            $row['message_type'],
+                'mime_type' =>
+                    $row['attachment_mime']
+                    !==
+                    null
+                        ?
+                        (string)
+                        $row['attachment_mime']
+                        :
+                        'application/octet-stream'
 
-        'message_text' =>
-            $row['message_text'],
+            ];
 
-        'attachment' => [
+    }
 
-            'path' =>
-                $row['attachment_path'],
 
-            'name' =>
-                $row['attachment_name'],
+    $messageId =
+        (int)
+        $row['id'];
 
-            'mime_type' =>
-                $row['attachment_mime']
 
-        ],
+    $messages[] =
+        [
 
-        'is_read' =>
-            (bool)
-            $row['is_read'],
+            'id' =>
+                $messageId,
 
-        'read_at' =>
-            $row['read_at'],
+            'conversation_id' =>
+                (int)
+                $row['conversation_id'],
 
-        'created_at' =>
-            $row['created_at']
+            'sender_id' =>
+                (int)
+                $row['sender_id'],
 
-    ];
+            'receiver_id' =>
+                (int)
+                $row['receiver_id'],
+
+            'from_me' =>
+                (int)
+                $row['sender_id']
+                ===
+                $currentUserId,
+
+            'message_type' =>
+                (string)
+                $row['message_type'],
+
+            'message_text' =>
+                $row['message_text'],
+
+            'attachment' =>
+                $attachment,
+
+            'reply_to' =>
+                $replyMap[
+                    $messageId
+                ]
+                ??
+                null,
+
+            'is_read' =>
+                (bool)
+                $row['is_read'],
+
+            'read_at' =>
+                $row['read_at'],
+
+            'created_at' =>
+                $row['created_at']
+
+        ];
 
 }
 
@@ -508,17 +984,20 @@ try {
 
             FROM messages
 
-            WHERE conversation_id =
-                :conversation_id
+            WHERE
+
+                conversation_id =
+                    :conversation_id
 
               AND receiver_id =
-                :receiver_id
+                    :receiver_id
 
               AND is_read = 0
 
               AND deleted_by_receiver = 0
             "
         );
+
 
     $unreadStmt->execute(
         [
@@ -527,52 +1006,216 @@ try {
                 $conversationId,
 
             ':receiver_id' =>
-                $userId
+                $currentUserId
 
         ]
     );
+
 
     $unreadCount =
         (int)
         $unreadStmt->fetchColumn();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     $unreadCount =
         0;
+
 }
 
 
 /* ============================================================
-   RESPONSE
+   IMPORTANT PREMIUM CHECK
+============================================================ */
+
+/*
+ * LOVEMI messaging rule:
+ *
+ *     CURRENT USER PREMIUM
+ *              OR
+ *     OTHER USER PREMIUM
+ *              =
+ *          CHAT ALLOWED
+ *
+ * Both users DO NOT need Premium.
+ *
+ * The subscription MUST:
+ *
+ *     service slug = lovemi-premium
+ *     status       = active
+ *     end_at       > current time
+ *
+ */
+
+$currentUserPremium =
+    false;
+
+
+$otherUserPremium =
+    false;
+
+
+try {
+
+    $premiumStmt =
+        $pdo->prepare(
+            "
+            SELECT
+
+                s.user_id
+
+            FROM subscriptions s
+
+            INNER JOIN services sv
+
+                ON sv.id =
+                    s.service_id
+
+            WHERE
+
+                s.user_id IN
+                (
+                    :current_user,
+                    :other_user
+                )
+
+              AND LOWER(
+                    TRIM(
+                        s.status
+                    )
+                  ) = 'active'
+
+              AND s.end_at IS NOT NULL
+
+              AND s.end_at >
+                    CURRENT_TIMESTAMP
+
+              AND LOWER(
+                    TRIM(
+                        sv.slug
+                    )
+                  ) = 'lovemi-premium'
+
+              AND sv.is_premium = 1
+
+              AND sv.is_active = 1
+
+            GROUP BY
+
+                s.user_id
+            "
+        );
+
+
+    $premiumStmt->execute(
+        [
+
+            ':current_user' =>
+                $currentUserId,
+
+            ':other_user' =>
+                $otherUserId
+
+        ]
+    );
+
+
+    while (
+        $premiumUserId =
+            $premiumStmt->fetchColumn()
+    ) {
+
+        $premiumUserId =
+            (int)
+            $premiumUserId;
+
+
+        if (
+            $premiumUserId ===
+            $currentUserId
+        ) {
+
+            $currentUserPremium =
+                true;
+
+        }
+
+
+        if (
+            $premiumUserId ===
+            $otherUserId
+        ) {
+
+            $otherUserPremium =
+                true;
+
+        }
+
+    }
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI PREMIUM ACCESS CHECK] '
+        .
+        $e->getMessage()
+    );
+
+}
+
+
+/*
+ * THIS IS THE IMPORTANT LINE:
+ *
+ * Either one having Premium is enough.
+ */
+
+$canSend =
+    $currentUserPremium
+    ||
+    $otherUserPremium;
+
+
+/* ============================================================
+   ONLINE
 ============================================================ */
 
 $isOtherOnline =
     (bool)
-    $conversation['is_online'];
+    (
+        $otherUser['is_online']
+        ??
+        false
+    );
 
 
 if (
     !empty(
-        $conversation['last_seen_at']
+        $otherUser['last_seen_at']
     )
 ) {
 
-    $lastSeen =
+    $lastSeenTimestamp =
         strtotime(
             (string)
-            $conversation['last_seen_at']
+            $otherUser['last_seen_at']
         );
 
+
     if (
-        $lastSeen !== false
+        $lastSeenTimestamp !== false
         &&
         (
             time()
             -
-            $lastSeen
+            $lastSeenTimestamp
         )
-        <= 300
+        <=
+        300
     ) {
 
         $isOtherOnline =
@@ -583,76 +1226,106 @@ if (
 }
 
 
-messagesResponse(
+/* ============================================================
+   RESPONSE
+============================================================ */
+
+messagesJson(
     true,
     'Messages loaded successfully.',
     [
 
-        'conversation' => [
+        'chat_code' =>
+            $chatCode,
 
-            'id' =>
-                (int)
-                $conversation['id'],
+        'conversation' =>
+            [
 
-            'connection_id' =>
-                $conversation['connection_id'] !== null
-                    ?
-                    (int)
+                'id' =>
+                    $conversationId,
+
+                'connection_id' =>
                     $conversation['connection_id']
-                    :
-                    null,
+                    !==
+                    null
+                        ?
+                        (int)
+                        $conversation['connection_id']
+                        :
+                        null,
 
-            'status' =>
-                $conversation['status']
+                'status' =>
+                    (string)
+                    $conversation['status']
 
-        ],
+            ],
 
-        'other_user' => [
+        'other_user' =>
+            [
 
-            'id' =>
-                (int)
-                $conversation['other_user_id'],
+                'id' =>
+                    $otherUserId,
 
-            'username' =>
-                $conversation['other_username'],
+                'username' =>
+                    $otherUser['username'],
 
-            'full_names' =>
-                $conversation['other_full_names'],
+                'full_names' =>
+                    $otherUser['full_names'],
 
-            'display_name' =>
-                $conversation['display_name']
-                ??
-                $conversation['other_full_names'],
+                'display_name' =>
+                    $otherUser['display_name']
+                    ??
+                    $otherUser['full_names'],
 
-            'gender' =>
-                $conversation['other_gender'],
+                'gender' =>
+                    $otherUser['gender'],
 
-            'online' =>
-                $isOtherOnline,
+                'bio' =>
+                    $otherUser['bio'],
 
-            'last_seen_at' =>
-                $conversation['last_seen_at']
+                'profile_photo' =>
+                    $profilePhoto,
 
-        ],
+                'online' =>
+                    $isOtherOnline,
+
+                'last_seen_at' =>
+                    $otherUser['last_seen_at'],
+
+                'whatsapp_available' =>
+                    $whatsappAvailable
+
+            ],
+
+        'premium_access' =>
+            [
+
+                'can_send' =>
+                    $canSend,
+
+                'current_user_premium' =>
+                    $currentUserPremium,
+
+                'other_user_premium' =>
+                    $otherUserPremium,
+
+                'rule' =>
+                    'Either connected member having active LOVEMI Premium is enough to keep messaging active.',
+
+                'reason' =>
+                    $canSend
+                        ?
+                        null
+                        :
+                        'Messaging is paused because neither connected member currently has active LOVEMI Premium.'
+
+            ],
 
         'messages' =>
             $messages,
 
         'unread_count' =>
-            $unreadCount,
-
-        'pagination' => [
-
-            'limit' =>
-                $limit,
-
-            'before_id' =>
-                $beforeId,
-
-            'has_more' =>
-                count($rows) >= $limit
-
-        ]
+            $unreadCount
 
     ]
 );

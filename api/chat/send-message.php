@@ -1,38 +1,17 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - SEND MESSAGE API
- * ============================================================
- *
- * POST JSON:
- *
- * {
- *   "conversation_id": 12,
- *   "message_text": "Hello"
- * }
- *
- * Normal members:
- *   - must be authenticated
- *   - must have active Premium
- *
- * Staff:
- *   - admin / moderator / support can message without Premium
- *
- * The receiver does NOT need Premium to receive messages.
- *
- * ============================================================
- */
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
-
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
@@ -43,7 +22,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
    RESPONSE
 ============================================================ */
 
-function sendMessageResponse(
+function sendJson(
     bool $success,
     string $message,
     array $data = [],
@@ -55,11 +34,8 @@ function sendMessageResponse(
     echo json_encode(
         array_merge(
             [
-                'success' =>
-                    $success,
-
-                'message' =>
-                    $message
+                'success' => $success,
+                'message' => $message
             ],
             $data
         ),
@@ -81,7 +57,7 @@ if (
     'POST'
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
         'Only POST requests are allowed.',
         [
@@ -90,6 +66,7 @@ if (
         ],
         405
     );
+
 }
 
 
@@ -97,7 +74,7 @@ if (
    AUTH
 ============================================================ */
 
-$userId =
+$currentUserId =
     isset(
         $_SESSION['lovemi_user_id']
     )
@@ -109,21 +86,19 @@ $userId =
 
 
 if (
-    $userId <= 0
+    $currentUserId <= 0
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
         'Please log in first.',
         [
             'code' =>
-                'AUTHENTICATION_REQUIRED',
-
-            'redirect' =>
-                'login.html'
+                'AUTHENTICATION_REQUIRED'
         ],
         401
     );
+
 }
 
 
@@ -131,143 +106,170 @@ if (
    INPUT
 ============================================================ */
 
-$raw =
-    file_get_contents(
-        'php://input'
-    );
-
-
-$input =
-    json_decode(
-        (string)
-        $raw,
-        true
-    );
-
-
-if (
-    !is_array(
-        $input
-    )
-) {
-
-    $input =
-        $_POST;
-
-}
-
-
-$conversationId =
-    (int)
-    (
-        $input['conversation_id']
-        ??
-        0
+$chatCode =
+    strtolower(
+        trim(
+            (string)(
+                $_POST['chat']
+                ??
+                ''
+            )
+        )
     );
 
 
 $messageText =
     trim(
-        (string)
-        (
-            $input['message_text']
-            ??
-            $input['message']
+        (string)(
+            $_POST['message_text']
             ??
             ''
         )
     );
 
 
-$messageType =
-    strtolower(
-        trim(
-            (string)
-            (
-                $input['message_type']
-                ??
-                'text'
-            )
-        )
-    );
-
-
-$allowedTypes = [
-
-    'text'
-
-];
+$replyToMessageId =
+    isset(
+        $_POST['reply_to_message_id']
+    )
+        ?
+        (int)
+        $_POST['reply_to_message_id']
+        :
+        0;
 
 
 if (
-    !in_array(
-        $messageType,
-        $allowedTypes,
-        true
+    !preg_match(
+        '/^[a-f0-9]{64}$/',
+        $chatCode
     )
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'This message type is not currently supported.',
+        'A valid chat code is required.',
         [
             'code' =>
-                'MESSAGE_TYPE_NOT_SUPPORTED'
+                'INVALID_CHAT_CODE'
         ],
         422
     );
+
 }
 
 
-if (
-    $conversationId <= 0
-) {
+/* ============================================================
+   MESSAGE CONTENT CHECK
+============================================================ */
 
-    sendMessageResponse(
-        false,
-        'Conversation ID is required.',
-        [
-            'code' =>
-                'CONVERSATION_ID_REQUIRED'
-        ],
-        422
+$hasFiles =
+    isset(
+        $_FILES['attachments']
+    )
+    &&
+    is_array(
+        $_FILES['attachments']['name']
+        ??
+        null
     );
-}
 
 
 if (
     $messageText === ''
+    &&
+    !$hasFiles
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'Please enter a message.',
+        'Write a message or select an attachment.',
         [
             'code' =>
-                'MESSAGE_REQUIRED'
+                'EMPTY_MESSAGE'
         ],
         422
     );
+
+}
+
+
+/* ============================================================
+   URL CHECK
+============================================================ */
+
+function containsForbiddenLink(
+    string $text
+): bool {
+
+    if (
+        $text === ''
+    ) {
+
+        return false;
+
+    }
+
+
+    $patterns =
+        [
+
+            '/https?:\/\//i',
+
+            '/http:\/\//i',
+
+            '/https?:\\\\\/\\\\\//i',
+
+            '/www\./i',
+
+            '/\bwa\.me\b/i',
+
+            '/\bwhatsapp\.com\b/i',
+
+            '/\b[a-z0-9-]+\.(com|net|org|io|co|ke|uk|us|biz|info|xyz)(\/\S*)?\b/i'
+
+        ];
+
+
+    foreach (
+        $patterns as $pattern
+    ) {
+
+        if (
+            preg_match(
+                $pattern,
+                $text
+            )
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
 }
 
 
 if (
-    mb_strlen(
+    containsForbiddenLink(
         $messageText
     )
-    >
-    5000
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'Your message is too long. Maximum 5000 characters.',
+        'Links and website addresses are not allowed in LOVEMI messages.',
         [
             'code' =>
-                'MESSAGE_TOO_LONG'
+                'LINK_NOT_ALLOWED'
         ],
         422
     );
+
 }
 
 
@@ -280,7 +282,9 @@ try {
     $pdo =
         db();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI SEND MESSAGE DB] '
@@ -288,8 +292,7 @@ try {
         $e->getMessage()
     );
 
-
-    sendMessageResponse(
+    sendJson(
         false,
         'Database connection failed.',
         [
@@ -298,237 +301,12 @@ try {
         ],
         500
     );
+
 }
 
 
 /* ============================================================
-   SENDER ROLE
-============================================================ */
-
-try {
-
-    $senderStmt =
-        $pdo->prepare(
-            "
-            SELECT
-
-                u.id,
-                u.role_id,
-                u.account_status,
-                u.is_active,
-                u.is_suspended,
-                u.is_deleted,
-
-                r.slug AS role_slug
-
-            FROM users u
-
-            LEFT JOIN roles r
-                ON r.id =
-                   u.role_id
-
-            WHERE u.id = :id
-
-            LIMIT 1
-            "
-        );
-
-
-    $senderStmt->execute(
-        [
-            ':id' =>
-                $userId
-        ]
-    );
-
-
-    $sender =
-        $senderStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI SEND MESSAGE SENDER] '
-        .
-        $e->getMessage()
-    );
-
-
-    sendMessageResponse(
-        false,
-        'Unable to verify your account.',
-        [],
-        500
-    );
-}
-
-
-if (
-    !$sender
-) {
-
-    sendMessageResponse(
-        false,
-        'Your account could not be found.',
-        [
-            'code' =>
-                'SENDER_NOT_FOUND'
-        ],
-        404
-    );
-}
-
-
-if (
-    (int)
-    $sender['is_deleted']
-    ===
-    1
-    ||
-    (int)
-    $sender['is_suspended']
-    ===
-    1
-    ||
-    (int)
-    $sender['is_active']
-    !==
-    1
-) {
-
-    sendMessageResponse(
-        false,
-        'Your account cannot currently send messages.',
-        [
-            'code' =>
-                'ACCOUNT_UNAVAILABLE'
-        ],
-        403
-    );
-}
-
-
-$roleSlug =
-    strtolower(
-        (string)
-        (
-            $sender['role_slug']
-            ??
-            ''
-        )
-    );
-
-
-$isStaff =
-    in_array(
-        $roleSlug,
-        [
-            'admin',
-            'moderator',
-            'support'
-        ],
-        true
-    );
-
-
-/* ============================================================
-   PREMIUM CHECK
-============================================================ */
-
-if (
-    !$isStaff
-) {
-
-    try {
-
-        $premiumStmt =
-            $pdo->prepare(
-                "
-                SELECT s.id
-
-                FROM subscriptions s
-
-                INNER JOIN services sv
-                    ON sv.id =
-                       s.service_id
-
-                WHERE s.user_id =
-                    :user_id
-
-                  AND s.status =
-                    'active'
-
-                  AND s.start_at <= CURRENT_TIMESTAMP
-
-                  AND s.end_at > CURRENT_TIMESTAMP
-
-                  AND sv.is_active = 1
-
-                  AND sv.is_premium = 1
-
-                ORDER BY
-                    s.end_at DESC,
-                    s.id DESC
-
-                LIMIT 1
-                "
-            );
-
-
-        $premiumStmt->execute(
-            [
-                ':user_id' =>
-                    $userId
-            ]
-        );
-
-
-        $premiumId =
-            $premiumStmt->fetchColumn();
-
-    } catch (Throwable $e) {
-
-        error_log(
-            '[LOVEMI SEND MESSAGE PREMIUM] '
-            .
-            $e->getMessage()
-        );
-
-
-        sendMessageResponse(
-            false,
-            'Unable to verify Premium access.',
-            [
-                'code' =>
-                    'PREMIUM_LOOKUP_FAILED'
-            ],
-            500
-        );
-    }
-
-
-    if (
-        !$premiumId
-    ) {
-
-        sendMessageResponse(
-            false,
-            'Premium access is required to send messages.',
-            [
-                'code' =>
-                    'PREMIUM_REQUIRED',
-
-                'redirect' =>
-                    'premium.html'
-            ],
-            403
-        );
-    }
-}
-
-
-/* ============================================================
-   VERIFY CONVERSATION
+   RESOLVE CHAT CODE
 ============================================================ */
 
 try {
@@ -538,62 +316,55 @@ try {
             "
             SELECT
 
-                c.id,
-                c.status,
+                c.id AS conversation_id,
+
+                c.connection_id,
+
                 c.user_one_id,
+
                 c.user_two_id,
 
+                c.status,
+
                 CASE
-                    WHEN c.user_one_id = :viewer_one
-                    THEN c.user_two_id
-                    ELSE c.user_one_id
-                END AS receiver_id,
 
-                receiver.username
-                    AS receiver_username,
-
-                receiver.full_names
-                    AS receiver_full_names,
-
-                receiver.is_active
-                    AS receiver_active,
-
-                receiver.is_suspended
-                    AS receiver_suspended,
-
-                receiver.is_deleted
-                    AS receiver_deleted,
-
-                rp.allow_messages
-
-            FROM conversations c
-
-            INNER JOIN users receiver
-
-                ON receiver.id =
-                    CASE
-
-                        WHEN c.user_one_id = :viewer_two
+                    WHEN c.user_one_id =
+                        :current_user_one
 
                         THEN c.user_two_id
 
-                        ELSE c.user_one_id
+                    ELSE
 
-                    END
+                        c.user_one_id
 
-            LEFT JOIN profiles rp
-                ON rp.user_id =
-                    receiver.id
+                END AS receiver_id
 
-            WHERE c.id =
-                :conversation_id
+            FROM conversation_access_codes cac
+
+            INNER JOIN conversations c
+
+                ON c.id =
+                    cac.conversation_id
+
+            WHERE
+
+                cac.access_code =
+                    :access_code
 
               AND
-              (
-                  c.user_one_id = :viewer_three
-                  OR
-                  c.user_two_id = :viewer_four
-              )
+
+                (
+                    c.user_one_id =
+                        :current_user_two
+
+                    OR
+
+                    c.user_two_id =
+                        :current_user_three
+                )
+
+              AND c.status =
+                    'active'
 
             LIMIT 1
             "
@@ -603,43 +374,47 @@ try {
     $conversationStmt->execute(
         [
 
-            ':viewer_one' =>
-                $userId,
+            ':current_user_one' =>
+                $currentUserId,
 
-            ':viewer_two' =>
-                $userId,
+            ':access_code' =>
+                $chatCode,
 
-            ':viewer_three' =>
-                $userId,
+            ':current_user_two' =>
+                $currentUserId,
 
-            ':viewer_four' =>
-                $userId,
-
-            ':conversation_id' =>
-                $conversationId
+            ':current_user_three' =>
+                $currentUserId
 
         ]
     );
 
 
     $conversation =
-        $conversationStmt->fetch();
+        $conversationStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI SEND MESSAGE CONVERSATION] '
+        '[LOVEMI SEND MESSAGE CHAT] '
         .
         $e->getMessage()
     );
 
-
-    sendMessageResponse(
+    sendJson(
         false,
-        'Unable to verify conversation.',
-        [],
+        'Unable to verify the conversation.',
+        [
+            'code' =>
+                'CONVERSATION_LOOKUP_FAILED'
+        ],
         500
     );
+
 }
 
 
@@ -647,7 +422,7 @@ if (
     !$conversation
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
         'Conversation not found or access denied.',
         [
@@ -656,28 +431,13 @@ if (
         ],
         404
     );
+
 }
 
 
-if (
-    strtolower(
-        (string)
-        $conversation['status']
-    )
-    !==
-    'active'
-) {
-
-    sendMessageResponse(
-        false,
-        'This conversation is not active.',
-        [
-            'code' =>
-                'CONVERSATION_INACTIVE'
-        ],
-        403
-    );
-}
+$conversationId =
+    (int)
+    $conversation['conversation_id'];
 
 
 $receiverId =
@@ -687,171 +447,761 @@ $receiverId =
 
 if (
     $receiverId <= 0
-) {
-
-    sendMessageResponse(
-        false,
-        'The message recipient could not be determined.',
-        [
-            'code' =>
-                'RECEIVER_NOT_FOUND'
-        ],
-        500
-    );
-}
-
-
-if (
-    (int)
-    $conversation['receiver_active']
-    !==
-    1
     ||
-    (int)
-    $conversation['receiver_suspended']
-    ===
-    1
-    ||
-    (int)
-    $conversation['receiver_deleted']
-    ===
-    1
+    $receiverId ===
+    $currentUserId
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'The recipient account is unavailable.',
+        'Invalid conversation participants.',
         [
             'code' =>
-                'RECEIVER_UNAVAILABLE'
+                'INVALID_PARTICIPANTS'
         ],
-        403
+        422
     );
-}
 
-
-if (
-    isset(
-        $conversation['allow_messages']
-    )
-    &&
-    (int)
-    $conversation['allow_messages']
-    !==
-    1
-    &&
-    !$isStaff
-) {
-
-    sendMessageResponse(
-        false,
-        'This member is not accepting messages.',
-        [
-            'code' =>
-                'MESSAGES_DISABLED'
-        ],
-        403
-    );
 }
 
 
 /* ============================================================
-   BLOCK CHECK
+   IMPORTANT PREMIUM CHECK
 ============================================================ */
+
+/*
+ * ONE active Premium is enough.
+ *
+ * Current user Premium
+ *      OR
+ * Other user Premium
+ *
+ * = SEND ALLOWED
+ *
+ * Both do NOT need Premium.
+ */
+
+$currentUserPremium =
+    false;
+
+
+$otherUserPremium =
+    false;
+
 
 try {
 
-    $blockStmt =
+    $premiumStmt =
         $pdo->prepare(
             "
-            SELECT id
+            SELECT
 
-            FROM blocked_users
+                s.user_id
+
+            FROM subscriptions s
+
+            INNER JOIN services sv
+
+                ON sv.id =
+                    s.service_id
 
             WHERE
-                (
-                    user_id =
-                        :sender_one
 
-                    AND
-                    blocked_user_id =
-                        :receiver_one
+                s.user_id IN
+                (
+                    :current_user,
+                    :other_user
                 )
 
-                OR
+              AND LOWER(
+                    TRIM(
+                        s.status
+                    )
+                  ) = 'active'
 
-                (
-                    user_id =
-                        :receiver_two
+              AND s.end_at IS NOT NULL
 
-                    AND
-                    blocked_user_id =
-                        :sender_two
-                )
+              AND s.end_at >
+                    CURRENT_TIMESTAMP
 
-            LIMIT 1
+              AND LOWER(
+                    TRIM(
+                        sv.slug
+                    )
+                  ) = 'lovemi-premium'
+
+              AND sv.is_premium = 1
+
+              AND sv.is_active = 1
+
+            GROUP BY
+                s.user_id
             "
         );
 
 
-    $blockStmt->execute(
+    $premiumStmt->execute(
         [
 
-            ':sender_one' =>
-                $userId,
+            ':current_user' =>
+                $currentUserId,
 
-            ':receiver_one' =>
-                $receiverId,
-
-            ':receiver_two' =>
-                $receiverId,
-
-            ':sender_two' =>
-                $userId
+            ':other_user' =>
+                $receiverId
 
         ]
     );
 
 
-    $blocked =
-        $blockStmt->fetchColumn();
+    while (
+        $premiumUserId =
+            $premiumStmt->fetchColumn()
+    ) {
 
-} catch (Throwable $e) {
+        $premiumUserId =
+            (int)
+            $premiumUserId;
+
+
+        if (
+            $premiumUserId ===
+            $currentUserId
+        ) {
+
+            $currentUserPremium =
+                true;
+
+        }
+
+
+        if (
+            $premiumUserId ===
+            $receiverId
+        ) {
+
+            $otherUserPremium =
+                true;
+
+        }
+
+    }
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI SEND MESSAGE BLOCK] '
+        '[LOVEMI SEND PREMIUM CHECK] '
         .
         $e->getMessage()
     );
 
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'Unable to verify messaging safety.',
-        [],
+        'Unable to verify Premium access.',
+        [
+            'code' =>
+                'PREMIUM_CHECK_FAILED'
+        ],
         500
     );
+
 }
 
 
+/*
+ * THIS IS THE CORRECT RULE.
+ */
+
+$canSend =
+    $currentUserPremium
+    ||
+    $otherUserPremium;
+
+
 if (
-    $blocked
+    !$canSend
 ) {
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'You cannot send messages in this conversation.',
+        'Messaging is paused because neither connected member currently has active LOVEMI Premium.',
         [
+
             'code' =>
-                'USER_BLOCKED'
+                'PREMIUM_REQUIRED',
+
+            'current_user_premium' =>
+                false,
+
+            'other_user_premium' =>
+                false
+
         ],
         403
     );
+
 }
 
 
 /* ============================================================
-   INSERT MESSAGE
+   CHECK WHATSAPP NUMBERS IN TEXT
+============================================================ */
+
+if (
+    $messageText !== ''
+) {
+
+    try {
+
+        $waTable =
+            $pdo->query(
+                "
+                SHOW TABLES LIKE
+                    'user_whatsapp_numbers'
+                "
+            );
+
+
+        if (
+            $waTable
+            &&
+            $waTable->fetch()
+        ) {
+
+            $waStmt =
+                $pdo->prepare(
+                    "
+                    SELECT whatsapp_number
+
+                    FROM user_whatsapp_numbers
+
+                    WHERE
+
+                        user_id IN
+                        (
+                            :current_user,
+                            :other_user
+                        )
+
+                      AND is_active = 1
+                    "
+                );
+
+
+            $waStmt->execute(
+                [
+
+                    ':current_user' =>
+                        $currentUserId,
+
+                    ':other_user' =>
+                        $receiverId
+
+                ]
+            );
+
+
+            $numbers =
+                $waStmt->fetchAll(
+                    PDO::FETCH_COLUMN
+                );
+
+
+            $messageDigits =
+                preg_replace(
+                    '/\D+/',
+                    '',
+                    $messageText
+                );
+
+
+            foreach (
+                $numbers as $number
+            ) {
+
+                $numberDigits =
+                    preg_replace(
+                        '/\D+/',
+                        '',
+                        (string)
+                        $number
+                    );
+
+
+                if (
+                    $numberDigits !== ''
+                    &&
+                    strlen(
+                        $numberDigits
+                    ) >= 8
+                    &&
+                    str_contains(
+                        $messageDigits,
+                        $numberDigits
+                    )
+                ) {
+
+                    sendJson(
+                        false,
+                        'WhatsApp numbers cannot be sent through LOVEMI chat.',
+                        [
+                            'code' =>
+                                'WHATSAPP_NUMBER_NOT_ALLOWED'
+                        ],
+                        422
+                    );
+
+                }
+
+            }
+
+        }
+
+    } catch (
+        Throwable $e
+    ) {
+
+        /*
+         * Do not block a normal message if the optional
+         * WhatsApp table is unavailable.
+         */
+
+        error_log(
+            '[LOVEMI WHATSAPP CHECK] '
+            .
+            $e->getMessage()
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   REPLY VALIDATION
+============================================================ */
+
+if (
+    $replyToMessageId > 0
+) {
+
+    try {
+
+        $replyStmt =
+            $pdo->prepare(
+                "
+                SELECT id
+
+                FROM messages
+
+                WHERE
+
+                    id =
+                        :message_id
+
+                  AND conversation_id =
+                        :conversation_id
+
+                  AND
+                    (
+                        sender_id =
+                            :user_one
+
+                        OR
+
+                        receiver_id =
+                            :user_two
+                    )
+
+                LIMIT 1
+                "
+            );
+
+
+        $replyStmt->execute(
+            [
+
+                ':message_id' =>
+                    $replyToMessageId,
+
+                ':conversation_id' =>
+                    $conversationId,
+
+                ':user_one' =>
+                    $currentUserId,
+
+                ':user_two' =>
+                    $currentUserId
+
+            ]
+        );
+
+
+        if (
+            !$replyStmt->fetchColumn()
+        ) {
+
+            $replyToMessageId =
+                0;
+
+        }
+
+    } catch (
+        Throwable $e
+    ) {
+
+        $replyToMessageId =
+            0;
+
+    }
+
+}
+
+
+/* ============================================================
+   ATTACHMENT VALIDATION
+============================================================ */
+
+$allowedMimeTypes =
+    [
+
+        'image/jpeg' =>
+            'image',
+
+        'image/png' =>
+            'image',
+
+        'image/gif' =>
+            'image',
+
+        'image/webp' =>
+            'image',
+
+        'image/heic' =>
+            'image',
+
+        'video/mp4' =>
+            'video',
+
+        'video/webm' =>
+            'video',
+
+        'video/quicktime' =>
+            'video',
+
+        'audio/mpeg' =>
+            'audio',
+
+        'audio/mp3' =>
+            'audio',
+
+        'audio/wav' =>
+            'audio',
+
+        'audio/x-wav' =>
+            'audio',
+
+        'audio/ogg' =>
+            'audio',
+
+        'audio/mp4' =>
+            'audio',
+
+        'application/pdf' =>
+            'document',
+
+        'text/plain' =>
+            'document',
+
+        'text/csv' =>
+            'document',
+
+        'application/rtf' =>
+            'document',
+
+        'application/msword' =>
+            'document',
+
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' =>
+            'document',
+
+        'application/vnd.ms-excel' =>
+            'document',
+
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' =>
+            'document',
+
+        'application/vnd.ms-powerpoint' =>
+            'document',
+
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation' =>
+            'document',
+
+        'application/zip' =>
+            'document'
+
+    ];
+
+
+$maxFileSize =
+    25 *
+    1024 *
+    1024;
+
+
+$files =
+    [];
+
+
+if (
+    isset(
+        $_FILES['attachments']
+    )
+    &&
+    is_array(
+        $_FILES['attachments']['name']
+        ??
+        null
+    )
+) {
+
+    $fileCount =
+        count(
+            $_FILES['attachments']['name']
+        );
+
+
+    if (
+        $fileCount >
+        5
+    ) {
+
+        sendJson(
+            false,
+            'You can attach a maximum of 5 files at once.',
+            [
+                'code' =>
+                    'TOO_MANY_ATTACHMENTS'
+            ],
+            422
+        );
+
+    }
+
+
+    $finfo =
+        new finfo(
+            FILEINFO_MIME_TYPE
+        );
+
+
+    for (
+        $index = 0;
+        $index < $fileCount;
+        $index++
+    ) {
+
+        $error =
+            (int)(
+                $_FILES['attachments']['error'][$index]
+                ??
+                UPLOAD_ERR_NO_FILE
+            );
+
+
+        if (
+            $error ===
+            UPLOAD_ERR_NO_FILE
+        ) {
+
+            continue;
+
+        }
+
+
+        if (
+            $error !==
+            UPLOAD_ERR_OK
+        ) {
+
+            sendJson(
+                false,
+                'An attachment could not be uploaded.',
+                [
+                    'code' =>
+                        'UPLOAD_ERROR'
+                ],
+                422
+            );
+
+        }
+
+
+        $temporaryPath =
+            (string)
+            $_FILES['attachments']['tmp_name'][$index];
+
+
+        $size =
+            (int)(
+                $_FILES['attachments']['size'][$index]
+                ??
+                0
+            );
+
+
+        if (
+            $size <= 0
+            ||
+            $size >
+            $maxFileSize
+        ) {
+
+            sendJson(
+                false,
+                'Each attachment must not exceed 25 MB.',
+                [
+                    'code' =>
+                        'FILE_SIZE_NOT_ALLOWED'
+                ],
+                422
+            );
+
+        }
+
+
+        $originalName =
+            basename(
+                (string)(
+                    $_FILES['attachments']['name'][$index]
+                    ??
+                    'attachment'
+                )
+            );
+
+
+        $mime =
+            $finfo->file(
+                $temporaryPath
+            );
+
+
+        if (
+            !is_string(
+                $mime
+            )
+            ||
+            !isset(
+                $allowedMimeTypes[$mime]
+            )
+        ) {
+
+            sendJson(
+                false,
+                'This file type is not allowed.',
+                [
+                    'code' =>
+                        'FILE_TYPE_NOT_ALLOWED',
+
+                    'file' =>
+                        $originalName
+                ],
+                422
+            );
+
+        }
+
+
+        $files[] =
+            [
+
+                'tmp_name' =>
+                    $temporaryPath,
+
+                'original_name' =>
+                    $originalName,
+
+                'mime' =>
+                    $mime,
+
+                'category' =>
+                    $allowedMimeTypes[$mime],
+
+                'size' =>
+                    $size
+
+            ];
+
+    }
+
+}
+
+
+/* ============================================================
+   DETERMINE MESSAGE TYPE
+============================================================ */
+
+$messageType =
+    'text';
+
+
+if (
+    count(
+        $files
+    )
+    >
+    0
+) {
+
+    $messageType =
+        $files[0]['category'];
+
+}
+
+
+/* ============================================================
+   UPLOAD DIRECTORY
+============================================================ */
+
+$uploadDirectory =
+    __DIR__
+    .
+    '/../../uploads/chat';
+
+
+if (
+    !is_dir(
+        $uploadDirectory
+    )
+) {
+
+    if (
+        !mkdir(
+            $uploadDirectory,
+            0750,
+            true
+        )
+    ) {
+
+        sendJson(
+            false,
+            'Unable to prepare attachment storage.',
+            [
+                'code' =>
+                    'UPLOAD_DIRECTORY_FAILED'
+            ],
+            500
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   TRANSACTION
 ============================================================ */
 
 try {
@@ -859,68 +1209,464 @@ try {
     $pdo->beginTransaction();
 
 
-    $stmt =
-        $pdo->prepare(
-            "
-            INSERT INTO messages
-            (
-                conversation_id,
-                sender_id,
-                receiver_id,
-                message_type,
-                message_text
+    $uploadedFiles =
+        [];
+
+
+    foreach (
+        $files as $file
+    ) {
+
+        $extension =
+            strtolower(
+                pathinfo(
+                    $file['original_name'],
+                    PATHINFO_EXTENSION
+                )
+            );
+
+
+        $randomName =
+            bin2hex(
+                random_bytes(
+                    20
+                )
+            );
+
+
+        if (
+            $extension !== ''
+        ) {
+
+            $cleanExtension =
+                preg_replace(
+                    '/[^a-z0-9]+/i',
+                    '',
+                    $extension
+                );
+
+
+            if (
+                is_string(
+                    $cleanExtension
+                )
+                &&
+                $cleanExtension !== ''
+            ) {
+
+                $randomName .=
+                    '.'
+                    .
+                    $cleanExtension;
+
+            }
+
+        }
+
+
+        $destination =
+            $uploadDirectory
+            .
+            DIRECTORY_SEPARATOR
+            .
+            $randomName;
+
+
+        if (
+            !move_uploaded_file(
+                $file['tmp_name'],
+                $destination
             )
-            VALUES
-            (
-                :conversation_id,
-                :sender_id,
-                :receiver_id,
-                :message_type,
-                :message_text
-            )
-            "
+        ) {
+
+            throw new RuntimeException(
+                'Unable to save attachment.'
+            );
+
+        }
+
+
+        @chmod(
+            $destination,
+            0640
         );
 
 
-    $stmt->execute(
-        [
+        $uploadedFiles[] =
+            [
 
-            ':conversation_id' =>
-                $conversationId,
+                'path' =>
+                    'uploads/chat/'
+                    .
+                    $randomName,
 
-            ':sender_id' =>
-                $userId,
+                'name' =>
+                    $file['original_name'],
 
-            ':receiver_id' =>
-                $receiverId,
+                'mime' =>
+                    $file['mime'],
 
-            ':message_type' =>
-                $messageType,
+                'category' =>
+                    $file['category']
 
-            ':message_text' =>
-                $messageText
+            ];
 
-        ]
-    );
-
-
-    $messageId =
-        (int)
-        $pdo->lastInsertId();
+    }
 
 
     /*
-     * Touch conversation.
+     * Ensure the optional reply table exists.
      */
 
-    $touchStmt =
+    if (
+        $replyToMessageId >
+        0
+    ) {
+
+        try {
+
+            $pdo->exec(
+                "
+                CREATE TABLE IF NOT EXISTS message_replies
+                (
+                    message_id BIGINT UNSIGNED NOT NULL,
+
+                    reply_to_message_id BIGINT UNSIGNED NOT NULL,
+
+                    created_at DATETIME NOT NULL
+                        DEFAULT CURRENT_TIMESTAMP,
+
+                    PRIMARY KEY (message_id),
+
+                    KEY idx_reply_target
+                        (reply_to_message_id)
+
+                )
+                ENGINE=InnoDB
+
+                DEFAULT CHARSET=utf8mb4
+
+                COLLATE=utf8mb4_unicode_ci
+                "
+            );
+
+        } catch (
+            Throwable $e
+        ) {
+
+            $replyToMessageId =
+                0;
+
+        }
+
+    }
+
+
+    /* ========================================================
+       TEXT ONLY
+    ======================================================== */
+
+    if (
+        count(
+            $uploadedFiles
+        )
+        ===
+        0
+    ) {
+
+        $insert =
+            $pdo->prepare(
+                "
+                INSERT INTO messages
+                (
+                    conversation_id,
+                    sender_id,
+                    receiver_id,
+                    message_type,
+                    message_text,
+                    attachment_path,
+                    attachment_name,
+                    attachment_mime,
+                    is_read,
+                    created_at
+                )
+
+                VALUES
+                (
+                    :conversation_id,
+                    :sender_id,
+                    :receiver_id,
+                    :message_type,
+                    :message_text,
+                    NULL,
+                    NULL,
+                    NULL,
+                    0,
+                    CURRENT_TIMESTAMP
+                )
+                "
+            );
+
+
+        $insert->execute(
+            [
+
+                ':conversation_id' =>
+                    $conversationId,
+
+                ':sender_id' =>
+                    $currentUserId,
+
+                ':receiver_id' =>
+                    $receiverId,
+
+                ':message_type' =>
+                    'text',
+
+                ':message_text' =>
+                    $messageText !== ''
+                        ?
+                        $messageText
+                        :
+                        null
+
+            ]
+        );
+
+
+        $messageId =
+            (int)
+            $pdo->lastInsertId();
+
+
+        if (
+            $replyToMessageId >
+            0
+        ) {
+
+            try {
+
+                $replyInsert =
+                    $pdo->prepare(
+                        "
+                        INSERT INTO message_replies
+                        (
+                            message_id,
+                            reply_to_message_id
+                        )
+
+                        VALUES
+                        (
+                            :message_id,
+                            :reply_to_message_id
+                        )
+                        "
+                    );
+
+
+                $replyInsert->execute(
+                    [
+
+                        ':message_id' =>
+                            $messageId,
+
+                        ':reply_to_message_id' =>
+                            $replyToMessageId
+
+                    ]
+                );
+
+            } catch (
+                Throwable $e
+            ) {
+
+                error_log(
+                    '[LOVEMI REPLY INSERT] '
+                    .
+                    $e->getMessage()
+                );
+
+            }
+
+        }
+
+
+    } else {
+
+        /* ====================================================
+           ATTACHMENTS
+        ==================================================== */
+
+        $messageId =
+            0;
+
+
+        $firstAttachment =
+            true;
+
+
+        foreach (
+            $uploadedFiles
+            as $uploaded
+        ) {
+
+            $insert =
+                $pdo->prepare(
+                    "
+                    INSERT INTO messages
+                    (
+                        conversation_id,
+                        sender_id,
+                        receiver_id,
+                        message_type,
+                        message_text,
+                        attachment_path,
+                        attachment_name,
+                        attachment_mime,
+                        is_read,
+                        created_at
+                    )
+
+                    VALUES
+                    (
+                        :conversation_id,
+                        :sender_id,
+                        :receiver_id,
+                        :message_type,
+                        :message_text,
+                        :attachment_path,
+                        :attachment_name,
+                        :attachment_mime,
+                        0,
+                        CURRENT_TIMESTAMP
+                    )
+                    "
+                );
+
+
+            $insert->execute(
+                [
+
+                    ':conversation_id' =>
+                        $conversationId,
+
+                    ':sender_id' =>
+                        $currentUserId,
+
+                    ':receiver_id' =>
+                        $receiverId,
+
+                    ':message_type' =>
+                        $uploaded[
+                            'category'
+                        ],
+
+                    ':message_text' =>
+                        $firstAttachment
+                        &&
+                        $messageText !== ''
+                            ?
+                            $messageText
+                            :
+                            null,
+
+                    ':attachment_path' =>
+                        $uploaded[
+                            'path'
+                        ],
+
+                    ':attachment_name' =>
+                        $uploaded[
+                            'name'
+                        ],
+
+                    ':attachment_mime' =>
+                        $uploaded[
+                            'mime'
+                        ]
+
+                ]
+            );
+
+
+            $messageId =
+                (int)
+                $pdo->lastInsertId();
+
+
+            if (
+                $firstAttachment
+                &&
+                $replyToMessageId >
+                0
+            ) {
+
+                try {
+
+                    $replyInsert =
+                        $pdo->prepare(
+                            "
+                            INSERT INTO message_replies
+                            (
+                                message_id,
+                                reply_to_message_id
+                            )
+
+                            VALUES
+                            (
+                                :message_id,
+                                :reply_to_message_id
+                            )
+                            "
+                        );
+
+
+                    $replyInsert->execute(
+                        [
+
+                            ':message_id' =>
+                                $messageId,
+
+                            ':reply_to_message_id' =>
+                                $replyToMessageId
+
+                        ]
+                    );
+
+                } catch (
+                    Throwable $e
+                ) {
+
+                    error_log(
+                        '[LOVEMI ATTACHMENT REPLY INSERT] '
+                        .
+                        $e->getMessage()
+                    );
+
+                }
+
+            }
+
+
+            $firstAttachment =
+                false;
+
+        }
+
+    }
+
+
+    /*
+     * Update conversation activity.
+     */
+
+    $conversationUpdate =
         $pdo->prepare(
             "
             UPDATE conversations
 
-            SET
-                updated_at =
-                    CURRENT_TIMESTAMP
+            SET updated_at =
+                CURRENT_TIMESTAMP
 
             WHERE id =
                 :conversation_id
@@ -930,204 +1676,22 @@ try {
         );
 
 
-    $touchStmt->execute(
+    $conversationUpdate->execute(
         [
+
             ':conversation_id' =>
                 $conversationId
+
         ]
     );
-
-
-    /* ========================================================
-       MESSAGE NOTIFICATION
-    ========================================================= */
-
-    /*
-     * Respect recipient's message notification preference.
-     */
-
-    $preferenceStmt =
-        $pdo->prepare(
-            "
-            SELECT
-                message_notifications
-
-            FROM notification_preferences
-
-            WHERE user_id =
-                :user_id
-
-            LIMIT 1
-            "
-        );
-
-
-    $preferenceStmt->execute(
-        [
-            ':user_id' =>
-                $receiverId
-        ]
-    );
-
-
-    $messageNotifications =
-        $preferenceStmt->fetchColumn();
-
-
-    if (
-        $messageNotifications === false
-        ||
-        (int)
-        $messageNotifications
-        ===
-        1
-    ) {
-
-        $typeStmt =
-            $pdo->prepare(
-                "
-                SELECT
-                    id
-
-                FROM notification_types
-
-                WHERE slug =
-                    'new_message'
-
-                LIMIT 1
-                "
-            );
-
-
-        $typeStmt->execute();
-
-
-        $notificationTypeId =
-            $typeStmt->fetchColumn();
-
-
-        if (
-            $notificationTypeId
-        ) {
-
-            $audioStmt =
-                $pdo->prepare(
-                    "
-                    SELECT
-                        id
-
-                    FROM notification_audio
-
-                    WHERE notification_type_id =
-                        :notification_type_id
-
-                      AND is_active = 1
-
-                    ORDER BY
-                        sort_order ASC,
-                        id ASC
-
-                    LIMIT 1
-                    "
-                );
-
-
-            $audioStmt->execute(
-                [
-                    ':notification_type_id' =>
-                        (int)
-                        $notificationTypeId
-                ]
-            );
-
-
-            $audioId =
-                $audioStmt->fetchColumn();
-
-
-            $notificationStmt =
-                $pdo->prepare(
-                    "
-                    INSERT INTO notifications
-                    (
-                        user_id,
-                        notification_type_id,
-                        sender_id,
-                        title,
-                        message,
-                        reference_type,
-                        reference_id,
-                        audio_id
-                    )
-                    VALUES
-                    (
-                        :user_id,
-                        :notification_type_id,
-                        :sender_id,
-                        'New Message',
-                        :message,
-                        'conversation',
-                        :conversation_id,
-                        :audio_id
-                    )
-                    "
-                );
-
-
-            $preview =
-                mb_substr(
-                    $messageText,
-                    0,
-                    180
-                );
-
-
-            $notificationStmt->execute(
-                [
-
-                    ':user_id' =>
-                        $receiverId,
-
-                    ':notification_type_id' =>
-                        (int)
-                        $notificationTypeId,
-
-                    ':sender_id' =>
-                        $userId,
-
-                    ':message' =>
-                        'You have a new message from '
-                        .
-                        (
-                            $sender['role_slug'] ===
-                            'admin'
-                                ?
-                                'LOVEMI Admin'
-                                :
-                                $preview
-                        ),
-
-                    ':conversation_id' =>
-                        $conversationId,
-
-                    ':audio_id' =>
-                        $audioId
-                        ?
-                        (int)
-                        $audioId
-                        :
-                        null
-
-                ]
-            );
-        }
-    }
 
 
     $pdo->commit();
 
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     if (
         $pdo->inTransaction()
@@ -1139,21 +1703,165 @@ try {
 
 
     error_log(
-        '[LOVEMI SEND MESSAGE TRANSACTION] '
+        '[LOVEMI SEND MESSAGE INSERT] '
         .
         $e->getMessage()
     );
 
 
-    sendMessageResponse(
+    sendJson(
         false,
-        'Unable to send your message.',
+        'The message could not be sent.',
         [
             'code' =>
-                'MESSAGE_SEND_FAILED'
+                'MESSAGE_INSERT_FAILED'
         ],
         500
     );
+
+}
+
+
+/* ============================================================
+   CREATE MESSAGE NOTIFICATION
+============================================================ */
+
+try {
+
+    $audioId =
+        null;
+
+
+    $audioTable =
+        $pdo->query(
+            "
+            SHOW TABLES LIKE
+                'notification_audio'
+            "
+        );
+
+
+    if (
+        $audioTable
+        &&
+        $audioTable->fetch()
+    ) {
+
+        $audioStmt =
+            $pdo->prepare(
+                "
+                SELECT id
+
+                FROM notification_audio
+
+                WHERE
+
+                    file_name =
+                        'notification4.mp3'
+
+                  AND is_active = 1
+
+                LIMIT 1
+                "
+            );
+
+
+        $audioStmt->execute();
+
+
+        $audioId =
+            $audioStmt->fetchColumn();
+
+    }
+
+
+    $notificationTable =
+        $pdo->query(
+            "
+            SHOW TABLES LIKE
+                'notifications'
+            "
+        );
+
+
+    if (
+        $notificationTable
+        &&
+        $notificationTable->fetch()
+    ) {
+
+        $notificationStmt =
+            $pdo->prepare(
+                "
+                INSERT INTO notifications
+                (
+                    user_id,
+                    sender_id,
+                    title,
+                    message,
+                    reference_type,
+                    reference_id,
+                    audio_id,
+                    is_read,
+                    created_at
+                )
+
+                VALUES
+                (
+                    :user_id,
+                    :sender_id,
+                    'New Message',
+                    'You received a new LOVEMI message.',
+                    'new_message',
+                    :reference_id,
+                    :audio_id,
+                    0,
+                    CURRENT_TIMESTAMP
+                )
+                "
+            );
+
+
+        $notificationStmt->execute(
+            [
+
+                ':user_id' =>
+                    $receiverId,
+
+                ':sender_id' =>
+                    $currentUserId,
+
+                ':reference_id' =>
+                    $messageId,
+
+                ':audio_id' =>
+                    $audioId
+                    ?
+                    (int)
+                    $audioId
+                    :
+                    null
+
+            ]
+        );
+
+    }
+
+} catch (
+    Throwable $e
+) {
+
+    /*
+     * Message was already sent.
+     * Notification failure must not undo it.
+     */
+
+    error_log(
+        '[LOVEMI MESSAGE NOTIFICATION] '
+        .
+        $e->getMessage()
+    );
+
 }
 
 
@@ -1161,41 +1869,33 @@ try {
    RESPONSE
 ============================================================ */
 
-sendMessageResponse(
+sendJson(
     true,
     'Message sent successfully.',
     [
 
-        'message' => [
+        'message_id' =>
+            $messageId,
 
-            'id' =>
-                $messageId,
+        'conversation_id' =>
+            $conversationId,
 
-            'conversation_id' =>
-                $conversationId,
+        'receiver_id' =>
+            $receiverId,
 
-            'sender_id' =>
-                $userId,
+        'premium_access' =>
+            [
 
-            'receiver_id' =>
-                $receiverId,
+                'current_user_premium' =>
+                    $currentUserPremium,
 
-            'message_type' =>
-                $messageType,
+                'other_user_premium' =>
+                    $otherUserPremium,
 
-            'message_text' =>
-                $messageText,
+                'can_send' =>
+                    true
 
-            'is_read' =>
-                false,
+            ]
 
-            'created_at' =>
-                date(
-                    'Y-m-d H:i:s'
-                )
-
-        ]
-
-    ],
-    201
+    ]
 );

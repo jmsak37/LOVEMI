@@ -1,0 +1,37 @@
+# ============================================================
+# LOVEMI PERSONAL INFORMATION / COMMENT BLOCK LIST
+# ============================================================
+#
+# One blocked word or phrase per line.
+# Lines starting with # are comments.
+#
+# Email addresses and phone numbers are blocked automatically
+# by the comments API even if they are not listed here.
+#
+# Add any other word/phrase you never want members to post.
+# ============================================================
+
+gmail.com
+yahoo.com
+hotmail.com
+outlook.com
+icloud.com
+protonmail.com
+
+whatsapp
+whatsapp me
+call me
+text me
+contact me
+my number
+phone number
+telephone
+mobile number
+email me
+my email
+email address
+
+send me your number
+give me your number
+send your number
+contact number

@@ -1,836 +1,2246 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="Manage your LOVEMI connections.">
+    <meta
+        name="description"
+        content="Manage your LOVEMI connections."
+    >
 
-    <meta name="theme-color"
-          content="#6d28d9">
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
 
-    <!-- =====================================================
-         LOVEMI TAB ICONS
-    ====================================================== -->
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
 
-    <link rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="assets/logo1/favicon-16x16.png">
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
 
-    <link rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="assets/logo1/favicon-32x32.png">
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
 
-    <link rel="apple-touch-icon"
-          sizes="180x180"
-          href="assets/logo1/apple-touch-icon.png">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
 
-    <link rel="manifest"
-          href="assets/logo1/site.webmanifest">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
 
-    <!-- =====================================================
-         NO CACHE
-    ====================================================== -->
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="assets/logo1/apple-touch-icon.png"
+    >
 
-    <meta http-equiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate">
-
-    <meta http-equiv="Pragma"
-          content="no-cache">
-
-    <meta http-equiv="Expires"
-          content="0">
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
 
     <title>Connections | LOVEMI</title>
 
-    <!-- =====================================================
-         FONTS
-    ====================================================== -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- =====================================================
-         ICONS
-    ====================================================== -->
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer">
-
-    <style>
-
-        :root {
-            --primary:#6d28d9;
-            --primary-soft:#f3e8ff;
-            --accent:#db2777;
-            --green:#16a34a;
-            --green-soft:#f0fdf4;
-            --red:#dc2626;
-            --red-soft:#fef2f2;
-            --text:#18181b;
-            --soft:#68686f;
-            --muted:#9898a1;
-            --bg:#f7f7fb;
-            --white:#ffffff;
-            --border:#e9e9ef;
-            --shadow-sm:0 5px 18px rgba(0,0,0,.04);
-            --shadow-md:0 14px 38px rgba(0,0,0,.07);
-            --container:1380px;
-        }
-
-        * {
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        html {
-            scroll-behavior:smooth;
-        }
-
-        body {
-            min-height:100vh;
-            font-family:"Inter",sans-serif;
-            color:var(--text);
-            background:var(--bg);
-            line-height:1.55;
-        }
-
-        body.menu-open {
-            overflow:hidden;
-        }
-
-        a {
-            color:inherit;
-            text-decoration:none;
-        }
-
-        button,
-        input,
-        select {
-            font-family:inherit;
-        }
-
-        button {
-            cursor:pointer;
-        }
-
-        img {
-            display:block;
-            max-width:100%;
-        }
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
-
-        .header {
-            position:sticky;
-            top:0;
-            z-index:2000;
-            background:rgba(255,255,255,.97);
-            backdrop-filter:blur(18px);
-            border-bottom:1px solid rgba(0,0,0,.06);
-        }
-
-        .header-inner {
-            width:min(calc(100% - 30px),var(--container));
-            min-height:74px;
-            margin:auto;
-            display:grid;
-            grid-template-columns:auto 1fr auto;
-            align-items:center;
-            gap:18px;
-        }
-
-        .brand {
-            display:inline-flex;
-            align-items:center;
-            gap:10px;
-        }
-
-        .brand-logo {
-            width:45px;
-            height:45px;
-            object-fit:contain;
-            border-radius:12px;
-        }
-
-        .brand-text {
-            display:flex;
-            flex-direction:column;
-        }
-
-        .brand-name {
-            font-family:"Playfair Display",serif;
-            font-size:26px;
-            font-weight:800;
-            line-height:1;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-            background-clip:text;
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
-
-        .brand-tagline {
-            margin-top:3px;
-            color:var(--muted);
-            font-size:7px;
-            letter-spacing:.7px;
-        }
-
-        .main-navigation {
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:3px;
-        }
-
-        .nav-link {
-            position:relative;
-            min-height:40px;
-            padding:0 8px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border-radius:9px;
-            color:var(--soft);
-            font-size:9px;
-            font-weight:700;
-            white-space:nowrap;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .nav-link.active::after {
-            content:"";
-            position:absolute;
-            left:11px;
-            right:11px;
-            bottom:3px;
-            height:2px;
-            border-radius:2px;
-            background:linear-gradient(90deg,var(--primary),var(--accent));
-        }
-
-        .header-actions {
-            display:flex;
-            align-items:center;
-            gap:6px;
-        }
-
-        .header-icon {
-            width:39px;
-            height:39px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            border:1px solid var(--border);
-            border-radius:10px;
-            color:var(--soft);
-            background:white;
-            font-size:10px;
-        }
-
-        .header-icon:hover {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .profile-shortcut {
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
-            padding:3px 7px 3px 3px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            background:#fff;
-        }
-
-        .profile-shortcut img {
-            width:31px;
-            height:31px;
-            border-radius:8px;
-            object-fit:cover;
-        }
-
-        .profile-shortcut span {
-            max-width:70px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
-            font-size:8px;
-            font-weight:800;
-        }
-
-        .mobile-menu {
-            display:none;
-            width:39px;
-            height:39px;
-            align-items:center;
-            justify-content:center;
-            border:1px solid var(--border);
-            border-radius:10px;
-            background:#fff;
-            color:var(--soft);
-        }
-
-        .mobile-navigation {
-            position:fixed;
-            top:74px;
-            left:0;
-            right:0;
-            z-index:1900;
-            display:none;
-            padding:8px;
-            background:rgba(255,255,255,.98);
-            border-bottom:1px solid var(--border);
-            box-shadow:0 20px 45px rgba(0,0,0,.10);
-        }
-
-        .mobile-navigation.open {
-            display:block;
-        }
-
-        .mobile-grid {
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:6px;
-        }
-
-        .mobile-link {
-            min-height:45px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:7px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            color:var(--soft);
-            background:#fff;
-            font-size:8px;
-            font-weight:800;
-        }
-
-        .mobile-link i {
-            color:var(--primary);
-        }
-
-        .mobile-link.active {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        /* =====================================================
-           PAGE
-        ====================================================== */
-
-        .page {
-            width:min(calc(100% - 30px),1120px);
-            margin:auto;
-            padding:28px 0 60px;
-        }
-
-        .page-heading {
-            margin-bottom:18px;
-        }
-
-        .page-heading h1 {
-            font-family:"Playfair Display",serif;
-            font-size:clamp(30px,4vw,45px);
-            line-height:1.08;
-        }
-
-        .page-heading h1 span {
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-            background-clip:text;
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
-
-        .page-heading p {
-            max-width:700px;
-            margin-top:7px;
-            color:var(--soft);
-            font-size:10px;
-        }
-
-        .status-card {
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:15px;
-            padding:13px 15px;
-            margin-bottom:16px;
-            border:1px solid #eadcff;
-            border-radius:13px;
-            background:#fcfaff;
-        }
-
-        .status-left {
-            display:flex;
-            align-items:center;
-            gap:9px;
-        }
-
-        .status-icon {
-            width:38px;
-            height:38px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:10px;
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .status-text strong {
-            display:block;
-            font-size:9px;
-        }
-
-        .status-text span {
-            display:block;
-            margin-top:2px;
-            color:var(--muted);
-            font-size:7px;
-        }
-
-        .status-button {
-            min-height:35px;
-            padding:0 10px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border:none;
-            border-radius:9px;
-            color:white;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-            font-size:8px;
-            font-weight:800;
-        }
-
-        /* =====================================================
-           TABS
-        ====================================================== */
-
-        .tabs {
-            display:flex;
-            gap:6px;
-            margin-bottom:15px;
-            padding:6px;
-            border:1px solid var(--border);
-            border-radius:13px;
-            background:#fff;
-        }
-
-        .tab-button {
-            min-height:37px;
-            padding:0 12px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:6px;
-            border:none;
-            border-radius:9px;
-            color:var(--soft);
-            background:transparent;
-            font-size:8px;
-            font-weight:800;
-        }
-
-        .tab-button.active {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        /* =====================================================
-           GRID
-        ====================================================== */
-
-        .connection-grid {
-            display:grid;
-            grid-template-columns:repeat(3,minmax(0,1fr));
-            gap:14px;
-        }
-
-        .connection-card {
-            overflow:hidden;
-            border:1px solid var(--border);
-            border-radius:16px;
-            background:#fff;
-            box-shadow:var(--shadow-sm);
-        }
-
-        .connection-photo {
-            position:relative;
-            aspect-ratio:1/1.02;
-            background:#efeff4;
-        }
-
-        .connection-photo img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-        }
-
-        .connection-online {
-            position:absolute;
-            top:9px;
-            left:9px;
-            padding:5px 7px;
-            border-radius:999px;
-            color:white;
-            background:rgba(0,0,0,.50);
-            font-size:6px;
-            font-weight:800;
-        }
-
-        .connection-online i {
-            color:#4ade80;
-            font-size:5px;
-        }
-
-        .connection-body {
-            padding:12px;
-        }
-
-        .connection-name {
-            display:flex;
-            align-items:center;
-            gap:5px;
-            font-size:10px;
-            font-weight:800;
-        }
-
-        .connection-name i {
-            color:#2563eb;
-            font-size:7px;
-        }
-
-        .connection-meta {
-            margin-top:3px;
-            color:var(--muted);
-            font-size:7px;
-        }
-
-        .connection-actions {
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:6px;
-            margin-top:10px;
-        }
-
-        .action-primary,
-        .action-secondary,
-        .action-danger {
-            min-height:34px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border-radius:9px;
-            font-size:7px;
-            font-weight:800;
-        }
-
-        .action-primary {
-            border:none;
-            color:#fff;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-        }
-
-        .action-secondary {
-            border:1px solid #ddd6fe;
-            color:var(--primary);
-            background:#fff;
-        }
-
-        .action-danger {
-            grid-column:1/-1;
-            border:1px solid #fecaca;
-            color:#b91c1c;
-            background:#fff;
-        }
-
-        /* =====================================================
-           EMPTY
-        ====================================================== */
-
-        .empty-state {
-            grid-column:1/-1;
-            min-height:260px;
-            padding:30px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            border:1px solid var(--border);
-            border-radius:16px;
-            background:#fff;
-        }
-
-        .empty-icon {
-            width:53px;
-            height:53px;
-            margin-bottom:10px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:15px;
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .empty-state h3 {
-            font-size:12px;
-        }
-
-        .empty-state p {
-            max-width:450px;
-            margin-top:4px;
-            color:var(--muted);
-            font-size:8px;
-        }
-
-        .empty-state a {
-            margin-top:12px;
-            min-height:36px;
-            padding:0 12px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border-radius:9px;
-            color:#fff;
-            background:var(--primary);
-            font-size:8px;
-            font-weight:800;
-        }
-
-        /* =====================================================
-           LOADING
-        ====================================================== */
-
-        .loading-state {
-            grid-column:1/-1;
-            min-height:220px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:7px;
-            border:1px solid var(--border);
-            border-radius:16px;
-            background:#fff;
-            color:var(--muted);
-            font-size:8px;
-        }
-
-        /* =====================================================
-           FOOTER
-        ====================================================== */
-
-        .footer {
-            background:#17151b;
-            color:#fff;
-        }
-
-        .footer-inner {
-            width:min(calc(100% - 30px),var(--container));
-            margin:auto;
-            padding:38px 0 18px;
-        }
-
-        .footer-grid {
-            display:grid;
-            grid-template-columns:1.5fr 1fr 1fr 1fr;
-            gap:30px;
-            padding-bottom:25px;
-        }
-
-        .footer-description {
-            max-width:320px;
-            margin-top:10px;
-            color:#9d99a5;
-            font-size:9px;
-            line-height:1.7;
-        }
-
-        .footer-heading {
-            margin-bottom:9px;
-            font-size:10px;
-        }
-
-        .footer-links {
-            display:flex;
-            flex-direction:column;
-            gap:6px;
-        }
-
-        .footer-links a {
-            color:#9d99a5;
-            font-size:8px;
-        }
-
-        .footer-links a:hover {
-            color:#fff;
-        }
-
-        .footer-bottom {
-            display:flex;
-            justify-content:space-between;
-            gap:15px;
-            padding-top:15px;
-            border-top:1px solid rgba(255,255,255,.08);
-            color:#716d78;
-            font-size:7px;
-        }
-
-        /* =====================================================
-           RESPONSIVE
-        ====================================================== */
-
-        @media(max-width:1100px) {
-
-            .main-navigation {
-                display:none;
-            }
-
-            .mobile-menu {
-                display:inline-flex;
-            }
-
-            .connection-grid {
-                grid-template-columns:repeat(2,minmax(0,1fr));
-            }
-
-        }
-
-        @media(max-width:700px) {
-
-            .page {
-                width:calc(100% - 20px);
-                padding-top:18px;
-            }
-
-            .header-inner {
-                width:calc(100% - 20px);
-            }
-
-            .brand-text {
-                display:none;
-            }
-
-            .profile-shortcut {
-                display:none;
-            }
-
-            .status-card {
-                align-items:flex-start;
-                flex-direction:column;
-            }
-
-            .status-button {
-                width:100%;
-            }
-
-            .connection-grid {
-                grid-template-columns:repeat(2,minmax(0,1fr));
-                gap:9px;
-            }
-
-            .connection-body {
-                padding:9px;
-            }
-
-            .connection-name {
-                font-size:8.5px;
-            }
-
-            .connection-actions {
-                grid-template-columns:1fr;
-            }
-
-            .action-danger {
-                grid-column:auto;
-            }
-
-            .footer-grid {
-                grid-template-columns:1fr 1fr;
-            }
-
-        }
-
-        @media(max-width:430px) {
-
-            .connection-grid {
-                grid-template-columns:1fr;
-            }
-
-            .tabs {
-                overflow-x:auto;
-            }
-
-            .tab-button {
-                flex:0 0 auto;
-            }
-
-            .footer-grid {
-                grid-template-columns:1fr;
-            }
-
-            .footer-bottom {
-                flex-direction:column;
-            }
-
-        }
-
-    </style>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+<style>
+
+:root {
+
+    --primary:#6d28d9;
+    --primary-dark:#4c1d95;
+    --primary-soft:#f3e8ff;
+
+    --accent:#db2777;
+    --accent-soft:#fce7f3;
+
+    --green:#16a34a;
+    --green-soft:#f0fdf4;
+
+    --red:#dc2626;
+    --red-soft:#fef2f2;
+
+    --blue:#2563eb;
+    --blue-soft:#eff6ff;
+
+    --orange:#d97706;
+    --orange-soft:#fff7ed;
+
+    --text:#18181b;
+    --soft:#68686f;
+    --muted:#9898a1;
+
+    --bg:#f6f6fa;
+    --white:#ffffff;
+
+    --border:#e9e9ef;
+
+    --shadow-sm:
+        0 6px 20px rgba(0,0,0,.045);
+
+    --shadow-md:
+        0 14px 38px rgba(0,0,0,.075);
+
+    --shadow-lg:
+        0 25px 75px rgba(0,0,0,.18);
+
+    --radius-sm:10px;
+    --radius-md:15px;
+    --radius-lg:21px;
+
+    --container:1380px;
+
+}
+
+
+* {
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+html {
+
+    scroll-behavior:smooth;
+
+}
+
+
+body {
+
+    min-height:100vh;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    color:var(--text);
+
+    background:var(--bg);
+
+    line-height:1.55;
+
+}
+
+
+body.menu-open {
+
+    overflow:hidden;
+
+}
+
+
+a {
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+button,
+input {
+
+    font-family:inherit;
+
+}
+
+
+button {
+
+    cursor:pointer;
+
+}
+
+
+img {
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.header {
+
+    position:sticky;
+
+    top:0;
+
+    z-index:2000;
+
+    background:
+        rgba(255,255,255,.97);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.055);
+
+}
+
+
+.header-inner {
+
+    width:
+        min(
+            calc(100% - 20px),
+            var(--container)
+        );
+
+    min-height:74px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+
+.brand {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.brand-logo {
+
+    width:45px;
+
+    height:45px;
+
+    object-fit:contain;
+
+    border-radius:12px;
+
+}
+
+
+.brand-text {
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.brand-name {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:26px;
+
+    font-weight:800;
+
+    line-height:1;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.brand-tagline {
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    letter-spacing:.7px;
+
+}
+
+
+.main-navigation {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+}
+
+
+.nav-link {
+
+    position:relative;
+
+    min-height:40px;
+
+    padding:0 8px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border-radius:9px;
+
+    color:var(--soft);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.nav-link.active::after {
+
+    content:"";
+
+    position:absolute;
+
+    left:10px;
+
+    right:10px;
+
+    bottom:3px;
+
+    height:2px;
+
+    border-radius:99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--accent)
+        );
+
+}
+
+
+.header-actions {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+}
+
+
+.header-icon {
+
+    width:40px;
+
+    height:40px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    color:var(--soft);
+
+    background:white;
+
+    font-size:10px;
+
+}
+
+
+.header-icon:hover {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.profile-shortcut {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:3px 8px 3px 3px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:11px;
+
+    background:white;
+
+}
+
+
+.profile-shortcut img {
+
+    width:32px;
+
+    height:32px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    background:#efeff4;
+
+}
+
+
+.profile-shortcut span {
+
+    max-width:85px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.mobile-menu {
+
+    display:none;
+
+    width:40px;
+
+    height:40px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    background:white;
+
+    color:var(--soft);
+
+}
+
+
+.mobile-navigation {
+
+    position:fixed;
+
+    top:74px;
+
+    left:10px;
+
+    right:10px;
+
+    z-index:1900;
+
+    display:none;
+
+    padding:8px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:14px;
+
+    background:white;
+
+    box-shadow:
+        var(--shadow-lg);
+
+}
+
+
+.mobile-navigation.open {
+
+    display:block;
+
+}
+
+
+.mobile-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:6px;
+
+}
+
+
+.mobile-link {
+
+    min-height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    color:var(--soft);
+
+    background:white;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.mobile-link.active {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.page {
+
+    width:
+        min(
+            calc(100% - 20px),
+            1120px
+        );
+
+    margin:auto;
+
+    padding:
+        25px 0 35px;
+
+}
+
+
+.page-heading {
+
+    margin-bottom:17px;
+
+}
+
+
+.page-heading h1 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            44px
+        );
+
+    line-height:1.08;
+
+}
+
+
+.page-heading h1 span {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.page-heading p {
+
+    max-width:700px;
+
+    margin-top:7px;
+
+    color:var(--soft);
+
+    font-size:10px;
+
+}
+
+
+/* ============================================================
+   STATUS
+============================================================ */
+
+.status-card {
+
+    margin-bottom:15px;
+
+    padding:13px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    border:
+        1px solid
+        #eadcff;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #fcfaff
+        );
+
+    box-shadow:
+        var(--shadow-sm);
+
+}
+
+
+.status-left {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.status-icon {
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:11px;
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.status-text strong {
+
+    display:block;
+
+    font-size:9px;
+
+}
+
+
+.status-text span {
+
+    display:block;
+
+    margin-top:2px;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+}
+
+
+.status-button {
+
+    min-height:35px;
+
+    padding:0 11px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border:none;
+
+    border-radius:9px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   TABS
+============================================================ */
+
+.tabs {
+
+    display:flex;
+
+    gap:6px;
+
+    margin-bottom:14px;
+
+    padding:6px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:13px;
+
+    background:white;
+
+    overflow-x:auto;
+
+}
+
+
+.tab-button {
+
+    min-height:37px;
+
+    padding:0 13px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    flex:0 0 auto;
+
+    border:none;
+
+    border-radius:9px;
+
+    color:var(--soft);
+
+    background:transparent;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.tab-button.active {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.tab-count {
+
+    min-width:17px;
+
+    height:17px;
+
+    padding:0 4px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:999px;
+
+    color:white;
+
+    background:var(--accent);
+
+    font-size:6px;
+
+    font-weight:900;
+
+}
+
+
+/* ============================================================
+   SCROLL AREA
+============================================================ */
+
+.connection-scroll {
+
+    height:
+        min(
+            680px,
+            72vh
+        );
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding-right:5px;
+
+    scrollbar-width:thin;
+
+    scrollbar-color:
+        #c4b5fd
+        #efeff4;
+
+}
+
+
+.connection-scroll::-webkit-scrollbar {
+
+    width:7px;
+
+}
+
+
+.connection-scroll::-webkit-scrollbar-track {
+
+    background:#efeff4;
+
+    border-radius:99px;
+
+}
+
+
+.connection-scroll::-webkit-scrollbar-thumb {
+
+    background:#c4b5fd;
+
+    border-radius:99px;
+
+}
+
+
+/* ============================================================
+   GRID
+============================================================ */
+
+.connection-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap:14px;
+
+}
+
+
+/* ============================================================
+   CARD
+============================================================ */
+
+.connection-card {
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:17px;
+
+    background:white;
+
+    box-shadow:
+        var(--shadow-sm);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+
+}
+
+
+.connection-card:hover {
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        var(--shadow-md);
+
+}
+
+
+.connection-photo {
+
+    position:relative;
+
+    aspect-ratio:1 / 1.03;
+
+    background:#efeff4;
+
+}
+
+
+.connection-photo img {
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+.connection-online {
+
+    position:absolute;
+
+    top:9px;
+
+    left:9px;
+
+    padding:5px 7px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    border-radius:999px;
+
+    color:white;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .50
+        );
+
+    font-size:6px;
+
+    font-weight:800;
+
+}
+
+
+.connection-online i {
+
+    color:#4ade80;
+
+    font-size:5px;
+
+}
+
+
+.connection-direction {
+
+    position:absolute;
+
+    right:9px;
+
+    top:9px;
+
+    padding:5px 7px;
+
+    border-radius:999px;
+
+    color:white;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .52
+        );
+
+    font-size:6px;
+
+    font-weight:800;
+
+}
+
+
+.connection-body {
+
+    padding:12px;
+
+}
+
+
+.connection-name {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+}
+
+
+.connection-name .verified {
+
+    color:var(--blue);
+
+    font-size:7px;
+
+}
+
+
+.connection-meta {
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+}
+
+
+.connection-status {
+
+    margin-top:6px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    padding:5px 7px;
+
+    border-radius:999px;
+
+    font-size:6px;
+
+    font-weight:900;
+
+}
+
+
+.connection-status.accepted {
+
+    color:#166534;
+
+    background:var(--green-soft);
+
+}
+
+
+.connection-status.pending {
+
+    color:#9a3412;
+
+    background:var(--orange-soft);
+
+}
+
+
+.connection-status.sent {
+
+    color:#1d4ed8;
+
+    background:var(--blue-soft);
+
+}
+
+
+.connection-actions {
+
+    margin-top:10px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:6px;
+
+}
+
+
+.action {
+
+    min-height:34px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border-radius:9px;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+.action-primary {
+
+    border:none;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+}
+
+
+.action-secondary {
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    color:var(--primary);
+
+    background:white;
+
+}
+
+
+.action-green {
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    color:#166534;
+
+    background:#f0fdf4;
+
+}
+
+
+.action-danger {
+
+    border:
+        1px solid
+        #fecaca;
+
+    color:#b91c1c;
+
+    background:white;
+
+}
+
+
+.action-full {
+
+    grid-column:1 / -1;
+
+}
+
+
+/* ============================================================
+   DETAILS PANEL
+============================================================ */
+
+.detail-overlay {
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:15px;
+
+    background:
+        rgba(
+            15,
+            12,
+            22,
+            .60
+        );
+
+    backdrop-filter:
+        blur(5px);
+
+}
+
+
+.detail-overlay.open {
+
+    display:flex;
+
+}
+
+
+.detail-card {
+
+    width:
+        min(
+            100%,
+            580px
+        );
+
+    max-height:
+        90vh;
+
+    overflow-y:auto;
+
+    border-radius:19px;
+
+    background:white;
+
+    box-shadow:
+        0 30px 90px
+        rgba(
+            0,
+            0,
+            0,
+            .25
+        );
+
+}
+
+
+.detail-head {
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    border-bottom:
+        1px solid
+        #f0f0f4;
+
+}
+
+
+.detail-head-title {
+
+    font-size:11px;
+
+    font-weight:900;
+
+}
+
+
+.detail-close {
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:none;
+
+    border-radius:9px;
+
+    color:var(--soft);
+
+    background:#f6f6fa;
+
+}
+
+
+.detail-profile {
+
+    padding:17px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.detail-avatar {
+
+    width:83px;
+
+    height:83px;
+
+    flex:0 0 83px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    background:#efeff4;
+
+}
+
+
+.detail-name {
+
+    font-size:15px;
+
+    font-weight:900;
+
+}
+
+
+.detail-username {
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+.detail-online {
+
+    margin-top:5px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    color:#166534;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+.detail-online i {
+
+    color:#22c55e;
+
+}
+
+
+.detail-grid {
+
+    padding:0 17px 17px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap:8px;
+
+}
+
+
+.detail-item {
+
+    padding:10px;
+
+    border-radius:11px;
+
+    background:#fafafa;
+
+}
+
+
+.detail-label {
+
+    color:var(--muted);
+
+    font-size:6px;
+
+    text-transform:uppercase;
+
+    font-weight:900;
+
+    letter-spacing:.4px;
+
+}
+
+
+.detail-value {
+
+    margin-top:3px;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    word-break:break-word;
+
+}
+
+
+.detail-section {
+
+    margin:
+        0 17px 15px;
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    background:#fff;
+
+}
+
+
+.detail-section strong {
+
+    display:block;
+
+    margin-bottom:6px;
+
+    font-size:9px;
+
+}
+
+
+.detail-bio {
+
+    color:#3f3f46;
+
+    font-size:8px;
+
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+}
+
+
+.detail-actions {
+
+    padding:0 17px 17px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    gap:7px;
+
+}
+
+
+.detail-action {
+
+    min-height:39px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    border-radius:9px;
+
+    font-size:7px;
+
+    font-weight:900;
+
+}
+
+
+.detail-action.chat {
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+
+}
+
+
+.detail-action.whatsapp {
+
+    color:#166534;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    background:#f0fdf4;
+
+}
+
+
+.detail-action.deactivate {
+
+    color:#b91c1c;
+
+    border:
+        1px solid
+        #fecaca;
+
+    background:#fff;
+
+}
+
+
+/* ============================================================
+   EMPTY / LOADING
+============================================================ */
+
+.loading-state,
+.empty-state {
+
+    min-height:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:16px;
+
+    background:white;
+
+}
+
+
+.loading-state {
+
+    grid-column:
+        1 /
+        -1;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+.empty-state {
+
+    grid-column:
+        1 /
+        -1;
+
+    padding:30px;
+
+}
+
+
+.empty-icon {
+
+    width:53px;
+
+    height:53px;
+
+    margin-bottom:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:15px;
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+}
+
+
+.empty-state h3 {
+
+    font-size:12px;
+
+}
+
+
+.empty-state p {
+
+    max-width:470px;
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+
+.empty-state a {
+
+    margin-top:12px;
+
+    min-height:36px;
+
+    padding:0 12px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border-radius:9px;
+
+    color:white;
+
+    background:var(--primary);
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+.toast {
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:20px;
+
+    z-index:7000;
+
+    max-width:
+        calc(
+            100% -
+            30px
+        );
+
+    padding:
+        11px 15px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.2s ease;
+
+    border-radius:11px;
+
+    color:#166534;
+
+    background:#f0fdf4;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.toast.error {
+
+    color:#991b1b;
+
+    background:#fef2f2;
+
+    border-color:#fecaca;
+
+}
+
+
+.toast.show {
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.footer {
+
+    margin-top:20px;
+
+    color:white;
+
+    background:#17151b;
+
+}
+
+
+.footer-inner {
+
+    width:
+        min(
+            calc(100% - 30px),
+            var(--container)
+        );
+
+    margin:auto;
+
+    padding:
+        35px 0 18px;
+
+}
+
+
+.footer-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
+
+    gap:30px;
+
+    padding-bottom:25px;
+
+}
+
+
+.footer-description {
+
+    max-width:320px;
+
+    margin-top:10px;
+
+    color:#9d99a5;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+}
+
+
+.footer-heading {
+
+    margin-bottom:9px;
+
+    font-size:10px;
+
+}
+
+
+.footer-links {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+.footer-links a {
+
+    color:#9d99a5;
+
+    font-size:8px;
+
+}
+
+
+.footer-links a:hover {
+
+    color:white;
+
+}
+
+
+.footer-bottom {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding-top:16px;
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
+
+    color:#716d78;
+
+    font-size:7px;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width:1100px) {
+
+    .main-navigation {
+
+        display:none;
+
+    }
+
+
+    .mobile-menu {
+
+        display:inline-flex;
+
+    }
+
+
+    .connection-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+    }
+
+}
+
+
+@media (max-width:700px) {
+
+    .header-inner {
+
+        width:
+            calc(
+                100% -
+                14px
+            );
+
+    }
+
+
+    .brand-text {
+
+        display:none;
+
+    }
+
+
+    .profile-shortcut {
+
+        display:none;
+
+    }
+
+
+    .header-actions {
+
+        margin-left:auto;
+
+    }
+
+
+    .page {
+
+        width:
+            calc(
+                100% -
+                14px
+            );
+
+        padding-top:16px;
+
+    }
+
+
+    .status-card {
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+
+    .status-button {
+
+        width:100%;
+
+    }
+
+
+    .connection-scroll {
+
+        height:
+            70vh;
+
+    }
+
+
+    .connection-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+        gap:9px;
+
+    }
+
+
+    .connection-body {
+
+        padding:9px;
+
+    }
+
+
+    .connection-actions {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .action-full {
+
+        grid-column:auto;
+
+    }
+
+
+    .detail-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .detail-actions {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width:430px) {
+
+    .connection-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================== -->
 
 <header class="header">
 
     <div class="header-inner">
 
-        <a href="dashboard.html"
-           class="brand">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
 
             <img
                 src="assets/logo1/logo1.png"
-                alt="LOVEMI Logo"
+                alt="LOVEMI"
                 class="brand-logo"
                 onerror="
                     this.onerror=null;
                     this.src='assets/logo1/apple-touch-icon.png';
-                ">
+                "
+            >
+
 
             <span class="brand-text">
 
@@ -846,118 +2256,130 @@
 
         </a>
 
-        <!-- FULL NAVIGATION -->
 
-        <nav class="main-navigation"
-             aria-label="Main navigation">
+        <nav
+            class="main-navigation"
+            aria-label="Main navigation"
+        >
 
-            <a href="dashboard.html"
-               class="nav-link">
-
+            <a
+                href="dashboard.html"
+                class="nav-link"
+            >
                 <i class="fa-solid fa-house"></i>
-
                 Dashboard
-
             </a>
 
-            <a href="discover.html"
-               class="nav-link">
 
+            <a
+                href="discover.html"
+                class="nav-link"
+            >
                 <i class="fa-solid fa-compass"></i>
-
                 Discover
-
             </a>
 
-            <a href="connections.html"
-               class="nav-link active">
 
+            <a
+                href="connections.html"
+                class="nav-link active"
+            >
                 <i class="fa-solid fa-user-group"></i>
-
                 Connections
-
             </a>
 
-            <a href="messages.html"
-               class="nav-link">
 
+            <a
+                href="messages.html"
+                class="nav-link"
+            >
                 <i class="fa-regular fa-message"></i>
-
                 Messages
-
             </a>
 
-            <a href="profile.html"
-               class="nav-link">
 
+            <a
+                href="profile.html"
+                class="nav-link"
+            >
                 <i class="fa-regular fa-user"></i>
-
                 Profile
-
             </a>
 
-            <a href="notifications.html"
-               class="nav-link">
 
+            <a
+                href="notifications.html"
+                class="nav-link"
+            >
                 <i class="fa-regular fa-bell"></i>
-
                 Notifications
-
             </a>
 
-            <a href="settings.html"
-               class="nav-link">
 
+            <a
+                href="settings.html"
+                class="nav-link"
+            >
                 <i class="fa-solid fa-gear"></i>
-
                 Settings
-
             </a>
 
-            <a href="premium.html"
-               class="nav-link">
 
+            <a
+                href="premium.html"
+                class="nav-link"
+            >
                 <i class="fa-solid fa-crown"></i>
-
                 Premium
-
             </a>
 
         </nav>
 
+
         <div class="header-actions">
 
-            <a href="notifications.html"
-               class="header-icon"
-               aria-label="Notifications">
 
+            <a
+                href="notifications.html"
+                class="header-icon"
+                aria-label="Notifications"
+            >
                 <i class="fa-regular fa-bell"></i>
-
             </a>
 
-            <a href="messages.html"
-               class="header-icon"
-               aria-label="Messages">
 
+            <a
+                href="messages.html"
+                class="header-icon"
+                aria-label="Messages"
+            >
                 <i class="fa-regular fa-message"></i>
-
             </a>
 
-            <a href="profile.html"
-               class="header-icon"
-               aria-label="Profile">
 
+            <a
+                href="profile.html"
+                class="header-icon"
+                aria-label="Profile"
+            >
                 <i class="fa-regular fa-user"></i>
-
             </a>
 
-            <a href="profile.html"
-               class="profile-shortcut">
+
+            <a
+                href="profile.html"
+                class="profile-shortcut"
+            >
 
                 <img
                     id="headerAvatar"
                     src="assets/images/defaults/default-avatar-male.png"
-                    alt="Profile">
+                    alt="Profile"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-avatar-male.png';
+                    "
+                >
 
                 <span id="headerName">
                     Account
@@ -965,12 +2387,14 @@
 
             </a>
 
+
             <button
-                type="button"
                 id="mobileMenu"
                 class="mobile-menu"
+                type="button"
+                aria-label="Open navigation"
                 aria-expanded="false"
-                aria-label="Open navigation">
+            >
 
                 <i class="fa-solid fa-bars"></i>
 
@@ -983,78 +2407,83 @@
 </header>
 
 
-<!-- =========================================================
-     MOBILE NAVIGATION
-========================================================== -->
-
 <nav
     id="mobileNavigation"
-    class="mobile-navigation">
+    class="mobile-navigation"
+>
 
     <div class="mobile-grid">
 
-        <a href="dashboard.html"
-           class="mobile-link">
 
+        <a
+            href="dashboard.html"
+            class="mobile-link"
+        >
             <i class="fa-solid fa-house"></i>
             Dashboard
-
         </a>
 
-        <a href="discover.html"
-           class="mobile-link">
 
+        <a
+            href="discover.html"
+            class="mobile-link"
+        >
             <i class="fa-solid fa-compass"></i>
             Discover
-
         </a>
 
-        <a href="connections.html"
-           class="mobile-link active">
 
+        <a
+            href="connections.html"
+            class="mobile-link active"
+        >
             <i class="fa-solid fa-user-group"></i>
             Connections
-
         </a>
 
-        <a href="messages.html"
-           class="mobile-link">
 
+        <a
+            href="messages.html"
+            class="mobile-link"
+        >
             <i class="fa-regular fa-message"></i>
             Messages
-
         </a>
 
-        <a href="profile.html"
-           class="mobile-link">
 
+        <a
+            href="profile.html"
+            class="mobile-link"
+        >
             <i class="fa-regular fa-user"></i>
             Profile
-
         </a>
 
-        <a href="notifications.html"
-           class="mobile-link">
 
+        <a
+            href="notifications.html"
+            class="mobile-link"
+        >
             <i class="fa-regular fa-bell"></i>
             Notifications
-
         </a>
 
-        <a href="settings.html"
-           class="mobile-link">
 
+        <a
+            href="settings.html"
+            class="mobile-link"
+        >
             <i class="fa-solid fa-gear"></i>
             Settings
-
         </a>
 
-        <a href="premium.html"
-           class="mobile-link">
 
+        <a
+            href="premium.html"
+            class="mobile-link"
+        >
             <i class="fa-solid fa-crown"></i>
             Premium
-
         </a>
 
     </div>
@@ -1062,11 +2491,8 @@
 </nav>
 
 
-<!-- =========================================================
-     MAIN
-========================================================== -->
-
 <main class="page">
+
 
     <section class="page-heading">
 
@@ -1075,8 +2501,8 @@
         </h1>
 
         <p>
-            See the members you are connected with and open
-            their profiles or conversations.
+            Manage accepted connections, incoming requests and
+            your conversations securely from one place.
         </p>
 
     </section>
@@ -1087,28 +2513,28 @@
         <div class="status-left">
 
             <div class="status-icon">
-
-                <i class="fa-solid fa-crown"></i>
-
+                <i class="fa-solid fa-link"></i>
             </div>
 
             <div class="status-text">
 
-                <strong id="premiumStatusTitle">
-                    Checking Premium...
+                <strong id="statusTitle">
+                    Loading...
                 </strong>
 
-                <span id="premiumStatusText">
-                    Loading your membership status.
+                <span id="statusText">
+                    Checking your connection access.
                 </span>
 
             </div>
 
         </div>
 
-        <a href="premium.html"
-           class="status-button"
-           id="premiumButton">
+
+        <a
+            href="premium.html"
+            class="status-button"
+        >
 
             <i class="fa-solid fa-crown"></i>
 
@@ -1119,50 +2545,91 @@
     </section>
 
 
-    <!-- =====================================================
-         TABS
-    ====================================================== -->
-
     <div class="tabs">
+
 
         <button
             type="button"
             class="tab-button active"
-            data-status="accepted">
+            data-status="accepted"
+        >
 
-            <i class="fa-solid fa-link"></i>
+            <i class="fa-solid fa-user-group"></i>
 
             Connections
 
+            <span
+                id="acceptedCount"
+                class="tab-count"
+                style="display:none;"
+            >
+                0
+            </span>
+
         </button>
+
 
         <button
             type="button"
             class="tab-button"
-            data-status="pending">
+            data-status="pending_received"
+        >
 
-            <i class="fa-regular fa-clock"></i>
+            <i class="fa-solid fa-inbox"></i>
 
-            Pending
+            Received
+
+            <span
+                id="receivedCount"
+                class="tab-count"
+                style="display:none;"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="tab-button"
+            data-status="pending_sent"
+        >
+
+            <i class="fa-regular fa-paper-plane"></i>
+
+            Sent
+
+            <span
+                id="sentCount"
+                class="tab-count"
+                style="display:none;"
+            >
+                0
+            </span>
 
         </button>
 
     </div>
 
 
-    <!-- =====================================================
-         CONNECTION GRID
-    ====================================================== -->
-
     <section
-        id="connectionGrid"
-        class="connection-grid">
+        id="connectionScroll"
+        class="connection-scroll"
+    >
 
-        <div class="loading-state">
+        <div
+            id="connectionGrid"
+            class="connection-grid"
+        >
 
-            <i class="fa-solid fa-spinner fa-spin"></i>
+            <div class="loading-state">
 
-            Loading connections...
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Loading connections...
+
+            </div>
 
         </div>
 
@@ -1171,30 +2638,26 @@
 </main>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================== -->
-
 <footer class="footer">
 
     <div class="footer-inner">
 
+
         <div class="footer-grid">
+
 
             <div>
 
                 <a
                     href="dashboard.html"
-                    class="brand">
+                    class="brand"
+                >
 
                     <img
                         src="assets/logo1/logo1.png"
                         alt="LOVEMI Logo"
                         class="brand-logo"
-                        onerror="
-                            this.onerror=null;
-                            this.src='assets/logo1/apple-touch-icon.png';
-                        ">
+                    >
 
                     <span class="brand-text">
 
@@ -1204,24 +2667,25 @@
 
                         <span
                             class="brand-tagline"
-                            style="color:#77717f;">
-
+                            style="color:#77717f;"
+                        >
                             DISCOVER • CONNECT • MEET
-
                         </span>
 
                     </span>
 
                 </a>
 
+
                 <p class="footer-description">
 
-                    Build connections, discover approved members
-                    and use LOVEMI services securely.
+                    Discover members, build trusted connections,
+                    communicate securely and enjoy LOVEMI services.
 
                 </p>
 
             </div>
+
 
             <div>
 
@@ -1231,25 +2695,18 @@
 
                 <div class="footer-links">
 
-                    <a href="dashboard.html">
-                        Dashboard
-                    </a>
+                    <a href="dashboard.html">Dashboard</a>
 
-                    <a href="discover.html">
-                        Discover
-                    </a>
+                    <a href="discover.html">Discover</a>
 
-                    <a href="connections.html">
-                        Connections
-                    </a>
+                    <a href="connections.html">Connections</a>
 
-                    <a href="messages.html">
-                        Messages
-                    </a>
+                    <a href="messages.html">Messages</a>
 
                 </div>
 
             </div>
+
 
             <div>
 
@@ -1259,25 +2716,18 @@
 
                 <div class="footer-links">
 
-                    <a href="profile.html">
-                        Profile
-                    </a>
+                    <a href="profile.html">Profile</a>
 
-                    <a href="edit-profile.html">
-                        Edit Profile
-                    </a>
+                    <a href="premium.html">Premium</a>
 
-                    <a href="premium.html">
-                        Premium
-                    </a>
+                    <a href="notifications.html">Notifications</a>
 
-                    <a href="settings.html">
-                        Settings
-                    </a>
+                    <a href="settings.html">Settings</a>
 
                 </div>
 
             </div>
+
 
             <div>
 
@@ -1287,33 +2737,30 @@
 
                 <div class="footer-links">
 
-                    <a href="help.html">
-                        Help Center
-                    </a>
+                    <a href="help.html">Help Center</a>
 
-                    <a href="privacy.html">
-                        Privacy
-                    </a>
+                    <a href="privacy.html">Privacy</a>
 
-                    <a href="terms.html">
-                        Terms
-                    </a>
+                    <a href="terms.html">Terms</a>
 
-                    <a href="contact.html">
-                        Contact
-                    </a>
+                    <a href="contact.html">Contact</a>
 
                 </div>
 
             </div>
 
+
         </div>
+
 
         <div class="footer-bottom">
 
             <span>
-                © <span id="year"></span> LOVEMI. All rights reserved.
+                ©
+                <span id="year"></span>
+                LOVEMI. All rights reserved.
             </span>
+
 
             <span>
                 Discover • Connect • Meet
@@ -1326,14 +2773,84 @@
 </footer>
 
 
+<div
+    id="detailOverlay"
+    class="detail-overlay"
+>
+
+    <div
+        id="detailCard"
+        class="detail-card"
+    >
+
+        <div class="detail-head">
+
+            <strong
+                id="detailTitle"
+                class="detail-head-title"
+            >
+                Connection details
+            </strong>
+
+            <button
+                id="detailClose"
+                type="button"
+                class="detail-close"
+                aria-label="Close"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="detailBody"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<audio
+    id="notification12Audio"
+    preload="auto"
+>
+    <source
+        src="assets/audio/notification12.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<audio
+    id="notification14Audio"
+    preload="auto"
+>
+    <source
+        src="assets/audio/notification14.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
 <script>
 
 "use strict";
 
 
-/* =========================================================
+/* ============================================================
    API
-========================================================= */
+============================================================ */
 
 const API = {
 
@@ -1343,91 +2860,102 @@ const API = {
     premium:
         "api/premium/status.php",
 
-    connections:
-        "api/connections/list.php"
+    list:
+        "api/connections/list.php",
+
+    action:
+        "api/connections/action.php",
+
+    detail:
+        "api/connections/detail.php",
+
+    chat:
+        "api/connections/chat.php",
+
+    events:
+        "api/connections/events.php"
 
 };
 
 
-/* =========================================================
-   DEFAULT IMAGE
-========================================================= */
+/* ============================================================
+   DEFAULT IMAGES
+============================================================ */
 
 const DEFAULT_MALE =
     "assets/images/defaults/default-avatar-male.png";
+
 
 const DEFAULT_FEMALE =
     "assets/images/defaults/default-avatar-female.png";
 
 
-/* =========================================================
+/* ============================================================
    STATE
-========================================================= */
+============================================================ */
 
 const state = {
 
+    currentStatus:
+        "accepted",
+
+    connections:[],
+
     premium:false,
 
-    currentStatus:"accepted",
+    eventsInitialized:false,
 
-    connections:[]
+    lastEventId:
+        Number(
+            localStorage.getItem(
+                "lovemi_connection_last_event_id"
+            )
+            ||
+            0
+        )
 
 };
 
 
-/* =========================================================
-   DOM
-========================================================= */
+/* ============================================================
+   DOM HELPERS
+============================================================ */
 
-const grid =
-    document.getElementById(
-        "connectionGrid"
+function $(
+    selector
+) {
+
+    return document.querySelector(
+        selector
     );
 
+}
 
-const headerAvatar =
-    document.getElementById(
-        "headerAvatar"
+
+function $$(
+    selector
+) {
+
+    return Array.from(
+        document.querySelectorAll(
+            selector
+        )
     );
 
-
-const headerName =
-    document.getElementById(
-        "headerName"
-    );
+}
 
 
-const premiumStatusTitle =
-    document.getElementById(
-        "premiumStatusTitle"
-    );
-
-
-const premiumStatusText =
-    document.getElementById(
-        "premiumStatusText"
-    );
-
-
-const premiumButton =
-    document.getElementById(
-        "premiumButton"
-    );
-
-
-/* =========================================================
+/* ============================================================
    YEAR
-========================================================= */
+============================================================ */
 
-document.getElementById(
-    "year"
-).textContent =
+$("#year").textContent =
     new Date().getFullYear();
 
 
-/* =========================================================
+/* ============================================================
    ESCAPE
-========================================================= */
+============================================================ */
 
 function escapeHtml(
     value
@@ -1436,27 +2964,278 @@ function escapeHtml(
     return String(
         value ?? ""
     )
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-/* =========================================================
-   GET JSON
-========================================================= */
+/* ============================================================
+   SAFE IMAGE
+============================================================ */
 
-async function getJson(
-    url
+function safeImage(
+    value,
+    gender = ""
 ) {
+
+    if (
+        !value
+        ||
+        typeof value !== "string"
+        ||
+        !value.trim()
+    ) {
+
+        return String(
+            gender
+        )
+        .toLowerCase()
+        ===
+        "female"
+            ?
+            DEFAULT_FEMALE
+            :
+            DEFAULT_MALE;
+
+    }
+
+
+    return value;
+
+}
+
+
+/* ============================================================
+   AGE
+============================================================ */
+
+function calculateAge(
+    dateOfBirth
+) {
+
+    if (
+        !dateOfBirth
+    ) {
+
+        return "";
+
+    }
+
+
+    const dob =
+        new Date(
+            dateOfBirth
+        );
+
+
+    if (
+        Number.isNaN(
+            dob.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    const today =
+        new Date();
+
+
+    let age =
+        today.getFullYear()
+        -
+        dob.getFullYear();
+
+
+    const month =
+        today.getMonth()
+        -
+        dob.getMonth();
+
+
+    if (
+        month < 0
+        ||
+        (
+            month === 0
+            &&
+            today.getDate() <
+            dob.getDate()
+        )
+    ) {
+
+        age--;
+
+    }
+
+
+    return age >= 0
+        ?
+        age
+        :
+        "";
+
+}
+
+
+/* ============================================================
+   DATE
+============================================================ */
+
+function formatDate(
+    value
+) {
+
+    if (
+        !value
+    ) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleString(
+        undefined,
+        {
+            dateStyle:"medium",
+            timeStyle:"short"
+        }
+    );
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer = null;
+
+
+function toast(
+    message,
+    error = false
+) {
+
+    const box =
+        $("#toast");
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    box.textContent =
+        message;
+
+
+    box.classList.toggle(
+        "error",
+        error
+    );
+
+
+    box.classList.add(
+        "show"
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () =>
+                box.classList.remove(
+                    "show"
+                ),
+            3500
+        );
+
+}
+
+
+/* ============================================================
+   JSON FETCH
+============================================================ */
+
+async function apiRequest(
+    url,
+    options = {}
+) {
+
+    const finalOptions = {
+
+        credentials:
+            "same-origin",
+
+        cache:
+            "no-store",
+
+        headers:{
+            "Accept":
+                "application/json",
+
+            "Cache-Control":
+                "no-cache, no-store, max-age=0",
+
+            "Pragma":
+                "no-cache",
+
+            ...(options.headers || {})
+
+        },
+
+        ...options
+
+    };
+
 
     const separator =
         url.includes("?")
-            ? "&"
-            : "?";
+            ?
+            "&"
+            :
+            "?";
 
 
     const response =
@@ -1468,42 +3247,112 @@ async function getJson(
             "_="
             +
             Date.now(),
-            {
-
-                credentials:
-                    "same-origin",
-
-                cache:
-                    "no-store",
-
-                headers:{
-                    "Accept":
-                        "application/json",
-                    "Cache-Control":
-                        "no-cache, no-store, max-age=0",
-                    "Pragma":
-                        "no-cache"
-                }
-
-            }
+            finalOptions
         );
 
 
-    const result =
-        await response.json();
+    const contentType =
+        response.headers.get(
+            "content-type"
+        )
+        ||
+        "";
+
+
+    const text =
+        await response.text();
+
+
+    let result;
+
+
+    try {
+
+        result =
+            JSON.parse(
+                text
+            );
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Non JSON API response:",
+            text
+        );
+
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+
+    }
 
 
     return {
+
         response,
+
         result
+
     };
 
 }
 
 
-/* =========================================================
+/* ============================================================
+   GET
+============================================================ */
+
+async function apiGet(
+    url
+) {
+
+    return apiRequest(
+        url,
+        {
+            method:"GET"
+        }
+    );
+
+}
+
+
+/* ============================================================
+   POST JSON
+============================================================ */
+
+async function apiPost(
+    url,
+    payload
+) {
+
+    return apiRequest(
+        url,
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                    "application/json"
+            },
+
+            body:
+                JSON.stringify(
+                    payload
+                )
+
+        }
+    );
+
+}
+
+
+/* ============================================================
    SESSION
-========================================================= */
+============================================================ */
 
 async function loadSession() {
 
@@ -1511,7 +3360,7 @@ async function loadSession() {
         response,
         result
     } =
-        await getJson(
+        await apiGet(
             API.session
         );
 
@@ -1520,6 +3369,8 @@ async function loadSession() {
         !response.ok
         ||
         result.authenticated !== true
+        ||
+        !result.user
     ) {
 
         window.location.href =
@@ -1531,48 +3382,27 @@ async function loadSession() {
 
 
     const user =
-        result.user
-        ||
-        null;
+        result.user;
 
 
-    if (
-        !user
-    ) {
-
-        window.location.href =
-            "login.html?return=connections.html";
-
-        return false;
-
-    }
-
-
-    headerName.textContent =
+    $("#headerName").textContent =
         user.username
         ||
         user.full_name
         ||
+        user.full_names
+        ||
         "Account";
 
 
-    headerAvatar.src =
-        user.profile_photo
-        ||
-        user.avatar
-        ||
-        (
-            String(
-                user.gender
-                ||
-                ""
-            ).toLowerCase()
-            ===
-            "female"
-                ?
-                DEFAULT_FEMALE
-                :
-                DEFAULT_MALE
+    $("#headerAvatar").src =
+        safeImage(
+            user.profile_photo
+            ||
+            user.avatar
+            ||
+            user.photo_url,
+            user.gender
         );
 
 
@@ -1581,9 +3411,9 @@ async function loadSession() {
 }
 
 
-/* =========================================================
+/* ============================================================
    PREMIUM
-========================================================= */
+============================================================ */
 
 async function loadPremium() {
 
@@ -1592,30 +3422,26 @@ async function loadPremium() {
         const {
             result
         } =
-            await getJson(
+            await apiGet(
                 API.premium
             );
 
 
+        const premium =
+            result.premium
+            ||
+            result.data?.premium
+            ||
+            {};
+
+
         state.premium =
-            Boolean(
-                result.premium
-                ??
-                result.is_premium
-                ??
-                result.active
-                ??
-                result.has_premium
-                ??
-                result.data?.premium
-                ??
-                result.data?.is_premium
-                ??
-                result.data?.active
-            );
+            premium.active === true;
 
 
-    } catch {
+    } catch (
+        error
+    ) {
 
         state.premium =
             false;
@@ -1627,87 +3453,120 @@ async function loadPremium() {
         state.premium
     ) {
 
-        premiumStatusTitle.textContent =
+        $("#statusTitle").textContent =
             "Premium Active";
 
 
-        premiumStatusText.textContent =
-            "You can use your connection services.";
-
-
-        premiumButton.innerHTML =
-            `
-            <i class="fa-solid fa-crown"></i>
-            Manage Premium
-            `;
+        $("#statusText").textContent =
+            "Your Premium connection services are active.";
 
     } else {
 
-        premiumStatusTitle.textContent =
-            "Premium Required";
+        $("#statusTitle").textContent =
+            "Premium Access";
 
 
-        premiumStatusText.textContent =
-            "Premium is required to create new connections.";
-
-
-        premiumButton.innerHTML =
-            `
-            <i class="fa-solid fa-crown"></i>
-            Get Premium
-            `;
+        $("#statusText").textContent =
+            "Premium is required when sending new connection requests.";
 
     }
 
 }
 
 
-/* =========================================================
-   CONNECTIONS
-========================================================= */
+/* ============================================================
+   LOAD CONNECTIONS
+============================================================ */
 
 async function loadConnections(
-    status = "accepted"
+    status =
+        state.currentStatus,
+    silent = false
 ) {
 
     state.currentStatus =
         status;
 
 
-    grid.innerHTML = `
+    if (
+        !silent
+    ) {
 
-        <div class="loading-state">
+        $("#connectionGrid").innerHTML =
+            `
 
-            <i class="fa-solid fa-spinner fa-spin"></i>
+            <div class="loading-state">
 
-            Loading connections...
+                <i class="fa-solid fa-spinner fa-spin"></i>
 
-        </div>
+                Loading...
 
-    `;
+            </div>
+
+            `;
+
+    }
 
 
     try {
+
+        let endpoint =
+            API.list
+            +
+            "?status=";
+
+
+        if (
+            status ===
+            "pending_received"
+        ) {
+
+            endpoint +=
+                encodeURIComponent(
+                    "pending"
+                )
+                +
+                "&direction=received";
+
+        } else if (
+            status ===
+            "pending_sent"
+        ) {
+
+            endpoint +=
+                encodeURIComponent(
+                    "pending"
+                )
+                +
+                "&direction=sent";
+
+        } else {
+
+            endpoint +=
+                encodeURIComponent(
+                    status
+                );
+
+        }
+
+
+        endpoint +=
+            "&limit=100";
+
 
         const {
             response,
             result
         } =
-            await getJson(
-                API.connections
-                +
-                "?status="
-                +
-                encodeURIComponent(status)
-                +
-                "&limit=100"
+            await apiGet(
+                endpoint
             );
 
 
         if (
             !response.ok
             ||
-            result.success === false
+            result.success !== true
         ) {
 
             throw new Error(
@@ -1726,26 +3585,18 @@ async function loadConnections(
                 ?
                 result.connections
                 :
-                Array.isArray(
-                    result.data
-                )
-                    ?
-                    result.data
-                    :
-                    [];
+                [];
 
 
         renderConnections();
 
 
-    } catch (error) {
+    } catch (
+        error
+    ) {
 
-        console.error(
-            error
-        );
-
-
-        grid.innerHTML = `
+        $("#connectionGrid").innerHTML =
+            `
 
             <div class="empty-state">
 
@@ -1767,7 +3618,10 @@ async function loadConnections(
                     )}
                 </p>
 
-                <a href="javascript:loadConnections(state.currentStatus)">
+                <a
+                    href="#"
+                    id="retryConnections"
+                >
 
                     <i class="fa-solid fa-rotate-right"></i>
 
@@ -1777,191 +3631,561 @@ async function loadConnections(
 
             </div>
 
-        `;
+            `;
+
+
+        $("#retryConnections")?.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                loadConnections(
+                    state.currentStatus
+                );
+
+            }
+        );
 
     }
 
 }
 
 
-/* =========================================================
+/* ============================================================
+   COUNTS
+============================================================ */
+
+async function loadCounts() {
+
+    const requests = {
+
+        accepted:
+            apiGet(
+                API.list
+                +
+                "?status=accepted&limit=1"
+            ),
+
+        received:
+            apiGet(
+                API.list
+                +
+                "?status=pending&direction=received&limit=1"
+            ),
+
+        sent:
+            apiGet(
+                API.list
+                +
+                "?status=pending&direction=sent&limit=1"
+            )
+
+    };
+
+
+    try {
+
+        const [
+            accepted,
+            received,
+            sent
+        ] =
+            await Promise.all([
+                requests.accepted,
+                requests.received,
+                requests.sent
+            ]);
+
+
+        updateCount(
+            "#acceptedCount",
+            accepted.result.count
+        );
+
+
+        updateCount(
+            "#receivedCount",
+            received.result.count
+        );
+
+
+        updateCount(
+            "#sentCount",
+            sent.result.count
+        );
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            "Connection counts:",
+            error.message
+        );
+
+    }
+
+}
+
+
+function updateCount(
+    selector,
+    count
+) {
+
+    const element =
+        $(selector);
+
+
+    const value =
+        Number(
+            count
+            ||
+            0
+        );
+
+
+    element.textContent =
+        value;
+
+
+    element.style.display =
+        value > 0
+            ?
+            "inline-flex"
+            :
+            "none";
+
+}
+
+
+/* ============================================================
    RENDER
-========================================================= */
+============================================================ */
 
 function renderConnections() {
 
     if (
-        state.connections.length === 0
+        !state.connections.length
     ) {
 
-        const isPending =
-            state.currentStatus ===
-            "pending";
+        const messages = {
+
+            accepted:
+                [
+                    "No connections yet.",
+                    "Start by discovering approved LOVEMI members.",
+                    "fa-user-group"
+                ],
+
+            pending_received:
+                [
+                    "No incoming requests.",
+                    "New connection requests will appear here.",
+                    "fa-inbox"
+                ],
+
+            pending_sent:
+                [
+                    "No sent requests.",
+                    "Connection requests that you send will appear here.",
+                    "fa-paper-plane"
+                ]
+
+        };
 
 
-        grid.innerHTML = `
+        const data =
+            messages[
+                state.currentStatus
+            ];
+
+
+        $("#connectionGrid").innerHTML =
+            `
 
             <div class="empty-state">
 
                 <div class="empty-icon">
 
-                    <i class="fa-solid ${
-                        isPending
-                            ? "fa-clock"
-                            : "fa-user-group"
-                    }"></i>
+                    <i class="fa-solid ${data[2]}"></i>
 
                 </div>
 
                 <h3>
-
-                    ${
-                        isPending
-                            ?
-                            "No pending connections"
-                            :
-                            "No connections yet"
-                    }
-
+                    ${escapeHtml(data[0])}
                 </h3>
 
                 <p>
-
-                    ${
-                        isPending
-                            ?
-                            "Pending connection records will appear here."
-                            :
-                            "Discover approved LOVEMI members and connect with people you want to know."
-                    }
-
+                    ${escapeHtml(data[1])}
                 </p>
 
                 ${
-                    !isPending
-                        ?
-                        `
-                        <a href="discover.html">
+                    state.currentStatus ===
+                    "accepted"
+                    ?
+                    `
+                    <a href="discover.html">
 
-                            <i class="fa-solid fa-compass"></i>
+                        <i class="fa-solid fa-compass"></i>
 
-                            Discover Members
+                        Discover Members
 
-                        </a>
-                        `
-                        :
-                        ""
+                    </a>
+                    `
+                    :
+                    ""
                 }
 
             </div>
 
-        `;
+            `;
+
 
         return;
 
     }
 
 
-    grid.innerHTML =
+    $("#connectionGrid").innerHTML =
         state.connections
             .map(
                 renderConnection
             )
             .join("");
 
+
+    bindConnectionEvents();
+
 }
 
 
-/* =========================================================
-   CONNECTION CARD
-========================================================= */
+/* ============================================================
+   RENDER CARD
+============================================================ */
 
 function renderConnection(
     connection
 ) {
 
-    const userId =
-        connection.user_id
-        ??
-        connection.id
-        ??
-        "";
+    const id =
+        Number(
+            connection.user_id
+            ||
+            connection.other_user_id
+            ||
+            0
+        );
 
 
     const name =
         connection.full_name
-        ??
+        ||
         connection.full_names
-        ??
+        ||
         connection.username
-        ??
+        ||
         "Member";
 
 
     const username =
         connection.username
-        ??
+        ||
         "";
 
 
     const gender =
         connection.gender
-        ??
+        ||
         "";
 
 
     const country =
         connection.country_name
-        ??
+        ||
         "";
 
 
     const avatar =
-        connection.profile_photo
-        ??
-        connection.photo_url
-        ??
-        (
-            String(
-                gender
-            ).toLowerCase()
-            ===
-            "female"
-                ?
-                DEFAULT_FEMALE
-                :
-                DEFAULT_MALE
+        safeImage(
+            connection.profile_photo
+            ||
+            connection.photo_url
+            ||
+            connection.avatar,
+            gender
         );
 
 
     const online =
-        Boolean(
+        connection.is_online === true
+        ||
+        Number(
             connection.is_online
-            ??
-            connection.online
-            ??
-            false
-        );
+            ||
+            0
+        )
+        ===
+        1;
 
 
     const verified =
-        Boolean(
+        connection.email_verified === true
+        ||
+        Number(
             connection.email_verified
-            ??
-            connection.verified
-            ??
-            false
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    const status =
+        String(
+            connection.status
+            ||
+            ""
+        ).toLowerCase();
+
+
+    const direction =
+        connection.direction
+        ||
+        "";
+
+
+    const isAccepted =
+        status === "accepted"
+        ||
+        status === "connected";
+
+
+    const isReceived =
+        status === "pending"
+        &&
+        (
+            direction ===
+            "received"
+            ||
+            connection.is_incoming === true
         );
 
 
-    const pending =
-        state.currentStatus ===
-        "pending";
+    const isSent =
+        status === "pending"
+        &&
+        (
+            direction ===
+            "sent"
+            ||
+            connection.is_outgoing === true
+        );
+
+
+    let badge =
+        "";
+
+
+    if (
+        isAccepted
+    ) {
+
+        badge =
+            `
+            <span class="connection-status accepted">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Connected
+
+            </span>
+            `;
+
+    } else if (
+        isReceived
+    ) {
+
+        badge =
+            `
+            <span class="connection-status pending">
+
+                <i class="fa-solid fa-inbox"></i>
+
+                Incoming request
+
+            </span>
+            `;
+
+    } else {
+
+        badge =
+            `
+            <span class="connection-status sent">
+
+                <i class="fa-regular fa-paper-plane"></i>
+
+                Request sent
+
+            </span>
+            `;
+
+    }
+
+
+    let actions =
+        "";
+
+
+    if (
+        isAccepted
+    ) {
+
+        actions =
+            `
+
+            <button
+                type="button"
+                class="action action-secondary"
+                data-details="${escapeHtml(id)}"
+            >
+
+                <i class="fa-regular fa-id-card"></i>
+
+                Details
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-primary"
+                data-chat="${escapeHtml(id)}"
+            >
+
+                <i class="fa-regular fa-message"></i>
+
+                Chat
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-green action-full"
+                data-whatsapp="${escapeHtml(id)}"
+            >
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                WhatsApp
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-danger action-full"
+                data-deactivate="${escapeHtml(id)}"
+            >
+
+                <i class="fa-solid fa-link-slash"></i>
+
+                Deactivate Connection
+
+            </button>
+
+            `;
+
+    } else if (
+        isReceived
+    ) {
+
+        actions =
+            `
+
+            <button
+                type="button"
+                class="action action-secondary"
+                data-details="${escapeHtml(id)}"
+            >
+
+                <i class="fa-regular fa-id-card"></i>
+
+                Details
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-primary"
+                data-accept="${escapeHtml(connection.connection_id)}"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Accept
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-danger action-full"
+                data-decline="${escapeHtml(connection.connection_id)}"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Decline
+
+            </button>
+
+            `;
+
+    } else {
+
+        actions =
+            `
+
+            <button
+                type="button"
+                class="action action-secondary"
+                data-details="${escapeHtml(id)}"
+            >
+
+                <i class="fa-regular fa-id-card"></i>
+
+                Details
+
+            </button>
+
+
+            <button
+                type="button"
+                class="action action-danger action-full"
+                data-deactivate="${escapeHtml(id)}"
+            >
+
+                <i class="fa-solid fa-ban"></i>
+
+                Cancel Request
+
+            </button>
+
+            `;
+
+    }
 
 
     return `
 
-        <article class="connection-card">
+        <article
+            class="connection-card"
+            data-user-id="${escapeHtml(id)}"
+        >
 
 
             <div class="connection-photo">
@@ -1969,30 +4193,52 @@ function renderConnection(
 
                 <img
                     src="${escapeHtml(avatar)}"
-                    alt="${escapeHtml(name)}"
+                    alt="Member"
                     loading="lazy"
                     onerror="
                         this.onerror=null;
-                        this.src='assets/images/defaults/default-avatar-male.png';
-                    ">
+                        this.src='${safeImage("", gender)}';
+                    "
+                >
 
 
                 ${
                     online
-                        ?
-                        `
-                        <span class="connection-online">
+                    ?
+                    `
+                    <span class="connection-online">
 
-                            <i class="fa-solid fa-circle"></i>
+                        <i class="fa-solid fa-circle"></i>
 
-                            Online
+                        Online
 
-                        </span>
-                        `
-                        :
-                        ""
+                    </span>
+                    `
+                    :
+                    ""
                 }
 
+
+                ${
+                    direction
+                    ?
+                    `
+                    <span class="connection-direction">
+
+                        ${
+                            direction ===
+                            "received"
+                                ?
+                                "Received"
+                                :
+                                "Sent"
+                        }
+
+                    </span>
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
@@ -2002,20 +4248,20 @@ function renderConnection(
 
                 <div class="connection-name">
 
-
                     ${escapeHtml(name)}
-
 
                     ${
                         verified
-                            ?
-                            `
-                            <i class="fa-solid fa-circle-check"></i>
-                            `
-                            :
-                            ""
+                        ?
+                        `
+                        <i
+                            class="fa-solid fa-circle-check verified"
+                            title="Verified"
+                        ></i>
+                        `
+                        :
+                        ""
                     }
-
 
                 </div>
 
@@ -2028,105 +4274,39 @@ function renderConnection(
                             "@"
                             +
                             escapeHtml(username)
-                            +
-                            (
-                                country
-                                    ?
-                                    " • "
-                                    +
-                                    escapeHtml(country)
-                                    :
-                                    ""
-                            )
-                            :
-                            (
-                                escapeHtml(country)
-                                ||
-                                escapeHtml(gender)
-                            )
-                    }
-
-                </div>
-
-
-                <div class="connection-actions">
-
-
-                    ${
-                        pending
-                            ?
-                            `
-                            <a
-                                href="profile.html?user=${encodeURIComponent(userId)}"
-                                class="action-secondary">
-
-                                <i class="fa-regular fa-user"></i>
-
-                                View
-
-                            </a>
-
-
-                            <a
-                                href="connections.html"
-                                class="action-primary">
-
-                                <i class="fa-regular fa-clock"></i>
-
-                                Pending
-
-                            </a>
-                            `
-                            :
-                            `
-                            <a
-                                href="profile.html?user=${encodeURIComponent(userId)}"
-                                class="action-secondary">
-
-                                <i class="fa-regular fa-user"></i>
-
-                                Profile
-
-                            </a>
-
-
-                            <a
-                                href="messages.html?user=${encodeURIComponent(userId)}"
-                                class="action-primary">
-
-                                <i class="fa-regular fa-message"></i>
-
-                                Message
-
-                            </a>
-                            `
-                    }
-
-
-                    ${
-                        !pending
-                            ?
-                            `
-                            <a
-                                href="reports.html?user=${encodeURIComponent(userId)}"
-                                class="action-danger">
-
-                                <i class="fa-regular fa-flag"></i>
-
-                                Report
-
-                            </a>
-                            `
                             :
                             ""
                     }
 
+                    ${
+                        country
+                            ?
+                            (
+                                username
+                                    ?
+                                    " • "
+                                    :
+                                    ""
+                            )
+                            +
+                            escapeHtml(country)
+                            :
+                            ""
+                    }
 
                 </div>
 
 
-            </div>
+                ${badge}
 
+
+                <div class="connection-actions">
+
+                    ${actions}
+
+                </div>
+
+            </div>
 
         </article>
 
@@ -2135,35 +4315,991 @@ function renderConnection(
 }
 
 
-/* =========================================================
-   TABS
-========================================================= */
+/* ============================================================
+   CARD EVENTS
+============================================================ */
 
-document
-    .querySelectorAll(
-        ".tab-button"
-    )
+function bindConnectionEvents() {
+
+    $$("[data-details]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        openDetails(
+                            Number(
+                                button.dataset.details
+                            )
+                        )
+                );
+
+            }
+        );
+
+
+    $$("[data-chat]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        openChat(
+                            Number(
+                                button.dataset.chat
+                            )
+                        )
+                );
+
+            }
+        );
+
+
+    $$("[data-whatsapp]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        openWhatsApp(
+                            Number(
+                                button.dataset.whatsapp
+                            )
+                        )
+                );
+
+            }
+        );
+
+
+    $$("[data-accept]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        changeConnection(
+                            Number(
+                                button.dataset.accept
+                            ),
+                            "accept"
+                        )
+                );
+
+            }
+        );
+
+
+    $$("[data-decline]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        changeConnection(
+                            Number(
+                                button.dataset.decline
+                            ),
+                            "decline"
+                        )
+                );
+
+            }
+        );
+
+
+    $$("[data-deactivate]")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const ok =
+                            window.confirm(
+                                "Deactivate this connection?"
+                            );
+
+
+                        if (
+                            !ok
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        changeConnection(
+                            Number(
+                                button.dataset.deactivate
+                            ),
+                            "deactivate"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   CONNECTION ACTION
+============================================================ */
+
+async function changeConnection(
+    connectionId,
+    action
+) {
+
+    if (
+        !connectionId
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiPost(
+                API.action,
+                {
+
+                    connection_id:
+                        connectionId,
+
+                    action:
+                        action
+
+                }
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "The connection action failed."
+            );
+
+        }
+
+
+        toast(
+            result.message
+            ||
+            "Connection updated."
+        );
+
+
+        await Promise.all([
+            loadConnections(
+                state.currentStatus,
+                true
+            ),
+            loadCounts()
+        ]);
+
+
+    } catch (
+        error
+    ) {
+
+        toast(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   DETAILS
+============================================================ */
+
+async function openDetails(
+    userId
+) {
+
+    if (
+        !userId
+    ) {
+
+        return;
+
+    }
+
+
+    const overlay =
+        $("#detailOverlay");
+
+
+    const body =
+        $("#detailBody");
+
+
+    overlay.classList.add(
+        "open"
+    );
+
+
+    body.innerHTML =
+        `
+
+        <div
+            class="loading-state"
+            style="
+                min-height:220px;
+                border:none;
+            "
+        >
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Loading details...
+
+        </div>
+
+        `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.detail
+                +
+                "?user_id="
+                +
+                encodeURIComponent(
+                    userId
+                )
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load the member details."
+            );
+
+        }
+
+
+        const person =
+            result.user
+            ||
+            result.data?.user
+            ||
+            {};
+
+
+        renderDetails(
+            person
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        body.innerHTML =
+            `
+
+            <div
+                class="empty-state"
+                style="
+                    border:none;
+                    min-height:220px;
+                "
+            >
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                </div>
+
+                <h3>
+                    Details unavailable
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                    )}
+                </p>
+
+            </div>
+
+            `;
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER DETAILS
+============================================================ */
+
+function renderDetails(
+    person
+) {
+
+    const name =
+        person.full_name
+        ||
+        person.full_names
+        ||
+        person.username
+        ||
+        "Member";
+
+
+    const username =
+        person.username
+        ||
+        "";
+
+
+    const gender =
+        person.gender
+        ||
+        "Not specified";
+
+
+    const age =
+        person.age
+        ||
+        calculateAge(
+            person.date_of_birth
+        )
+        ||
+        "Not specified";
+
+
+    const bio =
+        person.bio
+        ||
+        "No bio provided.";
+
+
+    const country =
+        person.country_name
+        ||
+        "";
+
+
+    const city =
+        person.city
+        ||
+        "";
+
+
+    const avatar =
+        safeImage(
+            person.profile_photo
+            ||
+            person.photo_url
+            ||
+            person.avatar,
+            gender
+        );
+
+
+    const connected =
+        person.connection_status ===
+        "accepted"
+        ||
+        person.connection_status ===
+        "connected"
+        ||
+        person.connected === true;
+
+
+    const online =
+        person.is_online === true
+        ||
+        Number(
+            person.is_online
+            ||
+            0
+        )
+        ===
+        1;
+
+
+    $("#detailBody").innerHTML =
+        `
+
+        <div class="detail-profile">
+
+
+            <img
+                src="${escapeHtml(avatar)}"
+                class="detail-avatar"
+                alt="Member"
+                onerror="
+                    this.onerror=null;
+                    this.src='${safeImage("", gender)}';
+                "
+            >
+
+
+            <div>
+
+                <div class="detail-name">
+
+                    ${escapeHtml(name)}
+
+                </div>
+
+
+                <div class="detail-username">
+
+                    ${
+                        username
+                            ?
+                            "@"
+                            +
+                            escapeHtml(username)
+                            :
+                            ""
+                    }
+
+                </div>
+
+
+                ${
+                    online
+                    ?
+                    `
+                    <div class="detail-online">
+
+                        <i class="fa-solid fa-circle"></i>
+
+                        Online
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-grid">
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Gender
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(gender)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Age
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(age)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Country
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(country || "Not specified")}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    City
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(city || "Not specified")}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <strong>
+                Bio
+            </strong>
+
+            <div class="detail-bio">
+                ${escapeHtml(bio)}
+            </div>
+
+        </div>
+
+
+        ${
+            connected
+            ?
+            `
+
+            <div class="detail-section">
+
+                <strong>
+                    WhatsApp
+                </strong>
+
+                <div class="detail-value">
+
+                    ${escapeHtml(
+                        person.whatsapp_display
+                        ||
+                        "Available to connected members"
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-actions">
+
+
+                <button
+                    type="button"
+                    class="detail-action chat"
+                    id="detailChatButton"
+                    data-chat-user="${escapeHtml(person.id)}"
+                >
+
+                    <i class="fa-regular fa-message"></i>
+
+                    Chat
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="detail-action whatsapp"
+                    id="detailWhatsappButton"
+                    data-whatsapp-user="${escapeHtml(person.id)}"
+                >
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="detail-action deactivate"
+                    id="detailDeactivateButton"
+                    data-connection-id="${escapeHtml(person.connection_id || "")}"
+                >
+
+                    <i class="fa-solid fa-link-slash"></i>
+
+                    Deactivate
+
+                </button>
+
+            </div>
+
+            `
+            :
+            ""
+
+        }
+
+        `;
+
+
+    $("#detailChatButton")
+        ?.addEventListener(
+            "click",
+            () =>
+                openChat(
+                    Number(
+                        person.id
+                    )
+                )
+        );
+
+
+    $("#detailWhatsappButton")
+        ?.addEventListener(
+            "click",
+            () =>
+                openWhatsApp(
+                    Number(
+                        person.id
+                    )
+                )
+        );
+
+
+    $("#detailDeactivateButton")
+        ?.addEventListener(
+            "click",
+            async () => {
+
+                const ok =
+                    window.confirm(
+                        "Deactivate this connection?"
+                    );
+
+
+                if (
+                    !ok
+                ) {
+
+                    return;
+
+                }
+
+
+                await changeConnection(
+                    Number(
+                        person.connection_id
+                    ),
+                    "deactivate"
+                );
+
+
+                closeDetails();
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   CLOSE DETAILS
+============================================================ */
+
+function closeDetails() {
+
+    $("#detailOverlay")
+        .classList.remove(
+            "open"
+        );
+
+}
+
+
+$("#detailClose")
+    .addEventListener(
+        "click",
+        closeDetails
+    );
+
+
+$("#detailOverlay")
+    .addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                $("#detailOverlay")
+            ) {
+
+                closeDetails();
+
+            }
+
+        }
+    );
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeDetails();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   CHAT
+============================================================ */
+
+async function openChat(
+    userId
+) {
+
+    if (
+        !userId
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiPost(
+                API.chat,
+                {
+                    user_id:
+                        userId
+                }
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to open this conversation."
+            );
+
+        }
+
+
+        const code =
+            result.chat_code
+            ||
+            result.data?.chat_code;
+
+
+        if (
+            !code
+        ) {
+
+            throw new Error(
+                "A chat code was not returned."
+            );
+
+        }
+
+
+        window.location.href =
+            "messages.html?chat="
+            +
+            encodeURIComponent(
+                code
+            );
+
+    } catch (
+        error
+    ) {
+
+        toast(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   WHATSAPP
+============================================================ */
+
+async function openWhatsApp(
+    userId
+) {
+
+    if (
+        !userId
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.detail
+                +
+                "?user_id="
+                +
+                encodeURIComponent(
+                    userId
+                )
+                +
+                "&whatsapp=1"
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "WhatsApp access is unavailable."
+            );
+
+        }
+
+
+        const person =
+            result.user
+            ||
+            {};
+
+
+        const number =
+            String(
+                person.whatsapp_number
+                ||
+                ""
+            )
+            .replace(
+                /\D/g,
+                ""
+            );
+
+
+        if (
+            !number
+        ) {
+
+            throw new Error(
+                "This member has no available WhatsApp number."
+            );
+
+        }
+
+
+        window.open(
+            "https://wa.me/"
+            +
+            encodeURIComponent(
+                number
+            ),
+            "_blank",
+            "noopener"
+        );
+
+    } catch (
+        error
+    ) {
+
+        toast(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   TABS
+============================================================ */
+
+$$(".tab-button")
     .forEach(
-        function(button) {
+        button => {
 
             button.addEventListener(
                 "click",
-                function() {
+                async function() {
 
-                    document
-                        .querySelectorAll(
-                            ".tab-button"
-                        )
+                    $$(".tab-button")
                         .forEach(
-                            btn =>
-                                btn.classList.toggle(
+                            item =>
+                                item.classList.toggle(
                                     "active",
-                                    btn === this
+                                    item === this
                                 )
                         );
 
 
-                    loadConnections(
+                    await loadConnections(
                         this.dataset.status
                     );
 
@@ -2174,76 +5310,197 @@ document
     );
 
 
-/* =========================================================
+/* ============================================================
    MOBILE MENU
-========================================================= */
+============================================================ */
 
-const mobileMenu =
-    document.getElementById(
-        "mobileMenu"
+$("#mobileMenu")
+    .addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            const menu =
+                $("#mobileNavigation");
+
+
+            const open =
+                menu.classList.contains(
+                    "open"
+                );
+
+
+            menu.classList.toggle(
+                "open",
+                !open
+            );
+
+
+            document.body.classList.toggle(
+                "menu-open",
+                !open
+            );
+
+
+            $("#mobileMenu")
+                .setAttribute(
+                    "aria-expanded",
+                    String(
+                        !open
+                    )
+                );
+
+
+            $("#mobileMenu")
+                .innerHTML =
+                    !open
+                        ?
+                        '<i class="fa-solid fa-xmark"></i>'
+                        :
+                        '<i class="fa-solid fa-bars"></i>';
+
+        }
     );
 
 
-const mobileNavigation =
-    document.getElementById(
-        "mobileNavigation"
-    );
-
-
-mobileMenu.addEventListener(
+document.addEventListener(
     "click",
-    function() {
+    event => {
 
-        const open =
-            mobileNavigation.classList.contains(
+        const menu =
+            $("#mobileNavigation");
+
+
+        const button =
+            $("#mobileMenu");
+
+
+        if (
+            menu.classList.contains(
+                "open"
+            )
+            &&
+            !menu.contains(
+                event.target
+            )
+            &&
+            !button.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove(
                 "open"
             );
 
 
-        mobileNavigation.classList.toggle(
-            "open"
-        );
+            document.body.classList.remove(
+                "menu-open"
+            );
 
 
-        document.body.classList.toggle(
-            "menu-open",
-            !open
-        );
-
-
-        this.setAttribute(
-            "aria-expanded",
-            String(
-                !open
-            )
-        );
-
-
-        this.innerHTML =
-            !open
-                ?
-                '<i class="fa-solid fa-xmark"></i>'
-                :
+            button.innerHTML =
                 '<i class="fa-solid fa-bars"></i>';
+
+
+            button.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
 
     }
 );
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+/* ============================================================
+   PLAY NOTIFICATION
+============================================================ */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async function() {
+function playNotification12() {
 
-        const authenticated =
-            await loadSession();
+    const audio =
+        $("#notification12Audio");
+
+
+    if (
+        !audio
+    ) {
+
+        return;
+
+    }
+
+
+    audio.currentTime =
+        0;
+
+
+    audio.play()
+        .catch(
+            () => {}
+        );
+
+}
+
+
+function playNotification14() {
+
+    const audio =
+        $("#notification14Audio");
+
+
+    if (
+        !audio
+    ) {
+
+        return;
+
+    }
+
+
+    audio.currentTime =
+        0;
+
+
+    audio.play()
+        .catch(
+            () => {}
+        );
+
+}
+
+
+/* ============================================================
+   CONNECTION EVENTS
+============================================================ */
+
+async function pollConnectionEvents() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.events
+                +
+                "?after="
+                +
+                encodeURIComponent(
+                    state.lastEventId
+                )
+            );
 
 
         if (
-            !authenticated
+            !response.ok
+            ||
+            result.success !== true
         ) {
 
             return;
@@ -2251,11 +5508,227 @@ document.addEventListener(
         }
 
 
-        await loadPremium();
+        const events =
+            Array.isArray(
+                result.events
+            )
+                ?
+                result.events
+                :
+                [];
 
-        await loadConnections(
-            "accepted"
+
+        if (
+            !state.eventsInitialized
+        ) {
+
+            if (
+                events.length
+            ) {
+
+                const newest =
+                    Math.max(
+                        ...events.map(
+                            event =>
+                                Number(
+                                    event.id
+                                    ||
+                                    0
+                                )
+                        )
+                    );
+
+
+                if (
+                    newest >
+                    state.lastEventId
+                ) {
+
+                    state.lastEventId =
+                        newest;
+
+
+                    localStorage.setItem(
+                        "lovemi_connection_last_event_id",
+                        String(
+                            newest
+                        )
+                    );
+
+                }
+
+            }
+
+
+            state.eventsInitialized =
+                true;
+
+
+            return;
+
+        }
+
+
+        for (
+            const event
+            of
+            events
+        ) {
+
+            const id =
+                Number(
+                    event.id
+                    ||
+                    0
+                );
+
+
+            if (
+                id <=
+                state.lastEventId
+            ) {
+
+                continue;
+
+            }
+
+
+            if (
+                event.event_type ===
+                "connection_request"
+            ) {
+
+                playNotification12();
+
+
+                toast(
+                    "You received a new connection request."
+                );
+
+            } else if (
+                event.event_type ===
+                "connection_accepted"
+            ) {
+
+                playNotification14();
+
+
+                toast(
+                    "Your connection request was accepted."
+                );
+
+            }
+
+
+            state.lastEventId =
+                Math.max(
+                    state.lastEventId,
+                    id
+                );
+
+        }
+
+
+        if (
+            state.lastEventId > 0
+        ) {
+
+            localStorage.setItem(
+                "lovemi_connection_last_event_id",
+                String(
+                    state.lastEventId
+                )
+            );
+
+        }
+
+
+        if (
+            events.length
+        ) {
+
+            await Promise.all([
+                loadCounts(),
+                loadConnections(
+                    state.currentStatus,
+                    true
+                )
+            ]);
+
+        }
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            "Connection events:",
+            error.message
         );
+
+    }
+
+}
+
+
+/* ============================================================
+   PERIODIC REFRESH
+============================================================ */
+
+setInterval(
+    () => {
+
+        loadCounts();
+
+        pollConnectionEvents();
+
+    },
+    7000
+);
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        try {
+
+            const authenticated =
+                await loadSession();
+
+
+            if (
+                !authenticated
+            ) {
+
+                return;
+
+            }
+
+
+            await Promise.all([
+                loadPremium(),
+                loadCounts(),
+                loadConnections("accepted")
+            ]);
+
+
+            await pollConnectionEvents();
+
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+        }
 
     }
 );

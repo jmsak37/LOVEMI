@@ -1,36 +1,23 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - CONNECTIONS LIST API
- * ============================================================
- *
- * Returns connections belonging to the authenticated user.
- *
- * GET:
- *
- * ?status=accepted
- * ?status=pending
- *
- * Private contact information is not returned by this API.
- * ============================================================
- */
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-function connectionsListResponse(
+function responseJson(
     bool $success,
     string $message,
     array $extra = [],
@@ -54,16 +41,13 @@ function connectionsListResponse(
     exit;
 }
 
-
-/* ============================================================
-   METHOD
-============================================================ */
-
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET'
+    ($_SERVER['REQUEST_METHOD'] ?? '')
+    !==
+    'GET'
 ) {
 
-    connectionsListResponse(
+    responseJson(
         false,
         'Only GET requests are allowed.',
         [
@@ -71,69 +55,62 @@ if (
         ],
         405
     );
+
 }
-
-
-/* ============================================================
-   SESSION
-============================================================ */
-
-if (
-    session_status() !== PHP_SESSION_ACTIVE
-) {
-    session_start();
-}
-
 
 $currentUserId =
-    isset(
-        $_SESSION['lovemi_user_id']
-    )
-        ? (int)
-          $_SESSION['lovemi_user_id']
+    isset($_SESSION['lovemi_user_id'])
+        ? (int) $_SESSION['lovemi_user_id']
         : 0;
 
+if ($currentUserId <= 0) {
 
-if (
-    $currentUserId <= 0
-) {
-
-    connectionsListResponse(
+    responseJson(
         false,
         'Please log in first.',
         [
             'code' => 'AUTHENTICATION_REQUIRED',
-            'redirect' => 'login.html?return=connections.html'
+            'connections' => []
         ],
         401
     );
+
 }
-
-
-/* ============================================================
-   FILTER
-============================================================ */
 
 $status =
     strtolower(
         trim(
             (string)(
                 $_GET['status']
-                ?? 'accepted'
+                ??
+                'accepted'
             )
         )
     );
 
+$direction =
+    strtolower(
+        trim(
+            (string)(
+                $_GET['direction']
+                ??
+                ''
+            )
+        )
+    );
+
+$allowedStatuses = [
+    'accepted',
+    'connected',
+    'pending',
+    'rejected',
+    'cancelled'
+];
 
 if (
     !in_array(
         $status,
-        [
-            'accepted',
-            'pending',
-            'rejected',
-            'cancelled'
-        ],
+        $allowedStatuses,
         true
     )
 ) {
@@ -143,7 +120,6 @@ if (
 
 }
 
-
 $limit =
     max(
         1,
@@ -151,30 +127,25 @@ $limit =
             100,
             (int)(
                 $_GET['limit']
-                ?? 50
+                ??
+                50
             )
         )
     );
-
 
 $offset =
     max(
         0,
         (int)(
             $_GET['offset']
-            ?? 0
+            ??
+            0
         )
     );
 
-
-/* ============================================================
-   DATABASE
-============================================================ */
-
 try {
 
-    $pdo =
-        db();
+    $pdo = db();
 
 } catch (Throwable $e) {
 
@@ -184,7 +155,7 @@ try {
         $e->getMessage()
     );
 
-    connectionsListResponse(
+    responseJson(
         false,
         'Unable to connect to the database.',
         [
@@ -193,42 +164,65 @@ try {
         ],
         500
     );
+
 }
 
+$whereDirection = '';
 
-/* ============================================================
-   QUERY
-============================================================ */
+if (
+    $status === 'pending'
+    &&
+    $direction === 'received'
+) {
 
-/*
- * A connection can have either direction:
- *
- * current user = requester
- * OR
- * current user = receiver
- *
- * We then return the OTHER member.
- */
+    $whereDirection =
+        "
+        AND c.initiated_by <> :current_user_direction_received
+        ";
+
+} elseif (
+    $status === 'pending'
+    &&
+    $direction === 'sent'
+) {
+
+    $whereDirection =
+        "
+        AND c.initiated_by = :current_user_direction_sent
+        ";
+
+}
 
 $sql = "
-
     SELECT
 
         c.id AS connection_id,
 
-        c.requester_id,
-        c.receiver_id,
+        c.user_id,
+
+        c.connected_user_id,
+
+        c.initiated_by,
 
         c.status,
 
+        c.connected_at,
+
         c.created_at,
+
         c.updated_at,
 
         CASE
-            WHEN c.requester_id = :current_user_id_1
-                THEN c.receiver_id
-            ELSE c.requester_id
-        END AS user_id,
+            WHEN c.user_id = :current_user_case_1
+                THEN c.connected_user_id
+            ELSE c.user_id
+        END AS other_user_id,
+
+        CASE
+            WHEN c.initiated_by = :current_user_direction_case
+                THEN 'sent'
+            ELSE 'received'
+        END AS direction,
 
         u.username,
 
@@ -236,42 +230,121 @@ $sql = "
 
         u.gender,
 
+        u.date_of_birth,
+
         u.email_verified,
 
-        u.is_active,
+        u.country_id,
 
-        u.is_suspended,
+        u.phone_number,
 
-        u.is_deleted,
-
-        co.id AS country_id,
+        u.phone_e164,
 
         co.name AS country_name,
 
         co.iso2 AS country_iso2,
 
-        pr.profile_photo,
+        p.display_name,
+
+        p.bio,
+
+        p.city,
+
+        p.relationship_status,
+
+        p.looking_for,
+
+        p.interests,
+
+        p.allow_messages,
+
+        p.show_online_status,
+
+        (
+            SELECT ph.file_path
+
+            FROM photos ph
+
+            WHERE ph.user_id =
+                CASE
+                    WHEN c.user_id = :current_user_case_2
+                        THEN c.connected_user_id
+                    ELSE c.user_id
+                END
+
+              AND ph.photo_type = 'profile'
+
+              AND ph.approval_status = 'approved'
+
+              AND ph.is_primary = 1
+
+            ORDER BY
+                ph.uploaded_at DESC,
+                ph.id DESC
+
+            LIMIT 1
+
+        ) AS profile_photo_primary,
+
+        (
+            SELECT ph2.file_path
+
+            FROM photos ph2
+
+            WHERE ph2.user_id =
+                CASE
+                    WHEN c.user_id = :current_user_case_3
+                        THEN c.connected_user_id
+                    ELSE c.user_id
+                END
+
+              AND ph2.photo_type = 'profile'
+
+              AND ph2.approval_status = 'approved'
+
+            ORDER BY
+                ph2.is_primary DESC,
+                ph2.uploaded_at DESC,
+                ph2.id DESC
+
+            LIMIT 1
+
+        ) AS profile_photo_fallback,
 
         CASE
 
             WHEN EXISTS
             (
+                SELECT 1
 
+                FROM user_presence up
+
+                WHERE up.user_id =
+                    CASE
+                        WHEN c.user_id = :current_user_case_4
+                            THEN c.connected_user_id
+                        ELSE c.user_id
+                    END
+
+                  AND up.is_online = 1
+            )
+
+            THEN 1
+
+            WHEN EXISTS
+            (
                 SELECT 1
 
                 FROM user_sessions us
 
                 WHERE us.user_id =
-
                     CASE
-                        WHEN c.requester_id = :current_user_id_2
-                            THEN c.receiver_id
-                        ELSE c.requester_id
+                        WHEN c.user_id = :current_user_case_5
+                            THEN c.connected_user_id
+                        ELSE c.user_id
                     END
 
                   AND us.revoked_at IS NULL
-
-                  AND us.two_factor_passed = TRUE
 
                   AND us.expires_at > CURRENT_TIMESTAMP
 
@@ -280,12 +353,11 @@ $sql = "
                           CURRENT_TIMESTAMP,
                           INTERVAL 10 MINUTE
                       )
-
             )
 
-            THEN TRUE
+            THEN 1
 
-            ELSE FALSE
+            ELSE 0
 
         END AS is_online
 
@@ -296,36 +368,39 @@ $sql = "
         ON u.id =
             CASE
 
-                WHEN c.requester_id = :current_user_id_3
-                    THEN c.receiver_id
+                WHEN c.user_id = :current_user_case_6
 
-                ELSE c.requester_id
+                    THEN c.connected_user_id
+
+                ELSE c.user_id
 
             END
 
     LEFT JOIN countries co
         ON co.id = u.country_id
 
-    LEFT JOIN profiles pr
-        ON pr.user_id = u.id
+    LEFT JOIN profiles p
+        ON p.user_id = u.id
 
     WHERE
 
         (
-            c.requester_id = :current_user_id_4
+            c.user_id = :current_user_where_1
 
             OR
 
-            c.receiver_id = :current_user_id_5
+            c.connected_user_id = :current_user_where_2
         )
 
         AND c.status = :status
 
-        AND u.is_active = TRUE
+        AND u.is_active = 1
 
-        AND u.is_suspended = FALSE
+        AND u.is_suspended = 0
 
-        AND u.is_deleted = FALSE
+        AND u.is_deleted = 0
+
+        $whereDirection
 
     ORDER BY
 
@@ -334,14 +409,130 @@ $sql = "
         c.id DESC
 
     LIMIT :limit
-    OFFSET :offset
 
+    OFFSET :offset
 ";
 
+$countSql = "
+    SELECT COUNT(*)
 
-/* ============================================================
-   EXECUTE
-============================================================ */
+    FROM connections c
+
+    INNER JOIN users u
+
+        ON u.id =
+            CASE
+
+                WHEN c.user_id = :current_user_count_case
+
+                    THEN c.connected_user_id
+
+                ELSE c.user_id
+
+            END
+
+    WHERE
+
+        (
+            c.user_id = :current_user_count_where_1
+
+            OR
+
+            c.connected_user_id = :current_user_count_where_2
+        )
+
+        AND c.status = :status
+
+        AND u.is_active = 1
+
+        AND u.is_suspended = 0
+
+        AND u.is_deleted = 0
+
+        $whereDirection
+";
+
+try {
+
+    $countStmt =
+        $pdo->prepare(
+            $countSql
+        );
+
+    $countStmt->bindValue(
+        ':current_user_count_case',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $countStmt->bindValue(
+        ':current_user_count_where_1',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $countStmt->bindValue(
+        ':current_user_count_where_2',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $countStmt->bindValue(
+        ':status',
+        $status,
+        PDO::PARAM_STR
+    );
+
+    if (
+        $status === 'pending'
+        &&
+        $direction === 'received'
+    ) {
+
+        $countStmt->bindValue(
+            ':current_user_direction_received',
+            $currentUserId,
+            PDO::PARAM_INT
+        );
+
+    } elseif (
+        $status === 'pending'
+        &&
+        $direction === 'sent'
+    ) {
+
+        $countStmt->bindValue(
+            ':current_user_direction_sent',
+            $currentUserId,
+            PDO::PARAM_INT
+        );
+
+    }
+
+    $countStmt->execute();
+
+    $count =
+        (int)
+        $countStmt->fetchColumn();
+
+} catch (Throwable $e) {
+
+    error_log(
+        '[LOVEMI CONNECTION LIST COUNT] '
+        .
+        $e->getMessage()
+    );
+
+    responseJson(
+        false,
+        'Unable to count connections.',
+        [
+            'connections' => []
+        ],
+        500
+    );
+
+}
 
 try {
 
@@ -350,41 +541,59 @@ try {
             $sql
         );
 
-
     $stmt->bindValue(
-        ':current_user_id_1',
+        ':current_user_case_1',
         $currentUserId,
         PDO::PARAM_INT
     );
 
-
     $stmt->bindValue(
-        ':current_user_id_2',
+        ':current_user_case_2',
         $currentUserId,
         PDO::PARAM_INT
     );
 
-
     $stmt->bindValue(
-        ':current_user_id_3',
+        ':current_user_case_3',
         $currentUserId,
         PDO::PARAM_INT
     );
 
-
     $stmt->bindValue(
-        ':current_user_id_4',
+        ':current_user_case_4',
         $currentUserId,
         PDO::PARAM_INT
     );
 
-
     $stmt->bindValue(
-        ':current_user_id_5',
+        ':current_user_case_5',
         $currentUserId,
         PDO::PARAM_INT
     );
 
+    $stmt->bindValue(
+        ':current_user_case_6',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->bindValue(
+        ':current_user_direction_case',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->bindValue(
+        ':current_user_where_1',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->bindValue(
+        ':current_user_where_2',
+        $currentUserId,
+        PDO::PARAM_INT
+    );
 
     $stmt->bindValue(
         ':status',
@@ -392,6 +601,31 @@ try {
         PDO::PARAM_STR
     );
 
+    if (
+        $status === 'pending'
+        &&
+        $direction === 'received'
+    ) {
+
+        $stmt->bindValue(
+            ':current_user_direction_received',
+            $currentUserId,
+            PDO::PARAM_INT
+        );
+
+    } elseif (
+        $status === 'pending'
+        &&
+        $direction === 'sent'
+    ) {
+
+        $stmt->bindValue(
+            ':current_user_direction_sent',
+            $currentUserId,
+            PDO::PARAM_INT
+        );
+
+    }
 
     $stmt->bindValue(
         ':limit',
@@ -399,20 +633,18 @@ try {
         PDO::PARAM_INT
     );
 
-
     $stmt->bindValue(
         ':offset',
         $offset,
         PDO::PARAM_INT
     );
 
-
     $stmt->execute();
 
-
     $rows =
-        $stmt->fetchAll();
-
+        $stmt->fetchAll(
+            PDO::FETCH_ASSOC
+        );
 
 } catch (Throwable $e) {
 
@@ -422,32 +654,56 @@ try {
         $e->getMessage()
     );
 
-
-    connectionsListResponse(
+    responseJson(
         false,
         'Connections could not be loaded.',
         [
-            'code' =>
-                'QUERY_ERROR',
-
-            'connections' =>
-                []
+            'code' => 'QUERY_ERROR',
+            'connections' => []
         ],
         500
     );
+
 }
 
-
-/* ============================================================
-   CLEAN DATA
-============================================================ */
-
 $connections = [];
-
 
 foreach (
     $rows as $row
 ) {
+
+    $profilePhoto =
+        !empty(
+            $row['profile_photo_primary']
+        )
+            ?
+            $row['profile_photo_primary']
+            :
+            (
+                !empty(
+                    $row['profile_photo_fallback']
+                )
+                    ?
+                    $row['profile_photo_fallback']
+                    :
+                    null
+            );
+
+    $isIncoming =
+        strtolower(
+            (string)
+            $row['direction']
+        )
+        ===
+        'received';
+
+    $isOutgoing =
+        strtolower(
+            (string)
+            $row['direction']
+        )
+        ===
+        'sent';
 
     $connections[] = [
 
@@ -457,7 +713,7 @@ foreach (
 
         'user_id' =>
             (int)
-            $row['user_id'],
+            $row['other_user_id'],
 
         'username' =>
             (string)
@@ -471,41 +727,76 @@ foreach (
             (string)
             $row['gender'],
 
+        'date_of_birth' =>
+            $row['date_of_birth'] !== null
+                ?
+                (string)
+                $row['date_of_birth']
+                :
+                null,
+
         'email_verified' =>
             (bool)
             $row['email_verified'],
 
         'country_id' =>
             $row['country_id'] !== null
-                ? (int)
-                  $row['country_id']
-                : null,
+                ?
+                (int)
+                $row['country_id']
+                :
+                null,
 
         'country_name' =>
             $row['country_name'] !== null
-                ? (string)
-                  $row['country_name']
-                : null,
+                ?
+                (string)
+                $row['country_name']
+                :
+                null,
 
         'country_iso2' =>
             $row['country_iso2'] !== null
-                ? strtoupper(
+                ?
+                strtoupper(
                     (string)
                     $row['country_iso2']
                 )
-                : null,
+                :
+                null,
+
+        'display_name' =>
+            $row['display_name'] !== null
+                ?
+                (string)
+                $row['display_name']
+                :
+                null,
+
+        'bio' =>
+            $row['bio'] !== null
+                ?
+                (string)
+                $row['bio']
+                :
+                null,
+
+        'city' =>
+            $row['city'] !== null
+                ?
+                (string)
+                $row['city']
+                :
+                null,
 
         'profile_photo' =>
-            $row['profile_photo'] !== null
-                ? (string)
-                  $row['profile_photo']
-                : null,
+            $profilePhoto,
 
         'photo_url' =>
-            $row['profile_photo'] !== null
-                ? (string)
-                  $row['profile_photo']
-                : null,
+            $profilePhoto,
+
+        'avatar' =>
+            $profilePhoto,
 
         'is_online' =>
             (bool)
@@ -514,6 +805,37 @@ foreach (
         'status' =>
             (string)
             $row['status'],
+
+        'direction' =>
+            $isIncoming
+                ?
+                'received'
+                :
+                (
+                    $isOutgoing
+                        ?
+                        'sent'
+                        :
+                        null
+                ),
+
+        'is_incoming' =>
+            $isIncoming,
+
+        'is_outgoing' =>
+            $isOutgoing,
+
+        'initiated_by' =>
+            (int)
+            $row['initiated_by'],
+
+        'connected_at' =>
+            $row['connected_at'] !== null
+                ?
+                (string)
+                $row['connected_at']
+                :
+                null,
 
         'created_at' =>
             (string)
@@ -527,27 +849,25 @@ foreach (
 
 }
 
-
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-connectionsListResponse(
+responseJson(
     true,
     'Connections loaded successfully.',
     [
+
         'status' =>
             $status,
 
+        'direction' =>
+            $direction,
+
         'count' =>
-            count(
-                $connections
-            ),
+            $count,
 
         'connections' =>
             $connections,
 
         'data' =>
             $connections
+
     ]
 );
