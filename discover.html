@@ -62,7 +62,7 @@
           href="https://fonts.googleapis.com">
 
     <link rel="preconnect"
-          href="https://fonts.googleapis.com"
+          href="https://fonts.gstatic.com"
           crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
@@ -87,33 +87,33 @@
 
         :root {
 
-            --primary: #6d28d9;
-            --primary-dark: #4c1d95;
-            --primary-soft: #f3e8ff;
+            --primary:#6d28d9;
+            --primary-dark:#4c1d95;
+            --primary-soft:#f3e8ff;
 
-            --accent: #db2777;
-            --accent-soft: #fce7f3;
+            --accent:#db2777;
+            --accent-soft:#fce7f3;
 
-            --blue: #2563eb;
-            --blue-soft: #eff6ff;
+            --blue:#2563eb;
+            --blue-soft:#eff6ff;
 
-            --green: #16a34a;
-            --green-soft: #f0fdf4;
+            --green:#16a34a;
+            --green-soft:#f0fdf4;
 
-            --orange: #d97706;
-            --orange-soft: #fff7ed;
+            --orange:#d97706;
+            --orange-soft:#fff7ed;
 
-            --red: #dc2626;
-            --red-soft: #fef2f2;
+            --red:#dc2626;
+            --red-soft:#fef2f2;
 
-            --text: #18181b;
-            --text-soft: #68686f;
-            --text-muted: #9898a1;
+            --text:#18181b;
+            --text-soft:#68686f;
+            --text-muted:#9898a1;
 
-            --white: #ffffff;
-            --background: #f7f7fb;
+            --white:#ffffff;
+            --background:#f7f7fb;
 
-            --border: #e9e9ef;
+            --border:#e9e9ef;
 
             --shadow-sm:
                 0 5px 18px rgba(0,0,0,.04);
@@ -124,7 +124,7 @@
             --shadow-lg:
                 0 22px 55px rgba(0,0,0,.10);
 
-            --container: 1380px;
+            --container:1380px;
 
         }
 
@@ -134,25 +134,20 @@
         ====================================================== */
 
         * {
-
-            margin: 0;
-            padding: 0;
-
-            box-sizing: border-box;
-
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
 
         html {
-
-            scroll-behavior: smooth;
-
+            scroll-behavior:smooth;
         }
 
 
         body {
 
-            min-height: 100vh;
+            min-height:100vh;
 
             font-family:
                 "Inter",
@@ -164,55 +159,44 @@
             background:
                 var(--background);
 
-            line-height: 1.55;
+            line-height:1.55;
 
         }
 
 
         body.menu-open {
-
-            overflow: hidden;
-
+            overflow:hidden;
         }
 
 
         a {
-
-            color:
-                inherit;
-
-            text-decoration:
-                none;
-
+            color:inherit;
+            text-decoration:none;
         }
 
 
         button,
         input,
-        select {
-
-            font-family:
-                inherit;
-
+        select,
+        textarea {
+            font-family:inherit;
         }
 
 
         button {
+            cursor:pointer;
+        }
 
-            cursor:
-                pointer;
 
+        button:disabled {
+            cursor:not-allowed;
+            opacity:.62;
         }
 
 
         img {
-
-            display:
-                block;
-
-            max-width:
-                100%;
-
+            display:block;
+            max-width:100%;
         }
 
 
@@ -222,17 +206,11 @@
 
         .header {
 
-            position:
-                sticky;
+            position:sticky;
+            top:0;
+            z-index:2000;
 
-            top:
-                0;
-
-            z-index:
-                2000;
-
-            width:
-                100%;
+            width:100%;
 
             background:
                 rgba(255,255,255,.97);
@@ -258,25 +236,20 @@
                     var(--container)
                 );
 
-            min-height:
-                76px;
+            min-height:76px;
 
-            margin:
-                auto;
+            margin:auto;
 
-            display:
-                grid;
+            display:grid;
 
             grid-template-columns:
                 auto
                 minmax(0,1fr)
                 auto;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                18px;
+            gap:18px;
 
         }
 
@@ -287,48 +260,36 @@
 
         .brand {
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                10px;
+            gap:10px;
 
-            min-width:
-                max-content;
+            min-width:max-content;
 
         }
 
 
         .brand-logo {
 
-            width:
-                45px;
+            width:45px;
+            height:45px;
 
-            height:
-                45px;
+            object-fit:contain;
 
-            object-fit:
-                contain;
+            border-radius:12px;
 
-            border-radius:
-                12px;
-
-            flex:
-                0 0 45px;
+            flex:0 0 45px;
 
         }
 
 
         .brand-text {
 
-            display:
-                flex;
+            display:flex;
 
-            flex-direction:
-                column;
+            flex-direction:column;
 
         }
 
@@ -339,14 +300,11 @@
                 "Playfair Display",
                 serif;
 
-            font-size:
-                26px;
+            font-size:26px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
-            line-height:
-                1;
+            line-height:1;
 
             background:
                 linear-gradient(
@@ -355,31 +313,24 @@
                     var(--accent)
                 );
 
-            -webkit-background-clip:
-                text;
+            -webkit-background-clip:text;
+            background-clip:text;
 
-            background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
+            -webkit-text-fill-color:transparent;
 
         }
 
 
         .brand-tagline {
 
-            margin-top:
-                3px;
+            margin-top:3px;
 
             color:
                 var(--text-muted);
 
-            font-size:
-                7px;
+            font-size:7px;
 
-            letter-spacing:
-                .7px;
+            letter-spacing:.7px;
 
         }
 
@@ -390,80 +341,59 @@
 
         .main-navigation {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                3px;
+            gap:3px;
 
-            min-width:
-                0;
+            min-width:0;
 
         }
 
 
         .nav-link {
 
-            position:
-                relative;
+            position:relative;
 
-            min-height:
-                40px;
+            min-height:40px;
 
-            padding:
-                0 9px;
+            padding:0 9px;
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                5px;
+            gap:5px;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
             color:
                 var(--text-soft);
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            font-weight:
-                700;
+            font-weight:700;
 
-            white-space:
-                nowrap;
+            white-space:nowrap;
 
-            transition:
-                .2s ease;
+            transition:.2s ease;
 
         }
 
 
         .nav-link i {
-
-            font-size:
-                9px;
-
+            font-size:9px;
         }
 
 
         .nav-link:hover {
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:
                 var(--primary-soft);
@@ -473,8 +403,7 @@
 
         .nav-link.active {
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:
                 var(--primary-soft);
@@ -484,26 +413,18 @@
 
         .nav-link.active::after {
 
-            content:
-                "";
+            content:"";
 
-            position:
-                absolute;
+            position:absolute;
 
-            left:
-                12px;
+            left:12px;
+            right:12px;
 
-            right:
-                12px;
+            bottom:3px;
 
-            bottom:
-                3px;
+            height:2px;
 
-            height:
-                2px;
-
-            border-radius:
-                2px;
+            border-radius:2px;
 
             background:
                 linear-gradient(
@@ -521,64 +442,47 @@
 
         .header-actions {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                flex-end;
+            justify-content:flex-end;
 
-            gap:
-                6px;
+            gap:6px;
 
         }
 
 
         .header-icon {
 
-            position:
-                relative;
+            position:relative;
 
-            width:
-                39px;
+            width:39px;
+            height:39px;
 
-            height:
-                39px;
+            display:inline-flex;
 
-            display:
-                inline-flex;
+            align-items:center;
 
-            align-items:
-                center;
+            justify-content:center;
 
-            justify-content:
-                center;
+            border:1px solid var(--border);
 
-            border:
-                1px solid
-                var(--border);
+            border-radius:10px;
 
-            border-radius:
-                10px;
-
-            color:
-                var(--text-soft);
+            color:var(--text-soft);
 
             background:
                 var(--white);
 
-            font-size:
-                10px;
+            font-size:10px;
 
         }
 
 
         .header-icon:hover {
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:
                 var(--primary-soft);
@@ -588,166 +492,142 @@
 
         .notification-dot {
 
-            position:
-                absolute;
+            position:absolute;
 
-            top:
-                4px;
+            top:4px;
+            right:4px;
 
-            right:
-                4px;
+            width:7px;
+            height:7px;
 
-            width:
-                7px;
+            border:2px solid white;
 
-            height:
-                7px;
-
-            border:
-                2px solid
-                white;
-
-            border-radius:
-                50%;
+            border-radius:50%;
 
             background:
                 var(--accent);
 
-            display:
-                none;
+            display:none;
+
+        }
+
+
+        .notification-dot.pulse {
+
+            display:block;
+
+            animation:
+                notificationPulse 1s ease-in-out infinite;
+
+        }
+
+
+        @keyframes notificationPulse {
+
+            0% {
+                transform:scale(1);
+            }
+
+            50% {
+                transform:scale(1.45);
+            }
+
+            100% {
+                transform:scale(1);
+            }
 
         }
 
 
         .profile-shortcut {
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                6px;
+            gap:6px;
 
-            padding:
-                3px 7px 3px 3px;
+            padding:3px 7px 3px 3px;
 
-            border:
-                1px solid
-                var(--border);
+            border:1px solid var(--border);
 
-            border-radius:
-                10px;
+            border-radius:10px;
 
-            background:
-                white;
+            background:white;
 
         }
 
 
         .profile-shortcut-avatar {
 
-            width:
-                31px;
+            width:31px;
+            height:31px;
 
-            height:
-                31px;
+            border-radius:8px;
 
-            border-radius:
-                8px;
+            object-fit:cover;
 
-            object-fit:
-                cover;
-
-            background:
-                #efeff4;
+            background:#efeff4;
 
         }
 
 
         .profile-shortcut-name {
 
-            max-width:
-                74px;
+            max-width:74px;
 
-            white-space:
-                nowrap;
+            white-space:nowrap;
 
-            overflow:
-                hidden;
+            overflow:hidden;
 
-            text-overflow:
-                ellipsis;
+            text-overflow:ellipsis;
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
 
         .mobile-menu-button {
 
-            display:
-                none;
+            display:none;
 
-            width:
-                40px;
+            width:40px;
+            height:40px;
 
-            height:
-                40px;
+            align-items:center;
 
-            align-items:
-                center;
+            justify-content:center;
 
-            justify-content:
-                center;
+            border:1px solid var(--border);
 
-            border:
-                1px solid
-                var(--border);
+            border-radius:10px;
 
-            border-radius:
-                10px;
+            background:white;
 
-            background:
-                white;
-
-            color:
-                var(--text-soft);
+            color:var(--text-soft);
 
         }
 
 
         /* =====================================================
-           MOBILE NAV
+           MOBILE NAVIGATION
         ====================================================== */
 
         .mobile-navigation {
 
-            position:
-                fixed;
+            position:fixed;
 
-            top:
-                76px;
+            top:76px;
+            left:0;
+            right:0;
 
-            left:
-                0;
+            z-index:1900;
 
-            right:
-                0;
+            display:none;
 
-            z-index:
-                1900;
-
-            display:
-                none;
-
-            padding:
-                8px;
+            padding:8px;
 
             background:
                 rgba(255,255,255,.98);
@@ -763,90 +643,68 @@
 
 
         .mobile-navigation.open {
-
-            display:
-                block;
-
+            display:block;
         }
 
 
         .mobile-nav-grid {
 
-            display:
-                grid;
+            display:grid;
 
             grid-template-columns:
                 repeat(2,minmax(0,1fr));
 
-            gap:
-                6px;
+            gap:6px;
 
         }
 
 
         .mobile-nav-link {
 
-            min-height:
-                48px;
+            min-height:48px;
 
-            padding:
-                8px;
+            padding:8px;
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                7px;
+            gap:7px;
 
-            border:
-                1px solid
-                var(--border);
+            border:1px solid var(--border);
 
-            border-radius:
-                10px;
+            border-radius:10px;
 
-            color:
-                var(--text-soft);
+            color:var(--text-soft);
 
-            background:
-                white;
+            background:white;
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
 
         .mobile-nav-link i {
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
-            font-size:
-                11px;
+            font-size:11px;
 
         }
 
 
         .mobile-nav-link.active {
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:
                 var(--primary-soft);
 
-            border-color:
-                #ddd6fe;
+            border-color:#ddd6fe;
 
         }
 
@@ -863,8 +721,7 @@
                     var(--container)
                 );
 
-            margin:
-                auto;
+            margin:auto;
 
             padding:
                 25px 0 55px;
@@ -878,24 +735,19 @@
 
         .hero {
 
-            position:
-                relative;
+            position:relative;
 
-            overflow:
-                hidden;
+            overflow:hidden;
 
-            padding:
-                32px;
+            padding:32px;
 
-            margin-bottom:
-                18px;
+            margin-bottom:18px;
 
             border:
                 1px solid
                 rgba(109,40,217,.12);
 
-            border-radius:
-                22px;
+            border-radius:22px;
 
             background:
 
@@ -921,40 +773,31 @@
 
         .hero-badge {
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                6px;
+            gap:6px;
 
-            padding:
-                6px 9px;
+            padding:6px 9px;
 
-            border-radius:
-                999px;
+            border-radius:999px;
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:
                 var(--primary-soft);
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
 
         .hero h1 {
 
-            margin-top:
-                9px;
+            margin-top:9px;
 
             font-family:
                 "Playfair Display",
@@ -963,8 +806,7 @@
             font-size:
                 clamp(28px,4vw,46px);
 
-            line-height:
-                1.08;
+            line-height:1.08;
 
         }
 
@@ -978,65 +820,53 @@
                     var(--accent)
                 );
 
-            -webkit-background-clip:
-                text;
+            -webkit-background-clip:text;
+            background-clip:text;
 
-            background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
+            -webkit-text-fill-color:transparent;
 
         }
 
 
         .hero p {
 
-            max-width:
-                700px;
+            max-width:700px;
 
-            margin-top:
-                8px;
+            margin-top:8px;
 
             color:
                 var(--text-soft);
 
-            font-size:
-                10px;
+            font-size:10px;
 
-            line-height:
-                1.7;
+            line-height:1.7;
 
         }
 
 
         /* =====================================================
-           PREMIUM MESSAGE
+           PREMIUM NOTICE
         ====================================================== */
 
         .premium-note {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                9px;
+            justify-content:space-between;
 
-            margin-bottom:
-                15px;
+            gap:12px;
 
-            padding:
-                11px 13px;
+            margin-bottom:15px;
+
+            padding:13px 15px;
 
             border:
                 1px solid
                 #eadcff;
 
-            border-radius:
-                12px;
+            border-radius:13px;
 
             background:
                 #fcfaff;
@@ -1044,45 +874,143 @@
             color:
                 var(--text-soft);
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            line-height:
-                1.5;
+            line-height:1.5;
 
         }
 
 
-        .premium-note i {
+        .premium-note-left {
 
-            color:
-                var(--primary);
+            display:flex;
 
-            flex:
-                0 0 auto;
+            align-items:center;
+
+            gap:9px;
+
+            min-width:0;
 
         }
 
 
-        .premium-note a {
+        .premium-note-left i {
+
+            color:var(--primary);
+
+            flex:0 0 auto;
+
+        }
+
+
+        .premium-note-copy {
+
+            min-width:0;
+
+        }
+
+
+        .premium-note-copy strong {
 
             color:
-                var(--primary);
-
-            font-weight:
-                800;
+                var(--text);
 
         }
 
 
         /* =====================================================
-           FILTER CARD
+           PREMIUM BUTTON
+        ====================================================== */
+
+        .premium-action {
+
+            flex:0 0 auto;
+
+            min-width:112px;
+
+            min-height:42px;
+
+            padding:0 17px;
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:7px;
+
+            border:none;
+
+            border-radius:10px;
+
+            color:#ffffff !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            font-size:9px;
+
+            font-weight:800;
+
+            text-decoration:none;
+
+            box-shadow:
+                0 7px 19px rgba(109,40,217,.23);
+
+            transition:
+                transform .18s ease,
+                box-shadow .18s ease;
+
+        }
+
+
+        .premium-action i {
+
+            color:#ffffff !important;
+
+            font-size:11px;
+
+        }
+
+
+        .premium-action:hover,
+        .premium-action:focus,
+        .premium-action:active {
+
+            color:#ffffff !important;
+
+            text-decoration:none;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 10px 25px rgba(109,40,217,.29);
+
+        }
+
+
+        .premium-action:hover i,
+        .premium-action:focus i,
+        .premium-action:active i {
+
+            color:#ffffff !important;
+
+        }
+
+
+        /* =====================================================
+           FILTERS
         ====================================================== */
 
         .filters {
 
-            display:
-                grid;
+            display:grid;
 
             grid-template-columns:
                 minmax(260px,1.5fr)
@@ -1090,24 +1018,19 @@
                 minmax(210px,.8fr)
                 auto;
 
-            gap:
-                9px;
+            gap:9px;
 
-            margin-bottom:
-                19px;
+            margin-bottom:19px;
 
-            padding:
-                13px;
+            padding:13px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                15px;
+            border-radius:15px;
 
-            background:
-                white;
+            background:white;
 
             box-shadow:
                 var(--shadow-sm);
@@ -1117,22 +1040,18 @@
 
         .filter-field {
 
-            position:
-                relative;
+            position:relative;
 
         }
 
 
         .filter-field > i {
 
-            position:
-                absolute;
+            position:absolute;
 
-            left:
-                12px;
+            left:12px;
 
-            top:
-                50%;
+            top:50%;
 
             transform:
                 translateY(-50%);
@@ -1140,11 +1059,9 @@
             color:
                 var(--text-muted);
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            pointer-events:
-                none;
+            pointer-events:none;
 
         }
 
@@ -1152,11 +1069,9 @@
         .filter-field input,
         .filter-field select {
 
-            width:
-                100%;
+            width:100%;
 
-            height:
-                41px;
+            height:41px;
 
             padding:
                 0 11px 0 34px;
@@ -1165,11 +1080,9 @@
                 1px solid
                 var(--border);
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
-            outline:
-                none;
+            outline:none;
 
             color:
                 var(--text);
@@ -1177,8 +1090,7 @@
             background:
                 #fafafa;
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
@@ -1186,11 +1098,9 @@
         .filter-field input:focus,
         .filter-field select:focus {
 
-            background:
-                white;
+            background:white;
 
-            border-color:
-                #c4b5fd;
+            border-color:#c4b5fd;
 
             box-shadow:
                 0 0 0 3px
@@ -1201,35 +1111,25 @@
 
         .search-button {
 
-            min-width:
-                94px;
+            min-width:94px;
 
-            height:
-                41px;
+            height:41px;
 
-            padding:
-                0 12px;
+            padding:0 12px;
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                6px;
+            gap:6px;
 
-            border:
-                none;
+            border:none;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
-            color:
-                white;
+            color:white;
 
             background:
                 linear-gradient(
@@ -1238,107 +1138,83 @@
                     var(--accent)
                 );
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
-
-        }
-
-
-        .search-button:hover {
-
-            opacity:
-                .94;
+            font-weight:800;
 
         }
 
 
         /* =====================================================
-           RESULTS
+           RESULTS HEADER
         ====================================================== */
 
         .results-header {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                space-between;
+            justify-content:space-between;
 
-            gap:
-                15px;
+            gap:15px;
 
-            margin-bottom:
-                12px;
+            margin-bottom:12px;
 
         }
 
 
         .results-title {
 
-            font-size:
-                14px;
+            font-size:14px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
 
         .results-count {
 
-            margin-top:
-                2px;
+            margin-top:2px;
 
             color:
                 var(--text-muted);
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
 
         .result-sort {
 
-            height:
-                34px;
+            height:34px;
 
-            padding:
-                0 10px;
+            padding:0 10px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
             color:
                 var(--text-soft);
 
-            background:
-                white;
+            background:white;
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
 
         /* =====================================================
            USER GRID
+           INDEPENDENT SCROLL
         ====================================================== */
 
         .user-grid {
 
-            display:
-                grid;
+            display:grid;
 
             grid-template-columns:
                 repeat(
@@ -1346,30 +1222,74 @@
                     minmax(0,1fr)
                 );
 
-            gap:
-                15px;
+            gap:15px;
+
+            max-height:
+                650px;
+
+            overflow-y:auto;
+
+            overflow-x:hidden;
+
+            padding:
+                2px 7px 14px 2px;
+
+            align-content:start;
+
+            overscroll-behavior:contain;
+
+            scrollbar-width:thin;
+
+            scrollbar-color:
+                #c4b5fd
+                #f4f4f8;
 
         }
 
 
-        /* =====================================================
-           USER CARD
-        ====================================================== */
+        .user-grid::-webkit-scrollbar {
+
+            width:8px;
+
+        }
+
+
+        .user-grid::-webkit-scrollbar-track {
+
+            background:#f0f0f5;
+
+            border-radius:20px;
+
+        }
+
+
+        .user-grid::-webkit-scrollbar-thumb {
+
+            background:#c4b5fd;
+
+            border-radius:20px;
+
+        }
+
+
+        .user-grid::-webkit-scrollbar-thumb:hover {
+
+            background:#a78bfa;
+
+        }
+
 
         .user-card {
 
-            overflow:
-                hidden;
+            overflow:hidden;
 
-            background:
-                white;
+            background:white;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                16px;
+            border-radius:16px;
 
             box-shadow:
                 var(--shadow-sm);
@@ -1394,37 +1314,27 @@
 
         .photo-area {
 
-            position:
-                relative;
+            position:relative;
 
-            width:
-                100%;
+            width:100%;
 
-            aspect-ratio:
-                1 / 1.08;
+            aspect-ratio:1 / 1.08;
 
-            overflow:
-                hidden;
+            overflow:hidden;
 
-            background:
-                #efeff4;
+            background:#efeff4;
 
         }
 
 
         .profile-photo {
 
-            width:
-                100%;
+            width:100%;
+            height:100%;
 
-            height:
-                100%;
+            object-fit:cover;
 
-            object-fit:
-                cover;
-
-            cursor:
-                pointer;
+            cursor:pointer;
 
             transition:
                 transform .35s ease;
@@ -1432,7 +1342,8 @@
         }
 
 
-        .user-card:hover .profile-photo {
+        .user-card:hover
+        .profile-photo {
 
             transform:
                 scale(1.025);
@@ -1442,32 +1353,22 @@
 
         .online-status {
 
-            position:
-                absolute;
+            position:absolute;
 
-            top:
-                10px;
+            top:10px;
+            left:10px;
 
-            left:
-                10px;
+            display:inline-flex;
 
-            display:
-                inline-flex;
+            align-items:center;
 
-            align-items:
-                center;
+            gap:4px;
 
-            gap:
-                4px;
+            padding:5px 7px;
 
-            padding:
-                5px 7px;
+            border-radius:999px;
 
-            border-radius:
-                999px;
-
-            color:
-                white;
+            color:white;
 
             background:
                 rgba(0,0,0,.52);
@@ -1475,105 +1376,52 @@
             backdrop-filter:
                 blur(7px);
 
-            font-size:
-                6.5px;
+            font-size:6.5px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
 
         .online-status i {
 
-            color:
-                #4ade80;
+            color:#4ade80;
 
-            font-size:
-                5.5px;
+            font-size:5.5px;
 
         }
 
 
-        .verified-badge {
-
-            position:
-                absolute;
-
-            top:
-                10px;
-
-            right:
-                10px;
-
-            width:
-                27px;
-
-            height:
-                27px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                8px;
-
-            color:
-                white;
-
-            background:
-                rgba(37,99,235,.90);
-
-            font-size:
-                8px;
-
-        }
-
+        /* =====================================================
+           NO VERIFICATION TICKS
+        ====================================================== */
 
         .photo-connect-overlay {
 
-            position:
-                absolute;
+            position:absolute;
 
-            left:
-                9px;
+            left:9px;
+            right:9px;
 
-            right:
-                9px;
+            bottom:9px;
 
-            bottom:
-                9px;
+            display:flex;
 
-            display:
-                flex;
+            align-items:center;
 
-            align-items:
-                center;
+            justify-content:space-between;
 
-            justify-content:
-                space-between;
+            gap:7px;
 
-            gap:
-                7px;
-
-            padding:
-                7px 8px;
+            padding:7px 8px;
 
             border:
                 1px solid
                 rgba(255,255,255,.16);
 
-            border-radius:
-                10px;
+            border-radius:10px;
 
-            color:
-                white;
+            color:white;
 
             background:
                 rgba(0,0,0,.44);
@@ -1586,40 +1434,30 @@
 
         .photo-connect-overlay span {
 
-            font-size:
-                6.5px;
+            font-size:6.5px;
 
         }
 
 
         .overlay-connect {
 
-            min-height:
-                29px;
+            min-height:29px;
 
-            padding:
-                0 8px;
+            padding:0 8px;
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                4px;
+            gap:4px;
 
-            border:
-                none;
+            border:none;
 
-            border-radius:
-                8px;
+            border-radius:8px;
 
-            color:
-                white;
+            color:white;
 
             background:
                 linear-gradient(
@@ -1628,142 +1466,101 @@
                     var(--accent)
                 );
 
-            font-size:
-                7px;
+            font-size:7px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
-            white-space:
-                nowrap;
+            white-space:nowrap;
 
         }
 
 
         .user-body {
 
-            padding:
-                12px;
+            padding:12px;
 
         }
 
 
         .user-name {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            gap:
-                4px;
+            gap:4px;
 
-            font-size:
-                10px;
+            font-size:10px;
 
-            font-weight:
-                800;
-
-        }
-
-
-        .user-name .check {
-
-            color:
-                var(--blue);
-
-            font-size:
-                7px;
+            font-weight:800;
 
         }
 
 
         .user-username {
 
-            margin-top:
-                2px;
+            margin-top:2px;
 
             color:
                 var(--text-muted);
 
-            font-size:
-                7px;
+            font-size:7px;
 
         }
 
 
         .user-meta {
 
-            display:
-                flex;
+            display:flex;
 
-            flex-wrap:
-                wrap;
+            flex-wrap:wrap;
 
-            gap:
-                5px;
+            gap:5px;
 
-            margin-top:
-                8px;
+            margin-top:8px;
 
         }
 
 
         .meta-pill {
 
-            padding:
-                4px 6px;
+            padding:4px 6px;
 
-            border-radius:
-                6px;
+            border-radius:6px;
 
             color:
                 var(--text-soft);
 
-            background:
-                #f5f5f7;
+            background:#f5f5f7;
 
-            font-size:
-                6.5px;
+            font-size:6.5px;
 
-            font-weight:
-                700;
+            font-weight:700;
 
         }
 
 
         .connect-button {
 
-            width:
-                100%;
+            width:100%;
 
-            min-height:
-                35px;
+            min-height:35px;
 
-            margin-top:
-                10px;
+            margin-top:10px;
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                5px;
+            gap:5px;
 
-            border:
-                none;
+            border:none;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
-            color:
-                white;
+            color:white;
 
             background:
                 linear-gradient(
@@ -1772,19 +1569,9 @@
                     var(--accent)
                 );
 
-            font-size:
-                7.5px;
+            font-size:7.5px;
 
-            font-weight:
-                800;
-
-        }
-
-
-        .connect-button:hover {
-
-            opacity:
-                .94;
+            font-weight:800;
 
         }
 
@@ -1799,45 +1586,34 @@
 
         .profile-button {
 
-            width:
-                100%;
+            width:100%;
 
-            min-height:
-                34px;
+            min-height:34px;
 
-            margin-top:
-                7px;
+            margin-top:7px;
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                5px;
+            gap:5px;
 
             border:
                 1px solid
                 #ddd6fe;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
             color:
                 var(--primary);
 
-            background:
-                white;
+            background:white;
 
-            font-size:
-                7.5px;
+            font-size:7.5px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
@@ -1859,62 +1635,45 @@
             grid-column:
                 1 / -1;
 
-            min-height:
-                230px;
+            min-height:230px;
 
-            padding:
-                30px;
+            padding:30px;
 
-            display:
-                flex;
+            display:flex;
 
-            flex-direction:
-                column;
+            flex-direction:column;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            text-align:
-                center;
+            text-align:center;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                16px;
+            border-radius:16px;
 
-            background:
-                white;
+            background:white;
 
         }
 
 
         .state-icon {
 
-            width:
-                50px;
+            width:50px;
+            height:50px;
 
-            height:
-                50px;
+            margin-bottom:10px;
 
-            margin-bottom:
-                10px;
+            display:flex;
 
-            display:
-                flex;
+            align-items:center;
 
-            align-items:
-                center;
+            justify-content:center;
 
-            justify-content:
-                center;
-
-            border-radius:
-                14px;
+            border-radius:14px;
 
             color:
                 var(--primary);
@@ -1927,72 +1686,55 @@
 
         .state-card h3 {
 
-            font-size:
-                12px;
+            font-size:12px;
 
         }
 
 
         .state-card p {
 
-            max-width:
-                450px;
+            max-width:450px;
 
-            margin-top:
-                4px;
+            margin-top:4px;
 
             color:
                 var(--text-muted);
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            line-height:
-                1.6;
+            line-height:1.6;
 
         }
 
 
         .retry-button {
 
-            min-height:
-                36px;
+            min-height:36px;
 
-            margin-top:
-                12px;
+            margin-top:12px;
 
-            padding:
-                0 13px;
+            padding:0 13px;
 
-            display:
-                inline-flex;
+            display:inline-flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                center;
+            justify-content:center;
 
-            gap:
-                6px;
+            gap:6px;
 
-            border:
-                none;
+            border:none;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
-            color:
-                white;
+            color:white;
 
             background:
                 var(--primary);
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
+            font-weight:800;
 
         }
 
@@ -2003,11 +1745,9 @@
 
         .footer {
 
-            background:
-                #17151b;
+            background:#17151b;
 
-            color:
-                white;
+            color:white;
 
         }
 
@@ -2020,8 +1760,7 @@
                     var(--container)
                 );
 
-            margin:
-                auto;
+            margin:auto;
 
             padding:
                 38px 0 18px;
@@ -2031,111 +1770,159 @@
 
         .footer-grid {
 
-            display:
-                grid;
+            display:grid;
 
             grid-template-columns:
                 1.5fr 1fr 1fr 1fr;
 
-            gap:
-                30px;
+            gap:30px;
 
-            padding-bottom:
-                25px;
+            padding-bottom:25px;
 
         }
 
 
         .footer-description {
 
-            max-width:
-                320px;
+            max-width:320px;
 
-            margin-top:
-                10px;
+            margin-top:10px;
 
-            color:
-                #9d99a5;
+            color:#9d99a5;
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            line-height:
-                1.7;
+            line-height:1.7;
 
         }
 
 
         .footer-heading {
 
-            margin-bottom:
-                9px;
+            margin-bottom:9px;
 
-            font-size:
-                10px;
+            font-size:10px;
 
         }
 
 
         .footer-links {
 
-            display:
-                flex;
+            display:flex;
 
-            flex-direction:
-                column;
+            flex-direction:column;
 
-            gap:
-                6px;
+            gap:6px;
 
         }
 
 
         .footer-links a {
 
-            color:
-                #9d99a5;
+            color:#9d99a5;
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
 
         .footer-links a:hover {
 
-            color:
-                white;
+            color:white;
 
         }
 
 
         .footer-bottom {
 
-            display:
-                flex;
+            display:flex;
 
-            align-items:
-                center;
+            align-items:center;
 
-            justify-content:
-                space-between;
+            justify-content:space-between;
 
-            gap:
-                15px;
+            gap:15px;
 
-            padding-top:
-                15px;
+            padding-top:15px;
 
             border-top:
                 1px solid
                 rgba(255,255,255,.08);
 
-            color:
-                #716d78;
+            color:#716d78;
 
-            font-size:
-                7px;
+            font-size:7px;
+
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .toast {
+
+            position:fixed;
+
+            left:50%;
+
+            bottom:24px;
+
+            z-index:7000;
+
+            max-width:
+                calc(100% - 30px);
+
+            padding:
+                11px 15px;
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
+
+            opacity:0;
+
+            pointer-events:none;
+
+            border-radius:11px;
+
+            color:white;
+
+            background:
+                #18181b;
+
+            font-size:8px;
+
+            font-weight:700;
+
+            transition:.22s ease;
+
+        }
+
+
+        .toast.show {
+
+            opacity:1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+        }
+
+
+        .toast.success {
+
+            background:
+                var(--green);
+
+        }
+
+
+        .toast.error {
+
+            background:
+                var(--red);
 
         }
 
@@ -2144,34 +1931,27 @@
            RESPONSIVE
         ====================================================== */
 
-        @media (max-width: 1180px) {
+        @media (max-width:1180px) {
 
             .nav-link {
 
-                padding:
-                    0 7px;
+                padding:0 7px;
 
-                font-size:
-                    8px;
+                font-size:8px;
 
             }
-
 
             .nav-link i {
 
-                font-size:
-                    8px;
+                font-size:8px;
 
             }
-
 
             .profile-shortcut-name {
 
-                display:
-                    none;
+                display:none;
 
             }
-
 
             .user-grid {
 
@@ -2186,33 +1966,19 @@
         }
 
 
-        @media (max-width: 980px) {
+        @media (max-width:980px) {
 
             .main-navigation {
 
-                display:
-                    none;
+                display:none;
 
             }
-
 
             .mobile-menu-button {
 
-                display:
-                    inline-flex;
+                display:inline-flex;
 
             }
-
-
-            .header-inner {
-
-                grid-template-columns:
-                    auto
-                    1fr
-                    auto;
-
-            }
-
 
             .filters {
 
@@ -2221,59 +1987,54 @@
 
             }
 
-
             .search-button {
 
-                width:
-                    100%;
+                width:100%;
+
+            }
+
+            .user-grid {
+
+                max-height:
+                    610px;
 
             }
 
         }
 
 
-        @media (max-width: 760px) {
+        @media (max-width:760px) {
 
             .page {
 
                 width:
                     calc(100% - 22px);
 
-                padding-top:
-                    17px;
+                padding-top:17px;
 
             }
-
 
             .header-inner {
 
                 width:
                     calc(100% - 20px);
 
-                min-height:
-                    70px;
+                min-height:70px;
 
             }
-
 
             .header-icon {
 
-                width:
-                    36px;
-
-                height:
-                    36px;
+                width:36px;
+                height:36px;
 
             }
-
 
             .profile-shortcut {
 
-                display:
-                    none;
+                display:none;
 
             }
-
 
             .user-grid {
 
@@ -2283,27 +2044,24 @@
                         minmax(0,1fr)
                     );
 
-                gap:
-                    10px;
+                gap:10px;
+
+                max-height:
+                    560px;
 
             }
-
 
             .filters {
 
-                grid-template-columns:
-                    1fr;
+                grid-template-columns:1fr;
 
             }
-
 
             .search-button {
 
-                width:
-                    100%;
+                width:100%;
 
             }
-
 
             .footer-grid {
 
@@ -2318,41 +2076,27 @@
         }
 
 
-        @media (max-width: 520px) {
+        @media (max-width:520px) {
 
             .brand-text {
 
-                display:
-                    none;
+                display:none;
 
             }
-
 
             .hero {
 
-                padding:
-                    22px;
+                padding:22px;
 
             }
-
 
             .hero h1 {
 
-                font-size:
-                    29px;
+                font-size:29px;
 
             }
-
 
             .premium-note {
-
-                align-items:
-                    flex-start;
-
-            }
-
-
-            .results-header {
 
                 align-items:
                     flex-start;
@@ -2362,14 +2106,29 @@
 
             }
 
+            .premium-action {
 
-            .result-sort {
+                width:100%;
 
-                width:
-                    100%;
+                min-height:44px;
+
+                font-size:9px;
 
             }
 
+            .results-header {
+
+                align-items:flex-start;
+
+                flex-direction:column;
+
+            }
+
+            .result-sort {
+
+                width:100%;
+
+            }
 
             .user-grid {
 
@@ -2379,90 +2138,70 @@
                         minmax(0,1fr)
                     );
 
-                gap:
-                    8px;
+                gap:8px;
+
+                max-height:
+                    520px;
 
             }
-
 
             .user-body {
 
-                padding:
-                    9px;
+                padding:9px;
 
             }
-
 
             .user-name {
 
-                font-size:
-                    8.5px;
+                font-size:8.5px;
 
             }
-
-
-            .user-username {
-
-                font-size:
-                    6.5px;
-
-            }
-
 
             .meta-pill {
 
-                font-size:
-                    5.8px;
+                font-size:5.8px;
 
             }
-
 
             .photo-connect-overlay span {
 
-                display:
-                    none;
+                display:none;
 
             }
-
 
             .overlay-connect {
 
-                width:
-                    100%;
+                width:100%;
 
             }
-
 
             .footer-grid {
 
-                grid-template-columns:
-                    1fr;
+                grid-template-columns:1fr;
 
             }
 
-
             .footer-bottom {
 
-                flex-direction:
-                    column;
+                flex-direction:column;
 
-                align-items:
-                    flex-start;
+                align-items:flex-start;
 
             }
 
         }
 
 
-        @media (max-width: 360px) {
+        @media (max-width:360px) {
 
             .user-grid {
 
-                grid-template-columns:
-                    1fr;
+                grid-template-columns:1fr;
+
+                max-height:
+                    600px;
 
             }
-
 
             .mobile-nav-grid {
 
@@ -2490,15 +2229,10 @@
     <div class="header-inner">
 
 
-        <!-- =================================================
-             LOGO
-        ================================================== -->
-
         <a
             href="dashboard.html"
             class="brand"
             aria-label="LOVEMI Dashboard">
-
 
             <img
                 src="assets/logo1/logo1.png"
@@ -2522,13 +2256,8 @@
 
             </span>
 
-
         </a>
 
-
-        <!-- =================================================
-             FULL DESKTOP NAVIGATION
-        ================================================== -->
 
         <nav
             class="main-navigation"
@@ -2541,9 +2270,7 @@
 
                 <i class="fa-solid fa-house"></i>
 
-                <span>
-                    Dashboard
-                </span>
+                <span>Dashboard</span>
 
             </a>
 
@@ -2554,9 +2281,7 @@
 
                 <i class="fa-solid fa-compass"></i>
 
-                <span>
-                    Discover
-                </span>
+                <span>Discover</span>
 
             </a>
 
@@ -2567,9 +2292,7 @@
 
                 <i class="fa-solid fa-user-group"></i>
 
-                <span>
-                    Connections
-                </span>
+                <span>Connections</span>
 
             </a>
 
@@ -2580,24 +2303,12 @@
 
                 <i class="fa-regular fa-message"></i>
 
-                <span>
-                    Messages
-                </span>
+                <span>Messages</span>
 
             </a>
 
 
-            <a
-                href="profile.html"
-                class="nav-link">
 
-                <i class="fa-regular fa-user"></i>
-
-                <span>
-                    Profile
-                </span>
-
-            </a>
 
 
             <a
@@ -2606,9 +2317,7 @@
 
                 <i class="fa-regular fa-bell"></i>
 
-                <span>
-                    Notifications
-                </span>
+                <span>Notifications</span>
 
             </a>
 
@@ -2619,9 +2328,7 @@
 
                 <i class="fa-solid fa-gear"></i>
 
-                <span>
-                    Settings
-                </span>
+                <span>Settings</span>
 
             </a>
 
@@ -2632,19 +2339,13 @@
 
                 <i class="fa-solid fa-crown"></i>
 
-                <span>
-                    Premium
-                </span>
+                <span>Premium</span>
 
             </a>
 
 
         </nav>
 
-
-        <!-- =================================================
-             HEADER ACTIONS
-        ================================================== -->
 
         <div class="header-actions">
 
@@ -2655,15 +2356,12 @@
                 title="Notifications"
                 aria-label="Notifications">
 
-
                 <i class="fa-regular fa-bell"></i>
-
 
                 <span
                     id="notificationDot"
                     class="notification-dot">
                 </span>
-
 
             </a>
 
@@ -2692,9 +2390,7 @@
 
             <a
                 href="profile.html"
-                class="profile-shortcut"
-                aria-label="My profile">
-
+                class="profile-shortcut">
 
                 <img
                     id="profileAvatar"
@@ -2706,7 +2402,6 @@
                         this.src='assets/images/defaults/default-avatar-male.png';
                     ">
 
-
                 <span
                     id="profileName"
                     class="profile-shortcut-name">
@@ -2714,7 +2409,6 @@
                     Account
 
                 </span>
-
 
             </a>
 
@@ -2732,7 +2426,6 @@
 
 
         </div>
-
 
     </div>
 
@@ -2796,15 +2489,7 @@
         </a>
 
 
-        <a
-            href="profile.html"
-            class="mobile-nav-link">
 
-            <i class="fa-regular fa-user"></i>
-
-            Profile
-
-        </a>
 
 
         <a
@@ -2852,10 +2537,6 @@
 <main class="page">
 
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
     <section class="hero">
 
 
@@ -2879,10 +2560,9 @@
 
         <p>
 
-            Browse approved profiles from members who have
-            completed account verification. Search by name,
-            gender or country. Private phone and WhatsApp
-            details are never displayed on this page.
+            Search approved members, open their profiles,
+            view their content, and create connections when
+            Premium access is active.
 
         </p>
 
@@ -2891,33 +2571,47 @@
 
 
     <!-- =====================================================
-         PREMIUM NOTICE
+         PREMIUM STATUS
     ====================================================== -->
 
-    <div class="premium-note">
+    <div
+        id="premiumNote"
+        class="premium-note">
 
 
-        <i class="fa-solid fa-shield-heart"></i>
+        <div class="premium-note-left">
+
+            <i class="fa-solid fa-shield-heart"></i>
 
 
-        <span>
+            <div
+                id="premiumNoteCopy"
+                class="premium-note-copy">
 
-            You can discover profiles without Premium.
-            A Premium membership is required to create
-            a connection with another member.
+                Checking your Premium status...
 
-            <a href="premium.html">
-                Get Premium
-            </a>
+            </div>
 
-        </span>
+        </div>
+
+
+        <a
+            id="premiumAction"
+            class="premium-action"
+            href="premium.html">
+
+            <i class="fa-solid fa-crown"></i>
+
+            Premium
+
+        </a>
 
 
     </div>
 
 
     <!-- =====================================================
-         FILTER CARD
+         FILTERS
     ====================================================== -->
 
     <section class="filters">
@@ -2925,9 +2619,7 @@
 
         <div class="filter-field">
 
-
             <i class="fa-solid fa-magnifying-glass"></i>
-
 
             <input
                 type="search"
@@ -2936,61 +2628,47 @@
                 autocomplete="off"
                 maxlength="100">
 
-
         </div>
 
 
         <div class="filter-field">
 
-
             <i class="fa-solid fa-venus-mars"></i>
 
-
             <select id="genderFilter">
-
 
                 <option value="">
                     All genders
                 </option>
 
-
                 <option value="Male">
                     Male
                 </option>
-
 
                 <option value="Female">
                     Female
                 </option>
 
-
                 <option value="Other">
                     Other
                 </option>
 
-
             </select>
-
 
         </div>
 
 
         <div class="filter-field">
 
-
             <i class="fa-solid fa-earth-africa"></i>
 
-
             <select id="countryFilter">
-
 
                 <option value="">
                     Loading countries...
                 </option>
 
-
             </select>
-
 
         </div>
 
@@ -2999,7 +2677,6 @@
             type="button"
             id="searchButton"
             class="search-button">
-
 
             <i class="fa-solid fa-filter"></i>
 
@@ -3020,20 +2697,17 @@
 
         <div>
 
-
             <div class="results-title">
-                People
+                Friends
             </div>
-
 
             <div
                 id="resultsCount"
                 class="results-count">
 
-                Loading profiles...
+                Loading members...
 
             </div>
-
 
         </div>
 
@@ -3042,21 +2716,17 @@
             id="sortFilter"
             class="result-sort">
 
-
             <option value="latest">
                 Latest members
             </option>
-
 
             <option value="online">
                 Online first
             </option>
 
-
             <option value="name">
                 Name A-Z
             </option>
-
 
         </select>
 
@@ -3075,26 +2745,20 @@
 
         <div class="state-card">
 
-
             <div class="state-icon">
 
                 <i class="fa-solid fa-spinner fa-spin"></i>
 
             </div>
 
-
             <h3>
                 Loading profiles...
             </h3>
 
-
             <p>
-
-                LOVEMI is loading approved members
-                directly from the database.
-
+                LOVEMI is loading approved members directly
+                from the database.
             </p>
-
 
         </div>
 
@@ -3116,8 +2780,6 @@
 
         <div class="footer-grid">
 
-
-            <!-- BRAND -->
 
             <div>
 
@@ -3143,21 +2805,23 @@
                             LOVEMI
                         </span>
 
-                        <span class="brand-tagline"
-                              style="color:#77717f;">
+                        <span
+                            class="brand-tagline"
+                            style="color:#77717f;">
+
                             DISCOVER • CONNECT • MEET
+
                         </span>
 
                     </span>
-
 
                 </a>
 
 
                 <p class="footer-description">
 
-                    Discover approved members, create meaningful
-                    connections and access secure LOVEMI services.
+                    Discover approved members, build meaningful
+                    friendships and create secure LOVEMI connections.
 
                 </p>
 
@@ -3165,119 +2829,89 @@
             </div>
 
 
-            <!-- EXPLORE -->
-
             <div>
-
 
                 <h3 class="footer-heading">
                     Explore
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="dashboard.html">
                         Dashboard
                     </a>
 
-
                     <a href="discover.html">
                         Discover
                     </a>
-
 
                     <a href="connections.html">
                         Connections
                     </a>
 
-
                     <a href="messages.html">
                         Messages
                     </a>
 
-
                 </div>
-
 
             </div>
 
 
-            <!-- ACCOUNT -->
-
             <div>
-
 
                 <h3 class="footer-heading">
                     Account
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="profile.html">
                         Profile
                     </a>
 
-
                     <a href="premium.html">
                         Premium
                     </a>
-
 
                     <a href="notifications.html">
                         Notifications
                     </a>
 
-
                     <a href="settings.html">
                         Settings
                     </a>
 
-
                 </div>
-
 
             </div>
 
 
-            <!-- HELP -->
-
             <div>
-
 
                 <h3 class="footer-heading">
                     Help
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="help.html">
                         Help Center
                     </a>
 
-
                     <a href="privacy.html">
                         Privacy
                     </a>
-
 
                     <a href="terms.html">
                         Terms
                     </a>
 
-
                     <a href="contact.html">
                         Contact
                     </a>
 
-
                 </div>
-
 
             </div>
 
@@ -3286,7 +2920,6 @@
 
 
         <div class="footer-bottom">
-
 
             <span>
 
@@ -3301,7 +2934,6 @@
                 Discover • Connect • Meet
             </span>
 
-
         </div>
 
 
@@ -3310,13 +2942,39 @@
 </footer>
 
 
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite">
+</div>
+
+
+<!-- =========================================================
+     NOTIFICATION SOUND
+     
+     Your LOVEMI project already contains notification audio
+     such as notification1.mp3.
+========================================================== -->
+
+<audio
+    id="notificationSound"
+    src="assets/audio/notification1.mp3"
+    preload="auto">
+</audio>
+
+
 <script>
 
 "use strict";
 
 
 /* =========================================================
-   API ENDPOINTS
+   API
 ========================================================= */
 
 const API = {
@@ -3330,8 +2988,31 @@ const API = {
     countries:
         "api/countries/list.php",
 
+    premium:
+        "api/premium/status.php",
+
     createConnection:
-        "api/connections/create.php"
+        "api/connections/create.php",
+
+    friendsCreate:
+        "api/friends/create.php",
+
+    /*
+     * NEW:
+     *
+     * Converts the internal database user ID into an encrypted
+     * public profile code.
+     */
+
+    profileCode:
+        "api/discover/profile-code.php",
+
+    /*
+     * Existing LOVEMI notification endpoint.
+     */
+
+    notificationCount:
+        "api/notifications/unread-count.php"
 
 };
 
@@ -3369,6 +3050,9 @@ const state = {
     premium:
         false,
 
+    premiumStatus:
+        "none",
+
     search:
         "",
 
@@ -3379,7 +3063,29 @@ const state = {
         "",
 
     sort:
-        "latest"
+        "latest",
+
+    pendingIntent:
+        null,
+
+    premiumWindow:
+        null,
+
+    /*
+     * Notification state.
+     */
+
+    notificationUnread:
+        0,
+
+    notificationInitialized:
+        false,
+
+    notificationTimer:
+        null,
+
+    notificationAudioUnlocked:
+        false
 
 };
 
@@ -3454,6 +3160,42 @@ const mobileNavigation =
     );
 
 
+const premiumNote =
+    document.getElementById(
+        "premiumNote"
+    );
+
+
+const premiumNoteCopy =
+    document.getElementById(
+        "premiumNoteCopy"
+    );
+
+
+const premiumAction =
+    document.getElementById(
+        "premiumAction"
+    );
+
+
+const toastBox =
+    document.getElementById(
+        "toast"
+    );
+
+
+const notificationDot =
+    document.getElementById(
+        "notificationDot"
+    );
+
+
+const notificationSound =
+    document.getElementById(
+        "notificationSound"
+    );
+
+
 /* =========================================================
    YEAR
 ========================================================= */
@@ -3465,7 +3207,7 @@ document.getElementById(
 
 
 /* =========================================================
-   ESCAPE HTML
+   ESCAPE
 ========================================================= */
 
 function escapeHtml(
@@ -3500,34 +3242,144 @@ function escapeHtml(
 
 
 /* =========================================================
-   IMAGE
+   SAFE URL
+========================================================= */
+
+function safeUrl(
+    value
+) {
+
+    if (
+        value
+        &&
+        typeof value === "object"
+    ) {
+
+        return safeUrl(
+            value.file_path
+            ??
+            value.url
+            ??
+            value.path
+            ??
+            value.src
+            ??
+            ""
+        );
+
+    }
+
+
+    const input =
+        String(
+            value
+            ??
+            ""
+        ).trim();
+
+
+    if (
+        !input
+    ) {
+
+        return "";
+
+    }
+
+
+    if (
+        input.startsWith(
+            "/"
+        )
+    ) {
+
+        return input;
+
+    }
+
+
+    if (
+        input.startsWith(
+            "https://"
+        )
+        ||
+        input.startsWith(
+            "http://"
+        )
+    ) {
+
+        return input;
+
+    }
+
+
+    return input;
+
+}
+
+
+/* =========================================================
+   USER IMAGE
 ========================================================= */
 
 function getUserImage(
     user
 ) {
 
-    const photo =
-        user.profile_photo
-        ||
-        user.photo_url
-        ||
-        user.avatar
-        ||
+    let photo =
+        user?.profile_photo
+        ??
+        user?.profilePhoto
+        ??
+        user?.profile_thumbnail
+        ??
+        user?.photo_url
+        ??
+        user?.avatar
+        ??
         "";
+
+
+    if (
+        typeof photo ===
+        "object"
+    ) {
+
+        photo =
+            photo.file_path
+            ??
+            photo.url
+            ??
+            photo.path
+            ??
+            photo.src
+            ??
+            "";
+
+    }
+
+
+    photo =
+        String(
+            photo
+            ??
+            ""
+        ).trim();
 
 
     if (
         photo
     ) {
 
-        return photo;
+        return safeUrl(
+            photo
+        );
 
     }
 
 
     return String(
-        user.gender
+        user?.gender
         ||
         ""
     ).toLowerCase()
@@ -3546,7 +3398,70 @@ function getUserImage(
 
 
 /* =========================================================
-   GET JSON
+   TOAST
+========================================================= */
+
+let toastTimer =
+    null;
+
+
+function showToast(
+    message,
+    type = "normal"
+) {
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastBox.textContent =
+        String(
+            message
+            ||
+            ""
+        );
+
+
+    toastBox.className =
+        "toast";
+
+
+    if (
+        type === "success"
+        ||
+        type === "error"
+    ) {
+
+        toastBox.classList.add(
+            type
+        );
+
+    }
+
+
+    toastBox.classList.add(
+        "show"
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function() {
+
+                toastBox.classList.remove(
+                    "show"
+                );
+
+            },
+            3200
+        );
+
+}
+
+
+/* =========================================================
+   JSON GET
 ========================================================= */
 
 async function apiGet(
@@ -3555,8 +3470,10 @@ async function apiGet(
 
     const separator =
         url.includes("?")
-            ? "&"
-            : "?";
+            ?
+            "&"
+            :
+            "?";
 
 
     const response =
@@ -3599,7 +3516,9 @@ async function apiGet(
     const contentType =
         response.headers.get(
             "content-type"
-        ) || "";
+        )
+        ||
+        "";
 
 
     if (
@@ -3628,7 +3547,7 @@ async function apiGet(
 
 
 /* =========================================================
-   POST JSON
+   JSON POST
 ========================================================= */
 
 async function apiPost(
@@ -3678,7 +3597,9 @@ async function apiPost(
     const contentType =
         response.headers.get(
             "content-type"
-        ) || "";
+        )
+        ||
+        "";
 
 
     if (
@@ -3707,7 +3628,7 @@ async function apiPost(
 
 
 /* =========================================================
-   SESSION
+   LOAD SESSION
 ========================================================= */
 
 async function loadSession() {
@@ -3760,11 +3681,11 @@ async function loadSession() {
 
         return true;
 
-
-    } catch (error) {
+    } catch (
+        error
+    ) {
 
         console.error(
-            "Session error:",
             error
         );
 
@@ -3781,24 +3702,17 @@ async function loadSession() {
 
 
 /* =========================================================
-   RENDER CURRENT USER
+   CURRENT USER
 ========================================================= */
 
 function renderCurrentUser() {
-
-    if (
-        !state.currentUser
-    ) {
-
-        return;
-
-    }
-
 
     profileName.textContent =
         state.currentUser.username
         ||
         state.currentUser.full_name
+        ||
+        state.currentUser.full_names
         ||
         "Account";
 
@@ -3807,6 +3721,171 @@ function renderCurrentUser() {
         getUserImage(
             state.currentUser
         );
+
+}
+
+
+/* =========================================================
+   PREMIUM
+========================================================= */
+
+async function loadPremiumStatus() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.premium
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load Premium status."
+            );
+
+        }
+
+
+        const premium =
+            result.premium
+            ||
+            result.data?.premium
+            ||
+            null;
+
+
+        state.premium =
+            Boolean(
+                premium?.active
+                ??
+                result.active
+                ??
+                result.is_premium
+                ??
+                false
+            );
+
+
+        state.premiumStatus =
+            String(
+                premium?.status
+                ??
+                result.status
+                ??
+                (
+                    state.premium
+                        ?
+                        "active"
+                        :
+                        "none"
+                )
+            ).toLowerCase();
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Premium status:",
+            error
+        );
+
+
+        state.premium =
+            false;
+
+        state.premiumStatus =
+            "unknown";
+
+    }
+
+
+    renderPremiumNotice();
+
+}
+
+
+/* =========================================================
+   PREMIUM NOTICE
+========================================================= */
+
+function renderPremiumNotice() {
+
+    if (
+        state.premium
+    ) {
+
+        premiumNoteCopy.innerHTML = `
+
+            <strong>
+                Premium Active
+            </strong>
+
+            <br>
+
+            You can discover members and public content,
+            create new connections and continue with your
+            LOVEMI services.
+
+        `;
+
+
+        premiumAction.innerHTML = `
+
+            <i class="fa-solid fa-crown"></i>
+
+            Manage Premium
+
+        `;
+
+
+        premiumAction.href =
+            "premium.html";
+
+
+        return;
+
+    }
+
+
+    premiumNoteCopy.innerHTML = `
+
+        <strong>
+            No Active Premium
+        </strong>
+
+        <br>
+
+        You can discover profiles and public content without
+        Premium. Premium is required before creating a new
+        connection. Click Activate to continue.
+
+    `;
+
+
+    premiumAction.innerHTML = `
+
+        <i class="fa-solid fa-crown"></i>
+
+        Activate
+
+    `;
+
+
+    premiumAction.href =
+        "premium.html?return=discover.html";
 
 }
 
@@ -3852,16 +3931,9 @@ async function loadCountries() {
         }
 
 
-        let countries = [];
+        let countries =
+            [];
 
-
-        /*
-         * Supports:
-         *
-         * result.countries
-         * result.data
-         * result.data.countries
-         */
 
         if (
             Array.isArray(
@@ -3882,10 +3954,8 @@ async function loadCountries() {
                 result.data;
 
         } else if (
-            result.data
-            &&
             Array.isArray(
-                result.data.countries
+                result.data?.countries
             )
         ) {
 
@@ -3913,14 +3983,10 @@ async function loadCountries() {
                 function(a,b) {
 
                     return String(
-                        a.name
-                        ||
-                        ""
+                        getCountryNameValue(a)
                     ).localeCompare(
                         String(
-                            b.name
-                            ||
-                            ""
+                            getCountryNameValue(b)
                         )
                     );
 
@@ -3935,68 +4001,20 @@ async function loadCountries() {
                         );
 
 
-                    /*
-                     * The value is country ID because the
-                     * backend can filter directly by ID.
-                     */
-
                     option.value =
                         String(
-                            country.id
-                            ??
-                            ""
+                            getCountryIdValue(
+                                country
+                            )
                         );
 
 
                     option.textContent =
-                        (
-                            country.name
-                            ||
-                            "Unknown country"
+                        getCountryNameValue(
+                            country
                         )
-                        +
-                        (
-                            country.iso2
-                                ?
-                                " ("
-                                +
-                                String(
-                                    country.iso2
-                                ).toUpperCase()
-                                +
-                                ")"
-                                :
-                                ""
-                        );
-
-
-                    /*
-                     * Store ISO and phone code for possible
-                     * future filtering/UI use.
-                     */
-
-                    if (
-                        country.iso2
-                    ) {
-
-                        option.dataset.iso2 =
-                            String(
-                                country.iso2
-                            ).toUpperCase();
-
-                    }
-
-
-                    if (
-                        country.phone_code
-                    ) {
-
-                        option.dataset.phoneCode =
-                            String(
-                                country.phone_code
-                            );
-
-                    }
+                        ||
+                        "Unknown country";
 
 
                     countryFilter.appendChild(
@@ -4007,10 +4025,11 @@ async function loadCountries() {
             );
 
 
-    } catch (error) {
+    } catch (
+        error
+    ) {
 
         console.error(
-            "Countries error:",
             error
         );
 
@@ -4023,12 +4042,186 @@ async function loadCountries() {
 
         `;
 
+    }
 
-        /*
-         * Profiles can still load without a country filter.
-         */
+}
+
+
+/* =========================================================
+   COUNTRY HELPERS
+========================================================= */
+
+function getCountryIdValue(
+    country
+) {
+
+    if (
+        country === null
+        ||
+        country === undefined
+    ) {
+
+        return "";
 
     }
+
+
+    if (
+        typeof country !== "object"
+    ) {
+
+        return String(
+            country
+        );
+
+    }
+
+
+    return String(
+        country.id
+        ??
+        country.country_id
+        ??
+        country.value
+        ??
+        ""
+    );
+
+}
+
+
+function getCountryNameValue(
+    country
+) {
+
+    if (
+        country === null
+        ||
+        country === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    if (
+        typeof country === "string"
+        ||
+        typeof country === "number"
+    ) {
+
+        return String(
+            country
+        );
+
+    }
+
+
+    if (
+        typeof country === "object"
+    ) {
+
+        return String(
+            country.name
+            ??
+            country.country_name
+            ??
+            country.label
+            ??
+            country.title
+            ??
+            ""
+        );
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   USER COUNTRY
+========================================================= */
+
+function resolveUserCountry(
+    user
+) {
+
+    if (
+        !user
+    ) {
+
+        return "";
+
+    }
+
+
+    const direct =
+        user.country_name;
+
+
+    if (
+        typeof direct === "string"
+        &&
+        direct.trim()
+    ) {
+
+        return direct.trim();
+
+    }
+
+
+    if (
+        typeof direct === "object"
+        &&
+        direct !== null
+    ) {
+
+        const objectName =
+            getCountryNameValue(
+                direct
+            );
+
+
+        if (
+            objectName
+        ) {
+
+            return objectName;
+
+        }
+
+    }
+
+
+    if (
+        typeof user.country === "string"
+    ) {
+
+        return user.country;
+
+    }
+
+
+    if (
+        typeof user.country === "object"
+        &&
+        user.country !== null
+    ) {
+
+        return getCountryNameValue(
+            user.country
+        );
+
+    }
+
+
+    return getCountryName(
+        user.country_id
+    );
 
 }
 
@@ -4054,11 +4247,53 @@ async function loadUsers() {
         );
 
 
-        /*
-         * We initially load approved/available profiles.
-         *
-         * The backend applies the real security rules.
-         */
+        const search =
+            searchInput.value.trim();
+
+
+        const gender =
+            genderFilter.value.trim();
+
+
+        const countryId =
+            countryFilter.value.trim();
+
+
+        if (
+            search
+        ) {
+
+            params.set(
+                "search",
+                search
+            );
+
+        }
+
+
+        if (
+            gender
+        ) {
+
+            params.set(
+                "gender",
+                gender
+            );
+
+        }
+
+
+        if (
+            countryId
+        ) {
+
+            params.set(
+                "country_id",
+                countryId
+            );
+
+        }
+
 
         const {
             response,
@@ -4114,13 +4349,51 @@ async function loadUsers() {
         }
 
 
+        /*
+         * Never show the authenticated user's own profile.
+         */
+
+        const currentId =
+            Number(
+                state.currentUser?.id
+                ??
+                state.currentUser?.user_id
+                ??
+                0
+            );
+
+
+        state.users =
+            state.users.filter(
+                function(user) {
+
+                    const userId =
+                        Number(
+                            user.id
+                            ??
+                            user.user_id
+                            ??
+                            0
+                        );
+
+
+                    return (
+                        !currentId
+                        ||
+                        userId !== currentId
+                    );
+
+                }
+            );
+
+
         applyFilters();
 
-
-    } catch (error) {
+    } catch (
+        error
+    ) {
 
         console.error(
-            "Users error:",
             error
         );
 
@@ -4141,7 +4414,7 @@ async function loadUsers() {
 
 
 /* =========================================================
-   FILTER USERS
+   FILTER / SORT
 ========================================================= */
 
 function applyFilters() {
@@ -4168,87 +4441,104 @@ function applyFilters() {
 
 
     let users =
-        state.users.filter(
-            function(user) {
+        [
+            ...state.users
+        ];
 
-                const name =
-                    String(
-                        user.full_name
+
+    if (
+        state.search
+    ) {
+
+        users =
+            users.filter(
+                function(user) {
+
+                    const name =
+                        String(
+                            user.full_name
+                            ??
+                            user.full_names
+                            ??
+                            user.display_name
+                            ??
+                            ""
+                        ).toLowerCase();
+
+
+                    const username =
+                        String(
+                            user.username
+                            ??
+                            ""
+                        ).toLowerCase();
+
+
+                    return (
+                        name.includes(
+                            state.search
+                        )
                         ||
-                        user.full_names
-                        ||
-                        ""
-                    )
-                    .toLowerCase();
-
-
-                const username =
-                    String(
-                        user.username
-                        ||
-                        ""
-                    )
-                    .toLowerCase();
-
-
-                const userGender =
-                    String(
-                        user.gender
-                        ||
-                        ""
-                    )
-                    .toLowerCase();
-
-
-                const userCountryId =
-                    String(
-                        user.country_id
-                        ??
-                        ""
+                        username.includes(
+                            state.search
+                        )
                     );
 
+                }
+            );
 
-                const searchMatch =
-                    !state.search
-                    ||
-                    name.includes(
-                        state.search
-                    )
-                    ||
-                    username.includes(
-                        state.search
+    }
+
+
+    if (
+        state.gender
+    ) {
+
+        users =
+            users.filter(
+                function(user) {
+
+                    return (
+                        String(
+                            user.gender
+                            ||
+                            ""
+                        ).toLowerCase()
+                        ===
+                        state.gender
                     );
 
+                }
+            );
 
-                const genderMatch =
-                    !state.gender
-                    ||
-                    userGender ===
-                    state.gender;
+    }
 
 
-                const countryMatch =
-                    !state.country
-                    ||
-                    userCountryId ===
-                    state.country;
+    if (
+        state.country
+    ) {
 
+        users =
+            users.filter(
+                function(user) {
 
-                return (
-                    searchMatch
-                    &&
-                    genderMatch
-                    &&
-                    countryMatch
-                );
+                    return (
+                        String(
+                            user.country_id
+                            ??
+                            user.country?.id
+                            ??
+                            ""
+                        )
+                        ===
+                        state.country
+                    );
 
-            }
-        );
+                }
+            );
 
+    }
 
-    /*
-     * SORT
-     */
 
     if (
         state.sort ===
@@ -4284,32 +4574,24 @@ function applyFilters() {
         users.sort(
             function(a,b) {
 
-                const nameA =
-                    String(
-                        a.full_name
-                        ||
-                        a.full_names
-                        ||
-                        a.username
-                        ||
-                        ""
-                    ).toLowerCase();
-
-
-                const nameB =
+                return String(
+                    a.full_name
+                    ??
+                    a.full_names
+                    ??
+                    a.username
+                    ??
+                    ""
+                ).localeCompare(
                     String(
                         b.full_name
-                        ||
+                        ??
                         b.full_names
-                        ||
+                        ??
                         b.username
-                        ||
+                        ??
                         ""
-                    ).toLowerCase();
-
-
-                return nameA.localeCompare(
-                    nameB
+                    )
                 );
 
             }
@@ -4328,7 +4610,7 @@ function applyFilters() {
 
 
 /* =========================================================
-   RENDER LOADING
+   LOADING
 ========================================================= */
 
 function renderLoading() {
@@ -4348,7 +4630,8 @@ function renderLoading() {
             </h3>
 
             <p>
-                Loading approved LOVEMI members directly from the database.
+                Loading approved LOVEMI members directly from
+                the database.
             </p>
 
         </div>
@@ -4359,7 +4642,7 @@ function renderLoading() {
 
 
 /* =========================================================
-   RENDER ERROR
+   ERROR
 ========================================================= */
 
 function renderError(
@@ -4372,7 +4655,7 @@ function renderError(
 
             <div class="state-icon">
 
-                <i class="fa-solid fa-cloud-exclamation"></i>
+                <i class="fa-solid fa-triangle-exclamation"></i>
 
             </div>
 
@@ -4381,7 +4664,9 @@ function renderError(
             </h3>
 
             <p>
-                ${escapeHtml(message)}
+                ${escapeHtml(
+                    message
+                )}
             </p>
 
             <button
@@ -4413,7 +4698,7 @@ function renderError(
 
 
 /* =========================================================
-   RENDER EMPTY
+   EMPTY
 ========================================================= */
 
 function renderEmpty() {
@@ -4429,7 +4714,7 @@ function renderEmpty() {
             </div>
 
             <h3>
-                No matching profiles
+                No matching members
             </h3>
 
             <p>
@@ -4444,7 +4729,7 @@ function renderEmpty() {
 
 
 /* =========================================================
-   RENDER USERS
+   USER GRID
 ========================================================= */
 
 function renderUsers() {
@@ -4476,15 +4761,42 @@ function renderUsers() {
     }
 
 
-    userGrid.innerHTML =
+    const cards =
         users
             .map(
                 renderUserCard
             )
+            .filter(
+                Boolean
+            )
             .join("");
 
 
-    bindUserEvents();
+    userGrid.innerHTML =
+        cards
+        ||
+        `
+        <div class="state-card">
+
+            <div class="state-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+            <h3>
+                No matching members
+            </h3>
+
+            <p>
+                Try another name, gender or country.
+            </p>
+
+        </div>
+        `;
+
+
+    bindUserCardEvents();
 
 }
 
@@ -4503,10 +4815,37 @@ function renderUserCard(
         user.user_id;
 
 
+    const currentId =
+        Number(
+            state.currentUser?.id
+            ??
+            state.currentUser?.user_id
+            ??
+            0
+        );
+
+
+    /*
+     * Never display the authenticated user's own profile.
+     */
+
+    if (
+        Number(id)
+        ===
+        currentId
+    ) {
+
+        return "";
+
+    }
+
+
     const fullName =
         user.full_name
         ??
         user.full_names
+        ??
+        user.display_name
         ??
         user.username
         ??
@@ -4525,27 +4864,15 @@ function renderUserCard(
         "";
 
 
-    const countryName =
-        user.country_name
-        ??
-        getCountryName(
-            user.country_id
-        );
-
-
-    const avatar =
-        getUserImage(
+    const country =
+        resolveUserCountry(
             user
         );
 
 
-    const verified =
-        Boolean(
-            user.email_verified
-            ??
-            user.verified
-            ??
-            false
+    const image =
+        getUserImage(
+            user
         );
 
 
@@ -4559,21 +4886,74 @@ function renderUserCard(
         );
 
 
-    const isSelf =
-        Number(
-            id
-        )
-        ===
-        Number(
-            state.currentUser?.id
-        );
+    const connectionStatus =
+        String(
+            user.connection_status
+            ??
+            ""
+        ).toLowerCase();
+
+
+    let connectionLabel =
+        "Connect";
+
+
+    let connectionIcon =
+        "fa-user-plus";
+
+
+    let connectionClass =
+        "";
+
+
+    let connectionDisabled =
+        "";
 
 
     if (
-        isSelf
+        connectionStatus ===
+        "accepted"
+        ||
+        connectionStatus ===
+        "connected"
     ) {
 
-        return "";
+        connectionLabel =
+            "Connected";
+
+        connectionIcon =
+            "fa-circle-check";
+
+        connectionClass =
+            "connected";
+
+        connectionDisabled =
+            "disabled";
+
+    } else if (
+        connectionStatus ===
+        "pending_sent"
+    ) {
+
+        connectionLabel =
+            "Pending";
+
+        connectionIcon =
+            "fa-clock";
+
+        connectionDisabled =
+            "disabled";
+
+    } else if (
+        connectionStatus ===
+        "pending_received"
+    ) {
+
+        connectionLabel =
+            "Request Received";
+
+        connectionIcon =
+            "fa-clock";
 
     }
 
@@ -4585,26 +4965,27 @@ function renderUserCard(
             data-user-id="${escapeHtml(id)}">
 
 
-            <!-- =================================================
-                 PHOTO
-            ================================================== -->
-
             <div class="photo-area">
 
 
                 <img
-                    src="${escapeHtml(avatar)}"
+                    src="${escapeHtml(image)}"
                     alt="${escapeHtml(fullName)}"
                     class="profile-photo"
+                    data-profile-user="${escapeHtml(id)}"
                     loading="lazy"
-                    data-connect-user="${escapeHtml(id)}"
-                    data-connect-name="${escapeHtml(fullName)}"
                     onerror="
                         this.onerror=null;
                         this.src='${escapeHtml(
-                            String(gender).toLowerCase() === "female"
-                                ? DEFAULT_FEMALE
-                                : DEFAULT_MALE
+                            String(
+                                gender
+                            ).toLowerCase()
+                                ===
+                                "female"
+                                ?
+                                DEFAULT_FEMALE
+                                :
+                                DEFAULT_MALE
                         )}';
                     ">
 
@@ -4626,29 +5007,11 @@ function renderUserCard(
                 }
 
 
-                ${
-                    verified
-                        ?
-                        `
-                        <span
-                            class="verified-badge"
-                            title="Verified account">
-
-                            <i class="fa-solid fa-check"></i>
-
-                        </span>
-                        `
-                        :
-                        ""
-                }
-
-
-                <!-- Photo clickable connection -->
                 <div class="photo-connect-overlay">
 
 
                     <span>
-                        Click photo to connect
+                        Open profile or connect
                     </span>
 
 
@@ -4656,11 +5019,12 @@ function renderUserCard(
                         type="button"
                         class="overlay-connect"
                         data-connect-user="${escapeHtml(id)}"
-                        data-connect-name="${escapeHtml(fullName)}">
+                        data-connect-name="${escapeHtml(fullName)}"
+                        ${connectionDisabled}>
 
-                        <i class="fa-solid fa-user-plus"></i>
+                        <i class="fa-solid ${connectionIcon}"></i>
 
-                        Connect
+                        ${escapeHtml(connectionLabel)}
 
                     </button>
 
@@ -4671,32 +5035,12 @@ function renderUserCard(
             </div>
 
 
-            <!-- =================================================
-                 USER DETAILS
-            ================================================== -->
-
             <div class="user-body">
 
 
                 <div class="user-name">
 
-
                     ${escapeHtml(fullName)}
-
-
-                    ${
-                        verified
-                            ?
-                            `
-                            <i
-                                class="fa-solid fa-circle-check check"
-                                title="Verified">
-                            </i>
-                            `
-                            :
-                            ""
-                    }
-
 
                 </div>
 
@@ -4737,14 +5081,14 @@ function renderUserCard(
 
 
                     ${
-                        countryName
+                        country
                             ?
                             `
                             <span class="meta-pill">
 
                                 <i class="fa-solid fa-location-dot"></i>
 
-                                ${escapeHtml(countryName)}
+                                ${escapeHtml(country)}
 
                             </span>
                             `
@@ -4773,26 +5117,28 @@ function renderUserCard(
 
                 <button
                     type="button"
-                    class="connect-button"
+                    class="connect-button ${connectionClass}"
                     data-connect-user="${escapeHtml(id)}"
-                    data-connect-name="${escapeHtml(fullName)}">
+                    data-connect-name="${escapeHtml(fullName)}"
+                    ${connectionDisabled}>
 
-                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid ${connectionIcon}"></i>
 
-                    Connect
+                    ${escapeHtml(connectionLabel)}
 
                 </button>
 
 
-                <a
-                    href="profile.html?user=${encodeURIComponent(id)}"
-                    class="profile-button">
+                <button
+                    type="button"
+                    class="profile-button"
+                    data-profile-user="${escapeHtml(id)}">
 
                     <i class="fa-regular fa-user"></i>
 
                     View Profile
 
-                </a>
+                </button>
 
 
             </div>
@@ -4822,12 +5168,14 @@ function getCountryName(
     }
 
 
-    const found =
+    const country =
         state.countries.find(
-            function(country) {
+            function(item) {
 
                 return Number(
-                    country.id
+                    getCountryIdValue(
+                        item
+                    )
                 )
                 ===
                 Number(
@@ -4838,16 +5186,203 @@ function getCountryName(
         );
 
 
-    return found?.name || "";
+    return getCountryNameValue(
+        country
+    );
 
 }
 
 
 /* =========================================================
-   USER EVENTS
+   PROFILE CODE
+   NEW SECURITY FLOW
 ========================================================= */
 
-function bindUserEvents() {
+async function openSecureProfile(
+    userId
+) {
+
+    if (
+        !userId
+    ) {
+
+        return;
+
+    }
+
+
+    const currentId =
+        Number(
+            state.currentUser?.id
+            ??
+            state.currentUser?.user_id
+            ??
+            0
+        );
+
+
+    if (
+        currentId
+        &&
+        Number(
+            userId
+        )
+        ===
+        currentId
+    ) {
+
+        showToast(
+            "Your own profile is available from the Profile menu.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        showToast(
+            "Opening profile...",
+            "normal"
+        );
+
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.profileCode
+                +
+                "?user_id="
+                +
+                encodeURIComponent(
+                    userId
+                )
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "The profile could not be opened."
+            );
+
+        }
+
+
+        const profileCode =
+            result.profile_code
+            ||
+            result.code
+            ||
+            result.data?.profile_code
+            ||
+            result.data?.code;
+
+
+        if (
+            !profileCode
+        ) {
+
+            throw new Error(
+                "A secure profile code was not returned."
+            );
+
+        }
+
+
+        /*
+         * IMPORTANT:
+         *
+         * The user ID is NOT included in the URL.
+         */
+
+        window.location.href =
+            "profile.html?code="
+            +
+            encodeURIComponent(
+                profileCode
+            );
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Secure profile:",
+            error
+        );
+
+
+        showToast(
+            error.message
+            ||
+            "Unable to open this profile.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   USER CARD EVENTS
+========================================================= */
+
+function bindUserCardEvents() {
+
+    /*
+     * Profile image and View Profile now use the encrypted
+     * profile code.
+     */
+
+    document
+        .querySelectorAll(
+            "[data-profile-user]"
+        )
+        .forEach(
+            function(element) {
+
+                element.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        const userId =
+                            Number(
+                                this.dataset.profileUser
+                            );
+
+
+                        openSecureProfile(
+                            userId
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /*
+     * Connect buttons.
+     */
 
     document
         .querySelectorAll(
@@ -4860,18 +5395,24 @@ function bindUserEvents() {
                     "click",
                     function(event) {
 
-                        /*
-                         * Prevent clicking a button from triggering
-                         * duplicate events.
-                         */
-
                         event.preventDefault();
 
                         event.stopPropagation();
 
 
-                        const id =
-                            this.dataset.connectUser;
+                        if (
+                            this.disabled
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        const userId =
+                            Number(
+                                this.dataset.connectUser
+                            );
 
 
                         const name =
@@ -4880,19 +5421,11 @@ function bindUserEvents() {
                             "this member";
 
 
-                        if (
-                            id
-                        ) {
-
-                            createConnection(
-                                this.tagName === "BUTTON"
-                                    ? this
-                                    : null,
-                                id,
-                                name
-                            );
-
-                        }
+                        createConnection(
+                            this,
+                            userId,
+                            name
+                        );
 
                     }
                 );
@@ -4904,18 +5437,493 @@ function bindUserEvents() {
 
 
 /* =========================================================
-   CREATE CONNECTION
+   PREMIUM RETURN / POPUP
+========================================================= */
+
+function createPremiumIntent(
+    action,
+    userId
+) {
+
+    const token =
+        (
+            typeof crypto !== "undefined"
+            &&
+            typeof crypto.randomUUID ===
+                "function"
+        )
+            ?
+            crypto.randomUUID()
+            :
+            (
+                Date.now()
+                +
+                "-"
+                +
+                Math.random()
+                    .toString(36)
+                    .slice(2)
+            );
+
+
+    const intent = {
+
+        token,
+        action,
+
+        userId:
+            Number(
+                userId
+            ),
+
+        createdAt:
+            Date.now()
+
+    };
+
+
+    state.pendingIntent =
+        intent;
+
+
+    try {
+
+        sessionStorage.setItem(
+            "lovemi_discover_intent",
+            JSON.stringify(
+                intent
+            )
+        );
+
+    } catch {
+
+        /* Ignore storage failure. */
+
+    }
+
+
+    return intent;
+
+}
+
+
+function openPremiumPopup(
+    action,
+    userId
+) {
+
+    const intent =
+        createPremiumIntent(
+            action,
+            userId
+        );
+
+
+    const query =
+        new URLSearchParams(
+            {
+
+                return:
+                    "discover.html",
+
+                popup:
+                    "1",
+
+                intent:
+                    action,
+
+                user_id:
+                    String(
+                        userId
+                    ),
+
+                token:
+                    intent.token
+
+            }
+        );
+
+
+    const url =
+        "premium.html?"
+        +
+        query.toString();
+
+
+    const popup =
+        window.open(
+            url,
+            "lovemiPremium",
+            "width=1000,height=760,resizable=yes,scrollbars=yes"
+        );
+
+
+    if (
+        popup
+        &&
+        !popup.closed
+    ) {
+
+        state.premiumWindow =
+            popup;
+
+
+        monitorPremiumPurchase(
+            popup,
+            intent
+        );
+
+
+        return true;
+
+    }
+
+
+    window.location.href =
+        url;
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   PREMIUM MONITOR
+========================================================= */
+
+let premiumMonitorTimer =
+    null;
+
+
+function monitorPremiumPurchase(
+    popup,
+    intent
+) {
+
+    clearInterval(
+        premiumMonitorTimer
+    );
+
+
+    let elapsed =
+        0;
+
+
+    premiumMonitorTimer =
+        setInterval(
+            async function() {
+
+                elapsed +=
+                    2500;
+
+
+                try {
+
+                    if (
+                        localStorage.getItem(
+                            "lovemi_premium_success"
+                        )
+                        ===
+                        intent.token
+                    ) {
+
+                        localStorage.removeItem(
+                            "lovemi_premium_success"
+                        );
+
+
+                        clearInterval(
+                            premiumMonitorTimer
+                        );
+
+
+                        await continueAfterPremium(
+                            intent
+                        );
+
+
+                        return;
+
+                    }
+
+                } catch {
+
+                    /* Ignore storage failure. */
+
+                }
+
+
+                try {
+
+                    const active =
+                        await checkPremiumNow();
+
+
+                    if (
+                        active
+                    ) {
+
+                        clearInterval(
+                            premiumMonitorTimer
+                        );
+
+
+                        await continueAfterPremium(
+                            intent
+                        );
+
+
+                        return;
+
+                    }
+
+                } catch {
+
+                    /* Continue monitoring. */
+
+                }
+
+
+                if (
+                    popup.closed
+                ) {
+
+                    clearInterval(
+                        premiumMonitorTimer
+                    );
+
+
+                    const active =
+                        await checkPremiumNow();
+
+
+                    if (
+                        active
+                    ) {
+
+                        await continueAfterPremium(
+                            intent
+                        );
+
+                    } else {
+
+                        showToast(
+                            "Premium payment was not completed. You can activate Premium and continue later.",
+                            "error"
+                        );
+
+                    }
+
+
+                    return;
+
+                }
+
+
+                if (
+                    elapsed >
+                    600000
+                ) {
+
+                    clearInterval(
+                        premiumMonitorTimer
+                    );
+
+                }
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   CHECK PREMIUM NOW
+========================================================= */
+
+async function checkPremiumNow() {
+
+    const {
+        response,
+        result
+    } =
+        await apiGet(
+            API.premium
+        );
+
+
+    if (
+        !response.ok
+        ||
+        result.success === false
+    ) {
+
+        return false;
+
+    }
+
+
+    const premium =
+        result.premium
+        ||
+        result.data?.premium
+        ||
+        null;
+
+
+    const active =
+        Boolean(
+            premium?.active
+            ??
+            result.active
+            ??
+            false
+        );
+
+
+    if (
+        active
+    ) {
+
+        state.premium =
+            true;
+
+        state.premiumStatus =
+            "active";
+
+
+        renderPremiumNotice();
+
+    }
+
+
+    return active;
+
+}
+
+
+/* =========================================================
+   CONTINUE AFTER PREMIUM
+========================================================= */
+
+async function continueAfterPremium(
+    intent
+) {
+
+    state.pendingIntent =
+        null;
+
+
+    try {
+
+        sessionStorage.removeItem(
+            "lovemi_discover_intent"
+        );
+
+    } catch {
+
+        /* Ignore. */
+
+    }
+
+
+    if (
+        intent.action ===
+        "connect"
+    ) {
+
+        showToast(
+            "Premium is active. Sending the connection request...",
+            "success"
+        );
+
+
+        await loadPremiumStatus();
+
+
+        await createConnection(
+            null,
+            Number(
+                intent.userId
+            ),
+            "this member",
+            true
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        intent.action ===
+        "chat"
+    ) {
+
+        await loadPremiumStatus();
+
+
+        await startChatFlow(
+            Number(
+                intent.userId
+            ),
+            true
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CONNECTION
 ========================================================= */
 
 async function createConnection(
     button,
     targetUserId,
-    targetName
+    targetName,
+    afterPremium = false
 ) {
 
     if (
         !targetUserId
     ) {
+
+        return;
+
+    }
+
+
+    if (
+        !state.premium
+        &&
+        !afterPremium
+    ) {
+
+        const confirmText =
+            "LOVEMI Premium is required before creating a new connection.\n\nOpen Premium now?";
+
+
+        if (
+            !window.confirm(
+                confirmText
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        openPremiumPopup(
+            "connect",
+            targetUserId
+        );
+
 
         return;
 
@@ -4934,11 +5942,13 @@ async function createConnection(
             button.innerHTML;
 
 
-        button.innerHTML =
-            `
+        button.innerHTML = `
+
             <i class="fa-solid fa-spinner fa-spin"></i>
-            Connecting...
-            `;
+
+            Sending...
+
+        `;
 
     }
 
@@ -4952,45 +5962,119 @@ async function createConnection(
             await apiPost(
                 API.createConnection,
                 {
+
                     user_id:
                         Number(
                             targetUserId
                         ),
 
                     source:
-                        "discover_photo_click"
+                        "discover"
+
                 }
             );
 
-
-        /*
-         * No active session.
-         */
-
-        if (
-            result.code ===
-            "AUTHENTICATION_REQUIRED"
-        ) {
-
-            window.location.href =
-                "login.html?return=discover.html";
-
-            return;
-
-        }
-
-
-        /*
-         * Premium required.
-         */
 
         if (
             result.code ===
             "PREMIUM_REQUIRED"
         ) {
 
-            window.location.href =
-                "premium.html?return=discover.html";
+            if (
+                button
+            ) {
+
+                button.disabled =
+                    false;
+
+                button.innerHTML =
+                    button.dataset.originalText
+                    ||
+                    `
+                    <i class="fa-solid fa-user-plus"></i>
+                    Connect
+                    `;
+
+            }
+
+
+            openPremiumPopup(
+                "connect",
+                targetUserId
+            );
+
+
+            return;
+
+        }
+
+
+        if (
+            result.code ===
+            "ALREADY_CONNECTED"
+        ) {
+
+            if (
+                button
+            ) {
+
+                button.disabled =
+                    true;
+
+                button.classList.add(
+                    "connected"
+                );
+
+                button.innerHTML = `
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Connected
+
+                `;
+
+            }
+
+
+            showToast(
+                "You are already connected with this member.",
+                "success"
+            );
+
+
+            return;
+
+        }
+
+
+        if (
+            result.code ===
+            "ALREADY_PENDING"
+        ) {
+
+            if (
+                button
+            ) {
+
+                button.disabled =
+                    true;
+
+                button.innerHTML = `
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    Pending
+
+                `;
+
+            }
+
+
+            showToast(
+                "Your connection request is already waiting for acceptance.",
+                "success"
+            );
+
 
             return;
 
@@ -5012,71 +6096,50 @@ async function createConnection(
         }
 
 
-        /*
-         * Success.
-         */
-
         if (
             button
         ) {
 
-            button.innerHTML =
-                `
-                <i class="fa-solid fa-circle-check"></i>
-                Connected
-                `;
-
-
-            button.classList.add(
-                "connected"
-            );
-
-
             button.disabled =
                 true;
 
-        }
+            button.innerHTML = `
 
+                <i class="fa-solid fa-clock"></i>
 
-        /*
-         * Backend may optionally redirect.
-         */
+                Request Sent
 
-        if (
-            result.redirect
-        ) {
-
-            setTimeout(
-                function() {
-
-                    window.location.href =
-                        result.redirect;
-
-                },
-                600
-            );
+            `;
 
         }
 
 
-    } catch (error) {
+        showToast(
+            result.message
+            ||
+            "Connection request sent successfully.",
+            "success"
+        );
+
+
+        await loadUsers();
+
+
+    } catch (
+        error
+    ) {
 
         console.error(
-            "Connection error:",
+            "Connection:",
             error
         );
 
 
-        alert(
+        showToast(
             error.message
             ||
-            (
-                "Unable to connect with "
-                +
-                targetName
-                +
-                "."
-            )
+            "Unable to create the connection.",
+            "error"
         );
 
 
@@ -5086,7 +6149,6 @@ async function createConnection(
 
             button.disabled =
                 false;
-
 
             button.innerHTML =
                 button.dataset.originalText
@@ -5104,78 +6166,867 @@ async function createConnection(
 
 
 /* =========================================================
-   SEARCH
+   CHAT FLOW
 ========================================================= */
 
-searchButton.addEventListener(
-    "click",
-    function() {
+async function startChatFlow(
+    userId,
+    afterPremium = false
+) {
 
-        applyFilters();
+    if (
+        !userId
+    ) {
 
-    }
-);
-
-
-searchInput.addEventListener(
-    "input",
-    function() {
-
-        applyFilters();
+        return;
 
     }
-);
 
 
-genderFilter.addEventListener(
-    "change",
-    function() {
+    const selected =
+        state.users.find(
+            function(user) {
 
-        applyFilters();
+                return Number(
+                    user.id
+                    ??
+                    user.user_id
+                )
+                ===
+                Number(
+                    userId
+                );
+
+            }
+        );
+
+
+    const connectionStatus =
+        String(
+            selected?.connection_status
+            ??
+            ""
+        ).toLowerCase();
+
+
+    if (
+        connectionStatus ===
+        "accepted"
+        ||
+        connectionStatus ===
+        "connected"
+    ) {
+
+        await openExistingChat(
+            userId
+        );
+
+        return;
 
     }
-);
 
 
-countryFilter.addEventListener(
-    "change",
-    function() {
+    if (
+        !state.premium
+        &&
+        !afterPremium
+    ) {
 
-        applyFilters();
+        const okay =
+            window.confirm(
+                "Premium is required before starting a chat.\n\nActivate Premium now?"
+            );
+
+
+        if (
+            !okay
+        ) {
+
+            return;
+
+        }
+
+
+        openPremiumPopup(
+            "chat",
+            userId
+        );
+
+
+        return;
 
     }
-);
 
 
-sortFilter.addEventListener(
-    "change",
+    showToast(
+        "Sending the connection request first. Chat will be available after the connection is accepted.",
+        "success"
+    );
+
+
+    await createConnection(
+        null,
+        userId,
+        "this member",
+        afterPremium
+    );
+
+}
+
+
+/* =========================================================
+   OPEN EXISTING CHAT
+========================================================= */
+
+async function openExistingChat(
+    userId
+) {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiPost(
+                "api/chat/create-conversation.php",
+                {
+                    user_id:
+                        Number(
+                            userId
+                        )
+                }
+            );
+
+
+        if (
+            result.code ===
+            "PREMIUM_REQUIRED"
+        ) {
+
+            openPremiumPopup(
+                "chat",
+                userId
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Conversation could not be opened."
+            );
+
+        }
+
+
+        const chatCode =
+            result.chat_code
+            ||
+            result.access_code
+            ||
+            result.conversation_code
+            ||
+            result.data?.chat_code
+            ||
+            result.data?.access_code
+            ||
+            result.conversation?.chat_code
+            ||
+            result.conversation?.access_code;
+
+
+        const conversationId =
+            result.conversation_id
+            ||
+            result.data?.conversation_id
+            ||
+            result.conversation?.id
+            ||
+            0;
+
+
+        if (
+            chatCode
+        ) {
+
+            window.location.href =
+                "messages.html?chat="
+                +
+                encodeURIComponent(
+                    chatCode
+                );
+
+            return;
+
+        }
+
+
+        if (
+            conversationId
+        ) {
+
+            window.location.href =
+                "messages.html?conversation_id="
+                +
+                encodeURIComponent(
+                    conversationId
+                );
+
+            return;
+
+        }
+
+
+        throw new Error(
+            "The conversation was created but no chat code was returned."
+        );
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Open chat:",
+            error
+        );
+
+
+        showToast(
+            error.message
+            ||
+            "Unable to open chat.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FRIEND
+========================================================= */
+
+async function createFriendRequest(
+    userId,
+    button
+) {
+
+    if (
+        !userId
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        button
+    ) {
+
+        button.disabled =
+            true;
+
+        button.dataset.originalText =
+            button.innerHTML;
+
+        button.innerHTML = `
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Saving...
+
+        `;
+
+    }
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiPost(
+                API.friendsCreate,
+                {
+
+                    user_id:
+                        Number(
+                            userId
+                        ),
+
+                    source:
+                        "discover"
+
+                }
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "The friend request could not be created."
+            );
+
+        }
+
+
+        showToast(
+            result.message
+            ||
+            "Friend request sent.",
+            "success"
+        );
+
+
+        if (
+            button
+        ) {
+
+            button.innerHTML = `
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Friend Request Sent
+
+            `;
+
+        }
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Friend request:",
+            error
+        );
+
+
+        showToast(
+            error.message
+            ||
+            "Friend feature is not currently available.",
+            "error"
+        );
+
+
+        if (
+            button
+        ) {
+
+            button.disabled =
+                false;
+
+            button.innerHTML =
+                button.dataset.originalText
+                ||
+                `
+                <i class="fa-solid fa-user-group"></i>
+                Add Friend
+                `;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION AUDIO UNLOCK
+========================================================= */
+
+function unlockNotificationAudio() {
+
+    if (
+        state.notificationAudioUnlocked
+        ||
+        !notificationSound
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        notificationSound.volume =
+            0.01;
+
+
+        const playPromise =
+            notificationSound.play();
+
+
+        if (
+            playPromise
+            &&
+            typeof playPromise.then ===
+                "function"
+        ) {
+
+            playPromise
+                .then(
+                    function() {
+
+                        notificationSound.pause();
+
+                        notificationSound.currentTime =
+                            0;
+
+                        notificationSound.volume =
+                            1;
+
+                        state.notificationAudioUnlocked =
+                            true;
+
+                    }
+                )
+                .catch(
+                    function() {
+
+                        notificationSound.volume =
+                            1;
+
+                    }
+                );
+
+        }
+
+    } catch {
+
+        /* Browser may require a user gesture. */
+
+    }
+
+}
+
+
+/* =========================================================
+   RING NOTIFICATION
+========================================================= */
+
+async function ringNotification() {
+
+    if (
+        !notificationSound
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        notificationSound.pause();
+
+        notificationSound.currentTime =
+            0;
+
+        notificationSound.volume =
+            1;
+
+
+        const playPromise =
+            notificationSound.play();
+
+
+        if (
+            playPromise
+            &&
+            typeof playPromise.catch ===
+                "function"
+        ) {
+
+            await playPromise.catch(
+                function() {
+
+                    /*
+                     * Browser autoplay restrictions can prevent
+                     * an automatic sound. The audio is unlocked
+                     * by the next user interaction.
+                     */
+
+                }
+            );
+
+        }
+
+    } catch (
+        error
+    ) {
+
+        console.warn(
+            "Notification sound:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION COUNT
+========================================================= */
+
+function extractNotificationCount(
+    result
+) {
+
+    const possibleValues =
+        [
+
+            result?.unread_count,
+
+            result?.unreadCount,
+
+            result?.count,
+
+            result?.new_count,
+
+            result?.newCount,
+
+            result?.data?.unread_count,
+
+            result?.data?.unreadCount,
+
+            result?.data?.count,
+
+            result?.data?.new_count,
+
+            result?.data?.newCount
+
+        ];
+
+
+    for (
+        const value
+        of
+        possibleValues
+    ) {
+
+        if (
+            value !== undefined
+            &&
+            value !== null
+            &&
+            value !== ""
+        ) {
+
+            const number =
+                Number(
+                    value
+                );
+
+
+            if (
+                Number.isFinite(
+                    number
+                )
+            ) {
+
+                return Math.max(
+                    0,
+                    number
+                );
+
+            }
+
+        }
+
+    }
+
+
+    if (
+        Array.isArray(
+            result?.notifications
+        )
+    ) {
+
+        return result.notifications.length;
+
+    }
+
+
+    if (
+        Array.isArray(
+            result?.data
+        )
+    ) {
+
+        return result.data.length;
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =========================================================
+   UPDATE NOTIFICATION DOT
+========================================================= */
+
+function renderNotificationState(
+    count
+) {
+
+    state.notificationUnread =
+        Number(
+            count
+        )
+        ||
+        0;
+
+
+    if (
+        state.notificationUnread > 0
+    ) {
+
+        notificationDot.style.display =
+            "block";
+
+        notificationDot.classList.add(
+            "pulse"
+        );
+
+    } else {
+
+        notificationDot.style.display =
+            "none";
+
+        notificationDot.classList.remove(
+            "pulse"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CHECK NOTIFICATIONS
+========================================================= */
+
+async function checkNotifications() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.notificationCount
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            return;
+
+        }
+
+
+        const newCount =
+            extractNotificationCount(
+                result
+            );
+
+
+        /*
+         * First successful check only establishes the baseline.
+         * We do not ring for old notifications when opening
+         * the page.
+         */
+
+        if (
+            !state.notificationInitialized
+        ) {
+
+            state.notificationInitialized =
+                true;
+
+
+            renderNotificationState(
+                newCount
+            );
+
+
+            return;
+
+        }
+
+
+        const oldCount =
+            state.notificationUnread;
+
+
+        renderNotificationState(
+            newCount
+        );
+
+
+        /*
+         * A larger unread count means at least one new unread
+         * notification has arrived.
+         */
+
+        if (
+            newCount >
+            oldCount
+        ) {
+
+            showToast(
+                "You have a new LOVEMI notification.",
+                "success"
+            );
+
+
+            await ringNotification();
+
+        }
+
+    } catch (
+        error
+    ) {
+
+        console.warn(
+            "Notification check:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START NOTIFICATION MONITOR
+========================================================= */
+
+function startNotificationMonitor() {
+
+    clearInterval(
+        state.notificationTimer
+    );
+
+
+    /*
+     * Check immediately.
+     */
+
+    checkNotifications();
+
+
+    /*
+     * Continue checking while the user remains on Discover.
+     */
+
+    state.notificationTimer =
+        setInterval(
+            function() {
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    checkNotifications();
+
+                }
+
+            },
+            5000
+        );
+
+}
+
+
+/* =========================================================
+   STOP NOTIFICATION MONITOR
+========================================================= */
+
+function stopNotificationMonitor() {
+
+    clearInterval(
+        state.notificationTimer
+    );
+
+
+    state.notificationTimer =
+        null;
+
+}
+
+
+/* =========================================================
+   PAGE VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
     function() {
 
-        applyFilters();
+        if (
+            document.visibilityState ===
+            "visible"
+        ) {
+
+            checkNotifications();
+
+        }
 
     }
 );
 
 
 /* =========================================================
-   ENTER SEARCH
+   UNLOCK AUDIO AFTER USER INTERACTION
 ========================================================= */
 
-searchInput.addEventListener(
-    "keydown",
-    function(event) {
+document.addEventListener(
+    "click",
+    function() {
 
-        if (
-            event.key ===
-            "Enter"
-        ) {
+        unlockNotificationAudio();
 
-            event.preventDefault();
+    },
+    {
+        once:
+            false,
 
-            applyFilters();
-
-        }
-
+        passive:
+            true
     }
 );
 
@@ -5188,7 +7039,7 @@ mobileMenuButton.addEventListener(
     "click",
     function() {
 
-        const isOpen =
+        const open =
             mobileNavigation.classList.contains(
                 "open"
             );
@@ -5201,27 +7052,23 @@ mobileMenuButton.addEventListener(
 
         document.body.classList.toggle(
             "menu-open",
-            !isOpen
+            !open
         );
 
 
         this.setAttribute(
             "aria-expanded",
             String(
-                !isOpen
+                !open
             )
         );
 
 
         this.innerHTML =
-            !isOpen
-
+            !open
                 ?
-
                 '<i class="fa-solid fa-xmark"></i>'
-
                 :
-
                 '<i class="fa-solid fa-bars"></i>';
 
     }
@@ -5229,7 +7076,7 @@ mobileMenuButton.addEventListener(
 
 
 /* =========================================================
-   CLOSE MOBILE MENU AFTER LINK
+   CLOSE MOBILE MENU
 ========================================================= */
 
 document
@@ -5270,45 +7117,53 @@ document
 
 
 /* =========================================================
-   CLOSE MOBILE MENU ON OUTSIDE CLICK
+   SEARCH
 ========================================================= */
 
-document.addEventListener(
+searchButton.addEventListener(
     "click",
+    loadUsers
+);
+
+
+searchInput.addEventListener(
+    "keydown",
     function(event) {
 
         if (
-            !mobileNavigation.contains(
-                event.target
-            )
-            &&
-            !mobileMenuButton.contains(
-                event.target
-            )
+            event.key ===
+            "Enter"
         ) {
 
-            mobileNavigation.classList.remove(
-                "open"
-            );
+            event.preventDefault();
 
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-
-            mobileMenuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            mobileMenuButton.innerHTML =
-                '<i class="fa-solid fa-bars"></i>';
+            loadUsers();
 
         }
 
     }
+);
+
+
+genderFilter.addEventListener(
+    "change",
+    loadUsers
+);
+
+
+countryFilter.addEventListener(
+    "change",
+    loadUsers
+);
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+sortFilter.addEventListener(
+    "change",
+    applyFilters
 );
 
 
@@ -5333,17 +7188,36 @@ document.addEventListener(
         }
 
 
-        /*
-         * Load countries directly from the database-backed API
-         * and profiles independently.
-         */
-
         await Promise.allSettled(
             [
+
+                loadPremiumStatus(),
+
                 loadCountries(),
-                loadUsers()
+
+                loadUsers(),
+
+                checkNotifications()
+
             ]
         );
+
+
+        startNotificationMonitor();
+
+    }
+);
+
+
+/* =========================================================
+   CLEANUP
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    function() {
+
+        stopNotificationMonitor();
 
     }
 );

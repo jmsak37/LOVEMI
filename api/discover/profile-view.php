@@ -1,45 +1,328 @@
 <?php
 
-declare(strict_types=1);
-
-require_once __DIR__ . '/../../config/database.php';
-
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
-header('Expires: 0');
-
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
+/**
+ * ============================================================
+ * LOVEMI - DISCOVER PROFILE VIEW API
+ * ============================================================
+ *
+ * File:
+ * C:\xampp\htdocs\LOVEMI\api\discover\profile-view.php
+ *
+ * GET:
+ * ?user_id=4
+ *
+ * Returns JSON ONLY.
+ *
+ * Loads:
+ * - User
+ * - Public profile
+ * - Primary profile photo
+ * - Approved public posts
+ * - All approved post media
+ * - Online status
+ * - Connection status
+ *
+ * IMPORTANT:
+ * No email, phone number, ID information, password,
+ * encryption data or other private security information
+ * is returned.
+ * ============================================================
+ */
 
 
 /* ============================================================
-   RESPONSE
+   PHP ERROR / OUTPUT PROTECTION
+============================================================ */
+
+error_reporting(E_ALL);
+
+ini_set(
+    'display_errors',
+    '0'
+);
+
+ini_set(
+    'html_errors',
+    '0'
+);
+
+
+/*
+ * Start buffering so accidental output such as warnings,
+ * notices or whitespace cannot corrupt the JSON response.
+ */
+
+ob_start();
+
+
+/* ============================================================
+   JSON HEADERS
+============================================================ */
+
+header(
+    'Content-Type: application/json; charset=utf-8'
+);
+
+header(
+    'Cache-Control: no-store, no-cache, must-revalidate, max-age=0'
+);
+
+header(
+    'Pragma: no-cache'
+);
+
+header(
+    'Expires: 0'
+);
+
+
+/* ============================================================
+   JSON RESPONSE FUNCTION
 ============================================================ */
 
 function profileViewResponse(
-    bool $success,
-    string $message,
-    array $data = [],
-    int $status = 200
-): never {
+    $success,
+    $message,
+    $data = array(),
+    $status = 200
+) {
 
-    http_response_code($status);
+    /*
+     * Remove accidental PHP output.
+     */
+
+    while (
+        ob_get_level() > 0
+    ) {
+
+        @ob_end_clean();
+
+    }
+
+
+    http_response_code(
+        (int)$status
+    );
+
+
+    header(
+        'Content-Type: application/json; charset=utf-8'
+    );
+
 
     echo json_encode(
         array_merge(
-            [
-                'success' => $success,
-                'message' => $message
-            ],
+            array(
+                'success' =>
+                    (bool)$success,
+
+                'message' =>
+                    (string)$message
+            ),
             $data
         ),
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
     );
 
+
     exit;
+
+}
+
+
+/* ============================================================
+   CONVERT PHP ERRORS TO EXCEPTIONS
+============================================================ */
+
+set_error_handler(
+    function (
+        $severity,
+        $message,
+        $file,
+        $line
+    ) {
+
+        /*
+         * Respect PHP errors which are masked with @.
+         */
+
+        if (
+            !(error_reporting() & $severity)
+        ) {
+
+            return false;
+
+        }
+
+
+        throw new ErrorException(
+            $message,
+            0,
+            $severity,
+            $file,
+            $line
+        );
+
+    }
+);
+
+
+/* ============================================================
+   GLOBAL EXCEPTION HANDLER
+============================================================ */
+
+set_exception_handler(
+    function (
+        $exception
+    ) {
+
+        error_log(
+            '[LOVEMI DISCOVER PROFILE EXCEPTION] '
+            .
+            $exception->getMessage()
+            .
+            ' in '
+            .
+            $exception->getFile()
+            .
+            ':'
+            .
+            $exception->getLine()
+        );
+
+
+        profileViewResponse(
+            false,
+            'The profile could not be loaded because of a server error.',
+            array(
+                'code' =>
+                    'PROFILE_SERVER_ERROR'
+            ),
+            500
+        );
+
+    }
+);
+
+
+/* ============================================================
+   SHUTDOWN HANDLER
+============================================================ */
+
+register_shutdown_function(
+    function () {
+
+        $error =
+            error_get_last();
+
+
+        if (
+            !$error
+        ) {
+
+            return;
+
+        }
+
+
+        $fatalTypes =
+            array(
+                E_ERROR,
+                E_PARSE,
+                E_CORE_ERROR,
+                E_COMPILE_ERROR
+            );
+
+
+        if (
+            in_array(
+                $error['type'],
+                $fatalTypes,
+                true
+            )
+        ) {
+
+            error_log(
+                '[LOVEMI DISCOVER PROFILE FATAL] '
+                .
+                $error['message']
+                .
+                ' in '
+                .
+                $error['file']
+                .
+                ':'
+                .
+                $error['line']
+            );
+
+
+            /*
+             * At this stage the previous output may already have
+             * been generated. Clear it and return valid JSON.
+             */
+
+            while (
+                ob_get_level() > 0
+            ) {
+
+                @ob_end_clean();
+
+            }
+
+
+            http_response_code(
+                500
+            );
+
+
+            header(
+                'Content-Type: application/json; charset=utf-8'
+            );
+
+
+            echo json_encode(
+                array(
+                    'success' =>
+                        false,
+
+                    'message' =>
+                        'The profile could not be loaded because of a server error.',
+
+                    'code' =>
+                        'PROFILE_FATAL_ERROR'
+                ),
+                JSON_UNESCAPED_UNICODE |
+                JSON_UNESCAPED_SLASHES
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   DATABASE
+============================================================ */
+
+require_once __DIR__ .
+    '/../../config/database.php';
+
+
+/* ============================================================
+   SESSION
+============================================================ */
+
+if (
+    session_status()
+    !==
+    PHP_SESSION_ACTIVE
+) {
+
+    session_start();
+
 }
 
 
@@ -48,44 +331,21 @@ function profileViewResponse(
 ============================================================ */
 
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET'
+    ($_SERVER['REQUEST_METHOD'] ?? '')
+    !==
+    'GET'
 ) {
 
     profileViewResponse(
         false,
         'Only GET requests are allowed.',
-        [
-            'code' => 'METHOD_NOT_ALLOWED'
-        ],
+        array(
+            'code' =>
+                'METHOD_NOT_ALLOWED'
+        ),
         405
     );
-}
 
-
-/* ============================================================
-   TARGET USER
-============================================================ */
-
-$targetUserId =
-    (int) (
-        $_GET['user_id']
-        ??
-        $_GET['id']
-        ??
-        0
-    );
-
-
-if ($targetUserId <= 0) {
-
-    profileViewResponse(
-        false,
-        'User ID is required.',
-        [
-            'code' => 'USER_ID_REQUIRED'
-        ],
-        422
-    );
 }
 
 
@@ -94,512 +354,522 @@ if ($targetUserId <= 0) {
 ============================================================ */
 
 $currentUserId =
-    isset($_SESSION['lovemi_user_id'])
-        ? (int) $_SESSION['lovemi_user_id']
-        : 0;
+    isset(
+        $_SESSION['lovemi_user_id']
+    )
+        ?
+        (int)
+        $_SESSION['lovemi_user_id']
+        :
+        0;
 
 
-/* ============================================================
-   DATABASE
-============================================================ */
-
-try {
-
-    $pdo = db();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI PROFILE VIEW DB] ' .
-        $e->getMessage()
-    );
+if (
+    $currentUserId <= 0
+) {
 
     profileViewResponse(
         false,
-        'Database connection failed.',
-        [
-            'code' => 'DATABASE_ERROR'
-        ],
-        500
+        'Please log in first.',
+        array(
+            'code' =>
+                'AUTHENTICATION_REQUIRED',
+
+            'redirect' =>
+                'login.html?return=discover.html'
+        ),
+        401
     );
+
 }
 
 
 /* ============================================================
-   LOAD PROFILE
+   TARGET USER
+============================================================ */
+
+$targetUserId = 0;
+
+
+if (
+    isset(
+        $_GET['user_id']
+    )
+) {
+
+    $targetUserId =
+        (int)
+        $_GET['user_id'];
+
+} elseif (
+    isset(
+        $_GET['id']
+    )
+) {
+
+    $targetUserId =
+        (int)
+        $_GET['id'];
+
+}
+
+
+if (
+    $targetUserId <= 0
+) {
+
+    profileViewResponse(
+        false,
+        'A valid user_id is required.',
+        array(
+            'code' =>
+                'INVALID_USER_ID'
+        ),
+        422
+    );
+
+}
+
+
+/* ============================================================
+   NO SELF PROFILE
+============================================================ */
+
+if (
+    $targetUserId ===
+    $currentUserId
+) {
+
+    profileViewResponse(
+        false,
+        'Your own profile is available from the Profile page.',
+        array(
+            'code' =>
+                'OWN_PROFILE'
+        ),
+        403
+    );
+
+}
+
+
+/* ============================================================
+   DATABASE CONNECTION
 ============================================================ */
 
 try {
 
-    $stmt = $pdo->prepare(
+    $pdo =
+        db();
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI DISCOVER PROFILE DATABASE] '
+        .
+        $e->getMessage()
+    );
+
+
+    profileViewResponse(
+        false,
+        'Unable to connect to the database.',
+        array(
+            'code' =>
+                'DATABASE_ERROR'
+        ),
+        500
+    );
+
+}
+
+
+/* ============================================================
+   TARGET USER
+============================================================ */
+
+$userStmt =
+    $pdo->prepare(
         "
         SELECT
 
             u.id,
+
             u.username,
+
             u.full_names,
+
             u.gender,
+
             u.country_id,
+
             u.date_of_birth,
 
+            u.account_status,
+
+            u.email_verified,
+
+            u.phone_verified,
+
+            u.identity_verified,
+
+            u.age_verified,
+
+            u.is_active,
+
+            u.is_suspended,
+
+            u.is_deleted,
+
+            u.last_seen_at,
+
+            u.created_at,
+
             c.name AS country_name,
-            c.iso2,
-            c.iso3,
-            c.flag_code,
 
-            p.display_name,
-            p.bio,
-            p.occupation,
-            p.education,
-            p.city,
-            p.relationship_status,
-            p.looking_for,
-            p.interests,
-            p.profile_visibility,
-            p.show_online_status,
-            p.allow_messages,
-
-            up.is_online,
-            up.last_seen_at
+            c.iso2 AS country_iso2
 
         FROM users u
-
-        INNER JOIN profiles p
-            ON p.user_id = u.id
 
         LEFT JOIN countries c
             ON c.id = u.country_id
 
-        LEFT JOIN user_presence up
-            ON up.user_id = u.id
+        WHERE
 
-        WHERE u.id = :user_id
+            u.id =
+                :user_id
+
+            AND u.account_status =
+                'approved'
+
+            AND u.email_verified =
+                1
+
+            AND u.is_active =
+                1
+
+            AND u.is_suspended =
+                0
+
+            AND u.is_deleted =
+                0
 
         LIMIT 1
         "
     );
 
-    $stmt->execute([
-        ':user_id' => $targetUserId
-    ]);
 
-    $profile = $stmt->fetch();
+$userStmt->execute(
+    array(
+        ':user_id' =>
+            $targetUserId
+    )
+);
 
-} catch (Throwable $e) {
 
-    error_log(
-        '[LOVEMI PROFILE VIEW QUERY] ' .
-        $e->getMessage()
+$user =
+    $userStmt->fetch(
+        PDO::FETCH_ASSOC
     );
+
+
+if (
+    !$user
+) {
 
     profileViewResponse(
         false,
-        'Unable to load the profile.',
-        [
-            'code' => 'PROFILE_QUERY_FAILED'
-        ],
-        500
-    );
-}
-
-
-if (!$profile) {
-
-    profileViewResponse(
-        false,
-        'Profile not found.',
-        [
-            'code' => 'PROFILE_NOT_FOUND'
-        ],
+        'The requested member was not found.',
+        array(
+            'code' =>
+                'USER_NOT_FOUND'
+        ),
         404
     );
+
 }
 
 
 /* ============================================================
-   ACCOUNT AVAILABILITY
+   PROFILE
 ============================================================ */
 
-try {
+$profile =
+    array();
 
-    $accountStmt = $pdo->prepare(
+
+$profileStmt =
+    $pdo->prepare(
         "
         SELECT
 
-            is_active,
-            is_suspended,
-            is_deleted,
-            account_status
+            id,
 
-        FROM users
+            user_id,
 
-        WHERE id = :user_id
+            display_name,
+
+            bio,
+
+            occupation,
+
+            education,
+
+            city,
+
+            relationship_status,
+
+            looking_for,
+
+            interests,
+
+            profile_visibility,
+
+            show_online_status,
+
+            allow_messages,
+
+            created_at,
+
+            updated_at
+
+        FROM profiles
+
+        WHERE user_id =
+            :user_id
 
         LIMIT 1
         "
     );
 
-    $accountStmt->execute([
-        ':user_id' => $targetUserId
-    ]);
 
-    $account = $accountStmt->fetch();
+$profileStmt->execute(
+    array(
+        ':user_id' =>
+            $targetUserId
+    )
+);
 
-} catch (Throwable $e) {
 
-    profileViewResponse(
-        false,
-        'Unable to verify this account.',
-        [
-            'code' => 'ACCOUNT_CHECK_FAILED'
-        ],
-        500
+$profile =
+    $profileStmt->fetch(
+        PDO::FETCH_ASSOC
     );
-}
 
 
 if (
-    !$account
-    ||
-    (int) $account['is_deleted'] === 1
-    ||
-    (int) $account['is_suspended'] === 1
-    ||
-    (int) $account['is_active'] !== 1
+    !is_array(
+        $profile
+    )
 ) {
 
-    profileViewResponse(
-        false,
-        'This profile is not available.',
-        [
-            'code' => 'PROFILE_UNAVAILABLE'
-        ],
-        404
-    );
+    $profile =
+        array();
+
 }
 
 
 /* ============================================================
-   PRIVACY CHECK
+   PROFILE VISIBILITY
 ============================================================ */
 
-$isOwner =
-    $currentUserId > 0 &&
-    $currentUserId === $targetUserId;
+$profileVisibility =
+    strtolower(
+        trim(
+            (string)(
+                $profile['profile_visibility']
+                ??
+                'public'
+            )
+        )
+    );
 
-
-/*
-|--------------------------------------------------------------------------
-| If another user's profile is private, do not expose it.
-|--------------------------------------------------------------------------
-*/
 
 if (
-    !$isOwner
-    &&
-    $profile['profile_visibility'] === 'private'
+    $profileVisibility !==
+    'public'
 ) {
 
     profileViewResponse(
         false,
-        'This profile is private.',
-        [
-            'code' => 'PROFILE_PRIVATE'
-        ],
+        'This profile is not currently public.',
+        array(
+            'code' =>
+                'PROFILE_NOT_PUBLIC'
+        ),
         403
     );
+
 }
 
 
 /* ============================================================
-   BLOCK CHECK
+   PRIMARY PROFILE PHOTO
 ============================================================ */
 
+$profilePhoto =
+    null;
+
+
+$photoStmt =
+    $pdo->prepare(
+        "
+        SELECT
+
+            id,
+
+            file_name,
+
+            file_path,
+
+            thumbnail_path,
+
+            mime_type,
+
+            file_size,
+
+            width,
+
+            height,
+
+            photo_type,
+
+            approval_status,
+
+            is_primary,
+
+            is_featured,
+
+            uploaded_at,
+
+            approved_at
+
+        FROM photos
+
+        WHERE
+
+            user_id =
+                :user_id
+
+            AND approval_status =
+                'approved'
+
+        ORDER BY
+
+            is_primary DESC,
+
+            uploaded_at DESC
+
+        LIMIT 1
+        "
+    );
+
+
+$photoStmt->execute(
+    array(
+        ':user_id' =>
+            $targetUserId
+    )
+);
+
+
+$profilePhoto =
+    $photoStmt->fetch(
+        PDO::FETCH_ASSOC
+    );
+
+
 if (
-    $currentUserId > 0
-    &&
-    !$isOwner
+    !is_array(
+        $profilePhoto
+    )
 ) {
 
-    try {
+    $profilePhoto =
+        null;
 
-        $blockStmt = $pdo->prepare(
+}
+
+
+/* ============================================================
+   ONLINE STATUS
+============================================================ */
+
+$isOnline =
+    false;
+
+
+try {
+
+    $onlineStmt =
+        $pdo->prepare(
             "
             SELECT id
 
-            FROM blocked_users
+            FROM user_sessions
 
             WHERE
-                (
-                    user_id = :current_user
-                    AND
-                    blocked_user_id = :target_user
-                )
 
-                OR
+                user_id =
+                    :user_id
 
-                (
-                    user_id = :target_user2
-                    AND
-                    blocked_user_id = :current_user2
-                )
+                AND revoked_at IS NULL
+
+                AND expires_at >
+                    CURRENT_TIMESTAMP
+
+                AND last_activity_at >=
+                    DATE_SUB(
+                        CURRENT_TIMESTAMP,
+                        INTERVAL 10 MINUTE
+                    )
+
+            ORDER BY
+                last_activity_at DESC
 
             LIMIT 1
             "
         );
 
-        $blockStmt->execute(
-            [
-                ':current_user' =>
-                    $currentUserId,
 
-                ':target_user' =>
-                    $targetUserId,
+    $onlineStmt->execute(
+        array(
+            ':user_id' =>
+                $targetUserId
+        )
+    );
 
-                ':target_user2' =>
-                    $targetUserId,
 
-                ':current_user2' =>
-                    $currentUserId
-            ]
+    $onlineRow =
+        $onlineStmt->fetch(
+            PDO::FETCH_ASSOC
         );
 
-        $blocked =
-            $blockStmt->fetch();
 
-    } catch (Throwable $e) {
-
-        $blocked = false;
-
-    }
-
-
-    if ($blocked) {
-
-        profileViewResponse(
-            false,
-            'This profile cannot be viewed.',
-            [
-                'code' =>
-                    'PROFILE_BLOCKED'
-            ],
-            403
+    $isOnline =
+        is_array(
+            $onlineRow
         );
-    }
 
-}
-
-
-/* ============================================================
-   AGE
-============================================================ */
-
-$age = null;
-
-if (
-    !empty(
-        $profile['date_of_birth']
-    )
+} catch (
+    Throwable $e
 ) {
 
-    try {
+    /*
+     * Presence should never stop the profile from loading.
+     */
 
-        $birthDate =
-            new DateTime(
-                (string)
-                $profile['date_of_birth']
-            );
+    error_log(
+        '[LOVEMI DISCOVER PROFILE PRESENCE] '
+        .
+        $e->getMessage()
+    );
 
-        $today =
-            new DateTime();
-
-        $age =
-            $birthDate->diff(
-                $today
-            )->y;
-
-    } catch (Throwable $e) {
-
-        $age = null;
-
-    }
-
-}
-
-
-/* ============================================================
-   ONLINE
-============================================================ */
-
-$isOnline =
-    (bool)
-    $profile['is_online'];
-
-
-if (
-    (int)
-    $profile['show_online_status']
-    !==
-    1
-) {
 
     $isOnline =
         false;
-
-}
-
-
-if (
-    !empty(
-        $profile['last_seen_at']
-    )
-) {
-
-    $lastSeen =
-        strtotime(
-            (string)
-            $profile['last_seen_at']
-        );
-
-    if (
-        $lastSeen !== false
-        &&
-        time() - $lastSeen <= 300
-        &&
-        (int)
-        $profile['show_online_status']
-        === 1
-    ) {
-
-        $isOnline = true;
-
-    }
-
-}
-
-
-/* ============================================================
-   APPROVED PHOTOS
-============================================================ */
-
-$photos = [];
-
-try {
-
-    $photoStmt = $pdo->prepare(
-        "
-        SELECT
-
-            id,
-            file_name,
-            file_path,
-            thumbnail_path,
-            mime_type,
-            file_size,
-            width,
-            height,
-            photo_type,
-            is_primary,
-            is_featured,
-            uploaded_at
-
-        FROM photos
-
-        WHERE user_id = :user_id
-
-          AND approval_status = 'approved'
-
-        ORDER BY
-
-            is_primary DESC,
-            is_featured DESC,
-            uploaded_at DESC,
-            id DESC
-        "
-    );
-
-    $photoStmt->execute([
-        ':user_id' => $targetUserId
-    ]);
-
-    $photoRows =
-        $photoStmt->fetchAll();
-
-} catch (Throwable $e) {
-
-    $photoRows = [];
-
-}
-
-
-foreach (
-    $photoRows
-    as $photo
-) {
-
-    $photos[] = [
-
-        'id' =>
-            (int)
-            $photo['id'],
-
-        'file_name' =>
-            $photo['file_name'],
-
-        'file_path' =>
-            $photo['file_path'],
-
-        'thumbnail_path' =>
-            $photo['thumbnail_path'],
-
-        'mime_type' =>
-            $photo['mime_type'],
-
-        'file_size' =>
-            $photo['file_size']
-            !==
-            null
-                ?
-                (int)
-                $photo['file_size']
-                :
-                null,
-
-        'width' =>
-            $photo['width']
-            !==
-            null
-                ?
-                (int)
-                $photo['width']
-                :
-                null,
-
-        'height' =>
-            $photo['height']
-            !==
-            null
-                ?
-                (int)
-                $photo['height']
-                :
-                null,
-
-        'photo_type' =>
-            $photo['photo_type'],
-
-        'is_primary' =>
-            (bool)
-            $photo['is_primary'],
-
-        'is_featured' =>
-            (bool)
-            $photo['is_featured'],
-
-        'uploaded_at' =>
-            $photo['uploaded_at']
-
-    ];
 
 }
 
@@ -609,217 +879,894 @@ foreach (
 ============================================================ */
 
 $connectionStatus =
-    'none';
+    '';
 
 
-$connectionId =
-    null;
+try {
 
+    $connectionStmt =
+        $pdo->prepare(
+            "
+            SELECT
 
-if (
-    $currentUserId > 0
-    &&
-    !$isOwner
-) {
+                id,
 
-    try {
+                user_id,
 
-        $connectionStmt =
-            $pdo->prepare(
-                "
-                SELECT
+                connected_user_id,
 
-                    id,
-                    status,
-                    initiated_by
+                initiated_by,
 
-                FROM connections
+                status,
 
-                WHERE
+                connected_at,
 
-                    user_low_id =
-                        LEAST(
-                            :u1,
-                            :u2
-                        )
+                created_at
 
-                    AND
+            FROM connections
 
-                    user_high_id =
-                        GREATEST(
-                            :u3,
-                            :u4
-                        )
+            WHERE
 
-                ORDER BY id DESC
+                (
+                    user_id =
+                        :current_user_one
 
-                LIMIT 1
-                "
-            );
+                    AND connected_user_id =
+                        :target_user_one
+                )
 
-        $connectionStmt->execute(
-            [
+                OR
 
-                ':u1' =>
-                    $currentUserId,
+                (
+                    user_id =
+                        :target_user_two
 
-                ':u2' =>
-                    $targetUserId,
+                    AND connected_user_id =
+                        :current_user_two
+                )
 
-                ':u3' =>
-                    $currentUserId,
+            ORDER BY id DESC
 
-                ':u4' =>
-                    $targetUserId
-
-            ]
+            LIMIT 1
+            "
         );
 
-        $connection =
-            $connectionStmt->fetch();
 
-    } catch (Throwable $e) {
+    $connectionStmt->execute(
+        array(
+            ':current_user_one' =>
+                $currentUserId,
 
-        $connection = false;
+            ':target_user_one' =>
+                $targetUserId,
+
+            ':target_user_two' =>
+                $targetUserId,
+
+            ':current_user_two' =>
+                $currentUserId
+        )
+    );
+
+
+    $connection =
+        $connectionStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
+
+    if (
+        is_array(
+            $connection
+        )
+    ) {
+
+        $connectionRawStatus =
+            strtolower(
+                trim(
+                    (string)(
+                        $connection['status']
+                        ??
+                        ''
+                    )
+                )
+            );
+
+
+        if (
+            $connectionRawStatus ===
+            'accepted'
+            ||
+            $connectionRawStatus ===
+            'connected'
+        ) {
+
+            $connectionStatus =
+                'connected';
+
+        } elseif (
+            $connectionRawStatus ===
+            'pending'
+        ) {
+
+            $initiatedBy =
+                (int)(
+                    $connection['initiated_by']
+                    ??
+                    0
+                );
+
+
+            if (
+                $initiatedBy ===
+                $currentUserId
+            ) {
+
+                $connectionStatus =
+                    'pending_sent';
+
+            } else {
+
+                $connectionStatus =
+                    'pending_received';
+
+            }
+
+        } else {
+
+            $connectionStatus =
+                $connectionRawStatus;
+
+        }
 
     }
 
+} catch (
+    Throwable $e
+) {
 
-    if ($connection) {
+    error_log(
+        '[LOVEMI DISCOVER PROFILE CONNECTION] '
+        .
+        $e->getMessage()
+    );
 
-        $connectionId =
-            (int)
-            $connection['id'];
 
-        $connectionStatus =
-            $connection['status'];
-
-    }
+    $connectionStatus =
+        '';
 
 }
 
 
 /* ============================================================
-   CAN MESSAGE
+   POSTS
 ============================================================ */
 
-$canMessage =
-    (bool)
-    $profile['allow_messages'];
+$posts =
+    array();
+
+
+$postsStmt =
+    $pdo->prepare(
+        "
+        SELECT
+
+            p.id,
+
+            p.user_id,
+
+            p.content,
+
+            p.visibility,
+
+            p.approval_status,
+
+            p.is_featured,
+
+            p.created_at,
+
+            p.updated_at,
+
+            p.approved_at
+
+        FROM posts p
+
+        WHERE
+
+            p.user_id =
+                :user_id
+
+            AND p.approval_status =
+                'approved'
+
+            AND p.visibility =
+                'public'
+
+            AND p.deleted_at IS NULL
+
+        ORDER BY
+            p.created_at DESC
+
+        LIMIT 100
+        "
+    );
+
+
+$postsStmt->execute(
+    array(
+        ':user_id' =>
+            $targetUserId
+    )
+);
+
+
+$postRows =
+    $postsStmt->fetchAll(
+        PDO::FETCH_ASSOC
+    );
+
+
+if (
+    !is_array(
+        $postRows
+    )
+) {
+
+    $postRows =
+        array();
+
+}
 
 
 /* ============================================================
-   RESPONSE
+   LOAD EACH POST AND ALL MEDIA
+============================================================ */
+
+foreach (
+    $postRows
+    as $post
+) {
+
+    $postId =
+        (int)(
+            $post['id']
+            ??
+            0
+        );
+
+
+    $post['id'] =
+        $postId;
+
+
+    $post['user_id'] =
+        (int)(
+            $post['user_id']
+            ??
+            $targetUserId
+        );
+
+
+    $post['post_id'] =
+        $postId;
+
+
+    $post['posted_at'] =
+        $post['created_at']
+        ??
+        null;
+
+
+    $post['media'] =
+        array();
+
+
+    /*
+     * Load ALL approved media associated with this post.
+     *
+     * This is important because the old public view was often
+     * limited to display_order = 1.
+     */
+
+    if (
+        $postId > 0
+    ) {
+
+        $mediaStmt =
+            $pdo->prepare(
+                "
+                SELECT
+
+                    ph.id,
+
+                    ph.user_id,
+
+                    ph.file_name,
+
+                    ph.file_path,
+
+                    ph.thumbnail_path,
+
+                    ph.mime_type,
+
+                    ph.file_size,
+
+                    ph.width,
+
+                    ph.height,
+
+                    ph.photo_type,
+
+                    ph.approval_status,
+
+                    ph.is_primary,
+
+                    ph.is_featured,
+
+                    ph.uploaded_at,
+
+                    pp.display_order,
+
+                    pp.created_at AS linked_at
+
+                FROM post_photos pp
+
+                INNER JOIN photos ph
+                    ON ph.id =
+                        pp.photo_id
+
+                WHERE
+
+                    pp.post_id =
+                        :post_id
+
+                    AND ph.user_id =
+                        :user_id
+
+                    AND ph.approval_status =
+                        'approved'
+
+                ORDER BY
+
+                    pp.display_order ASC,
+
+                    pp.id ASC
+
+                LIMIT 50
+                "
+            );
+
+
+        $mediaStmt->execute(
+            array(
+                ':post_id' =>
+                    $postId,
+
+                ':user_id' =>
+                    $targetUserId
+            )
+        );
+
+
+        $mediaRows =
+            $mediaStmt->fetchAll(
+                PDO::FETCH_ASSOC
+            );
+
+
+        if (
+            is_array(
+                $mediaRows
+            )
+        ) {
+
+            foreach (
+                $mediaRows
+                as $media
+            ) {
+
+                $media['id'] =
+                    (int)(
+                        $media['id']
+                        ??
+                        0
+                    );
+
+
+                $media['user_id'] =
+                    (int)(
+                        $media['user_id']
+                        ??
+                        $targetUserId
+                    );
+
+
+                $media['display_order'] =
+                    (int)(
+                        $media['display_order']
+                        ??
+                        1
+                    );
+
+
+                $post['media'][] =
+                    $media;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+     * Legacy fields kept for compatibility with your existing
+     * Discover JavaScript.
+     */
+
+    if (
+        !empty(
+            $post['media']
+        )
+    ) {
+
+        $firstMedia =
+            $post['media'][0];
+
+
+        $post['media_url'] =
+            $firstMedia['file_path']
+            ??
+            '';
+
+
+        $post['file_path'] =
+            $firstMedia['file_path']
+            ??
+            '';
+
+
+        $post['post_image'] =
+            $firstMedia['file_path']
+            ??
+            '';
+
+
+        $post['post_thumbnail'] =
+            $firstMedia['thumbnail_path']
+            ??
+            '';
+
+
+        $post['mime_type'] =
+            $firstMedia['mime_type']
+            ??
+            '';
+
+    } else {
+
+        $post['media_url'] =
+            '';
+
+
+        $post['file_path'] =
+            '';
+
+
+        $post['post_image'] =
+            '';
+
+
+        $post['post_thumbnail'] =
+            '';
+
+
+        $post['mime_type'] =
+            '';
+
+    }
+
+
+    $posts[] =
+        $post;
+
+}
+
+
+/* ============================================================
+   SAFE COUNTRY OBJECT
+============================================================ */
+
+$countryObject =
+    array(
+
+        'id' =>
+            (int)(
+                $user['country_id']
+                ??
+                0
+            ),
+
+        'name' =>
+            (string)(
+                $user['country_name']
+                ??
+                ''
+            ),
+
+        'iso2' =>
+            (string)(
+                $user['country_iso2']
+                ??
+                ''
+            )
+
+    );
+
+
+/* ============================================================
+   PROFILE OBJECT
+============================================================ */
+
+$profile['user_id'] =
+    $targetUserId;
+
+
+$profile['display_name'] =
+    $profile['display_name']
+    ??
+    $user['full_names']
+    ??
+    $user['username']
+    ??
+    'LOVEMI Member';
+
+
+$profile['country_id'] =
+    (int)(
+        $user['country_id']
+        ??
+        0
+    );
+
+
+$profile['country_name'] =
+    (string)(
+        $user['country_name']
+        ??
+        ''
+    );
+
+
+$profile['country'] =
+    $countryObject;
+
+
+$profile['is_online'] =
+    $isOnline;
+
+
+$profile['online'] =
+    $isOnline;
+
+
+$profile['connection_status'] =
+    $connectionStatus;
+
+
+/* ============================================================
+   PROFILE PHOTO
+============================================================ */
+
+$profile['profile_photo'] =
+    $profilePhoto['file_path']
+    ??
+    '';
+
+
+$profile['profile_thumbnail'] =
+    $profilePhoto['thumbnail_path']
+    ??
+    '';
+
+
+$profile['photo'] =
+    $profilePhoto
+    ?:
+    null;
+
+
+/* ============================================================
+   USER OBJECT
+============================================================ */
+
+$userResponse =
+    array(
+
+        'id' =>
+            (int)(
+                $user['id']
+                ??
+                $targetUserId
+            ),
+
+        'user_id' =>
+            (int)(
+                $user['id']
+                ??
+                $targetUserId
+            ),
+
+        'username' =>
+            (string)(
+                $user['username']
+                ??
+                ''
+            ),
+
+        'full_names' =>
+            (string)(
+                $user['full_names']
+                ??
+                ''
+            ),
+
+        'full_name' =>
+            (string)(
+                $user['full_names']
+                ??
+                ''
+            ),
+
+        'gender' =>
+            (string)(
+                $user['gender']
+                ??
+                ''
+            ),
+
+        'country_id' =>
+            (int)(
+                $user['country_id']
+                ??
+                0
+            ),
+
+        'country_name' =>
+            (string)(
+                $user['country_name']
+                ??
+                ''
+            ),
+
+        'country' =>
+            $countryObject,
+
+        'iso2' =>
+            (string)(
+                $user['country_iso2']
+                ??
+                ''
+            ),
+
+        'date_of_birth' =>
+            $user['date_of_birth']
+            ??
+            null,
+
+        'last_seen_at' =>
+            $user['last_seen_at']
+            ??
+            null,
+
+        'created_at' =>
+            $user['created_at']
+            ??
+            null,
+
+        'is_online' =>
+            $isOnline,
+
+        'online' =>
+            $isOnline,
+
+        'profile_photo' =>
+            $profilePhoto['file_path']
+            ??
+            '',
+
+        'profile_thumbnail' =>
+            $profilePhoto['thumbnail_path']
+            ??
+            '',
+
+        'connection_status' =>
+            $connectionStatus
+
+    );
+
+
+/* ============================================================
+   FINAL RESPONSE
 ============================================================ */
 
 profileViewResponse(
     true,
     'Profile loaded successfully.',
-    [
+    array(
 
-        'profile' => [
+        'profile' =>
+            array(
 
-            'id' =>
-                (int)
-                $profile['id'],
+                /*
+                 * User data.
+                 */
 
-            'username' =>
-                $profile['username'],
+                'user' =>
+                    $userResponse,
 
-            'full_names' =>
-                $profile['full_names'],
+                /*
+                 * Profile table data.
+                 */
 
-            'display_name' =>
-                $profile['display_name']
-                ??
-                $profile['full_names'],
+                'profile' =>
+                    $profile,
 
-            'gender' =>
-                $profile['gender'],
-
-            'age' =>
-                $age,
-
-            'country' => [
+                /*
+                 * Flattened fields for frontend compatibility.
+                 */
 
                 'id' =>
-                    $profile['country_id']
-                    !== null
-                        ?
-                        (int)
-                        $profile['country_id']
-                        :
-                        null,
+                    $userResponse['id'],
 
-                'name' =>
-                    $profile['country_name'],
+                'user_id' =>
+                    $userResponse['user_id'],
 
-                'iso2' =>
-                    $profile['iso2'],
+                'username' =>
+                    $userResponse['username'],
 
-                'iso3' =>
-                    $profile['iso3'],
+                'full_name' =>
+                    $userResponse['full_name'],
 
-                'flag_code' =>
-                    $profile['flag_code']
+                'full_names' =>
+                    $userResponse['full_names'],
 
-            ],
+                'gender' =>
+                    $userResponse['gender'],
 
-            'bio' =>
-                $profile['bio'],
+                'country_id' =>
+                    $userResponse['country_id'],
 
-            'occupation' =>
-                $profile['occupation'],
+                'country_name' =>
+                    $userResponse['country_name'],
 
-            'education' =>
-                $profile['education'],
+                'country' =>
+                    $countryObject,
 
-            'city' =>
-                $profile['city'],
+                'date_of_birth' =>
+                    $userResponse['date_of_birth'],
 
-            'relationship_status' =>
-                $profile['relationship_status'],
+                'profile_photo' =>
+                    $userResponse['profile_photo'],
 
-            'looking_for' =>
-                $profile['looking_for'],
+                'profile_thumbnail' =>
+                    $userResponse['profile_thumbnail'],
 
-            'interests' =>
-                $profile['interests'],
+                'is_online' =>
+                    $isOnline,
 
-            'online' =>
-                $isOnline,
+                'online' =>
+                    $isOnline,
 
-            'last_seen_at' =>
-                (
-                    (int)
-                    $profile['show_online_status']
-                    === 1
-                        ?
-                        $profile['last_seen_at']
-                        :
-                        null
-                ),
+                'connection_status' =>
+                    $connectionStatus,
 
-            'photos' =>
-                $photos
+                /*
+                 * Profile-specific fields.
+                 */
 
-        ],
+                'bio' =>
+                    $profile['bio']
+                    ??
+                    '',
 
-        'is_owner' =>
-            $isOwner,
+                'occupation' =>
+                    $profile['occupation']
+                    ??
+                    '',
 
-        'can_message' =>
-            $canMessage,
+                'education' =>
+                    $profile['education']
+                    ??
+                    '',
 
-        'connection' => [
+                'city' =>
+                    $profile['city']
+                    ??
+                    '',
 
-            'id' =>
-                $connectionId,
+                'relationship_status' =>
+                    $profile['relationship_status']
+                    ??
+                    '',
 
-            'status' =>
-                $connectionStatus
+                'looking_for' =>
+                    $profile['looking_for']
+                    ??
+                    '',
 
-        ]
+                'interests' =>
+                    $profile['interests']
+                    ??
+                    '',
 
-    ]
+                'show_online_status' =>
+                    (int)(
+                        $profile['show_online_status']
+                        ??
+                        1
+                    ),
+
+                'allow_messages' =>
+                    (int)(
+                        $profile['allow_messages']
+                        ??
+                        1
+                    ),
+
+                /*
+                 * Primary photo object.
+                 */
+
+                'photo' =>
+                    $profilePhoto,
+
+                /*
+                 * Public approved posts.
+                 */
+
+                'posts' =>
+                    $posts,
+
+                /*
+                 * Statistics.
+                 */
+
+                'statistics' =>
+                    array(
+
+                        'posts' =>
+                            count(
+                                $posts
+                            ),
+
+                        'media' =>
+                            array_sum(
+                                array_map(
+                                    function (
+                                        $post
+                                    ) {
+
+                                        return count(
+                                            is_array(
+                                                $post['media']
+                                                ??
+                                                null
+                                            )
+                                                ?
+                                                $post['media']
+                                                :
+                                                array()
+                                        );
+
+                                    },
+                                    $posts
+                                )
+                            )
+
+                    )
+
+            )
+
+    )
 );

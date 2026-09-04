@@ -1,25 +1,4 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - CREATE CONNECTION
- * ============================================================
- *
- * File:
- * C:\xampp\htdocs\LOVEMI\api\connections\create.php
- *
- * RULE:
- *
- * Premium user
- *      +
- * Click another eligible member
- *      =
- * Connection is created
- *
- * The receiving member does NOT need premium.
- *
- * Phone/WhatsApp information is NOT returned here.
- * ============================================================
- */
 
 declare(strict_types=1);
 
@@ -36,9 +15,12 @@ header('Expires: 0');
 ============================================================ */
 
 if (
-    session_status() !== PHP_SESSION_ACTIVE
+    session_status()
+    !== PHP_SESSION_ACTIVE
 ) {
+
     session_start();
+
 }
 
 
@@ -76,7 +58,8 @@ function connectionResponse(
 ============================================================ */
 
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST'
+    ($_SERVER['REQUEST_METHOD'] ?? '')
+    !== 'POST'
 ) {
 
     connectionResponse(
@@ -124,14 +107,19 @@ if (
 
 
 /* ============================================================
-   REQUEST
+   REQUEST BODY
 ============================================================ */
+
+$rawBody =
+    file_get_contents(
+        'php://input'
+    )
+    ?: '';
+
 
 $data =
     json_decode(
-        file_get_contents(
-            'php://input'
-        ) ?: '{}',
+        $rawBody,
         true
     );
 
@@ -139,9 +127,15 @@ $data =
 if (
     !is_array($data)
 ) {
+
     $data = [];
+
 }
 
+
+/* ============================================================
+   TARGET
+============================================================ */
 
 $targetUserId =
     isset(
@@ -178,7 +172,7 @@ if (
 
 
 /* ============================================================
-   SELF CONNECTION
+   SELF
 ============================================================ */
 
 if (
@@ -211,7 +205,8 @@ try {
 
     error_log(
         '[LOVEMI CONNECTION DB] '
-        . $e->getMessage()
+        .
+        $e->getMessage()
     );
 
     connectionResponse(
@@ -230,16 +225,23 @@ try {
    CURRENT USER
 ============================================================ */
 
-$userStmt =
+$currentUserStmt =
     $pdo->prepare(
         "
+
         SELECT
 
-            u.id,
-            u.email_verified,
-            u.is_active,
-            u.is_suspended,
-            u.is_deleted,
+            id,
+
+            email_verified,
+
+            is_active,
+
+            is_suspended,
+
+            is_deleted,
+
+            account_status,
 
             EXISTS
             (
@@ -247,32 +249,55 @@ $userStmt =
 
                 FROM subscriptions s
 
-                WHERE s.user_id = u.id
+                INNER JOIN services sv
+                    ON sv.id = s.service_id
 
-                  AND s.status = 'active'
+                WHERE
 
-                  AND s.starts_at <= CURRENT_TIMESTAMP
+                    s.user_id = users.id
 
-                  AND
-                      (
-                          s.ends_at IS NULL
-                          OR
-                          s.ends_at > CURRENT_TIMESTAMP
-                      )
+                    AND
+
+                    sv.slug = 'lovemi-premium'
+
+                    AND
+
+                    sv.is_active = 1
+
+                    AND
+
+                    s.status = 'active'
+
+                    AND
+
+                    (
+                        s.start_at IS NULL
+                        OR
+                        s.start_at <= CURRENT_TIMESTAMP
+                    )
+
+                    AND
+
+                    (
+                        s.end_at IS NULL
+                        OR
+                        s.end_at > CURRENT_TIMESTAMP
+                    )
 
                 LIMIT 1
             ) AS has_premium
 
-        FROM users u
+        FROM users
 
-        WHERE u.id = :id
+        WHERE id = :id
 
         LIMIT 1
+
         "
     );
 
 
-$userStmt->execute(
+$currentUserStmt->execute(
     [
         ':id' =>
             $currentUserId
@@ -281,7 +306,9 @@ $userStmt->execute(
 
 
 $currentUser =
-    $userStmt->fetch();
+    $currentUserStmt->fetch(
+        PDO::FETCH_ASSOC
+    );
 
 
 if (
@@ -291,7 +318,10 @@ if (
     connectionResponse(
         false,
         'Your account could not be found.',
-        [],
+        [
+            'code' =>
+                'USER_NOT_FOUND'
+        ],
         404
     );
 }
@@ -302,7 +332,9 @@ if (
 ============================================================ */
 
 if (
-    !(bool)$currentUser['email_verified']
+    (int)$currentUser['email_verified']
+    !==
+    1
 ) {
 
     connectionResponse(
@@ -318,11 +350,30 @@ if (
 
 
 if (
-    !(bool)$currentUser['is_active']
+    (int)$currentUser['is_active']
+    !==
+    1
+
     ||
-    (bool)$currentUser['is_suspended']
+
+    (int)$currentUser['is_suspended']
+    ===
+    1
+
     ||
-    (bool)$currentUser['is_deleted']
+
+    (int)$currentUser['is_deleted']
+    ===
+    1
+
+    ||
+
+    strtolower(
+        (string)
+        $currentUser['account_status']
+    )
+    !==
+    'approved'
 ) {
 
     connectionResponse(
@@ -342,12 +393,14 @@ if (
 ============================================================ */
 
 if (
-    !(bool)$currentUser['has_premium']
+    (int)$currentUser['has_premium']
+    !==
+    1
 ) {
 
     connectionResponse(
         false,
-        'Premium access is required to create a connection.',
+        'Premium access is required to create a new connection.',
         [
             'code' =>
                 'PREMIUM_REQUIRED',
@@ -356,7 +409,7 @@ if (
                 false,
 
             'redirect' =>
-                'premium.html?return=dashboard.html'
+                'premium.html?return=discover.html'
         ],
         403
     );
@@ -370,22 +423,33 @@ if (
 $targetStmt =
     $pdo->prepare(
         "
+
         SELECT
 
             id,
-            full_names,
+
             username,
+
+            full_names,
+
             gender,
+
             email_verified,
+
             is_active,
+
             is_suspended,
-            is_deleted
+
+            is_deleted,
+
+            account_status
 
         FROM users
 
         WHERE id = :id
 
         LIMIT 1
+
         "
     );
 
@@ -399,7 +463,9 @@ $targetStmt->execute(
 
 
 $targetUser =
-    $targetStmt->fetch();
+    $targetStmt->fetch(
+        PDO::FETCH_ASSOC
+    );
 
 
 if (
@@ -418,14 +484,33 @@ if (
 }
 
 
+/* ============================================================
+   TARGET AVAILABILITY
+============================================================ */
+
 if (
-    !(bool)$targetUser['email_verified']
+    (int)$targetUser['email_verified']
+    !==
+    1
     ||
-    !(bool)$targetUser['is_active']
+    (int)$targetUser['is_active']
+    !==
+    1
     ||
-    (bool)$targetUser['is_suspended']
+    (int)$targetUser['is_suspended']
+    ===
+    1
     ||
-    (bool)$targetUser['is_deleted']
+    (int)$targetUser['is_deleted']
+    ===
+    1
+    ||
+    strtolower(
+        (string)
+        $targetUser['account_status']
+    )
+    !==
+    'approved'
 ) {
 
     connectionResponse(
@@ -447,32 +532,40 @@ if (
 $blockStmt =
     $pdo->prepare(
         "
+
         SELECT id
 
-        FROM blocks
+        FROM blocked_users
 
         WHERE
+
             (
-                blocker_id = :user_a
+                user_id = :user_a
+
                 AND
-                blocked_id = :user_b
+
+                blocked_user_id = :user_b
             )
 
             OR
 
             (
-                blocker_id = :user_b2
+                user_id = :user_b2
+
                 AND
-                blocked_id = :user_a2
+
+                blocked_user_id = :user_a2
             )
 
         LIMIT 1
+
         "
     );
 
 
 $blockStmt->execute(
     [
+
         ':user_a' =>
             $currentUserId,
 
@@ -484,6 +577,7 @@ $blockStmt->execute(
 
         ':user_a2' =>
             $currentUserId
+
     ]
 );
 
@@ -505,43 +599,66 @@ if (
 
 
 /* ============================================================
-   CHECK EXISTING CONNECTION
+   EXISTING CONNECTION
 ============================================================ */
 
 $existingStmt =
     $pdo->prepare(
         "
+
         SELECT
 
             id,
-            requester_id,
-            receiver_id,
-            status
+
+            user_id,
+
+            connected_user_id,
+
+            initiated_by,
+
+            status,
+
+            connected_at,
+
+            created_at,
+
+            updated_at
 
         FROM connections
 
         WHERE
+
             (
-                requester_id = :user_a
+                user_id = :user_a
+
                 AND
-                receiver_id = :user_b
+
+                connected_user_id = :user_b
             )
 
             OR
 
             (
-                requester_id = :user_b2
+                user_id = :user_b2
+
                 AND
-                receiver_id = :user_a2
+
+                connected_user_id = :user_a2
             )
 
+        ORDER BY
+
+            id DESC
+
         LIMIT 1
+
         "
     );
 
 
 $existingStmt->execute(
     [
+
         ':user_a' =>
             $currentUserId,
 
@@ -553,88 +670,133 @@ $existingStmt->execute(
 
         ':user_a2' =>
             $currentUserId
+
     ]
 );
 
 
 $existing =
-    $existingStmt->fetch();
+    $existingStmt->fetch(
+        PDO::FETCH_ASSOC
+    );
 
-
-/* ============================================================
-   EXISTING
-============================================================ */
 
 if (
     $existing
 ) {
 
-    if (
+    $existingStatus =
         strtolower(
-            (string)
-            $existing['status']
+            trim(
+                (string)
+                $existing['status']
+            )
+        );
+
+
+    /* --------------------------------------------------------
+       ALREADY CONNECTED
+    -------------------------------------------------------- */
+
+    if (
+        in_array(
+            $existingStatus,
+            [
+                'accepted',
+                'connected'
+            ],
+            true
         )
-        ===
-        'accepted'
     ) {
+
+        $conversationId =
+            null;
+
+
+        $conversationStmt =
+            $pdo->prepare(
+                "
+
+                SELECT
+
+                    id
+
+                FROM conversations
+
+                WHERE
+
+                    (
+                        user_one_id = :user_one_a
+
+                        AND
+
+                        user_two_id = :user_two_a
+                    )
+
+                    OR
+
+                    (
+                        user_one_id = :user_one_b
+
+                        AND
+
+                        user_two_id = :user_two_b
+                    )
+
+                ORDER BY
+
+                    id DESC
+
+                LIMIT 1
+
+                "
+            );
+
+
+        $conversationStmt->execute(
+            [
+
+                ':user_one_a' =>
+                    $currentUserId,
+
+                ':user_two_a' =>
+                    $targetUserId,
+
+                ':user_one_b' =>
+                    $targetUserId,
+
+                ':user_two_b' =>
+                    $currentUserId
+
+            ]
+        );
+
+
+        $conversation =
+            $conversationStmt->fetch(
+                PDO::FETCH_ASSOC
+            );
+
+
+        if (
+            $conversation
+        ) {
+
+            $conversationId =
+                (int)
+                $conversation['id'];
+
+        }
+
 
         connectionResponse(
             true,
             'You are already connected with this member.',
             [
-                'connection_id' =>
-                    (int)
-                    $existing['id'],
 
-                'status' =>
-                    'accepted',
+                'code' =>
+                    'ALREADY_CONNECTED',
 
-                'already_connected' =>
-                    true
-            ]
-        );
-    }
-
-
-    /*
-     * Convert an existing pending connection to an active
-     * connection because the authenticated initiator has premium.
-     */
-
-    try {
-
-        $update =
-            $pdo->prepare(
-                "
-                UPDATE connections
-
-                SET
-
-                    status = 'accepted',
-
-                    updated_at =
-                        CURRENT_TIMESTAMP
-
-                WHERE id = :id
-
-                LIMIT 1
-                "
-            );
-
-
-        $update->execute(
-            [
-                ':id' =>
-                    (int)
-                    $existing['id']
-            ]
-        );
-
-
-        connectionResponse(
-            true,
-            'Connection created successfully.',
-            [
                 'connection_id' =>
                     (int)
                     $existing['id'],
@@ -643,30 +805,135 @@ if (
                     'accepted',
 
                 'connected' =>
-                    true
+                    true,
+
+                'conversation_id' =>
+                    $conversationId
+
             ]
         );
+    }
 
-    } catch (Throwable $e) {
 
-        error_log(
-            '[LOVEMI CONNECTION UPDATE] '
-            . $e->getMessage()
-        );
+    /* --------------------------------------------------------
+       PENDING SENT
+    -------------------------------------------------------- */
+
+    if (
+        $existingStatus ===
+        'pending'
+    ) {
+
+        if (
+            (int)
+            $existing['initiated_by']
+            ===
+            $currentUserId
+        ) {
+
+            connectionResponse(
+                true,
+                'Your connection request is already waiting for acceptance.',
+                [
+
+                    'code' =>
+                        'ALREADY_PENDING',
+
+                    'connection_id' =>
+                        (int)
+                        $existing['id'],
+
+                    'status' =>
+                        'pending_sent',
+
+                    'connected' =>
+                        false
+
+                ]
+            );
+        }
+
+
+        /*
+         * The other member already sent the request.
+         * Do not silently accept it.
+         *
+         * They must accept it themselves.
+         */
 
         connectionResponse(
             false,
-            'Unable to activate this connection.',
-            [],
-            500
+            'This member has already sent you a connection request. Please check your Connections page.',
+            [
+
+                'code' =>
+                    'PENDING_RECEIVED',
+
+                'connection_id' =>
+                    (int)
+                    $existing['id'],
+
+                'status' =>
+                    'pending_received'
+
+            ],
+            409
         );
     }
+
+
+    /* --------------------------------------------------------
+       REJECTED / CANCELLED
+       --------------------------------------------------------
+       Remove the old record so the premium user can create
+       a fresh request.
+    -------------------------------------------------------- */
+
+    if (
+        in_array(
+            $existingStatus,
+            [
+                'rejected',
+                'cancelled'
+            ],
+            true
+        )
+    ) {
+
+        $deleteOld =
+            $pdo->prepare(
+                "
+
+                DELETE FROM connections
+
+                WHERE id = :id
+
+                LIMIT 1
+
+                "
+            );
+
+
+        $deleteOld->execute(
+            [
+                ':id' =>
+                    (int)
+                    $existing['id']
+            ]
+        );
+
+    }
+
 }
 
 
 /* ============================================================
-   CREATE CONNECTION
+   CREATE NEW PENDING REQUEST
 ============================================================ */
+
+$connectionId =
+    0;
+
 
 try {
 
@@ -676,33 +943,57 @@ try {
     $insert =
         $pdo->prepare(
             "
+
             INSERT INTO connections
             (
-                requester_id,
-                receiver_id,
+                user_id,
+
+                connected_user_id,
+
+                initiated_by,
+
                 status,
+
+                connected_at,
+
                 created_at,
+
                 updated_at
             )
+
             VALUES
             (
-                :requester_id,
-                :receiver_id,
-                'accepted',
+                :user_id,
+
+                :connected_user_id,
+
+                :initiated_by,
+
+                'pending',
+
+                NULL,
+
                 CURRENT_TIMESTAMP,
+
                 CURRENT_TIMESTAMP
             )
+
             "
         );
 
 
     $insert->execute(
         [
-            ':requester_id' =>
+
+            ':user_id' =>
                 $currentUserId,
 
-            ':receiver_id' =>
-                $targetUserId
+            ':connected_user_id' =>
+                $targetUserId,
+
+            ':initiated_by' =>
+                $currentUserId
+
         ]
     );
 
@@ -712,67 +1003,158 @@ try {
         $pdo->lastInsertId();
 
 
-    /*
-     * Create notification for the receiving member.
-     *
-     * We only store notification metadata.
-     * Contact information is not placed in notification text.
-     */
+    /* ========================================================
+       NOTIFICATION
+    ======================================================== */
 
     try {
+
+        /*
+         * Existing LOVEMI notification type:
+         *
+         * 1 = New Connection
+         *
+         * The notification schema uses notification_type_id,
+         * sender_id, reference_type and reference_id.
+         */
+
+        $audioId =
+            null;
+
+
+        $audioStmt =
+            $pdo->prepare(
+                "
+
+                SELECT id
+
+                FROM notification_audio
+
+                WHERE notification_type_id = 1
+
+                  AND is_active = 1
+
+                ORDER BY
+
+                    sort_order ASC,
+
+                    id ASC
+
+                LIMIT 1
+
+                "
+            );
+
+
+        $audioStmt->execute();
+
+
+        $audioRow =
+            $audioStmt->fetch(
+                PDO::FETCH_ASSOC
+            );
+
+
+        if (
+            $audioRow
+        ) {
+
+            $audioId =
+                (int)
+                $audioRow['id'];
+
+        }
+
 
         $notification =
             $pdo->prepare(
                 "
+
                 INSERT INTO notifications
                 (
                     user_id,
-                    type,
+
+                    notification_type_id,
+
+                    sender_id,
+
                     title,
+
                     message,
-                    entity_type,
-                    entity_id,
+
+                    reference_type,
+
+                    reference_id,
+
+                    audio_id,
+
                     is_read,
+
                     created_at
                 )
+
                 VALUES
                 (
                     :user_id,
-                    'connection',
-                    'New Connection',
+
+                    1,
+
+                    :sender_id,
+
+                    :title,
+
                     :message,
+
                     'connection',
-                    :entity_id,
-                    FALSE,
+
+                    :reference_id,
+
+                    :audio_id,
+
+                    0,
+
                     CURRENT_TIMESTAMP
                 )
+
                 "
             );
 
 
         $notification->execute(
             [
+
                 ':user_id' =>
                     $targetUserId,
 
-                ':message' =>
-                    'Someone connected with you on LOVEMI.',
+                ':sender_id' =>
+                    $currentUserId,
 
-                ':entity_id' =>
-                    $connectionId
+                ':title' =>
+                    'New Connection Request',
+
+                ':message' =>
+                    'Someone sent you a connection request on LOVEMI.',
+
+                ':reference_id' =>
+                    $connectionId,
+
+                ':audio_id' =>
+                    $audioId
+
             ]
         );
 
     } catch (Throwable $notificationError) {
 
         /*
-         * Do not break the connection when the optional
-         * notification record cannot be inserted.
+         * Connection creation must still succeed if
+         * optional notification insertion fails.
          */
 
         error_log(
             '[LOVEMI CONNECTION NOTIFICATION] '
-            . $notificationError->getMessage()
+            .
+            $notificationError->getMessage()
         );
 
     }
@@ -794,16 +1176,19 @@ try {
 
     error_log(
         '[LOVEMI CONNECTION CREATE] '
-        . $e->getMessage()
+        .
+        $e->getMessage()
     );
 
 
     connectionResponse(
         false,
-        'Unable to create the connection.',
+        'Unable to create the connection request.',
         [
+
             'code' =>
                 'CONNECTION_CREATE_ERROR'
+
         ],
         500
     );
@@ -816,22 +1201,27 @@ try {
 
 connectionResponse(
     true,
-    'Connection created successfully.',
+    'Connection request sent successfully. Please be patient while the other member accepts it.',
     [
+
+        'code' =>
+            'CONNECTION_REQUEST_SENT',
+
         'connection_id' =>
             $connectionId,
 
         'status' =>
-            'accepted',
+            'pending_sent',
 
         'connected' =>
-            true,
+            false,
 
         'target_user_id' =>
             $targetUserId,
 
-        'redirect' =>
-            'connections.html'
+        'conversation_id' =>
+            null
+
     ],
     201
 );

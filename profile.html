@@ -5,73 +5,100 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="LOVEMI member profile.">
+    <meta
+        name="description"
+        content="LOVEMI member profile."
+    >
 
-    <meta name="theme-color"
-          content="#6d28d9">
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
 
-    <!-- =====================================================
-         TAB ICONS
-    ====================================================== -->
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
 
-    <link rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="assets/logo1/favicon-16x16.png">
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
 
-    <link rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="assets/logo1/favicon-32x32.png">
-
-    <link rel="apple-touch-icon"
-          sizes="180x180"
-          href="assets/logo1/apple-touch-icon.png">
-
-    <link rel="manifest"
-          href="assets/logo1/site.webmanifest">
-
-    <!-- =====================================================
-         NO CACHE
-    ====================================================== -->
-
-    <meta http-equiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate">
-
-    <meta http-equiv="Pragma"
-          content="no-cache">
-
-    <meta http-equiv="Expires"
-          content="0">
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
 
     <title>Profile | LOVEMI</title>
 
-    <!-- =====================================================
+
+    <!-- ======================================================
+         FAVICONS
+    ======================================================= -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="assets/logo1/favicon-16x16.png"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="assets/logo1/site.webmanifest"
+    >
+
+
+    <!-- ======================================================
          FONTS
-    ====================================================== -->
+    ======================================================= -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- =====================================================
-         ICONS
-    ====================================================== -->
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer">
+    <!-- ======================================================
+         FONT AWESOME
+    ======================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
 
 
     <style>
@@ -79,6 +106,7 @@
         :root {
 
             --primary:#6d28d9;
+            --primary-dark:#4c1d95;
             --primary-soft:#f3e8ff;
 
             --accent:#db2777;
@@ -90,25 +118,29 @@
             --green:#16a34a;
             --green-soft:#f0fdf4;
 
-            --orange:#d97706;
-            --orange-soft:#fff7ed;
-
             --red:#dc2626;
             --red-soft:#fef2f2;
+
+            --orange:#d97706;
+            --orange-soft:#fff7ed;
 
             --text:#18181b;
             --soft:#68686f;
             --muted:#9898a1;
 
-            --bg:#f7f7fb;
+            --bg:#f6f6fa;
             --white:#ffffff;
+
             --border:#e9e9ef;
 
             --shadow-sm:
-                0 5px 18px rgba(0,0,0,.04);
+                0 6px 20px rgba(0,0,0,.045);
 
             --shadow-md:
-                0 14px 38px rgba(0,0,0,.07);
+                0 14px 38px rgba(0,0,0,.075);
+
+            --shadow-lg:
+                0 25px 75px rgba(0,0,0,.18);
 
             --container:1380px;
 
@@ -143,6 +175,15 @@
 
             background:var(--bg);
 
+            line-height:1.55;
+
+        }
+
+
+        body.modal-open {
+
+            overflow:hidden;
+
         }
 
 
@@ -163,7 +204,8 @@
 
 
         button,
-        input {
+        input,
+        textarea {
 
             font-family:inherit;
 
@@ -177,7 +219,8 @@
         }
 
 
-        img {
+        img,
+        video {
 
             display:block;
 
@@ -186,9 +229,9 @@
         }
 
 
-        /* =====================================================
+        /* ====================================================
            HEADER
-        ====================================================== */
+        ===================================================== */
 
         .header {
 
@@ -204,9 +247,12 @@
             backdrop-filter:
                 blur(18px);
 
+            -webkit-backdrop-filter:
+                blur(18px);
+
             border-bottom:
                 1px solid
-                rgba(0,0,0,.06);
+                rgba(0,0,0,.055);
 
         }
 
@@ -215,7 +261,7 @@
 
             width:
                 min(
-                    calc(100% - 30px),
+                    calc(100% - 20px),
                     var(--container)
                 );
 
@@ -226,7 +272,9 @@
             display:grid;
 
             grid-template-columns:
-                auto 1fr auto;
+                auto
+                minmax(200px,1fr)
+                auto;
 
             align-items:center;
 
@@ -309,80 +357,69 @@
         }
 
 
-        .main-navigation {
+        .header-search {
 
-            display:flex;
+            width:100%;
 
-            align-items:center;
+            max-width:560px;
 
-            justify-content:center;
-
-            gap:3px;
-
-        }
-
-
-        .nav-link {
+            margin:auto;
 
             position:relative;
 
-            min-height:40px;
-
-            padding:0 8px;
-
-            display:inline-flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            gap:5px;
-
-            border-radius:9px;
-
-            color:var(--soft);
-
-            font-size:9px;
-
-            font-weight:700;
-
-            white-space:nowrap;
-
         }
 
 
-        .nav-link:hover,
-        .nav-link.active {
-
-            color:var(--primary);
-
-            background:var(--primary-soft);
-
-        }
-
-
-        .nav-link.active::after {
-
-            content:"";
+        .header-search i {
 
             position:absolute;
 
-            left:11px;
+            left:14px;
 
-            right:11px;
+            top:50%;
 
-            bottom:3px;
+            transform:translateY(-50%);
 
-            height:2px;
+            color:var(--muted);
 
-            border-radius:2px;
+            font-size:11px;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary),
-                    var(--accent)
-                );
+        }
+
+
+        .header-search input {
+
+            width:100%;
+
+            height:42px;
+
+            padding:
+                0 14px 0 38px;
+
+            outline:none;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:12px;
+
+            background:#fafaff;
+
+            font-size:10px;
+
+        }
+
+
+        .header-search input:focus {
+
+            background:#fff;
+
+            border-color:#c4b5fd;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(109,40,217,.05);
 
         }
 
@@ -393,6 +430,8 @@
 
             align-items:center;
 
+            justify-content:flex-end;
+
             gap:6px;
 
         }
@@ -400,9 +439,11 @@
 
         .header-icon {
 
-            width:39px;
+            position:relative;
 
-            height:39px;
+            width:41px;
+
+            height:41px;
 
             display:inline-flex;
 
@@ -410,15 +451,15 @@
 
             justify-content:center;
 
-            border:1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
-            border-radius:10px;
-
-            color:var(--soft);
+            border-radius:11px;
 
             background:#fff;
 
-            font-size:10px;
+            color:var(--soft);
 
         }
 
@@ -432,19 +473,59 @@
         }
 
 
-        .profile-shortcut {
+        .notification-count {
 
-            display:inline-flex;
+            position:absolute;
+
+            top:-4px;
+
+            right:-4px;
+
+            min-width:17px;
+
+            height:17px;
+
+            padding:0 4px;
+
+            display:flex;
 
             align-items:center;
 
-            gap:6px;
+            justify-content:center;
 
-            padding:3px 7px 3px 3px;
+            border:
+                2px solid
+                #fff;
 
-            border:1px solid var(--border);
+            border-radius:999px;
 
-            border-radius:10px;
+            color:#fff;
+
+            background:var(--accent);
+
+            font-size:7px;
+
+            font-weight:900;
+
+        }
+
+
+        .profile-shortcut {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:7px;
+
+            padding:
+                4px 8px 4px 4px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:12px;
 
             background:#fff;
 
@@ -453,28 +534,28 @@
 
         .profile-shortcut img {
 
-            width:31px;
+            width:33px;
 
-            height:31px;
-
-            border-radius:8px;
+            height:33px;
 
             object-fit:cover;
+
+            border-radius:9px;
 
         }
 
 
         .profile-shortcut span {
 
-            max-width:70px;
+            max-width:100px;
 
             overflow:hidden;
 
-            white-space:nowrap;
-
             text-overflow:ellipsis;
 
-            font-size:8px;
+            white-space:nowrap;
+
+            font-size:9px;
 
             font-weight:800;
 
@@ -483,26 +564,32 @@
 
         .mobile-menu {
 
+            width:41px;
+
+            height:41px;
+
             display:none;
-
-            width:39px;
-
-            height:39px;
 
             align-items:center;
 
             justify-content:center;
 
-            border:1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
-            border-radius:10px;
-
-            color:var(--soft);
+            border-radius:11px;
 
             background:#fff;
 
+            color:var(--soft);
+
         }
 
+
+        /* ====================================================
+           MOBILE NAV
+        ===================================================== */
 
         .mobile-navigation {
 
@@ -510,9 +597,9 @@
 
             top:74px;
 
-            left:0;
+            left:10px;
 
-            right:0;
+            right:10px;
 
             z-index:1900;
 
@@ -520,13 +607,16 @@
 
             padding:8px;
 
-            background:rgba(255,255,255,.98);
+            border:
+                1px solid
+                var(--border);
 
-            border-bottom:1px solid var(--border);
+            border-radius:15px;
+
+            background:#fff;
 
             box-shadow:
-                0 20px 45px
-                rgba(0,0,0,.10);
+                var(--shadow-lg);
 
         }
 
@@ -552,7 +642,7 @@
 
         .mobile-link {
 
-            min-height:45px;
+            min-height:44px;
 
             display:flex;
 
@@ -562,7 +652,9 @@
 
             gap:7px;
 
-            border:1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             border-radius:10px;
 
@@ -577,13 +669,6 @@
         }
 
 
-        .mobile-link i {
-
-            color:var(--primary);
-
-        }
-
-
         .mobile-link.active {
 
             color:var(--primary);
@@ -593,22 +678,29 @@
         }
 
 
-        /* =====================================================
+        .mobile-link i {
+
+            color:var(--primary);
+
+        }
+
+
+        /* ====================================================
            PAGE
-        ====================================================== */
+        ===================================================== */
 
         .page {
 
             width:
                 min(
-                    calc(100% - 30px),
-                    1100px
+                    calc(100% - 20px),
+                    1180px
                 );
 
             margin:auto;
 
             padding:
-                25px 0 60px;
+                22px 0 55px;
 
         }
 
@@ -621,7 +713,7 @@
 
             gap:6px;
 
-            margin-bottom:15px;
+            margin-bottom:14px;
 
             color:var(--primary);
 
@@ -632,17 +724,13 @@
         }
 
 
-        /* =====================================================
+        /* ====================================================
            PROFILE HERO
-        ====================================================== */
+        ===================================================== */
 
         .profile-hero {
 
-            position:relative;
-
             overflow:hidden;
-
-            min-height:330px;
 
             border:
                 1px solid
@@ -650,34 +738,31 @@
 
             border-radius:22px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #fff,
-                    #faf8ff
-                );
+            background:#fff;
 
-            box-shadow:
-                var(--shadow-sm);
+            box-shadow:var(--shadow-sm);
 
         }
 
 
         .cover {
 
-            height:145px;
+            height:180px;
 
             background:
+
                 radial-gradient(
-                    circle at 20% 20%,
-                    rgba(219,39,119,.20),
+                    circle at 10% 10%,
+                    rgba(255,255,255,.25),
+                    transparent 22%
+                ),
+
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,255,255,.18),
                     transparent 25%
                 ),
-                radial-gradient(
-                    circle at 85% 15%,
-                    rgba(109,40,217,.20),
-                    transparent 25%
-                ),
+
                 linear-gradient(
                     135deg,
                     #5b21b6,
@@ -690,8 +775,6 @@
 
         .profile-summary {
 
-            position:relative;
-
             display:flex;
 
             align-items:flex-end;
@@ -701,12 +784,14 @@
             gap:20px;
 
             padding:
-                0 25px 24px;
+                0 24px 22px;
 
         }
 
 
         .profile-main {
+
+            min-width:0;
 
             display:flex;
 
@@ -714,7 +799,7 @@
 
             gap:16px;
 
-            margin-top:-65px;
+            margin-top:-75px;
 
         }
 
@@ -723,34 +808,34 @@
 
             position:relative;
 
-            width:150px;
+            width:155px;
 
-            height:150px;
+            height:155px;
 
-            flex:0 0 150px;
+            flex:0 0 155px;
 
         }
 
 
         .profile-photo {
 
-            width:150px;
+            width:155px;
 
-            height:150px;
+            height:155px;
 
             object-fit:cover;
-
-            border-radius:25px;
 
             border:
                 6px solid
                 #fff;
 
-            box-shadow:
-                0 14px 35px
-                rgba(0,0,0,.13);
+            border-radius:26px;
 
             background:#efeff4;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.15);
 
         }
 
@@ -759,25 +844,23 @@
 
             position:absolute;
 
-            left:14px;
+            left:13px;
 
-            bottom:9px;
+            bottom:10px;
 
             padding:
                 5px 7px;
 
-            border-radius:
-                999px;
+            border-radius:999px;
 
             color:#fff;
 
             background:
-                rgba(0,0,0,.55);
+                rgba(0,0,0,.58);
 
-            font-size:
-                6px;
+            font-size:6px;
 
-            font-weight:800;
+            font-weight:900;
 
         }
 
@@ -793,7 +876,9 @@
 
         .profile-info {
 
-            padding-bottom:4px;
+            min-width:0;
+
+            padding-bottom:3px;
 
         }
 
@@ -812,50 +897,43 @@
 
             font-size:
                 clamp(
-                    25px,
+                    26px,
                     4vw,
-                    36px
+                    40px
                 );
 
-            line-height:
-                1.1;
+            line-height:1.05;
+
+            overflow-wrap:anywhere;
 
         }
 
 
         .verified {
 
-            color:
-                var(--blue);
+            color:var(--blue);
 
-            font-family:
-                "Inter",
-                sans-serif;
+            font-family:"Inter",sans-serif;
 
-            font-size:
-                11px;
+            font-size:12px;
 
         }
 
 
         .profile-username {
 
-            margin-top:
-                4px;
+            margin-top:4px;
 
-            color:
-                var(--muted);
+            color:var(--muted);
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
 
         .profile-location {
 
-            margin-top:
-                6px;
+            margin-top:7px;
 
             display:flex;
 
@@ -863,11 +941,16 @@
 
             gap:5px;
 
-            color:
-                var(--soft);
+            color:var(--soft);
 
-            font-size:
-                8px;
+            font-size:8px;
+
+        }
+
+
+        .profile-location i {
+
+            color:var(--accent);
 
         }
 
@@ -878,6 +961,10 @@
 
             align-items:center;
 
+            justify-content:flex-end;
+
+            flex-wrap:wrap;
+
             gap:7px;
 
             padding-bottom:4px;
@@ -885,15 +972,11 @@
         }
 
 
-        .button-primary,
-        .button-secondary,
-        .button-danger {
+        .action-button {
 
-            min-height:
-                40px;
+            min-height:40px;
 
-            padding:
-                0 12px;
+            padding:0 12px;
 
             display:inline-flex;
 
@@ -903,19 +986,18 @@
 
             gap:6px;
 
-            border-radius:
-                10px;
+            border-radius:10px;
 
-            font-size:
-                8px;
+            font-size:8px;
 
-            font-weight:
-                800;
+            font-weight:800;
+
+            white-space:nowrap;
 
         }
 
 
-        .button-primary {
+        .action-primary {
 
             border:none;
 
@@ -931,37 +1013,127 @@
         }
 
 
-        .button-secondary {
+        .action-secondary {
 
             border:
                 1px solid
                 #ddd6fe;
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
             background:#fff;
 
         }
 
 
-        .button-danger {
+        .action-whatsapp {
+
+            border:
+                1px solid
+                #bbf7d0;
+
+            color:#15803d;
+
+            background:
+                #f0fdf4;
+
+        }
+
+
+        .action-danger {
 
             border:
                 1px solid
                 #fecaca;
 
-            color:
-                #b91c1c;
+            color:#b91c1c;
 
             background:#fff;
 
         }
 
 
-        /* =====================================================
-           CONTENT GRID
-        ====================================================== */
+        .action-button:disabled {
+
+            opacity:.5;
+
+            cursor:not-allowed;
+
+        }
+
+
+        /* ====================================================
+           STATS
+        ===================================================== */
+
+        .profile-stats {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(5,1fr);
+
+            gap:1px;
+
+            margin:
+                0 24px 20px;
+
+            overflow:hidden;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:13px;
+
+            background:var(--border);
+
+        }
+
+
+        .profile-stat {
+
+            padding:
+                11px;
+
+            text-align:center;
+
+            background:#fff;
+
+        }
+
+
+        .profile-stat strong {
+
+            display:block;
+
+            font-size:15px;
+
+            font-weight:900;
+
+        }
+
+
+        .profile-stat span {
+
+            display:block;
+
+            margin-top:1px;
+
+            color:var(--muted);
+
+            font-size:7px;
+
+            text-transform:uppercase;
+
+            letter-spacing:.3px;
+
+        }
+
+
+        /* ====================================================
+           MAIN GRID
+        ===================================================== */
 
         .content-grid {
 
@@ -969,151 +1141,271 @@
 
             grid-template-columns:
                 minmax(0,1fr)
-                330px;
+                340px;
 
-            gap:16px;
+            gap:17px;
 
-            margin-top:16px;
+            margin-top:17px;
 
             align-items:start;
 
         }
 
 
+        .main-column {
+
+            min-width:0;
+
+        }
+
+
+        .sidebar {
+
+            min-width:0;
+
+            display:grid;
+
+            gap:14px;
+
+        }
+
+
         .card {
 
-            padding:
-                18px;
+            padding:17px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                16px;
+            border-radius:16px;
 
             background:#fff;
 
-            box-shadow:
-                var(--shadow-sm);
+            box-shadow:var(--shadow-sm);
 
         }
 
 
-        .card-title {
+        .card + .card {
 
-            margin-bottom:
-                12px;
+            margin-top:14px;
 
-            font-size:
-                13px;
+        }
 
-            font-weight:
-                800;
+
+        .card-heading {
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:10px;
+
+            margin-bottom:11px;
+
+        }
+
+
+        .card-heading h2 {
+
+            font-size:13px;
+
+            font-weight:900;
+
+        }
+
+
+        .card-heading span {
+
+            color:var(--muted);
+
+            font-size:7px;
 
         }
 
 
         .bio {
 
-            color:
-                var(--soft);
+            color:var(--soft);
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            line-height:
-                1.75;
+            line-height:1.75;
 
-            white-space:
-                pre-line;
+            white-space:pre-line;
+
+            word-break:break-word;
 
         }
 
 
-        .details {
+        .bio.empty {
 
-            display:
-                grid;
+            color:var(--muted);
+
+        }
+
+
+        /* ====================================================
+           ABOUT DETAILS
+        ===================================================== */
+
+        .detail-grid {
+
+            display:grid;
 
             grid-template-columns:
                 repeat(2,minmax(0,1fr));
 
-            gap:
-                9px;
+            gap:8px;
 
         }
 
 
         .detail {
 
-            padding:
-                10px;
+            min-width:0;
+
+            padding:10px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius:
-                10px;
+            border-radius:10px;
 
-            background:
-                #fafafa;
+            background:#fafafa;
 
         }
 
 
         .detail-label {
 
-            color:
-                var(--muted);
+            color:var(--muted);
 
-            font-size:
-                7px;
+            font-size:7px;
 
         }
 
 
         .detail-value {
 
-            margin-top:
-                3px;
+            margin-top:3px;
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            font-weight:
-                700;
+            font-weight:800;
+
+            word-break:break-word;
 
         }
 
 
-        /* =====================================================
+        /* ====================================================
+           VERIFICATIONS
+        ===================================================== */
+
+        .verification-grid {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap:8px;
+
+        }
+
+
+        .verification-item {
+
+            padding:10px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            background:#fafafa;
+
+        }
+
+
+        .verification-item i {
+
+            color:var(--green);
+
+            font-size:11px;
+
+        }
+
+
+        .verification-item.off i {
+
+            color:var(--muted);
+
+        }
+
+
+        .verification-item div {
+
+            min-width:0;
+
+        }
+
+
+        .verification-item strong {
+
+            display:block;
+
+            font-size:8px;
+
+        }
+
+
+        .verification-item span {
+
+            display:block;
+
+            margin-top:1px;
+
+            color:var(--muted);
+
+            font-size:6.5px;
+
+        }
+
+
+        /* ====================================================
            CONTACT
-        ====================================================== */
+        ===================================================== */
 
-        .contact-card {
+        .contact-box {
 
-            margin-top:
-                12px;
-
-            padding:
-                13px;
+            padding:12px;
 
             border:
                 1px solid
                 #dbeafe;
 
-            border-radius:
-                12px;
+            border-radius:12px;
 
-            background:
-                #f8fbff;
+            background:#f8fbff;
 
         }
 
 
-        .contact-title {
+        .contact-box-title {
 
             display:flex;
 
@@ -1123,147 +1415,926 @@
 
             color:#1d4ed8;
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            font-weight:
-                800;
+            font-weight:900;
 
         }
 
 
-        .contact-note {
+        .contact-box-note {
 
-            margin-top:
-                6px;
+            margin-top:5px;
 
-            color:
-                #475569;
+            color:#475569;
 
-            font-size:
-                7.5px;
+            font-size:7px;
 
-            line-height:
-                1.55;
+            line-height:1.6;
 
         }
 
 
-        .contact-item {
+        .contact-row {
 
-            margin-top:
-                9px;
+            margin-top:8px;
 
-            padding:
-                9px;
+            padding:9px;
 
-            border-radius:
-                9px;
+            border-radius:9px;
 
             background:#fff;
 
         }
 
 
-        .contact-item small {
+        .contact-row small {
 
             display:block;
 
             color:var(--muted);
 
-            font-size:
-                6.5px;
+            font-size:6.5px;
 
         }
 
 
-        .contact-item strong {
+        .contact-row strong {
 
             display:block;
 
             margin-top:2px;
 
-            font-size:
-                9px;
+            font-size:9px;
+
+            word-break:break-word;
 
         }
 
 
-        .privacy-message {
+        /* ====================================================
+           POSTS
+        ===================================================== */
 
-            margin-top:
-                12px;
+        .posts-header {
 
-            padding:
-                13px;
+            display:flex;
+
+            align-items:flex-end;
+
+            justify-content:space-between;
+
+            gap:10px;
+
+            margin-bottom:11px;
+
+        }
+
+
+        .posts-header h2 {
+
+            font-size:16px;
+
+            font-weight:900;
+
+        }
+
+
+        .posts-header p {
+
+            margin-top:2px;
+
+            color:var(--muted);
+
+            font-size:7px;
+
+        }
+
+
+        .posts-count {
+
+            min-width:35px;
+
+            height:30px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            border-radius:9px;
+
+            color:var(--primary);
+
+            background:var(--primary-soft);
+
+            font-size:8px;
+
+            font-weight:900;
+
+        }
+
+
+        .posts-shell {
+
+            height:
+                min(
+                    920px,
+                    78vh
+                );
+
+            overflow-y:auto;
+
+            overflow-x:hidden;
+
+            padding-right:5px;
+
+            scrollbar-width:thin;
+
+            scrollbar-color:
+                #c4b5fd
+                #f1f1f6;
+
+        }
+
+
+        .posts-shell::-webkit-scrollbar {
+
+            width:7px;
+
+        }
+
+
+        .posts-shell::-webkit-scrollbar-track {
+
+            background:#f1f1f6;
+
+            border-radius:99px;
+
+        }
+
+
+        .posts-shell::-webkit-scrollbar-thumb {
+
+            background:#c4b5fd;
+
+            border-radius:99px;
+
+        }
+
+
+        .posts-feed {
+
+            display:grid;
+
+            gap:13px;
+
+        }
+
+
+        /* ====================================================
+           POST CARD
+        ===================================================== */
+
+        .post {
+
+            overflow:hidden;
 
             border:
                 1px solid
-                #eadcff;
+                var(--border);
 
-            border-radius:
-                12px;
+            border-radius:16px;
 
-            color:
-                var(--soft);
+            background:#fff;
+
+            box-shadow:var(--shadow-sm);
+
+        }
+
+
+        .post-header {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:9px;
+
+            padding:
+                13px 14px 9px;
+
+        }
+
+
+        .post-avatar {
+
+            width:40px;
+
+            height:40px;
+
+            flex:0 0 40px;
+
+            object-fit:cover;
+
+            border-radius:11px;
+
+            background:#efeff4;
+
+        }
+
+
+        .post-author {
+
+            min-width:0;
+
+            flex:1;
+
+        }
+
+
+        .post-author-name {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:5px;
+
+            font-size:9px;
+
+            font-weight:900;
+
+        }
+
+
+        .post-author-name i {
+
+            color:var(--blue);
+
+            font-size:8px;
+
+        }
+
+
+        .post-meta {
+
+            margin-top:2px;
+
+            color:var(--muted);
+
+            font-size:6.5px;
+
+        }
+
+
+        .post-status {
+
+            padding:5px 7px;
+
+            border-radius:999px;
+
+            color:#166534;
+
+            background:#dcfce7;
+
+            font-size:6px;
+
+            font-weight:900;
+
+        }
+
+
+        .post-content {
+
+            padding:
+                2px 14px 11px;
+
+            font-size:9px;
+
+            line-height:1.75;
+
+            white-space:pre-wrap;
+
+            word-break:break-word;
+
+        }
+
+
+        .post-content.collapsed {
+
+            max-height:170px;
+
+            overflow:hidden;
+
+            position:relative;
+
+        }
+
+
+        .post-content.collapsed::after {
+
+            content:"";
+
+            position:absolute;
+
+            left:0;
+
+            right:0;
+
+            bottom:0;
+
+            height:50px;
 
             background:
-                #fcfaff;
+                linear-gradient(
+                    transparent,
+                    #fff
+                );
 
-            font-size:
-                8px;
-
-            line-height:
-                1.55;
-
-        }
-
-
-        .privacy-message i {
-
-            color:
-                var(--primary);
-
-            margin-right:
-                5px;
+            pointer-events:none;
 
         }
 
 
-        /* =====================================================
-           PHOTOS
-        ====================================================== */
+        .read-more {
+
+            margin:
+                -4px 14px
+                10px;
+
+            padding:0;
+
+            border:none;
+
+            color:var(--primary);
+
+            background:transparent;
+
+            font-size:8px;
+
+            font-weight:900;
+
+        }
+
+
+        /* ====================================================
+           POST MEDIA
+        ===================================================== */
+
+        .post-media {
+
+            width:100%;
+
+            background:#050505;
+
+        }
+
+
+        .post-media-grid {
+
+            display:grid;
+
+            gap:2px;
+
+        }
+
+
+        .post-media-grid.one {
+
+            grid-template-columns:1fr;
+
+        }
+
+
+        .post-media-grid.two {
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+        }
+
+
+        .post-media-grid.three,
+
+        .post-media-grid.many {
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+        }
+
+
+        .post-media-item {
+
+            position:relative;
+
+            min-height:190px;
+
+            background:#080808;
+
+            overflow:hidden;
+
+        }
+
+
+        .post-media-grid.one
+        .post-media-item {
+
+            min-height:260px;
+
+        }
+
+
+        .post-media-item img {
+
+            width:100%;
+
+            height:100%;
+
+            min-height:190px;
+
+            object-fit:cover;
+
+            cursor:pointer;
+
+        }
+
+
+        .post-media-item video {
+
+            width:100%;
+
+            min-height:220px;
+
+            max-height:700px;
+
+            object-fit:contain;
+
+            background:#050505;
+
+        }
+
+
+        .document-media {
+
+            min-height:210px;
+
+            padding:25px;
+
+            display:flex;
+
+            flex-direction:column;
+
+            align-items:center;
+
+            justify-content:center;
+
+            text-align:center;
+
+            gap:9px;
+
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #312e81
+                );
+
+        }
+
+
+        .document-media i {
+
+            font-size:40px;
+
+        }
+
+
+        .document-media strong {
+
+            font-size:11px;
+
+        }
+
+
+        .document-media small {
+
+            color:#c7d2fe;
+
+            font-size:7px;
+
+        }
+
+
+        /* ====================================================
+           POST ACTIONS
+        ===================================================== */
+
+        .post-actions {
+
+            padding:
+                10px 14px 11px;
+
+            display:flex;
+
+            flex-wrap:wrap;
+
+            gap:6px;
+
+            border-top:
+                1px solid
+                #f4f4f7;
+
+        }
+
+
+        .post-action {
+
+            min-height:34px;
+
+            padding:
+                0 10px;
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:5px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:9px;
+
+            color:var(--soft);
+
+            background:#fff;
+
+            font-size:7.5px;
+
+            font-weight:800;
+
+        }
+
+
+        .post-action:hover {
+
+            color:var(--primary);
+
+            background:var(--primary-soft);
+
+        }
+
+
+        .post-action.active-like {
+
+            color:var(--blue);
+
+            border-color:#bfdbfe;
+
+            background:var(--blue-soft);
+
+        }
+
+
+        .post-action i {
+
+            font-size:10px;
+
+        }
+
+
+        .comment-count,
+        .like-count {
+
+            font-weight:900;
+
+        }
+
+
+        /* ====================================================
+           COMMENTS
+        ===================================================== */
+
+        .comments-panel {
+
+            display:none;
+
+            padding:
+                0 14px 13px;
+
+        }
+
+
+        .comments-panel.open {
+
+            display:block;
+
+        }
+
+
+        .comments-title {
+
+            margin-bottom:7px;
+
+            font-size:8px;
+
+            font-weight:900;
+
+        }
+
+
+        .comments-list {
+
+            display:grid;
+
+            gap:7px;
+
+        }
+
+
+        .comment {
+
+            padding:8px;
+
+            border-radius:10px;
+
+            background:#fafafa;
+
+        }
+
+
+        .comment.reply {
+
+            margin-left:28px;
+
+            border-left:
+                2px solid
+                #ddd6fe;
+
+        }
+
+
+        .comment-head {
+
+            display:flex;
+
+            align-items:flex-start;
+
+            gap:7px;
+
+        }
+
+
+        .comment-avatar {
+
+            width:29px;
+
+            height:29px;
+
+            flex:0 0 29px;
+
+            object-fit:cover;
+
+            border-radius:8px;
+
+            background:#efeff4;
+
+        }
+
+
+        .comment-body {
+
+            min-width:0;
+
+            flex:1;
+
+        }
+
+
+        .comment-author {
+
+            font-size:7.5px;
+
+            font-weight:900;
+
+        }
+
+
+        .comment-time {
+
+            display:block;
+
+            margin-top:1px;
+
+            color:var(--muted);
+
+            font-size:6px;
+
+        }
+
+
+        .comment-text {
+
+            margin-top:4px;
+
+            color:#3f3f46;
+
+            font-size:8px;
+
+            line-height:1.6;
+
+            white-space:pre-wrap;
+
+            word-break:break-word;
+
+        }
+
+
+        .comment-actions {
+
+            margin-top:4px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:6px;
+
+        }
+
+
+        .comment-reply {
+
+            padding:0;
+
+            border:none;
+
+            color:var(--primary);
+
+            background:transparent;
+
+            font-size:6.5px;
+
+            font-weight:900;
+
+        }
+
+
+        .comment-form {
+
+            display:flex;
+
+            align-items:flex-end;
+
+            gap:6px;
+
+            margin-top:9px;
+
+        }
+
+
+        .comment-input {
+
+            flex:1;
+
+            min-height:39px;
+
+            max-height:100px;
+
+            resize:none;
+
+            outline:none;
+
+            padding:9px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:10px;
+
+            background:#fafaff;
+
+            font-size:8px;
+
+        }
+
+
+        .comment-input:focus {
+
+            border-color:#c4b5fd;
+
+        }
+
+
+        .comment-send {
+
+            width:39px;
+
+            height:39px;
+
+            flex:0 0 39px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            border:none;
+
+            border-radius:10px;
+
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+        }
+
+
+        .replying-label {
+
+            display:none;
+
+            margin-top:6px;
+
+            padding:6px 8px;
+
+            border-radius:7px;
+
+            color:#5b21b6;
+
+            background:#f5f3ff;
+
+            font-size:6.5px;
+
+            font-weight:700;
+
+        }
+
+
+        .replying-label.show {
+
+            display:block;
+
+        }
+
+
+        .cancel-reply {
+
+            float:right;
+
+            border:none;
+
+            color:var(--red);
+
+            background:transparent;
+
+            font-size:6px;
+
+            font-weight:900;
+
+        }
+
+
+        /* ====================================================
+           PHOTO GALLERY
+        ===================================================== */
 
         .gallery {
 
             display:grid;
 
             grid-template-columns:
-                repeat(
-                    3,
-                    minmax(0,1fr)
-                );
+                repeat(3,minmax(0,1fr));
 
-            gap:
-                8px;
-
-            margin-top:
-                12px;
+            gap:7px;
 
         }
 
 
         .gallery-item {
 
-            position:relative;
-
             overflow:hidden;
 
-            aspect-ratio:
-                1/1;
+            position:relative;
 
-            border-radius:
-                11px;
+            aspect-ratio:1/1;
+
+            border-radius:10px;
 
             background:#efeff4;
 
@@ -1278,10 +2349,12 @@
 
             object-fit:cover;
 
+            cursor:pointer;
+
         }
 
 
-        .gallery-status {
+        .gallery-item .gallery-badge {
 
             position:absolute;
 
@@ -1292,29 +2365,171 @@
             padding:
                 4px 6px;
 
-            border-radius:
-                999px;
+            border-radius:999px;
 
             color:#fff;
 
             background:
                 rgba(0,0,0,.55);
 
-            font-size:
-                5.5px;
+            font-size:5.5px;
 
-            font-weight:800;
+            font-weight:900;
 
         }
 
 
-        /* =====================================================
-           STATE
-        ====================================================== */
+        /* ====================================================
+           CONNECTIONS
+        ===================================================== */
 
-        .state {
+        .connection-list {
 
-            min-height:260px;
+            display:grid;
+
+            gap:8px;
+
+        }
+
+
+        .connection-item {
+
+            padding:8px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:8px;
+
+            border-radius:10px;
+
+            background:#fafafa;
+
+        }
+
+
+        .connection-item:hover {
+
+            background:var(--primary-soft);
+
+        }
+
+
+        .connection-avatar {
+
+            width:37px;
+
+            height:37px;
+
+            flex:0 0 37px;
+
+            object-fit:cover;
+
+            border-radius:10px;
+
+        }
+
+
+        .connection-info {
+
+            min-width:0;
+
+            flex:1;
+
+        }
+
+
+        .connection-name {
+
+            display:block;
+
+            overflow:hidden;
+
+            text-overflow:ellipsis;
+
+            white-space:nowrap;
+
+            font-size:8px;
+
+            font-weight:900;
+
+        }
+
+
+        .connection-meta {
+
+            display:block;
+
+            margin-top:1px;
+
+            color:var(--muted);
+
+            font-size:6.5px;
+
+        }
+
+
+        .online-dot {
+
+            width:7px;
+
+            height:7px;
+
+            border-radius:50%;
+
+            background:#22c55e;
+
+            box-shadow:
+                0 0 0 3px
+                #dcfce7;
+
+        }
+
+
+        /* ====================================================
+           PRIVACY
+        ===================================================== */
+
+        .privacy-box {
+
+            padding:12px;
+
+            border:
+                1px solid
+                #eadcff;
+
+            border-radius:12px;
+
+            color:var(--soft);
+
+            background:#fcfaff;
+
+            font-size:7px;
+
+            line-height:1.65;
+
+        }
+
+
+        .privacy-box i {
+
+            margin-right:5px;
+
+            color:var(--primary);
+
+        }
+
+
+        /* ====================================================
+           EMPTY / LOADING
+        ===================================================== */
+
+        .empty {
+
+            min-height:150px;
+
+            padding:25px 15px;
 
             display:flex;
 
@@ -1326,27 +2541,28 @@
 
             text-align:center;
 
-            padding:30px;
-
             border:
-                1px solid
-                var(--border);
+                1px dashed
+                #dcdce4;
 
-            border-radius:
-                18px;
+            border-radius:13px;
+
+            color:var(--muted);
 
             background:#fff;
+
+            font-size:8px;
 
         }
 
 
-        .state-icon {
+        .empty i {
 
-            width:53px;
+            width:46px;
 
-            height:53px;
+            height:46px;
 
-            margin-bottom:10px;
+            margin-bottom:9px;
 
             display:flex;
 
@@ -1354,55 +2570,278 @@
 
             justify-content:center;
 
-            border-radius:15px;
+            border-radius:14px;
 
-            color:
-                var(--primary);
+            color:var(--primary);
 
-            background:
-                var(--primary-soft);
+            background:var(--primary-soft);
 
-        }
-
-
-        .state h2 {
-
-            font-size:
-                14px;
+            font-size:17px;
 
         }
 
 
-        .state p {
+        .empty strong {
+
+            color:var(--text);
+
+            font-size:11px;
+
+        }
+
+
+        .empty span {
+
+            margin-top:3px;
+
+            max-width:400px;
+
+            font-size:7px;
+
+        }
+
+
+        .loading {
+
+            min-height:150px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:7px;
+
+            color:var(--muted);
+
+            font-size:8px;
+
+        }
+
+
+        /* ====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position:fixed;
+
+            left:50%;
+
+            bottom:20px;
+
+            z-index:5000;
+
+            width:max-content;
 
             max-width:
-                470px;
+                calc(100% - 30px);
 
-            margin-top:
-                5px;
+            padding:
+                11px 15px;
 
-            color:
-                var(--muted);
+            transform:
+                translateX(-50%)
+                translateY(20px);
 
-            font-size:
-                8px;
+            opacity:0;
+
+            pointer-events:none;
+
+            transition:
+                .2s ease;
+
+            border-radius:11px;
+
+            color:#166534;
+
+            background:#f0fdf4;
+
+            border:
+                1px solid
+                #bbf7d0;
+
+            font-size:8px;
+
+            font-weight:800;
+
+            box-shadow:
+                var(--shadow-md);
 
         }
 
 
-        /* =====================================================
+        .toast.error {
+
+            color:#991b1b;
+
+            background:#fef2f2;
+
+            border-color:#fecaca;
+
+        }
+
+
+        .toast.info {
+
+            color:#1d4ed8;
+
+            background:#eff6ff;
+
+            border-color:#bfdbfe;
+
+        }
+
+
+        .toast.show {
+
+            opacity:1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+        }
+
+
+        /* ====================================================
+           PREMIUM MODAL
+        ===================================================== */
+
+        .premium-notice {
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:4500;
+
+            display:none;
+
+            align-items:center;
+
+            justify-content:center;
+
+            padding:20px;
+
+            background:
+                rgba(15,23,42,.55);
+
+            backdrop-filter:
+                blur(7px);
+
+        }
+
+
+        .premium-notice.open {
+
+            display:flex;
+
+        }
+
+
+        .premium-notice-card {
+
+            width:
+                min(
+                    100%,
+                    430px
+                );
+
+            padding:22px;
+
+            border-radius:18px;
+
+            background:#fff;
+
+            box-shadow:
+                var(--shadow-lg);
+
+            text-align:center;
+
+        }
+
+
+        .premium-notice-icon {
+
+            width:55px;
+
+            height:55px;
+
+            margin:
+                0 auto 10px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            border-radius:16px;
+
+            color:var(--primary);
+
+            background:var(--primary-soft);
+
+            font-size:20px;
+
+        }
+
+
+        .premium-notice-card h3 {
+
+            font-size:15px;
+
+        }
+
+
+        .premium-notice-card p {
+
+            margin-top:6px;
+
+            color:var(--soft);
+
+            font-size:8px;
+
+            line-height:1.6;
+
+        }
+
+
+        .premium-notice-actions {
+
+            margin-top:15px;
+
+            display:flex;
+
+            gap:7px;
+
+        }
+
+
+        .premium-notice-actions button,
+        .premium-notice-actions a {
+
+            flex:1;
+
+            min-height:40px;
+
+        }
+
+
+        /* ====================================================
            FOOTER
-        ====================================================== */
+        ===================================================== */
 
         .footer {
 
-            margin-top:
-                20px;
-
-            background:
-                #17151b;
+            margin-top:20px;
 
             color:#fff;
+
+            background:#17151b;
 
         }
 
@@ -1418,7 +2857,7 @@
             margin:auto;
 
             padding:
-                38px 0 18px;
+                35px 0 18px;
 
         }
 
@@ -1433,42 +2872,33 @@
                 1fr
                 1fr;
 
-            gap:
-                30px;
+            gap:30px;
 
-            padding-bottom:
-                25px;
+            padding-bottom:25px;
 
         }
 
 
         .footer-description {
 
-            max-width:
-                320px;
+            max-width:320px;
 
-            margin-top:
-                10px;
+            margin-top:10px;
 
-            color:
-                #9d99a5;
+            color:#9d99a5;
 
-            font-size:
-                9px;
+            font-size:9px;
 
-            line-height:
-                1.7;
+            line-height:1.7;
 
         }
 
 
         .footer-heading {
 
-            margin-bottom:
-                9px;
+            margin-bottom:9px;
 
-            font-size:
-                10px;
+            font-size:10px;
 
         }
 
@@ -1486,11 +2916,9 @@
 
         .footer-links a {
 
-            color:
-                #9d99a5;
+            color:#9d99a5;
 
-            font-size:
-                8px;
+            font-size:8px;
 
         }
 
@@ -1506,33 +2934,32 @@
 
             display:flex;
 
+            align-items:center;
+
             justify-content:space-between;
 
             gap:15px;
 
-            padding-top:
-                15px;
+            padding-top:15px;
 
             border-top:
                 1px solid
                 rgba(255,255,255,.08);
 
-            color:
-                #716d78;
+            color:#716d78;
 
-            font-size:
-                7px;
+            font-size:7px;
 
         }
 
 
-        /* =====================================================
+        /* ====================================================
            RESPONSIVE
-        ====================================================== */
+        ===================================================== */
 
         @media(max-width:1100px) {
 
-            .main-navigation {
+            .header-search {
 
                 display:none;
 
@@ -1541,15 +2968,22 @@
 
             .mobile-menu {
 
-                display:inline-flex;
+                display:flex;
 
             }
 
 
             .content-grid {
 
+                grid-template-columns:1fr;
+
+            }
+
+
+            .sidebar {
+
                 grid-template-columns:
-                    1fr;
+                    repeat(2,minmax(0,1fr));
 
             }
 
@@ -1558,19 +2992,54 @@
 
         @media(max-width:760px) {
 
-            .header-inner,
-            .page {
+            .header-inner {
 
                 width:
-                    calc(100% - 20px);
+                    calc(100% - 14px);
+
+                display:flex;
+
+                align-items:center;
+
+                justify-content:space-between;
 
             }
 
 
-            .brand-text,
-            .profile-shortcut {
+            .brand-text {
 
                 display:none;
+
+            }
+
+
+            .profile-shortcut {
+
+                padding:4px;
+
+            }
+
+
+            .profile-shortcut span {
+
+                display:none;
+
+            }
+
+
+            .page {
+
+                width:
+                    calc(100% - 14px);
+
+                padding-top:15px;
+
+            }
+
+
+            .cover {
+
+                height:135px;
 
             }
 
@@ -1582,15 +3051,14 @@
                 align-items:flex-start;
 
                 padding:
-                    0 16px
-                    18px;
+                    0 14px 17px;
 
             }
 
 
             .profile-main {
 
-                margin-top:-60px;
+                margin-top:-58px;
 
                 gap:11px;
 
@@ -1613,20 +3081,59 @@
 
                 width:100%;
 
-                flex-wrap:wrap;
+                justify-content:stretch;
 
             }
 
 
-            .profile-actions a,
-            .profile-actions button {
+            .action-button {
 
                 flex:1;
 
             }
 
 
-            .details {
+            .profile-stats {
+
+                margin:
+                    0 14px 17px;
+
+                grid-template-columns:
+                    repeat(5,1fr);
+
+            }
+
+
+            .profile-stat {
+
+                padding:9px 3px;
+
+            }
+
+
+            .profile-stat strong {
+
+                font-size:12px;
+
+            }
+
+
+            .profile-stat span {
+
+                font-size:5.5px;
+
+            }
+
+
+            .sidebar {
+
+                grid-template-columns:1fr;
+
+            }
+
+
+            .detail-grid,
+            .verification-grid {
 
                 grid-template-columns:1fr;
 
@@ -1637,6 +3144,23 @@
 
                 grid-template-columns:
                     repeat(2,1fr);
+
+            }
+
+
+            .posts-shell {
+
+                height:72vh;
+
+            }
+
+
+            .post-actions .post-action {
+
+                flex:1;
+
+                min-width:
+                    calc(50% - 3px);
 
             }
 
@@ -1653,6 +3177,53 @@
 
         @media(max-width:450px) {
 
+            .profile-name {
+
+                font-size:27px;
+
+            }
+
+
+            .profile-actions {
+
+                display:grid;
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .action-button {
+
+                width:100%;
+
+            }
+
+
+            .profile-stats {
+
+                margin-left:8px;
+
+                margin-right:8px;
+
+            }
+
+
+            .profile-stat strong {
+
+                font-size:11px;
+
+            }
+
+
+            .profile-stat span {
+
+                font-size:5px;
+
+            }
+
+
             .footer-grid {
 
                 grid-template-columns:1fr;
@@ -1664,11 +3235,103 @@
 
                 flex-direction:column;
 
+                align-items:flex-start;
+
             }
 
         }
 
-    </style>
+    
+
+        /* ====================================================
+           RICH CONTENT
+        ===================================================== */
+
+        .post-content.rich-content,
+        .comment-text.rich-content {
+            white-space:normal;
+            overflow-wrap:anywhere;
+            word-break:break-word;
+        }
+
+        .rich-content p { margin:0 0 7px; }
+        .rich-content div { margin:0; }
+        .rich-content ul,
+        .rich-content ol { padding-left:20px; margin:6px 0; }
+        .rich-content blockquote {
+            margin:7px 0;
+            padding-left:9px;
+            border-left:3px solid #ddd6fe;
+        }
+        .rich-content a {
+            color:var(--primary);
+            text-decoration:underline;
+        }
+
+        /* ====================================================
+           CONNECTION NOTICE MODAL
+        ===================================================== */
+
+        .connection-notice {
+            position:fixed;
+            inset:0;
+            z-index:4550;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            background:rgba(15,23,42,.58);
+            backdrop-filter:blur(7px);
+        }
+
+        .connection-notice.open {
+            display:flex;
+        }
+
+        .connection-notice-card {
+            width:min(100%,430px);
+            padding:23px;
+            border-radius:18px;
+            background:#fff;
+            box-shadow:var(--shadow-lg);
+            text-align:center;
+        }
+
+        .connection-notice-icon {
+            width:56px;
+            height:56px;
+            margin:0 auto 10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            color:var(--primary);
+            background:var(--primary-soft);
+            font-size:20px;
+        }
+
+        .connection-notice-card h3 {
+            font-size:16px;
+        }
+
+        .connection-notice-card p {
+            margin-top:7px;
+            color:var(--soft);
+            font-size:8px;
+            line-height:1.7;
+        }
+
+        .connection-notice-actions {
+            margin-top:16px;
+            display:flex;
+            gap:7px;
+        }
+
+        .connection-notice-actions button {
+            flex:1;
+            min-height:40px;
+        }
+</style>
 
 </head>
 
@@ -1676,9 +3339,9 @@
 <body>
 
 
-<!-- =========================================================
+<!-- ==========================================================
      HEADER
-========================================================== -->
+=========================================================== -->
 
 <header class="header">
 
@@ -1687,8 +3350,8 @@
 
         <a
             href="dashboard.html"
-            class="brand">
-
+            class="brand"
+        >
 
             <img
                 src="assets/logo1/logo1.png"
@@ -1697,122 +3360,36 @@
                 onerror="
                     this.onerror=null;
                     this.src='assets/logo1/apple-touch-icon.png';
-                ">
-
+                "
+            >
 
             <span class="brand-text">
-
 
                 <span class="brand-name">
                     LOVEMI
                 </span>
 
-
                 <span class="brand-tagline">
                     DISCOVER • CONNECT • MEET
                 </span>
 
-
             </span>
-
 
         </a>
 
 
-        <nav
-            class="main-navigation"
-            aria-label="Main navigation">
+        <div class="header-search">
 
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-            <a
-                href="dashboard.html"
-                class="nav-link">
+            <input
+                id="globalSearch"
+                type="search"
+                placeholder="Search people..."
+                autocomplete="off"
+            >
 
-                <i class="fa-solid fa-house"></i>
-
-                Dashboard
-
-            </a>
-
-
-            <a
-                href="discover.html"
-                class="nav-link">
-
-                <i class="fa-solid fa-compass"></i>
-
-                Discover
-
-            </a>
-
-
-            <a
-                href="connections.html"
-                class="nav-link">
-
-                <i class="fa-solid fa-user-group"></i>
-
-                Connections
-
-            </a>
-
-
-            <a
-                href="messages.html"
-                class="nav-link">
-
-                <i class="fa-regular fa-message"></i>
-
-                Messages
-
-            </a>
-
-
-            <a
-                href="profile.html"
-                class="nav-link active">
-
-                <i class="fa-regular fa-user"></i>
-
-                Profile
-
-            </a>
-
-
-            <a
-                href="notifications.html"
-                class="nav-link">
-
-                <i class="fa-regular fa-bell"></i>
-
-                Notifications
-
-            </a>
-
-
-            <a
-                href="settings.html"
-                class="nav-link">
-
-                <i class="fa-solid fa-gear"></i>
-
-                Settings
-
-            </a>
-
-
-            <a
-                href="premium.html"
-                class="nav-link">
-
-                <i class="fa-solid fa-crown"></i>
-
-                Premium
-
-            </a>
-
-
-        </nav>
+        </div>
 
 
         <div class="header-actions">
@@ -1820,169 +3397,156 @@
 
             <a
                 href="notifications.html"
-                class="header-icon">
+                class="header-icon"
+                aria-label="Notifications"
+            >
 
                 <i class="fa-regular fa-bell"></i>
+
+                <span
+                    id="notificationCount"
+                    class="notification-count"
+                    style="display:none;"
+                >
+                    0
+                </span>
 
             </a>
 
 
             <a
                 href="messages.html"
-                class="header-icon">
+                class="header-icon"
+                aria-label="Messages"
+            >
 
-                <i class="fa-regular fa-message"></i>
-
-            </a>
-
-
-            <a
-                href="profile.html"
-                class="header-icon">
-
-                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-comment-dots"></i>
 
             </a>
 
 
             <a
                 href="profile.html"
-                class="profile-shortcut">
-
+                class="profile-shortcut"
+            >
 
                 <img
                     id="headerAvatar"
                     src="assets/images/defaults/default-avatar-male.png"
-                    alt="Profile">
+                    alt="Account"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/defaults/default-avatar-male.png';
+                    "
+                >
 
-
-                <span
-                    id="headerName">
+                <span id="headerName">
                     Account
                 </span>
-
 
             </a>
 
 
             <button
                 type="button"
-                id="mobileMenu"
                 class="mobile-menu"
-                aria-expanded="false">
-
+                id="mobileMenu"
+                aria-label="Menu"
+            >
 
                 <i class="fa-solid fa-bars"></i>
-
 
             </button>
 
 
         </div>
 
-
     </div>
 
 </header>
 
 
-<!-- =========================================================
+<!-- ==========================================================
      MOBILE NAV
-========================================================== -->
+=========================================================== -->
 
 <nav
     id="mobileNavigation"
-    class="mobile-navigation">
-
+    class="mobile-navigation"
+>
 
     <div class="mobile-grid">
 
 
         <a
             href="dashboard.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-solid fa-house"></i>
-
             Dashboard
-
         </a>
 
 
         <a
             href="discover.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-solid fa-compass"></i>
-
             Discover
-
         </a>
 
 
         <a
             href="connections.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-solid fa-user-group"></i>
-
             Connections
-
         </a>
 
 
         <a
             href="messages.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-regular fa-message"></i>
-
             Messages
-
         </a>
 
 
         <a
             href="profile.html"
-            class="mobile-link active">
-
+            class="mobile-link active"
+        >
             <i class="fa-regular fa-user"></i>
-
             Profile
-
         </a>
 
 
         <a
             href="notifications.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-regular fa-bell"></i>
-
             Notifications
-
         </a>
 
 
         <a
             href="settings.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-solid fa-gear"></i>
-
             Settings
-
         </a>
 
 
         <a
             href="premium.html"
-            class="mobile-link">
-
+            class="mobile-link"
+        >
             <i class="fa-solid fa-crown"></i>
-
             Premium
-
         </a>
 
 
@@ -1991,18 +3555,17 @@
 </nav>
 
 
-<!-- =========================================================
+<!-- ==========================================================
      MAIN
-========================================================== -->
+=========================================================== -->
 
-<main
-    class="page"
-    id="profilePage">
+<main class="page">
 
 
     <a
         href="javascript:history.back()"
-        class="back-link">
+        class="back-link"
+    >
 
         <i class="fa-solid fa-arrow-left"></i>
 
@@ -2011,45 +3574,58 @@
     </a>
 
 
-    <!-- Loading state initially -->
+    <!-- ======================================================
+         LOADING
+    ======================================================= -->
 
     <section
         id="profileLoading"
-        class="state">
+        class="loading"
+    >
 
+        <i class="fa-solid fa-spinner fa-spin"></i>
 
-        <div class="state-icon">
-
-            <i class="fa-solid fa-spinner fa-spin"></i>
-
-        </div>
-
-
-        <h2>
-            Loading profile...
-        </h2>
-
-
-        <p>
-            Loading profile information directly from the LOVEMI database.
-        </p>
-
+        Loading LOVEMI profile...
 
     </section>
 
 
-    <!-- =====================================================
+    <!-- ======================================================
+         ERROR
+    ======================================================= -->
+
+    <section
+        id="profileError"
+        class="empty"
+        style="display:none;"
+    >
+
+        <i class="fa-solid fa-user-slash"></i>
+
+        <strong>
+            Profile unavailable
+        </strong>
+
+        <span id="profileErrorMessage">
+            The requested profile could not be loaded.
+        </span>
+
+    </section>
+
+
+    <!-- ======================================================
          PROFILE CONTENT
-    ====================================================== -->
+    ======================================================= -->
 
     <div
         id="profileContent"
-        style="display:none;">
+        style="display:none;"
+    >
 
 
-        <!-- =================================================
-             PROFILE HERO
-        ================================================== -->
+        <!-- ==================================================
+             HERO
+        =================================================== -->
 
         <section class="profile-hero">
 
@@ -2070,19 +3646,23 @@
                             id="profilePhoto"
                             class="profile-photo"
                             src="assets/images/defaults/default-avatar-male.png"
-                            alt="Profile">
+                            alt="Profile"
+                            onerror="
+                                this.onerror=null;
+                                this.src='assets/images/defaults/default-avatar-male.png';
+                            "
+                        >
 
 
                         <span
                             id="onlineBadge"
                             class="online-badge"
-                            style="display:none;">
-
+                            style="display:none;"
+                        >
 
                             <i class="fa-solid fa-circle"></i>
 
                             Online
-
 
                         </span>
 
@@ -2095,33 +3675,29 @@
 
                         <h1 class="profile-name">
 
-
-                            <span
-                                id="profileName">
+                            <span id="profileName">
                                 Member
                             </span>
-
 
                             <i
                                 id="verifiedIcon"
                                 class="fa-solid fa-circle-check verified"
-                                style="display:none;">
-                            </i>
-
+                                style="display:none;"
+                            ></i>
 
                         </h1>
 
 
                         <div
                             id="profileUsername"
-                            class="profile-username">
-                        </div>
+                            class="profile-username"
+                        ></div>
 
 
                         <div
                             id="profileLocation"
-                            class="profile-location">
-                        </div>
+                            class="profile-location"
+                        ></div>
 
 
                     </div>
@@ -2133,28 +3709,46 @@
                 <div class="profile-actions">
 
 
-                    <a
+                    <button
+                        type="button"
                         id="connectButton"
-                        href="#"
-                        class="button-primary"
-                        style="display:none;">
+                        class="action-button action-primary"
+                        style="display:none;"
+                    >
 
                         <i class="fa-solid fa-user-plus"></i>
 
                         Connect
 
-                    </a>
+                    </button>
 
 
-                    <a
-                        id="messageButton"
-                        href="#"
-                        class="button-secondary"
-                        style="display:none;">
+                    <button
+                        type="button"
+                        id="chatButton"
+                        class="action-button action-secondary"
+                        style="display:none;"
+                    >
 
                         <i class="fa-regular fa-message"></i>
 
-                        Message
+                        Chat
+
+                    </button>
+
+
+                    <a
+                        id="whatsappButton"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="action-button action-whatsapp"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        WhatsApp
 
                     </a>
 
@@ -2162,20 +3756,37 @@
                     <a
                         id="editButton"
                         href="edit-profile.html"
-                        class="button-secondary"
-                        style="display:none;">
+                        class="action-button action-secondary"
+                        style="display:none;"
+                    >
 
                         <i class="fa-solid fa-pen"></i>
 
-                        Edit Profile
+                        Edit
 
                     </a>
+
+
+                    <button
+                        type="button"
+                        id="followButton"
+                        class="action-button action-secondary"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Add Friend
+
+                    </button>
 
 
                     <a
                         id="reportButton"
                         href="#"
-                        class="button-danger">
+                        class="action-button action-danger"
+                        style="display:none;"
+                    >
 
                         <i class="fa-regular fa-flag"></i>
 
@@ -2186,6 +3797,80 @@
 
                 </div>
 
+            </div>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <div class="profile-stats">
+
+
+                <div class="profile-stat">
+
+                    <strong id="postsCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Posts
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="connectionsCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Connections
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="followersCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Followers
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="followingCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Following
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="photosCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Photos
+                    </span>
+
+                </div>
+
 
             </div>
 
@@ -2193,138 +3878,376 @@
         </section>
 
 
-        <!-- =================================================
+        <!-- ==================================================
              CONTENT
-        ================================================== -->
+        =================================================== -->
 
         <div class="content-grid">
 
 
-            <!-- LEFT -->
+            <!-- =================================================
+                 MAIN COLUMN
+            ================================================== -->
 
-            <div>
+            <section class="main-column">
 
+
+                <!-- =============================================
+                     ABOUT
+                ============================================== -->
 
                 <section class="card">
 
+                    <div class="card-heading">
 
-                    <h2 class="card-title">
-                        About
-                    </h2>
+                        <h2>
+                            About
+                        </h2>
 
-
-                    <p
-                        id="profileBio"
-                        class="bio">
-                    </p>
-
-
-                </section>
-
-
-                <section class="card"
-                         style="margin-top:12px;">
-
-
-                    <h2 class="card-title">
-                        Photos
-                    </h2>
-
-
-                    <div
-                        id="gallery"
-                        class="gallery">
-
+                        <span>
+                            Profile information
+                        </span>
 
                     </div>
 
 
-                </section>
+                    <p
+                        id="profileBio"
+                        class="bio empty"
+                    >
+                        This member has not added an About Me description yet.
+                    </p>
 
 
-            </div>
+                    <div
+                        id="aboutDetails"
+                        class="detail-grid"
+                        style="margin-top:13px;"
+                    >
 
+                        <div class="detail">
 
-            <!-- RIGHT -->
+                            <div class="detail-label">
+                                Occupation
+                            </div>
 
-            <aside>
+                            <div
+                                id="aboutOccupation"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
 
-
-                <section class="card">
-
-
-                    <h2 class="card-title">
-                        Profile Details
-                    </h2>
-
-
-                    <div class="details">
+                        </div>
 
 
                         <div class="detail">
 
+                            <div class="detail-label">
+                                Education
+                            </div>
+
+                            <div
+                                id="aboutEducation"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Relationship
+                            </div>
+
+                            <div
+                                id="aboutRelationship"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Looking For
+                            </div>
+
+                            <div
+                                id="aboutLookingFor"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Interests
+                            </div>
+
+                            <div
+                                id="aboutInterests"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Member Since
+                            </div>
+
+                            <div
+                                id="aboutJoined"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     POSTS
+                ============================================== -->
+
+                <section class="card">
+
+                    <div class="posts-header">
+
+                        <div>
+
+                            <h2>
+                                Posts
+                            </h2>
+
+                            <p>
+                                Posts, pictures, videos and discussions
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            id="postsCounter"
+                            class="posts-count"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="postsShell"
+                        class="posts-shell"
+                    >
+
+                        <div
+                            id="postsFeed"
+                            class="posts-feed"
+                        >
+
+                            <div class="loading">
+
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                Loading posts...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     PHOTOS
+                ============================================== -->
+
+                <section class="card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            Photos
+                        </h2>
+
+                        <span>
+                            Approved profile and uploaded photos
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="gallery"
+                        class="gallery"
+                    ></div>
+
+                </section>
+
+
+                <!-- =============================================
+                     PRIVACY
+                ============================================== -->
+
+                <section class="privacy-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    LOVEMI protects private member information.
+                    Contact information is shown only when the
+                    protected server confirms that the viewer has
+                    the required access.
+
+                </section>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+
+            <aside class="sidebar">
+
+
+                <!-- =============================================
+                     PROFILE DETAILS
+                ============================================== -->
+
+                <section class="card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            Profile Details
+                        </h2>
+
+                        <span>
+                            Member information
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-grid">
+
+
+                        <div class="detail">
 
                             <div class="detail-label">
                                 Gender
                             </div>
 
-
                             <div
                                 id="detailGender"
-                                class="detail-value">
+                                class="detail-value"
+                            >
+                                Not specified
                             </div>
-
 
                         </div>
 
 
                         <div class="detail">
-
 
                             <div class="detail-label">
                                 Country
                             </div>
 
-
                             <div
                                 id="detailCountry"
-                                class="detail-value">
+                                class="detail-value"
+                            >
+                                Not specified
                             </div>
-
 
                         </div>
 
 
                         <div class="detail">
-
 
                             <div class="detail-label">
-                                City / Location
+                                City
                             </div>
-
 
                             <div
-                                id="detailLocation"
-                                class="detail-value">
+                                id="detailCity"
+                                class="detail-value"
+                            >
+                                Not specified
                             </div>
-
 
                         </div>
 
 
                         <div class="detail">
-
 
                             <div class="detail-label">
                                 Status
                             </div>
 
-
                             <div
                                 id="detailStatus"
-                                class="detail-value">
+                                class="detail-value"
+                            >
+                                Offline
                             </div>
 
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Username
+                            </div>
+
+                            <div
+                                id="detailUsername"
+                                class="detail-value"
+                            >
+                                Not specified
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="detail-label">
+                                Visibility
+                            </div>
+
+                            <div
+                                id="detailVisibility"
+                                class="detail-value"
+                            >
+                                Public
+                            </div>
 
                         </div>
 
@@ -2332,90 +4255,234 @@
                     </div>
 
 
-                    <!-- CONTACT -->
+                    <!-- =========================================
+                         VERIFICATION
+                    ========================================== -->
+
+                    <div
+                        class="card-heading"
+                        style="margin-top:15px;"
+                    >
+
+                        <h2>
+                            Verification
+                        </h2>
+
+                    </div>
+
+
+                    <div class="verification-grid">
+
+
+                        <div
+                            id="verifyEmail"
+                            class="verification-item off"
+                        >
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <div>
+
+                                <strong>
+                                    Email
+                                </strong>
+
+                                <span>
+                                    Not verified
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="verifyPhone"
+                            class="verification-item off"
+                        >
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <div>
+
+                                <strong>
+                                    Phone
+                                </strong>
+
+                                <span>
+                                    Not verified
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="verifyIdentity"
+                            class="verification-item off"
+                        >
+
+                            <i class="fa-solid fa-id-card"></i>
+
+                            <div>
+
+                                <strong>
+                                    Identity
+                                </strong>
+
+                                <span>
+                                    Not verified
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="verifyAge"
+                            class="verification-item off"
+                        >
+
+                            <i class="fa-solid fa-user-check"></i>
+
+                            <div>
+
+                                <strong>
+                                    Age
+                                </strong>
+
+                                <span>
+                                    Not verified
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =========================================
+                         PRIVATE CONTACT
+                    ========================================== -->
 
                     <div
                         id="contactSection"
-                        class="contact-card"
-                        style="display:none;">
+                        style="display:none;margin-top:15px;"
+                    >
+
+                        <div class="contact-box">
+
+                            <div class="contact-box-title">
+
+                                <i class="fa-solid fa-address-book"></i>
+
+                                Contact
+
+                            </div>
 
 
-                        <div class="contact-title">
+                            <div class="contact-box-note">
 
-                            <i class="fa-solid fa-address-book"></i>
+                                Contact information is displayed
+                                only when LOVEMI authorizes access.
 
-                            Contact
-
-                        </div>
-
-
-                        <div class="contact-note">
-
-                            Contact details are displayed only when
-                            the server confirms that your account
-                            has the required access.
-
-                        </div>
+                            </div>
 
 
-                        <div
-                            id="phoneContact"
-                            class="contact-item"
-                            style="display:none;">
+                            <div
+                                id="phoneRow"
+                                class="contact-row"
+                                style="display:none;"
+                            >
+
+                                <small>
+                                    Phone
+                                </small>
+
+                                <strong id="phoneValue">
+                                </strong>
+
+                            </div>
 
 
-                            <small>
-                                Phone
-                            </small>
+                            <div
+                                id="whatsappRow"
+                                class="contact-row"
+                                style="display:none;"
+                            >
 
+                                <small>
+                                    WhatsApp
+                                </small>
 
-                            <strong
-                                id="phoneValue">
-                            </strong>
+                                <strong id="whatsappValue">
+                                </strong>
 
-
-                        </div>
-
-
-                        <div
-                            id="whatsappContact"
-                            class="contact-item"
-                            style="display:none;">
-
-
-                            <small>
-                                WhatsApp
-                            </small>
-
-
-                            <strong
-                                id="whatsappValue">
-                            </strong>
-
+                            </div>
 
                         </div>
-
 
                     </div>
 
+                </section>
 
-                    <!-- PRIVACY -->
+
+                <!-- =============================================
+                     CONNECTIONS
+                ============================================== -->
+
+                <section class="card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            Connections
+                        </h2>
+
+                        <span>
+                            People connected with this member
+                        </span>
+
+                    </div>
+
 
                     <div
-                        id="privacyMessage"
-                        class="privacy-message">
+                        id="connectionList"
+                        class="connection-list"
+                    >
 
+                        <div class="loading">
 
-                        <i class="fa-solid fa-lock"></i>
+                            <i class="fa-solid fa-spinner fa-spin"></i>
 
+                            Loading...
 
-                        Phone and WhatsApp details are private
-                        and are never loaded into the page unless
-                        the protected API authorizes access.
-
+                        </div>
 
                     </div>
 
+                </section>
+
+
+                <!-- =============================================
+                     SAFETY
+                ============================================== -->
+
+                <section class="card">
+
+                    <div class="privacy-box">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Stay safe on LOVEMI. Never share passwords,
+                        verification codes, banking information or
+                        identity documents through comments or chat.
+
+                    </div>
 
                 </section>
 
@@ -2428,45 +4495,125 @@
 
     </div>
 
-
-    <!-- ERROR -->
-
-    <section
-        id="profileError"
-        class="state"
-        style="display:none;">
+</main>
 
 
-        <div class="state-icon">
+<!-- ==========================================================
+     PREMIUM NOTICE
+=========================================================== -->
 
-            <i class="fa-solid fa-user-slash"></i>
+<div
+    id="premiumNotice"
+    class="premium-notice"
+>
+
+    <div class="premium-notice-card">
+
+        <div class="premium-notice-icon">
+
+            <i class="fa-solid fa-crown"></i>
 
         </div>
 
 
-        <h2>
-            Profile unavailable
-        </h2>
+        <h3>
+            Premium is required
+        </h3>
 
 
-        <p
-            id="profileErrorMessage">
-            This profile could not be loaded.
+        <p>
+
+            You need an active LOVEMI Premium membership
+            before you can create a new connection.
+
+            Your profile information remains protected.
+
         </p>
 
 
-    </section>
+        <div class="premium-notice-actions">
+
+            <button
+                type="button"
+                id="premiumCancel"
+                class="action-button action-secondary"
+            >
+
+                Cancel
+
+            </button>
 
 
-</main>
+            <button
+                type="button"
+                id="premiumContinue"
+                class="action-button action-primary"
+            >
+
+                <i class="fa-solid fa-crown"></i>
+
+                Open Premium
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
-<!-- =========================================================
+<!-- ==========================================================
+     CONNECTION / ACCESS NOTICE
+=========================================================== -->
+
+<div id="connectionNotice" class="connection-notice" aria-hidden="true">
+    <div class="connection-notice-card">
+        <div class="connection-notice-icon">
+            <i class="fa-solid fa-link"></i>
+        </div>
+        <h3 id="connectionNoticeTitle">Connection required</h3>
+        <p id="connectionNoticeMessage">LOVEMI requires a connection for this action.</p>
+        <div class="connection-notice-actions">
+            <button type="button" id="connectionNoticeCancel" class="action-button action-secondary">Cancel</button>
+            <button type="button" id="connectionNoticeContinue" class="action-button action-primary">Continue</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ==========================================================
+     TOAST
+=========================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- ==========================================================
+     NOTIFICATION AUDIO
+=========================================================== -->
+
+<audio
+    id="notificationAudio"
+    preload="auto"
+>
+
+    <source
+        src="assets/audio/notification1.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- ==========================================================
      FOOTER
-========================================================== -->
+=========================================================== -->
 
 <footer class="footer">
-
 
     <div class="footer-inner">
 
@@ -2476,163 +4623,132 @@
 
             <div>
 
-
                 <a
                     href="dashboard.html"
-                    class="brand">
-
+                    class="brand"
+                >
 
                     <img
                         src="assets/logo1/logo1.png"
-                        alt="LOVEMI Logo"
+                        alt="LOVEMI"
                         class="brand-logo"
                         onerror="
                             this.onerror=null;
                             this.src='assets/logo1/apple-touch-icon.png';
-                        ">
-
+                        "
+                    >
 
                     <span class="brand-text">
-
 
                         <span class="brand-name">
                             LOVEMI
                         </span>
 
-
                         <span
                             class="brand-tagline"
-                            style="color:#77717f;">
-
+                            style="color:#77717f;"
+                        >
                             DISCOVER • CONNECT • MEET
-
                         </span>
 
-
                     </span>
-
 
                 </a>
 
 
                 <p class="footer-description">
 
-                    Discover approved members and manage
-                    your LOVEMI connections securely.
+                    Discover approved members, build meaningful
+                    connections and manage your LOVEMI profile securely.
 
                 </p>
-
 
             </div>
 
 
             <div>
-
 
                 <h3 class="footer-heading">
                     Explore
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="dashboard.html">
                         Dashboard
                     </a>
 
-
                     <a href="discover.html">
                         Discover
                     </a>
-
 
                     <a href="connections.html">
                         Connections
                     </a>
 
-
                     <a href="messages.html">
                         Messages
                     </a>
 
-
                 </div>
-
 
             </div>
 
 
             <div>
-
 
                 <h3 class="footer-heading">
                     Account
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="profile.html">
                         Profile
                     </a>
 
-
                     <a href="edit-profile.html">
                         Edit Profile
                     </a>
-
 
                     <a href="premium.html">
                         Premium
                     </a>
 
-
                     <a href="settings.html">
                         Settings
                     </a>
 
-
                 </div>
-
 
             </div>
 
 
             <div>
 
-
                 <h3 class="footer-heading">
                     Help
                 </h3>
 
-
                 <div class="footer-links">
-
 
                     <a href="help.html">
                         Help Center
                     </a>
 
-
                     <a href="privacy.html">
                         Privacy
                     </a>
-
 
                     <a href="terms.html">
                         Terms
                     </a>
 
-
                     <a href="contact.html">
                         Contact
                     </a>
 
-
                 </div>
-
 
             </div>
 
@@ -2642,9 +4758,12 @@
 
         <div class="footer-bottom">
 
-
             <span>
-                © <span id="year"></span> LOVEMI. All rights reserved.
+
+                ©
+                <span id="year"></span>
+                LOVEMI. All rights reserved.
+
             </span>
 
 
@@ -2652,12 +4771,10 @@
                 Discover • Connect • Meet
             </span>
 
-
         </div>
 
 
     </div>
-
 
 </footer>
 
@@ -2666,1285 +4783,1878 @@
 
 "use strict";
 
-
-/* =========================================================
-   API
-========================================================= */
+/* ============================================================
+   LOVEMI PROFILE PAGE SCRIPT
+   ============================================================ */
 
 const API = {
-
-    session:
-        "api/auth/session.php",
-
-    profile:
-        "api/users/get-profile.php"
-
+    session: "api/auth/session.php",
+    profile: "api/profile/data.php",
+    posts: "api/profile/posts.php",
+    comments: "api/profile/comments.php",
+    comment: "api/profile/comment.php",
+    react: "api/posts/react.php",
+    follow: "api/profile/follow.php",
+    connection: "api/connections/create.php",
+    premium: "api/premium/status.php",
+    notifications: "api/notifications/unread-count.php",
 };
 
+const DEFAULT_MALE = "assets/images/defaults/default-avatar-male.png";
+const DEFAULT_FEMALE = "assets/images/defaults/default-avatar-female.png";
 
-/* =========================================================
-   DEFAULT IMAGES
-========================================================= */
+const state = {
+    currentUser: null,
+    profile: null,
+    profileResult: null,
+    profileConnections: [],
+    gallery: [],
+    isOwnProfile: false,
+    secureCode: "",
+    posts: [],
+    postPage: 1,
+    hasMorePosts: true,
+    loadingPosts: false,
+    loadingProfile: false,
+    premium: false,
+    connected: false,
+    connectionStatus: null,
+    following: false,
+    canChat: false,
+    notificationCount: 0,
+    notificationInitialized: false,
+    audioUnlocked: false,
+    pendingPremiumIntent: null,
+    premiumWindow: null,
+    commentsOpen: new Set(),
+};
 
-const DEFAULT_MALE =
-    "assets/images/defaults/default-avatar-male.png";
+const $ = (selector) => document.querySelector(selector);
 
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
-const DEFAULT_FEMALE =
-    "assets/images/defaults/default-avatar-female.png";
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const profileLoading =
-    document.getElementById(
-        "profileLoading"
-    );
-
-
-const profileContent =
-    document.getElementById(
-        "profileContent"
-    );
-
-
-const profileError =
-    document.getElementById(
-        "profileError"
-    );
-
-
-const profileErrorMessage =
-    document.getElementById(
-        "profileErrorMessage"
-    );
-
-
-const headerAvatar =
-    document.getElementById(
-        "headerAvatar"
-    );
-
-
-const headerName =
-    document.getElementById(
-        "headerName"
-    );
-
-
-/* =========================================================
-   YEAR
-========================================================= */
-
-document.getElementById(
-    "year"
-).textContent =
-    new Date().getFullYear();
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-function escapeHtml(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
+if (document.getElementById("year")) {
+    document.getElementById("year").textContent = new Date().getFullYear();
 }
 
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
 
-/* =========================================================
-   IMAGE
-========================================================= */
+function safeImage(value, gender = "") {
+    const fallback = String(gender).toLowerCase() === "female" ? DEFAULT_FEMALE : DEFAULT_MALE;
+    if (typeof value !== "string" || !value.trim()) return fallback;
+    return value.trim();
+}
 
-function getImage(
-    profile
-) {
+function safeMediaUrl(value) {
+    const input = String(value ?? "").trim();
+    if (!input) return "";
 
-    if (
-        profile.profile_photo
-    ) {
+    try {
+        if (input.startsWith("/") || input.startsWith("./") || input.startsWith("../")) {
+            return input;
+        }
 
-        return profile.profile_photo;
-
+        const url = new URL(input, window.location.origin);
+        if (["http:", "https:"].includes(url.protocol)) return url.href;
+    } catch (error) {
+        console.debug("Invalid media URL", error);
     }
 
+    return "";
+}
 
-    if (
-        profile.photo_url
-    ) {
+function formatDate(value) {
+    if (!value) return "";
 
-        return profile.photo_url;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
 
+    return date.toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+    });
+}
+
+function formatShortDate(value) {
+    if (!value) return "";
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+
+    return date.toLocaleDateString(undefined, {
+        dateStyle: "medium",
+    });
+}
+
+let toastTimer = null;
+
+function toast(message, type = "success") {
+    const box = $("#toast");
+    if (!box) return;
+
+    clearTimeout(toastTimer);
+    box.textContent = String(message || "");
+    box.classList.remove("error", "info", "show");
+
+    if (type === "error") box.classList.add("error");
+    if (type === "info") box.classList.add("info");
+
+    requestAnimationFrame(() => box.classList.add("show"));
+
+    toastTimer = setTimeout(() => box.classList.remove("show"), 3500);
+}
+
+/* ============================================================
+   JSON HELPERS
+   Never expose PHP HTML warnings as "Unexpected token <".
+   ============================================================ */
+
+async function parseJsonResponse(response, label) {
+    const text = await response.text();
+    const trimmed = text.replace(/^\uFEFF/, "").trim();
+
+    if (!trimmed) {
+        throw new Error(`${label} returned an empty response.`);
     }
 
+    let result;
+    try {
+        result = JSON.parse(trimmed);
+    } catch (error) {
+        console.error(`${label} invalid JSON response:`, trimmed.slice(0, 1200));
+        throw new Error("The server returned an invalid response. Please check the LOVEMI PHP error log.");
+    }
 
-    return String(
-        profile.gender
-        ||
-        ""
-    ).toLowerCase()
-        ===
-        "female"
+    if (!result || typeof result !== "object") {
+        throw new Error(`${label} returned an invalid JSON object.`);
+    }
 
-        ?
-        DEFAULT_FEMALE
-
-        :
-        DEFAULT_MALE;
-
+    return result;
 }
 
+async function getJson(url) {
+    const separator = url.includes("?") ? "&" : "?";
 
-/* =========================================================
-   GET JSON
-========================================================= */
+    const response = await fetch(
+        `${url}${separator}_=${Date.now()}`,
+        {
+            method: "GET",
+            credentials: "same-origin",
+            cache: "no-store",
+            headers: {
+                Accept: "application/json",
+                "Cache-Control": "no-cache, no-store, max-age=0",
+                Pragma: "no-cache",
+            },
+        }
+    );
 
-async function getJson(
-    url
-) {
-
-    const separator =
-        url.includes("?")
-            ? "&"
-            : "?";
-
-
-    const response =
-        await fetch(
-            url
-            +
-            separator
-            +
-            "_="
-            +
-            Date.now(),
-            {
-
-                credentials:
-                    "same-origin",
-
-                cache:
-                    "no-store",
-
-                headers: {
-
-                    "Accept":
-                        "application/json",
-
-                    "Cache-Control":
-                        "no-cache, no-store, max-age=0",
-
-                    "Pragma":
-                        "no-cache"
-
-                }
-
-            }
-        );
-
-
-    const result =
-        await response.json();
-
-
-    return {
-
-        response,
-        result
-
-    };
-
+    const result = await parseJsonResponse(response, "GET API");
+    return { response, result };
 }
 
+async function postJson(url, data) {
+    const response = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        cache: "no-store",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, max-age=0",
+            Pragma: "no-cache",
+        },
+        body: JSON.stringify(data),
+    });
 
-/* =========================================================
-   SESSION
-========================================================= */
+    const result = await parseJsonResponse(response, "POST API");
+    return { response, result };
+}
+
+function getProfileCode() {
+    const params = new URLSearchParams(window.location.search);
+    return (params.get("code") || "").trim();
+}
+
+/* ============================================================
+   AUTHENTICATION
+   ============================================================ */
 
 async function loadSession() {
+    const { response, result } = await getJson(API.session);
 
-    try {
+    if (!response.ok || result.authenticated !== true || !result.user) {
+        const returnUrl = state.secureCode
+            ? `profile.html?code=${encodeURIComponent(state.secureCode)}`
+            : "profile.html";
 
-        const {
-            response,
-            result
-        } =
-            await getJson(
-                API.session
-            );
-
-
-        if (
-            !response.ok
-            ||
-            result.authenticated !== true
-        ) {
-
-            window.location.href =
-                "login.html?return=profile.html";
-
-            return false;
-
-        }
-
-
-        const user =
-            result.user
-            ||
-            null;
-
-
-        if (
-            !user
-        ) {
-
-            window.location.href =
-                "login.html?return=profile.html";
-
-            return false;
-
-        }
-
-
-        headerName.textContent =
-            user.username
-            ||
-            user.full_name
-            ||
-            "Account";
-
-
-        headerAvatar.src =
-            getImage(
-                user
-            );
-
-
-        return true;
-
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-
-        window.location.href =
-            "login.html?return=profile.html";
-
-
+        window.location.href = `login.html?return=${encodeURIComponent(returnUrl)}`;
         return false;
-
     }
 
+    state.currentUser = result.user;
+    renderHeaderAccount(state.currentUser);
+    return true;
 }
 
+function renderHeaderAccount(user) {
+    const name = user.username || user.full_name || user.full_names || "Account";
+    const avatar = safeImage(user.profile_photo || user.avatar || user.photo_url, user.gender);
 
-/* =========================================================
-   GET PROFILE ID
-========================================================= */
-
-function getProfileId() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const id =
-        params.get(
-            "user"
-        );
-
-
-    return id;
-
+    if ($("#headerName")) $("#headerName").textContent = name;
+    if ($("#headerAvatar")) $("#headerAvatar").src = avatar;
 }
 
-
-/* =========================================================
-   LOAD PROFILE
-========================================================= */
+/* ============================================================
+   PROFILE
+   ============================================================ */
 
 async function loadProfile() {
-
-    const profileId =
-        getProfileId();
-
-
-    let url =
-        API.profile;
-
-
-    if (
-        profileId
-    ) {
-
-        url +=
-            "?user_id="
-            +
-            encodeURIComponent(
-                profileId
-            );
-
-    }
-
+    if (state.loadingProfile) return;
+    state.loadingProfile = true;
 
     try {
-
-        const {
-            response,
-            result
-        } =
-            await getJson(
-                url
-            );
-
-
-        if (
-            !response.ok
-            ||
-            result.success === false
-        ) {
-
-            throw new Error(
-                result.message
-                ||
-                "Profile could not be loaded."
-            );
-
+        let url = API.profile;
+        if (state.secureCode) {
+            url += `?code=${encodeURIComponent(state.secureCode)}`;
         }
 
+        const { response, result } = await getJson(url);
 
-        const profile =
-            result.profile
-            ||
-            result.data?.profile
-            ||
-            result.data
-            ||
-            null;
-
-
-        if (
-            !profile
-        ) {
-
-            throw new Error(
-                "No profile information was returned."
-            );
-
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Profile could not be loaded.");
         }
 
+        const profile = result.profile || result.data?.profile || result.data || null;
+        if (!profile) {
+            throw new Error("No profile information was returned.");
+        }
 
-        renderProfile(
-            profile,
-            result
-        );
+        state.profile = profile;
+        state.profileResult = result;
+        state.profileConnections = Array.isArray(result.connections) ? result.connections : [];
+        state.gallery = Array.isArray(result.gallery) ? result.gallery : [];
+        state.isOwnProfile = determineOwnProfile(profile, result);
+        state.connected = Boolean(result.is_connected ?? result.connected ?? false);
+        state.connectionStatus = result.connection_status ?? null;
+        state.following = Boolean(result.is_following ?? result.following ?? false);
+        state.premium = Boolean(result.viewer_has_premium ?? false);
+        state.canChat = Boolean(result.can_chat ?? false);
 
+        renderProfile(profile, result);
+        renderConnections(state.profileConnections);
+        renderGallery(state.gallery);
 
+        await loadPosts(true);
     } catch (error) {
-
-        console.error(
-            "Profile error:",
-            error
-        );
-
-
-        profileLoading.style.display =
-            "none";
-
-
-        profileContent.style.display =
-            "none";
-
-
-        profileError.style.display =
-            "flex";
-
-
-        profileErrorMessage.textContent =
-            error.message
-            ||
-            "The requested profile is unavailable.";
-
+        console.error("Profile load error:", error);
+        showProfileError(error.message || "This profile could not be loaded.");
+    } finally {
+        state.loadingProfile = false;
     }
-
 }
 
-
-/* =========================================================
-   RENDER PROFILE
-========================================================= */
-
-function renderProfile(
-    profile,
-    result
-) {
-
-    profileLoading.style.display =
-        "none";
-
-
-    profileError.style.display =
-        "none";
-
-
-    profileContent.style.display =
-        "block";
-
-
-    const image =
-        getImage(
-            profile
-        );
-
-
-    const name =
-        profile.full_name
-        ??
-        profile.full_names
-        ??
-        profile.username
-        ??
-        "Member";
-
-
-    const username =
-        profile.username
-        ??
-        "";
-
-
-    const gender =
-        profile.gender
-        ??
-        "";
-
-
-    const country =
-        profile.country_name
-        ??
-        "";
-
-
-    const location =
-        profile.location
-        ??
-        profile.city
-        ??
-        "";
-
-
-    const verified =
-        Boolean(
-            profile.email_verified
-            ??
-            profile.verified
-            ??
-            false
-        );
-
-
-    const online =
-        Boolean(
-            profile.is_online
-            ??
-            profile.online
-            ??
-            false
-        );
-
-
-    document.getElementById(
-        "profilePhoto"
-    ).src =
-        image;
-
-
-    document.getElementById(
-        "profilePhoto"
-    ).alt =
-        name;
-
-
-    document.getElementById(
-        "profileName"
-    ).textContent =
-        name;
-
-
-    document.getElementById(
-        "profileUsername"
-    ).textContent =
-        username
-            ?
-            "@" + username
-            :
-            "";
-
-
-    document.getElementById(
-        "profileLocation"
-    ).innerHTML =
-        country
-        ||
-        location
-
-            ?
-
-            `
-            <i class="fa-solid fa-location-dot"></i>
-            ${escapeHtml(
-                [location,country]
-                    .filter(Boolean)
-                    .join(", ")
-            )}
-            `
-
-            :
-
-            "";
-
-
-    document.getElementById(
-        "verifiedIcon"
-    ).style.display =
-        verified
-            ?
-            "inline-block"
-            :
-            "none";
-
-
-    document.getElementById(
-        "onlineBadge"
-    ).style.display =
-        online
-            ?
-            "block"
-            :
-            "none";
-
-
-    document.getElementById(
-        "detailGender"
-    ).textContent =
-        gender
-        ||
-        "Not specified";
-
-
-    document.getElementById(
-        "detailCountry"
-    ).textContent =
-        country
-        ||
-        "Not specified";
-
-
-    document.getElementById(
-        "detailLocation"
-    ).textContent =
-        location
-        ||
-        "Not specified";
-
-
-    document.getElementById(
-        "detailStatus"
-    ).textContent =
-        online
-            ?
-            "Online"
-            :
-            "Available";
-
-
-    document.getElementById(
-        "profileBio"
-    ).textContent =
-        profile.bio
-        ||
-        "This member has not added an About Me description yet.";
-
-
-    /*
-     * Determine whether this is the current user's own profile.
-     */
-
-    const isOwnProfile =
-        Boolean(
-            result.is_own_profile
-            ??
-            profile.is_own_profile
-            ??
-            false
-        );
-
-
-    const connected =
-        Boolean(
-            result.connected
-            ??
-            result.is_connected
-            ??
-            profile.connected
-            ??
-            false
-        );
-
-
-    const canMessage =
-        Boolean(
-            result.can_message
-            ??
-            result.message_allowed
-            ??
-            false
-        );
-
-
-    const canContact =
-        Boolean(
-            result.can_view_contact
-            ??
-            result.contact_allowed
-            ??
-            false
-        );
-
-
-    const connectButton =
-        document.getElementById(
-            "connectButton"
-        );
-
-
-    const messageButton =
-        document.getElementById(
-            "messageButton"
-        );
-
-
-    const editButton =
-        document.getElementById(
-            "editButton"
-        );
-
-
-    /*
-     * Own profile.
-     */
-
-    if (
-        isOwnProfile
-    ) {
-
-        editButton.style.display =
-            "inline-flex";
-
-
+function determineOwnProfile(profile, result) {
+    if (typeof result?.is_own_profile !== "undefined") return Boolean(result.is_own_profile);
+    if (typeof profile?.is_own_profile !== "undefined") return Boolean(profile.is_own_profile);
+
+    const currentId = Number(state.currentUser?.id ?? state.currentUser?.user_id ?? 0);
+    const profileId = Number(profile?.id ?? profile?.user_id ?? 0);
+
+    return currentId > 0 && profileId > 0 ? currentId === profileId : !state.secureCode;
+}
+
+function renderProfile(profile, result) {
+    $("#profileLoading").style.display = "none";
+    $("#profileError").style.display = "none";
+    $("#profileContent").style.display = "block";
+
+    const gender = profile.gender || "";
+    const name = profile.display_name || profile.full_name || profile.full_names || profile.username || "Member";
+    const username = profile.username || "";
+    const country = profile.country_name || profile.country || "";
+    const city = profile.city || profile.location || "";
+
+    $("#profilePhoto").src = safeImage(profile.profile_photo || profile.photo_url || profile.avatar, gender);
+    $("#profilePhoto").alt = name;
+    $("#profileName").textContent = name;
+    $("#profileUsername").textContent = username ? `@${username}` : "";
+
+    const locationParts = [city, country].filter(Boolean);
+    $("#profileLocation").innerHTML = locationParts.length
+        ? `<i class="fa-solid fa-location-dot"></i>${escapeHtml(locationParts.join(", "))}`
+        : "";
+
+    const verified = Boolean(profile.email_verified || profile.verified);
+    $("#verifiedIcon").style.display = verified ? "inline-block" : "none";
+
+    const online = Boolean(profile.is_online ?? profile.online ?? false);
+    $("#onlineBadge").style.display = online ? "block" : "none";
+
+    const bio = String(profile.bio || "").trim();
+    const bioElement = $("#profileBio");
+    bioElement.textContent = bio || "This member has not added an About Me description yet.";
+    bioElement.classList.toggle("empty", !bio);
+
+    $("#aboutOccupation").textContent = profile.occupation || "Not specified";
+    $("#aboutEducation").textContent = profile.education || "Not specified";
+    $("#aboutRelationship").textContent = profile.relationship_status || "Not specified";
+    $("#aboutLookingFor").textContent = profile.looking_for || "Not specified";
+    $("#aboutInterests").textContent = profile.interests || "Not specified";
+    $("#aboutJoined").textContent = profile.created_at ? formatShortDate(profile.created_at) : "Not specified";
+
+    $("#detailGender").textContent = profile.gender || "Not specified";
+    $("#detailCountry").textContent = country || "Not specified";
+    $("#detailCity").textContent = city || "Not specified";
+    $("#detailStatus").textContent = online ? "Online" : "Offline";
+    $("#detailUsername").textContent = username || "Not specified";
+    $("#detailVisibility").textContent = profile.profile_visibility || "Public";
+
+    updateVerification("#verifyEmail", Boolean(profile.email_verified), "Email");
+    updateVerification("#verifyPhone", Boolean(profile.phone_verified), "Phone");
+    updateVerification("#verifyIdentity", Boolean(profile.identity_verified), "Identity");
+    updateVerification("#verifyAge", Boolean(profile.age_verified), "Age");
+
+    renderContact(profile, result);
+    renderProfileActions(profile, result);
+
+    const profileId = Number(profile.id ?? profile.user_id ?? 0);
+    if (!state.isOwnProfile && profileId > 0) {
+        $("#reportButton").href = `reports.html?user=${encodeURIComponent(profileId)}`;
+        $("#reportButton").style.display = "inline-flex";
     } else {
-
-
-        /*
-         * Existing connection.
-         */
-
-        if (
-            connected
-        ) {
-
-            if (
-                canMessage
-                ||
-                result.has_premium
-                ||
-                result.premium
-            ) {
-
-                messageButton.href =
-                    "messages.html?user="
-                    +
-                    encodeURIComponent(
-                        profile.id
-                        ||
-                        profile.user_id
-                        ||
-                        ""
-                    );
-
-
-                messageButton.style.display =
-                    "inline-flex";
-
-            }
-
-
-        } else {
-
-            /*
-             * Connect button.
-             *
-             * The backend performs the actual Premium check.
-             */
-
-            connectButton.href =
-                "discover.html?connect="
-                +
-                encodeURIComponent(
-                    profile.id
-                    ||
-                    profile.user_id
-                    ||
-                    ""
-                );
-
-
-            connectButton.style.display =
-                "inline-flex";
-
-        }
-
+        $("#reportButton").style.display = "none";
     }
 
+    $("#postsCount").textContent = Number(result.posts_count ?? profile.posts_count ?? 0);
+    $("#postsCounter").textContent = $("#postsCount").textContent;
+    $("#connectionsCount").textContent = Number(result.connections_count ?? profile.connections_count ?? 0);
+    $("#followersCount").textContent = Number(result.followers_count ?? profile.followers_count ?? 0);
+    $("#followingCount").textContent = Number(result.following_count ?? profile.following_count ?? 0);
+    $("#photosCount").textContent = Number(result.photos_count ?? state.gallery.length);
+}
 
-    /*
-     * Report.
-     */
+function updateVerification(selector, verified) {
+    const element = $(selector);
+    if (!element) return;
 
-    const reportButton =
-        document.getElementById(
-            "reportButton"
-        );
+    element.classList.toggle("off", !verified);
+    const span = element.querySelector("span");
+    const icon = element.querySelector("i");
 
+    if (span) span.textContent = verified ? "Verified" : "Not verified";
+    if (icon) icon.className = verified ? "fa-solid fa-circle-check" : "fa-solid fa-circle-xmark";
+}
 
-    reportButton.href =
-        "reports.html?user="
-        +
-        encodeURIComponent(
-            profile.id
-            ||
-            profile.user_id
-            ||
-            ""
-        );
+function renderContact(profile, result) {
+    const contactSection = $("#contactSection");
+    const phoneRow = $("#phoneRow");
+    const whatsappRow = $("#whatsappRow");
 
+    phoneRow.style.display = "none";
+    whatsappRow.style.display = "none";
+    contactSection.style.display = "none";
 
-    /*
-     * Contact details.
-     *
-     * They are only rendered if the protected API explicitly
-     * authorizes them.
-     */
+    const privateData = result?.private || {};
+    const phone = privateData.phone_number || privateData.phone_e164 || "";
+    const whatsapp = privateData.whatsapp_number || "";
 
-    const contactSection =
-        document.getElementById(
-            "contactSection"
-        );
+    if (!state.isOwnProfile && !Boolean(result?.can_view_contact)) return;
+    if (!phone && !whatsapp) return;
 
+    contactSection.style.display = "block";
 
-    const privacyMessage =
-        document.getElementById(
-            "privacyMessage"
-        );
-
-
-    const phoneContact =
-        document.getElementById(
-            "phoneContact"
-        );
-
-
-    const whatsappContact =
-        document.getElementById(
-            "whatsappContact"
-        );
-
-
-    if (
-        canContact
-    ) {
-
-        const phone =
-            profile.phone_number
-            ??
-            profile.phone
-            ??
-            "";
-
-
-        const whatsapp =
-            profile.whatsapp_number
-            ??
-            profile.whatsapp
-            ??
-            "";
-
-
-        if (
-            phone
-            ||
-            whatsapp
-        ) {
-
-            contactSection.style.display =
-                "block";
-
-
-            privacyMessage.innerHTML =
-                `
-                <i class="fa-solid fa-shield-halved"></i>
-                Contact information has been authorized by the LOVEMI server.
-                `;
-
-
-            if (
-                phone
-            ) {
-
-                phoneContact.style.display =
-                    "block";
-
-
-                document.getElementById(
-                    "phoneValue"
-                ).textContent =
-                    phone;
-
-            }
-
-
-            if (
-                whatsapp
-            ) {
-
-                whatsappContact.style.display =
-                    "block";
-
-
-                document.getElementById(
-                    "whatsappValue"
-                ).textContent =
-                    whatsapp;
-
-            }
-
-        }
-
+    if (phone) {
+        phoneRow.style.display = "block";
+        $("#phoneValue").textContent = phone;
     }
 
+    if (whatsapp) {
+        whatsappRow.style.display = "block";
+        $("#whatsappValue").textContent = whatsapp;
+    }
 
-    /*
-     * Gallery.
-     */
+    if (state.isOwnProfile && privateData.email) {
+        // Email is deliberately not added as a public/contact row.
+    }
+}
 
-    renderGallery(
-        profile.photos
-        ??
-        profile.gallery
-        ??
-        result.photos
-        ??
-        []
+function renderProfileActions(profile, result) {
+    const connectButton = $("#connectButton");
+    const chatButton = $("#chatButton");
+    const whatsappButton = $("#whatsappButton");
+    const editButton = $("#editButton");
+    const followButton = $("#followButton");
+
+    [connectButton, chatButton, whatsappButton, editButton, followButton].forEach((element) => {
+        if (element) element.style.display = "none";
+    });
+
+    if (state.isOwnProfile) {
+        editButton.style.display = "inline-flex";
+        return;
+    }
+
+    followButton.style.display = "inline-flex";
+    updateFollowButton();
+
+    const contactAllowed = Boolean(result?.can_view_contact);
+    const privateData = result?.private || {};
+    const whatsapp = privateData.whatsapp_number || privateData.phone_e164 || privateData.phone_number || "";
+    const normalized = normalizeWhatsApp(whatsapp);
+
+    if (contactAllowed && normalized) {
+        whatsappButton.href = `https://wa.me/${normalized}`;
+        whatsappButton.style.display = "inline-flex";
+    }
+
+    if (isActiveConnection(state.connectionStatus)) {
+        state.connected = true;
+        chatButton.style.display = "inline-flex";
+        connectButton.style.display = "none";
+        return;
+    }
+
+    chatButton.style.display = "inline-flex";
+    connectButton.style.display = "inline-flex";
+    connectButton.disabled = false;
+
+    if (isPendingConnection(state.connectionStatus)) {
+        connectButton.disabled = true;
+        connectButton.innerHTML = `<i class="fa-solid fa-clock"></i> Request Pending`;
+    } else {
+        connectButton.innerHTML = `<i class="fa-solid fa-user-plus"></i> Connect`;
+    }
+}
+
+function isActiveConnection(status) {
+    return ["accepted", "connected", "active"].includes(String(status || "").toLowerCase());
+}
+
+function isPendingConnection(status) {
+    return ["pending", "requested", "sent", "pending_sent"].includes(String(status || "").toLowerCase());
+}
+
+function normalizeWhatsApp(value) {
+    let number = String(value || "").replace(/[^\d+]/g, "");
+    if (number.startsWith("+")) number = number.substring(1);
+    if (number.startsWith("0") && number.length >= 9) number = `254${number.substring(1)}`;
+    return number.length >= 9 ? number : "";
+}
+
+/* ============================================================
+   CONNECTION + CHAT
+   ============================================================ */
+
+$("#connectButton")?.addEventListener("click", requestConnection);
+$("#chatButton")?.addEventListener("click", openChat);
+
+async function getPremiumNow() {
+    try {
+        const { response, result } = await getJson(API.premium);
+        state.premium = Boolean(response.ok && result.success === true && result.premium?.active === true);
+        return state.premium;
+    } catch (error) {
+        console.debug("Premium status", error);
+        state.premium = false;
+        return false;
+    }
+}
+
+async function requestConnection() {
+    if (state.isOwnProfile) return;
+
+    const targetUserId = Number(state.profile?.id ?? state.profile?.user_id ?? 0);
+    if (targetUserId <= 0) {
+        toast("The target member could not be identified.", "error");
+        return;
+    }
+
+    if (isActiveConnection(state.connectionStatus)) {
+        openChat();
+        return;
+    }
+
+    if (isPendingConnection(state.connectionStatus)) {
+        toast("The connection request is already pending.", "info");
+        return;
+    }
+
+    const premiumActive = await getPremiumNow();
+    if (!premiumActive) {
+        showAccessNotice(
+            "Premium is required",
+            "An active LOVEMI Premium membership is required before creating a new connection. Premium will open automatically.",
+            "connect",
+            targetUserId,
+            true
+        );
+        return;
+    }
+
+    await sendConnectionRequest(targetUserId);
+}
+
+async function sendConnectionRequest(targetUserId = Number(state.profile?.id ?? state.profile?.user_id ?? 0)) {
+    if (targetUserId <= 0) return;
+
+    try {
+        const { response, result } = await postJson(API.connection, {
+            user_id: targetUserId,
+            source: "profile",
+        });
+
+        if (result.code === "PREMIUM_REQUIRED") {
+            showAccessNotice(
+                "Premium is required",
+                "Premium is required before this connection can be created. Premium will open automatically.",
+                "connect",
+                targetUserId,
+                true
+            );
+            return;
+        }
+
+        if (result.code === "ALREADY_CONNECTED") {
+            state.connected = true;
+            state.connectionStatus = "accepted";
+            renderProfileActions(state.profile, state.profileResult || {});
+            toast("You are already connected.", "info");
+            return;
+        }
+
+        if (result.code === "ALREADY_PENDING") {
+            state.connectionStatus = "pending";
+            renderProfileActions(state.profile, state.profileResult || {});
+            toast("Connection request is already pending.", "info");
+            return;
+        }
+
+        if (result.code === "AUTHENTICATION_REQUIRED") {
+            window.location.href = `login.html?return=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+            return;
+        }
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Connection request could not be sent.");
+        }
+
+        state.connectionStatus = result.status || "pending";
+        state.connected = false;
+        renderProfileActions(state.profile, state.profileResult || {});
+        toast(result.message || "Connection request sent successfully.");
+    } catch (error) {
+        console.error("Connection request", error);
+        toast(error.message || "Connection request failed.", "error");
+    }
+}
+
+async function openChat() {
+    if (state.isOwnProfile) {
+        window.location.href = "messages.html";
+        return;
+    }
+
+    const targetUserId = Number(state.profile?.id ?? state.profile?.user_id ?? 0);
+    if (targetUserId <= 0) {
+        toast("This member could not be identified.", "error");
+        return;
+    }
+
+    const premiumActive = await getPremiumNow();
+
+    if (isActiveConnection(state.connectionStatus)) {
+        if (!premiumActive) {
+            showAccessNotice(
+                "Premium is required for Chat",
+                "Your connection already exists. Activate Premium to continue to the conversation.",
+                "chat",
+                targetUserId,
+                true
+            );
+            return;
+        }
+
+        await openExistingChat(targetUserId);
+        return;
+    }
+
+    if (isPendingConnection(state.connectionStatus)) {
+        showConnectionNotice(
+            "Connection request pending",
+            "You have already requested to connect with this member. Chat will open after the request is accepted.",
+            null,
+            false
+        );
+        return;
+    }
+
+    if (!premiumActive) {
+        showAccessNotice(
+            "Premium is required",
+            "You need Premium to start this chat. Premium will open automatically and the chat request will continue after successful payment.",
+            "chat",
+            targetUserId,
+            true
+        );
+        return;
+    }
+
+    showConnectionNotice(
+        "Connection required for Chat",
+        "You are not connected with this member yet. LOVEMI will send the connection request automatically. Chat becomes available after acceptance.",
+        async () => {
+            await sendConnectionRequest(targetUserId);
+        },
+        true
+    );
+}
+
+async function openExistingChat(userId) {
+    try {
+        const { response, result } = await postJson("api/chat/create-conversation.php", {
+            user_id: Number(userId),
+        });
+
+        if (result.code === "PREMIUM_REQUIRED") {
+            showAccessNotice(
+                "Premium is required for Chat",
+                "Activate Premium to continue to this conversation.",
+                "chat",
+                Number(userId),
+                true
+            );
+            return;
+        }
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Conversation could not be opened.");
+        }
+
+        const chatCode = result.chat_code || result.access_code || result.conversation_code || result.data?.chat_code || result.data?.access_code;
+        const conversationId = result.conversation_id || result.data?.conversation_id || result.conversation?.id || 0;
+
+        if (chatCode) {
+            window.location.href = `messages.html?chat=${encodeURIComponent(chatCode)}`;
+            return;
+        }
+
+        if (conversationId) {
+            window.location.href = `messages.html?conversation_id=${encodeURIComponent(conversationId)}`;
+            return;
+        }
+
+        throw new Error("The conversation was created but no chat code was returned.");
+    } catch (error) {
+        console.error("Open chat", error);
+        toast(error.message || "Unable to open chat.", "error");
+    }
+}
+
+/* ============================================================
+   FRIEND / FOLLOW
+   ============================================================ */
+
+$("#followButton")?.addEventListener("click", toggleFollow);
+
+function updateFollowButton() {
+    const button = $("#followButton");
+    if (!button || state.isOwnProfile) return;
+
+    button.style.display = "inline-flex";
+
+    if (state.following) {
+        button.innerHTML = `<i class="fa-solid fa-user-check"></i> Friend`;
+    } else {
+        button.innerHTML = `<i class="fa-solid fa-user-group"></i> Add Friend`;
+    }
+}
+
+async function toggleFollow() {
+    const targetUserId = Number(state.profile?.id ?? state.profile?.user_id ?? 0);
+    if (targetUserId <= 0) return;
+
+    try {
+        const { response, result } = await postJson(API.follow, {
+            user_id: targetUserId,
+            action: state.following ? "unfollow" : "follow",
+        });
+
+        if (result.code === "CONNECTION_REQUIRED") {
+            showConnectionNotice(
+                "Connection required",
+                "Add Friend becomes available after you are connected with this member.",
+                async () => {
+                    await requestConnection();
+                },
+                true
+            );
+            return;
+        }
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Friend action could not be completed.");
+        }
+
+        state.following = Boolean(result.following ?? !state.following);
+        updateFollowButton();
+        $("#followersCount").textContent = Number(result.followers_count ?? $("#followersCount").textContent);
+        toast(result.message || (state.following ? "Friend added." : "Friend removed."));
+    } catch (error) {
+        console.error("Follow", error);
+        toast(error.message || "Friend action is temporarily unavailable.", "error");
+    }
+}
+
+/* ============================================================
+   ACCESS / PREMIUM MODALS
+   ============================================================ */
+
+function showConnectionNotice(title, message, callback, autoRun = false) {
+    const overlay = $("#connectionNotice");
+    const titleEl = $("#connectionNoticeTitle");
+    const messageEl = $("#connectionNoticeMessage");
+    const continueButton = $("#connectionNoticeContinue");
+    const cancelButton = $("#connectionNoticeCancel");
+
+    if (!overlay) return;
+
+    titleEl.textContent = title;
+    messageEl.textContent = message;
+    overlay.classList.add("open");
+
+    const run = async () => {
+        overlay.classList.remove("open");
+        if (typeof callback === "function") await callback();
+    };
+
+    continueButton.onclick = run;
+    cancelButton.onclick = () => overlay.classList.remove("open");
+
+    if (autoRun && typeof callback === "function") {
+        setTimeout(run, 650);
+    }
+}
+
+function showAccessNotice(title, message, action, userId, autoOpenPremium) {
+    state.pendingPremiumIntent = {
+        action,
+        userId: Number(userId),
+        createdAt: Date.now(),
+    };
+
+    showConnectionNotice(
+        title,
+        message,
+        () => openPremiumWindow(action, Number(userId)),
+        Boolean(autoOpenPremium)
+    );
+}
+
+$("#premiumCancel")?.addEventListener("click", () => {
+    $("#premiumNotice")?.classList.remove("open");
+});
+
+$("#premiumContinue")?.addEventListener("click", () => {
+    openPremiumWindow(state.pendingPremiumIntent?.action || "connect", state.pendingPremiumIntent?.userId || Number(state.profile?.id ?? 0));
+});
+
+function openPremiumWindow(action, userId) {
+    const profileReturn = state.secureCode
+        ? `profile.html?code=${encodeURIComponent(state.secureCode)}`
+        : "profile.html";
+
+    const query = new URLSearchParams({
+        return: profileReturn,
+        popup: "1",
+        source: "profile",
+        intent: String(action || "connect"),
+        user_id: String(Number(userId) || 0),
+    });
+
+    const premiumUrl = `premium.html?${query.toString()}`;
+
+    const popup = window.open(
+        premiumUrl,
+        "LOVEMI_PREMIUM",
+        "width=1100,height=800,resizable=yes,scrollbars=yes"
     );
 
+    if (popup) {
+        state.premiumWindow = popup;
+        popup.focus?.();
+        startPremiumPolling();
+    } else {
+        toast("Your browser blocked the Premium window. Allow pop-ups for LOVEMI.", "error");
+        window.location.href = premiumUrl;
+    }
 }
 
+let premiumPollTimer = null;
 
-/* =========================================================
-   GALLERY
-========================================================= */
+function startPremiumPolling() {
+    clearInterval(premiumPollTimer);
 
-function renderGallery(
-    photos
-) {
+    premiumPollTimer = setInterval(async () => {
+        if (!state.pendingPremiumIntent) return;
 
-    const gallery =
-        document.getElementById(
-            "gallery"
-        );
+        try {
+            const active = await getPremiumNow();
 
+            if (active) {
+                clearInterval(premiumPollTimer);
+                await handlePremiumSuccess();
+                return;
+            }
+        } catch (error) {
+            console.debug("Premium polling", error);
+        }
 
-    if (
-        !Array.isArray(
-            photos
-        )
-        ||
-        photos.length === 0
-    ) {
+        try {
+            if (state.premiumWindow && state.premiumWindow.closed) {
+                clearInterval(premiumPollTimer);
+                state.premiumWindow = null;
+                toast("Premium payment was not completed. You can activate Premium later.", "error");
+            }
+        } catch (error) {
+            console.debug("Premium window check", error);
+        }
+    }, 2500);
+}
 
-        gallery.innerHTML = `
+window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin) return;
 
-            <div
-                style="
-                    grid-column:1/-1;
-                    padding:25px;
-                    text-align:center;
-                    color:#9898a1;
-                    font-size:8px;
-                    border:1px dashed #dddde4;
-                    border-radius:11px;
-                ">
+    const data = event.data || {};
+    if (data.type === "LOVEMI_PREMIUM_SUCCESS" || data.premium === true) {
+        handlePremiumSuccess();
+    }
+});
 
-                No approved additional photos yet.
+window.addEventListener("storage", (event) => {
+    if (event.key !== "lovemi_premium_success" || !event.newValue) return;
+    handlePremiumSuccess();
+});
 
+async function handlePremiumSuccess() {
+    state.premium = true;
+
+    toast("Premium payment was successful. Continuing your requested action.");
+
+    try {
+        if (state.premiumWindow && !state.premiumWindow.closed) {
+            state.premiumWindow.close();
+        }
+    } catch (error) {
+        console.debug("Close premium window", error);
+    }
+
+    const intent = state.pendingPremiumIntent;
+    state.pendingPremiumIntent = null;
+
+    if (!intent) return;
+
+    await sleep(350);
+
+    if (intent.action === "connect") {
+        await sendConnectionRequest(Number(intent.userId));
+        return;
+    }
+
+    if (intent.action === "chat") {
+        if (isActiveConnection(state.connectionStatus)) {
+            await openExistingChat(Number(intent.userId));
+        } else {
+            await sendConnectionRequest(Number(intent.userId));
+            showConnectionNotice(
+                "Connection request sent",
+                "Premium is active and the connection request has been sent. Chat will become available after acceptance.",
+                null,
+                false
+            );
+        }
+    }
+}
+
+/* ============================================================
+   POSTS
+   ============================================================ */
+
+async function loadPosts(reset = false) {
+    if (state.loadingPosts) return;
+    if (!state.hasMorePosts && !reset) return;
+
+    if (reset) {
+        state.postPage = 1;
+        state.hasMorePosts = true;
+        state.posts = [];
+        $("#postsFeed").innerHTML = `<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading posts...</div>`;
+    }
+
+    state.loadingPosts = true;
+
+    try {
+        let url = `${API.posts}?page=${encodeURIComponent(state.postPage)}&limit=10`;
+        if (state.secureCode) url += `&code=${encodeURIComponent(state.secureCode)}`;
+
+        const { response, result } = await getJson(url);
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Posts could not be loaded.");
+        }
+
+        const incoming = Array.isArray(result.posts) ? result.posts : [];
+        const incomingIds = new Set(state.posts.map((post) => Number(post.id ?? post.post_id ?? 0)));
+
+        incoming.forEach((post) => {
+            const id = Number(post.id ?? post.post_id ?? 0);
+            if (!incomingIds.has(id)) state.posts.push(post);
+        });
+
+        state.hasMorePosts = Boolean(result.has_more);
+        if (state.hasMorePosts) state.postPage += 1;
+
+        renderPosts();
+
+        const total = Number(result.total);
+        const displayCount = Number.isFinite(total) ? total : state.posts.length;
+        $("#postsCount").textContent = displayCount;
+        $("#postsCounter").textContent = displayCount;
+    } catch (error) {
+        console.error("Profile posts", error);
+
+        if (reset) {
+            $("#postsFeed").innerHTML = `
+                <div class="empty">
+                    <i class="fa-solid fa-cloud"></i>
+                    <strong>Posts unavailable</strong>
+                    <span>${escapeHtml(error.message || "The posts could not be loaded.")}</span>
+                </div>
+            `;
+        }
+    } finally {
+        state.loadingPosts = false;
+    }
+}
+
+function renderPosts() {
+    const feed = $("#postsFeed");
+
+    if (!state.posts.length) {
+        feed.innerHTML = `
+            <div class="empty">
+                <i class="fa-regular fa-newspaper"></i>
+                <strong>No posts yet</strong>
+                <span>This member has not published any approved posts.</span>
+            </div>
+        `;
+        return;
+    }
+
+    feed.innerHTML = "";
+    state.posts.forEach((post) => feed.appendChild(buildPostElement(post)));
+
+    state.posts.forEach((post) => {
+        const id = Number(post.id ?? post.post_id ?? 0);
+        if (state.commentsOpen.has(id)) {
+            const article = feed.querySelector(`[data-post-id="${id}"]`);
+            if (article) toggleComments(id, article, true);
+        }
+    });
+}
+
+/* ============================================================
+   SAFE RICH-TEXT RENDERING
+   ============================================================ */
+
+const SAFE_RICH_TAGS = new Set([
+    "b", "strong", "i", "em", "u", "s", "del", "ins",
+    "br", "p", "div", "span", "small", "mark", "blockquote",
+    "ul", "ol", "li", "sub", "sup", "a",
+]);
+
+const SAFE_STYLE_PROPERTIES = new Set([
+    "color",
+    "background-color",
+    "font-weight",
+    "font-style",
+    "text-decoration",
+    "text-align",
+]);
+
+function safeCssColor(value) {
+    const normalized = String(value || "").trim();
+    if (!normalized) return "";
+
+    if (/^#[0-9a-f]{3,8}$/i.test(normalized)) return normalized;
+    if (/^(transparent|currentcolor|inherit)$/i.test(normalized)) return normalized;
+    if (/^[a-z]+$/i.test(normalized)) return normalized;
+    if (/^(rgb|rgba|hsl|hsla)\([0-9.%\s,]+\)$/i.test(normalized)) return normalized;
+
+    return "";
+}
+
+function safeStyle(styleText) {
+    const safe = [];
+    const parts = String(styleText || "").split(";");
+
+    for (const part of parts) {
+        const separator = part.indexOf(":");
+        if (separator <= 0) continue;
+
+        const property = part.slice(0, separator).trim().toLowerCase();
+        const value = part.slice(separator + 1).trim();
+
+        if (!SAFE_STYLE_PROPERTIES.has(property)) continue;
+        if (!value || /url\s*\(|expression\s*\(|javascript\s*:/i.test(value)) continue;
+
+        let safeValue = "";
+
+        if (property === "color" || property === "background-color") {
+            safeValue = safeCssColor(value);
+        } else if (property === "font-weight") {
+            safeValue = /^(normal|bold|bolder|lighter|[1-9]00)$/i.test(value) ? value : "";
+        } else if (property === "font-style") {
+            safeValue = /^(normal|italic|oblique)$/i.test(value) ? value : "";
+        } else if (property === "text-align") {
+            safeValue = /^(left|right|center|justify|start|end)$/i.test(value) ? value : "";
+        } else if (property === "text-decoration") {
+            safeValue = /^(none|underline|overline|line-through|underline\s+overline|underline\s+line-through)$/i.test(value) ? value : "";
+        }
+
+        if (safeValue) safe.push(`${property}:${safeValue}`);
+    }
+
+    return safe.join(";");
+}
+
+function sanitizeRichHtml(input) {
+    const source = String(input ?? "");
+    if (!source) return "";
+
+    const parser = new DOMParser();
+    const documentFragment = parser.parseFromString(source, "text/html");
+    const output = document.createElement("div");
+
+    function appendTextPreservingNewlines(parent, text) {
+        const pieces = String(text).split(/\r?\n/);
+        pieces.forEach((piece, index) => {
+            if (piece) parent.appendChild(document.createTextNode(piece));
+            if (index < pieces.length - 1) parent.appendChild(document.createElement("br"));
+        });
+    }
+
+    function walk(node, parent) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            appendTextPreservingNewlines(parent, node.nodeValue || "");
+            return;
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+        const tag = node.tagName.toLowerCase();
+
+        if (!SAFE_RICH_TAGS.has(tag)) {
+            Array.from(node.childNodes).forEach((child) => walk(child, parent));
+            return;
+        }
+
+        const safeElement = document.createElement(tag);
+
+        if (tag === "a") {
+            const href = node.getAttribute("href") || "";
+            try {
+                const url = new URL(href, window.location.origin);
+                if (["http:", "https:", "mailto:"].includes(url.protocol)) {
+                    safeElement.setAttribute("href", url.href);
+                    if (url.protocol !== "mailto:") {
+                        safeElement.setAttribute("target", "_blank");
+                        safeElement.setAttribute("rel", "noopener noreferrer nofollow");
+                    }
+                }
+            } catch (error) {
+                console.debug("Dropped unsafe link", error);
+            }
+        }
+
+        const cleanStyle = safeStyle(node.getAttribute("style") || "");
+        if (cleanStyle) safeElement.setAttribute("style", cleanStyle);
+
+        Array.from(node.childNodes).forEach((child) => walk(child, safeElement));
+        parent.appendChild(safeElement);
+    }
+
+    Array.from(documentFragment.body.childNodes).forEach((node) => walk(node, output));
+    return output.innerHTML;
+}
+
+/* ============================================================
+   POST BUILDER
+   ============================================================ */
+
+function buildPostElement(post) {
+    const article = document.createElement("article");
+    article.className = "post";
+
+    const postId = Number(post.id ?? post.post_id ?? 0);
+    article.dataset.postId = String(postId);
+
+    const media = normalizePostMedia(post);
+    const content = String(post.content || "");
+    const textLength = content.replace(/<[^>]*>/g, "").length;
+    const longPost = textLength > 420;
+
+    const authorName = post.full_name || post.display_name || post.username || "Member";
+    const username = post.username || "";
+    const avatar = safeImage(post.profile_photo || post.avatar || "", post.gender || state.profile?.gender);
+    const verified = Boolean(post.email_verified ?? post.verified ?? false);
+    const liked = String(post.my_reaction ?? post.reaction ?? "").toLowerCase() === "like" || Boolean(post.liked_by_me);
+    const likes = Number(post.like_count ?? post.likes ?? 0);
+    const comments = Number(post.comment_count ?? post.commentCount ?? 0);
+
+    article.innerHTML = `
+        <div class="post-header">
+            <img
+                class="post-avatar"
+                src="${escapeHtml(avatar)}"
+                alt="${escapeHtml(authorName)}"
+                onerror="this.onerror=null;this.src='${DEFAULT_MALE}';"
+            >
+            <div class="post-author">
+                <div class="post-author-name">
+                    ${escapeHtml(authorName)}
+                    ${verified ? `<i class="fa-solid fa-circle-check" title="Verified"></i>` : ""}
+                </div>
+                <div class="post-meta">
+                    ${username ? `@${escapeHtml(username)} • ` : ""}
+                    ${escapeHtml(formatDate(post.created_at || post.posted_at))}
+                </div>
+            </div>
+            ${String(post.approval_status || "").toLowerCase() === "approved" ? `<span class="post-status">Approved</span>` : ""}
+        </div>
+
+        ${content ? `
+            <div class="post-content rich-content ${longPost ? "collapsed" : ""}">
+                ${sanitizeRichHtml(content)}
+            </div>
+            ${longPost ? `<button type="button" class="read-more">Read More</button>` : ""}
+        ` : ""}
+
+        ${renderPostMedia(media)}
+
+        <div class="post-actions">
+            <button type="button" class="post-action like-button ${liked ? "active-like" : ""}">
+                <i class="${liked ? "fa-solid" : "fa-regular"} fa-heart"></i>
+                <span>${liked ? "Liked" : "Like"}</span>
+                <span class="like-count">${likes}</span>
+            </button>
+
+            <button type="button" class="post-action comment-toggle">
+                <i class="fa-regular fa-comment"></i>
+                Comment
+                <span class="comment-count">${comments}</span>
+            </button>
+
+            <button type="button" class="post-action share-button">
+                <i class="fa-solid fa-share-nodes"></i>
+                Share
+            </button>
+        </div>
+
+        <div class="comments-panel">
+            <div class="comments-title">Discussion</div>
+
+            <div class="replying-label">
+                Replying to a comment.
+                <button type="button" class="cancel-reply">Cancel</button>
             </div>
 
-        `;
+            <div class="comments-list">
+                <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading comments...</div>
+            </div>
 
+            <div class="comment-form">
+                <textarea class="comment-input" rows="1" maxlength="5000" placeholder="Write a comment..."></textarea>
+                <button type="button" class="comment-send"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    `;
 
-        return;
-
+    const readMore = article.querySelector(".read-more");
+    if (readMore) {
+        readMore.addEventListener("click", () => {
+            const contentElement = article.querySelector(".post-content");
+            const collapsed = contentElement.classList.toggle("collapsed");
+            readMore.textContent = collapsed ? "Read More" : "Show Less";
+        });
     }
 
+    article.querySelector(".like-button")?.addEventListener("click", () => reactToPost(post, article));
+    article.querySelector(".comment-toggle")?.addEventListener("click", () => {
+        const opening = !article.querySelector(".comments-panel")?.classList.contains("open");
+        toggleComments(postId, article, opening);
+    });
+    article.querySelector(".comment-send")?.addEventListener("click", () => submitComment(postId, article));
+    article.querySelector(".cancel-reply")?.addEventListener("click", () => clearReplyTarget(article));
+    article.querySelector(".share-button")?.addEventListener("click", () => sharePost(post));
 
-    gallery.innerHTML =
-        photos
-            .map(
-                function(photo) {
-
-                    const url =
-                        photo.url
-                        ??
-                        photo.photo_url
-                        ??
-                        photo.file_path
-                        ??
-                        photo.path
-                        ??
-                        "";
-
-
-                    if (
-                        !url
-                    ) {
-
-                        return "";
-
-                    }
-
-
-                    return `
-
-                        <div
-                            class="gallery-item">
-
-                            <img
-                                src="${escapeHtml(url)}"
-                                alt="Profile photo"
-                                loading="lazy"
-                                onerror="
-                                    this.parentElement.style.display='none';
-                                ">
-
-
-                            ${
-                                String(
-                                    photo.status
-                                    ??
-                                    "approved"
-                                ).toLowerCase()
-                                ===
-                                "approved"
-                                    ?
-                                    `
-                                    <span class="gallery-status">
-                                        Approved
-                                    </span>
-                                    `
-                                    :
-                                    ""
-                            }
-
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
-
+    return article;
 }
 
+function normalizePostMedia(post) {
+    if (Array.isArray(post.media)) return post.media;
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+    const url = post.media_url || post.post_image || post.photo_url || post.file_path || "";
+    if (!url) return [];
 
-const mobileMenu =
-    document.getElementById(
-        "mobileMenu"
-    );
+    return [{
+        url,
+        thumbnail: post.thumbnail_url || post.post_thumbnail || "",
+        mime_type: post.mime_type || "",
+    }];
+}
 
+function detectMediaType(media) {
+    const mime = String(media.mime_type || media.mimeType || "").toLowerCase();
+    if (mime.startsWith("image/")) return "image";
+    if (mime.startsWith("video/")) return "video";
 
-const mobileNavigation =
-    document.getElementById(
-        "mobileNavigation"
-    );
+    const url = String(media.url || media.media_url || media.file_path || "").toLowerCase();
+    if (/\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/.test(url)) return "image";
+    if (/\.(mp4|webm|ogg|mov)(\?.*)?$/.test(url)) return "video";
+    return "document";
+}
 
+function renderPostMedia(media) {
+    if (!Array.isArray(media) || !media.length) return "";
 
-mobileMenu.addEventListener(
-    "click",
-    function() {
+    const valid = media
+        .map((item) => ({
+            ...item,
+            url: safeMediaUrl(item.url || item.media_url || item.file_path),
+            thumbnail: safeMediaUrl(item.thumbnail || item.thumbnail_url || item.thumbnail_path || ""),
+        }))
+        .filter((item) => item.url);
 
-        const open =
-            mobileNavigation.classList.contains(
-                "open"
-            );
+    if (!valid.length) return "";
 
+    let layout = "one";
+    if (valid.length === 2) layout = "two";
+    else if (valid.length === 3) layout = "three";
+    else if (valid.length > 3) layout = "many";
 
-        mobileNavigation.classList.toggle(
-            "open"
-        );
+    const html = valid.map((item) => {
+        const type = detectMediaType(item);
 
+        if (type === "video") {
+            return `
+                <div class="post-media-item">
+                    <video
+                        src="${escapeHtml(item.url)}"
+                        ${item.thumbnail ? `poster="${escapeHtml(item.thumbnail)}"` : ""}
+                        controls
+                        preload="metadata"
+                    ></video>
+                </div>
+            `;
+        }
 
-        document.body.classList.toggle(
-            "menu-open",
-            !open
-        );
+        if (type === "image") {
+            return `
+                <div class="post-media-item">
+                    <img
+                        src="${escapeHtml(item.url)}"
+                        alt="Post image"
+                        loading="lazy"
+                        data-full-image="${escapeHtml(item.url)}"
+                        onerror="this.parentElement.style.display='none';"
+                    >
+                </div>
+            `;
+        }
 
+        return `
+            <div class="post-media-item">
+                <div class="document-media">
+                    <i class="fa-solid fa-file"></i>
+                    <strong>${escapeHtml(item.file_name || "Post file")}</strong>
+                    <small>${escapeHtml(item.mime_type || "Document")}</small>
+                    <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="action-button action-secondary">Open File</a>
+                </div>
+            </div>
+        `;
+    }).join("");
 
-        this.setAttribute(
-            "aria-expanded",
-            String(
-                !open
-            )
-        );
+    return `<div class="post-media"><div class="post-media-grid ${layout}">${html}</div></div>`;
+}
 
+/* ============================================================
+   REACTIONS
+   ============================================================ */
 
-        this.innerHTML =
-            !open
-                ?
-                '<i class="fa-solid fa-xmark"></i>'
-                :
-                '<i class="fa-solid fa-bars"></i>';
+async function reactToPost(post, article) {
+    const postId = Number(post.id ?? post.post_id ?? 0);
+    if (postId <= 0) return;
 
+    const button = article.querySelector(".like-button");
+    if (!button) return;
+
+    const currentLiked = button.classList.contains("active-like");
+    const desiredReaction = currentLiked ? null : "like";
+
+    try {
+        const { response, result } = await postJson(API.react, {
+            post_id: postId,
+            reaction: desiredReaction,
+        });
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Reaction failed.");
+        }
+
+        const data = result.data || result;
+        const likeCount = Number(data.like_count ?? data.likes ?? 0);
+        const myReaction = data.my_reaction ?? desiredReaction;
+
+        post.like_count = likeCount;
+        post.likes = likeCount;
+        post.my_reaction = myReaction;
+        post.reaction = myReaction;
+
+        button.classList.toggle("active-like", myReaction === "like");
+        button.querySelector("i").className = `${myReaction === "like" ? "fa-solid" : "fa-regular"} fa-heart`;
+        button.querySelector("span").textContent = myReaction === "like" ? "Liked" : "Like";
+        button.querySelector(".like-count").textContent = String(likeCount);
+    } catch (error) {
+        toast(error.message || "Unable to react to the post.", "error");
     }
-);
+}
 
+/* ============================================================
+   COMMENTS
+   ============================================================ */
 
-/* =========================================================
-   CONNECT
-========================================================= */
+async function toggleComments(postId, article, forceOpen = null) {
+    const panel = article.querySelector(".comments-panel");
+    if (!panel) return;
 
-document
-    .getElementById(
-        "connectButton"
-    )
-    .addEventListener(
-        "click",
-        async function(event) {
+    const isOpen = panel.classList.contains("open");
+    const shouldOpen = forceOpen === null ? !isOpen : forceOpen;
 
-            event.preventDefault();
+    panel.classList.toggle("open", shouldOpen);
 
+    if (shouldOpen) {
+        state.commentsOpen.add(Number(postId));
+        await loadComments(postId, article);
+    } else {
+        state.commentsOpen.delete(Number(postId));
+        clearReplyTarget(article);
+    }
+}
 
-            const url =
-                new URL(
-                    window.location.href
-                );
+async function loadComments(postId, article) {
+    const list = article.querySelector(".comments-list");
+    if (!list) return;
 
+    list.innerHTML = `<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading comments...</div>`;
 
-            const params =
-                new URLSearchParams(
-                    url.search
-                );
+    try {
+        const { response, result } = await getJson(`${API.comments}?post_id=${encodeURIComponent(postId)}`);
 
-
-            const targetUser =
-                params.get(
-                    "user"
-                );
-
-
-            /*
-             * If no profile user was supplied, simply return
-             * to Discover.
-             */
-
-            if (
-                !targetUser
-            ) {
-
-                window.location.href =
-                    "discover.html";
-
-                return;
-
-            }
-
-
-            /*
-             * Let the secure backend decide Premium eligibility.
-             */
-
-            try {
-
-                const response =
-                    await fetch(
-                        "api/connections/create.php",
-                        {
-
-                            method:
-                                "POST",
-
-                            credentials:
-                                "same-origin",
-
-                            cache:
-                                "no-store",
-
-                            headers:{
-
-                                "Accept":
-                                    "application/json",
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "Cache-Control":
-                                    "no-cache, no-store, max-age=0"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    {
-                                        user_id:
-                                            Number(
-                                                targetUser
-                                            ),
-
-                                        source:
-                                            "profile"
-                                    }
-                                )
-
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (
-                    result.code ===
-                    "AUTHENTICATION_REQUIRED"
-                ) {
-
-                    window.location.href =
-                        "login.html?return=profile.html?user="
-                        +
-                        encodeURIComponent(
-                            targetUser
-                        );
-
-                    return;
-
-                }
-
-
-                if (
-                    result.code ===
-                    "PREMIUM_REQUIRED"
-                ) {
-
-                    window.location.href =
-                        "premium.html?return=profile.html%3Fuser%3D"
-                        +
-                        encodeURIComponent(
-                            targetUser
-                        );
-
-                    return;
-
-                }
-
-
-                if (
-                    !response.ok
-                    ||
-                    result.success !== true
-                ) {
-
-                    throw new Error(
-                        result.message
-                        ||
-                        "Connection could not be created."
-                    );
-
-                }
-
-
-                window.location.href =
-                    result.redirect
-                    ||
-                    "connections.html";
-
-
-            } catch (error) {
-
-                console.error(
-                    error
-                );
-
-
-                alert(
-                    error.message
-                    ||
-                    "The connection could not be created."
-                );
-
-            }
-
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Comments unavailable.");
         }
-    );
 
+        const comments = Array.isArray(result.comments) ? result.comments : [];
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async function() {
-
-        const authenticated =
-            await loadSession();
-
-
-        if (
-            !authenticated
-        ) {
-
+        if (!comments.length) {
+            list.innerHTML = `<div style="color:#9898a1;font-size:7px;padding:6px;">No comments yet.</div>`;
+            updateCommentCount(article, 0);
             return;
-
         }
 
+        const byParent = new Map();
+        comments.forEach((comment) => {
+            const parentId = Number(comment.parent_id ?? comment.parent_comment_id ?? 0);
+            if (!byParent.has(parentId)) byParent.set(parentId, []);
+            byParent.get(parentId).push(comment);
+        });
+
+        const renderBranch = (parentId, depth) => {
+            const rows = byParent.get(Number(parentId)) || [];
+            return rows.map((comment) => {
+                const html = renderComment(comment, depth);
+                const childHtml = renderBranch(Number(comment.id ?? comment.comment_id ?? 0), depth + 1);
+                return html + childHtml;
+            }).join("");
+        };
+
+        list.innerHTML = renderBranch(0, 0);
+        updateCommentCount(article, comments.length);
+        bindCommentReplyButtons(article, postId);
+    } catch (error) {
+        console.error("Comments", error);
+        list.innerHTML = `<div style="color:#9898a1;font-size:7px;padding:6px;">${escapeHtml(error.message || "Comments are currently unavailable.")}</div>`;
+    }
+}
+
+function renderComment(comment, depth) {
+    const avatar = safeImage(comment.avatar || comment.profile_photo || comment.photo_url, comment.gender);
+    const name = comment.full_name || comment.fullName || comment.username || "Member";
+    const id = Number(comment.id ?? comment.comment_id ?? 0);
+    const body = comment.body ?? comment.comment_text ?? comment.content ?? "";
+
+    const marginClass = depth > 0 ? "reply" : "";
+
+    return `
+        <div class="comment ${marginClass}" data-comment-id="${id}">
+            <div class="comment-head">
+                <img
+                    class="comment-avatar"
+                    src="${escapeHtml(avatar)}"
+                    alt="${escapeHtml(name)}"
+                    onerror="this.onerror=null;this.src='${DEFAULT_MALE}';"
+                >
+                <div class="comment-body">
+                    <div class="comment-author">${escapeHtml(name)}</div>
+                    <span class="comment-time">${escapeHtml(formatDate(comment.created_at || comment.updated_at))}</span>
+                    <div class="comment-text rich-content">${sanitizeRichHtml(body)}</div>
+                    <div class="comment-actions">
+                        <button
+                            type="button"
+                            class="comment-reply"
+                            data-comment-id="${id}"
+                            data-comment-name="${escapeHtml(name)}"
+                        >Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function bindCommentReplyButtons(article, postId) {
+    article.querySelectorAll(".comment-reply").forEach((button) => {
+        button.addEventListener("click", () => {
+            startReply(article, postId, Number(button.dataset.commentId), button.dataset.commentName || "member");
+        });
+    });
+}
+
+function startReply(article, postId, commentId, name) {
+    const input = article.querySelector(".comment-input");
+    const label = article.querySelector(".replying-label");
+
+    if (input) {
+        input.dataset.replyTo = String(commentId);
+        input.placeholder = `Replying to ${name}...`;
+        input.focus();
+    }
+
+    if (label) {
+        label.classList.add("show");
+        const textNode = Array.from(label.childNodes).find((node) => node.nodeType === Node.TEXT_NODE);
+        if (textNode) textNode.textContent = `Replying to ${name}. `;
+    }
+}
+
+function clearReplyTarget(article) {
+    const input = article.querySelector(".comment-input");
+    const label = article.querySelector(".replying-label");
+
+    if (input) {
+        delete input.dataset.replyTo;
+        input.placeholder = "Write a comment...";
+    }
+
+    if (label) label.classList.remove("show");
+}
+
+async function submitComment(postId, article) {
+    const input = article.querySelector(".comment-input");
+    const sendButton = article.querySelector(".comment-send");
+    if (!input || !sendButton) return;
+
+    const body = input.value.trim();
+    if (!body) {
+        toast("Please write a comment.", "info");
+        return;
+    }
+
+    if (/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(body)) {
+        toast("Email addresses are not allowed in comments.", "error");
+        return;
+    }
+
+    if (/(?:\+?\d[\d\s().-]{7,}\d)/.test(body)) {
+        toast("Phone numbers are not allowed in comments.", "error");
+        return;
+    }
+
+    const parentId = Number(input.dataset.replyTo || 0);
+    sendButton.disabled = true;
+
+    try {
+        const { response, result } = await postJson(API.comment, {
+            post_id: Number(postId),
+            parent_id: parentId,
+            body,
+        });
+
+        if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Comment could not be posted.");
+        }
+
+        input.value = "";
+        clearReplyTarget(article);
+        await loadComments(postId, article);
+        toast(result.message || (parentId ? "Reply posted successfully." : "Comment posted successfully."));
+    } catch (error) {
+        toast(error.message || "Unable to post comment.", "error");
+    } finally {
+        sendButton.disabled = false;
+    }
+}
+
+function updateCommentCount(article, count) {
+    const counter = article.querySelector(".comment-count");
+    if (counter) counter.textContent = String(Number(count) || 0);
+}
+
+/* ============================================================
+   SHARE
+   ============================================================ */
+
+async function sharePost(post) {
+    const postId = Number(post.id ?? post.post_id ?? 0);
+
+    const url = state.secureCode
+        ? `${window.location.origin}${window.location.pathname}?code=${encodeURIComponent(state.secureCode)}#post-${postId}`
+        : `${window.location.href.split("#")[0]}#post-${postId}`;
+
+    try {
+        if (navigator.share) {
+            await navigator.share({
+                title: state.profile?.display_name || state.profile?.full_name || "LOVEMI Post",
+                text: post.content ? String(post.content).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "LOVEMI post",
+                url,
+            });
+            return;
+        }
+
+        await navigator.clipboard.writeText(url);
+        toast("Post link copied successfully.");
+    } catch (error) {
+        console.debug("Share cancelled", error);
+    }
+}
+
+/* ============================================================
+   GALLERY / CONNECTIONS
+   ============================================================ */
+
+function renderGallery(photos) {
+    const gallery = $("#gallery");
+
+    if (!Array.isArray(photos) || !photos.length) {
+        gallery.innerHTML = `
+            <div class="empty" style="grid-column:1/-1;min-height:130px;">
+                <i class="fa-regular fa-images"></i>
+                <strong>No approved photos yet</strong>
+                <span>Approved member photos will appear here.</span>
+            </div>
+        `;
+        return;
+    }
+
+    gallery.innerHTML = photos.map((photo) => {
+        const url = safeMediaUrl(photo.url || photo.photo_url || photo.file_path || photo.path);
+        if (!url) return "";
+
+        const thumb = safeMediaUrl(photo.thumbnail_path || photo.thumbnail || url) || url;
+        const approved = String(photo.approval_status ?? photo.status ?? "approved").toLowerCase() === "approved";
+
+        return `
+            <div class="gallery-item">
+                <img
+                    src="${escapeHtml(thumb)}"
+                    alt="Profile photo"
+                    loading="lazy"
+                    data-full-image="${escapeHtml(url)}"
+                    onerror="this.parentElement.style.display='none';"
+                >
+                ${approved ? `<span class="gallery-badge">Approved</span>` : ""}
+            </div>
+        `;
+    }).join("");
+}
+
+function renderConnections(rows) {
+    const box = $("#connectionList");
+
+    if (!Array.isArray(rows) || !rows.length) {
+        box.innerHTML = `
+            <div class="empty" style="min-height:110px;">
+                <i class="fa-solid fa-user-group"></i>
+                <strong>No connections to display</strong>
+                <span>Connected members will appear here.</span>
+            </div>
+        `;
+        return;
+    }
+
+    box.innerHTML = rows.map((row) => {
+        const id = Number(row.user_id ?? row.connected_user_id ?? row.other_user_id ?? row.id ?? 0);
+        const name = row.full_name || row.full_names || row.display_name || row.username || "Member";
+        const avatar = safeImage(row.profile_photo || row.avatar || row.photo_url, row.gender);
+        const href = row.profile_code
+            ? `profile.html?code=${encodeURIComponent(row.profile_code)}`
+            : "#";
+
+        return `
+            <a class="connection-item" href="${escapeHtml(href)}" ${href === "#" ? "aria-disabled=\"true\"" : ""}>
+                <img
+                    class="connection-avatar"
+                    src="${escapeHtml(avatar)}"
+                    alt="${escapeHtml(name)}"
+                    onerror="this.onerror=null;this.src='${DEFAULT_MALE}';"
+                >
+                <span class="connection-info">
+                    <span class="connection-name">${escapeHtml(name)}</span>
+                    <span class="connection-meta">${row.is_online ? "Online" : "Connected"}</span>
+                </span>
+                ${row.is_online ? `<span class="online-dot"></span>` : ""}
+            </a>
+        `;
+    }).join("");
+}
+
+/* ============================================================
+   IMAGE VIEWER
+   ============================================================ */
+
+function openImage(url) {
+    const safeUrl = safeMediaUrl(url);
+    if (!safeUrl) return;
+
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.inset = "0";
+    overlay.style.zIndex = "6000";
+    overlay.style.background = "rgba(0,0,0,.88)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.padding = "20px";
+
+    overlay.innerHTML = `
+        <button
+            type="button"
+            aria-label="Close"
+            style="position:absolute;top:18px;right:18px;width:40px;height:40px;border:none;border-radius:11px;color:#fff;background:rgba(255,255,255,.15);font-size:16px;"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="${escapeHtml(safeUrl)}" alt="Full size" style="max-width:96vw;max-height:90vh;object-fit:contain;border-radius:12px;">
+    `;
+
+    overlay.addEventListener("click", (event) => {
+        if (event.target === overlay || event.target.closest("button")) overlay.remove();
+    });
+
+    document.body.appendChild(overlay);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+$("#globalSearch")?.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter") return;
+
+    const value = this.value.trim();
+    if (!value) return;
+
+    window.location.href = `discover.html?search=${encodeURIComponent(value)}`;
+});
+
+$("#mobileMenu")?.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    const nav = $("#mobileNavigation");
+    const open = nav.classList.toggle("open");
+    document.body.classList.toggle("menu-open", open);
+    this.innerHTML = open ? `<i class="fa-solid fa-xmark"></i>` : `<i class="fa-solid fa-bars"></i>`;
+});
+
+document.addEventListener("click", (event) => {
+    const nav = $("#mobileNavigation");
+    const menu = $("#mobileMenu");
+
+    if (
+        nav?.classList.contains("open")
+        && !nav.contains(event.target)
+        && !menu?.contains(event.target)
+    ) {
+        nav.classList.remove("open");
+        document.body.classList.remove("menu-open");
+        if (menu) menu.innerHTML = `<i class="fa-solid fa-bars"></i>`;
+    }
+});
+
+$("#postsShell")?.addEventListener("scroll", function () {
+    const remaining = this.scrollHeight - this.scrollTop - this.clientHeight;
+    if (remaining < 400 && state.hasMorePosts && !state.loadingPosts) loadPosts(false);
+});
+
+document.addEventListener("click", (event) => {
+    const image = event.target.closest("img[data-full-image]");
+    if (!image) return;
+
+    if (image.closest(".post")) {
+        openImage(image.dataset.fullImage);
+    } else if (image.closest(".gallery-item")) {
+        openImage(image.dataset.fullImage);
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    $("#premiumNotice")?.classList.remove("open");
+    $("#connectionNotice")?.classList.remove("open");
+
+    const mobile = $("#mobileNavigation");
+    if (mobile) mobile.classList.remove("open");
+    document.body.classList.remove("menu-open");
+});
+
+/* ============================================================
+   NOTIFICATIONS
+   ============================================================ */
+
+function unlockNotificationAudio() {
+    if (state.audioUnlocked) return;
+
+    const audio = $("#notificationAudio");
+    if (!audio) return;
+
+    try {
+        audio.volume = 0;
+        const promise = audio.play();
+
+        if (promise && typeof promise.then === "function") {
+            promise.then(() => {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.volume = 1;
+                state.audioUnlocked = true;
+            }).catch(() => {
+                audio.volume = 1;
+            });
+        }
+    } catch (error) {
+        console.debug("Audio unlock", error);
+    }
+}
+
+function playNotificationSound() {
+    const audio = $("#notificationAudio");
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.volume = 1;
+    audio.play().catch(() => {});
+}
+
+function updateNotificationBadge(count) {
+    const badge = $("#notificationCount");
+    if (!badge) return;
+
+    badge.textContent = count > 99 ? "99+" : String(count);
+    badge.style.display = count > 0 ? "flex" : "none";
+}
+
+async function pollNotifications() {
+    try {
+        const { response, result } = await getJson(API.notifications);
+        if (!response.ok || result.success === false) return;
+
+        const count = Number(
+            result.unread_count
+            ?? result.unreadCount
+            ?? result.count
+            ?? result.new_count
+            ?? result.data?.unread_count
+            ?? result.data?.count
+            ?? 0
+        );
+
+        updateNotificationBadge(Math.max(0, count));
+
+        if (!state.notificationInitialized) {
+            state.notificationInitialized = true;
+            state.notificationCount = count;
+            return;
+        }
+
+        if (count > state.notificationCount) playNotificationSound();
+        state.notificationCount = count;
+    } catch (error) {
+        console.debug("Notification polling", error);
+    }
+}
+
+["click", "keydown", "touchstart"].forEach((eventName) => {
+    document.addEventListener(eventName, unlockNotificationAudio, { passive: true });
+});
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") pollNotifications();
+});
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function showProfileError(message) {
+    $("#profileLoading").style.display = "none";
+    $("#profileContent").style.display = "none";
+    $("#profileError").style.display = "flex";
+    $("#profileErrorMessage").textContent = message || "This profile could not be loaded.";
+}
+
+/* ============================================================
+   INITIALIZE
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        state.secureCode = getProfileCode();
+
+        const authenticated = await loadSession();
+        if (!authenticated) return;
 
         await loadProfile();
-
+        await pollNotifications();
+        setInterval(pollNotifications, 5000);
+    } catch (error) {
+        console.error("Profile initialization", error);
+        showProfileError(error.message || "Unable to load profile.");
     }
-);
+});
+
 
 </script>
 
+
 </body>
+
 </html>

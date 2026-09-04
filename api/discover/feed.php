@@ -14,7 +14,7 @@ header('Expires: 0');
    RESPONSE
 ============================================================ */
 
-function discoverResponse(
+function discoverFeedResponse(
     bool $success,
     string $message,
     array $extra = [],
@@ -48,7 +48,7 @@ if (
     !== 'GET'
 ) {
 
-    discoverResponse(
+    discoverFeedResponse(
         false,
         'Only GET requests are allowed.',
         [
@@ -87,7 +87,7 @@ if (
     $currentUserId <= 0
 ) {
 
-    discoverResponse(
+    discoverFeedResponse(
         false,
         'Please log in first.',
         [
@@ -95,10 +95,14 @@ if (
                 'AUTHENTICATION_REQUIRED',
 
             'redirect' =>
-                'login.html?return=discover.html'
+                'login.html?return=discover.html',
+
+            'posts' =>
+                []
         ],
         401
     );
+
 }
 
 
@@ -167,18 +171,24 @@ try {
 } catch (Throwable $e) {
 
     error_log(
-        '[LOVEMI DISCOVER USERS DB] ' .
+        '[LOVEMI DISCOVER FEED DB] '
+        .
         $e->getMessage()
     );
 
-    discoverResponse(
+    discoverFeedResponse(
         false,
         'Unable to connect to the database.',
         [
-            'users' => []
+            'code' =>
+                'DATABASE_ERROR',
+
+            'posts' =>
+                []
         ],
         500
     );
+
 }
 
 
@@ -188,7 +198,11 @@ try {
 
 $where = [
 
-    "u.id <> :current_user_id",
+    "p.approval_status = 'approved'",
+
+    "p.visibility = 'public'",
+
+    "p.deleted_at IS NULL",
 
     "u.account_status = 'approved'",
 
@@ -200,23 +214,16 @@ $where = [
 
     "u.is_deleted = 0",
 
-    "
-    (
+    "(
         pr.profile_visibility IS NULL
         OR
         pr.profile_visibility = 'public'
-    )
-    "
+    )"
 
 ];
 
 
-$params = [
-
-    ':current_user_id' =>
-        $currentUserId
-
-];
+$params = [];
 
 
 /* ============================================================
@@ -263,7 +270,7 @@ if (
 
             LOWER(
                 COALESCE(
-                    pr.city,
+                    pr.occupation,
                     ''
                 )
             )
@@ -273,7 +280,7 @@ if (
 
             LOWER(
                 COALESCE(
-                    pr.occupation,
+                    pr.city,
                     ''
                 )
             )
@@ -288,6 +295,38 @@ if (
                 )
             )
                 LIKE LOWER(:search_7)
+
+            OR
+
+            LOWER(
+                COALESCE(
+                    p.content,
+                    ''
+                )
+            )
+                LIKE LOWER(:search_8)
+
+            OR
+
+            EXISTS
+            (
+                SELECT 1
+
+                FROM post_photos pps
+
+                INNER JOIN photos ps
+                    ON ps.id = pps.photo_id
+
+                WHERE pps.post_id = p.id
+
+                  AND LOWER(
+                        COALESCE(
+                            ps.file_name,
+                            ''
+                        )
+                  )
+                  LIKE LOWER(:search_9)
+            )
 
         )
 
@@ -321,6 +360,12 @@ if (
         $searchValue;
 
     $params[':search_7'] =
+        $searchValue;
+
+    $params[':search_8'] =
+        $searchValue;
+
+    $params[':search_9'] =
         $searchValue;
 
 }
@@ -380,25 +425,31 @@ if (
 
 
 /* ============================================================
-   QUERY
+   MAIN POSTS QUERY
 ============================================================ */
 
 $sql = "
 
     SELECT
 
-        u.id,
+        p.id,
+        p.user_id,
+        p.content,
+        p.visibility,
+        p.approval_status,
+        p.is_featured,
+        p.created_at,
+        p.updated_at,
+        p.approved_at,
+
         u.username,
         u.full_names,
         u.gender,
-        u.country_id,
-        u.date_of_birth,
         u.email_verified,
         u.identity_verified,
         u.age_verified,
-        u.account_status,
-        u.created_at,
-        u.last_seen_at,
+        u.country_id,
+        u.date_of_birth,
 
         c.name AS country_name,
         c.iso2 AS country_iso2,
@@ -406,122 +457,20 @@ $sql = "
         pr.display_name,
         pr.bio,
         pr.occupation,
-        pr.education,
         pr.city,
-        pr.relationship_status,
-        pr.looking_for,
         pr.interests,
         pr.profile_visibility,
-        pr.show_online_status,
-        pr.allow_messages,
 
-        profile_photo.file_path AS profile_photo,
-        profile_photo.thumbnail_path AS profile_thumbnail,
-        profile_photo.mime_type AS profile_photo_mime,
+        profile_photo.file_path
+            AS profile_photo,
 
-        CASE
+        profile_photo.thumbnail_path
+            AS profile_thumbnail
 
-            WHEN EXISTS
-            (
-                SELECT 1
+    FROM posts p
 
-                FROM user_sessions us
-
-                WHERE us.user_id = u.id
-
-                  AND us.revoked_at IS NULL
-
-                  AND us.two_factor_passed = 1
-
-                  AND us.expires_at >
-                      CURRENT_TIMESTAMP
-
-                  AND us.last_activity_at >=
-                      DATE_SUB(
-                          CURRENT_TIMESTAMP,
-                          INTERVAL 10 MINUTE
-                      )
-
-                LIMIT 1
-            )
-
-            THEN 1
-
-            ELSE 0
-
-        END AS is_online,
-
-        (
-
-            SELECT
-
-                CASE
-
-                    WHEN c1.status IN
-                        ('accepted', 'connected')
-
-                    THEN 'accepted'
-
-                    WHEN c1.status = 'pending'
-                         AND
-                         c1.initiated_by =
-                         :current_for_status
-
-                    THEN 'pending_sent'
-
-                    WHEN c1.status = 'pending'
-                         AND
-                         c1.initiated_by <>
-                         :current_for_status_2
-
-                    THEN 'pending_received'
-
-                    WHEN c1.status = 'rejected'
-
-                    THEN 'rejected'
-
-                    WHEN c1.status = 'cancelled'
-
-                    THEN 'cancelled'
-
-                    ELSE NULL
-
-                END
-
-            FROM connections c1
-
-            WHERE
-
-                (
-                    c1.user_id = u.id
-
-                    AND
-
-                    c1.connected_user_id =
-                        :current_connection_a
-                )
-
-                OR
-
-                (
-                    c1.user_id =
-                        :current_connection_b
-
-                    AND
-
-                    c1.connected_user_id =
-                        u.id
-                )
-
-            ORDER BY
-
-                c1.id DESC
-
-            LIMIT 1
-
-        ) AS connection_status
-
-    FROM users u
+    INNER JOIN users u
+        ON u.id = p.user_id
 
     LEFT JOIN countries c
         ON c.id = u.country_id
@@ -545,7 +494,6 @@ $sql = "
               AND p2.is_primary = 1
 
             ORDER BY
-
                 p2.id DESC
 
             LIMIT 1
@@ -559,15 +507,16 @@ $sql = "
             $where
         )
         .
-        "
+
+    "
 
     ORDER BY
 
-        is_online DESC,
+        p.is_featured DESC,
 
-        u.created_at DESC,
+        p.created_at DESC,
 
-        u.id DESC
+        p.id DESC
 
     LIMIT :limit
 
@@ -596,7 +545,6 @@ try {
             in_array(
                 $key,
                 [
-                    ':current_user_id',
                     ':country_id'
                 ],
                 true
@@ -620,34 +568,6 @@ try {
         }
 
     }
-
-
-    $stmt->bindValue(
-        ':current_for_status',
-        $currentUserId,
-        PDO::PARAM_INT
-    );
-
-
-    $stmt->bindValue(
-        ':current_for_status_2',
-        $currentUserId,
-        PDO::PARAM_INT
-    );
-
-
-    $stmt->bindValue(
-        ':current_connection_a',
-        $currentUserId,
-        PDO::PARAM_INT
-    );
-
-
-    $stmt->bindValue(
-        ':current_connection_b',
-        $currentUserId,
-        PDO::PARAM_INT
-    );
 
 
     $stmt->bindValue(
@@ -676,67 +596,343 @@ try {
 } catch (Throwable $e) {
 
     error_log(
-        '[LOVEMI DISCOVER USERS QUERY] ' .
+        '[LOVEMI DISCOVER FEED QUERY] '
+        .
         $e->getMessage()
     );
 
-    discoverResponse(
+    discoverFeedResponse(
         false,
-        'Profiles could not be loaded.',
+        'Posts could not be loaded.',
         [
             'code' =>
-                'DISCOVER_QUERY_ERROR',
+                'DISCOVER_FEED_QUERY_ERROR',
 
-            'users' =>
+            'posts' =>
                 []
         ],
         500
     );
+
 }
 
 
 /* ============================================================
-   CLEAN RESPONSE
+   BUILD POSTS
 ============================================================ */
 
-$users = [];
+$posts = [];
 
+
+$mediaStmt =
+    $pdo->prepare(
+        "
+
+        SELECT
+
+            pp.id AS post_photo_id,
+
+            ph.id AS photo_id,
+
+            ph.file_name,
+
+            ph.file_path,
+
+            ph.thumbnail_path,
+
+            ph.mime_type,
+
+            ph.file_size,
+
+            ph.width,
+
+            ph.height,
+
+            ph.photo_type,
+
+            ph.approval_status,
+
+            pp.display_order
+
+        FROM post_photos pp
+
+        INNER JOIN photos ph
+            ON ph.id = pp.photo_id
+
+        WHERE
+
+            pp.post_id = :post_id
+
+            AND
+
+            ph.approval_status = 'approved'
+
+        ORDER BY
+
+            pp.display_order ASC,
+
+            pp.id ASC
+
+        "
+    );
+
+
+/* ============================================================
+   EACH POST
+============================================================ */
 
 foreach (
     $rows as $row
 ) {
 
-    $users[] = [
+    $postId =
+        (int)
+        $row['id'];
+
+
+    $media = [];
+
+
+    try {
+
+        $mediaStmt->execute(
+            [
+                ':post_id' =>
+                    $postId
+            ]
+        );
+
+
+        $mediaRows =
+            $mediaStmt->fetchAll(
+                PDO::FETCH_ASSOC
+            );
+
+
+        foreach (
+            $mediaRows as $mediaRow
+        ) {
+
+            $media[] = [
+
+                'post_photo_id' =>
+                    (int)
+                    $mediaRow[
+                        'post_photo_id'
+                    ],
+
+                'photo_id' =>
+                    (int)
+                    $mediaRow[
+                        'photo_id'
+                    ],
+
+                'file_name' =>
+                    (string)
+                    $mediaRow[
+                        'file_name'
+                    ],
+
+                'url' =>
+                    (string)
+                    $mediaRow[
+                        'file_path'
+                    ],
+
+                'file_path' =>
+                    (string)
+                    $mediaRow[
+                        'file_path'
+                    ],
+
+                'thumbnail' =>
+                    $mediaRow[
+                        'thumbnail_path'
+                    ] !== null
+                        ?
+                        (string)
+                        $mediaRow[
+                            'thumbnail_path'
+                        ]
+                        :
+                        null,
+
+                'thumbnail_path' =>
+                    $mediaRow[
+                        'thumbnail_path'
+                    ] !== null
+                        ?
+                        (string)
+                        $mediaRow[
+                            'thumbnail_path'
+                        ]
+                        :
+                        null,
+
+                'mime_type' =>
+                    $mediaRow[
+                        'mime_type'
+                    ] !== null
+                        ?
+                        (string)
+                        $mediaRow[
+                            'mime_type'
+                        ]
+                        :
+                        null,
+
+                'file_size' =>
+                    $mediaRow[
+                        'file_size'
+                    ] !== null
+                        ?
+                        (int)
+                        $mediaRow[
+                            'file_size'
+                        ]
+                        :
+                        null,
+
+                'width' =>
+                    $mediaRow[
+                        'width'
+                    ] !== null
+                        ?
+                        (int)
+                        $mediaRow[
+                            'width'
+                        ]
+                        :
+                        null,
+
+                'height' =>
+                    $mediaRow[
+                        'height'
+                    ] !== null
+                        ?
+                        (int)
+                        $mediaRow[
+                            'height'
+                        ]
+                        :
+                        null,
+
+                'display_order' =>
+                    (int)
+                    $mediaRow[
+                        'display_order'
+                    ]
+
+            ];
+
+        }
+
+    } catch (Throwable $mediaError) {
+
+        error_log(
+            '[LOVEMI DISCOVER FEED MEDIA] '
+            .
+            $mediaError->getMessage()
+        );
+
+        $media = [];
+
+    }
+
+
+    $posts[] = [
 
         'id' =>
-            (int)$row['id'],
+            $postId,
+
+        'post_id' =>
+            $postId,
 
         'user_id' =>
-            (int)$row['id'],
+            (int)
+            $row['user_id'],
+
+        'author_id' =>
+            (int)
+            $row['user_id'],
+
+        'content' =>
+            $row['content'] !== null
+                ?
+                (string)
+                $row['content']
+                :
+                '',
+
+        'visibility' =>
+            (string)
+            $row['visibility'],
+
+        'approval_status' =>
+            (string)
+            $row['approval_status'],
+
+        'is_featured' =>
+            (bool)
+            $row['is_featured'],
+
+        'created_at' =>
+            (string)
+            $row['created_at'],
+
+        'updated_at' =>
+            (string)
+            $row['updated_at'],
+
+        'approved_at' =>
+            $row['approved_at'] !== null
+                ?
+                (string)
+                $row['approved_at']
+                :
+                null,
 
         'username' =>
-            (string)$row['username'],
+            (string)
+            $row['username'],
 
         'full_name' =>
-            (string)$row['full_names'],
+            (string)
+            $row['full_names'],
 
         'full_names' =>
-            (string)$row['full_names'],
+            (string)
+            $row['full_names'],
 
         'gender' =>
-            (string)$row['gender'],
+            (string)
+            $row['gender'],
+
+        'email_verified' =>
+            (bool)
+            $row['email_verified'],
+
+        'identity_verified' =>
+            (bool)
+            $row['identity_verified'],
+
+        'age_verified' =>
+            (bool)
+            $row['age_verified'],
 
         'country_id' =>
             $row['country_id'] !== null
                 ?
-                (int)$row['country_id']
+                (int)
+                $row['country_id']
                 :
                 null,
 
         'country_name' =>
             $row['country_name'] !== null
                 ?
-                (string)$row['country_name']
+                (string)
+                $row['country_name']
                 :
                 null,
 
@@ -757,15 +953,6 @@ foreach (
                 $row['date_of_birth']
                 :
                 null,
-
-        'email_verified' =>
-            (bool)$row['email_verified'],
-
-        'identity_verified' =>
-            (bool)$row['identity_verified'],
-
-        'age_verified' =>
-            (bool)$row['age_verified'],
 
         'display_name' =>
             $row['display_name'] !== null
@@ -791,35 +978,11 @@ foreach (
                 :
                 null,
 
-        'education' =>
-            $row['education'] !== null
-                ?
-                (string)
-                $row['education']
-                :
-                null,
-
         'city' =>
             $row['city'] !== null
                 ?
                 (string)
                 $row['city']
-                :
-                null,
-
-        'relationship_status' =>
-            $row['relationship_status'] !== null
-                ?
-                (string)
-                $row['relationship_status']
-                :
-                null,
-
-        'looking_for' =>
-            $row['looking_for'] !== null
-                ?
-                (string)
-                $row['looking_for']
                 :
                 null,
 
@@ -830,20 +993,6 @@ foreach (
                 $row['interests']
                 :
                 null,
-
-        'profile_visibility' =>
-            $row['profile_visibility'] !== null
-                ?
-                (string)
-                $row['profile_visibility']
-                :
-                null,
-
-        'show_online_status' =>
-            (bool)$row['show_online_status'],
-
-        'allow_messages' =>
-            (bool)$row['allow_messages'],
 
         'profile_photo' =>
             $row['profile_photo'] !== null
@@ -869,35 +1018,52 @@ foreach (
                 :
                 null,
 
-        'profile_photo_mime' =>
-            $row['profile_photo_mime'] !== null
+        /*
+         * These are deliberately kept so the existing
+         * Discover JavaScript remains compatible.
+         */
+
+        'like_count' =>
+            0,
+
+        'dislike_count' =>
+            0,
+
+        'comment_count' =>
+            0,
+
+        'my_reaction' =>
+            null,
+
+        /*
+         * All approved media belonging to this post.
+         */
+
+        'media' =>
+            $media,
+
+        /*
+         * Compatibility fields when one media item exists.
+         */
+
+        'media_url' =>
+            !empty($media)
                 ?
-                (string)
-                $row['profile_photo_mime']
+                $media[0]['url']
                 :
                 null,
 
-        'is_online' =>
-            (bool)$row['is_online'],
-
-        'online' =>
-            (bool)$row['is_online'],
-
-        'last_seen_at' =>
-            $row['last_seen_at'] !== null
+        'mime_type' =>
+            !empty($media)
                 ?
-                (string)
-                $row['last_seen_at']
+                $media[0]['mime_type']
                 :
                 null,
 
-        'created_at' =>
-            (string)$row['created_at'],
-
-        'connection_status' =>
-            $row['connection_status'] !== null
+        'file_name' =>
+            !empty($media)
                 ?
-                (string)$row['connection_status']
+                $media[0]['file_name']
                 :
                 null
 
@@ -910,19 +1076,19 @@ foreach (
    RESPONSE
 ============================================================ */
 
-discoverResponse(
+discoverFeedResponse(
     true,
-    'Approved members loaded successfully.',
+    'Approved public posts loaded successfully.',
     [
 
         'count' =>
-            count($users),
+            count($posts),
 
-        'users' =>
-            $users,
+        'posts' =>
+            $posts,
 
         'data' =>
-            $users
+            $posts
 
     ]
 );
