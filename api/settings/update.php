@@ -1,26 +1,4 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - USER SETTINGS UPDATE API
- * ============================================================
- *
- * POST JSON:
- *
- * {
- *     "email_notifications": 1,
- *     "sms_notifications": 0,
- *     "push_notifications": 1,
- *     "connection_notifications": 1,
- *     "message_notifications": 1,
- *     "premium_notifications": 1,
- *     "system_notifications": 1,
- *     "sound_enabled": 1
- * }
- *
- * Any omitted setting is left unchanged.
- *
- * ============================================================
- */
 
 declare(strict_types=1);
 
@@ -42,9 +20,9 @@ header(
     'Expires: 0'
 );
 
-
 if (
-    session_status() !==
+    session_status()
+    !==
     PHP_SESSION_ACTIVE
 ) {
     session_start();
@@ -92,11 +70,7 @@ function settingsUpdateResponse(
 ============================================================ */
 
 if (
-    (
-        $_SERVER['REQUEST_METHOD']
-        ??
-        ''
-    )
+    ($_SERVER['REQUEST_METHOD'] ?? '')
     !==
     'POST'
 ) {
@@ -110,6 +84,7 @@ if (
         ],
         405
     );
+
 }
 
 
@@ -121,36 +96,31 @@ $userId =
     isset(
         $_SESSION['lovemi_user_id']
     )
-        ?
-        (int)
-        $_SESSION['lovemi_user_id']
-        :
-        0;
+        ? (int)
+          $_SESSION['lovemi_user_id']
+        : 0;
 
 
-if (
-    $userId <= 0
-) {
+if ($userId <= 0) {
 
     settingsUpdateResponse(
         false,
         'Please log in first.',
         [
-
             'code' =>
                 'AUTHENTICATION_REQUIRED',
 
             'redirect' =>
                 'login.html'
-
         ],
         401
     );
+
 }
 
 
 /* ============================================================
-   REQUEST BODY
+   INPUT
 ============================================================ */
 
 $raw =
@@ -161,23 +131,19 @@ $raw =
 
 $input =
     json_decode(
-        (string)
-        $raw,
+        (string)$raw,
         true
     );
 
 
-if (
-    !is_array(
-        $input
-    )
-) {
-
-    $input =
-        $_POST;
-
+if (!is_array($input)) {
+    $input = $_POST;
 }
 
+
+/* ============================================================
+   ALLOWED FIELDS
+============================================================ */
 
 $allowedFields = [
 
@@ -193,15 +159,15 @@ $allowedFields = [
 ];
 
 
-$updates =
-    [];
+$updates = [];
 
 
-$params =
-    [
-        ':user_id' =>
-            $userId
-    ];
+$params = [
+
+    ':user_id' =>
+        $userId
+
+];
 
 
 foreach (
@@ -210,120 +176,116 @@ foreach (
 ) {
 
     if (
-        array_key_exists(
+        !array_key_exists(
             $field,
             $input
         )
     ) {
 
+        continue;
+
+    }
+
+
+    $value =
+        $input[
+            $field
+        ];
+
+
+    if (
+        is_bool(
+            $value
+        )
+    ) {
+
         $value =
-            $input[
-                $field
-            ];
+            $value
+                ? 1
+                : 0;
 
+    } elseif (
+        is_string(
+            $value
+        )
+    ) {
 
-        /*
-         * Convert accepted boolean-like values to 0/1.
-         */
-
-        if (
-            is_bool(
-                $value
-            )
-        ) {
-
-            $value =
-                $value
-                    ? 1
-                    : 0;
-
-        } elseif (
-            is_string(
-                $value
-            )
-        ) {
-
-            $lower =
-                strtolower(
-                    trim(
-                        $value
-                    )
-                );
-
-
-            if (
-                in_array(
-                    $lower,
-                    [
-                        'true',
-                        'yes',
-                        'on'
-                    ],
-                    true
+        $value =
+            strtolower(
+                trim(
+                    $value
                 )
-            ) {
-
-                $value =
-                    1;
-
-            } elseif (
-                in_array(
-                    $lower,
-                    [
-                        'false',
-                        'no',
-                        'off'
-                    ],
-                    true
-                )
-            ) {
-
-                $value =
-                    0;
-
-            }
-
-        }
+            );
 
 
         if (
-            !in_array(
-                (int)
+            in_array(
                 $value,
                 [
-                    0,
-                    1
+                    'true',
+                    'yes',
+                    'on'
                 ],
                 true
             )
         ) {
 
-            settingsUpdateResponse(
-                false,
-                "Invalid value for {$field}. Use 0 or 1.",
-                [
-                    'code' =>
-                        'INVALID_SETTING_VALUE',
+            $value = 1;
 
-                    'field' =>
-                        $field
+        } elseif (
+            in_array(
+                $value,
+                [
+                    'false',
+                    'no',
+                    'off'
                 ],
-                422
-            );
+                true
+            )
+        ) {
+
+            $value = 0;
+
         }
 
-
-        $updates[] =
-            "{$field} = :{$field}";
+    }
 
 
-        $params[
-            ":{$field}"
-        ] =
-            (int)
-            $value;
+    if (
+        !in_array(
+            (int)$value,
+            [
+                0,
+                1
+            ],
+            true
+        )
+    ) {
+
+        settingsUpdateResponse(
+            false,
+            "Invalid value for {$field}. Use 0 or 1.",
+            [
+                'code' =>
+                    'INVALID_SETTING_VALUE',
+
+                'field' =>
+                    $field
+            ],
+            422
+        );
 
     }
+
+
+    $updates[] =
+        "{$field} = :{$field}";
+
+
+    $params[
+        ":{$field}"
+    ] =
+        (int)$value;
 
 }
 
@@ -332,13 +294,7 @@ foreach (
    NOTHING TO UPDATE
 ============================================================ */
 
-if (
-    count(
-        $updates
-    )
-    ===
-    0
-) {
+if (!$updates) {
 
     settingsUpdateResponse(
         false,
@@ -349,6 +305,7 @@ if (
         ],
         422
     );
+
 }
 
 
@@ -358,17 +315,13 @@ if (
 
 try {
 
-    $pdo =
-        db();
+    $pdo = db();
 
-} catch (
-    Throwable $e
-) {
+} catch (Throwable $e) {
 
     error_log(
         '[LOVEMI SETTINGS UPDATE DB] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -381,20 +334,20 @@ try {
         ],
         500
     );
+
 }
 
 
 /* ============================================================
-   VERIFY ACCOUNT
+   VERIFY USER
 ============================================================ */
 
 try {
 
     $userStmt =
         $pdo->prepare(
-            "
+            '
             SELECT
-
                 id,
                 is_active,
                 is_suspended,
@@ -402,11 +355,10 @@ try {
 
             FROM users
 
-            WHERE id =
-                :user_id
+            WHERE id = :user_id
 
             LIMIT 1
-            "
+            '
         );
 
 
@@ -419,18 +371,11 @@ try {
 
 
     $user =
-        $userStmt->fetch();
+        $userStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
 
-} catch (
-    Throwable $e
-) {
-
-    error_log(
-        '[LOVEMI SETTINGS UPDATE USER] '
-        .
-        $e->getMessage()
-    );
-
+} catch (Throwable $e) {
 
     settingsUpdateResponse(
         false,
@@ -441,12 +386,11 @@ try {
         ],
         500
     );
+
 }
 
 
-if (
-    !$user
-) {
+if (!$user) {
 
     settingsUpdateResponse(
         false,
@@ -457,14 +401,12 @@ if (
         ],
         404
     );
+
 }
 
 
 if (
-    (int)
-    $user['is_deleted']
-    ===
-    1
+    (int)$user['is_deleted'] === 1
 ) {
 
     settingsUpdateResponse(
@@ -476,14 +418,12 @@ if (
         ],
         403
     );
+
 }
 
 
 if (
-    (int)
-    $user['is_suspended']
-    ===
-    1
+    (int)$user['is_suspended'] === 1
 ) {
 
     settingsUpdateResponse(
@@ -495,14 +435,12 @@ if (
         ],
         403
     );
+
 }
 
 
 if (
-    (int)
-    $user['is_active']
-    !==
-    1
+    (int)$user['is_active'] !== 1
 ) {
 
     settingsUpdateResponse(
@@ -514,74 +452,61 @@ if (
         ],
         403
     );
+
 }
 
 
 /* ============================================================
-   BUILD UPDATE QUERY
-============================================================ */
-
-$setClause =
-    implode(
-        ",\n",
-        $updates
-    );
-
-
-$sql =
-    "
-        UPDATE notification_preferences
-
-        SET
-
-            {$setClause}
-
-        WHERE user_id =
-            :user_id
-
-        LIMIT 1
-    ";
-
-
-/* ============================================================
-   UPDATE
+   SAVE
 ============================================================ */
 
 try {
 
-    /*
-     * Ensure a row exists for old accounts before updating.
-     */
-
     $ensureStmt =
         $pdo->prepare(
-            "
+            '
             INSERT INTO notification_preferences
             (
                 user_id
             )
             VALUES
             (
-                :ensure_user_id
+                :user_id
             )
 
             ON DUPLICATE KEY UPDATE
                 user_id = user_id
-            "
+            '
         );
 
 
     $ensureStmt->execute(
         [
-            ':ensure_user_id' =>
+            ':user_id' =>
                 $userId
         ]
     );
 
 
+    $setClause =
+        implode(
+            ",\n",
+            $updates
+        );
+
+
     $stmt =
         $pdo->prepare(
-            $sql
+            "
+            UPDATE notification_preferences
+
+            SET
+                {$setClause}
+
+            WHERE user_id = :user_id
+
+            LIMIT 1
+            "
         );
 
 
@@ -590,14 +515,11 @@ try {
     );
 
 
-} catch (
-    Throwable $e
-) {
+} catch (Throwable $e) {
 
     error_log(
         '[LOVEMI SETTINGS UPDATE QUERY] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -610,20 +532,20 @@ try {
         ],
         500
     );
+
 }
 
 
 /* ============================================================
-   READ BACK SAVED VALUES
+   READ BACK
 ============================================================ */
 
 try {
 
     $readStmt =
         $pdo->prepare(
-            "
+            '
             SELECT
-
                 email_notifications,
                 sms_notifications,
                 push_notifications,
@@ -636,11 +558,10 @@ try {
 
             FROM notification_preferences
 
-            WHERE user_id =
-                :user_id
+            WHERE user_id = :user_id
 
             LIMIT 1
-            "
+            '
         );
 
 
@@ -653,28 +574,16 @@ try {
 
 
     $saved =
-        $readStmt->fetch();
+        $readStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
 
-} catch (
-    Throwable $e
-) {
+} catch (Throwable $e) {
 
-    error_log(
-        '[LOVEMI SETTINGS READBACK] '
-        .
-        $e->getMessage()
-    );
-
-
-    $saved =
-        null;
+    $saved = null;
 
 }
 
-
-/* ============================================================
-   RESPONSE
-============================================================ */
 
 settingsUpdateResponse(
     true,
@@ -683,9 +592,7 @@ settingsUpdateResponse(
 
         'notifications' =>
             $saved
-                ?
-
-                [
+                ? [
 
                     'email_notifications' =>
                         (int)
@@ -741,10 +648,7 @@ settingsUpdateResponse(
                         ]
 
                 ]
-
-                :
-
-                null
+                : null
 
     ]
 );

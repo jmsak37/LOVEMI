@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LOVEMI secure payment receipt"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-store"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+    <title>Receipt | LOVEMI</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="assets/logo1/apple-touch-icon.png"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"
+    ></script>
+
+    <style>
+        :root {
+            --p:#6d28d9;
+            --a:#db2777;
+            --g:#16a34a;
+            --t:#18181b;
+            --s:#68686f;
+            --m:#9898a1;
+            --bg:#f6f6fa;
+            --b:#e6e4eb;
+        }
+
+        * {
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body {
+            min-height:100vh;
+            background:var(--bg);
+            font-family:Inter,sans-serif;
+            color:var(--t);
+            padding:22px;
+        }
+
+        .page {
+            width:min(100%,780px);
+            margin:auto;
+        }
+
+        .top {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+            margin-bottom:15px;
+        }
+
+        .brand {
+            display:flex;
+            align-items:center;
+            gap:9px;
+        }
+
+        .brand img {
+            width:45px;
+            height:45px;
+            object-fit:contain;
+        }
+
+        .brand strong {
+            font:800 25px "Playfair Display",serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--p),
+                    var(--a)
+                );
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
+        }
+
+        .top-actions {
+            display:flex;
+            gap:7px;
+        }
+
+        .btn {
+            border:0;
+            border-radius:10px;
+            min-height:40px;
+            padding:0 13px;
+            font-size:8px;
+            font-weight:900;
+            cursor:pointer;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--p),
+                    var(--a)
+                );
+            color:#fff;
+        }
+
+        .btn.secondary {
+            background:#fff;
+            color:var(--p);
+            border:1px solid #ddd6fe;
+        }
+
+        .receipt {
+            background:#fff;
+            border:1px solid var(--b);
+            box-shadow:0 20px 65px rgba(0,0,0,.10);
+            border-radius:24px;
+            overflow:hidden;
+        }
+
+        .receipt-head {
+            text-align:center;
+            padding:30px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #faf7ff,
+                    #fff7fb
+                );
+            border-bottom:1px solid var(--b);
+        }
+
+        .receipt-logo {
+            width:78px;
+            height:78px;
+            object-fit:contain;
+        }
+
+        .receipt-head h1 {
+            margin-top:9px;
+            color:var(--p);
+            font:800 28px "Playfair Display",serif;
+        }
+
+        .receipt-head p {
+            margin-top:5px;
+            color:var(--s);
+            font-size:9px;
+        }
+
+        .status {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            margin-top:11px;
+            padding:7px 10px;
+            border-radius:999px;
+            background:#dcfce7;
+            color:#166534;
+            font-size:7px;
+            font-weight:900;
+        }
+
+        .body {
+            padding:25px;
+        }
+
+        .intro {
+            font-size:10px;
+            line-height:1.7;
+            color:#444;
+        }
+
+        .details {
+            margin-top:18px;
+            border:1px solid var(--b);
+            border-radius:14px;
+            overflow:hidden;
+        }
+
+        .row {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:15px;
+            padding:11px 13px;
+            border-bottom:1px solid #eee;
+            font-size:8px;
+        }
+
+        .row:last-child {
+            border-bottom:0;
+        }
+
+        .label {
+            color:var(--m);
+        }
+
+        .value {
+            text-align:right;
+            font-weight:800;
+            overflow-wrap:anywhere;
+        }
+
+        .total {
+            margin-top:17px;
+            padding:17px;
+            border-radius:14px;
+            background:#faf9ff;
+            border:1px solid #eadcff;
+            display:flex;
+            justify-content:space-between;
+            gap:15px;
+            align-items:center;
+        }
+
+        .total span {
+            color:var(--s);
+            font-size:9px;
+        }
+
+        .total strong {
+            color:var(--p);
+            font-size:21px;
+        }
+
+        .foot {
+            padding:18px 25px;
+            border-top:1px solid var(--b);
+            text-align:center;
+            color:var(--m);
+            font-size:7px;
+            line-height:1.7;
+        }
+
+        .notice {
+            display:none;
+            margin-bottom:15px;
+            padding:12px;
+            border-radius:11px;
+            font-size:9px;
+        }
+
+        .notice.show {
+            display:block;
+        }
+
+        .notice.error {
+            background:#fef2f2;
+            color:#991b1b;
+            border:1px solid #fecaca;
+        }
+
+        .notice.info {
+            background:#eff6ff;
+            color:#1d4ed8;
+            border:1px solid #bfdbfe;
+        }
+
+        .loader {
+            text-align:center;
+            padding:35px;
+            color:var(--m);
+            font-size:9px;
+        }
+
+        @media (max-width:560px) {
+
+            body {
+                padding:10px;
+            }
+
+            .top {
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .top-actions {
+                width:100%;
+            }
+
+            .top-actions .btn {
+                flex:1;
+            }
+
+            .body {
+                padding:17px;
+            }
+
+            .row {
+                grid-template-columns:1fr;
+            }
+
+            .value {
+                text-align:left;
+            }
+
+            .total {
+                align-items:flex-start;
+                flex-direction:column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="top">
+
+        <a
+            class="brand"
+            href="dashboard.html"
+        >
+            <img
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI"
+                onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png'"
+            >
+
+            <strong>LOVEMI</strong>
+        </a>
+
+        <div class="top-actions">
+
+            <button
+                id="downloadPdf"
+                class="btn"
+            >
+                <i class="fa-solid fa-file-pdf"></i>
+                Download PDF
+            </button>
+
+            <button
+                id="returnBtn"
+                class="btn secondary"
+            >
+                Return to LOVEMI
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notice"
+        class="notice"
+    ></div>
+
+    <div
+        id="loader"
+        class="loader"
+    >
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Verifying secure receipt code...
+    </div>
+
+    <article
+        id="receipt"
+        class="receipt"
+        style="display:none"
+    >
+
+        <header class="receipt-head">
+
+            <img
+                class="receipt-logo"
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI"
+            >
+
+            <h1>
+                Payment Receipt
+            </h1>
+
+            <p>
+                Official LOVEMI payment record
+            </p>
+
+            <span class="status">
+                <i class="fa-solid fa-circle-check"></i>
+                PAYMENT SUCCESSFUL
+            </span>
+
+        </header>
+
+        <section class="body">
+
+            <p
+                id="intro"
+                class="intro"
+            ></p>
+
+            <div class="details">
+
+                <div class="row">
+                    <span class="label">
+                        Receipt number
+                    </span>
+
+                    <span
+                        id="receiptNumber"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Payment reference
+                    </span>
+
+                    <span
+                        id="paymentReference"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Customer
+                    </span>
+
+                    <span
+                        id="customer"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Service
+                    </span>
+
+                    <span
+                        id="service"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Payment method
+                    </span>
+
+                    <span
+                        id="method"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Transaction ID
+                    </span>
+
+                    <span
+                        id="transaction"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Paid at
+                    </span>
+
+                    <span
+                        id="paidAt"
+                        class="value"
+                    ></span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Premium period
+                    </span>
+
+                    <span
+                        id="period"
+                        class="value"
+                    ></span>
+                </div>
+
+            </div>
+
+            <div class="total">
+
+                <span>
+                    Total paid
+                </span>
+
+                <strong id="total"></strong>
+
+            </div>
+
+        </section>
+
+        <footer class="foot">
+            LOVEMI • Discover • Connect • Meet
+            <br>
+            This receipt was generated from a securely
+            verified payment record.
+        </footer>
+
+    </article>
+
+</div>
+
+<script src="receipt.js"></script>
+
+</body>
+</html>

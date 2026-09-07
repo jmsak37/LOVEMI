@@ -845,6 +845,163 @@
 
 
         /* =====================================================
+           LOCATION PROMPT
+        ====================================================== */
+
+        .location-prompt {
+
+            display:none;
+
+            position:absolute;
+
+            top:18px;
+
+            right:18px;
+
+            max-width:430px;
+
+            padding:10px 12px;
+
+            align-items:center;
+
+            gap:10px;
+
+            border:1px solid rgba(109,40,217,.14);
+
+            border-radius:14px;
+
+            background:rgba(255,255,255,.94);
+
+            box-shadow:0 10px 28px rgba(0,0,0,.09);
+
+            backdrop-filter:blur(12px);
+
+            -webkit-backdrop-filter:blur(12px);
+
+            z-index:5;
+
+        }
+
+        .location-prompt.show {
+            display:flex;
+        }
+
+        .location-prompt-icon {
+
+            width:30px;
+            height:30px;
+
+            flex:0 0 30px;
+
+            display:flex;
+
+            align-items:center;
+            justify-content:center;
+
+            border-radius:9px;
+
+            color:var(--primary);
+            background:var(--primary-soft);
+
+            font-size:12px;
+
+        }
+
+        .location-prompt-copy {
+
+            min-width:0;
+
+            display:flex;
+            flex-direction:column;
+
+            gap:2px;
+
+            flex:1;
+
+        }
+
+        .location-prompt-copy strong {
+            font-size:8px;
+            color:var(--text);
+        }
+
+        .location-prompt-copy span {
+            font-size:7px;
+            line-height:1.45;
+            color:var(--text-soft);
+        }
+
+        .location-enable-button {
+
+            min-height:31px;
+            padding:0 10px;
+
+            flex:0 0 auto;
+
+            display:inline-flex;
+
+            align-items:center;
+            justify-content:center;
+
+            gap:5px;
+
+            border:0;
+            border-radius:9px;
+
+            color:white;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+
+            font-size:7px;
+            font-weight:800;
+
+            cursor:pointer;
+
+        }
+
+        .location-enable-button:disabled {
+            opacity:.65;
+            cursor:wait;
+        }
+
+        .location-attribution {
+            margin-top:8px;
+            font-size:7px;
+            color:var(--text-muted);
+        }
+
+        .location-attribution a {
+            color:var(--primary);
+            text-decoration:none;
+        }
+
+        .location-meta {
+            display:inline-flex;
+            align-items:center;
+            gap:4px;
+        }
+
+        .nearest-active {
+            color:var(--primary);
+            font-weight:800;
+        }
+
+        @media (max-width: 700px) {
+
+            .location-prompt {
+                position:static;
+                margin-top:14px;
+                width:100%;
+                max-width:none;
+            }
+
+            .hero {
+                padding:24px 20px;
+            }
+
+        }
+
+
+        /* =====================================================
            PREMIUM NOTICE
         ====================================================== */
 
@@ -1209,7 +1366,15 @@
 
         /* =====================================================
            USER GRID
-           INDEPENDENT SCROLL
+
+           CHANGED:
+           The old version created an independent internal
+           scroll box with max-height + overflow-y.
+           This prevented the whole Discover page from scrolling
+           naturally.
+
+           The grid now expands normally and the BODY/PAGE
+           handles scrolling just like profile.html.
         ====================================================== */
 
         .user-grid {
@@ -1224,57 +1389,23 @@
 
             gap:15px;
 
-            max-height:
-                650px;
-
-            overflow-y:auto;
-
-            overflow-x:hidden;
+            width:100%;
 
             padding:
-                2px 7px 14px 2px;
+                2px 2px 14px 2px;
 
             align-content:start;
 
-            overscroll-behavior:contain;
+            /*
+             * IMPORTANT:
+             * No max-height.
+             * No overflow-y:auto.
+             * No overflow-x:hidden.
+             *
+             * The complete page remains scrollable.
+             */
 
-            scrollbar-width:thin;
-
-            scrollbar-color:
-                #c4b5fd
-                #f4f4f8;
-
-        }
-
-
-        .user-grid::-webkit-scrollbar {
-
-            width:8px;
-
-        }
-
-
-        .user-grid::-webkit-scrollbar-track {
-
-            background:#f0f0f5;
-
-            border-radius:20px;
-
-        }
-
-
-        .user-grid::-webkit-scrollbar-thumb {
-
-            background:#c4b5fd;
-
-            border-radius:20px;
-
-        }
-
-
-        .user-grid::-webkit-scrollbar-thumb:hover {
-
-            background:#a78bfa;
+            min-height:0;
 
         }
 
@@ -1993,12 +2124,10 @@
 
             }
 
-            .user-grid {
-
-                max-height:
-                    610px;
-
-            }
+            /*
+             * Removed the old fixed max-height here.
+             * The page itself now scrolls.
+             */
 
         }
 
@@ -2045,9 +2174,6 @@
                     );
 
                 gap:10px;
-
-                max-height:
-                    560px;
 
             }
 
@@ -2140,9 +2266,6 @@
 
                 gap:8px;
 
-                max-height:
-                    520px;
-
             }
 
             .user-body {
@@ -2197,9 +2320,6 @@
             .user-grid {
 
                 grid-template-columns:1fr;
-
-                max-height:
-                    600px;
 
             }
 
@@ -2306,9 +2426,6 @@
                 <span>Messages</span>
 
             </a>
-
-
-
 
 
             <a
@@ -2489,9 +2606,6 @@
         </a>
 
 
-
-
-
         <a
             href="notifications.html"
             class="mobile-nav-link">
@@ -2565,6 +2679,44 @@
             Premium access is active.
 
         </p>
+
+
+        <!-- =====================================================
+             LOCATION ACCESS
+        ====================================================== -->
+
+        <div
+            id="locationPrompt"
+            class="location-prompt"
+            aria-live="polite">
+
+            <div class="location-prompt-icon">
+
+                <i class="fa-solid fa-location-crosshairs"></i>
+
+            </div>
+
+            <div class="location-prompt-copy">
+
+                <strong>Discover people on LOVEMI.</strong>
+
+                <span id="locationPromptText">
+                    Click to enable your location and discover people near you.
+                </span>
+
+            </div>
+
+            <button
+                type="button"
+                id="enableLocationButton"
+                class="location-enable-button">
+
+                <i class="fa-solid fa-location-dot"></i>
+                Enable
+
+            </button>
+
+        </div>
 
 
     </section>
@@ -2698,7 +2850,7 @@
         <div>
 
             <div class="results-title">
-                Friends
+                Lovely Connections
             </div>
 
             <div
@@ -2726,6 +2878,10 @@
 
             <option value="name">
                 Name A-Z
+            </option>
+
+            <option value="nearest">
+                Nearest to me
             </option>
 
         </select>
@@ -2756,8 +2912,7 @@
             </h3>
 
             <p>
-                LOVEMI is loading approved members directly
-                from the database.
+                LOVEMI is loading approved members.
             </p>
 
         </div>
@@ -2919,6 +3074,9 @@
         </div>
 
 
+
+
+
         <div class="footer-bottom">
 
             <span>
@@ -2956,9 +3114,6 @@
 
 <!-- =========================================================
      NOTIFICATION SOUND
-     
-     Your LOVEMI project already contains notification audio
-     such as notification1.mp3.
 ========================================================== -->
 
 <audio
@@ -2988,6 +3143,9 @@ const API = {
     countries:
         "api/countries/list.php",
 
+    location:
+        "api/auth/live-location-udate.php",
+
     premium:
         "api/premium/status.php",
 
@@ -2997,19 +3155,8 @@ const API = {
     friendsCreate:
         "api/friends/create.php",
 
-    /*
-     * NEW:
-     *
-     * Converts the internal database user ID into an encrypted
-     * public profile code.
-     */
-
     profileCode:
         "api/discover/profile-code.php",
-
-    /*
-     * Existing LOVEMI notification endpoint.
-     */
 
     notificationCount:
         "api/notifications/unread-count.php"
@@ -3065,15 +3212,26 @@ const state = {
     sort:
         "latest",
 
+    locationEnabled:
+        true,
+
+    locationPermission:
+        "unknown",
+
+    currentLocation:
+        null,
+
+    currentLocationUpdated:
+        false,
+
+    currentLocationAddress:
+        null,
+
     pendingIntent:
         null,
 
     premiumWindow:
         null,
-
-    /*
-     * Notification state.
-     */
 
     notificationUnread:
         0,
@@ -3127,6 +3285,24 @@ const searchButton =
 const sortFilter =
     document.getElementById(
         "sortFilter"
+    );
+
+
+const locationPrompt =
+    document.getElementById(
+        "locationPrompt"
+    );
+
+
+const locationPromptText =
+    document.getElementById(
+        "locationPromptText"
+    );
+
+
+const enableLocationButton =
+    document.getElementById(
+        "enableLocationButton"
     );
 
 
@@ -3204,6 +3380,56 @@ document.getElementById(
     "year"
 ).textContent =
     new Date().getFullYear();
+
+
+/* =========================================================
+   URL SEARCH
+   NEW:
+   Reads ?search=JULI from the URL and places it inside
+   the Discover search box before users are loaded.
+========================================================= */
+
+function loadSearchFromUrl() {
+
+    try {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const urlSearch =
+            String(
+                params.get("search")
+                ||
+                ""
+            ).trim();
+
+
+        if (
+            urlSearch
+        ) {
+
+            searchInput.value =
+                urlSearch;
+
+            state.search =
+                urlSearch.toLowerCase();
+
+        }
+
+    } catch (
+        error
+    ) {
+
+        console.warn(
+            "URL search:",
+            error
+        );
+
+    }
+
+}
 
 
 /* =========================================================
@@ -4227,6 +4453,871 @@ function resolveUserCountry(
 
 
 /* =========================================================
+   LOCATION HELPERS
+========================================================= */
+
+function getLovemiDeviceId() {
+
+    const key =
+        "lovemi_device_id";
+
+    try {
+
+        let value =
+            localStorage.getItem(key);
+
+        if (!value) {
+
+            const bytes =
+                new Uint8Array(16);
+
+            if (
+                window.crypto
+                &&
+                window.crypto.getRandomValues
+            ) {
+
+                window.crypto.getRandomValues(bytes);
+
+                value =
+                    Array.from(
+                        bytes,
+                        function(byte) {
+                            return byte.toString(16).padStart(2, "0");
+                        }
+                    ).join("");
+
+            } else {
+
+                value =
+                    String(Date.now())
+                    +
+                    "-"
+                    +
+                    Math.random().toString(36).slice(2);
+
+            }
+
+            localStorage.setItem(
+                key,
+                value
+            );
+
+        }
+
+        return value;
+
+    } catch (
+        error
+    ) {
+
+        return (
+            "temporary-"
+            +
+            String(Date.now())
+            +
+            "-"
+            +
+            Math.random().toString(36).slice(2)
+        );
+
+    }
+
+}
+
+
+function getBrowserName() {
+
+    const ua =
+        navigator.userAgent || "";
+
+    if (/Edg\//i.test(ua)) return "Edge";
+    if (/OPR\//i.test(ua)) return "Opera";
+    if (/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) return "Chrome";
+    if (/Firefox\//i.test(ua)) return "Firefox";
+    if (/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) return "Safari";
+
+    return "Unknown Browser";
+
+}
+
+
+function getOperatingSystem() {
+
+    const ua =
+        navigator.userAgent || "";
+
+    if (/Windows NT/i.test(ua)) return "Windows";
+    if (/Android/i.test(ua)) return "Android";
+    if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+    if (/Mac OS X/i.test(ua)) return "macOS";
+    if (/Linux/i.test(ua)) return "Linux";
+
+    return "Unknown OS";
+
+}
+
+
+function getDeviceName() {
+
+    return (
+        /Mobile|Android|iPhone|iPad|iPod/i.test(
+            navigator.userAgent || ""
+        )
+            ? "Mobile device"
+            : "Desktop device"
+    );
+
+}
+
+
+function showLocationPrompt(
+    message = "Click to enable your location and discover people near you."
+) {
+
+    if (!state.locationEnabled) {
+        return;
+    }
+
+    locationPromptText.textContent =
+        message;
+
+    locationPrompt.classList.add(
+        "show"
+    );
+
+}
+
+
+function hideLocationPrompt() {
+
+    locationPrompt.classList.remove(
+        "show"
+    );
+
+}
+
+
+function setLocationButtonBusy(
+    busy,
+    label = "Enable"
+) {
+
+    enableLocationButton.disabled =
+        busy;
+
+    enableLocationButton.innerHTML =
+        busy
+            ? '<i class="fa-solid fa-spinner fa-spin"></i> Checking...'
+            : '<i class="fa-solid fa-location-dot"></i> ' + label;
+
+}
+
+
+async function getLocationPermissionState() {
+
+    if (
+        !navigator.permissions
+        ||
+        !navigator.permissions.query
+    ) {
+
+        state.locationPermission =
+            "unknown";
+
+        return state.locationPermission;
+
+    }
+
+    try {
+
+        const permission =
+            await navigator.permissions.query({
+                name: "geolocation"
+            });
+
+        state.locationPermission =
+            permission.state;
+
+        permission.onchange =
+            function() {
+                handleLocationPermissionChange(
+                    permission.state
+                );
+            };
+
+        return permission.state;
+
+    } catch (
+        error
+    ) {
+
+        state.locationPermission =
+            "unknown";
+
+        return state.locationPermission;
+
+    }
+
+}
+
+
+async function handleLocationPermissionChange(
+    permissionState
+) {
+
+    state.locationPermission =
+        permissionState;
+
+    if (!state.locationEnabled) {
+        hideLocationPrompt();
+        return;
+    }
+
+    if (
+        permissionState ===
+        "granted"
+    ) {
+
+        hideLocationPrompt();
+        await obtainAndSaveLocation();
+        return;
+
+    }
+
+    if (
+        permissionState ===
+        "denied"
+    ) {
+
+        showLocationPrompt(
+            "Location access is blocked. Allow location in your browser settings, then try again."
+        );
+        return;
+
+    }
+
+    showLocationPrompt();
+
+}
+
+
+async function getLocationPreference() {
+
+    try {
+
+        const {
+            response,
+            result
+        } = await apiGet(
+            API.location
+            +
+            "?action=preference"
+        );
+
+        if (
+            !response.ok
+            ||
+            result.success === false
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Unable to load location preference."
+            );
+
+        }
+
+        state.locationEnabled =
+            result.live_location_enabled !== false;
+
+        return state.locationEnabled;
+
+    } catch (
+        error
+    ) {
+
+        console.warn(
+            "LOVEMI location preference:",
+            error
+        );
+
+        // Location is allowed by default until the account setting says otherwise.
+        state.locationEnabled =
+            true;
+
+        return true;
+
+    }
+
+}
+
+
+async function reverseGeocodeLocation(
+    latitude,
+    longitude
+) {
+
+    const cacheKey =
+        "lovemi_reverse_geo_"
+        +
+        Number(latitude).toFixed(4)
+        +
+        "_"
+        +
+        Number(longitude).toFixed(4);
+
+    try {
+
+        const cached =
+            sessionStorage.getItem(
+                cacheKey
+            );
+
+        if (cached) {
+
+            return JSON.parse(
+                cached
+            );
+
+        }
+
+    } catch (
+        error
+    ) {}
+
+    const url =
+        "https://nominatim.openstreetmap.org/reverse"
+        +
+        "?format=jsonv2"
+        +
+        "&addressdetails=1"
+        +
+        "&zoom=18"
+        +
+        "&accept-language=en"
+        +
+        "&lat="
+        +
+        encodeURIComponent(latitude)
+        +
+        "&lon="
+        +
+        encodeURIComponent(longitude);
+
+    const response =
+        await fetch(
+            url,
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                },
+                cache: "no-store"
+            }
+        );
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Free location lookup is temporarily unavailable."
+        );
+
+    }
+
+    const data =
+        await response.json();
+
+    const address =
+        data.address
+        ||
+        {};
+
+    const city =
+        address.city
+        ||
+        address.town
+        ||
+        address.village
+        ||
+        address.municipality
+        ||
+        address.suburb
+        ||
+        "";
+
+    const region =
+        address.county
+        ||
+        address.state
+        ||
+        address.region
+        ||
+        address.province
+        ||
+        "";
+
+    const country =
+        address.country
+        ||
+        "";
+
+    const countryCode =
+        address.country_code
+        ||
+        "";
+
+    const result = {
+        city,
+        region,
+        country,
+        country_code: String(countryCode).toUpperCase()
+    };
+
+    try {
+
+        sessionStorage.setItem(
+            cacheKey,
+            JSON.stringify(result)
+        );
+
+    } catch (
+        error
+    ) {}
+
+    return result;
+
+}
+
+
+async function saveCurrentLocation(
+    position,
+    address
+) {
+
+    const coordinates =
+        position.coords;
+
+    const payload = {
+
+        action:
+            "location",
+
+        latitude:
+            Number(coordinates.latitude),
+
+        longitude:
+            Number(coordinates.longitude),
+
+        accuracy_meters:
+            Number(coordinates.accuracy)
+            ||
+            null,
+
+        altitude_meters:
+            coordinates.altitude === null
+                ? null
+                : Number(coordinates.altitude),
+
+        heading:
+            coordinates.heading === null
+                ? null
+                : Number(coordinates.heading),
+
+        speed_mps:
+            coordinates.speed === null
+                ? null
+                : Number(coordinates.speed),
+
+        city_name:
+            address?.city
+            ||
+            null,
+
+        region_name:
+            address?.region
+            ||
+            null,
+
+        country_name:
+            address?.country
+            ||
+            null,
+
+        country_code:
+            address?.country_code
+            ||
+            null,
+
+        device_id:
+            getLovemiDeviceId(),
+
+        device_name:
+            getDeviceName(),
+
+        browser_name:
+            getBrowserName(),
+
+        operating_system:
+            getOperatingSystem()
+
+    };
+
+    const {
+        response,
+        result
+    } = await apiPost(
+        API.location,
+        payload
+    );
+
+    if (
+        !response.ok
+        ||
+        result.success === false
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "Your location could not be saved."
+        );
+
+    }
+
+    state.currentLocation = {
+        latitude:
+            Number(coordinates.latitude),
+        longitude:
+            Number(coordinates.longitude),
+        accuracy:
+            Number(coordinates.accuracy)
+            ||
+            null
+    };
+
+    state.currentLocationAddress =
+        address
+        ||
+        null;
+
+    state.currentLocationUpdated =
+        true;
+
+}
+
+
+function getCurrentBrowserPosition() {
+
+    return new Promise(
+        function(resolve, reject) {
+
+            if (
+                !navigator.geolocation
+            ) {
+
+                reject(
+                    new Error(
+                        "This browser does not support location services."
+                    )
+                );
+
+                return;
+
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                resolve,
+                reject,
+                {
+                    enableHighAccuracy:
+                        true,
+                    maximumAge:
+                        0,
+                    timeout:
+                        15000
+                }
+            );
+
+        }
+    );
+
+}
+
+
+async function obtainAndSaveLocation() {
+
+    if (!state.locationEnabled) {
+        return false;
+    }
+
+    if (!navigator.geolocation) {
+
+        showLocationPrompt(
+            "Your browser does not provide GPS location services."
+        );
+
+        return false;
+
+    }
+
+    try {
+
+        setLocationButtonBusy(
+            true,
+            "Enable"
+        );
+
+        const position =
+            await getCurrentBrowserPosition();
+
+        state.locationPermission =
+            "granted";
+
+        hideLocationPrompt();
+
+        let address =
+            null;
+
+        try {
+
+            address =
+                await reverseGeocodeLocation(
+                    position.coords.latitude,
+                    position.coords.longitude
+                );
+
+        } catch (
+            reverseError
+        ) {
+
+            console.warn(
+                "LOVEMI reverse geocoding:",
+                reverseError
+            );
+
+        }
+
+        await saveCurrentLocation(
+            position,
+            address
+        );
+
+        if (
+            sortFilter.value ===
+            "nearest"
+        ) {
+
+            await loadUsers();
+
+        }
+
+        return true;
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "LOVEMI location:",
+            error
+        );
+
+        if (
+            error
+            &&
+            error.code === 1
+        ) {
+
+            state.locationPermission =
+                "denied";
+
+            showLocationPrompt(
+                "Location access was not allowed. Enable it in your browser settings and try again."
+            );
+
+        } else if (
+            error
+            &&
+            error.code === 2
+        ) {
+
+            showLocationPrompt(
+                "Your location could not be determined right now. Please try again."
+            );
+
+        } else if (
+            error
+            &&
+            error.code === 3
+        ) {
+
+            showLocationPrompt(
+                "Location lookup timed out. Please try again."
+            );
+
+        } else {
+
+            showLocationPrompt(
+                error.message
+                ||
+                "Location could not be enabled right now."
+            );
+
+        }
+
+        return false;
+
+    } finally {
+
+        setLocationButtonBusy(
+            false,
+            "Enable"
+        );
+
+    }
+
+}
+
+
+async function initializeLocation() {
+
+    const enabled =
+        await getLocationPreference();
+
+    if (!enabled) {
+
+        hideLocationPrompt();
+        return;
+
+    }
+
+    const permission =
+        await getLocationPermissionState();
+
+    if (
+        permission ===
+        "granted"
+    ) {
+
+        hideLocationPrompt();
+        await obtainAndSaveLocation();
+        return;
+
+    }
+
+    if (
+        permission ===
+        "denied"
+    ) {
+
+        showLocationPrompt(
+            "Location access is blocked. Allow location in your browser settings, then try again."
+        );
+        return;
+
+    }
+
+    showLocationPrompt();
+
+}
+
+
+enableLocationButton.addEventListener(
+    "click",
+    async function() {
+
+        if (!state.locationEnabled) {
+            hideLocationPrompt();
+            return;
+        }
+
+        await obtainAndSaveLocation();
+
+        if (
+            state.currentLocationUpdated
+        ) {
+
+            await loadUsers();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOCATION SORT
+========================================================= */
+
+function getDistanceNumber(user) {
+
+    const value =
+        Number(
+            user?.distance_km
+        );
+
+    return Number.isFinite(value)
+        ? value
+        : Number.POSITIVE_INFINITY;
+
+}
+
+
+function getUserLocationLabel(user) {
+
+    if (!user) {
+        return "";
+    }
+
+    const currentCountry =
+        String(user.location_country || "").trim();
+
+    const currentRegion =
+        String(user.location_region || "").trim();
+
+    const currentCity =
+        String(user.location_city || "").trim();
+
+    let currentPlace =
+        currentCity ||
+        currentRegion ||
+        currentCountry ||
+        "";
+
+    const distance = Number(user.distance_km);
+
+    const distanceText =
+        Number.isFinite(distance)
+            ? (distance < 1
+                ? Math.round(distance * 1000) + " m away"
+                : distance.toFixed(1) + " km away")
+            : "";
+
+    if (!currentPlace && distanceText) {
+        return "CURRENT AT " + distanceText;
+    }
+
+    if (!currentPlace) {
+        return "";
+    }
+
+    /*
+     * The first country shown on the card is the country's
+     * registration/profile value. This second value is explicitly
+     * marked CURRENT AT so relocation is clear to other members.
+     */
+    if (distanceText) {
+        return "CURRENT AT " + currentPlace + " • " + distanceText;
+    }
+
+    return "CURRENT AT " + currentPlace;
+
+}
+
+
+/* =========================================================
    LOAD USERS
 ========================================================= */
 
@@ -4293,6 +5384,12 @@ async function loadUsers() {
             );
 
         }
+
+
+        params.set(
+            "sort",
+            sortFilter.value
+        );
 
 
         const {
@@ -4387,6 +5484,24 @@ async function loadUsers() {
             );
 
 
+
+
+        /*
+         * Never allow administrator/moderator/support accounts to appear
+         * in Discover, even if an older API response contains them.
+         */
+        state.users =
+            state.users.filter(
+                function(user) {
+
+                    return Number(
+                        user.is_admin_role
+                        ??
+                        0
+                    ) !== 1;
+
+                }
+            );
         applyFilters();
 
     } catch (
@@ -4542,6 +5657,17 @@ function applyFilters() {
 
     if (
         state.sort ===
+        "nearest"
+    ) {
+
+        users.sort(
+            function(a,b) {
+                return getDistanceNumber(a) - getDistanceNumber(b);
+            }
+        );
+
+    } else if (
+        state.sort ===
         "online"
     ) {
 
@@ -4595,6 +5721,7 @@ function applyFilters() {
                 );
 
             }
+
         );
 
     }
@@ -4744,9 +5871,9 @@ function renderUsers() {
         (
             users.length === 1
                 ?
-                " member found"
+                " lovely person found"
                 :
-                " members found"
+                " lovely people found"
         );
 
 
@@ -4868,6 +5995,10 @@ function renderUserCard(
         resolveUserCountry(
             user
         );
+
+
+    const currentLocationLabel =
+        getUserLocationLabel(user);
 
 
     const image =
@@ -5098,6 +6229,25 @@ function renderUserCard(
 
 
                     ${
+                        currentLocationLabel
+                            ?
+                            `
+                            <span class="meta-pill location-meta" title="Current live location">
+
+                                <i class="fa-solid fa-location-crosshairs"></i>
+
+                                ${escapeHtml(
+                                    currentLocationLabel
+                                )}
+
+                            </span>
+                            `
+                            :
+                            ""
+                    }
+
+
+                    ${
                         online
                             ?
                             `
@@ -5195,7 +6345,6 @@ function getCountryName(
 
 /* =========================================================
    PROFILE CODE
-   NEW SECURITY FLOW
 ========================================================= */
 
 async function openSecureProfile(
@@ -5300,12 +6449,6 @@ async function openSecureProfile(
         }
 
 
-        /*
-         * IMPORTANT:
-         *
-         * The user ID is NOT included in the URL.
-         */
-
         window.location.href =
             "profile.html?code="
             +
@@ -5342,11 +6485,6 @@ async function openSecureProfile(
 
 function bindUserCardEvents() {
 
-    /*
-     * Profile image and View Profile now use the encrypted
-     * profile code.
-     */
-
     document
         .querySelectorAll(
             "[data-profile-user]"
@@ -5379,10 +6517,6 @@ function bindUserCardEvents() {
             }
         );
 
-
-    /*
-     * Connect buttons.
-     */
 
     document
         .querySelectorAll(
@@ -5905,7 +7039,7 @@ async function createConnection(
     ) {
 
         const confirmText =
-            "LOVEMI Premium is required before creating a new connection.\n\nOpen Premium now?";
+            "LOVEMI Premium is required before creating a new connection.nnOpen Premium now?";
 
 
         if (
@@ -6234,7 +7368,7 @@ async function startChatFlow(
 
         const okay =
             window.confirm(
-                "Premium is required before starting a chat.\n\nActivate Premium now?"
+                "Premium is required before starting a chat.nnActivate Premium now?"
             );
 
 
@@ -6666,8 +7800,7 @@ async function ringNotification() {
 
                     /*
                      * Browser autoplay restrictions can prevent
-                     * an automatic sound. The audio is unlocked
-                     * by the next user interaction.
+                     * an automatic sound.
                      */
 
                 }
@@ -6865,8 +7998,6 @@ async function checkNotifications() {
 
         /*
          * First successful check only establishes the baseline.
-         * We do not ring for old notifications when opening
-         * the page.
          */
 
         if (
@@ -6895,11 +8026,6 @@ async function checkNotifications() {
             newCount
         );
 
-
-        /*
-         * A larger unread count means at least one new unread
-         * notification has arrived.
-         */
 
         if (
             newCount >
@@ -6941,16 +8067,8 @@ function startNotificationMonitor() {
     );
 
 
-    /*
-     * Check immediately.
-     */
-
     checkNotifications();
 
-
-    /*
-     * Continue checking while the user remains on Discover.
-     */
 
     state.notificationTimer =
         setInterval(
@@ -7163,7 +8281,26 @@ countryFilter.addEventListener(
 
 sortFilter.addEventListener(
     "change",
-    applyFilters
+    function() {
+
+        sortFilter.classList.toggle(
+            "nearest-active",
+            sortFilter.value === "nearest"
+        );
+
+        applyFilters();
+
+        if (
+            sortFilter.value === "nearest"
+            &&
+            state.locationEnabled
+        ) {
+
+            initializeLocation();
+
+        }
+
+    }
 );
 
 
@@ -7174,6 +8311,19 @@ sortFilter.addEventListener(
 document.addEventListener(
     "DOMContentLoaded",
     async function() {
+
+        /*
+         * IMPORTANT:
+         * Read ?search=JULI before loadUsers().
+         * This makes:
+         *
+         * discover.html?search=JULI
+         *
+         * automatically search for JULI.
+         */
+
+        loadSearchFromUrl();
+
 
         const authenticated =
             await loadSession();
@@ -7186,6 +8336,16 @@ document.addEventListener(
             return;
 
         }
+
+
+        /*
+         * IMPORTANT:
+         * When location is enabled and the browser has already granted
+         * permission, initializeLocation() requests a FRESH GPS position
+         * (maximumAge=0) and saves it before Discover loads the people list.
+         * The profile's registered country is never overwritten.
+         */
+        await initializeLocation();
 
 
         await Promise.allSettled(

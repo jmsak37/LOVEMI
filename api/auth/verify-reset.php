@@ -1,22 +1,22 @@
 <?php
+
 /**
  * ============================================================
- * LOVEMI - VERIFY PASSWORD RESET TOKEN
+ * LOVEMI - VERIFY PASSWORD RESET LINK
  * ============================================================
  *
- * GET:
+ * The user reaches this endpoint from the email.
  *
- *   api/auth/verify-reset.php?email=...&token=...
+ * This endpoint:
  *
- * The endpoint:
+ * 1. Validates email + reset token.
+ * 2. Checks that the reset request is still active.
+ * 3. Checks expiry.
+ * 4. Marks the link as verified.
+ * 5. Stores the reset request ID in session.
+ * 6. Redirects to reset-password.html.
  *
- *   - Finds the active reset request.
- *   - Checks expiry.
- *   - Checks blocked/used state.
- *   - Hashes incoming token.
- *   - Compares it securely.
- *   - Records failed attempts.
- *   - Marks the reset request verified in session.
+ * The verification code is NOT accepted here.
  *
  * ============================================================
  */
@@ -25,34 +25,13 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
-
-/* ============================================================
-   HEADERS
-============================================================ */
-
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
-header('Expires: 0');
-
-
-/* ============================================================
-   TIMEZONE
-============================================================ */
-
 date_default_timezone_set(
     'Africa/Nairobi'
 );
 
 
-/* ============================================================
-   SESSION
-============================================================ */
-
 if (
-    session_status()
-    !==
-    PHP_SESSION_ACTIVE
+    session_status() !== PHP_SESSION_ACTIVE
 ) {
 
     session_start();
@@ -61,65 +40,90 @@ if (
 
 
 /* ============================================================
-   RESPONSE
+   ERROR PAGE
 ============================================================ */
 
-function verifyResetResponse(
-    bool $success,
-    string $message,
-    array $data = [],
-    int $status = 200
+function resetLinkError(
+    string $message
 ): never {
 
     http_response_code(
-        $status
+        400
     );
 
-
-    echo json_encode(
-        array_merge(
-            [
-                'success' =>
-                    $success,
-
-                'message' =>
-                    $message
-            ],
-            $data
-        ),
-        JSON_UNESCAPED_UNICODE |
-        JSON_UNESCAPED_SLASHES
+    header(
+        'Content-Type: text/html; charset=utf-8'
     );
 
+    $safeMessage =
+        htmlspecialchars(
+            $message,
+            ENT_QUOTES |
+            ENT_HTML5,
+            'UTF-8'
+        );
+
+    echo <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LOVEMI | Invalid Reset Link</title>
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f7f7fb;
+    font-family:Arial,sans-serif;
+    color:#18181b;
+}
+.card{
+    width:min(92%,520px);
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 18px 55px rgba(24,24,27,.09);
+}
+h1{
+    margin:0 0 10px;
+    color:#7c3aed;
+    font-family:Georgia,serif;
+}
+p{
+    color:#71717a;
+    line-height:1.7;
+}
+a{
+    display:inline-block;
+    margin-top:10px;
+    padding:12px 18px;
+    border-radius:10px;
+    color:#fff;
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <h1>LOVEMI</h1>
+    <h2>Reset Link Problem</h2>
+    <p>{$safeMessage}</p>
+    <a href="../../forgot-password.html">
+        Request a New Reset Email
+    </a>
+</div>
+</body>
+</html>
+HTML;
 
     exit;
-}
-
-
-/* ============================================================
-   METHOD
-============================================================ */
-
-if (
-    ($_SERVER['REQUEST_METHOD'] ?? '')
-    !==
-    'GET'
-    &&
-    ($_SERVER['REQUEST_METHOD'] ?? '')
-    !==
-    'POST'
-) {
-
-    verifyResetResponse(
-        false,
-        'Only GET and POST requests are allowed.',
-        [
-            'code' =>
-                'METHOD_NOT_ALLOWED'
-        ],
-        405
-    );
-
 }
 
 
@@ -129,30 +133,33 @@ if (
 
 $email =
     trim(
-        (string)
-        (
+        (string)(
             $_GET['email']
-            ??
-            $_POST['email']
-            ??
-            ''
+            ?? ''
         )
     );
 
 
 $token =
     trim(
-        (string)
-        (
+        (string)(
             $_GET['token']
-            ??
-            $_POST['token']
-            ??
-            $_POST['reset_token']
-            ??
-            ''
+            ?? ''
         )
     );
+
+
+if (
+    $email === ''
+    ||
+    $token === ''
+) {
+
+    resetLinkError(
+        'The password-reset link is incomplete.'
+    );
+
+}
 
 
 if (
@@ -162,62 +169,19 @@ if (
     )
 ) {
 
-    verifyResetResponse(
-        false,
-        'The reset email address is invalid.',
-        [
-            'code' =>
-                'INVALID_EMAIL'
-        ],
-        422
+    resetLinkError(
+        'The password-reset email address is invalid.'
     );
 
 }
 
 
 if (
-    $token === ''
+    strlen($token) < 40
 ) {
 
-    verifyResetResponse(
-        false,
-        'The password reset token is missing.',
-        [
-            'code' =>
-                'TOKEN_REQUIRED'
-        ],
-        422
-    );
-
-}
-
-
-/* ============================================================
-   DATABASE
-============================================================ */
-
-try {
-
-    $pdo =
-        db();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI VERIFY RESET DB] '
-        .
-        $e->getMessage()
-    );
-
-
-    verifyResetResponse(
-        false,
-        'Unable to connect to the database.',
-        [
-            'code' =>
-                'DATABASE_ERROR'
-        ],
-        500
+    resetLinkError(
+        'The password-reset link is invalid.'
     );
 
 }
@@ -235,6 +199,32 @@ $tokenHash =
 
 
 /* ============================================================
+   DATABASE
+============================================================ */
+
+try {
+
+    $pdo =
+        db();
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI VERIFY RESET DB] '
+        .
+        $e->getMessage()
+    );
+
+    resetLinkError(
+        'LOVEMI could not connect to the database.'
+    );
+
+}
+
+
+/* ============================================================
    LOAD RESET REQUEST
 ============================================================ */
 
@@ -245,33 +235,22 @@ try {
             "
             SELECT
 
-                id,
-                user_id,
-                email,
-                phone_e164,
-                id_number_hash,
+                pr.id,
+                pr.user_id,
+                pr.email,
+                pr.reset_token_hash,
+                pr.expires_at,
+                pr.used_at,
+                pr.blocked_at,
+                pr.link_verified_at
 
-                reset_token_hash,
+            FROM password_resets pr
 
-                attempt_count,
-                max_attempts,
+            WHERE pr.email = :email
 
-                expires_at,
-                used_at,
-                blocked_at,
+              AND pr.reset_token_hash = :token_hash
 
-                created_at
-
-            FROM password_resets
-
-            WHERE email = :email
-
-              AND used_at IS NULL
-
-              AND blocked_at IS NULL
-
-            ORDER BY
-                id DESC
+            ORDER BY pr.id DESC
 
             LIMIT 1
             "
@@ -280,16 +259,25 @@ try {
 
     $stmt->execute(
         [
+
             ':email' =>
-                $email
+                $email,
+
+            ':token_hash' =>
+                $tokenHash
+
         ]
     );
 
 
     $reset =
-        $stmt->fetch();
+        $stmt->fetch(
+            PDO::FETCH_ASSOC
+        );
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI VERIFY RESET QUERY] '
@@ -297,85 +285,57 @@ try {
         $e->getMessage()
     );
 
-
-    verifyResetResponse(
-        false,
-        'Unable to verify the password reset request.',
-        [
-            'code' =>
-                'RESET_LOOKUP_FAILED'
-        ],
-        500
+    resetLinkError(
+        'LOVEMI could not verify the reset request.'
     );
 
 }
 
 
 /* ============================================================
-   NOT FOUND
+   VALIDATE REQUEST
 ============================================================ */
 
 if (
     !$reset
 ) {
 
-    verifyResetResponse(
-        false,
-        'This password reset link is invalid or has already been used.',
-        [
-            'code' =>
-                'RESET_NOT_FOUND'
-        ],
-        404
+    resetLinkError(
+        'This password-reset link is invalid or no longer available.'
     );
 
 }
-
-
-/* ============================================================
-   BLOCKED
-============================================================ */
-
-$attemptCount =
-    (int)
-    $reset['attempt_count'];
-
-
-$maxAttempts =
-    max(
-        1,
-        (int)
-        $reset['max_attempts']
-    );
 
 
 if (
-    $attemptCount
-    >=
-    $maxAttempts
+    !empty(
+        $reset['used_at']
+    )
 ) {
 
-    verifyResetResponse(
-        false,
-        'This password reset request has been blocked because the maximum number of attempts was reached.',
-        [
-            'code' =>
-                'RESET_ATTEMPTS_EXCEEDED'
-        ],
-        403
+    resetLinkError(
+        'This password-reset link has already been used.'
     );
 
 }
 
 
-/* ============================================================
-   EXPIRY
-============================================================ */
+if (
+    !empty(
+        $reset['blocked_at']
+    )
+) {
+
+    resetLinkError(
+        'This password-reset request has been blocked. Please start again.'
+    );
+
+}
+
 
 $expiresTimestamp =
     strtotime(
-        (string)
-        $reset['expires_at']
+        (string)$reset['expires_at']
     );
 
 
@@ -385,340 +345,60 @@ if (
     $expiresTimestamp < time()
 ) {
 
-    /*
-     * Mark it used/invalid so it cannot be reused.
-     */
-
-    try {
-
-        $expireStmt =
-            $pdo->prepare(
-                "
-                UPDATE password_resets
-
-                SET
-                    blocked_at =
-                        CURRENT_TIMESTAMP
-
-                WHERE id = :id
-
-                LIMIT 1
-                "
-            );
-
-
-        $expireStmt->execute(
-            [
-                ':id' =>
-                    (int)
-                    $reset['id']
-            ]
-        );
-
-    } catch (
-        Throwable $e
-    ) {
-
-        error_log(
-            '[LOVEMI VERIFY RESET EXPIRE] '
-            .
-            $e->getMessage()
-        );
-
-    }
-
-
-    verifyResetResponse(
-        false,
-        'This password reset link has expired. Please request a new one.',
-        [
-            'code' =>
-                'RESET_EXPIRED'
-        ],
-        410
+    resetLinkError(
+        'This password-reset link has expired. Please request a new one.'
     );
 
 }
 
 
 /* ============================================================
-   USER STILL VALID
+   MARK LINK VERIFIED
 ============================================================ */
 
 try {
 
-    $userStmt =
+    $updateStmt =
         $pdo->prepare(
             "
-            SELECT
+            UPDATE password_resets
 
-                id,
-                email,
-                account_status,
-                is_active,
-                is_suspended,
-                is_deleted
+            SET
+                link_verified_at =
+                    COALESCE(
+                        link_verified_at,
+                        CURRENT_TIMESTAMP
+                    )
 
-            FROM users
+            WHERE id = :id
 
-            WHERE id = :user_id
+              AND used_at IS NULL
 
-              AND email = :email
-
-            LIMIT 1
+              AND blocked_at IS NULL
             "
         );
 
 
-    $userStmt->execute(
+    $updateStmt->execute(
         [
-
-            ':user_id' =>
-                (int)
-                $reset['user_id'],
-
-            ':email' =>
-                $email
-
+            ':id' =>
+                (int)$reset['id']
         ]
     );
 
-
-    $user =
-        $userStmt->fetch();
 
 } catch (
     Throwable $e
 ) {
 
     error_log(
-        '[LOVEMI VERIFY RESET USER] '
+        '[LOVEMI VERIFY RESET UPDATE] '
         .
         $e->getMessage()
     );
 
-
-    verifyResetResponse(
-        false,
-        'Unable to verify the account.',
-        [
-            'code' =>
-                'USER_LOOKUP_FAILED'
-        ],
-        500
-    );
-
-}
-
-
-if (
-    !$user
-) {
-
-    verifyResetResponse(
-        false,
-        'The account associated with this reset request could not be found.',
-        [
-            'code' =>
-                'USER_NOT_FOUND'
-        ],
-        404
-    );
-
-}
-
-
-if (
-    (int)
-    $user['is_deleted']
-    ===
-    1
-) {
-
-    verifyResetResponse(
-        false,
-        'This account is no longer available.',
-        [
-            'code' =>
-                'ACCOUNT_DELETED'
-        ],
-        403
-    );
-
-}
-
-
-if (
-    (int)
-    $user['is_suspended']
-    ===
-    1
-) {
-
-    verifyResetResponse(
-        false,
-        'This account is suspended.',
-        [
-            'code' =>
-                'ACCOUNT_SUSPENDED'
-        ],
-        403
-    );
-
-}
-
-
-if (
-    (int)
-    $user['is_active']
-    !==
-    1
-) {
-
-    verifyResetResponse(
-        false,
-        'This account is inactive.',
-        [
-            'code' =>
-                'ACCOUNT_INACTIVE'
-        ],
-        403
-    );
-
-}
-
-
-/* ============================================================
-   VERIFY TOKEN
-============================================================ */
-
-$storedHash =
-    (string)
-    $reset['reset_token_hash'];
-
-
-if (
-    $storedHash === ''
-    ||
-    !hash_equals(
-        $storedHash,
-        $tokenHash
-    )
-) {
-
-    $newAttemptCount =
-        $attemptCount
-        +
-        1;
-
-
-    $blocked =
-        $newAttemptCount
-        >=
-        $maxAttempts;
-
-
-    try {
-
-        $attemptStmt =
-            $pdo->prepare(
-                "
-                UPDATE password_resets
-
-                SET
-
-                    attempt_count =
-                        :attempt_count,
-
-                    blocked_at =
-                        CASE
-
-                            WHEN :blocked = 1
-                            THEN CURRENT_TIMESTAMP
-
-                            ELSE blocked_at
-
-                        END
-
-                WHERE id = :id
-
-                LIMIT 1
-                "
-            );
-
-
-        $attemptStmt->execute(
-            [
-
-                ':attempt_count' =>
-                    $newAttemptCount,
-
-                ':blocked' =>
-                    $blocked
-                    ?
-                    1
-                    :
-                    0,
-
-                ':id' =>
-                    (int)
-                    $reset['id']
-
-            ]
-        );
-
-    } catch (
-        Throwable $e
-    ) {
-
-        error_log(
-            '[LOVEMI RESET ATTEMPT UPDATE] '
-            .
-            $e->getMessage()
-        );
-
-    }
-
-
-    if (
-        $blocked
-    ) {
-
-        verifyResetResponse(
-            false,
-            'This password reset request has been blocked.',
-            [
-                'code' =>
-                    'RESET_BLOCKED'
-            ],
-            403
-        );
-
-    }
-
-
-    $remaining =
-        max(
-            0,
-            $maxAttempts
-            -
-            $newAttemptCount
-        );
-
-
-    verifyResetResponse(
-        false,
-        'The password reset link is invalid.',
-        [
-
-            'code' =>
-                'INVALID_RESET_TOKEN',
-
-            'attempts_remaining' =>
-                $remaining
-
-        ],
-        403
+    resetLinkError(
+        'Unable to verify this password-reset link.'
     );
 
 }
@@ -728,59 +408,41 @@ if (
    SESSION
 ============================================================ */
 
-/*
- * The original token is intentionally kept only in the current
- * server session long enough for reset-password.php to verify
- * the reset request.
- */
+$_SESSION[
+    'lovemi_password_reset_request_id'
+] =
+    (int)$reset['id'];
 
 $_SESSION[
-    'lovemi_password_reset'
-] = [
-
-    'reset_id' =>
-        (int)
-        $reset['id'],
-
-    'user_id' =>
-        (int)
-        $reset['user_id'],
-
-    'email' =>
-        $email,
-
-    'verified' =>
-        true,
-
-    'verified_at' =>
-        time(),
-
-    'expires_at' =>
-        $expiresTimestamp
-
-];
+    'lovemi_password_reset_link_verified'
+] =
+    true;
 
 
 /* ============================================================
-   RESPONSE
+   REDIRECT
 ============================================================ */
 
-verifyResetResponse(
-    true,
-    'Password reset link verified successfully.',
-    [
+$redirectUrl =
+    '../../reset-password.html?email='
+    .
+    rawurlencode(
+        $email
+    )
+    .
+    '&token='
+    .
+    rawurlencode(
+        $token
+    );
 
-        'verified' =>
-            true,
 
-        'email' =>
-            $email,
-
-        'expires_at' =>
-            date(
-                'c',
-                $expiresTimestamp
-            )
-
-    ]
+header(
+    'Cache-Control: no-store, no-cache, must-revalidate, max-age=0'
 );
+
+header(
+    'Location: ' . $redirectUrl
+);
+
+exit;

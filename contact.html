@@ -1,1604 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Contact LOVEMI support"
-    >
-
-    <meta
-        name="robots"
-        content="index,follow"
-    >
-
-    <title>Contact LOVEMI</title>
-
-    <!-- =====================================================
-         LOVEMI ICONS
-    ====================================================== -->
-
-    <link
-        rel="icon"
-        type="image/x-icon"
-        href="assets/logo1/favicon.ico"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="assets/logo1/favicon-16x16.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="assets/logo1/apple-touch-icon.png"
-    >
-
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
-
-    <!-- =====================================================
-         FONT / ICON LIBRARY
-    ====================================================== -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-
-    <style>
-
-        :root {
-            --primary: #e91e63;
-            --primary-dark: #c2185b;
-            --secondary: #7c3aed;
-            --text: #172033;
-            --muted: #687386;
-            --surface: #ffffff;
-            --surface-soft: #faf9fd;
-            --border: #e8e9ef;
-            --shadow: 0 12px 35px rgba(25, 25, 45, .08);
-            --radius: 18px;
-            --max-width: 1180px;
-        }
-
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            font-family: "Inter", Arial, sans-serif;
-            background:
-                linear-gradient(
-                    180deg,
-                    #ffffff 0%,
-                    #faf9fd 100%
-                );
-            color: var(--text);
-            line-height: 1.65;
-        }
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-
-        img {
-            max-width: 100%;
-        }
-
-
-        .container {
-            width: min(
-                calc(100% - 32px),
-                var(--max-width)
-            );
-            margin-inline: auto;
-        }
-
-
-        /* =================================================
-           HEADER
-        ================================================== */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,.97);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-
-        .nav {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-
-        .brand img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-
-
-        .brand strong {
-            font-size: 1.35rem;
-            letter-spacing: -.4px;
-        }
-
-
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 7px;
-            flex-wrap: wrap;
-        }
-
-
-        .nav-link {
-            padding: 10px 13px;
-            border-radius: 11px;
-            color: #566173;
-            font-size: .9rem;
-            font-weight: 600;
-            transition: .2s ease;
-        }
-
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: #fff0f5;
-            color: var(--primary);
-        }
-
-
-        .nav-link.cta {
-            color: white;
-            background: var(--primary);
-        }
-
-
-        .nav-link.cta:hover {
-            color: white;
-            background: var(--primary-dark);
-        }
-
-
-        .mobile-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: 0;
-            border-radius: 12px;
-            background: #f3f4f8;
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-
-
-        .mobile-menu {
-            display: none;
-            padding: 10px 0 16px;
-            border-top: 1px solid var(--border);
-            background: #fff;
-        }
-
-
-        .mobile-menu.open {
-            display: block;
-        }
-
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 5px;
-            border-bottom: 1px solid #f0f1f5;
-            color: #4b5565;
-            font-weight: 600;
-        }
-
-
-        /* =================================================
-           HERO
-        ================================================== */
-
-        .hero {
-            padding: 74px 0 42px;
-            text-align: center;
-        }
-
-
-        .hero-icon {
-            width: 76px;
-            height: 76px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto 18px;
-            border-radius: 23px;
-            background: #fff0f5;
-            color: var(--primary);
-            font-size: 1.9rem;
-        }
-
-
-        .hero h1 {
-            font-size: clamp(
-                2rem,
-                5vw,
-                3.5rem
-            );
-            line-height: 1.06;
-            letter-spacing: -1px;
-            margin-bottom: 13px;
-        }
-
-
-        .hero p {
-            max-width: 720px;
-            margin-inline: auto;
-            color: var(--muted);
-        }
-
-
-        /* =================================================
-           CONTACT
-        ================================================== */
-
-        .contact-section {
-            padding-bottom: 80px;
-        }
-
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns:
-                .85fr
-                1.15fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: clamp(
-                22px,
-                4vw,
-                38px
-            );
-        }
-
-
-        .card h2 {
-            font-size: 1.35rem;
-            margin-bottom: 10px;
-        }
-
-
-        .card > p {
-            color: var(--muted);
-            margin-bottom: 20px;
-        }
-
-
-        .contact-items {
-            display: grid;
-            gap: 14px;
-        }
-
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 13px;
-            padding: 16px;
-            background: var(--surface-soft);
-            border-radius: 14px;
-        }
-
-
-        .contact-icon {
-            flex: 0 0 44px;
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border-radius: 12px;
-            background: #fff0f5;
-            color: var(--primary);
-        }
-
-
-        .contact-item strong {
-            display: block;
-            margin-bottom: 2px;
-        }
-
-
-        .contact-item span,
-        .contact-item a {
-            color: var(--muted);
-            font-size: .9rem;
-        }
-
-
-        .contact-item a:hover {
-            color: var(--primary);
-        }
-
-
-        /* FORM */
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-
-        .form-group label {
-            display: block;
-            margin-bottom: 7px;
-            font-size: .88rem;
-            font-weight: 700;
-        }
-
-
-        .input {
-            width: 100%;
-            padding: 12px 13px;
-            border: 1px solid #dfe1e8;
-            border-radius: 12px;
-            outline: none;
-            background: #fff;
-            transition: .2s ease;
-        }
-
-
-        .input:focus {
-            border-color: var(--primary);
-            box-shadow:
-                0 0 0 4px
-                rgba(233,30,99,.08);
-        }
-
-
-        textarea.input {
-            min-height: 145px;
-            resize: vertical;
-        }
-
-
-        .submit-btn {
-            width: 100%;
-            border: 0;
-            border-radius: 12px;
-            padding: 13px 16px;
-            background: var(--primary);
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-
-        .submit-btn:hover {
-            background: var(--primary-dark);
-        }
-
-
-        .submit-btn:disabled {
-            opacity: .65;
-            cursor: wait;
-        }
-
-
-        .form-status {
-            display: none;
-            margin-top: 14px;
-            border-radius: 11px;
-            padding: 12px 14px;
-            font-size: .88rem;
-        }
-
-
-        .form-status.show {
-            display: block;
-        }
-
-
-        .form-status.success {
-            color: #1e6b3d;
-            background: #eaf8ef;
-        }
-
-
-        .form-status.error {
-            color: #a52626;
-            background: #fff0f0;
-        }
-
-
-        /* =================================================
-           FOOTER
-        ================================================== */
-
-        .site-footer {
-            background: #151827;
-            color: #d7dbe6;
-        }
-
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns:
-                1.4fr
-                repeat(3, 1fr);
-            gap: 34px;
-            padding: 52px 0 30px;
-        }
-
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin-bottom: 13px;
-        }
-
-
-        .footer-brand img {
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-        }
-
-
-        .footer-brand strong {
-            color: #fff;
-            font-size: 1.18rem;
-        }
-
-
-        .footer-description {
-            max-width: 330px;
-            color: #aab0bf;
-            font-size: .9rem;
-        }
-
-
-        .footer-column h3 {
-            color: #fff;
-            font-size: .95rem;
-            margin-bottom: 13px;
-        }
-
-
-        .footer-column a {
-            display: block;
-            color: #aab0bf;
-            font-size: .87rem;
-            margin: 8px 0;
-        }
-
-
-        .footer-column a:hover {
-            color: #fff;
-        }
-
-
-        .footer-bottom {
-            padding: 18px 0;
-            border-top: 1px solid rgba(255,255,255,.08);
-        }
-
-
-        .footer-bottom-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            color: #9198a9;
-            font-size: .8rem;
-        }
-
-
-        @media (max-width: 900px) {
-
-            .desktop-nav {
-                display: none;
-            }
-
-
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: min(
-                    calc(100% - 22px),
-                    var(--max-width)
-                );
-            }
-
-
-            .nav {
-                min-height: 68px;
-            }
-
-
-            .brand img {
-                width: 42px;
-                height: 42px;
-            }
-
-
-            .hero {
-                padding: 52px 0 30px;
-            }
-
-
-            .card {
-                padding: 20px;
-                border-radius: 15px;
-            }
-
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-
-            .footer-bottom-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Contact LOVEMI support — send a message, get help and reach the LOVEMI support team.">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Contact LOVEMI | Support</title>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+:root{--primary:#6d28d9;--primary-dark:#4c1d95;--primary-soft:#f3e8ff;--accent:#db2777;--accent-soft:#fce7f3;--blue:#2563eb;--green:#16a34a;--green-soft:#f0fdf4;--orange:#d97706;--red:#dc2626;--red-soft:#fef2f2;--text:#18181b;--text-soft:#68686f;--text-muted:#9898a1;--white:#fff;--background:#f7f7fb;--border:#e9e9ef;--shadow-sm:0 5px 18px rgba(0,0,0,.045);--shadow-md:0 14px 38px rgba(0,0,0,.075);--shadow-lg:0 25px 70px rgba(0,0,0,.12);--container:1380px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{min-height:100vh;font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(circle at 8% 5%,rgba(109,40,217,.055),transparent 24%),radial-gradient(circle at 92% 14%,rgba(219,39,119,.05),transparent 24%),linear-gradient(180deg,#fff 0,#faf9fd 270px,var(--background) 100%);line-height:1.6;overflow-x:hidden}body.menu-open{overflow:hidden}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.65}img{display:block;max-width:100%}[hidden]{display:none!important}
+.header{position:sticky;top:0;z-index:2000;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.header-inner{width:min(calc(100% - 30px),var(--container));min-height:76px;margin:auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px}.brand{display:inline-flex;align-items:center;gap:10px;min-width:max-content}.brand-logo{width:45px;height:45px;object-fit:contain;border-radius:12px}.brand-text{display:flex;flex-direction:column}.brand-name{font-family:"Playfair Display",serif;font-size:26px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.brand-tagline{margin-top:3px;color:var(--text-muted);font-size:7px;letter-spacing:.7px}
+.main-navigation{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0}.main-navigation[hidden]{display:none!important}.nav-link{position:relative;min-height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:9px;color:var(--text-soft);font-size:9px;font-weight:800;white-space:nowrap;transition:.22s ease}.nav-link i{font-size:9px}.nav-link:hover,.nav-link.active{color:var(--primary);background:var(--primary-soft)}.nav-link.active::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px}.header-guest{display:flex;align-items:center;gap:7px}.guest-btn{min-height:37px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:9px;font-weight:900;transition:.2s ease}.guest-login{color:var(--primary);background:#fff;border:1px solid #ddd6fe}.guest-login:hover{background:var(--primary-soft);transform:translateY(-1px)}.guest-join{color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 8px 20px rgba(109,40,217,.16)}.guest-join:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(109,40,217,.22)}
+.header-action{position:relative;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft);transition:.2s ease}.header-action:hover{color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}.notification-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border:2px solid #fff;border-radius:50%;background:var(--accent);display:none}.notification-dot.pulse{display:block;animation:notificationPulse 1s ease-in-out infinite}.profile-shortcut{display:inline-flex;align-items:center;gap:6px;padding:3px 7px 3px 3px;border:1px solid var(--border);border-radius:10px;background:#fff;transition:.2s ease}.profile-shortcut:hover{border-color:#ddd6fe;background:#faf8ff;transform:translateY(-1px)}.profile-shortcut-avatar-wrap{position:relative}.profile-shortcut-avatar{width:31px;height:31px;border-radius:8px;object-fit:cover;background:#efeff4}.profile-shortcut-online{position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border:2px solid #fff;background:#22c55e;border-radius:50%}.profile-shortcut-name{max-width:82px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:900}.profile-shortcut-sub{display:block;color:var(--text-muted);font-size:7px;margin-top:1px}
+.mobile-menu-button{display:none;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft)}.mobile-navigation{position:fixed;top:76px;left:0;right:0;z-index:1900;display:none;padding:8px;background:rgba(255,255,255,.98);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:0 20px 45px rgba(0,0,0,.10)}.mobile-navigation.open{display:block}.mobile-nav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.mobile-nav-link{min-height:48px;padding:8px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--border);border-radius:10px;color:var(--text-soft);background:#fff;font-size:8px;font-weight:900}.mobile-nav-link i{color:var(--primary);font-size:11px}.mobile-nav-link.active{color:var(--primary);background:var(--primary-soft);border-color:#ddd6fe}
+.page{width:min(calc(100% - 30px),var(--container));margin:auto;padding:25px 0 70px}.hero{position:relative;overflow:hidden;min-height:330px;padding:46px 40px;display:flex;align-items:center;border:1px solid rgba(109,40,217,.12);border-radius:28px;background:radial-gradient(circle at 86% 15%,rgba(219,39,119,.15),transparent 24%),radial-gradient(circle at 7% 92%,rgba(109,40,217,.13),transparent 28%),linear-gradient(145deg,#fff,#fbf8ff 60%,#fff8fc);box-shadow:var(--shadow-lg)}.hero::before{content:"";position:absolute;width:290px;height:290px;right:-125px;bottom:-155px;border:55px solid rgba(109,40,217,.055);border-radius:50%;animation:heroOrbit 18s linear infinite}.hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(circle at 22% 28%,rgba(255,255,255,.85),transparent 17%),radial-gradient(circle at 75% 72%,rgba(219,39,119,.05),transparent 20%);animation:heroGlow 11s ease-in-out infinite alternate}.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;color:var(--primary);background:var(--primary-soft);font-size:8px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.hero-icon{width:66px;height:66px;display:grid;place-items:center;margin:18px 0 15px;border-radius:20px;background:linear-gradient(135deg,#fff0f6,#f1e9ff);color:var(--primary);font-size:25px;box-shadow:0 14px 35px rgba(109,40,217,.10);animation:iconBreathe 4.5s ease-in-out infinite}.hero h1{font-family:"Playfair Display",serif;font-size:clamp(36px,5vw,60px);line-height:1.03;letter-spacing:-1.3px}.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero p{max-width:770px;margin-top:14px;color:var(--text-soft);font-size:12px;line-height:1.8}.hero-art{width:150px;height:150px;display:grid;place-items:center;border-radius:38px;background:linear-gradient(145deg,#f3e8ff,#fce7f3);border:1px solid #eee4f6;box-shadow:0 18px 45px rgba(109,40,217,.10);animation:artFloat 5.5s ease-in-out infinite}.hero-art i{font-size:58px;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 9px 22px rgba(109,40,217,.2))}
+.contact-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:18px;margin-top:18px}.card{position:relative;overflow:hidden;background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:22px;padding:27px;box-shadow:var(--shadow-sm);transition:.28s ease}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}.card h2{font-size:19px;letter-spacing:-.3px}.card-intro{margin-top:4px;color:var(--text-muted);font-size:9px;line-height:1.65}.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:15px}.help-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:999px;background:#f8f3ff;color:var(--primary);font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.contact-items{display:grid;gap:10px;margin-top:14px}.contact-item{display:flex;align-items:flex-start;gap:11px;padding:13px;border-radius:15px;border:1px solid #eeeaf0;background:linear-gradient(145deg,#fff,#fbf9fc);transition:.22s ease}.contact-item:hover{transform:translateX(3px);border-color:#e1d6f0;box-shadow:0 9px 20px rgba(40,20,55,.05)}.contact-icon{flex:0 0 39px;width:39px;height:39px;display:grid;place-items:center;border-radius:11px;background:var(--primary-soft);color:var(--primary);font-size:11px}.contact-item:nth-child(2) .contact-icon{background:var(--accent-soft);color:var(--accent)}.contact-item:nth-child(3) .contact-icon{background:#eff6ff;color:#2563eb}.contact-item:nth-child(4) .contact-icon{background:#f0fdf4;color:#16a34a}.contact-item strong{display:block;font-size:10px;margin-bottom:2px}.contact-item span,.contact-item a{color:var(--text-soft);font-size:8.5px}.contact-item a:hover{color:var(--primary)}.small-note{margin-top:12px;color:var(--text-muted);font-size:8px;line-height:1.65}
+.form-card{position:relative}.form-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 100% 0,rgba(109,40,217,.07),transparent 27%),radial-gradient(circle at 0 100%,rgba(219,39,119,.05),transparent 25%)}.form-inner{position:relative;z-index:1}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;color:#3a3640;font-size:9px;font-weight:800}.form-control{width:100%;min-height:42px;border:1px solid #dedee6;border-radius:11px;padding:10px 11px;background:#fff;color:var(--text);outline:none;font-size:10px;transition:.2s ease}.form-control:focus{border-color:#c4b5fd;box-shadow:0 0 0 4px rgba(109,40,217,.06)}textarea.form-control{min-height:150px;resize:vertical;line-height:1.55}.form-hint{margin-top:5px;color:var(--text-muted);font-size:8px}.submit-btn{width:100%;min-height:45px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:10px;font-weight:800;box-shadow:0 12px 24px rgba(109,40,217,.17);transition:.2s ease}.submit-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px rgba(109,40,217,.22)}.status{display:none;margin-top:12px;padding:11px 12px;border-radius:11px;font-size:9px;line-height:1.55}.status.show{display:block}.status.success{background:var(--green-soft);color:#166534;border:1px solid #bbf7d0}.status.error{background:var(--red-soft);color:#991b1b;border:1px solid #fecaca}.status.info{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.info-band{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.info-card{display:flex;align-items:center;gap:9px;padding:12px;border-radius:14px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-sm)}.info-card i{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:10px}.info-card:nth-child(2) i{background:#e0f2fe;color:#0284c7}.info-card:nth-child(3) i{background:#fce7f3;color:#db2777}.info-card strong{display:block;font-size:9px}.info-card span{display:block;margin-top:2px;color:var(--text-muted);font-size:7px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step{padding:15px;border-radius:15px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-sm)}.step-number{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));font-size:9px;font-weight:900;margin-bottom:9px}.step h3{font-size:10px;margin-bottom:4px}.step p{color:var(--text-muted);font-size:8px;line-height:1.6}
+.callout{position:relative;overflow:hidden;margin-top:18px;padding:25px;border-radius:22px;background:linear-gradient(135deg,#4c1d95,#6d28d9 48%,#be185d);color:#fff;box-shadow:0 22px 55px rgba(76,29,149,.18)}.callout::before{content:"";position:absolute;width:240px;height:240px;right:-100px;top:-130px;border:45px solid rgba(255,255,255,.08);border-radius:50%;animation:heroOrbit 20s linear infinite}.callout-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px}.callout h2{font-family:"Playfair Display",serif;font-size:25px}.callout p{max-width:700px;margin-top:5px;color:rgba(255,255,255,.78);font-size:9px}.callout a{flex:0 0 auto;min-height:42px;padding:0 15px;display:inline-flex;align-items:center;gap:7px;border-radius:10px;background:#fff;color:var(--primary);font-size:9px;font-weight:900;transition:.22s ease}.callout a:hover{transform:translateY(-2px) scale(1.02)}
+.footer{margin-top:0;background:#17151b;color:#fff}.footer-guest .footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-guest .footer-brand img{width:42px;height:42px;object-fit:contain;border-radius:10px}.footer-guest .footer-brand strong{font-family:"Playfair Display",serif;font-size:22px;color:#fff}.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr;gap:34px;padding-bottom:28px}.footer-grid[hidden]{display:none!important}.footer-inner{width:min(calc(100% - 30px),var(--container));margin:auto;padding:42px 0 22px}.footer-description{max-width:360px;margin-top:10px;color:#9994a1;font-size:9px;line-height:1.75}.footer-heading{font-size:10px;margin-bottom:10px}.footer-links{display:flex;flex-direction:column;gap:6px}.footer-links a{color:#9d99a5;font-size:8.5px;transition:.18s ease}.footer-links a:hover{color:#fff;transform:translateX(2px)}.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);color:#716d78;font-size:8px}.toast{position:fixed;right:18px;bottom:18px;z-index:5000;max-width:min(390px,calc(100vw - 36px));padding:12px 14px;border-radius:12px;background:#18181b;color:#fff;font-size:9px;box-shadow:var(--shadow-lg);opacity:0;transform:translateY(14px);pointer-events:none;transition:.25s ease}.toast.show{opacity:1;transform:none}.toast.success{background:#14532d}.toast.error{background:#7f1d1d}
+@keyframes notificationPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}@keyframes heroOrbit{to{transform:rotate(360deg)}}@keyframes heroGlow{from{transform:translate3d(-1%,1%,0) scale(1)}to{transform:translate3d(1%,-1%,0) scale(1.04)}}@keyframes artFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(1deg)}}@keyframes iconBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.04)}}
+@media(max-width:1050px){.main-navigation{gap:0}.nav-link{padding-inline:7px}.contact-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:820px){.header-inner{grid-template-columns:auto 1fr auto}.main-navigation,.header-guest{display:none}.header-actions .header-action,.profile-shortcut{display:none}.mobile-menu-button{display:flex}.hero{padding:36px 28px}.hero-inner{grid-template-columns:1fr}.hero-art{display:none}.callout-content{flex-direction:column;align-items:flex-start}.callout a{width:100%;justify-content:center}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.page,.footer-inner,.header-inner{width:calc(100% - 22px)}.header-inner{min-height:68px}.brand-tagline,.brand-name{display:none}.brand-logo{width:40px;height:40px}.mobile-navigation{top:68px}.page{padding-top:17px}.hero{padding:30px 20px;border-radius:21px}.hero h1{font-size:38px}.hero p{font-size:10px}.hero-icon{width:56px;height:56px;font-size:21px}.card{padding:19px}.info-band,.steps,.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.callout{padding:21px}.contact-row{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
-
 <body>
-
-
-<header class="site-header">
-
-    <div class="container nav">
-
-        <a
-            class="brand"
-            href="index.html"
-            aria-label="LOVEMI home"
-        >
-
-            <img
-                src="assets/logo1/LOGO1.ico"
-                alt="LOVEMI"
-            >
-
-            <strong>LOVEMI</strong>
-
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="LOVEMI Home">
+      <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+      <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline">DISCOVER • CONNECT • MEET</span></span>
+    </a>
+    <nav id="guestNavigation" class="main-navigation" aria-label="Public navigation">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+      <a href="discover.html" class="nav-link"><i class="fa-solid fa-compass"></i>Discover</a>
+      <a href="about.html" class="nav-link"><i class="fa-regular fa-circle-info"></i>About</a>
+      <a href="help.html" class="nav-link"><i class="fa-regular fa-circle-question"></i>Help</a>
+      <a href="contact.html" class="nav-link active"><i class="fa-regular fa-envelope"></i>Contact</a>
+    </nav>
+    <nav id="userNavigation" class="main-navigation" aria-label="Member navigation" hidden>
+      <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>Dashboard</a>
+      <a href="discover.html" class="nav-link"><i class="fa-solid fa-compass"></i>Discover</a>
+      <a href="connections.html" class="nav-link"><i class="fa-solid fa-user-group"></i>Connections</a>
+      <a href="messages.html" class="nav-link"><i class="fa-regular fa-message"></i>Messages</a>
+      <a href="profile.html" class="nav-link"><i class="fa-regular fa-user"></i>Profile</a>
+      <a href="notifications.html" class="nav-link notification-link"><i class="fa-regular fa-bell"></i>Notifications<span id="notificationDot" class="notification-dot"></span></a>
+      <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
+      <a href="premium.html" class="nav-link cta"><i class="fa-solid fa-crown"></i>Premium</a>
+    </nav>
+    <div class="header-actions">
+      <div id="guestActions" class="header-guest">
+        <a href="login.html" class="guest-btn guest-login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+        <a href="registration.html" class="guest-btn guest-join"><i class="fa-solid fa-heart"></i>Join LOVEMI</a>
+      </div>
+      <div id="userActions" class="header-guest" hidden>
+        <a href="notifications.html" class="header-action" title="Notifications" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="notification-dot" id="headerNotificationDot"></span></a>
+        <a href="profile.html" class="header-action" title="Profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <a href="profile.html" class="profile-shortcut" aria-label="Open my profile">
+          <span class="profile-shortcut-avatar-wrap"><img id="profileAvatar" class="profile-shortcut-avatar" src="assets/images/defaults/default-avatar-male.png" alt="My profile"><span class="profile-shortcut-online"></span></span>
+          <span><span id="profileName" class="profile-shortcut-name">Account</span><span id="profileSub" class="profile-shortcut-sub">Signed in</span></span>
         </a>
-
-
-        <!-- GUEST NAV -->
-
-        <nav
-            id="guestNav"
-            class="desktop-nav"
-            aria-label="Guest navigation"
-        >
-
-            <a
-                class="nav-link"
-                href="index.html"
-            >
-                Home
-            </a>
-
-            <a
-                class="nav-link"
-                href="about.html"
-            >
-                About
-            </a>
-
-            <a
-                class="nav-link"
-                href="help.html"
-            >
-                Help
-            </a>
-
-            <a
-                class="nav-link active"
-                href="contact.html"
-            >
-                Contact
-            </a>
-
-            <a
-                class="nav-link"
-                href="login.html"
-            >
-                Login
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="registration.html"
-            >
-                Create Account
-            </a>
-
-        </nav>
-
-
-        <!-- USER NAV -->
-
-        <nav
-            id="userNav"
-            class="desktop-nav"
-            aria-label="User navigation"
-            hidden
-        >
-
-            <a
-                class="nav-link"
-                href="dashboard.html"
-            >
-                Dashboard
-            </a>
-
-            <a
-                class="nav-link"
-                href="discover.html"
-            >
-                Discover
-            </a>
-
-            <a
-                class="nav-link"
-                href="connections.html"
-            >
-                Connections
-            </a>
-
-            <a
-                class="nav-link"
-                href="messages.html"
-            >
-                Messages
-            </a>
-
-            <a
-                class="nav-link"
-                href="profile.html"
-            >
-                Profile
-            </a>
-
-            <a
-                class="nav-link"
-                href="notifications.html"
-            >
-                Notifications
-            </a>
-
-            <a
-                class="nav-link"
-                href="settings.html"
-            >
-                Settings
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="premium.html"
-            >
-                Premium
-            </a>
-
-        </nav>
-
-
-        <button
-            class="mobile-toggle"
-            id="mobileToggle"
-            type="button"
-            aria-label="Open navigation"
-            aria-expanded="false"
-        >
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
+      </div>
+      <button type="button" id="mobileMenuButton" class="mobile-menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
     </div>
-
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
-
-        <div
-            class="container"
-            id="mobileLinks"
-        ></div>
-
-    </div>
-
+  </div>
 </header>
-
-
-<main>
-
-
-    <section class="hero">
-
-        <div class="container">
-
-            <div class="hero-icon">
-                <i class="fa-solid fa-envelope"></i>
-            </div>
-
-            <h1>
-                Contact LOVEMI
-            </h1>
-
-            <p>
-                Need assistance? Contact our support team or
-                send us a message using the form below.
-            </p>
-
-        </div>
-
+<nav id="mobileNavigation" class="mobile-navigation" aria-label="Mobile navigation"><div id="mobileNavGrid" class="mobile-nav-grid"></div></nav>
+<main class="page">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-badge"><i class="fa-solid fa-headset"></i> LOVEMI CONTACT CENTER</span>
+        <div class="hero-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h1>Let’s talk. <span>We’re here to help.</span></h1>
+        <p>Reach the LOVEMI support team about your account, profile, connections, Premium services, safety concerns or technical problems. Messages submitted below are saved as support tickets and sent to the LOVEMI support mailbox through the shared email service.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><i class="fa-solid fa-comments"></i></div>
+    </div>
+  </section>
+  <section class="contact-grid">
+    <section class="card">
+      <div class="card-header"><div><h2>Contact LOVEMI</h2><p class="card-intro">Use the channel that is most convenient for you.</p></div><span class="help-badge"><i class="fa-solid fa-life-ring"></i> Support</span></div>
+      <div class="contact-items">
+        <div class="contact-item"><div class="contact-icon"><i class="fa-regular fa-envelope"></i></div><div><strong>Support email</strong><a href="mailto:eduassistasc@gmail.com">eduassistasc@gmail.com</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div><div><strong>WhatsApp</strong><a href="https://wa.me/254769089734" target="_blank" rel="noopener noreferrer">+254 769 089 734</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fa-regular fa-circle-question"></i></div><div><strong>Help Center</strong><a href="help.html">Open LOVEMI Help</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fa-solid fa-shield-halved"></i></div><div><strong>Privacy & safety</strong><a href="privacy.html">Review Privacy Policy</a></div></div>
+      </div>
+      <p class="small-note">For account or payment issues, include enough detail for support to identify the problem, but do not send passwords, authentication codes or other private credentials.</p>
+      <div class="info-band">
+        <div class="info-card"><i class="fa-solid fa-database"></i><div><strong>Ticket stored</strong><span>Request saved in LOVEMI</span></div></div>
+        <div class="info-card"><i class="fa-solid fa-paper-plane"></i><div><strong>Email sent</strong><span>Shared LOVEMI mail service</span></div></div>
+        <div class="info-card"><i class="fa-solid fa-reply"></i><div><strong>Reply ready</strong><span>Support can respond</span></div></div>
+      </div>
     </section>
-
-
-    <section class="contact-section">
-
-        <div class="container">
-
-
-            <div class="contact-grid">
-
-
-                <section class="card">
-
-                    <h2>
-                        Get in Touch
-                    </h2>
-
-                    <p>
-                        Our support contact details are available
-                        below.
-                    </p>
-
-
-                    <div class="contact-items">
-
-
-                        <div class="contact-item">
-
-                            <div class="contact-icon">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Email
-                                </strong>
-
-                                <a
-                                    href="mailto:eduassistasc@gmail.com"
-                                >
-                                    eduassistasc@gmail.com
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <div class="contact-icon">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    WhatsApp
-                                </strong>
-
-                                <a
-                                    href="https://wa.me/254769089734"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    +254 769 089 734
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <div class="contact-icon">
-                                <i class="fa-solid fa-circle-question"></i>
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Help Center
-                                </strong>
-
-                                <a href="help.html">
-                                    Visit LOVEMI Help
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <div class="contact-icon">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Privacy
-                                </strong>
-
-                                <a href="privacy.html">
-                                    Privacy Policy
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <section class="card">
-
-                    <h2>
-                        Send a Message
-                    </h2>
-
-                    <p>
-                        Describe your question or problem clearly
-                        so the support team can assist you.
-                    </p>
-
-
-                    <form
-                        id="contactForm"
-                        novalidate
-                    >
-
-                        <div class="form-group">
-
-                            <label for="contactName">
-                                Name
-                            </label>
-
-                            <input
-                                class="input"
-                                id="contactName"
-                                name="name"
-                                type="text"
-                                maxlength="120"
-                                autocomplete="name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="contactEmail">
-                                Email
-                            </label>
-
-                            <input
-                                class="input"
-                                id="contactEmail"
-                                name="email"
-                                type="email"
-                                maxlength="190"
-                                autocomplete="email"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="contactSubject">
-                                Subject
-                            </label>
-
-                            <input
-                                class="input"
-                                id="contactSubject"
-                                name="subject"
-                                type="text"
-                                maxlength="180"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="contactMessage">
-                                Message
-                            </label>
-
-                            <textarea
-                                class="input"
-                                id="contactMessage"
-                                name="message"
-                                maxlength="5000"
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <button
-                            class="submit-btn"
-                            id="contactSubmit"
-                            type="submit"
-                        >
-                            <i class="fa-solid fa-paper-plane"></i>
-                            Send Message
-                        </button>
-
-
-                        <div
-                            class="form-status"
-                            id="contactStatus"
-                        ></div>
-
-                    </form>
-
-                </section>
-
-
-            </div>
-
-        </div>
-
+    <section class="card form-card">
+      <div class="form-inner">
+        <div class="card-header"><div><h2>Send a Message</h2><p class="card-intro">Create a support ticket and send it directly to LOVEMI Support.</p></div><span class="help-badge"><i class="fa-solid fa-paper-plane"></i> Direct email</span></div>
+        <form id="contactForm" novalidate>
+          <div class="form-group"><label for="contactName">Your Name</label><input class="form-control" id="contactName" name="name" type="text" maxlength="120" autocomplete="name" required></div>
+          <div class="form-group"><label for="contactEmail">Email Address</label><input class="form-control" id="contactEmail" name="email" type="email" maxlength="190" autocomplete="email" required><div class="form-hint">Use an email address where support can reply.</div></div>
+          <div class="form-group"><label for="contactCategory">Category</label><select class="form-control" id="contactCategory" name="category" required><option value="">Select category</option><option value="account">Account</option><option value="login">Login / Verification</option><option value="premium">Premium / Payment</option><option value="profile">Profile</option><option value="connection">Connection / Chat</option><option value="report">Report / Safety</option><option value="technical">Technical Problem</option><option value="contact" selected>Contact</option><option value="other">Other</option></select></div>
+          <div class="form-group"><label for="contactSubject">Subject</label><input class="form-control" id="contactSubject" name="subject" type="text" maxlength="180" required></div>
+          <div class="form-group"><label for="contactMessage">Message</label><textarea class="form-control" id="contactMessage" name="message" maxlength="5000" required placeholder="Describe your question or problem clearly."></textarea><div class="form-hint"><span id="messageCount">0</span>/5000 characters</div></div>
+          <button class="submit-btn" id="contactSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+          <div id="contactStatus" class="status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </section>
-
+  </section>
+  <section class="steps">
+    <article class="step"><div class="step-number">1</div><h3>Describe</h3><p>Tell support what happened and what you expected.</p></article>
+    <article class="step"><div class="step-number">2</div><h3>Submit</h3><p>Send the form to the LOVEMI support API.</p></article>
+    <article class="step"><div class="step-number">3</div><h3>Delivery</h3><p>The ticket is stored and emailed to support.</p></article>
+    <article class="step"><div class="step-number">4</div><h3>Response</h3><p>Keep your ticket details for follow-up.</p></article>
+  </section>
+  <section class="callout"><div class="callout-content"><div><h2>Need help right now?</h2><p>Check the Help Center for common questions or send a support ticket from this page.</p></div><a href="help.html"><i class="fa-regular fa-circle-question"></i> Open Help Center</a></div></section>
 </main>
-
-
-<footer class="site-footer">
-
-    <div class="container footer-grid">
-
-
-        <div>
-
-            <div class="footer-brand">
-
-                <img
-                    src="assets/logo1/LOGO1.ico"
-                    alt="LOVEMI"
-                >
-
-                <strong>
-                    LOVEMI
-                </strong>
-
-            </div>
-
-            <p class="footer-description">
-                Discover meaningful connections and communicate
-                responsibly through the LOVEMI platform.
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Explore</h3>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="help.html">
-                Help
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Account</h3>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="registration.html">
-                Register
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Legal</h3>
-
-            <a href="privacy.html">
-                Privacy
-            </a>
-
-            <a href="terms.html">
-                Terms
-            </a>
-
-        </div>
-
+<footer id="guestFooter" class="footer footer-guest">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><a href="index.html" class="footer-brand"><img src="assets/logo1/logo1.png" alt="LOVEMI Logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"><strong>LOVEMI</strong></a><p class="footer-description">Discover people, build meaningful connections and get help through LOVEMI.</p></div>
+      <div><h3 class="footer-heading">Platform</h3><div class="footer-links"><a href="discover.html">Discover</a><a href="about.html">About LOVEMI</a><a href="help.html">Help Center</a><a href="contact.html">Contact</a></div></div>
+      <div><h3 class="footer-heading">Information</h3><div class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="login.html">Login</a><a href="registration.html">Register</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="login.html">Login</a><a href="registration.html">Create Account</a><a href="forgot-password.html">Forgot Password</a><a href="premium.html">Premium</a></div></div>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <div class="container footer-bottom-inner">
-
-            <span>
-                © 2026 LOVEMI. All rights reserved.
-            </span>
-
-            <span>
-                eduassistasc@gmail.com
-            </span>
-
-        </div>
-
-    </div>
-
+    <div class="footer-bottom"><span>© <span id="guestYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
 </footer>
-
-
+<footer id="userFooter" class="footer" hidden>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><a href="dashboard.html" class="brand"><img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"><span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f">DISCOVER • CONNECT • MEET</span></span></a><p class="footer-description">Discover approved members, build meaningful connections and manage your LOVEMI profile securely.</p></div>
+      <div><h3 class="footer-heading">Explore</h3><div class="footer-links"><a href="dashboard.html">Dashboard</a><a href="discover.html">Discover</a><a href="connections.html">Connections</a><a href="messages.html">Messages</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="profile.html">Profile</a><a href="edit-profile.html">Edit Profile</a><a href="premium.html">Premium</a><a href="settings.html">Settings</a></div></div>
+      <div><h3 class="footer-heading">Help</h3><div class="footer-links"><a href="notifications.html">Notifications</a><a href="help.html">Help Center</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="userYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
+</footer>
+<div id="toast" class="toast" role="alert" aria-live="polite"></div>
 <script>
-
-(function () {
-
-    "use strict";
-
-
-    const guestNav =
-        document.getElementById(
-            "guestNav"
-        );
-
-
-    const userNav =
-        document.getElementById(
-            "userNav"
-        );
-
-
-    const mobileMenu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-
-    const mobileLinks =
-        document.getElementById(
-            "mobileLinks"
-        );
-
-
-    const mobileToggle =
-        document.getElementById(
-            "mobileToggle"
-        );
-
-
-    const guestItems = [
-
-        ["Home", "index.html"],
-
-        ["About", "about.html"],
-
-        ["Help", "help.html"],
-
-        ["Contact", "contact.html"],
-
-        ["Login", "login.html"],
-
-        ["Create Account", "registration.html"]
-
-    ];
-
-
-    const userItems = [
-
-        ["Dashboard", "dashboard.html"],
-
-        ["Discover", "discover.html"],
-
-        ["Connections", "connections.html"],
-
-        ["Messages", "messages.html"],
-
-        ["Profile", "profile.html"],
-
-        ["Notifications", "notifications.html"],
-
-        ["Settings", "settings.html"],
-
-        ["Premium", "premium.html"]
-
-    ];
-
-
-    async function getSession() {
-
-        try {
-
-            const response =
-                await fetch(
-                    "api/auth/session.php",
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        cache: "no-store",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                return null;
-            }
-
-
-            return await response.json();
-
-        } catch (error) {
-
-            return null;
-
-        }
-
-    }
-
-
-    function buildMobile(
-        items
-    ) {
-
-        mobileLinks.innerHTML = "";
-
-
-        items.forEach(
-            function (item) {
-
-                const a =
-                    document.createElement(
-                        "a"
-                    );
-
-
-                a.href =
-                    item[1];
-
-
-                a.textContent =
-                    item[0];
-
-
-                mobileLinks.appendChild(
-                    a
-                );
-
-            }
-        );
-
-    }
-
-
-    async function initializeNavigation() {
-
-        const data =
-            await getSession();
-
-
-        const loggedIn =
-            Boolean(
-                data &&
-                (
-                    data.authenticated === true
-                    ||
-                    data.logged_in === true
-                    ||
-                    (
-                        data.success === true &&
-                        data.user
-                    )
-                )
-            );
-
-
-        if (loggedIn) {
-
-            guestNav.hidden =
-                true;
-
-            userNav.hidden =
-                false;
-
-            buildMobile(
-                userItems
-            );
-
-        } else {
-
-            guestNav.hidden =
-                false;
-
-            userNav.hidden =
-                true;
-
-            buildMobile(
-                guestItems
-            );
-
-        }
-
-    }
-
-
-    mobileToggle.addEventListener(
-        "click",
-        function () {
-
-            const open =
-                mobileMenu.classList.toggle(
-                    "open"
-                );
-
-
-            mobileToggle.setAttribute(
-                "aria-expanded",
-                open
-                    ? "true"
-                    : "false"
-            );
-
-
-            mobileToggle.innerHTML =
-                open
-                    ?
-                    '<i class="fa-solid fa-xmark"></i>'
-                    :
-                    '<i class="fa-solid fa-bars"></i>';
-
-        }
-    );
-
-
-    initializeNavigation();
-
-
-    /* ======================================================
-       CONTACT FORM
-    ====================================================== */
-
-    const contactForm =
-        document.getElementById(
-            "contactForm"
-        );
-
-
-    const status =
-        document.getElementById(
-            "contactStatus"
-        );
-
-
-    const submit =
-        document.getElementById(
-            "contactSubmit"
-        );
-
-
-    contactForm.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            status.className =
-                "form-status";
-
-
-            const name =
-                document
-                    .getElementById(
-                        "contactName"
-                    )
-                    .value
-                    .trim();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "contactEmail"
-                    )
-                    .value
-                    .trim();
-
-
-            const subject =
-                document
-                    .getElementById(
-                        "contactSubject"
-                    )
-                    .value
-                    .trim();
-
-
-            const message =
-                document
-                    .getElementById(
-                        "contactMessage"
-                    )
-                    .value
-                    .trim();
-
-
-            if (
-                !name ||
-                !email ||
-                !subject ||
-                !message
-            ) {
-
-                status.textContent =
-                    "Please complete all fields.";
-
-                status.classList.add(
-                    "show",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            submit.disabled =
-                true;
-
-
-            submit.innerHTML =
-                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "api/support/create-ticket.php",
-                        {
-                            method: "POST",
-                            credentials: "include",
-                            cache: "no-store",
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-                                "Accept":
-                                    "application/json"
-                            },
-                            body:
-                                JSON.stringify(
-                                    {
-                                        name,
-                                        email,
-                                        subject,
-                                        message,
-                                        category:
-                                            "contact"
-                                    }
-                                )
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-
-                    throw new Error(
-                        data.message ||
-                        "Message could not be sent."
-                    );
-
-                }
-
-
-                status.textContent =
-                    data.message ||
-                    "Your message has been sent successfully.";
-
-                status.classList.add(
-                    "show",
-                    "success"
-                );
-
-
-                contactForm.reset();
-
-            } catch (error) {
-
-                status.textContent =
-                    error.message ||
-                    "Unable to send the message.";
-
-                status.classList.add(
-                    "show",
-                    "error"
-                );
-
-            } finally {
-
-                submit.disabled =
-                    false;
-
-
-                submit.innerHTML =
-                    '<i class="fa-solid fa-paper-plane"></i> Send Message';
-
-            }
-
-        }
-    );
-
-})();
-
+"use strict";
+const API={session:"api/auth/session.php",ticket:"api/support/create-ticket.php",notifications:"api/notifications/unread-count.php"};
+const DEFAULT_MALE="assets/images/defaults/default-avatar-male.png",DEFAULT_FEMALE="assets/images/defaults/default-avatar-female.png";
+let authenticated=false,currentUser=null;
+const $=id=>document.getElementById(id);
+$("guestYear").textContent=new Date().getFullYear();$("userYear").textContent=new Date().getFullYear();
+function sessionBool(v){if(v===true||v===1)return true;if(typeof v==="string")return /^(1|true|yes|on|authenticated|logged[ _-]?in)$/i.test(v.trim());return false}
+function findUser(data){const c=[data?.user,data?.current_user,data?.currentUser,data?.profile,data?.result?.user,data?.result?.current_user,data?.result?.profile,data?.data?.user,data?.data?.current_user,data?.data?.profile,data?.session?.user];return c.find(v=>v&&typeof v==="object"&&!Array.isArray(v))||null}
+function userField(user,keys){for(const key of keys){const v=key.split(".").reduce((o,p)=>o?.[p],user);if(v!==undefined&&v!==null&&String(v).trim()!=="")return v}return ""}
+function getAvatar(user){const image=userField(user,["profile_photo","profile_image","profile_picture","profile_thumbnail","avatar","image","photo_url"]);if(image)return String(image).trim().replace(/^\.\//,"");return /female|woman|girl/i.test(String(userField(user,["gender"])||""))?DEFAULT_FEMALE:DEFAULT_MALE}
+function displayName(user){return String(userField(user,["full_names","full_name","display_name","username"])||"Account").trim()||"Account"}
+function setState(isLogged,user){authenticated=isLogged;currentUser=user||null;renderNavigation();renderMobile()}
+function renderNavigation(){const guestNav=$("guestNavigation"),userNav=$("userNavigation"),guestActions=$("guestActions"),userActions=$("userActions"),guestFooter=$("guestFooter"),userFooter=$("userFooter");if(authenticated){guestNav.hidden=true;guestNav.setAttribute("aria-hidden","true");userNav.hidden=false;userNav.setAttribute("aria-hidden","false");guestActions.hidden=true;userActions.hidden=false;guestFooter.hidden=true;guestFooter.setAttribute("aria-hidden","true");userFooter.hidden=false;userFooter.setAttribute("aria-hidden","false");$("profileName").textContent=displayName(currentUser);const username=userField(currentUser,["username"]);$("profileSub").textContent=username?`@${username}`:"Signed in";$("profileAvatar").src=getAvatar(currentUser);$("profileAvatar").onerror=()=>{$("profileAvatar").onerror=null;$('profileAvatar').src=/female|woman|girl/i.test(String(userField(currentUser,["gender"])))?DEFAULT_FEMALE:DEFAULT_MALE}}else{guestNav.hidden=false;guestNav.setAttribute("aria-hidden","false");userNav.hidden=true;userNav.setAttribute("aria-hidden","true");guestActions.hidden=false;userActions.hidden=true;guestFooter.hidden=false;guestFooter.setAttribute("aria-hidden","false");userFooter.hidden=true;userFooter.setAttribute("aria-hidden","true")}}
+function mobileItems(){return authenticated?[["Dashboard","dashboard.html","fa-house"],["Discover","discover.html","fa-compass"],["Connections","connections.html","fa-user-group"],["Messages","messages.html","fa-message"],["Profile","profile.html","fa-user"],["Notifications","notifications.html","fa-bell"],["Settings","settings.html","fa-gear"],["Premium","premium.html","fa-crown"]]:[["Home","index.html","fa-house"],["Discover","discover.html","fa-compass"],["About","about.html","fa-circle-info"],["Help","help.html","fa-circle-question"],["Contact","contact.html","fa-envelope"],["Login","login.html","fa-right-to-bracket"],["Create Account","registration.html","fa-user-plus"]]}
+function renderMobile(){const grid=$("mobileNavGrid");grid.innerHTML=mobileItems().map(([label,href,icon])=>`<a class="mobile-nav-link ${label==='Contact'?'active':''}" href="${href}"><i class="fa-solid ${icon}"></i>${label}</a>`).join("")}
+async function getJson(url,options={}){const sep=url.includes("?")?"&":"?";const response=await fetch(`${url}${sep}_=${Date.now()}`,{...options,cache:"no-store",credentials:"same-origin",headers:{Accept:"application/json","Cache-Control":"no-cache,no-store,max-age=0",...(options.headers||{})}});const text=await response.text();let data;try{data=JSON.parse(text)}catch(e){throw new Error("The server returned an invalid response. Please try again.")}if(!response.ok||data?.success===false)throw new Error(data?.message||`Request failed (${response.status}).`);return data}
+async function loadSession(){try{const data=await getJson(API.session);const user=findUser(data);const flags=[data?.authenticated,data?.logged_in,data?.loggedIn,data?.is_authenticated,data?.isLoggedIn,data?.result?.authenticated,data?.result?.logged_in,data?.result?.loggedIn,data?.data?.authenticated,data?.data?.logged_in];const explicit=flags.some(v=>v!==undefined&&v!==null);const id=user?.user_id??user?.id??data?.user_id??data?.id??data?.result?.user_id??data?.result?.id??data?.data?.user_id??data?.data?.id;const isLogged=explicit?flags.some(sessionBool):Boolean(user&&id!==undefined&&id!==null&&String(id).trim()!=="");setState(isLogged,user)}catch(e){setState(false,null)}}
+async function refreshNotifications(){if(!authenticated)return;try{const data=await getJson(API.notifications);const count=Number(data?.unread_count??data?.count??0);$("notificationDot").classList.toggle("pulse",count>0);$("headerNotificationDot").classList.toggle("pulse",count>0)}catch(e){}}
+function showStatus(message,type){const box=$("contactStatus");box.className=`status show ${type}`;box.textContent=message}
+function showToast(message,type=""){const toast=$("toast");clearTimeout(showToast.timer);toast.textContent=message;toast.className=`toast show ${type}`;showToast.timer=setTimeout(()=>toast.className="toast",3500)}
+$("mobileMenuButton").addEventListener("click",function(){const nav=$("mobileNavigation"),open=nav.classList.toggle("open");document.body.classList.toggle("menu-open",open);this.setAttribute("aria-expanded",String(open));this.innerHTML=open?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>'});
+window.addEventListener("resize",()=>{if(window.innerWidth>820){$("mobileNavigation").classList.remove("open");document.body.classList.remove("menu-open");$("mobileMenuButton").setAttribute("aria-expanded","false");$("mobileMenuButton").innerHTML='<i class="fa-solid fa-bars"></i>'}});
+const messageField=$("contactMessage");messageField.addEventListener("input",()=>$("messageCount").textContent=String(messageField.value.length));
+$("contactForm").addEventListener("submit",async event=>{event.preventDefault();const name=$("contactName").value.trim(),email=$("contactEmail").value.trim(),category=$("contactCategory").value,subject=$("contactSubject").value.trim(),message=$("contactMessage").value.trim();if(!name||!email||!category||!subject||!message){showStatus("Please complete all required fields.","error");return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showStatus("Please enter a valid email address.","error");return}const button=$("contactSubmit"),old=button.innerHTML;button.disabled=true;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';showStatus("Sending your message to LOVEMI Support...","info");try{const data=await getJson(API.ticket,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,category,subject,message})});const successMessage=data.message||"Your message has been sent successfully to LOVEMI Support.";showStatus(successMessage,"success");$("contactForm").reset();$("messageCount").textContent="0";showToast("Message sent to LOVEMI Support.","success")}catch(error){showStatus(error.message||"Unable to send your message.","error");showToast("Message could not be sent.","error")}finally{button.disabled=false;button.innerHTML=old}});
+window.addEventListener("pageshow",async()=>{await loadSession();await refreshNotifications()});
+(async()=>{await loadSession();await refreshNotifications()})();
 </script>
-
-
 </body>
 </html>

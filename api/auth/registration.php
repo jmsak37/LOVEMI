@@ -4,18 +4,62 @@
  * LOVEMI - REGISTRATION API
  * ============================================================
  *
- * EMAIL verification only.
+ * Supports:
  *
- * Google Authenticator is configured after email verification.
- * Phone is stored but is NOT part of the verification process.
+ * 1. Normal LOVEMI registration
+ * 2. Google registration preparation
+ * 3. Google registration session retrieval
+ *
+ * Existing registration behavior remains:
+ * - Username
+ * - Full names
+ * - Gender
+ * - Date of birth
+ * - Email
+ * - Country
+ * - Phone
+ * - ID number
+ * - Password
+ * - First-admin registration
+ * - Terms
+ * - Email verification
+ *
+ * Added:
+ * - Current city
+ * - Education level
+ * - University / College
+ * - Course
+ * - Google account registration
+ * - Google account linking
+ * - Official welcome email
+ *
  * ============================================================
  */
 
 declare(strict_types=1);
 
 
-require_once __DIR__ . '/../../config/database.php';
+/* ============================================================
+   DATABASE
+============================================================ */
 
+require_once
+    __DIR__
+    . '/../../config/database.php';
+
+
+/* ============================================================
+   GOOGLE CONFIG
+============================================================ */
+
+require_once
+    __DIR__
+    . '/../../config/google.php';
+
+
+/* ============================================================
+   HEADERS
+============================================================ */
 
 header(
     'Content-Type: application/json; charset=utf-8'
@@ -35,6 +79,19 @@ header(
 
 
 /* ============================================================
+   SESSION
+============================================================ */
+
+if (
+    session_status() !== PHP_SESSION_ACTIVE
+) {
+
+    session_start();
+
+}
+
+
+/* ============================================================
    RESPONSE
 ============================================================ */
 
@@ -45,7 +102,10 @@ function registrationResponse(
     int $status = 200
 ): never {
 
-    http_response_code($status);
+    http_response_code(
+        $status
+    );
+
 
     echo json_encode(
         array_merge(
@@ -58,21 +118,1894 @@ function registrationResponse(
             ],
             $extra
         ),
+        JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
-        | JSON_UNESCAPED_UNICODE
     );
+
 
     exit;
 }
 
 
 /* ============================================================
-   METHOD
+   GOOGLE CSRF TOKEN
+============================================================ */
+
+function getGoogleCsrfToken(): string
+{
+
+    if (
+        empty(
+            $_SESSION[
+                'lovemi_registration_google_csrf'
+            ]
+        )
+    ) {
+
+        $_SESSION[
+            'lovemi_registration_google_csrf'
+        ] =
+            bin2hex(
+                random_bytes(32)
+            );
+
+    }
+
+
+    return (string)
+        $_SESSION[
+            'lovemi_registration_google_csrf'
+        ];
+
+}
+
+
+/* ============================================================
+   VALIDATE GOOGLE CSRF
+============================================================ */
+
+function validateGoogleCsrf(
+    string $token
+): bool {
+
+    $sessionToken =
+        (string)(
+            $_SESSION[
+                'lovemi_registration_google_csrf'
+            ]
+            ??
+            ''
+        );
+
+
+    if (
+        $sessionToken === ''
+        ||
+        $token === ''
+    ) {
+
+        return false;
+
+    }
+
+
+    return hash_equals(
+        $sessionToken,
+        $token
+    );
+
+}
+
+
+/* ============================================================
+   GOOGLE TOKEN INFO
+============================================================ */
+
+function requestGoogleTokenInfo(
+    string $idToken
+): array {
+
+    if (
+        trim(
+            $idToken
+        ) === ''
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_TOKEN_REQUIRED'
+        );
+
+    }
+
+
+    $url =
+        'https://oauth2.googleapis.com/tokeninfo?id_token='
+        .
+        rawurlencode(
+            $idToken
+        );
+
+
+    /* ========================================================
+       CURL
+    ======================================================== */
+
+    if (
+        function_exists(
+            'curl_init'
+        )
+    ) {
+
+        $curl =
+            curl_init(
+                $url
+            );
+
+
+        curl_setopt_array(
+            $curl,
+            [
+
+                CURLOPT_RETURNTRANSFER =>
+                    true,
+
+                CURLOPT_FOLLOWLOCATION =>
+                    false,
+
+                CURLOPT_CONNECTTIMEOUT =>
+                    10,
+
+                CURLOPT_TIMEOUT =>
+                    15,
+
+                CURLOPT_SSL_VERIFYPEER =>
+                    true,
+
+                CURLOPT_SSL_VERIFYHOST =>
+                    2,
+
+                CURLOPT_HTTPHEADER =>
+                    [
+                        'Accept: application/json'
+                    ]
+
+            ]
+        );
+
+
+        $body =
+            curl_exec(
+                $curl
+            );
+
+
+        $httpCode =
+            (int)
+            curl_getinfo(
+                $curl,
+                CURLINFO_HTTP_CODE
+            );
+
+
+        $curlError =
+            curl_error(
+                $curl
+            );
+
+
+        curl_close(
+            $curl
+        );
+
+
+        if (
+            $body === false
+        ) {
+
+            error_log(
+                '[LOVEMI GOOGLE TOKEN CURL] '
+                .
+                $curlError
+            );
+
+
+            throw new RuntimeException(
+                'GOOGLE_TOKEN_VALIDATION_FAILED'
+            );
+
+        }
+
+    } else {
+
+        /* ====================================================
+           FILE GET CONTENTS FALLBACK
+        ==================================================== */
+
+        $context =
+            stream_context_create(
+                [
+
+                    'http' =>
+                        [
+
+                            'method' =>
+                                'GET',
+
+                            'timeout' =>
+                                15,
+
+                            'ignore_errors' =>
+                                true,
+
+                            'header' =>
+                                "Accept: application/json\r\n"
+
+                        ],
+
+                    'ssl' =>
+                        [
+
+                            'verify_peer' =>
+                                true,
+
+                            'verify_peer_name' =>
+                                true
+
+                        ]
+
+                ]
+            );
+
+
+        $body =
+            @file_get_contents(
+                $url,
+                false,
+                $context
+            );
+
+
+        $httpCode =
+            0;
+
+
+        if (
+            isset(
+                $http_response_header
+            )
+            &&
+            is_array(
+                $http_response_header
+            )
+        ) {
+
+            foreach (
+                $http_response_header
+                as $header
+            ) {
+
+                if (
+                    preg_match(
+                        '#HTTP/\S+\s+(\d+)#',
+                        $header,
+                        $matches
+                    )
+                ) {
+
+                    $httpCode =
+                        (int)
+                        $matches[1];
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    if (
+        !is_string(
+            $body
+        )
+        ||
+        trim(
+            $body
+        ) === ''
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_TOKEN_EMPTY'
+        );
+
+    }
+
+
+    $payload =
+        json_decode(
+            $body,
+            true
+        );
+
+
+    if (
+        !is_array(
+            $payload
+        )
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_TOKEN_INVALID'
+        );
+
+    }
+
+
+    if (
+        $httpCode >= 400
+        ||
+        isset(
+            $payload['error']
+        )
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_TOKEN_REJECTED'
+        );
+
+    }
+
+
+    return $payload;
+
+}
+
+
+/* ============================================================
+   VALIDATE GOOGLE IDENTITY
+============================================================ */
+
+function validateGoogleIdentity(
+    string $credential
+): array {
+
+    $payload =
+        requestGoogleTokenInfo(
+            $credential
+        );
+
+
+    $clientId =
+        lovemiGoogleClientId();
+
+
+    if (
+        $clientId === ''
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_CLIENT_ID_NOT_CONFIGURED'
+        );
+
+    }
+
+
+    $issuer =
+        trim(
+            (string)(
+                $payload['iss']
+                ??
+                ''
+            )
+        );
+
+
+    $audience =
+        trim(
+            (string)(
+                $payload['aud']
+                ??
+                ''
+            )
+        );
+
+
+    $sub =
+        trim(
+            (string)(
+                $payload['sub']
+                ??
+                ''
+            )
+        );
+
+
+    $email =
+        strtolower(
+            trim(
+                (string)(
+                    $payload['email']
+                    ??
+                    ''
+                )
+            )
+        );
+
+
+    $emailVerified =
+        filter_var(
+            $payload['email_verified']
+                ??
+                false,
+            FILTER_VALIDATE_BOOLEAN
+        );
+
+
+    $fullNames =
+        trim(
+            (string)(
+                $payload['name']
+                ??
+                ''
+            )
+        );
+
+
+    $picture =
+        trim(
+            (string)(
+                $payload['picture']
+                ??
+                ''
+            )
+        );
+
+
+    $expiresAt =
+        isset(
+            $payload['exp']
+        )
+            ?
+            (int)
+            $payload['exp']
+            :
+            0;
+
+
+    /* ========================================================
+       ISSUER
+    ======================================================== */
+
+    if (
+        !in_array(
+            $issuer,
+            [
+                'accounts.google.com',
+                'https://accounts.google.com'
+            ],
+            true
+        )
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_ISSUER_INVALID'
+        );
+
+    }
+
+
+    /* ========================================================
+       AUDIENCE
+    ======================================================== */
+
+    if (
+        !hash_equals(
+            $clientId,
+            $audience
+        )
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_AUDIENCE_INVALID'
+        );
+
+    }
+
+
+    /* ========================================================
+       SUB
+    ======================================================== */
+
+    if (
+        $sub === ''
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_SUB_MISSING'
+        );
+
+    }
+
+
+    /* ========================================================
+       EMAIL
+    ======================================================== */
+
+    if (
+        !filter_var(
+            $email,
+            FILTER_VALIDATE_EMAIL
+        )
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_EMAIL_INVALID'
+        );
+
+    }
+
+
+    /* ========================================================
+       EMAIL VERIFIED
+    ======================================================== */
+
+    if (
+        !$emailVerified
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_EMAIL_NOT_VERIFIED'
+        );
+
+    }
+
+
+    /* ========================================================
+       EXPIRATION
+    ======================================================== */
+
+    if (
+        $expiresAt <= 0
+        ||
+        $expiresAt < time()
+    ) {
+
+        throw new RuntimeException(
+            'GOOGLE_TOKEN_EXPIRED'
+        );
+
+    }
+
+
+    /* ========================================================
+       FALLBACK NAME
+    ======================================================== */
+
+    if (
+        $fullNames === ''
+    ) {
+
+        $emailName =
+            strstr(
+                $email,
+                '@',
+                true
+            );
+
+
+        $fullNames =
+            $emailName
+            ?:
+            'LOVEMI Member';
+
+    }
+
+
+    return [
+
+        'sub' =>
+            $sub,
+
+        'email' =>
+            $email,
+
+        'full_names' =>
+            $fullNames,
+
+        'picture' =>
+            $picture
+
+    ];
+
+}
+
+
+/* ============================================================
+   APP URL
+============================================================ */
+
+function lovemiApplicationUrl(): string
+{
+
+    $configured =
+        getenv(
+            'LOVEMI_APP_URL'
+        );
+
+
+    if (
+        is_string(
+            $configured
+        )
+        &&
+        trim(
+            $configured
+        ) !== ''
+    ) {
+
+        return rtrim(
+            trim(
+                $configured
+            ),
+            '/'
+        );
+
+    }
+
+
+    $scheme =
+        (
+            !empty(
+                $_SERVER['HTTPS']
+            )
+            &&
+            strtolower(
+                (string)
+                $_SERVER['HTTPS']
+            ) !== 'off'
+        )
+            ?
+            'https'
+            :
+            'http';
+
+
+    $host =
+        preg_replace(
+            '/[^A-Za-z0-9.\-:\[\]]/',
+            '',
+            (string)(
+                $_SERVER['HTTP_HOST']
+                ??
+                'localhost'
+            )
+        );
+
+
+    return
+        $scheme
+        .
+        '://'
+        .
+        $host
+        .
+        '/LOVEMI';
+
+}
+
+
+/* ============================================================
+   WELCOME EMAIL
+============================================================ */
+
+function sendLovemiWelcomeEmail(
+    string $recipientEmail,
+    string $recipientName,
+    string $username,
+    string $city,
+    string $educationLevel,
+    string $universityName,
+    string $course,
+    bool $googleSignup
+): bool {
+
+    try {
+
+        require_once
+            __DIR__
+            .
+            '/../../services/email/email-service.php';
+
+
+        if (
+            !function_exists(
+                'lovemiMail'
+            )
+        ) {
+
+            throw new RuntimeException(
+                'LOVEMI_MAIL_SERVICE_NOT_FOUND'
+            );
+
+        }
+
+
+        $mailer =
+            lovemiMail();
+
+
+        $mailer->addAddress(
+            $recipientEmail,
+            $recipientName
+        );
+
+
+        /* ====================================================
+           EMBED LOVEMI LOGO
+        ==================================================== */
+
+        $logoPath =
+            dirname(
+                __DIR__,
+                2
+            )
+            .
+            DIRECTORY_SEPARATOR
+            .
+            'assets'
+            .
+            DIRECTORY_SEPARATOR
+            .
+            'logo1'
+            .
+            DIRECTORY_SEPARATOR
+            .
+            'logo1.png';
+
+
+        if (
+            is_file(
+                $logoPath
+            )
+        ) {
+
+            $mailer->addEmbeddedImage(
+                $logoPath,
+                'lovemi_logo',
+                'logo1.png',
+                'base64',
+                'image/png'
+            );
+
+        }
+
+
+        $safeName =
+            htmlspecialchars(
+                $recipientName,
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $safeUsername =
+            htmlspecialchars(
+                $username,
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $safeCity =
+            htmlspecialchars(
+                $city,
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $safeEducation =
+            htmlspecialchars(
+                $educationLevel,
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $safeUniversity =
+            htmlspecialchars(
+                $universityName !== ''
+                    ?
+                    $universityName
+                    :
+                    'Not provided',
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $safeCourse =
+            htmlspecialchars(
+                $course !== ''
+                    ?
+                    $course
+                    :
+                    'Not provided',
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $registrationMethod =
+            $googleSignup
+                ?
+                'Google account registration'
+                :
+                'Standard LOVEMI registration';
+
+
+        $appUrl =
+            htmlspecialchars(
+                lovemiApplicationUrl(),
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $createdAt =
+            htmlspecialchars(
+                date(
+                    'F j, Y \a\t H:i'
+                ),
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+
+        $mailer->isHTML(
+            true
+        );
+
+
+        $mailer->Subject =
+            'Welcome to LOVEMI — Your Account Has Been Created';
+
+
+        $logoHtml =
+            is_file(
+                $logoPath
+            )
+                ?
+                '
+                <img
+                    src="cid:lovemi_logo"
+                    alt="LOVEMI"
+                    style="
+                        width:76px;
+                        height:76px;
+                        object-fit:contain;
+                        border-radius:18px;
+                        margin-bottom:15px;
+                    "
+                >
+                '
+                :
+                '';
+
+
+        $mailer->Body = '
+
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Welcome to LOVEMI</title>
+
+</head>
+
+<body
+    style="
+        margin:0;
+        padding:0;
+        background:#f7f7fb;
+        font-family:Arial,Helvetica,sans-serif;
+        color:#18181b;
+    "
+>
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="
+        background:#f7f7fb;
+        padding:30px 15px;
+    "
+>
+
+<tr>
+
+<td align="center">
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="
+        max-width:640px;
+        background:#ffffff;
+        border-radius:22px;
+        overflow:hidden;
+        box-shadow:0 12px 35px rgba(0,0,0,.08);
+    "
+>
+
+<tr>
+
+<td
+    align="center"
+    style="
+        padding:35px 25px;
+        background:linear-gradient(
+            135deg,
+            #3f176f,
+            #6d28d9,
+            #9d174d
+        );
+    "
+>
+
+'
+.
+$logoHtml
+.
+'
+
+<div
+    style="
+        color:#ffffff;
+        font-size:30px;
+        font-weight:800;
+    "
+>
+LOVEMI
+</div>
+
+<div
+    style="
+        color:rgba(255,255,255,.78);
+        font-size:10px;
+        margin-top:5px;
+        letter-spacing:1px;
+    "
+>
+DISCOVER • CONNECT • MEET
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:35px;">
+
+<h1
+    style="
+        margin:0 0 12px;
+        color:#18181b;
+        font-size:24px;
+    "
+>
+Welcome to LOVEMI, '
+.
+$safeName
+.
+'
+</h1>
+
+<p
+    style="
+        color:#55555c;
+        font-size:14px;
+        line-height:1.7;
+        margin:0 0 15px;
+    "
+>
+Thank you for creating your LOVEMI account.
+We are pleased to welcome you to LOVEMI.
+</p>
+
+<p
+    style="
+        color:#55555c;
+        font-size:14px;
+        line-height:1.7;
+        margin:0 0 20px;
+    "
+>
+Your registration has been successfully received.
+Please complete the email verification process using
+the separate verification email sent to this address.
+</p>
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="
+        border:1px solid #eeeeef;
+        border-radius:15px;
+        overflow:hidden;
+        margin:20px 0;
+    "
+>
+
+<tr>
+
+<td
+    colspan="2"
+    style="
+        padding:14px 15px;
+        background:#faf8ff;
+        color:#6d28d9;
+        font-weight:800;
+        font-size:13px;
+    "
+>
+Registration Details
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        width:42%;
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Username
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$safeUsername
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Current City
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$safeCity
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Education Level
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$safeEducation
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+University / College
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$safeUniversity
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Course
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$safeCourse
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Registration Method
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+htmlspecialchars(
+    $registrationMethod,
+    ENT_QUOTES,
+    'UTF-8'
+)
+.
+'
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:10px 15px;
+        color:#777;
+        font-size:12px;
+    "
+>
+Created
+</td>
+
+<td
+    style="
+        padding:10px 15px;
+        font-size:12px;
+        font-weight:700;
+    "
+>
+'
+.
+$createdAt
+.
+'
+</td>
+
+</tr>
+
+</table>
+
+<div
+    style="
+        text-align:center;
+        margin:25px 0;
+    "
+>
+
+<a
+    href="'
+.
+$appUrl
+.
+'"
+    style="
+        display:inline-block;
+        padding:13px 25px;
+        color:#ffffff;
+        background:linear-gradient(
+            135deg,
+            #6d28d9,
+            #db2777
+        );
+        border-radius:10px;
+        text-decoration:none;
+        font-weight:800;
+        font-size:13px;
+    "
+>
+Open LOVEMI
+</a>
+
+</div>
+
+<p
+    style="
+        color:#777;
+        font-size:12px;
+        line-height:1.7;
+        margin:0;
+    "
+>
+Please keep your LOVEMI account information secure.
+If you did not create this account, please contact
+LOVEMI support immediately.
+</p>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td
+    style="
+        padding:20px 35px 30px;
+        border-top:1px solid #eeeeef;
+        color:#999;
+        font-size:11px;
+        line-height:1.6;
+    "
+>
+
+<strong
+    style="color:#6d28d9;"
+>
+LOVEMI
+</strong>
+
+<br>
+
+Discover • Connect • Meet
+
+<br>
+
+This is an official automated message from LOVEMI.
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>
+';
+
+
+        $mailer->AltBody =
+            "Welcome to LOVEMI, {$recipientName}.\n\n"
+            .
+            "Thank you for creating your LOVEMI account.\n\n"
+            .
+            "Username: {$username}\n"
+            .
+            "Current City: {$city}\n"
+            .
+            "Education Level: {$educationLevel}\n"
+            .
+            "University / College: "
+            .
+            (
+                $universityName !== ''
+                    ?
+                    $universityName
+                    :
+                    'Not provided'
+            )
+            .
+            "\n"
+            .
+            "Course: "
+            .
+            (
+                $course !== ''
+                    ?
+                    $course
+                    :
+                    'Not provided'
+            )
+            .
+            "\n"
+            .
+            "Registration Method: "
+            .
+            $registrationMethod
+            .
+            "\n\n"
+            .
+            "Please complete the email verification process."
+            .
+            "\n\n"
+            .
+            "LOVEMI"
+            .
+            "\nDiscover • Connect • Meet";
+
+
+        return
+            (bool)
+            $mailer->send();
+
+
+    } catch (
+        Throwable $e
+    ) {
+
+        error_log(
+            '[LOVEMI WELCOME EMAIL ERROR] '
+            .
+            $e->getMessage()
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   REQUEST METHOD
+============================================================ */
+
+$method =
+    strtoupper(
+        trim(
+            (string)(
+                $_SERVER['REQUEST_METHOD']
+                ??
+                ''
+            )
+        )
+    );
+
+
+$action =
+    strtolower(
+        trim(
+            (string)(
+                $_GET['action']
+                ??
+                ''
+            )
+        )
+    );
+
+
+/* ============================================================
+   GOOGLE CONFIG ENDPOINT
 ============================================================ */
 
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '')
-    !== 'POST'
+    $method === 'GET'
+    &&
+    $action === 'google-config'
+) {
+
+    registrationResponse(
+        true,
+        'Google registration configuration loaded.',
+        [
+            'client_id' =>
+                lovemiGoogleClientId(),
+
+            'csrf_token' =>
+                getGoogleCsrfToken()
+        ]
+    );
+
+}
+
+
+/* ============================================================
+   GOOGLE SESSION ENDPOINT
+============================================================ */
+
+if (
+    $method === 'GET'
+    &&
+    $action === 'google-session'
+) {
+
+    $google =
+        $_SESSION[
+            'lovemi_google_signup'
+        ]
+        ??
+        null;
+
+
+    if (
+        !is_array(
+            $google
+        )
+        ||
+        empty(
+            $google['sub']
+        )
+        ||
+        empty(
+            $google['email']
+        )
+    ) {
+
+        registrationResponse(
+            false,
+            'No pending Google registration was found.',
+            [
+                'code' =>
+                    'GOOGLE_SIGNUP_SESSION_NOT_FOUND'
+            ],
+            404
+        );
+
+    }
+
+
+    if (
+        isset(
+            $google['created_at']
+        )
+        &&
+        (
+            time()
+            -
+            (int)
+            $google['created_at']
+        ) > 1800
+    ) {
+
+        unset(
+            $_SESSION[
+                'lovemi_google_signup'
+            ]
+        );
+
+
+        registrationResponse(
+            false,
+            'Your Google registration session has expired. Please start again.',
+            [
+                'code' =>
+                    'GOOGLE_SESSION_EXPIRED'
+            ],
+            422
+        );
+
+    }
+
+
+    registrationResponse(
+        true,
+        'Pending Google registration loaded.',
+        [
+            'google' =>
+                [
+                    'sub' =>
+                        (string)
+                        $google['sub'],
+
+                    'email' =>
+                        (string)
+                        $google['email'],
+
+                    'full_names' =>
+                        (string)
+                        (
+                            $google['full_names']
+                            ??
+                            ''
+                        ),
+
+                    'picture' =>
+                        (string)
+                        (
+                            $google['picture']
+                            ??
+                            ''
+                        )
+                ]
+        ]
+    );
+
+}
+
+
+/* ============================================================
+   GOOGLE PREPARE
+============================================================ */
+
+if (
+    $method === 'POST'
+    &&
+    $action === 'google-prepare'
+) {
+
+    $rawBody =
+        file_get_contents(
+            'php://input'
+        );
+
+
+    $data =
+        json_decode(
+            $rawBody ?: '{}',
+            true
+        );
+
+
+    if (
+        !is_array(
+            $data
+        )
+    ) {
+
+        $data = [];
+
+    }
+
+
+    $csrfToken =
+        trim(
+            (string)(
+                $data['csrf_token']
+                ??
+                ''
+            )
+        );
+
+
+    if (
+        !validateGoogleCsrf(
+            $csrfToken
+        )
+    ) {
+
+        registrationResponse(
+            false,
+            'Google registration security validation failed. Please refresh the page and try again.',
+            [
+                'code' =>
+                    'GOOGLE_CSRF_FAILED'
+            ],
+            403
+        );
+
+    }
+
+
+    $credential =
+        trim(
+            (string)(
+                $data['credential']
+                ??
+                ''
+            )
+        );
+
+
+    try {
+
+        $google =
+            validateGoogleIdentity(
+                $credential
+            );
+
+
+        $pdo =
+            db();
+
+
+        /* ====================================================
+           CHECK GOOGLE SUB
+        ==================================================== */
+
+        $stmt =
+            $pdo->prepare(
+                "
+                SELECT user_id
+                FROM user_google_accounts
+                WHERE google_sub = :google_sub
+                LIMIT 1
+                "
+            );
+
+
+        $stmt->execute(
+            [
+                ':google_sub' =>
+                    $google['sub']
+            ]
+        );
+
+
+        if (
+            $stmt->fetch()
+        ) {
+
+            registrationResponse(
+                false,
+                'This Google account is already connected to LOVEMI. Please use Login with Google.',
+                [
+                    'code' =>
+                        'ACCOUNT_EXISTS'
+                ],
+                409
+            );
+
+        }
+
+
+        /* ====================================================
+           CHECK EMAIL
+        ==================================================== */
+
+        $stmt =
+            $pdo->prepare(
+                "
+                SELECT
+                    id,
+                    username,
+                    full_names,
+                    account_status
+                FROM users
+                WHERE LOWER(email) =
+                      LOWER(:email)
+                LIMIT 1
+                "
+            );
+
+
+        $stmt->execute(
+            [
+                ':email' =>
+                    $google['email']
+            ]
+        );
+
+
+        $existingUser =
+            $stmt->fetch();
+
+
+        if (
+            $existingUser
+        ) {
+
+            registrationResponse(
+                false,
+                'A LOVEMI account already exists with this email address. Please use Login with Google or your existing login details.',
+                [
+                    'code' =>
+                        'ACCOUNT_EXISTS',
+
+                    'user_id' =>
+                        (int)
+                        $existingUser['id']
+                ],
+                409
+            );
+
+        }
+
+
+        /* ====================================================
+           STORE TRUSTED GOOGLE SESSION
+        ==================================================== */
+
+        $_SESSION[
+            'lovemi_google_signup'
+        ] =
+            [
+
+                'sub' =>
+                    $google['sub'],
+
+                'email' =>
+                    $google['email'],
+
+                'full_names' =>
+                    $google['full_names'],
+
+                'picture' =>
+                    $google['picture'],
+
+                'created_at' =>
+                    time()
+
+            ];
+
+
+        registrationResponse(
+            true,
+            'Google account accepted. Complete the remaining LOVEMI registration details.',
+            [
+                'google' =>
+                    [
+                        'sub' =>
+                            $google['sub'],
+
+                        'email' =>
+                            $google['email'],
+
+                        'full_names' =>
+                            $google['full_names'],
+
+                        'picture' =>
+                            $google['picture']
+                    ]
+            ]
+        );
+
+
+    } catch (
+        Throwable $e
+    ) {
+
+        error_log(
+            '[LOVEMI GOOGLE PREPARE ERROR] '
+            .
+            $e->getMessage()
+        );
+
+
+        $message =
+            'Google registration could not be completed. Please try again.';
+
+
+        switch (
+            $e->getMessage()
+        ) {
+
+            case 'GOOGLE_CLIENT_ID_NOT_CONFIGURED':
+
+                $message =
+                    'Google registration is not configured on the LOVEMI server.';
+
+                break;
+
+
+            case 'GOOGLE_EMAIL_NOT_VERIFIED':
+
+                $message =
+                    'Google did not provide a verified email address.';
+
+                break;
+
+
+            case 'GOOGLE_AUDIENCE_INVALID':
+
+                $message =
+                    'The Google client ID configured for LOVEMI does not match the Google account configuration.';
+
+                break;
+
+
+            case 'GOOGLE_TOKEN_EXPIRED':
+
+                $message =
+                    'The Google registration request has expired. Please try again.';
+
+                break;
+
+        }
+
+
+        registrationResponse(
+            false,
+            $message,
+            [
+                'code' =>
+                    'GOOGLE_REGISTRATION_FAILED'
+            ],
+            422
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   NORMAL REGISTRATION
+============================================================ */
+
+if (
+    $method !== 'POST'
 ) {
 
     registrationResponse(
@@ -89,7 +2022,7 @@ if (
 
 
 /* ============================================================
-   REQUEST
+   REQUEST DATA
 ============================================================ */
 
 $rawBody =
@@ -105,8 +2038,148 @@ $data =
     );
 
 
-if (!is_array($data)) {
+if (
+    !is_array(
+        $data
+    )
+    ||
+    empty(
+        $data
+    )
+) {
+
+    /*
+     * Keep compatibility with normal
+     * application/x-www-form-urlencoded requests.
+     */
+
+    $data =
+        $_POST;
+
+}
+
+
+if (
+    !is_array(
+        $data
+    )
+) {
+
     $data = [];
+
+}
+
+
+/* ============================================================
+   GOOGLE REGISTRATION FLAG
+============================================================ */
+
+$googleSignup =
+    filter_var(
+        $data['google_signup']
+        ??
+        false,
+        FILTER_VALIDATE_BOOLEAN
+    );
+
+
+$pendingGoogle =
+    $_SESSION[
+        'lovemi_google_signup'
+    ]
+    ??
+    null;
+
+
+/* ============================================================
+   TRUST GOOGLE EMAIL FROM SESSION
+============================================================ */
+
+if (
+    $googleSignup
+) {
+
+    if (
+        !is_array(
+            $pendingGoogle
+        )
+        ||
+        empty(
+            $pendingGoogle['sub']
+        )
+        ||
+        empty(
+            $pendingGoogle['email']
+        )
+    ) {
+
+        registrationResponse(
+            false,
+            'Your Google registration session has expired. Please start Google registration again.',
+            [
+                'code' =>
+                    'GOOGLE_SESSION_EXPIRED'
+            ],
+            422
+        );
+
+    }
+
+
+    if (
+        isset(
+            $pendingGoogle['created_at']
+        )
+        &&
+        (
+            time()
+            -
+            (int)
+            $pendingGoogle['created_at']
+        ) > 1800
+    ) {
+
+        unset(
+            $_SESSION[
+                'lovemi_google_signup'
+            ]
+        );
+
+
+        registrationResponse(
+            false,
+            'Your Google registration session has expired. Please start again.',
+            [
+                'code' =>
+                    'GOOGLE_SESSION_EXPIRED'
+            ],
+            422
+        );
+
+    }
+
+
+    $email =
+        strtolower(
+            trim(
+                (string)
+                $pendingGoogle['email']
+            )
+        );
+
+} else {
+
+    $email =
+        strtolower(
+            trim(
+                (string)(
+                    $data['email']
+                    ??
+                    ''
+                )
+            )
+        );
+
 }
 
 
@@ -116,47 +2189,65 @@ if (!is_array($data)) {
 
 $username =
     trim(
-        (string) (
+        (string)(
             $data['username']
-            ?? ''
+            ??
+            ''
         )
     );
 
 
 $fullNames =
     trim(
-        (string) (
+        (string)(
             $data['full_names']
-            ?? ''
+            ??
+            ''
         )
     );
 
 
+/*
+ * Google supplies the initial name.
+ */
+if (
+    $fullNames === ''
+    &&
+    $googleSignup
+    &&
+    is_array(
+        $pendingGoogle
+    )
+) {
+
+    $fullNames =
+        trim(
+            (string)(
+                $pendingGoogle['full_names']
+                ??
+                ''
+            )
+        );
+
+}
+
+
 $gender =
     trim(
-        (string) (
+        (string)(
             $data['gender']
-            ?? ''
+            ??
+            ''
         )
     );
 
 
 $dateOfBirth =
     trim(
-        (string) (
+        (string)(
             $data['date_of_birth']
-            ?? ''
-        )
-    );
-
-
-$email =
-    strtolower(
-        trim(
-            (string) (
-                $data['email']
-                ?? ''
-            )
+            ??
+            ''
         )
     );
 
@@ -165,56 +2256,104 @@ $countryId =
     isset(
         $data['country_id']
     )
-        ? (int)
-          $data['country_id']
-        : 0;
+        ?
+        (int)
+        $data['country_id']
+        :
+        0;
 
 
 $phoneCode =
     trim(
-        (string) (
+        (string)(
             $data['phone_code']
-            ?? ''
+            ??
+            ''
         )
     );
 
 
 $phoneNumber =
     trim(
-        (string) (
+        (string)(
             $data['phone_number']
-            ?? ''
+            ??
+            ''
         )
     );
 
 
 $idNumber =
     trim(
-        (string) (
+        (string)(
             $data['id_number']
-            ?? ''
+            ??
+            ''
+        )
+    );
+
+
+$city =
+    trim(
+        (string)(
+            $data['city']
+            ??
+            ''
+        )
+    );
+
+
+$educationLevel =
+    trim(
+        (string)(
+            $data['education_level']
+            ??
+            ''
+        )
+    );
+
+
+$universityName =
+    trim(
+        (string)(
+            $data['university_name']
+            ??
+            ''
+        )
+    );
+
+
+$course =
+    trim(
+        (string)(
+            $data['course']
+            ??
+            ''
         )
     );
 
 
 $password =
-    (string) (
+    (string)(
         $data['password']
-        ?? ''
+        ??
+        ''
     );
 
 
 $confirmPassword =
-    (string) (
+    (string)(
         $data['confirm_password']
-        ?? ''
+        ??
+        ''
     );
 
 
 $registerAsAdmin =
     filter_var(
         $data['register_as_admin']
-        ?? false,
+        ??
+        false,
         FILTER_VALIDATE_BOOLEAN
     );
 
@@ -222,13 +2361,14 @@ $registerAsAdmin =
 $agree =
     filter_var(
         $data['agree']
-        ?? false,
+        ??
+        false,
         FILTER_VALIDATE_BOOLEAN
     );
 
 
 /* ============================================================
-   VALIDATION
+   USERNAME
 ============================================================ */
 
 if (
@@ -251,10 +2391,18 @@ if (
 }
 
 
+/* ============================================================
+   FULL NAMES
+============================================================ */
+
 if (
-    mb_strlen($fullNames) < 2
+    mb_strlen(
+        $fullNames
+    ) < 2
     ||
-    mb_strlen($fullNames) > 180
+    mb_strlen(
+        $fullNames
+    ) > 180
 ) {
 
     registrationResponse(
@@ -269,6 +2417,10 @@ if (
 
 }
 
+
+/* ============================================================
+   GENDER
+============================================================ */
 
 if (
     !in_array(
@@ -296,7 +2448,7 @@ if (
 
 
 /* ============================================================
-   AGE
+   DATE OF BIRTH
 ============================================================ */
 
 $dob =
@@ -309,8 +2461,10 @@ $dob =
 if (
     !$dob
     ||
-    $dob->format('Y-m-d')
-        !==
+    $dob->format(
+        'Y-m-d'
+    )
+    !==
     $dateOfBirth
 ) {
 
@@ -448,11 +2602,14 @@ try {
         $countryStmt->fetch();
 
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI REGISTRATION COUNTRY ERROR] '
-        . $e->getMessage()
+        .
+        $e->getMessage()
     );
 
 
@@ -466,7 +2623,9 @@ try {
 }
 
 
-if (!$country) {
+if (
+    !$country
+) {
 
     registrationResponse(
         false,
@@ -514,9 +2673,13 @@ $nationalPhone =
 
 
 if (
-    !is_string($nationalPhone)
+    !is_string(
+        $nationalPhone
+    )
     ||
-    strlen($nationalPhone) < 5
+    strlen(
+        $nationalPhone
+    ) < 5
 ) {
 
     registrationResponse(
@@ -533,13 +2696,14 @@ if (
 
 
 $phoneE164 =
-    $phoneCode
-    .
+    $phoneCode .
     $nationalPhone;
 
 
 if (
-    strlen($phoneE164) > 20
+    strlen(
+        $phoneE164
+    ) > 20
 ) {
 
     registrationResponse(
@@ -556,7 +2720,7 @@ if (
 
 
 /* ============================================================
-   ID HASH
+   ID NUMBER HASH
 ============================================================ */
 
 $normalizedId =
@@ -570,7 +2734,9 @@ $normalizedId =
 
 
 if (
-    strlen($normalizedId) < 4
+    strlen(
+        $normalizedId
+    ) < 4
 ) {
 
     registrationResponse(
@@ -594,11 +2760,131 @@ $idNumberHash =
 
 
 /* ============================================================
+   CURRENT CITY
+============================================================ */
+
+if (
+    mb_strlen(
+        $city
+    ) < 2
+    ||
+    mb_strlen(
+        $city
+    ) > 120
+) {
+
+    registrationResponse(
+        false,
+        'Please enter your current city.',
+        [
+            'code' =>
+                'INVALID_CITY'
+        ],
+        422
+    );
+
+}
+
+
+/* ============================================================
+   EDUCATION
+============================================================ */
+
+$allowedEducationLevels =
+    [
+
+        'Secondary School',
+
+        'Certificate',
+
+        'Diploma',
+
+        "Bachelor's Degree",
+
+        "Master's Degree",
+
+        'Doctorate',
+
+        'Other'
+
+    ];
+
+
+if (
+    !in_array(
+        $educationLevel,
+        $allowedEducationLevels,
+        true
+    )
+) {
+
+    registrationResponse(
+        false,
+        'Please select a valid education level.',
+        [
+            'code' =>
+                'INVALID_EDUCATION_LEVEL'
+        ],
+        422
+    );
+
+}
+
+
+/* ============================================================
+   UNIVERSITY
+============================================================ */
+
+if (
+    mb_strlen(
+        $universityName
+    ) > 255
+) {
+
+    registrationResponse(
+        false,
+        'University or college name is too long.',
+        [
+            'code' =>
+                'INVALID_UNIVERSITY'
+        ],
+        422
+    );
+
+}
+
+
+/* ============================================================
+   COURSE
+============================================================ */
+
+if (
+    mb_strlen(
+        $course
+    ) > 255
+) {
+
+    registrationResponse(
+        false,
+        'Course name is too long.',
+        [
+            'code' =>
+                'INVALID_COURSE'
+        ],
+        422
+    );
+
+}
+
+
+/* ============================================================
    PASSWORD
 ============================================================ */
 
 if (
-    strlen($password) < 8
+    strlen(
+        $password
+    ) < 8
 ) {
 
     registrationResponse(
@@ -632,7 +2918,9 @@ if (
 }
 
 
-if (!$agree) {
+if (
+    !$agree
+) {
 
     registrationResponse(
         false,
@@ -673,6 +2961,52 @@ if (
 
 
 /* ============================================================
+   GOOGLE DUPLICATE CHECK BEFORE TRANSACTION
+============================================================ */
+
+if (
+    $googleSignup
+) {
+
+    $googleCheck =
+        $pdo->prepare(
+            "
+            SELECT id
+            FROM user_google_accounts
+            WHERE google_sub = :google_sub
+            LIMIT 1
+            "
+        );
+
+
+    $googleCheck->execute(
+        [
+            ':google_sub' =>
+                $pendingGoogle['sub']
+        ]
+    );
+
+
+    if (
+        $googleCheck->fetch()
+    ) {
+
+        registrationResponse(
+            false,
+            'This Google account is already connected to LOVEMI.',
+            [
+                'code' =>
+                    'GOOGLE_EXISTS'
+            ],
+            409
+        );
+
+    }
+
+}
+
+
+/* ============================================================
    FIRST ADMIN LOCK
 ============================================================ */
 
@@ -686,12 +3020,17 @@ try {
                 10
             ) AS lock_result
             "
-        )->fetch();
+        )
+        ->fetch();
 
 
     if (
         (int)
-        ($lockResult['lock_result'] ?? 0)
+        (
+            $lockResult['lock_result']
+            ??
+            0
+        )
         !==
         1
     ) {
@@ -709,7 +3048,9 @@ try {
     }
 
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     registrationResponse(
         false,
@@ -722,7 +3063,7 @@ try {
 
 
 /* ============================================================
-   REGISTRATION TRANSACTION
+   TRANSACTION
 ============================================================ */
 
 try {
@@ -731,7 +3072,7 @@ try {
 
 
     /* ========================================================
-       DUPLICATE USERNAME
+       USERNAME DUPLICATE
     ======================================================== */
 
     $stmt =
@@ -754,7 +3095,9 @@ try {
     );
 
 
-    if ($stmt->fetch()) {
+    if (
+        $stmt->fetch()
+    ) {
 
         throw new RuntimeException(
             'USERNAME_EXISTS'
@@ -764,7 +3107,7 @@ try {
 
 
     /* ========================================================
-       DUPLICATE EMAIL
+       EMAIL DUPLICATE
     ======================================================== */
 
     $stmt =
@@ -787,7 +3130,9 @@ try {
     );
 
 
-    if ($stmt->fetch()) {
+    if (
+        $stmt->fetch()
+    ) {
 
         throw new RuntimeException(
             'EMAIL_EXISTS'
@@ -797,7 +3142,7 @@ try {
 
 
     /* ========================================================
-       DUPLICATE PHONE
+       PHONE DUPLICATE
     ======================================================== */
 
     $stmt =
@@ -819,7 +3164,9 @@ try {
     );
 
 
-    if ($stmt->fetch()) {
+    if (
+        $stmt->fetch()
+    ) {
 
         throw new RuntimeException(
             'PHONE_EXISTS'
@@ -829,7 +3176,7 @@ try {
 
 
     /* ========================================================
-       DUPLICATE ID
+       ID DUPLICATE
     ======================================================== */
 
     $stmt =
@@ -851,7 +3198,9 @@ try {
     );
 
 
-    if ($stmt->fetch()) {
+    if (
+        $stmt->fetch()
+    ) {
 
         throw new RuntimeException(
             'ID_EXISTS'
@@ -892,9 +3241,13 @@ try {
 
 
     if (
-        !isset($roles['member'])
+        !isset(
+            $roles['member']
+        )
         ||
-        !isset($roles['admin'])
+        !isset(
+            $roles['admin']
+        )
     ) {
 
         throw new RuntimeException(
@@ -905,23 +3258,18 @@ try {
 
 
     /* ========================================================
-       EXISTING ADMIN
+       ADMIN STATUS
     ======================================================== */
 
     $adminStmt =
         $pdo->query(
             "
             SELECT u.id
-
             FROM users u
-
             INNER JOIN roles r
                 ON r.id = u.role_id
-
             WHERE r.slug = 'admin'
-
               AND u.is_deleted = FALSE
-
             LIMIT 1
             "
         );
@@ -931,10 +3279,6 @@ try {
         (bool)
         $adminStmt->fetch();
 
-
-    /*
-     * SERVER DECIDES THE ROLE.
-     */
 
     if (
         !$adminExists
@@ -1018,6 +3362,7 @@ try {
 
     $insert->execute(
         [
+
             ':role_id' =>
                 $roleId,
 
@@ -1050,6 +3395,7 @@ try {
 
             ':password_hash' =>
                 $passwordHash
+
         ]
     );
 
@@ -1060,7 +3406,209 @@ try {
 
 
     /* ========================================================
-       EMAIL VERIFICATION CODE
+       PROFILE
+    ======================================================== */
+
+    /*
+     * The existing database trigger creates the profiles row.
+     * Your current database already uses this trigger to create
+     * profiles after user creation. :contentReference[oaicite:1]{index=1}
+     */
+
+    $profileCheck =
+        $pdo->prepare(
+            "
+            SELECT id
+            FROM profiles
+            WHERE user_id = :user_id
+            LIMIT 1
+            "
+        );
+
+
+    $profileCheck->execute(
+        [
+            ':user_id' =>
+                $newUserId
+        ]
+    );
+
+
+    $profileExists =
+        $profileCheck->fetch();
+
+
+    if (
+        !$profileExists
+    ) {
+
+        $profileInsert =
+            $pdo->prepare(
+                "
+                INSERT INTO profiles
+                (
+                    user_id,
+                    display_name
+                )
+                VALUES
+                (
+                    :user_id,
+                    :display_name
+                )
+                "
+            );
+
+
+        $profileInsert->execute(
+            [
+                ':user_id' =>
+                    $newUserId,
+
+                ':display_name' =>
+                    $fullNames
+            ]
+        );
+
+    }
+
+
+    /* ========================================================
+       PROFILE DATA
+    ======================================================== */
+
+    $profileUpdate =
+        $pdo->prepare(
+            "
+            UPDATE profiles
+            SET
+                display_name =
+                    :display_name,
+
+                education =
+                    :education,
+
+                city =
+                    :city,
+
+                education_level =
+                    :education_level,
+
+                university_name =
+                    :university_name,
+
+                course =
+                    :course,
+
+                updated_at =
+                    CURRENT_TIMESTAMP
+
+            WHERE user_id = :user_id
+            LIMIT 1
+            "
+        );
+
+
+    $profileUpdate->execute(
+        [
+
+            ':display_name' =>
+                $fullNames,
+
+            ':education' =>
+                $educationLevel,
+
+            ':city' =>
+                $city,
+
+            ':education_level' =>
+                $educationLevel,
+
+            ':university_name' =>
+                (
+                    $universityName !== ''
+                        ?
+                        $universityName
+                        :
+                        null
+                ),
+
+            ':course' =>
+                (
+                    $course !== ''
+                        ?
+                        $course
+                        :
+                        null
+                ),
+
+            ':user_id' =>
+                $newUserId
+
+        ]
+    );
+
+
+    /* ========================================================
+       GOOGLE ACCOUNT LINK
+    ======================================================== */
+
+    if (
+        $googleSignup
+    ) {
+
+        $googleInsert =
+            $pdo->prepare(
+                "
+                INSERT INTO user_google_accounts
+                (
+                    user_id,
+                    google_sub,
+                    email,
+                    picture_url
+                )
+                VALUES
+                (
+                    :user_id,
+                    :google_sub,
+                    :email,
+                    :picture_url
+                )
+                "
+            );
+
+
+        $googleInsert->execute(
+            [
+
+                ':user_id' =>
+                    $newUserId,
+
+                ':google_sub' =>
+                    $pendingGoogle['sub'],
+
+                ':email' =>
+                    $email,
+
+                ':picture_url' =>
+                    (
+                        !empty(
+                            $pendingGoogle['picture']
+                        )
+                        ?
+                        (string)
+                        $pendingGoogle['picture']
+                        :
+                        null
+                    )
+
+            ]
+        );
+
+    }
+
+
+    /* ========================================================
+       EMAIL VERIFICATION
     ======================================================== */
 
     $verificationCode =
@@ -1119,6 +3667,7 @@ try {
 
     $verification->execute(
         [
+
             ':user_id' =>
                 $newUserId,
 
@@ -1130,6 +3679,7 @@ try {
 
             ':expires_at' =>
                 $verificationExpires
+
         ]
     );
 
@@ -1167,6 +3717,7 @@ try {
 
     $audit->execute(
         [
+
             ':user_id' =>
                 $newUserId,
 
@@ -1176,21 +3727,55 @@ try {
             ':new_values' =>
                 json_encode(
                     [
+
                         'role' =>
                             $roleSlug,
 
                         'account_status' =>
-                            'pending'
-                    ]
+                            'pending',
+
+                        'google_signup' =>
+                            $googleSignup,
+
+                        'city' =>
+                            $city,
+
+                        'education_level' =>
+                            $educationLevel,
+
+                        'university_name' =>
+                            (
+                                $universityName !== ''
+                                    ?
+                                    $universityName
+                                    :
+                                    null
+                            ),
+
+                        'course' =>
+                            (
+                                $course !== ''
+                                    ?
+                                    $course
+                                    :
+                                    null
+                            )
+
+                    ],
+                    JSON_UNESCAPED_UNICODE |
+                    JSON_UNESCAPED_SLASHES
                 ),
 
             ':ip_address' =>
                 $_SERVER['REMOTE_ADDR']
-                ?? null,
+                ??
+                null,
 
             ':user_agent' =>
                 $_SERVER['HTTP_USER_AGENT']
-                ?? null
+                ??
+                null
+
         ]
     );
 
@@ -1198,7 +3783,9 @@ try {
     $pdo->commit();
 
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     if (
         $pdo->inTransaction()
@@ -1219,11 +3806,14 @@ try {
             "
         );
 
-    } catch (Throwable $lockError) {
+    } catch (
+        Throwable $lockError
+    ) {
 
         error_log(
             '[LOVEMI LOCK RELEASE ERROR] '
-            . $lockError->getMessage()
+            .
+            $lockError->getMessage()
         );
 
     }
@@ -1293,11 +3883,27 @@ try {
             break;
 
 
+        case 'GOOGLE_EXISTS':
+
+            registrationResponse(
+                false,
+                'This Google account is already connected to LOVEMI.',
+                [
+                    'code' =>
+                        'GOOGLE_EXISTS'
+                ],
+                409
+            );
+
+            break;
+
+
         default:
 
             error_log(
                 '[LOVEMI REGISTRATION ERROR] '
-                . $e->getMessage()
+                .
+                $e->getMessage()
             );
 
 
@@ -1330,21 +3936,24 @@ try {
         "
     );
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI LOCK RELEASE ERROR] '
-        . $e->getMessage()
+        .
+        $e->getMessage()
     );
 
 }
 
 
 /* ============================================================
-   SEND EMAIL
+   SEND VERIFICATION EMAIL
 ============================================================ */
 
-$emailSent =
+$verificationEmailSent =
     false;
 
 
@@ -1352,72 +3961,124 @@ try {
 
     require_once
         __DIR__
-        . '/../../services/email/email-service.php';
+        .
+        '/../../services/email/email-service.php';
 
 
-    $emailSent =
-        sendLovemiVerificationEmail(
-            $email,
-            $fullNames,
-            $verificationCode
-        );
+    if (
+        function_exists(
+            'sendLovemiVerificationEmail'
+        )
+    ) {
 
-} catch (Throwable $e) {
+        $verificationEmailSent =
+            sendLovemiVerificationEmail(
+                $email,
+                $fullNames,
+                $verificationCode
+            );
+
+    }
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI VERIFICATION EMAIL ERROR] '
-        . $e->getMessage()
+        .
+        $e->getMessage()
     );
 
 }
 
 
-if (!$emailSent) {
+/* ============================================================
+   SEND WELCOME EMAIL
+============================================================ */
 
-    /*
-     * The account exists, but the verification email could not
-     * be delivered. The user can use resend-email-code.php.
-     */
-
-    registrationResponse(
-        true,
-        'Your account was created, but we could not deliver the verification email. Please use Resend Code on the verification page.',
-        [
-            'user_id' =>
-                $newUserId,
-
-            'role' =>
-                $roleSlug,
-
-            'email_verification_required' =>
-                true,
-
-            'two_factor_required' =>
-                true,
-
-            'redirect' =>
-                'verify-account.html?user='
-                .
-                rawurlencode(
-                    (string)
-                    $newUserId
-                )
-        ],
-        201
+$welcomeEmailSent =
+    sendLovemiWelcomeEmail(
+        $email,
+        $fullNames,
+        $username,
+        $city,
+        $educationLevel,
+        $universityName,
+        $course,
+        $googleSignup
     );
+
+
+/* ============================================================
+   CLEAR GOOGLE SESSION
+============================================================ */
+
+if (
+    $googleSignup
+) {
+
+    unset(
+        $_SESSION[
+            'lovemi_google_signup'
+        ]
+    );
+
+}
+
+
+/* ============================================================
+   RESPONSE
+============================================================ */
+
+$message =
+    'Your LOVEMI account has been created.';
+
+
+if (
+    $verificationEmailSent
+) {
+
+    $message .=
+        ' A verification email has been sent to your email address.';
+
+} else {
+
+    $message .=
+        ' The verification email could not be delivered. Please use Resend Code on the verification page.';
+
+}
+
+
+if (
+    $welcomeEmailSent
+) {
+
+    $message .=
+        ' An official LOVEMI welcome email has also been sent.';
 
 }
 
 
 registrationResponse(
     true,
-    'Your LOVEMI account has been created. A verification code has been sent to your email.',
+    $message,
     [
+
         'user_id' =>
             $newUserId,
 
         'role' =>
             $roleSlug,
+
+        'google_signup' =>
+            $googleSignup,
+
+        'verification_email_sent' =>
+            $verificationEmailSent,
+
+        'welcome_email_sent' =>
+            $welcomeEmailSent,
 
         'email_verification_required' =>
             true,
@@ -1432,6 +4093,7 @@ registrationResponse(
                 (string)
                 $newUserId
             )
+
     ],
     201
 );

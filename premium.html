@@ -1,1748 +1,1073 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<meta name="description"
-      content="LOVEMI Premium membership">
-
-<meta name="theme-color"
-      content="#6d28d9">
-
-
-<!-- =====================================================
-     LOGOS / TAB ICONS
-====================================================== -->
-
-<link rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/logo1/favicon-16x16.png">
-
-<link rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/logo1/favicon-32x32.png">
-
-<link rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/logo1/apple-touch-icon.png">
-
-<link rel="manifest"
-      href="assets/logo1/site.webmanifest">
-
-
-<meta http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate">
-
-<meta http-equiv="Pragma"
-      content="no-cache">
-
-<meta http-equiv="Expires"
-      content="0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="LOVEMI Premium memberships">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <title>Premium | LOVEMI</title>
 
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
 
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet"
+>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
-      rel="stylesheet">
-
-
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer">
-
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+>
 
 <style>
-
-:root {
-
+:root{
     --primary:#6d28d9;
-
     --primary-dark:#4c1d95;
-
     --primary-soft:#f3e8ff;
-
     --accent:#db2777;
-
-    --accent-soft:#fce7f3;
-
     --green:#16a34a;
-
     --green-soft:#f0fdf4;
-
     --red:#dc2626;
-
     --red-soft:#fef2f2;
-
+    --orange:#d97706;
+    --orange-soft:#fff7ed;
     --text:#18181b;
-
     --soft:#68686f;
-
     --muted:#9898a1;
-
-    --background:#f7f7fb;
-
+    --bg:#f7f7fb;
     --white:#fff;
-
     --border:#e9e9ef;
-
-    --shadow:
-        0 18px 55px
-        rgba(0,0,0,.08);
-
+    --shadow:0 18px 55px rgba(0,0,0,.08);
     --container:1380px;
-
 }
 
-
-* {
-
-    margin:0;
-
-    padding:0;
-
+*{
     box-sizing:border-box;
-
+    margin:0;
+    padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
 
-body {
-
+body{
     min-height:100vh;
-
-    font-family:
-        "Inter",
-        sans-serif;
-
-    color:
-        var(--text);
-
-    background:
-        var(--background);
-
+    font-family:Inter,sans-serif;
+    color:var(--text);
+    background:var(--bg);
 }
 
-
-a {
-
+a{
     color:inherit;
-
     text-decoration:none;
-
 }
 
+button,
+select{
+    font:inherit;
+}
 
-button {
-
-    font-family:inherit;
-
+button{
     cursor:pointer;
-
 }
 
-
-button:disabled {
-
+button:disabled{
+    opacity:.55;
     cursor:not-allowed;
-
-    opacity:.6;
-
 }
 
-
-/* =====================================================
-   HEADER
-====================================================== */
-
-.header {
-
+.header{
     position:sticky;
-
     top:0;
-
     z-index:1000;
-
-    background:
-        rgba(255,255,255,.97);
-
-    backdrop-filter:
-        blur(18px);
-
-    border-bottom:
-        1px solid
-        var(--border);
-
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
 }
 
-
-.header-inner {
-
-    width:
-        min(
-            calc(100% - 30px),
-            var(--container)
-        );
-
+.header-inner{
+    width:min(calc(100% - 30px),var(--container));
     min-height:74px;
-
     margin:auto;
-
     display:grid;
-
-    grid-template-columns:
-        auto
-        1fr
-        auto;
-
+    grid-template-columns:auto 1fr auto;
     gap:18px;
-
     align-items:center;
-
 }
 
-
-.brand {
-
+.brand{
     display:flex;
-
     align-items:center;
-
     gap:9px;
-
 }
 
-
-.brand-logo {
-
+.brand-logo{
     width:44px;
-
     height:44px;
-
     object-fit:contain;
-
     border-radius:11px;
-
 }
 
-
-.brand-name {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:25px;
-
-    font-weight:800;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--accent)
-        );
-
-    background-clip:text;
-
+.brand-name{
+    font:800 25px/1 'Playfair Display',serif;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
     -webkit-background-clip:text;
-
     background-clip:text;
-
     -webkit-text-fill-color:transparent;
-
 }
 
-
-.brand-tagline {
-
+.brand-tagline{
     display:block;
-
-    margin-top:2px;
-
     color:var(--muted);
-
     font-size:6px;
-
     letter-spacing:.7px;
-
+    margin-top:2px;
 }
 
-
-.navigation {
-
+.navigation{
     display:flex;
-
     justify-content:center;
-
-    align-items:center;
-
     gap:3px;
-
 }
 
-
-.nav-link {
-
+.nav-link{
     min-height:39px;
-
-    padding:
-        0 9px;
-
+    padding:0 9px;
     display:flex;
-
     align-items:center;
-
     gap:5px;
-
     border-radius:9px;
-
     color:var(--soft);
-
     font-size:8px;
-
     font-weight:800;
-
-    white-space:nowrap;
-
 }
 
-
-.nav-link:hover,
-.nav-link.active {
-
+.nav-link.active,
+.nav-link:hover{
     color:var(--primary);
-
     background:var(--primary-soft);
-
 }
 
-
-.nav-link i {
-
-    font-size:9px;
-
-}
-
-
-.header-actions {
-
+.header-actions{
     display:flex;
-
-    align-items:center;
-
     gap:6px;
-
 }
 
-
-.header-icon {
-
+.header-icon,
+.mobile-menu{
+    position:relative;
     width:38px;
-
     height:38px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:10px;
-
+    background:#fff;
     color:var(--soft);
-
-    background:white;
-
-    font-size:10px;
-
 }
 
+.header-icon.has-notification{
+    color:var(--primary);
+    border-color:#d8b4fe;
+    background:var(--primary-soft);
+}
 
-.mobile-menu {
+.header-icon.has-notification::after{
+    content:attr(data-unread);
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    min-width:17px;
+    height:17px;
+    padding:0 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:var(--red);
+    color:#fff;
+    border:2px solid #fff;
+    font-size:6px;
+    font-weight:900;
+}
 
+.mobile-menu{
     display:none;
-
-    width:39px;
-
-    height:39px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:10px;
-
-    background:white;
-
 }
 
-
-/* =====================================================
-   MOBILE NAV
-====================================================== */
-
-.mobile-nav {
-
+.mobile-nav{
     position:fixed;
-
     top:74px;
-
     left:8px;
-
     right:8px;
-
     z-index:999;
-
     display:none;
-
     padding:8px;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:13px;
-
-    background:white;
-
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.12);
-
+    background:#fff;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
 }
 
-
-.mobile-nav.open {
-
+.mobile-nav.open{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:6px;
-
 }
 
-
-.mobile-nav a {
-
+.mobile-nav a{
     min-height:43px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:6px;
-
+    border:1px solid var(--border);
     border-radius:9px;
-
     color:var(--soft);
-
     font-size:8px;
-
     font-weight:800;
-
-    border:
-        1px solid
-        var(--border);
-
 }
 
-
-.mobile-nav a i {
-
+.mobile-nav a i{
     color:var(--primary);
-
 }
 
-
-.mobile-nav a.active {
-
+.mobile-nav a.active{
     color:var(--primary);
-
     background:var(--primary-soft);
-
 }
 
-
-/* =====================================================
-   MAIN
-====================================================== */
-
-.page {
-
-    width:
-        min(
-            calc(100% - 30px),
-            1180px
-        );
-
+.page{
+    width:min(calc(100% - 30px),1180px);
     margin:auto;
-
-    padding:
-        32px 0 60px;
-
+    padding:30px 0 60px;
 }
 
-
-/* =====================================================
-   HERO
-====================================================== */
-
-.hero {
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:
-        35px;
-
+.hero{
+    padding:35px;
     margin-bottom:18px;
-
-    border:
-        1px solid
-        #eadcff;
-
+    border:1px solid #eadcff;
     border-radius:24px;
-
     background:
-
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(219,39,119,.12),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 5% 90%,
-            rgba(109,40,217,.10),
-            transparent 30%
-        ),
-
-        white;
-
+        radial-gradient(circle at 90% 10%,rgba(219,39,119,.12),transparent 28%),
+        radial-gradient(circle at 5% 90%,rgba(109,40,217,.10),transparent 30%),
+        #fff;
     box-shadow:var(--shadow);
-
 }
 
-
-.hero-badge {
-
+.hero-badge{
     display:inline-flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:
-        6px 9px;
-
+    padding:6px 9px;
     border-radius:999px;
-
     color:var(--primary);
-
     background:var(--primary-soft);
-
     font-size:8px;
-
     font-weight:800;
-
 }
 
-
-.hero h1 {
-
+.hero h1{
     margin-top:10px;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            30px,
-            5vw,
-            51px
-        );
-
-    line-height:1.04;
-
+    font:800 clamp(30px,5vw,51px)/1.04 'Playfair Display',serif;
 }
 
-
-.hero h1 span {
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--accent)
-        );
-
+.hero h1 span{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
     -webkit-background-clip:text;
-
     background-clip:text;
-
     -webkit-text-fill-color:transparent;
-
 }
 
-
-.hero p {
-
-    max-width:700px;
-
+.hero p{
+    max-width:780px;
     margin-top:8px;
-
     color:var(--soft);
-
     font-size:10px;
-
     line-height:1.7;
-
 }
 
-
-/* =====================================================
-   ALERT
-====================================================== */
-
-.alert {
-
+.alert{
     display:none;
-
+    padding:12px 14px;
     margin-bottom:15px;
-
-    padding:11px 13px;
-
     border-radius:11px;
-
     font-size:9px;
-
 }
 
-
-.alert.show {
-
+.alert.show{
     display:block;
-
 }
 
-
-.alert.success {
-
+.alert.success{
     color:#166534;
-
     background:var(--green-soft);
-
     border:1px solid #bbf7d0;
-
 }
 
-
-.alert.error {
-
+.alert.error{
     color:#991b1b;
-
     background:var(--red-soft);
-
     border:1px solid #fecaca;
-
 }
 
-
-/* =====================================================
-   PREMIUM GRID
-====================================================== */
-
-.premium-grid {
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1.2fr)
-        minmax(300px,.8fr);
-
-    gap:18px;
-
+.alert.info{
+    color:#1d4ed8;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
 }
 
-
-/* =====================================================
-   SERVICES
-====================================================== */
-
-.services-card {
-
-    padding:20px;
-
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:19px;
-
-    box-shadow:
-        var(--shadow);
-
-}
-
-
-.section-title {
-
+.currency-strip{
     display:flex;
-
+    flex-wrap:wrap;
+    gap:8px;
     align-items:center;
-
-    gap:7px;
-
     margin-bottom:15px;
-
-}
-
-
-.section-title i {
-
-    color:var(--primary);
-
-}
-
-
-.section-title h2 {
-
-    font-size:14px;
-
-}
-
-
-.service {
-
-    position:relative;
-
-    padding:18px;
-
-    border:
-        1px solid
-        #e9dcff;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #fcfaff
-        );
-
-}
-
-
-.service-tag {
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    padding:
-        6px 8px;
-
-    border-radius:999px;
-
-    color:var(--primary);
-
-    background:var(--primary-soft);
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-.service h3 {
-
-    margin-top:10px;
-
-    font-size:18px;
-
-}
-
-
-.service-description {
-
-    margin-top:6px;
-
-    color:var(--soft);
-
-    font-size:9px;
-
-    line-height:1.65;
-
-}
-
-
-.price-area {
-
-    display:flex;
-
-    align-items:end;
-
-    gap:9px;
-
-    margin-top:17px;
-
-}
-
-
-.price {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:35px;
-
-    font-weight:800;
-
-    color:var(--primary);
-
-}
-
-
-.price-sub {
-
-    padding-bottom:5px;
-
-    color:var(--muted);
-
-    font-size:8px;
-
-}
-
-
-.service-meta {
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:7px;
-
-    margin-top:15px;
-
-}
-
-
-.meta {
-
-    padding:9px;
-
-    border-radius:9px;
-
-    background:#f8f8fa;
-
-}
-
-
-.meta strong {
-
-    display:block;
-
-    font-size:8px;
-
-}
-
-
-.meta span {
-
-    display:block;
-
-    margin-top:3px;
-
-    color:var(--muted);
-
-    font-size:7px;
-
-}
-
-
-.subscribe-button {
-
-    width:100%;
-
-    min-height:47px;
-
-    margin-top:17px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    border:none;
-
-    border-radius:11px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--accent)
-        );
-
-    font-size:9px;
-
-    font-weight:800;
-
-}
-
-
-/* =====================================================
-   ACTIVE PREMIUM
-====================================================== */
-
-.active-card {
-
-    padding:20px;
-
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:19px;
-
+    padding:10px 12px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
     box-shadow:var(--shadow);
-
 }
 
-
-.status-box {
-
-    padding:16px;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #faf7ff,
-            #fff7fb
-        );
-
-    border:
-        1px solid
-        #eadcff;
-
-}
-
-
-.active-badge {
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:
-        6px 8px;
-
+.currency-pill{
+    padding:5px 8px;
     border-radius:999px;
-
-    color:#166534;
-
-    background:#dcfce7;
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-.status-box h3 {
-
-    margin-top:11px;
-
-    font-size:15px;
-
-}
-
-
-.status-box p {
-
-    margin-top:5px;
-
-    color:var(--soft);
-
-    font-size:8px;
-
-    line-height:1.6;
-
-}
-
-
-.status-date {
-
-    margin-top:10px;
-
+    background:var(--primary-soft);
     color:var(--primary);
-
-    font-size:9px;
-
-    font-weight:800;
-
-}
-
-
-.features {
-
-    display:grid;
-
-    gap:7px;
-
-    margin-top:15px;
-
-}
-
-
-.feature {
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:9px;
-
-    border-radius:9px;
-
-    background:#fafafa;
-
-    font-size:8px;
-
-}
-
-
-.feature i {
-
-    color:var(--green);
-
-}
-
-
-/* =====================================================
-   LOADING
-====================================================== */
-
-.loading {
-
-    min-height:180px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:var(--muted);
-
-    font-size:9px;
-
-}
-
-
-/* =====================================================
-   FOOTER
-====================================================== */
-
-.footer {
-
-    background:#17151b;
-
-    color:white;
-
-}
-
-
-.footer-inner {
-
-    width:
-        min(
-            calc(100% - 30px),
-            1380px
-        );
-
-    margin:auto;
-
-    padding:
-        38px 0 18px;
-
-}
-
-
-.footer-grid {
-
-    display:grid;
-
-    grid-template-columns:
-        1.5fr 1fr 1fr 1fr;
-
-    gap:30px;
-
-    padding-bottom:25px;
-
-}
-
-
-.footer-description {
-
-    max-width:320px;
-
-    margin-top:10px;
-
-    color:#9d99a5;
-
-    font-size:9px;
-
-    line-height:1.7;
-
-}
-
-
-.footer-heading {
-
-    margin-bottom:9px;
-
-    font-size:10px;
-
-}
-
-
-.footer-links {
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-
-.footer-links a {
-
-    color:#9d99a5;
-
-    font-size:8px;
-
-}
-
-
-.footer-links a:hover {
-
-    color:white;
-
-}
-
-
-.footer-bottom {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    padding-top:15px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.08);
-
-    color:#716d78;
-
     font-size:7px;
-
+    font-weight:900;
 }
 
+.currency-note{
+    font-size:7px;
+    color:var(--muted);
+}
 
-/* =====================================================
-   RESPONSIVE
-====================================================== */
+.premium-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);
+    gap:18px;
+}
 
-@media(max-width:1100px) {
+.card{
+    padding:20px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:19px;
+    box-shadow:var(--shadow);
+}
 
-    .navigation {
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:15px;
+}
 
+.section-title i{
+    color:var(--primary);
+}
+
+.section-title h2{
+    font-size:14px;
+}
+
+.section-counter{
+    margin-left:auto;
+    padding:5px 8px;
+    border-radius:999px;
+    background:#f8f8fa;
+    color:var(--muted);
+    font-size:7px;
+    font-weight:900;
+}
+
+.service-list,
+.active-list{
+    display:grid;
+    gap:12px;
+}
+
+.service,
+.active-item{
+    padding:18px;
+    border:1px solid #e9dcff;
+    border-radius:15px;
+    background:linear-gradient(145deg,#fff,#fcfaff);
+}
+
+.service.active,
+.active-item{
+    border-color:#bbf7d0;
+    background:linear-gradient(145deg,#fff,#f7fff9);
+}
+
+.tag{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 8px;
+    border-radius:999px;
+    font-size:7px;
+    font-weight:900;
+}
+
+.tag.purple{
+    color:var(--primary);
+    background:var(--primary-soft);
+}
+
+.tag.green{
+    color:#166534;
+    background:#dcfce7;
+}
+
+.service h3,
+.active-name{
+    margin-top:10px;
+    font-size:18px;
+}
+
+.description{
+    margin-top:6px;
+    color:var(--soft);
+    font-size:9px;
+    line-height:1.65;
+}
+
+.price-area{
+    display:flex;
+    align-items:end;
+    gap:9px;
+    margin-top:17px;
+}
+
+.price{
+    font:800 35px/1 'Playfair Display',serif;
+    color:var(--primary);
+}
+
+.price-sub{
+    padding-bottom:5px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.meta-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin-top:15px;
+}
+
+.meta{
+    padding:9px;
+    border-radius:9px;
+    background:#f8f8fa;
+}
+
+.meta strong{
+    display:block;
+    font-size:8px;
+}
+
+.meta span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:7px;
+    overflow-wrap:anywhere;
+}
+
+.payment-row{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:7px;
+    margin-top:12px;
+}
+
+.method-select{
+    width:100%;
+    height:42px;
+    padding:0 10px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+    font-size:8px;
+    outline:none;
+}
+
+.method-select:focus{
+    border-color:#c4b5fd;
+    box-shadow:0 0 0 3px #f3e8ff;
+}
+
+.subscribe-button,
+.deactivate-button,
+.receipt-button{
+    width:100%;
+    min-height:44px;
+    border:0;
+    border-radius:11px;
+    font-size:8px;
+    font-weight:900;
+}
+
+.subscribe-button{
+    margin-top:12px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+.subscribe-button.secondary,
+.receipt-button{
+    color:var(--primary);
+    background:var(--primary-soft);
+    border:1px solid #ddd6fe;
+}
+
+.limit-note{
+    margin-top:7px;
+    color:var(--muted);
+    font-size:7px;
+    line-height:1.5;
+}
+
+.warning{
+    margin-top:8px;
+    padding:8px;
+    border-radius:9px;
+    color:#92400e;
+    background:var(--orange-soft);
+    font-size:7px;
+    line-height:1.5;
+}
+
+.status-intro{
+    padding:16px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#faf7ff,#fff7fb);
+    border:1px solid #eadcff;
+}
+
+.status-intro h3{
+    margin-top:10px;
+    font-size:15px;
+}
+
+.status-intro p{
+    margin-top:5px;
+    color:var(--soft);
+    font-size:8px;
+    line-height:1.6;
+}
+
+.remaining-line{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:9px;
+    font-size:8px;
+    color:var(--soft);
+}
+
+.remaining-strong{
+    font-weight:900;
+    color:var(--primary);
+}
+
+.progress{
+    height:10px;
+    margin-top:7px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#ececf2;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    border-radius:999px;
+    transition:width .5s linear;
+}
+
+.percent-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:6.5px;
+}
+
+.active-actions{
+    display:flex;
+    gap:7px;
+    margin-top:10px;
+}
+
+.deactivate-button{
+    flex:1;
+    color:#b91c1c;
+    background:#fff;
+    border:1px solid #fecaca;
+}
+
+.deactivate-button:hover{
+    background:var(--red-soft);
+}
+
+.receipt-button{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    text-align:center;
+}
+
+.feature-list{
+    display:grid;
+    gap:7px;
+    margin-top:13px;
+}
+
+.feature{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:9px;
+    border-radius:9px;
+    background:#fafafa;
+    font-size:8px;
+}
+
+.feature i{
+    color:var(--green);
+}
+
+.empty{
+    padding:30px;
+    text-align:center;
+    color:var(--muted);
+    font-size:9px;
+}
+
+.loading{
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    font-size:9px;
+}
+
+.footer{
+    background:#17151b;
+    color:#fff;
+}
+
+.footer-inner{
+    width:min(calc(100% - 30px),1380px);
+    margin:auto;
+    padding:38px 0 18px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:25px;
+}
+
+.footer-description{
+    max-width:320px;
+    margin-top:10px;
+    color:#9d99a5;
+    font-size:9px;
+    line-height:1.7;
+}
+
+.footer-heading{
+    margin-bottom:9px;
+    font-size:10px;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.footer-links a{
+    color:#9d99a5;
+    font-size:8px;
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding-top:15px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#716d78;
+    font-size:7px;
+}
+
+@media(max-width:1100px){
+    .navigation{
         display:none;
-
     }
 
-
-    .mobile-menu {
-
+    .mobile-menu{
         display:flex;
-
         align-items:center;
-
         justify-content:center;
-
     }
-
 }
 
-
-@media(max-width:850px) {
-
-    .premium-grid {
-
+@media(max-width:850px){
+    .premium-grid{
         grid-template-columns:1fr;
-
     }
 
-
-    .footer-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
     }
-
 }
 
-
-@media(max-width:560px) {
-
+@media(max-width:560px){
     .brand-name,
-    .brand-tagline {
-
+    .brand-tagline{
         display:none;
-
     }
 
-
-    .page {
-
-        width:
-            calc(100% - 20px);
-
+    .page{
+        width:calc(100% - 20px);
         padding-top:18px;
-
     }
 
-
-    .hero {
-
+    .hero{
         padding:22px;
-
     }
 
-
-    .hero h1 {
-
+    .hero h1{
         font-size:32px;
-
     }
 
-
-    .services-card,
-    .active-card {
-
+    .card{
         padding:15px;
-
     }
 
-
-    .service-meta {
-
+    .meta-grid{
         grid-template-columns:1fr;
-
     }
 
-
-    .footer-grid {
-
+    .payment-row{
         grid-template-columns:1fr;
-
     }
 
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
 
-    .footer-bottom {
-
+    .footer-bottom{
         flex-direction:column;
-
         align-items:flex-start;
-
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
-     HEADER
-========================================================== -->
-
 <header class="header">
-
     <div class="header-inner">
 
-
-        <a
-            href="dashboard.html"
-            class="brand">
-
+        <a href="dashboard.html" class="brand">
 
             <img
-                src="assets/logo1/LOGO1.ico"
+                src="assets/logo1/logo1.png"
                 alt="LOVEMI"
                 class="brand-logo"
-                onerror="
-                    this.onerror=null;
-                    this.src='assets/logo1/apple-touch-icon.png';
-                ">
-
+                onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"
+            >
 
             <span>
-
-                <span class="brand-name">
-                    LOVEMI
-                </span>
-
+                <span class="brand-name">LOVEMI</span>
                 <span class="brand-tagline">
                     DISCOVER • CONNECT • MEET
                 </span>
-
             </span>
-
 
         </a>
 
+        <nav class="navigation">
 
-        <nav
-            class="navigation">
-
-
-            <a href="dashboard.html"
-               class="nav-link">
-
+            <a href="dashboard.html" class="nav-link">
                 <i class="fa-solid fa-house"></i>
-
                 Dashboard
-
             </a>
 
-
-            <a href="discover.html"
-               class="nav-link">
-
+            <a href="discover.html" class="nav-link">
                 <i class="fa-solid fa-compass"></i>
-
                 Discover
-
             </a>
 
-
-            <a href="connections.html"
-               class="nav-link">
-
+            <a href="connections.html" class="nav-link">
                 <i class="fa-solid fa-user-group"></i>
-
                 Connections
-
             </a>
 
-
-            <a href="messages.html"
-               class="nav-link">
-
+            <a href="messages.html" class="nav-link">
                 <i class="fa-regular fa-message"></i>
-
                 Messages
-
             </a>
 
-
-
-
-
-            <a href="notifications.html"
-               class="nav-link">
-
+            <a href="notifications.html" class="nav-link">
                 <i class="fa-regular fa-bell"></i>
-
                 Notifications
-
             </a>
 
-
-            <a href="settings.html"
-               class="nav-link">
-
+            <a href="settings.html" class="nav-link">
                 <i class="fa-solid fa-gear"></i>
-
                 Settings
-
             </a>
 
-
-            <a href="premium.html"
-               class="nav-link active">
-
+            <a href="premium.html" class="nav-link active">
                 <i class="fa-solid fa-crown"></i>
-
                 Premium
-
             </a>
-
 
         </nav>
 
-
         <div class="header-actions">
 
-
             <a
+                class="header-icon"
+                id="notificationBell"
                 href="notifications.html"
-                class="header-icon">
-
+                aria-label="Notifications"
+            >
                 <i class="fa-regular fa-bell"></i>
-
             </a>
 
-
             <a
+                class="header-icon"
                 href="messages.html"
-                class="header-icon">
-
+                aria-label="Messages"
+            >
                 <i class="fa-regular fa-message"></i>
-
             </a>
-
 
             <a
+                class="header-icon"
                 href="profile.html"
-                class="header-icon">
-
+                aria-label="Profile"
+            >
                 <i class="fa-regular fa-user"></i>
-
             </a>
-
 
             <button
-                type="button"
                 id="mobileMenu"
                 class="mobile-menu"
-                aria-expanded="false">
-
+                type="button"
+                aria-expanded="false"
+                aria-label="Open navigation"
+            >
                 <i class="fa-solid fa-bars"></i>
-
             </button>
-
 
         </div>
 
-
     </div>
-
 </header>
 
-
-<!-- =========================================================
-     MOBILE NAV
-========================================================== -->
-
-<nav
-    id="mobileNav"
-    class="mobile-nav">
-
+<nav id="mobileNav" class="mobile-nav">
 
     <a href="dashboard.html">
-
         <i class="fa-solid fa-house"></i>
-
         Dashboard
-
     </a>
-
 
     <a href="discover.html">
-
         <i class="fa-solid fa-compass"></i>
-
         Discover
-
     </a>
-
 
     <a href="connections.html">
-
         <i class="fa-solid fa-user-group"></i>
-
         Connections
-
     </a>
-
 
     <a href="messages.html">
-
         <i class="fa-regular fa-message"></i>
-
         Messages
-
     </a>
-
-
-
-
 
     <a href="notifications.html">
-
         <i class="fa-regular fa-bell"></i>
-
         Notifications
-
     </a>
-
 
     <a href="settings.html">
-
         <i class="fa-solid fa-gear"></i>
-
         Settings
-
     </a>
 
-
-    <a
-        href="premium.html"
-        class="active">
-
+    <a href="premium.html" class="active">
         <i class="fa-solid fa-crown"></i>
-
         Premium
-
     </a>
-
 
 </nav>
 
-
-<!-- =========================================================
-     MAIN
-========================================================== -->
-
 <main class="page">
-
 
     <section class="hero">
 
-
-        <div class="hero-badge">
-
+        <span class="hero-badge">
             <i class="fa-solid fa-crown"></i>
-
             LOVEMI Premium
-
-        </div>
-
+        </span>
 
         <h1>
-
-            Unlock the full
-            <span>LOVEMI experience.</span>
-
+            Choose the
+            <span>Premium services</span>
+            you need.
         </h1>
 
-
         <p>
-
-            Premium membership gives you access to the
-            connection and messaging services offered by LOVEMI.
-            Your payment currency is determined from your
-            country in the database.
+            Unlock more LOVEMI services securely.
 
         </p>
 
-
     </section>
 
+    <div id="alert" class="alert"></div>
 
     <div
-        id="alert"
-        class="alert">
-    </div>
-
+        id="currencyStrip"
+        class="currency-strip"
+        style="display:none"
+    ></div>
 
     <div class="premium-grid">
 
-
-        <!-- =================================================
-             SERVICES
-        ================================================== -->
-
-        <section class="services-card">
-
+        <section class="card">
 
             <div class="section-title">
-
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-crown"></i>
 
                 <h2>
-                    Premium Service
+                    Available Premium services
                 </h2>
 
+                <span
+                    id="serviceCounter"
+                    class="section-counter"
+                >
+                    0
+                </span>
             </div>
-
 
             <div
                 id="serviceContainer"
-                class="loading">
-
+                class="loading"
+            >
                 <i class="fa-solid fa-spinner fa-spin"></i>
-
                 &nbsp;
-
-                Loading Premium service...
-
+                Loading Premium services...
             </div>
-
 
         </section>
 
 
-        <!-- =================================================
-             STATUS
-        ================================================== -->
-
-        <section class="active-card">
-
+        <section class="card">
 
             <div class="section-title">
 
                 <i class="fa-solid fa-shield-heart"></i>
 
                 <h2>
-                    Your Membership
+                    Your active Premium
                 </h2>
 
-            </div>
-
-
-            <div
-                id="statusContainer"
-                class="status-box">
-
-
                 <span
-                    class="active-badge">
-
-                    <i class="fa-solid fa-circle-notch fa-spin"></i>
-
-                    Checking...
-
+                    id="activeCounter"
+                    class="section-counter"
+                >
+                    0 / 2
                 </span>
 
-
             </div>
 
+            <div
+                id="activeContainer"
+                class="active-list"
+            >
+
+                <div class="loading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    &nbsp;
+                    Checking membership...
+                </div>
+
+            </div>
 
         </section>
 
-
     </div>
 
-
 </main>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================== -->
 
 <footer class="footer">
 
     <div class="footer-inner">
 
-
         <div class="footer-grid">
-
 
             <div>
 
-
                 <a
                     href="dashboard.html"
-                    class="brand">
-
+                    class="brand"
+                >
 
                     <img
-                        src="assets/logo1/LOGO1.ico"
+                        src="assets/logo1/logo1.png"
                         alt="LOVEMI"
                         class="brand-logo"
-                        onerror="
-                            this.onerror=null;
-                            this.src='assets/logo1/apple-touch-icon.png';
-                        ">
-
+                    >
 
                     <span class="brand-name">
                         LOVEMI
                     </span>
 
-
                 </a>
 
-
                 <p class="footer-description">
-
-                    Discover approved profiles, create connections
-                    and use Premium services securely.
-
+                    Discover approved members, build meaningful
+                    connections and access LOVEMI Premium services
+                    securely.
                 </p>
-
 
             </div>
 
@@ -1752,7 +1077,6 @@ button:disabled {
                 <h3 class="footer-heading">
                     Explore
                 </h3>
-
 
                 <div class="footer-links">
 
@@ -1783,15 +1107,10 @@ button:disabled {
                     Account
                 </h3>
 
-
                 <div class="footer-links">
 
                     <a href="profile.html">
                         Profile
-                    </a>
-
-                    <a href="edit-profile.html">
-                        Edit Profile
                     </a>
 
                     <a href="premium.html">
@@ -1800,6 +1119,10 @@ button:disabled {
 
                     <a href="settings.html">
                         Settings
+                    </a>
+
+                    <a href="notifications.html">
+                        Notifications
                     </a>
 
                 </div>
@@ -1812,7 +1135,6 @@ button:disabled {
                 <h3 class="footer-heading">
                     Help
                 </h3>
-
 
                 <div class="footer-links">
 
@@ -1836,14 +1158,15 @@ button:disabled {
 
             </div>
 
-
         </div>
 
 
         <div class="footer-bottom">
 
             <span>
-                © <span id="year"></span> LOVEMI. All rights reserved.
+                ©
+                <span id="year"></span>
+                LOVEMI. All rights reserved.
             </span>
 
             <span>
@@ -1852,108 +1175,124 @@ button:disabled {
 
         </div>
 
-
     </div>
 
 </footer>
 
 
 <script>
-
 "use strict";
 
 
-/* =========================================================
+/* ============================================================
    API
-========================================================= */
+   ============================================================ */
 
-const PREMIUM_API =
-    "api/premium/services.php";
+const API = {
+    services:
+        "api/premium/services.php",
 
+    subscribe:
+        "api/premium/subscribe.php",
 
-const SUBSCRIBE_API =
-    "api/premium/subscribe.php";
+    deactivate:
+        "api/premium/deactivate.php",
 
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const serviceContainer =
-    document.getElementById(
-        "serviceContainer"
-    );
+    notifications:
+        "api/notifications/unread-count.php"
+};
 
 
-const statusContainer =
-    document.getElementById(
-        "statusContainer"
-    );
+/* ============================================================
+   STATE
+   ============================================================ */
+
+const state = {
+    data: null,
+    timer: null,
+    notificationTimer: null,
+    notificationCount: null
+};
 
 
-const alertBox =
-    document.getElementById(
-        "alert"
-    );
+const $ = (selector) =>
+    document.querySelector(selector);
 
 
-/* =========================================================
-   YEAR
-========================================================= */
+/* ============================================================
+   HTML ESCAPING
+   ============================================================ */
 
-document.getElementById(
-    "year"
-).textContent =
-    new Date().getFullYear();
+function escapeHtml(value) {
 
-
-/* =========================================================
-   ALERT
-========================================================= */
-
-function showAlert(
-    message,
-    type
-) {
-
-    alertBox.className =
-        "alert show "
-        +
-        type;
-
-
-    alertBox.textContent =
-        message;
-
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
 
-/* =========================================================
-   GET JSON
-========================================================= */
+/* ============================================================
+   ALERT
+   ============================================================ */
 
-async function getJson(
-    url
+function showAlert(
+    message,
+    type = "info"
 ) {
+
+    const alert =
+        $("#alert");
+
+    if (!alert) {
+        return;
+    }
+
+    alert.className =
+        `alert show ${type}`;
+
+    alert.textContent =
+        String(message || "");
+}
+
+
+function clearAlert() {
+
+    const alert =
+        $("#alert");
+
+    if (!alert) {
+        return;
+    }
+
+    alert.className =
+        "alert";
+
+    alert.textContent =
+        "";
+}
+
+
+/* ============================================================
+   API FETCH
+   ============================================================ */
+
+async function apiFetch(
+    url,
+    options = {}
+) {
+
+    const separator =
+        url.includes("?")
+            ? "&"
+            : "?";
 
     const response =
         await fetch(
-            url
-            +
-            (
-                url.includes("?")
-                    ? "&"
-                    : "?"
-            )
-            +
-            "_="
-            +
-            Date.now(),
+            `${url}${separator}_=${Date.now()}`,
             {
-
-                method:
-                    "GET",
-
                 credentials:
                     "same-origin",
 
@@ -1961,37 +1300,1529 @@ async function getJson(
                     "no-store",
 
                 headers: {
-
                     "Accept":
                         "application/json",
 
                     "Cache-Control":
                         "no-cache, no-store, max-age=0",
 
-                    "Pragma":
-                        "no-cache"
+                    ...(options.headers || {})
+                },
 
-                }
-
+                ...options
             }
         );
 
 
-    const result =
-        await response.json();
+    const text =
+        await response.text();
+
+
+    let result = {};
+
+
+    try {
+
+        result =
+            JSON.parse(text);
+
+    } catch (error) {
+
+        console.error(
+            "LOVEMI API response:",
+            text
+        );
+
+        throw new Error(
+            "The server returned an invalid response."
+        );
+    }
 
 
     return {
         response,
         result
     };
-
 }
 
 
-/* =========================================================
+/* ============================================================
+   RETURN PATH
+   ============================================================ */
+
+function getReturnPath() {
+
+    const requested =
+        new URLSearchParams(
+            location.search
+        ).get("return");
+
+
+    if (!requested) {
+        return "dashboard.html";
+    }
+
+
+    if (
+        /^https?:\/\//i.test(requested)
+        || requested.startsWith("//")
+        || requested.includes("../")
+        || requested.includes("..\\")
+    ) {
+        return "dashboard.html";
+    }
+
+
+    return requested.startsWith("/")
+        ? requested.slice(1)
+        : requested;
+}
+
+
+/* ============================================================
+   PAYMENT PAGE
+   ============================================================ */
+
+function methodPage(
+    method,
+    code
+) {
+
+    const pages = {
+        mpesa:
+            "mpesa-pay.html",
+
+        paypal:
+            "paypal-pay.html",
+
+        card:
+            "card-pay.html"
+    };
+
+
+    const page =
+        pages[method];
+
+
+    if (
+        !page
+        || !code
+    ) {
+        return null;
+    }
+
+
+    return (
+        `${page}?code=`
+        + encodeURIComponent(code)
+        + "&return="
+        + encodeURIComponent(
+            getReturnPath()
+        )
+    );
+}
+
+
+/* ============================================================
+   CURRENCY
+   ============================================================ */
+
+function renderCurrency(data) {
+
+    const strip =
+        $("#currencyStrip");
+
+
+    if (!strip) {
+        return;
+    }
+
+
+    const currency =
+        data.currency || {};
+
+
+    const code =
+        currency.code
+        || data.currency_code
+        || "";
+
+
+    const symbol =
+        currency.symbol
+        || data.currency_symbol
+        || "";
+
+
+    const rate =
+        Number(
+            data.exchange_rate
+            ?? data.rate
+            ?? 1
+        );
+
+
+    strip.style.display =
+        "flex";
+
+
+    strip.innerHTML = `
+        <span class="currency-pill">
+            ${escapeHtml(symbol)}
+            ${escapeHtml(code)}
+        </span>
+
+        <span class="currency-note">
+            ${
+                code
+                && code !== "USD"
+                    ? `
+                        1 USD ≈
+                        ${escapeHtml(
+                            rate.toFixed(4)
+                        )}
+                        ${escapeHtml(code)}
+                    `
+                    : "USD pricing is being used."
+            }
+        </span>
+    `;
+}
+
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+
+function renderServices(data) {
+
+    const services =
+        Array.isArray(
+            data.services
+        )
+            ? data.services
+            : [];
+
+
+    const activeSubscriptions =
+        Array.isArray(
+            data.active_subscriptions
+        )
+            ? data.active_subscriptions
+            : [];
+
+
+    const activeIds =
+        new Set(
+            activeSubscriptions.map(
+                item =>
+                    Number(
+                        item.service_id
+                    )
+            )
+        );
+
+
+    const activeCount =
+        Number(
+            data.active_count
+            ?? activeSubscriptions.length
+            ?? 0
+        );
+
+
+    $("#serviceCounter")
+        .textContent =
+            String(
+                services.length
+            );
+
+
+    if (!services.length) {
+
+        $("#serviceContainer").innerHTML = `
+            <div class="empty">
+                No active Premium service is currently available.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    $("#serviceContainer").innerHTML = `
+        <div class="service-list">
+
+            ${
+                services.map(
+                    service => {
+
+                        const id =
+                            Number(
+                                service.id
+                            );
+
+
+                        const active =
+                            activeIds.has(
+                                id
+                            );
+
+
+                        const limitReached =
+                            !active
+                            && activeCount >= 2;
+
+
+                        const disabled =
+                            active
+                            || limitReached;
+
+
+                        let buttonLabel;
+
+                        if (active) {
+
+                            buttonLabel =
+                                "Premium Active";
+
+                        } else if (limitReached) {
+
+                            buttonLabel =
+                                "Deactivate one Premium first";
+
+                        } else {
+
+                            buttonLabel =
+                                "Continue to Payment";
+                        }
+
+
+                        const localAmount =
+                            service.local_amount_display
+                            || service.amount_display
+                            || service.price_display
+                            || "";
+
+
+                        const durationLabel =
+                            service.duration_label
+                            || (
+                                `${
+                                    Number(
+                                        service.duration_days
+                                    ) || 0
+                                } days`
+                            );
+
+
+                        return `
+                            <article
+                                class="service ${
+                                    active
+                                        ? "active"
+                                        : ""
+                                }"
+                            >
+
+                                <span
+                                    class="tag ${
+                                        active
+                                            ? "green"
+                                            : "purple"
+                                    }"
+                                >
+
+                                    <i
+                                        class="fa-solid ${
+                                            active
+                                                ? "fa-circle-check"
+                                                : "fa-crown"
+                                        }"
+                                    ></i>
+
+                                    ${
+                                        active
+                                            ? "ACTIVE"
+                                            : "PREMIUM"
+                                    }
+
+                                </span>
+
+
+                                <h3>
+                                    ${escapeHtml(
+                                        service.name
+                                    )}
+                                </h3>
+
+
+                                <p class="description">
+                                    ${escapeHtml(
+                                        service.description
+                                        || "Premium access to LOVEMI services."
+                                    )}
+                                </p>
+
+
+                                <div class="price-area">
+
+                                    <div class="price">
+                                        ${escapeHtml(
+                                            localAmount
+                                        )}
+                                    </div>
+
+                                    <div class="price-sub">
+                                        per
+                                        ${escapeHtml(
+                                            durationLabel
+                                        )}
+                                    </div>
+
+                                </div>
+
+
+                                <div class="meta-grid">
+
+                                    <div class="meta">
+
+                                        <strong>
+                                            USD Base
+                                        </strong>
+
+                                        <span>
+                                            $${escapeHtml(
+                                                service.base_price_usd
+                                                ?? "0.00"
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="meta">
+
+                                        <strong>
+                                            Duration
+                                        </strong>
+
+                                        <span>
+                                            ${escapeHtml(
+                                                service.duration_days
+                                                ?? ""
+                                            )}
+                                            days
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="meta">
+
+                                        <strong>
+                                            Currency
+                                        </strong>
+
+                                        <span>
+                                            ${escapeHtml(
+                                                service.currency?.code
+                                                || data.currency_code
+                                                || ""
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="payment-row">
+
+                                    <select
+                                        class="method-select"
+                                        data-method="${id}"
+                                        aria-label="Payment method for ${
+                                            escapeHtml(
+                                                service.name
+                                            )
+                                        }"
+                                        ${
+                                            active
+                                                ? "disabled"
+                                                : ""
+                                        }
+                                    >
+
+                                        <option value="mpesa">
+                                            M-Pesa
+                                        </option>
+
+                                        <option value="paypal">
+                                            PayPal
+                                        </option>
+
+                                        <option value="card">
+                                            Card
+                                        </option>
+
+                                    </select>
+
+
+                                    <button
+                                        type="button"
+                                        class="subscribe-button ${
+                                            active
+                                            || limitReached
+                                                ? "secondary"
+                                                : ""
+                                        }"
+                                        data-service-id="${id}"
+                                        ${
+                                            disabled
+                                                ? "disabled"
+                                                : ""
+                                        }
+                                    >
+
+                                        <i
+                                            class="fa-solid ${
+                                                active
+                                                    ? "fa-check"
+                                                    : limitReached
+                                                        ? "fa-lock"
+                                                        : "fa-credit-card"
+                                            }"
+                                        ></i>
+
+                                        ${buttonLabel}
+
+                                    </button>
+
+                                </div>
+
+
+                                ${
+                                    limitReached
+                                        ? `
+                                            <div class="warning">
+
+                                                You already have
+                                                2 active Premium
+                                                memberships.
+
+                                                Deactivate one before
+                                                purchasing another.
+
+                                            </div>
+                                        `
+                                        : `
+                                            <div class="limit-note">
+
+                                                Maximum active
+                                                Premium memberships:
+                                                2.
+
+                                            </div>
+                                        `
+                                }
+
+                            </article>
+                        `;
+                    }
+                ).join("")
+            }
+
+        </div>
+    `;
+
+
+    document
+        .querySelectorAll(
+            "[data-service-id]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        subscribe(
+                            Number(
+                                button.dataset.serviceId
+                            ),
+                            button
+                        )
+                );
+            }
+        );
+}
+
+
+/* ============================================================
+   REMAINING TIME
+   ============================================================ */
+
+function formatRemaining(
+    seconds
+) {
+
+    let value =
+        Math.max(
+            0,
+            Math.floor(
+                Number(seconds) || 0
+            )
+        );
+
+
+    const days =
+        Math.floor(
+            value / 86400
+        );
+
+
+    value %= 86400;
+
+
+    const hours =
+        Math.floor(
+            value / 3600
+        );
+
+
+    value %= 3600;
+
+
+    const minutes =
+        Math.floor(
+            value / 60
+        );
+
+
+    const secs =
+        value % 60;
+
+
+    if (days > 0) {
+
+        return `${days}d ${hours}h ${minutes}m`;
+    }
+
+
+    if (hours > 0) {
+
+        return `${hours}h ${minutes}m`;
+    }
+
+
+    return `${minutes}m ${secs}s`;
+}
+
+
+/* ============================================================
+   ACTIVE PREMIUM
+   ============================================================ */
+
+function renderActive() {
+
+    const data =
+        state.data || {};
+
+
+    const active =
+        Array.isArray(
+            data.active_subscriptions
+        )
+            ? data.active_subscriptions
+            : [];
+
+
+    $("#activeCounter")
+        .textContent =
+            `${active.length} / 2`;
+
+
+    if (!active.length) {
+
+        $("#activeContainer").innerHTML = `
+            <div class="status-intro">
+
+                <span class="tag purple">
+                    <i class="fa-solid fa-crown"></i>
+                    NOT ACTIVE
+                </span>
+
+                <h3>
+                    No Premium is active
+                </h3>
+
+                <p>
+                    Choose any available Premium service
+                    to continue.
+                </p>
+
+
+                <div class="feature-list">
+
+                    <div class="feature">
+                        <i class="fa-solid fa-check"></i>
+                        Maximum of 2 active memberships
+                    </div>
+
+                    <div class="feature">
+                        <i class="fa-solid fa-lock"></i>
+                        Secure verified payments
+                    </div>
+
+                    <div class="feature">
+                        <i class="fa-solid fa-receipt"></i>
+                        Receipt after successful payment
+                    </div>
+
+                    <div class="feature">
+                        <i class="fa-solid fa-envelope"></i>
+                        Payment email notifications
+                    </div>
+
+                    <div class="feature">
+                        <i class="fa-solid fa-bell"></i>
+                        Payment failure and cancellation alerts
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    $("#activeContainer").innerHTML =
+        active.map(
+            item => {
+
+                const id =
+                    Number(
+                        item.id
+                    );
+
+
+                return `
+                    <article
+                        class="active-item"
+                        data-active-id="${id}"
+                    >
+
+                        <div class="active-top">
+
+                            <div>
+
+                                <span class="tag green">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    ACTIVE
+                                </span>
+
+                                <h3 class="active-name">
+                                    ${escapeHtml(
+                                        item.service_name
+                                    )}
+                                </h3>
+
+                            </div>
+
+                            <div class="active-amount">
+                                ${escapeHtml(
+                                    item.amount_paid_display
+                                    || ""
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="remaining-line">
+
+                            <span>
+                                Time remaining
+                            </span>
+
+                            <span
+                                class="remaining-strong"
+                                data-remaining
+                            >
+                                ${escapeHtml(
+                                    formatRemaining(
+                                        item.remaining_seconds
+                                    )
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                data-progress
+                            ></div>
+
+                        </div>
+
+
+                        <div class="percent-row">
+
+                            <span data-used-percent>
+                                0% used
+                            </span>
+
+                            <span data-left-percent>
+                                100% remaining
+                            </span>
+
+                        </div>
+
+
+                        <div class="remaining-line">
+
+                            <span>
+                                Expires
+                            </span>
+
+                            <strong>
+                                ${escapeHtml(
+                                    item.end_at_display
+                                    || item.end_at
+                                    || ""
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="active-actions">
+
+                            <button
+                                class="deactivate-button"
+                                type="button"
+                                data-deactivate="${id}"
+                            >
+                                <i class="fa-solid fa-pause"></i>
+                                Deactivate
+                            </button>
+
+
+                            ${
+                                item.receipt_url
+                                    ? `
+                                        <a
+                                            class="receipt-button"
+                                            href="${escapeHtml(
+                                                item.receipt_url
+                                            )}"
+                                        >
+                                            <i class="fa-solid fa-receipt"></i>
+                                            Receipt
+                                        </a>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+                    </article>
+                `;
+            }
+        ).join("");
+
+
+    document
+        .querySelectorAll(
+            "[data-deactivate]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        deactivate(
+                            Number(
+                                button.dataset.deactivate
+                            ),
+                            button
+                        )
+                );
+            }
+        );
+
+
+    updateTimers();
+}
+
+
+/* ============================================================
+   UPDATE ACTIVE TIMERS
+   ============================================================ */
+
+function updateTimers() {
+
+    const data =
+        state.data || {};
+
+
+    const active =
+        Array.isArray(
+            data.active_subscriptions
+        )
+            ? data.active_subscriptions
+            : [];
+
+
+    const now =
+        Math.floor(
+            Date.now() / 1000
+        );
+
+
+    document
+        .querySelectorAll(
+            "[data-active-id]"
+        )
+        .forEach(
+            card => {
+
+                const id =
+                    Number(
+                        card.dataset.activeId
+                    );
+
+
+                const subscription =
+                    active.find(
+                        item =>
+                            Number(
+                                item.id
+                            ) === id
+                    );
+
+
+                if (!subscription) {
+                    return;
+                }
+
+
+                const startDate =
+                    new Date(
+                        String(
+                            subscription.start_at
+                        ).replace(
+                            " ",
+                            "T"
+                        )
+                    );
+
+
+                const endDate =
+                    new Date(
+                        String(
+                            subscription.end_at
+                        ).replace(
+                            " ",
+                            "T"
+                        )
+                    );
+
+
+                const start =
+                    Math.floor(
+                        startDate.getTime()
+                        / 1000
+                    );
+
+
+                const end =
+                    Math.floor(
+                        endDate.getTime()
+                        / 1000
+                    );
+
+
+                if (
+                    Number.isNaN(start)
+                    || Number.isNaN(end)
+                ) {
+                    return;
+                }
+
+
+                const remaining =
+                    Math.max(
+                        0,
+                        end - now
+                    );
+
+
+                const total =
+                    Math.max(
+                        1,
+                        end - start
+                    );
+
+
+                const used =
+                    Math.min(
+                        100,
+                        Math.max(
+                            0,
+                            (
+                                (
+                                    now - start
+                                )
+                                / total
+                            ) * 100
+                        )
+                    );
+
+
+                const remainingNode =
+                    card.querySelector(
+                        "[data-remaining]"
+                    );
+
+
+                const progressNode =
+                    card.querySelector(
+                        "[data-progress]"
+                    );
+
+
+                const usedNode =
+                    card.querySelector(
+                        "[data-used-percent]"
+                    );
+
+
+                const leftNode =
+                    card.querySelector(
+                        "[data-left-percent]"
+                    );
+
+
+                if (remainingNode) {
+
+                    remainingNode.textContent =
+                        formatRemaining(
+                            remaining
+                        );
+                }
+
+
+                if (progressNode) {
+
+                    progressNode.style.width =
+                        `${used.toFixed(2)}%`;
+                }
+
+
+                if (usedNode) {
+
+                    usedNode.textContent =
+                        `${used.toFixed(1)}% used`;
+                }
+
+
+                if (leftNode) {
+
+                    leftNode.textContent =
+                        `${(
+                            100 - used
+                        ).toFixed(1)}% remaining`;
+                }
+
+            }
+        );
+}
+
+
+/* ============================================================
+   SUBSCRIBE
+   ============================================================ */
+
+async function subscribe(
+    serviceId,
+    button
+) {
+
+    clearAlert();
+
+
+    const select =
+        document.querySelector(
+            `[data-method="${serviceId}"]`
+        );
+
+
+    const method =
+        select
+            ? String(
+                select.value
+            ).toLowerCase()
+            : "";
+
+
+    if (
+        ![
+            "mpesa",
+            "paypal",
+            "card"
+        ].includes(method)
+    ) {
+
+        showAlert(
+            "Please select a valid payment method.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Creating secure payment...
+    `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiFetch(
+                API.subscribe,
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            service_id:
+                                Number(
+                                    serviceId
+                                ),
+
+                            payment_method:
+                                method,
+
+                            return_path:
+                                getReturnPath()
+
+                        })
+                }
+            );
+
+
+        /* ---------------------------------------------
+           AUTHENTICATION
+           --------------------------------------------- */
+
+        if (
+            result.code ===
+            "AUTHENTICATION_REQUIRED"
+        ) {
+
+            location.href =
+                result.redirect
+                || "login.html?return=premium.html";
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           EMAIL VERIFICATION
+           --------------------------------------------- */
+
+        if (
+            result.code ===
+            "EMAIL_NOT_VERIFIED"
+        ) {
+
+            showAlert(
+                result.message
+                || "Please verify your email before purchasing Premium.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           TWO PREMIUM LIMIT
+           --------------------------------------------- */
+
+        if (
+            result.code ===
+            "PREMIUM_LIMIT_REACHED"
+        ) {
+
+            showAlert(
+                result.message
+                || "Deactivate one Premium membership first.",
+                "error"
+            );
+
+            await loadPremium();
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           SAME SERVICE ACTIVE
+           --------------------------------------------- */
+
+        if (
+            result.code ===
+            "PREMIUM_ALREADY_ACTIVE"
+        ) {
+
+            showAlert(
+                result.message
+                || "This Premium service is already active.",
+                "error"
+            );
+
+            await loadPremium();
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           FX ERROR
+           --------------------------------------------- */
+
+        if (
+            result.code ===
+            "EXCHANGE_RATE_UNAVAILABLE"
+        ) {
+
+            showAlert(
+                result.message
+                || "The exchange rate is currently unavailable.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           GENERAL ERROR
+           --------------------------------------------- */
+
+        if (
+            !response.ok
+            || result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                || "The Premium payment could not be created."
+            );
+        }
+
+
+        /* ---------------------------------------------
+           SECURE PAYMENT URL
+           --------------------------------------------- */
+
+        if (
+            result.payment_url
+        ) {
+
+            location.href =
+                result.payment_url;
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           FALLBACK SECURE CODE
+           --------------------------------------------- */
+
+        if (
+            result.payment_code
+        ) {
+
+            const paymentUrl =
+                methodPage(
+                    method,
+                    result.payment_code
+                );
+
+
+            if (paymentUrl) {
+
+                location.href =
+                    paymentUrl;
+
+                return;
+            }
+        }
+
+
+        throw new Error(
+            "The secure payment page could not be opened."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "LOVEMI Premium payment creation:",
+            error
+        );
+
+
+        showAlert(
+            error.message
+            || "The Premium payment request could not be created.",
+            "error"
+        );
+
+    } finally {
+
+        button.disabled =
+            false;
+
+
+        button.innerHTML = `
+            <i class="fa-solid fa-credit-card"></i>
+            Continue to Payment
+        `;
+    }
+}
+
+
+/* ============================================================
+   DEACTIVATE
+   ============================================================ */
+
+async function deactivate(
+    subscriptionId,
+    button
+) {
+
+    const confirmed =
+        confirm(
+            "Deactivate this Premium membership? "
+            + "It will stop being active immediately."
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    button.disabled =
+        true;
+
+
+    const originalText =
+        button.innerHTML;
+
+
+    button.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Deactivating...
+    `;
+
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiFetch(
+                API.deactivate,
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            subscription_id:
+                                Number(
+                                    subscriptionId
+                                )
+
+                        })
+                }
+            );
+
+
+        if (
+            !response.ok
+            || result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                || "Premium could not be deactivated."
+            );
+        }
+
+
+        showAlert(
+            result.message
+            || "Premium deactivated successfully.",
+            "success"
+        );
+
+
+        await loadPremium();
+
+    } catch (error) {
+
+        showAlert(
+            error.message
+            || "Premium could not be deactivated.",
+            "error"
+        );
+
+    } finally {
+
+        button.disabled =
+            false;
+
+        button.innerHTML =
+            originalText;
+    }
+}
+
+
+/* ============================================================
+   NOTIFICATION BADGE
+   ============================================================ */
+
+async function pollNotifications() {
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiFetch(
+                API.notifications
+            );
+
+
+        if (
+            !response.ok
+            || !result
+        ) {
+            return;
+        }
+
+
+        const unreadCount =
+            Number(
+                result.unread_count
+                ?? result.count
+                ?? result.data?.unread_count
+                ?? 0
+            );
+
+
+        const bell =
+            $("#notificationBell");
+
+
+        if (!bell) {
+            return;
+        }
+
+
+        /*
+         * Show the notification ring/badge when unread
+         * notifications exist.
+         */
+        if (
+            unreadCount > 0
+        ) {
+
+            bell.classList.add(
+                "has-notification"
+            );
+
+
+            bell.setAttribute(
+                "data-unread",
+                unreadCount > 99
+                    ? "99+"
+                    : String(
+                        unreadCount
+                    )
+            );
+
+        } else {
+
+            bell.classList.remove(
+                "has-notification"
+            );
+
+
+            bell.removeAttribute(
+                "data-unread"
+            );
+        }
+
+
+        /*
+         * Save count for this page.
+         */
+        state.notificationCount =
+            unreadCount;
+
+    } catch (error) {
+
+        console.debug(
+            "LOVEMI notification polling:",
+            error
+        );
+    }
+}
+
+
+/* ============================================================
    LOAD PREMIUM
-========================================================= */
+   ============================================================ */
 
 async function loadPremium() {
 
@@ -2001,728 +2832,239 @@ async function loadPremium() {
             response,
             result
         } =
-            await getJson(
-                PREMIUM_API
+            await apiFetch(
+                API.services
             );
 
 
         if (
-            response.status ===
-            401
-            &&
-            result.redirect
+            response.status === 401
+            && result.redirect
         ) {
 
-            window.location.href =
+            location.href =
                 result.redirect;
 
             return;
-
         }
 
 
         if (
             !response.ok
-            ||
-            result.success !== true
+            || result.success !== true
         ) {
 
             throw new Error(
                 result.message
-                ||
-                "Premium information could not be loaded."
+                || "Premium information could not be loaded."
             );
-
         }
 
 
-        renderStatus(
+        state.data =
+            result;
+
+
+        renderCurrency(
             result
         );
 
 
         renderServices(
-            result.services
-            ||
-            []
+            result
         );
 
+
+        renderActive();
+
+
+        clearInterval(
+            state.timer
+        );
+
+
+        state.timer =
+            setInterval(
+                updateTimers,
+                1000
+            );
+
+
+        await pollNotifications();
 
     } catch (error) {
 
         console.error(
+            "LOVEMI Premium:",
             error
         );
 
 
-        serviceContainer.innerHTML = `
-
-            <div
-                style="
-                    text-align:center;
-                    padding:30px;
-                    color:#9898a1;
-                    font-size:9px;
-                ">
-
-                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                <br><br>
-
+        $("#serviceContainer").innerHTML = `
+            <div class="empty">
                 ${escapeHtml(
                     error.message
-                    ||
-                    "Unable to load Premium."
+                    || "Premium information is unavailable."
                 )}
-
             </div>
+        `;
 
+
+        $("#activeContainer").innerHTML = `
+            <div class="empty">
+                Membership status is unavailable.
+            </div>
         `;
 
 
         showAlert(
             error.message
-            ||
-            "Premium could not be loaded.",
+            || "Premium information is unavailable.",
             "error"
         );
-
     }
-
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-   RENDER SERVICES
-========================================================= */
-
-function renderServices(
-    services
-) {
-
-    if (
-        !services.length
-    ) {
-
-        serviceContainer.innerHTML = `
-
-            <div
-                style="
-                    padding:30px;
-                    text-align:center;
-                    color:#9898a1;
-                    font-size:9px;
-                ">
-
-                No Premium service is currently available.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const service =
-        services[0];
-
-
-    serviceContainer.innerHTML = `
-
-        <article class="service">
-
-
-            <span class="service-tag">
-
-                <i class="fa-solid fa-crown"></i>
-
-                PREMIUM
-
-            </span>
-
-
-            <h3>
-
-                ${escapeHtml(
-                    service.name
-                )}
-
-            </h3>
-
-
-            <p class="service-description">
-
-                ${escapeHtml(
-                    service.description
-                    ||
-                    "Premium access to LOVEMI services."
-                )}
-
-            </p>
-
-
-            <div class="price-area">
-
-
-                <div class="price">
-
-                    ${escapeHtml(
-                        service.local_amount_display
-                    )}
-
-                </div>
-
-
-                <div class="price-sub">
-
-                    ${
-                        service.currency.code === "USD"
-                            ?
-                            "international price"
-                            :
-                            "converted from USD"
-                    }
-
-                </div>
-
-
-            </div>
-
-
-            <div class="service-meta">
-
-
-                <div class="meta">
-
-                    <strong>
-                        USD Base
-                    </strong>
-
-                    <span>
-                        ${escapeHtml(
-                            service.price_usd_display
-                        )}
-                    </span>
-
-                </div>
-
-
-                <div class="meta">
-
-                    <strong>
-                        Duration
-                    </strong>
-
-                    <span>
-                        ${escapeHtml(
-                            service.duration_days
-                        )}
-                        days
-                    </span>
-
-                </div>
-
-
-                <div class="meta">
-
-                    <strong>
-                        Currency
-                    </strong>
-
-                    <span>
-
-                        ${escapeHtml(
-                            service.currency.code
-                        )}
-
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-            <button
-                type="button"
-                id="subscribeButton"
-                class="subscribe-button">
-
-
-                <i class="fa-solid fa-lock"></i>
-
-                Continue to Payment
-
-
-            </button>
-
-
-        </article>
-
-    `;
-
-
-    document
-        .getElementById(
-            "subscribeButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                subscribe(
-                    service.id,
-                    service
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   RENDER STATUS
-========================================================= */
-
-function renderStatus(
-    result
-) {
-
-    if (
-        result.has_active_premium
-        &&
-        result.active_subscription
-    ) {
-
-        const active =
-            result.active_subscription;
-
-
-        statusContainer.innerHTML = `
-
-            <span class="active-badge">
-
-                <i class="fa-solid fa-circle-check"></i>
-
-                Premium Active
-
-            </span>
-
-
-            <h3>
-
-                ${escapeHtml(
-                    active.service_name
-                )}
-
-            </h3>
-
-
-            <p>
-
-                Your Premium membership is active.
-
-            </p>
-
-
-            <div class="status-date">
-
-                Expires:
-
-                ${escapeHtml(
-                    active.end_at
-                )}
-
-            </div>
-
-
-            <div class="features">
-
-
-                <div class="feature">
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Create connections
-
-                </div>
-
-
-                <div class="feature">
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Access Premium services
-
-                </div>
-
-
-                <div class="feature">
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Start approved conversations
-
-                </div>
-
-
-            </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    statusContainer.innerHTML = `
-
-        <span
-            class="active-badge"
-            style="
-                color:#92400e;
-                background:#fef3c7;
-            ">
-
-            <i class="fa-solid fa-crown"></i>
-
-            Not Active
-
-        </span>
-
-
-        <h3>
-            Premium is not active
-        </h3>
-
-
-        <p>
-
-            Purchase Premium to unlock the member
-            connection and messaging services.
-
-        </p>
-
-
-        <div class="features">
-
-
-            <div class="feature">
-
-                <i class="fa-solid fa-lock"></i>
-
-                Connection service
-
-            </div>
-
-
-            <div class="feature">
-
-                <i class="fa-solid fa-lock"></i>
-
-                Premium messaging features
-
-            </div>
-
-
-            <div class="feature">
-
-                <i class="fa-solid fa-lock"></i>
-
-                Premium member services
-
-            </div>
-
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   SUBSCRIBE
-========================================================= */
-
-async function subscribe(
-    serviceId,
-    service
-) {
-
-    const button =
-        document.getElementById(
-            "subscribeButton"
-        );
-
-
-    if (
-        !button
-    ) {
-
-        return;
-
-    }
-
-
-    button.disabled =
-        true;
-
-
-    button.innerHTML =
-        `
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        Creating payment...
-        `;
-
-
-    try {
-
-        const response =
-            await fetch(
-                SUBSCRIBE_API,
-                {
-
-                    method:
-                        "POST",
-
-                    credentials:
-                        "same-origin",
-
-                    cache:
-                        "no-store",
-
-                    headers: {
-
-                        "Accept":
-                            "application/json",
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Cache-Control":
-                            "no-cache, no-store, max-age=0",
-
-                        "Pragma":
-                            "no-cache"
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            {
-                                service_id:
-                                    Number(
-                                        serviceId
-                                    )
-                            }
-                        )
-
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            result.code ===
-            "AUTHENTICATION_REQUIRED"
-        ) {
-
-            window.location.href =
-                result.redirect
-                ||
-                "login.html?return=premium.html";
-
-            return;
-
-        }
-
-
-        if (
-            result.code ===
-            "PREMIUM_ALREADY_ACTIVE"
-        ) {
-
-            showAlert(
-                result.message,
-                "success"
-            );
-
-
-            await loadPremium();
-
-            return;
-
-        }
-
-
-        if (
-            !response.ok
-            ||
-            result.success !== true
-        ) {
-
-            throw new Error(
-                result.message
-                ||
-                "Unable to create your Premium payment."
-            );
-
-        }
-
-
-        if (
-            result.redirect
-        ) {
-
-            window.location.href =
-                result.redirect;
-
-            return;
-
-        }
-
-
-        throw new Error(
-            "The payment page could not be opened."
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-
-        showAlert(
-            error.message
-            ||
-            "Unable to create the Premium payment.",
-            "error"
-        );
-
-
-    } finally {
-
-        button.disabled =
-            false;
-
-
-        button.innerHTML =
-            `
-            <i class="fa-solid fa-lock"></i>
-            Continue to Payment
-            `;
-
-    }
-
-}
-
-
-/* =========================================================
+/* ============================================================
    MOBILE MENU
-========================================================= */
+   ============================================================ */
 
-const mobileMenu =
-    document.getElementById(
-        "mobileMenu"
-    );
-
-
-const mobileNav =
-    document.getElementById(
-        "mobileNav"
-    );
-
-
-mobileMenu.addEventListener(
+$("#mobileMenu")?.addEventListener(
     "click",
-    function() {
+    function () {
+
+        const nav =
+            $("#mobileNav");
+
+
+        if (!nav) {
+            return;
+        }
+
 
         const open =
-            mobileNav.classList.contains(
+            nav.classList.toggle(
                 "open"
             );
 
 
-        mobileNav.classList.toggle(
-            "open"
+        this.setAttribute(
+            "aria-expanded",
+            String(open)
         );
 
 
         this.setAttribute(
-            "aria-expanded",
-            String(
-                !open
-            )
+            "aria-label",
+            open
+                ? "Close navigation"
+                : "Open navigation"
         );
 
 
         this.innerHTML =
-            !open
-                ?
-                '<i class="fa-solid fa-xmark"></i>'
-                :
-                '<i class="fa-solid fa-bars"></i>';
-
+            open
+                ? `<i class="fa-solid fa-xmark"></i>`
+                : `<i class="fa-solid fa-bars"></i>`;
     }
 );
 
 
-/* =========================================================
-   START
-========================================================= */
+/* ============================================================
+   CLOSE MOBILE MENU WHEN LINK IS CLICKED
+   ============================================================ */
+
+document
+    .querySelectorAll(
+        "#mobileNav a"
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    $("#mobileNav")
+                        ?.classList
+                        .remove("open");
+
+
+                    $("#mobileMenu")
+                        ?.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+
+                    $("#mobileMenu")
+                        ?.setAttribute(
+                            "aria-label",
+                            "Open navigation"
+                        );
+
+
+                    if (
+                        $("#mobileMenu")
+                    ) {
+
+                        $("#mobileMenu").innerHTML =
+                            `<i class="fa-solid fa-bars"></i>`;
+                    }
+                }
+            );
+        }
+    );
+
+
+/* ============================================================
+   VISIBILITY
+   ============================================================ */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    loadPremium
+    "visibilitychange",
+    () => {
+
+        if (
+            document.visibilityState
+            === "visible"
+        ) {
+
+            loadPremium();
+
+            pollNotifications();
+        }
+    }
 );
+
+
+/* ============================================================
+   YEAR
+   ============================================================ */
+
+$("#year").textContent =
+    new Date().getFullYear();
+
+
+/* ============================================================
+   NOTIFICATION POLLING
+   ============================================================ */
+
+state.notificationTimer =
+    setInterval(
+        pollNotifications,
+        5000
+    );
+
+
+/* ============================================================
+   INITIAL LOAD
+   ============================================================ */
+
+loadPremium();
 
 </script>
 
 </body>
-
 </html>

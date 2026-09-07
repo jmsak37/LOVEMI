@@ -1,38 +1,35 @@
 <?php
+declare(strict_types=1);
+
 /**
  * ============================================================
  * LOVEMI - UNREAD NOTIFICATION COUNT API
  * ============================================================
- *
- * Returns the number of unread notifications belonging to the
- * authenticated user.
- *
- * ============================================================
  */
-
-declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
 
-/* ============================================================
-   HEADERS
-============================================================ */
+header(
+    'Content-Type: application/json; charset=utf-8'
+);
 
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
-header('Expires: 0');
+header(
+    'Cache-Control: no-store, no-cache, must-revalidate, max-age=0'
+);
 
+header(
+    'Pragma: no-cache'
+);
 
-/* ============================================================
-   SESSION
-============================================================ */
+header(
+    'Expires: 0'
+);
+
 
 if (
     session_status()
-    !==
-    PHP_SESSION_ACTIVE
+    !== PHP_SESSION_ACTIVE
 ) {
 
     session_start();
@@ -67,7 +64,8 @@ function unreadCountResponse(
             ],
             $data
         ),
-        JSON_UNESCAPED_UNICODE |
+        JSON_UNESCAPED_UNICODE
+        |
         JSON_UNESCAPED_SLASHES
     );
 
@@ -99,18 +97,16 @@ if (
 
 
 /* ============================================================
-   AUTHENTICATION
+   USER
 ============================================================ */
 
 $userId =
-    isset(
-        $_SESSION['lovemi_user_id']
-    )
-        ?
-        (int)
-        $_SESSION['lovemi_user_id']
-        :
-        0;
+    (int) (
+        $_SESSION[
+            'lovemi_user_id'
+        ]
+        ?? 0
+    );
 
 
 if (
@@ -126,7 +122,6 @@ if (
 
             'unread_count' =>
                 0
-
         ],
         401
     );
@@ -142,12 +137,20 @@ try {
     $pdo =
         db();
 
-} catch (Throwable $e) {
+
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
+
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI UNREAD COUNT DB] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -160,7 +163,6 @@ try {
 
             'unread_count' =>
                 0
-
         ],
         500
     );
@@ -199,12 +201,14 @@ try {
         (int)
         $stmt->fetchColumn();
 
-} catch (Throwable $e) {
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI UNREAD COUNT QUERY] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -217,7 +221,6 @@ try {
 
             'unread_count' =>
                 0
-
         ],
         500
     );

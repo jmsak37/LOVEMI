@@ -1,51 +1,55 @@
 <?php
+declare(strict_types=1);
+
 /**
- * ============================================================
- * LOVEMI - M-PESA CALLBACK API
- * ============================================================
+ * LOVEMI - Standard Payment Callback
  *
- * Receives M-Pesa STK callback information.
- *
- * SECURITY:
- *   A callback secret is required.
- *
- * IMPORTANT:
- *   Never trust a front-end request to mark payment as paid.
- *
- * ============================================================
+ * This endpoint must only be called by a trusted provider callback
+ * after the provider-specific callback has verified authenticity.
  */
 
-declare(strict_types=1);
+header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    http_response_code(405);
+
+    echo json_encode([
+        'success' => false,
+        'code' => 'METHOD_NOT_ALLOWED',
+        'message' => 'Only POST requests are allowed.'
+    ]);
+
+    exit;
+}
 
 require_once __DIR__ . '/../../config/database.php';
 
 
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store');
-
-
 /* ============================================================
    RESPONSE
-============================================================ */
+   ============================================================ */
 
 function callbackResponse(
+    bool $success,
     string $message,
     array $data = [],
     int $status = 200
 ): never {
-
     http_response_code($status);
 
     echo json_encode(
         array_merge(
             [
-                'ResultCode' => 0,
-                'ResultDesc' => $message
+                'success' => $success,
+                'message' => $message
             ],
             $data
         ),
-        JSON_UNESCAPED_UNICODE |
-        JSON_UNESCAPED_SLASHES
+        JSON_UNESCAPED_UNICODE
+        | JSON_UNESCAPED_SLASHES
     );
 
     exit;
@@ -53,226 +57,794 @@ function callbackResponse(
 
 
 /* ============================================================
-   CALLBACK SECRET
-============================================================ */
+   ENVIRONMENT
+   ============================================================ */
 
-$configuredSecret =
-    trim(
-        (string)
-        getenv('MPESA_CALLBACK_SECRET')
+function lovemiEnv(
+    string $name,
+    ?string $default = null
+): ?string {
+    $value = getenv($name);
+
+    if ($value === false) {
+        return $default;
+    }
+
+    $value = trim((string) $value);
+
+    return $value === ''
+        ? $default
+        : $value;
+}
+
+
+/* ============================================================
+   APP URL
+   ============================================================ */
+
+function lovemiAppUrl(): string {
+
+    $configured =
+        lovemiEnv('LOVEMI_APP_URL');
+
+    if ($configured !== null) {
+        return rtrim(
+            $configured,
+            '/'
+        );
+    }
+
+
+    $https =
+        !empty($_SERVER['HTTPS'])
+        && strtolower(
+            (string) $_SERVER['HTTPS']
+        ) !== 'off';
+
+
+    $scheme =
+        $https
+            ? 'https'
+            : 'http';
+
+
+    $host =
+        $_SERVER['HTTP_HOST']
+        ?? 'localhost';
+
+
+    $script =
+        str_replace(
+            '\\',
+            '/',
+            (string) (
+                $_SERVER['SCRIPT_NAME']
+                ?? ''
+            )
+        );
+
+
+    $marker =
+        '/api/payments/';
+
+
+    $position =
+        strpos(
+            $script,
+            $marker
+        );
+
+
+    $root =
+        $position !== false
+            ? substr(
+                $script,
+                0,
+                $position
+            )
+            : '/LOVEMI';
+
+
+    return
+        $scheme
+        . '://'
+        . $host
+        . rtrim($root, '/');
+}
+
+
+/* ============================================================
+   SECURE RETURN PATH
+   ============================================================ */
+
+function safeReturnPath(
+    ?string $path
+): string {
+
+    $fallback =
+        'dashboard.html';
+
+    if ($path === null) {
+        return $fallback;
+    }
+
+    $path =
+        trim($path);
+
+
+    if ($path === '') {
+        return $fallback;
+    }
+
+
+    if (
+        preg_match(
+            '/[\r\n]/',
+            $path
+        )
+        || preg_match(
+            '#^[a-z][a-z0-9+\-.]*:#i',
+            $path
+        )
+        || str_starts_with(
+            $path,
+            '//'
+        )
+        || str_contains(
+            $path,
+            '../'
+        )
+        || str_contains(
+            $path,
+            '..\\'
+        )
+    ) {
+        return $fallback;
+    }
+
+
+    return ltrim(
+        $path,
+        '/'
     );
+}
+
+
+/* ============================================================
+   PAYMENT PAGE
+   ============================================================ */
+
+function paymentPageForMethod(
+    string $method
+): string {
+
+    switch (
+        strtolower(
+            trim($method)
+        )
+    ) {
+
+        case 'mpesa':
+            return 'mpesa-pay.html';
+
+        case 'paypal':
+            return 'paypal-pay.html';
+
+        case 'card':
+            return 'card-pay.html';
+
+        default:
+            return 'premium.html';
+    }
+}
+
+
+/* ============================================================
+   SECURE TOKEN
+   ============================================================ */
+
+function secureCode(): string {
+    return bin2hex(
+        random_bytes(32)
+    );
+}
+
+
+/* ============================================================
+   PAYMENT ACCESS TOKEN TABLE
+   ============================================================ */
+
+function ensurePaymentAccessTable(
+    PDO $pdo
+): void {
+
+    $pdo->exec(
+        "
+        CREATE TABLE IF NOT EXISTS payment_access_tokens (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            payment_id BIGINT UNSIGNED NOT NULL,
+            token_hash CHAR(64) NOT NULL,
+            expires_at DATETIME NOT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+            PRIMARY KEY (id),
+
+            UNIQUE KEY uq_payment_access_payment
+                (payment_id),
+
+            UNIQUE KEY uq_payment_access_token
+                (token_hash),
+
+            KEY idx_payment_access_expiry
+                (expires_at)
+
+        ) ENGINE=InnoDB
+        DEFAULT CHARSET=utf8mb4
+        COLLATE=utf8mb4_unicode_ci
+        "
+    );
+}
+
+
+/* ============================================================
+   CREATE PAYMENT RETRY CODE
+   ============================================================ */
+
+function createPaymentRetryCode(
+    PDO $pdo,
+    int $paymentId
+): string {
+
+    ensurePaymentAccessTable(
+        $pdo
+    );
+
+
+    $code =
+        secureCode();
+
+
+    $hash =
+        hash(
+            'sha256',
+            $code
+        );
+
+
+    $stmt =
+        $pdo->prepare(
+            "
+            INSERT INTO payment_access_tokens
+            (
+                payment_id,
+                token_hash,
+                expires_at
+            )
+            VALUES
+            (
+                :payment_id,
+                :token_hash,
+                DATE_ADD(
+                    CURRENT_TIMESTAMP,
+                    INTERVAL 30 DAY
+                )
+            )
+
+            ON DUPLICATE KEY UPDATE
+                token_hash =
+                    VALUES(token_hash),
+
+                expires_at =
+                    VALUES(expires_at)
+            "
+        );
+
+
+    $stmt->execute([
+        ':payment_id' =>
+            $paymentId,
+
+        ':token_hash' =>
+            $hash
+    ]);
+
+
+    return $code;
+}
+
+
+/* ============================================================
+   CREATE NOTIFICATION
+   ============================================================ */
+
+function createPaymentFailureNotification(
+    PDO $pdo,
+    array $payment,
+    string $paymentStatus
+): void {
+
+    /*
+     * IMPORTANT:
+     * notification_types uses "slug", NOT "type".
+     */
+    $typeStmt =
+        $pdo->prepare(
+            "
+            SELECT
+                id,
+                name,
+                sound_enabled
+
+            FROM notification_types
+
+            WHERE slug = 'payment_failed'
+
+            LIMIT 1
+            "
+        );
+
+
+    $typeStmt->execute();
+
+
+    $notificationType =
+        $typeStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
+
+    if (!$notificationType) {
+        error_log(
+            '[LOVEMI] payment_failed notification type not found.'
+        );
+
+        return;
+    }
+
+
+    /*
+     * Get the notification sound belonging to notification type 7.
+     *
+     * The database maps payment_failed to notification7.mp3.
+     */
+    $audioStmt =
+        $pdo->prepare(
+            "
+            SELECT
+                id
+
+            FROM notification_audio
+
+            WHERE notification_type_id = :type_id
+
+              AND is_active = 1
+
+            ORDER BY sort_order ASC, id ASC
+
+            LIMIT 1
+            "
+        );
+
+
+    $audioStmt->execute([
+        ':type_id' =>
+            (int) $notificationType['id']
+    ]);
+
+
+    $audioId =
+        $audioStmt->fetchColumn();
+
+
+    $title =
+        $paymentStatus === 'cancelled'
+            ? 'Payment Cancelled'
+            : 'Payment Failed';
+
+
+    $message =
+        $paymentStatus === 'cancelled'
+            ? 'Your payment for '
+                . (string) $payment['service_name']
+                . ' was cancelled. Your Premium membership was not activated. You can safely continue the payment using the secure payment link sent to your email.'
+            : 'Your payment for '
+                . (string) $payment['service_name']
+                . ' was not completed. Your Premium membership was not activated. A secure payment continuation link has been sent to your email.';
+
+
+    /*
+     * Prevent duplicate notification entries when a provider sends
+     * the same callback more than once.
+     */
+    $duplicateStmt =
+        $pdo->prepare(
+            "
+            SELECT id
+
+            FROM notifications
+
+            WHERE user_id = :user_id
+
+              AND notification_type_id = :type_id
+
+              AND reference_type = 'payment'
+
+              AND reference_id = :payment_id
+
+              AND created_at >= DATE_SUB(
+                    CURRENT_TIMESTAMP,
+                    INTERVAL 10 MINUTE
+                  )
+
+            LIMIT 1
+            "
+        );
+
+
+    $duplicateStmt->execute([
+        ':user_id' =>
+            (int) $payment['user_id'],
+
+        ':type_id' =>
+            (int) $notificationType['id'],
+
+        ':payment_id' =>
+            (int) $payment['id']
+    ]);
+
+
+    if ($duplicateStmt->fetchColumn()) {
+        return;
+    }
+
+
+    /*
+     * Insert notification.
+     *
+     * sender_id is NULL because this notification is generated
+     * by LOVEMI automatically.
+     */
+    $insert =
+        $pdo->prepare(
+            "
+            INSERT INTO notifications
+            (
+                user_id,
+                notification_type_id,
+                sender_id,
+                title,
+                message,
+                reference_type,
+                reference_id,
+                audio_id,
+                is_read,
+                read_at,
+                created_at
+            )
+            VALUES
+            (
+                :user_id,
+                :notification_type_id,
+                NULL,
+                :title,
+                :message,
+                'payment',
+                :reference_id,
+                :audio_id,
+                0,
+                NULL,
+                CURRENT_TIMESTAMP
+            )
+            "
+        );
+
+
+    $insert->execute([
+        ':user_id' =>
+            (int) $payment['user_id'],
+
+        ':notification_type_id' =>
+            (int) $notificationType['id'],
+
+        ':title' =>
+            $title,
+
+        ':message' =>
+            $message,
+
+        ':reference_id' =>
+            (int) $payment['id'],
+
+        ':audio_id' =>
+            $audioId !== false
+                ? (int) $audioId
+                : null
+    ]);
+}
+
+
+/* ============================================================
+   READ REQUEST
+   ============================================================ */
+
+$secret =
+    lovemiEnv(
+        'LOVEMI_PAYMENT_WEBHOOK_SECRET'
+    );
+
+
+if (
+    $secret === null
+) {
+    callbackResponse(
+        false,
+        'Payment webhook is not configured.',
+        [
+            'code' =>
+                'PAYMENT_WEBHOOK_NOT_CONFIGURED'
+        ],
+        500
+    );
+}
 
 
 $providedSecret =
     trim(
-        (string)
-        (
-            $_GET['token']
-            ??
-            ''
+        (string) (
+            $_SERVER[
+                'HTTP_X_LOVEMI_PAYMENT_SECRET'
+            ]
+            ?? ''
         )
     );
 
 
 if (
-    $configuredSecret === ''
-    ||
     $providedSecret === ''
-    ||
-    !hash_equals(
-        $configuredSecret,
+    || !hash_equals(
+        $secret,
         $providedSecret
     )
 ) {
 
-    http_response_code(403);
-
-    echo json_encode(
+    callbackResponse(
+        false,
+        'Invalid payment callback authentication.',
         [
-            'ResultCode' =>
-                1,
-
-            'ResultDesc' =>
-                'Unauthorized callback.'
-        ]
+            'code' =>
+                'INVALID_PAYMENT_WEBHOOK'
+        ],
+        401
     );
-
-    exit;
 }
 
 
-/* ============================================================
-   POST BODY
-============================================================ */
-
-$rawBody =
+$raw =
     file_get_contents(
         'php://input'
     );
 
 
 if (
-    trim(
-        (string)
-        $rawBody
-    ) === ''
+    $raw === false
+    || trim($raw) === ''
 ) {
 
     callbackResponse(
-        'Empty callback received.',
-        [],
+        false,
+        'The callback request is empty.',
+        [
+            'code' =>
+                'EMPTY_REQUEST'
+        ],
         400
     );
 }
 
 
-$payload =
-    json_decode(
-        (string)
-        $rawBody,
+try {
+
+    $payload =
+        json_decode(
+            $raw,
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+} catch (Throwable $e) {
+
+    callbackResponse(
+        false,
+        'Invalid payment callback JSON.',
+        [
+            'code' =>
+                'INVALID_JSON'
+        ],
+        400
+    );
+}
+
+
+if (!is_array($payload)) {
+
+    callbackResponse(
+        false,
+        'Invalid payment callback payload.',
+        [
+            'code' =>
+                'INVALID_PAYLOAD'
+        ],
+        400
+    );
+}
+
+
+$paymentId =
+    filter_var(
+        $payload['payment_id'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
+
+if (
+    $paymentId === false
+    || $paymentId === null
+    || $paymentId <= 0
+) {
+
+    callbackResponse(
+        false,
+        'A valid payment_id is required.',
+        [
+            'code' =>
+                'INVALID_PAYMENT_ID'
+        ],
+        400
+    );
+}
+
+
+$status =
+    strtolower(
+        trim(
+            (string) (
+                $payload['status']
+                ?? ''
+            )
+        )
+    );
+
+
+if (
+    !in_array(
+        $status,
+        [
+            'paid',
+            'failed',
+            'cancelled'
+        ],
         true
-    );
-
-
-if (
-    !is_array(
-        $payload
     )
 ) {
 
     callbackResponse(
-        'Invalid JSON callback.',
-        [],
+        false,
+        'Invalid payment status.',
+        [
+            'code' =>
+                'INVALID_PAYMENT_STATUS'
+        ],
         400
     );
 }
 
 
-/* ============================================================
-   EXTRACT STK CALLBACK
-============================================================ */
+$transactionId =
+    trim(
+        (string) (
+            $payload[
+                'gateway_transaction_id'
+            ]
+            ?? ''
+        )
+    );
 
-$stkCallback =
-    $payload['Body']['stkCallback']
-    ??
-    null;
+
+$amountPaid =
+    $payload['amount_paid']
+    ?? null;
 
 
 if (
-    !is_array(
-        $stkCallback
-    )
+    $amountPaid !== null
+    && $amountPaid !== ''
+    && !is_numeric($amountPaid)
 ) {
 
     callbackResponse(
-        'Invalid STK callback payload.',
-        [],
+        false,
+        'Invalid amount_paid.',
+        [
+            'code' =>
+                'INVALID_AMOUNT'
+        ],
         400
     );
 }
 
 
-$merchantRequestId =
-    (string)
-    (
-        $stkCallback['MerchantRequestID']
-        ??
-        ''
+$amountPaid =
+    $amountPaid !== null
+    && $amountPaid !== ''
+        ? round(
+            (float) $amountPaid,
+            2
+        )
+        : null;
+
+
+$providerCurrency =
+    strtoupper(
+        trim(
+            (string) (
+                $payload['currency']
+                ?? ''
+            )
+        )
     );
-
-
-$checkoutRequestId =
-    (string)
-    (
-        $stkCallback['CheckoutRequestID']
-        ??
-        ''
-    );
-
-
-$resultCode =
-    (int)
-    (
-        $stkCallback['ResultCode']
-        ??
-        -1
-    );
-
-
-$resultDescription =
-    (string)
-    (
-        $stkCallback['ResultDesc']
-        ??
-        ''
-    );
-
-
-if (
-    $checkoutRequestId === ''
-) {
-
-    callbackResponse(
-        'Checkout request reference missing.',
-        [],
-        400
-    );
-}
 
 
 /* ============================================================
    DATABASE
-============================================================ */
+   ============================================================ */
 
 try {
 
     $pdo =
         db();
 
-} catch (Throwable $e) {
 
-    error_log(
-        '[LOVEMI CALLBACK DB] '
-        .
-        $e->getMessage()
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
     );
 
-    callbackResponse(
-        'Database unavailable.',
-        [],
-        500
+
+    $pdo->setAttribute(
+        PDO::ATTR_DEFAULT_FETCH_MODE,
+        PDO::FETCH_ASSOC
     );
-}
 
 
-/* ============================================================
-   FIND PAYMENT
-============================================================ */
+    $pdo->beginTransaction();
 
-try {
 
+    /*
+     * Lock the payment.
+     */
     $paymentStmt =
         $pdo->prepare(
             "
             SELECT
-
-                p.id,
-                p.user_id,
-                p.service_id,
-                p.subscription_id,
-                p.payment_reference,
-                p.status,
-                p.currency_id,
-                p.base_amount_usd,
-                p.exchange_rate,
-                p.amount_expected,
-                p.amount_paid,
-                p.checkout_reference,
+                p.*,
 
                 s.name AS service_name,
                 s.duration_days,
+                s.is_premium,
+                s.is_active AS service_active,
 
-                sub.status AS subscription_status
+                sub.id AS sub_id,
+                sub.status AS subscription_status,
+
+                u.full_names,
+                u.username,
+                u.email,
+
+                c.code AS currency_code,
+                c.symbol AS currency_symbol,
+
+                rr.return_path
 
             FROM payments p
 
@@ -282,845 +854,1090 @@ try {
             LEFT JOIN subscriptions sub
                 ON sub.id = p.subscription_id
 
-            WHERE p.checkout_reference = :checkout_reference
+            INNER JOIN users u
+                ON u.id = p.user_id
+
+            LEFT JOIN currencies c
+                ON c.id = p.currency_id
+
+            LEFT JOIN payment_return_routes rr
+                ON rr.payment_id = p.id
+
+            WHERE p.id = :payment_id
 
             LIMIT 1
-            "
-        );
-
-
-    $paymentStmt->execute(
-        [
-            ':checkout_reference' =>
-                $checkoutRequestId
-        ]
-    );
-
-
-    $payment =
-        $paymentStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI CALLBACK PAYMENT QUERY] '
-        .
-        $e->getMessage()
-    );
-
-    callbackResponse(
-        'Payment could not be located.',
-        [],
-        500
-    );
-}
-
-
-if (
-    !$payment
-) {
-
-    error_log(
-        '[LOVEMI CALLBACK UNKNOWN CHECKOUT] '
-        .
-        $checkoutRequestId
-    );
-
-    callbackResponse(
-        'Payment not found.',
-        [],
-        404
-    );
-}
-
-
-/* ============================================================
-   ALREADY PAID
-============================================================ */
-
-if (
-    $payment['status'] === 'paid'
-) {
-
-    callbackResponse(
-        'Payment was already processed.'
-    );
-}
-
-
-/* ============================================================
-   FAILED / CANCELLED
-============================================================ */
-
-if (
-    $resultCode !== 0
-) {
-
-    try {
-
-        $failedStmt =
-            $pdo->prepare(
-                "
-                UPDATE payments
-
-                SET
-
-                    status = 'failed',
-
-                    gateway = 'mpesa',
-
-                    payment_method = 'mpesa',
-
-                    checkout_reference =
-                        :checkout_reference
-
-                WHERE id = :payment_id
-
-                  AND status <> 'paid'
-
-                LIMIT 1
-                "
-            );
-
-
-        $failedStmt->execute(
-            [
-                ':checkout_reference' =>
-                    $checkoutRequestId,
-
-                ':payment_id' =>
-                    (int)
-                    $payment['id']
-            ]
-        );
-
-
-        /*
-         * Keep pending subscription from becoming active.
-         */
-
-        if (
-            !empty(
-                $payment['subscription_id']
-            )
-        ) {
-
-            $subFailed =
-                $pdo->prepare(
-                    "
-                    UPDATE subscriptions
-
-                    SET status = 'failed'
-
-                    WHERE id = :subscription_id
-
-                      AND status = 'pending'
-
-                    LIMIT 1
-                    "
-                );
-
-
-            $subFailed->execute(
-                [
-                    ':subscription_id' =>
-                        (int)
-                        $payment['subscription_id']
-                ]
-            );
-
-        }
-
-    } catch (Throwable $e) {
-
-        error_log(
-            '[LOVEMI CALLBACK FAILED UPDATE] '
-            .
-            $e->getMessage()
-        );
-
-    }
-
-
-    callbackResponse(
-        'Payment was not completed. ' .
-        $resultDescription
-    );
-}
-
-
-/* ============================================================
-   CALLBACK METADATA
-============================================================ */
-
-$metadataItems =
-    $stkCallback['CallbackMetadata']['Item']
-    ??
-    [];
-
-
-if (
-    !is_array(
-        $metadataItems
-    )
-) {
-
-    $metadataItems = [];
-
-}
-
-
-$metadata = [];
-
-
-foreach (
-    $metadataItems
-    as $item
-) {
-
-    if (
-        !is_array($item)
-    ) {
-
-        continue;
-
-    }
-
-
-    $name =
-        (string)
-        (
-            $item['Name']
-            ??
-            ''
-        );
-
-
-    if (
-        $name === ''
-    ) {
-
-        continue;
-
-    }
-
-
-    $metadata[$name] =
-        $item['Value']
-        ??
-        null;
-
-}
-
-
-/* ============================================================
-   PAYMENT DATA
-============================================================ */
-
-$mpesaAmount =
-    isset(
-        $metadata['Amount']
-    )
-        ? (float)
-          $metadata['Amount']
-        : 0.0;
-
-
-$mpesaReceipt =
-    trim(
-        (string)
-        (
-            $metadata['MpesaReceiptNumber']
-            ??
-            ''
-        )
-    );
-
-
-$transactionDate =
-    isset(
-        $metadata['TransactionDate']
-    )
-        ?
-        (string)
-        $metadata['TransactionDate']
-        :
-        null;
-
-
-$phoneNumber =
-    isset(
-        $metadata['PhoneNumber']
-    )
-        ?
-        (string)
-        $metadata['PhoneNumber']
-        :
-        null;
-
-
-/* ============================================================
-   TRANSACTION ID
-============================================================ */
-
-$gatewayTransactionId =
-    $mpesaReceipt !== ''
-        ?
-        $mpesaReceipt
-        :
-        $checkoutRequestId;
-
-
-/* ============================================================
-   RECEIPT NUMBER
-============================================================ */
-
-$receiptNumber =
-    $mpesaReceipt;
-
-
-if (
-    $receiptNumber === ''
-) {
-
-    $receiptNumber =
-        'LVM-'
-        .
-        date('YmdHis')
-        .
-        '-'
-        .
-        (int)
-        $payment['id'];
-
-}
-
-
-/* ============================================================
-   ACTIVATE PAYMENT
-============================================================ */
-
-try {
-
-    $pdo->beginTransaction();
-
-
-    /*
-     * Lock payment while processing callback.
-     */
-
-    $lockStmt =
-        $pdo->prepare(
-            "
-            SELECT
-
-                id,
-                user_id,
-                service_id,
-                subscription_id,
-                status,
-                amount_expected,
-                amount_paid
-
-            FROM payments
-
-            WHERE id = :id
 
             FOR UPDATE
             "
         );
 
 
-    $lockStmt->execute(
-        [
-            ':id' =>
-                (int)
-                $payment['id']
-        ]
-    );
+    $paymentStmt->execute([
+        ':payment_id' =>
+            (int) $paymentId
+    ]);
 
 
-    $lockedPayment =
-        $lockStmt->fetch();
+    $payment =
+        $paymentStmt->fetch();
 
 
-    if (
-        !$lockedPayment
-    ) {
+    if (!$payment) {
 
-        throw new RuntimeException(
-            'Payment disappeared during callback processing.'
-        );
-
-    }
-
-
-    if (
-        $lockedPayment['status'] === 'paid'
-    ) {
-
-        $pdo->commit();
+        $pdo->rollBack();
 
         callbackResponse(
-            'Payment was already processed.'
+            false,
+            'Payment not found.',
+            [
+                'code' =>
+                    'PAYMENT_NOT_FOUND'
+            ],
+            404
         );
-
-    }
-
-
-    /*
-     * Amount validation.
-     *
-     * For KES payments compare the callback amount with the
-     * amount expected by LOVEMI.
-     */
-
-    $expectedAmount =
-        (float)
-        $lockedPayment['amount_expected'];
-
-
-    if (
-        $mpesaAmount > 0
-        &&
-        abs(
-            $mpesaAmount
-            -
-            $expectedAmount
-        ) > 1.0
-    ) {
-
-        throw new RuntimeException(
-            'Payment amount does not match the expected amount.'
-        );
-
     }
 
 
     /* ========================================================
-       UPDATE PAYMENT
-    ====================================================== */
+       PAID
+       ======================================================== */
 
-    $paymentUpdate =
-        $pdo->prepare(
-            "
-            UPDATE payments
+    if ($status === 'paid') {
 
-            SET
+        $expected =
+            round(
+                (float) $payment['amount_expected'],
+                2
+            );
 
-                gateway = 'mpesa',
 
-                payment_method = 'mpesa',
+        $actual =
+            $amountPaid !== null
+                ? $amountPaid
+                : $expected;
 
-                status = 'paid',
-
-                gateway_transaction_id =
-                    :gateway_transaction_id,
-
-                amount_paid =
-                    :amount_paid,
-
-                phone_number =
-                    COALESCE(
-                        :phone_number,
-                        phone_number
-                    ),
-
-                paid_at =
-                    CURRENT_TIMESTAMP
-
-            WHERE id = :payment_id
-
-              AND status <> 'paid'
-
-            LIMIT 1
-            "
-        );
-
-
-    $paymentUpdate->execute(
-        [
-            ':gateway_transaction_id' =>
-                $gatewayTransactionId,
-
-            ':amount_paid' =>
-                $mpesaAmount > 0
-                    ?
-                    $mpesaAmount
-                    :
-                    $expectedAmount,
-
-            ':phone_number' =>
-                $phoneNumber,
-
-            ':payment_id' =>
-                (int)
-                $payment['id']
-        ]
-    );
-
-
-    /* ========================================================
-       SUBSCRIPTION
-    ====================================================== */
-
-    if (
-        empty(
-            $lockedPayment['subscription_id']
-        )
-    ) {
-
-        throw new RuntimeException(
-            'Paid payment does not have a linked subscription.'
-        );
-
-    }
-
-
-    /*
-     * Fetch service duration.
-     */
-
-    $durationStmt =
-        $pdo->prepare(
-            "
-            SELECT
-
-                duration_days,
-                max_usage
-
-            FROM services
-
-            WHERE id = :service_id
-
-            LIMIT 1
-            "
-        );
-
-
-    $durationStmt->execute(
-        [
-            ':service_id' =>
-                (int)
-                $lockedPayment['service_id']
-        ]
-    );
-
-
-    $service =
-        $durationStmt->fetch();
-
-
-    if (
-        !$service
-    ) {
-
-        throw new RuntimeException(
-            'Premium service not found.'
-        );
-
-    }
-
-
-    $durationDays =
-        max(
-            1,
-            (int)
-            $service['duration_days']
-        );
-
-
-    /*
-     * Start immediately after confirmed payment.
-     */
-
-    $startSql =
-        date(
-            'Y-m-d H:i:s'
-        );
-
-
-    $endSql =
-        date(
-            'Y-m-d H:i:s',
-            strtotime(
-                '+'
-                .
-                $durationDays
-                .
-                ' days'
-            )
-        );
-
-
-    $subscriptionUpdate =
-        $pdo->prepare(
-            "
-            UPDATE subscriptions
-
-            SET
-
-                status = 'active',
-
-                start_at = :start_at,
-
-                end_at = :end_at,
-
-                amount_paid =
-                    :amount_paid,
-
-                payment_id =
-                    :payment_id
-
-            WHERE id = :subscription_id
-
-              AND status IN
-                ('pending','failed')
-
-            LIMIT 1
-            "
-        );
-
-
-    $subscriptionUpdate->execute(
-        [
-
-            ':start_at' =>
-                $startSql,
-
-            ':end_at' =>
-                $endSql,
-
-            ':amount_paid' =>
-                $mpesaAmount > 0
-                    ?
-                    $mpesaAmount
-                    :
-                    $expectedAmount,
-
-            ':payment_id' =>
-                (int)
-                $lockedPayment['id'],
-
-            ':subscription_id' =>
-                (int)
-                $lockedPayment['subscription_id']
-
-        ]
-    );
-
-
-    if (
-        $subscriptionUpdate->rowCount() < 1
-    ) {
 
         /*
-         * It may already be active.
+         * Validate currency when provider supplies it.
          */
+        $storedCurrency =
+            strtoupper(
+                (string) (
+                    $payment['currency_code']
+                    ?? ''
+                )
+            );
 
-        $checkSubscription =
+
+        if (
+            $providerCurrency !== ''
+            && $storedCurrency !== ''
+            && $providerCurrency !== $storedCurrency
+        ) {
+
+            $pdo->rollBack();
+
+            callbackResponse(
+                false,
+                'Payment currency mismatch.',
+                [
+                    'code' =>
+                        'PAYMENT_CURRENCY_MISMATCH'
+                ],
+                409
+            );
+        }
+
+
+        /*
+         * Never activate an underpaid transaction.
+         */
+        if (
+            $actual + 0.0001
+            < $expected
+        ) {
+
+            $update =
+                $pdo->prepare(
+                    "
+                    UPDATE payments
+
+                    SET
+                        status = 'failed',
+                        gateway_transaction_id =
+                            NULLIF(:transaction_id, ''),
+                        amount_paid = :amount_paid,
+                        updated_at = CURRENT_TIMESTAMP
+
+                    WHERE id = :payment_id
+                    "
+                );
+
+
+            $update->execute([
+                ':transaction_id' =>
+                    $transactionId,
+
+                ':amount_paid' =>
+                    $actual,
+
+                ':payment_id' =>
+                    (int) $paymentId
+            ]);
+
+
+            if (
+                !empty(
+                    $payment['sub_id']
+                )
+            ) {
+
+                $subUpdate =
+                    $pdo->prepare(
+                        "
+                        UPDATE subscriptions
+
+                        SET
+                            status = 'cancelled',
+                            updated_at = CURRENT_TIMESTAMP
+
+                        WHERE id = :id
+
+                          AND status = 'pending'
+                        "
+                    );
+
+
+                $subUpdate->execute([
+                    ':id' =>
+                        (int) $payment['sub_id']
+                ]);
+            }
+
+
+            createPaymentFailureNotification(
+                $pdo,
+                $payment,
+                'failed'
+            );
+
+
+            $retryCode =
+                createPaymentRetryCode(
+                    $pdo,
+                    (int) $paymentId
+                );
+
+
+            $resumeUrl =
+                lovemiAppUrl()
+                . '/'
+                . paymentPageForMethod(
+                    (string) $payment['payment_method']
+                )
+                . '?code='
+                . rawurlencode($retryCode)
+                . '&return='
+                . rawurlencode(
+                    safeReturnPath(
+                        $payment['return_path'] ?? null
+                    )
+                );
+
+
+            $pdo->commit();
+
+
+            /*
+             * Failure email after DB commit.
+             */
+            try {
+
+                require_once
+                    __DIR__
+                    . '/../../services/email/main-email-service.php';
+
+
+                if (
+                    function_exists(
+                        'sendLovemiPaymentFailedEmail'
+                    )
+                ) {
+
+                    sendLovemiPaymentFailedEmail(
+                        (string) $payment['email'],
+
+                        (string) (
+                            $payment['full_names']
+                            ?: $payment['username']
+                        ),
+
+                        [
+                            'payment_reference' =>
+                                (string) $payment[
+                                    'payment_reference'
+                                ],
+
+                            'service_name' =>
+                                (string) $payment[
+                                    'service_name'
+                                ],
+
+                            'payment_method' =>
+                                (string) $payment[
+                                    'payment_method'
+                                ],
+
+                            'gateway' =>
+                                (string) $payment[
+                                    'gateway'
+                                ],
+
+                            'currency' =>
+                                $storedCurrency,
+
+                            'amount_expected' =>
+                                $expected,
+
+                            'amount_paid' =>
+                                $actual,
+
+                            'status' =>
+                                'failed',
+
+                            'reason' =>
+                                'The amount received was less than the required Premium payment amount.',
+
+                            'continuation_url' =>
+                                $resumeUrl
+                        ]
+                    );
+                }
+
+            } catch (Throwable $mailError) {
+
+                error_log(
+                    '[LOVEMI PAYMENT UNDERPAYMENT EMAIL] '
+                    . $mailError->getMessage()
+                );
+            }
+
+
+            callbackResponse(
+                false,
+                'The payment amount was insufficient.',
+                [
+                    'code' =>
+                        'PAYMENT_UNDERPAID',
+
+                    'payment_id' =>
+                        (int) $paymentId,
+
+                    'resume_url' =>
+                        $resumeUrl
+                ],
+                409
+            );
+        }
+
+
+        /*
+         * User must still have an eligible account.
+         */
+        if (
+            (int) $payment['is_deleted'] === 1
+            || (int) $payment['is_suspended'] === 1
+            || (int) $payment['is_active'] !== 1
+        ) {
+
+            $pdo->rollBack();
+
+            callbackResponse(
+                false,
+                'The account is not eligible for Premium activation.',
+                [
+                    'code' =>
+                        'ACCOUNT_NOT_ELIGIBLE'
+                ],
+                409
+            );
+        }
+
+
+        /*
+         * Maximum two active memberships.
+         */
+        $activeCountStmt =
             $pdo->prepare(
                 "
-                SELECT status
+                SELECT COUNT(*)
 
                 FROM subscriptions
 
-                WHERE id = :id
+                WHERE user_id = :user_id
 
+                  AND status = 'active'
+
+                  AND start_at IS NOT NULL
+
+                  AND end_at IS NOT NULL
+
+                  AND end_at > CURRENT_TIMESTAMP
+
+                FOR UPDATE
+                "
+            );
+
+
+        $activeCountStmt->execute([
+            ':user_id' =>
+                (int) $payment['user_id']
+        ]);
+
+
+        $activeCount =
+            (int) $activeCountStmt->fetchColumn();
+
+
+        if (
+            $activeCount >= 2
+            && strtolower(
+                (string) $payment[
+                    'subscription_status'
+                ]
+            ) !== 'active'
+        ) {
+
+            /*
+             * Payment was received, but there are already two
+             * active Premium memberships.
+             */
+            $paymentUpdate =
+                $pdo->prepare(
+                    "
+                    UPDATE payments
+
+                    SET
+                        status = 'paid',
+                        gateway_transaction_id =
+                            NULLIF(:transaction_id, ''),
+                        amount_paid = :amount_paid,
+                        paid_at = CURRENT_TIMESTAMP,
+                        updated_at = CURRENT_TIMESTAMP
+
+                    WHERE id = :payment_id
+                    "
+                );
+
+
+            $paymentUpdate->execute([
+                ':transaction_id' =>
+                    $transactionId,
+
+                ':amount_paid' =>
+                    $actual,
+
+                ':payment_id' =>
+                    (int) $paymentId
+            ]);
+
+
+            $pdo->commit();
+
+
+            callbackResponse(
+                false,
+                'Payment was received, but the account already has two active Premium memberships.',
+                [
+                    'code' =>
+                        'PREMIUM_LIMIT_REACHED_AFTER_PAYMENT',
+
+                    'payment_id' =>
+                        (int) $paymentId,
+
+                    'refund_required' =>
+                        true
+                ],
+                409
+            );
+        }
+
+
+        /*
+         * Activate subscription.
+         */
+        $durationDays =
+            max(
+                1,
+                (int) $payment['duration_days']
+            );
+
+
+        $startAt =
+            new DateTimeImmutable(
+                'now',
+                new DateTimeZone('UTC')
+            );
+
+
+        $endAt =
+            $startAt->modify(
+                '+' . $durationDays . ' days'
+            );
+
+
+        $paymentUpdate =
+            $pdo->prepare(
+                "
+                UPDATE payments
+
+                SET
+                    status = 'paid',
+                    gateway_transaction_id =
+                        NULLIF(:transaction_id, ''),
+                    amount_paid = :amount_paid,
+                    paid_at = CURRENT_TIMESTAMP,
+                    updated_at = CURRENT_TIMESTAMP
+
+                WHERE id = :payment_id
+                "
+            );
+
+
+        $paymentUpdate->execute([
+            ':transaction_id' =>
+                $transactionId,
+
+            ':amount_paid' =>
+                $actual,
+
+            ':payment_id' =>
+                (int) $paymentId
+        ]);
+
+
+        if (
+            !empty(
+                $payment['sub_id']
+            )
+        ) {
+
+            $subUpdate =
+                $pdo->prepare(
+                    "
+                    UPDATE subscriptions
+
+                    SET
+                        status = 'active',
+                        start_at = :start_at,
+                        end_at = :end_at,
+                        amount_paid = :amount_paid,
+                        updated_at = CURRENT_TIMESTAMP
+
+                    WHERE id = :id
+                    "
+                );
+
+
+            $subUpdate->execute([
+                ':start_at' =>
+                    $startAt->format(
+                        'Y-m-d H:i:s'
+                    ),
+
+                ':end_at' =>
+                    $endAt->format(
+                        'Y-m-d H:i:s'
+                    ),
+
+                ':amount_paid' =>
+                    $actual,
+
+                ':id' =>
+                    (int) $payment['sub_id']
+            ]);
+        }
+
+
+        /*
+         * Successful payment notification.
+         */
+        $successTypeStmt =
+            $pdo->prepare(
+                "
+                SELECT id
+                FROM notification_types
+                WHERE slug = 'payment_successful'
                 LIMIT 1
                 "
             );
 
 
-        $checkSubscription->execute(
-            [
-                ':id' =>
-                    (int)
-                    $lockedPayment['subscription_id']
-            ]
-        );
+        $successTypeStmt->execute();
 
 
-        $subStatus =
-            $checkSubscription->fetchColumn();
+        $successType =
+            $successTypeStmt->fetchColumn();
 
 
-        if (
-            $subStatus !== 'active'
-        ) {
+        if ($successType) {
 
-            throw new RuntimeException(
-                'Premium subscription could not be activated.'
-            );
+            $successAudioStmt =
+                $pdo->prepare(
+                    "
+                    SELECT id
+                    FROM notification_audio
+                    WHERE notification_type_id = :type_id
+                      AND is_active = 1
+                    ORDER BY sort_order ASC, id ASC
+                    LIMIT 1
+                    "
+                );
 
+
+            $successAudioStmt->execute([
+                ':type_id' =>
+                    (int) $successType
+            ]);
+
+
+            $successAudio =
+                $successAudioStmt->fetchColumn();
+
+
+            $notification =
+                $pdo->prepare(
+                    "
+                    INSERT INTO notifications
+                    (
+                        user_id,
+                        notification_type_id,
+                        sender_id,
+                        title,
+                        message,
+                        reference_type,
+                        reference_id,
+                        audio_id,
+                        is_read,
+                        read_at,
+                        created_at
+                    )
+                    VALUES
+                    (
+                        :user_id,
+                        :type_id,
+                        NULL,
+                        'Payment Successful',
+                        :message,
+                        'payment',
+                        :reference_id,
+                        :audio_id,
+                        0,
+                        NULL,
+                        CURRENT_TIMESTAMP
+                    )
+                    "
+                );
+
+
+            $notification->execute([
+                ':user_id' =>
+                    (int) $payment['user_id'],
+
+                ':type_id' =>
+                    (int) $successType,
+
+                ':message' =>
+                    'Your payment for '
+                    . (string) $payment['service_name']
+                    . ' was successful. Your Premium membership is now active.',
+
+                ':reference_id' =>
+                    (int) $paymentId,
+
+                ':audio_id' =>
+                    $successAudio !== false
+                        ? (int) $successAudio
+                        : null
+            ]);
         }
 
-    }
-
-
-    /* ========================================================
-       RECEIPT RECORD
-    ====================================================== */
-
-    try {
-
-        $receiptStmt =
-            $pdo->prepare(
-                "
-                INSERT INTO payment_receipts
-                (
-                    payment_id,
-                    receipt_number,
-                    receipt_path,
-                    issued_at
-                )
-                VALUES
-                (
-                    :payment_id,
-                    :receipt_number,
-                    NULL,
-                    CURRENT_TIMESTAMP
-                )
-                "
-            );
-
-
-        $receiptStmt->execute(
-            [
-                ':payment_id' =>
-                    (int)
-                    $lockedPayment['id'],
-
-                ':receipt_number' =>
-                    $receiptNumber
-            ]
-        );
-
-    } catch (Throwable $receiptError) {
 
         /*
-         * Receipt record should not make a successfully confirmed
-         * payment disappear. Log and continue.
+         * At this point payment and Premium activation are committed.
          */
+        $pdo->commit();
 
-        error_log(
-            '[LOVEMI RECEIPT RECORD] '
-            .
-            $receiptError->getMessage()
+
+        /*
+         * Return URL.
+         */
+        $returnUrl =
+            lovemiAppUrl()
+            . '/'
+            . safeReturnPath(
+                $payment['return_path'] ?? null
+            );
+
+
+        /*
+         * Successful payment email.
+         */
+        try {
+
+            require_once
+                __DIR__
+                . '/../../services/email/main-email-service.php';
+
+
+            if (
+                function_exists(
+                    'sendLovemiPaymentSuccessEmail'
+                )
+            ) {
+
+                sendLovemiPaymentSuccessEmail(
+                    (string) $payment['email'],
+
+                    (string) (
+                        $payment['full_names']
+                        ?: $payment['username']
+                    ),
+
+                    [
+                        'payment_reference' =>
+                            (string) $payment[
+                                'payment_reference'
+                            ],
+
+                        'service_name' =>
+                            (string) $payment[
+                                'service_name'
+                            ],
+
+                        'payment_method' =>
+                            (string) $payment[
+                                'payment_method'
+                            ],
+
+                        'gateway' =>
+                            (string) $payment[
+                                'gateway'
+                            ],
+
+                        'gateway_transaction_id' =>
+                            $transactionId,
+
+                        'currency' =>
+                            (string) $payment[
+                                'currency_code'
+                            ],
+
+                        'currency_symbol' =>
+                            (string) $payment[
+                                'currency_symbol'
+                            ],
+
+                        'amount_paid' =>
+                            $actual,
+
+                        'base_amount_usd' =>
+                            (float) $payment[
+                                'base_amount_usd'
+                            ],
+
+                        'exchange_rate' =>
+                            (float) $payment[
+                                'exchange_rate'
+                            ],
+
+                        'premium_start_at' =>
+                            $startAt->format(
+                                'Y-m-d H:i:s'
+                            ),
+
+                        'premium_end_at' =>
+                            $endAt->format(
+                                'Y-m-d H:i:s'
+                            ),
+
+                        'return_url' =>
+                            $returnUrl
+                    ]
+                );
+            }
+
+        } catch (Throwable $mailError) {
+
+            error_log(
+                '[LOVEMI PAYMENT SUCCESS EMAIL] '
+                . $mailError->getMessage()
+            );
+        }
+
+
+        callbackResponse(
+            true,
+            'Payment completed and Premium has been activated.',
+            [
+                'code' =>
+                    'PAYMENT_COMPLETED',
+
+                'payment_id' =>
+                    (int) $paymentId,
+
+                'payment_reference' =>
+                    (string) $payment[
+                        'payment_reference'
+                    ],
+
+                'status' =>
+                    'paid',
+
+                'return_url' =>
+                    $returnUrl
+            ]
         );
-
     }
 
 
     /* ========================================================
-       AUDIT
-    ====================================================== */
+       FAILED / CANCELLED
+       ======================================================== */
 
-    try {
+    if (
+        $status === 'failed'
+        || $status === 'cancelled'
+    ) {
 
-        $auditStmt =
+        $paymentUpdate =
             $pdo->prepare(
                 "
-                INSERT INTO audit_logs
-                (
-                    user_id,
-                    action,
-                    entity_type,
-                    entity_id,
-                    new_values,
-                    ip_address,
-                    user_agent
-                )
-                VALUES
-                (
-                    :user_id,
-                    'payment_confirmed',
-                    'payment',
-                    :entity_id,
-                    :new_values,
-                    NULL,
-                    'M-Pesa callback'
-                )
+                UPDATE payments
+
+                SET
+                    status = :status,
+                    gateway_transaction_id =
+                        NULLIF(:transaction_id, ''),
+                    amount_paid =
+                        COALESCE(
+                            :amount_paid,
+                            amount_paid
+                        ),
+                    updated_at = CURRENT_TIMESTAMP
+
+                WHERE id = :payment_id
                 "
             );
 
 
-        $auditStmt->execute(
+        $paymentUpdate->execute([
+            ':status' =>
+                $status,
+
+            ':transaction_id' =>
+                $transactionId,
+
+            ':amount_paid' =>
+                $amountPaid,
+
+            ':payment_id' =>
+                (int) $paymentId
+        ]);
+
+
+        /*
+         * Pending subscription must not remain pending forever.
+         */
+        if (
+            !empty(
+                $payment['sub_id']
+            )
+        ) {
+
+            $subscriptionUpdate =
+                $pdo->prepare(
+                    "
+                    UPDATE subscriptions
+
+                    SET
+                        status = 'cancelled',
+                        updated_at = CURRENT_TIMESTAMP
+
+                    WHERE id = :id
+
+                      AND status = 'pending'
+                    "
+                );
+
+
+            $subscriptionUpdate->execute([
+                ':id' =>
+                    (int) $payment['sub_id']
+            ]);
+        }
+
+
+        /*
+         * THIS CREATES THE UNREAD NOTIFICATION.
+         *
+         * It also selects notification7.mp3 through notification_audio.
+         */
+        createPaymentFailureNotification(
+            $pdo,
+            $payment,
+            $status
+        );
+
+
+        /*
+         * Create secure continuation code.
+         */
+        $retryCode =
+            createPaymentRetryCode(
+                $pdo,
+                (int) $paymentId
+            );
+
+
+        $returnPath =
+            safeReturnPath(
+                $payment['return_path']
+                ?? null
+            );
+
+
+        $resumeUrl =
+            lovemiAppUrl()
+            . '/'
+            . paymentPageForMethod(
+                (string) $payment['payment_method']
+            )
+            . '?code='
+            . rawurlencode($retryCode)
+            . '&return='
+            . rawurlencode($returnPath);
+
+
+        $returnUrl =
+            lovemiAppUrl()
+            . '/'
+            . $returnPath;
+
+
+        /*
+         * COMMIT BEFORE EMAIL.
+         *
+         * This guarantees that even if email sending fails,
+         * the payment status and notification remain saved.
+         */
+        $pdo->commit();
+
+
+        /* ====================================================
+           BEAUTIFUL FAILURE / CANCELLED EMAIL
+           ==================================================== */
+
+        try {
+
+            require_once
+                __DIR__
+                . '/../../services/email/main-email-service.php';
+
+
+            if (
+                function_exists(
+                    'sendLovemiPaymentFailedEmail'
+                )
+            ) {
+
+                sendLovemiPaymentFailedEmail(
+                    (string) $payment['email'],
+
+                    (string) (
+                        $payment['full_names']
+                        ?: $payment['username']
+                    ),
+
+                    [
+                        'payment_reference' =>
+                            (string) $payment[
+                                'payment_reference'
+                            ],
+
+                        'service_name' =>
+                            (string) $payment[
+                                'service_name'
+                            ],
+
+                        'payment_method' =>
+                            (string) $payment[
+                                'payment_method'
+                            ],
+
+                        'gateway' =>
+                            (string) $payment[
+                                'gateway'
+                            ],
+
+                        'gateway_transaction_id' =>
+                            $transactionId,
+
+                        'currency' =>
+                            (string) (
+                                $payment[
+                                    'currency_code'
+                                ]
+                                ?? $providerCurrency
+                                ?? ''
+                            ),
+
+                        'currency_symbol' =>
+                            (string) (
+                                $payment[
+                                    'currency_symbol'
+                                ]
+                                ?? ''
+                            ),
+
+                        'amount_expected' =>
+                            round(
+                                (float) $payment[
+                                    'amount_expected'
+                                ],
+                                2
+                            ),
+
+                        'amount_paid' =>
+                            $amountPaid !== null
+                                ? $amountPaid
+                                : 0,
+
+                        'status' =>
+                            $status,
+
+                        'reason' =>
+                            $status === 'cancelled'
+                                ? 'The payment was cancelled before it could be completed. No Premium membership was activated.'
+                                : 'The payment could not be completed. No Premium membership was activated.',
+
+                        'continuation_url' =>
+                            $resumeUrl,
+
+                        'return_url' =>
+                            $returnUrl
+                    ]
+                );
+
+            } else {
+
+                error_log(
+                    '[LOVEMI] sendLovemiPaymentFailedEmail() '
+                    . 'does not exist in main-email-service.php'
+                );
+            }
+
+        } catch (Throwable $mailError) {
+
+            /*
+             * Email failure must NEVER undo the saved notification
+             * or payment status.
+             */
+            error_log(
+                '[LOVEMI PAYMENT FAILURE EMAIL] '
+                . $mailError->getMessage()
+            );
+        }
+
+
+        callbackResponse(
+            true,
+            $status === 'cancelled'
+                ? 'Payment was cancelled. A secure continuation link is available.'
+                : 'Payment failed. A secure continuation link is available.',
             [
+                'code' =>
+                    $status === 'cancelled'
+                        ? 'PAYMENT_CANCELLED'
+                        : 'PAYMENT_FAILED',
 
-                ':user_id' =>
-                    (int)
-                    $lockedPayment['user_id'],
+                'payment_id' =>
+                    (int) $paymentId,
 
-                ':entity_id' =>
-                    (int)
-                    $lockedPayment['id'],
+                'payment_reference' =>
+                    (string) $payment[
+                        'payment_reference'
+                    ],
 
-                ':new_values' =>
-                    json_encode(
-                        [
-                            'gateway' =>
-                                'mpesa',
+                'status' =>
+                    $status,
 
-                            'transaction_id' =>
-                                $gatewayTransactionId,
+                'resume_url' =>
+                    $resumeUrl,
 
-                            'receipt_number' =>
-                                $receiptNumber,
-
-                            'status' =>
-                                'paid'
-
-                        ],
-                        JSON_UNESCAPED_UNICODE
-                    )
-
+                'return_url' =>
+                    $returnUrl
             ]
         );
-
-    } catch (Throwable $auditError) {
-
-        error_log(
-            '[LOVEMI PAYMENT AUDIT] '
-            .
-            $auditError->getMessage()
-        );
-
     }
 
 
-    $pdo->commit();
+    /*
+     * Safety fallback.
+     */
+    if (
+        isset($pdo)
+        && $pdo->inTransaction()
+    ) {
+        $pdo->rollBack();
+    }
+
+
+    callbackResponse(
+        false,
+        'The payment callback could not be processed.',
+        [
+            'code' =>
+                'CALLBACK_NOT_PROCESSED'
+        ],
+        500
+    );
+
 
 } catch (Throwable $e) {
 
     if (
-        $pdo->inTransaction()
+        isset($pdo)
+        && $pdo->inTransaction()
     ) {
-
-        $pdo->rollBack();
-
+        try {
+            $pdo->rollBack();
+        } catch (Throwable $rollbackError) {
+            error_log(
+                '[LOVEMI CALLBACK ROLLBACK] '
+                . $rollbackError->getMessage()
+            );
+        }
     }
 
 
     error_log(
-        '[LOVEMI CALLBACK ERROR] '
-        .
-        $e->getMessage()
+        '[LOVEMI PAYMENT CALLBACK] '
+        . $e->getMessage()
+        . ' | File: '
+        . $e->getFile()
+        . ' | Line: '
+        . $e->getLine()
     );
 
 
     callbackResponse(
-        'Payment processing failed.',
-        [],
+        false,
+        'The payment callback could not be completed because of a server error.',
+        [
+            'code' =>
+                'PAYMENT_CALLBACK_ERROR'
+        ],
         500
     );
 }
-
-
-/* ============================================================
-   SUCCESS
-============================================================ */
-
-callbackResponse(
-    'Payment successfully confirmed and Premium activated.'
-);

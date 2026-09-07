@@ -1,1092 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="LOVEMI Terms and Conditions"
-    >
-
-    <title>Terms & Conditions | LOVEMI</title>
-
-    <link
-        rel="icon"
-        href="assets/logo1/favicon.ico"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="assets/logo1/apple-touch-icon.png"
-    >
-
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-
-    <style>
-
-        :root {
-            --primary: #e91e63;
-            --primary-dark: #c2185b;
-            --text: #172033;
-            --muted: #687386;
-            --surface: #ffffff;
-            --soft: #faf9fd;
-            --border: #e8e9ef;
-            --shadow: 0 10px 35px rgba(25,25,45,.08);
-        }
-
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-
-        body {
-            font-family: Inter, Arial, sans-serif;
-            color: var(--text);
-            background:
-                linear-gradient(
-                    180deg,
-                    #ffffff,
-                    #faf9fd
-                );
-            line-height: 1.7;
-        }
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        .container {
-            width: min(
-                calc(100% - 32px),
-                1180px
-            );
-            margin-inline: auto;
-        }
-
-
-        /* NAV */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,.97);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-
-        .nav {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 22px;
-        }
-
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-
-        .brand img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-
-
-        .brand strong {
-            font-size: 1.35rem;
-        }
-
-
-        .guest-nav,
-        .user-nav {
-            display: flex;
-            gap: 7px;
-            align-items: center;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-
-
-        .nav-link {
-            padding: 10px 13px;
-            border-radius: 11px;
-            color: #566173;
-            font-size: .9rem;
-            font-weight: 600;
-        }
-
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background: #fff0f5;
-        }
-
-
-        .cta {
-            background: var(--primary);
-            color: white !important;
-        }
-
-
-        .cta:hover {
-            background: var(--primary-dark);
-        }
-
-
-        .mobile-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: 0;
-            border-radius: 12px;
-            background: #f3f4f8;
-        }
-
-
-        .mobile-menu {
-            display: none;
-            padding: 10px 0 15px;
-            border-top: 1px solid var(--border);
-        }
-
-
-        .mobile-menu.open {
-            display: block;
-        }
-
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 5px;
-            border-bottom: 1px solid #f0f1f5;
-            font-weight: 600;
-            color: #4b5565;
-        }
-
-
-        /* HERO */
-
-        .hero {
-            padding: 78px 0 38px;
-            text-align: center;
-        }
-
-
-        .hero-icon {
-            width: 70px;
-            height: 70px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto 18px;
-            border-radius: 22px;
-            background: #fff0f5;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-
-        .hero h1 {
-            font-size: clamp(
-                2rem,
-                5vw,
-                3.35rem
-            );
-            line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 14px;
-        }
-
-
-        .hero p {
-            max-width: 720px;
-            margin-inline: auto;
-            color: var(--muted);
-        }
-
-
-        /* TERMS */
-
-        .content {
-            padding-bottom: 78px;
-        }
-
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            padding: clamp(
-                22px,
-                4vw,
-                42px
-            );
-        }
-
-
-        .updated {
-            display: inline-flex;
-            padding: 8px 12px;
-            background: var(--soft);
-            border-radius: 10px;
-            color: var(--muted);
-            font-size: .87rem;
-            margin-bottom: 25px;
-        }
-
-
-        .card section + section {
-            margin-top: 33px;
-        }
-
-
-        .card h2 {
-            font-size: 1.34rem;
-            margin-bottom: 9px;
-        }
-
-
-        .card p {
-            color: #5e6879;
-            margin-bottom: 10px;
-        }
-
-
-        .card ul {
-            padding-left: 23px;
-            color: #5e6879;
-        }
-
-
-        /* FOOTER */
-
-        footer {
-            background: #151827;
-            color: #d7dbe6;
-        }
-
-
-        .footer-grid {
-            padding: 52px 0 30px;
-            display: grid;
-            grid-template-columns:
-                1.4fr
-                repeat(3, 1fr);
-            gap: 34px;
-        }
-
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin-bottom: 14px;
-        }
-
-
-        .footer-brand img {
-            width: 42px;
-            height: 42px;
-        }
-
-
-        .footer-brand strong {
-            color: white;
-            font-size: 1.18rem;
-        }
-
-
-        .footer-description {
-            color: #aab0bf;
-            max-width: 330px;
-            font-size: .9rem;
-        }
-
-
-        .footer-column h3 {
-            color: #fff;
-            margin-bottom: 12px;
-            font-size: .95rem;
-        }
-
-
-        .footer-column a {
-            display: block;
-            color: #aab0bf;
-            font-size: .87rem;
-            margin: 8px 0;
-        }
-
-
-        .footer-column a:hover {
-            color: white;
-        }
-
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,.08);
-            padding: 18px 0;
-        }
-
-
-        .footer-bottom-inner {
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            color: #9198a9;
-            font-size: .8rem;
-        }
-
-
-        @media (max-width: 900px) {
-
-            .guest-nav,
-            .user-nav {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: min(
-                    calc(100% - 22px),
-                    1180px
-                );
-            }
-
-            .nav {
-                min-height: 68px;
-            }
-
-            .brand img {
-                width: 42px;
-                height: 42px;
-            }
-
-            .hero {
-                padding: 52px 0 30px;
-            }
-
-            .card {
-                padding: 20px;
-                border-radius: 15px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="LOVEMI Terms and Conditions — rules, account responsibilities, safety, content, connections, Premium services, payments, moderation and platform use.">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Terms & Conditions | LOVEMI</title>
+
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<style>
+:root{
+ --primary:#6d28d9;--primary-dark:#4c1d95;--primary-soft:#f3e8ff;
+ --accent:#db2777;--accent-soft:#fce7f3;--blue:#2563eb;--blue-soft:#eff6ff;
+ --green:#16a34a;--green-soft:#f0fdf4;--orange:#d97706;--orange-soft:#fff7ed;
+ --red:#dc2626;--red-soft:#fef2f2;--text:#18181b;--text-soft:#68686f;
+ --text-muted:#9898a1;--white:#fff;--background:#f7f7fb;--border:#e9e9ef;
+ --shadow-sm:0 5px 18px rgba(0,0,0,.04);--shadow-md:0 14px 38px rgba(0,0,0,.07);
+ --shadow-lg:0 25px 70px rgba(0,0,0,.12);--container:1380px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:Inter,sans-serif;color:var(--text);background:
+ radial-gradient(circle at 10% 3%,rgba(109,40,217,.055),transparent 24%),
+ radial-gradient(circle at 90% 9%,rgba(219,39,119,.05),transparent 23%),
+ linear-gradient(180deg,#fff 0,#faf9fd 280px,#f7f7fb 100%);line-height:1.65;overflow-x:hidden}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
+[hidden]{display:none!important}
+
+.header{position:sticky;top:0;z-index:2000;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.header-inner{width:min(calc(100% - 30px),var(--container));min-height:76px;margin:auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-width:max-content}.brand-logo{width:45px;height:45px;object-fit:contain;border-radius:12px}
+.brand-text{display:flex;flex-direction:column}.brand-name{font-family:"Playfair Display",serif;font-size:26px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-tagline{margin-top:3px;color:var(--text-muted);font-size:7px;letter-spacing:.7px}
+.main-navigation{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0}.main-navigation[hidden]{display:none!important}
+.nav-link{position:relative;min-height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:9px;color:var(--text-soft);font-size:9px;font-weight:800;white-space:nowrap;transition:.22s ease}
+.nav-link i{font-size:9px}.nav-link:hover,.nav-link.active{color:var(--primary);background:var(--primary-soft)}
+.nav-link.active::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px}.header-guest{display:flex;align-items:center;gap:7px}
+.guest-btn{min-height:37px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:9px;font-weight:900;transition:.2s ease}
+.guest-login{color:var(--primary);background:#fff;border:1px solid #ddd6fe}.guest-login:hover{background:var(--primary-soft);transform:translateY(-1px)}
+.guest-join{color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 8px 20px rgba(109,40,217,.16)}
+.guest-join:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(109,40,217,.22)}
+.header-action{position:relative;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft);transition:.2s ease}
+.header-action:hover{color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}
+.notification-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border:2px solid #fff;border-radius:50%;background:var(--accent);display:none}.notification-dot.show{display:block;animation:notificationPulse 1s ease-in-out infinite}
+.profile-shortcut{display:inline-flex;align-items:center;gap:6px;padding:3px 7px 3px 3px;border:1px solid var(--border);border-radius:10px;background:#fff;transition:.2s ease}
+.profile-shortcut:hover{border-color:#ddd6fe;background:#faf8ff;transform:translateY(-1px)}
+.profile-shortcut-avatar-wrap{position:relative}.profile-shortcut-avatar{width:31px;height:31px;border-radius:8px;object-fit:cover;background:#efeff4}
+.profile-shortcut-online{position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border:2px solid #fff;background:#22c55e;border-radius:50%}
+.profile-shortcut-name{max-width:82px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:900}.profile-shortcut-sub{display:block;color:var(--text-muted);font-size:7px;margin-top:1px}
+.mobile-menu-button{display:none;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft)}
+.mobile-navigation{position:fixed;top:76px;left:0;right:0;z-index:1900;display:none;padding:8px;background:rgba(255,255,255,.98);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:0 20px 45px rgba(0,0,0,.10)}
+.mobile-navigation.open{display:block}.mobile-nav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.mobile-nav-link{min-height:48px;padding:8px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--border);border-radius:10px;color:var(--text-soft);background:#fff;font-size:8px;font-weight:900}
+.mobile-nav-link i{color:var(--primary);font-size:11px}.mobile-nav-link.active{color:var(--primary);background:var(--primary-soft);border-color:#ddd6fe}
+
+.page{width:min(calc(100% - 30px),var(--container));margin:auto;padding:25px 0 70px}
+.hero{position:relative;overflow:hidden;min-height:390px;padding:50px 42px;display:flex;align-items:center;border:1px solid rgba(109,40,217,.12);border-radius:28px;background:
+ radial-gradient(circle at 88% 12%,rgba(219,39,119,.15),transparent 25%),
+ radial-gradient(circle at 8% 92%,rgba(109,40,217,.13),transparent 28%),
+ linear-gradient(145deg,#fff,#fbf8ff 60%,#fff8fc);box-shadow:var(--shadow-lg)}
+.hero::before{content:"";position:absolute;width:320px;height:320px;right:-145px;bottom:-180px;border:66px solid rgba(109,40,217,.055);border-radius:50%;animation:heroOrbit 18s linear infinite}
+.hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(circle at 22% 28%,rgba(255,255,255,.85),transparent 17%),radial-gradient(circle at 75% 72%,rgba(219,39,119,.05),transparent 20%);animation:heroGlow 11s ease-in-out infinite alternate}
+.hero-content{position:relative;z-index:2;max-width:930px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;color:var(--primary);background:var(--primary-soft);font-size:8px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.hero-icon{width:68px;height:68px;display:grid;place-items:center;margin:18px 0 15px;border-radius:21px;background:linear-gradient(135deg,#fff0f6,#f1e9ff);color:var(--primary);font-size:26px;box-shadow:0 14px 35px rgba(109,40,217,.10);animation:iconBreathe 4.5s ease-in-out infinite}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(37px,5vw,60px);line-height:1.03;letter-spacing:-1.3px}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{max-width:870px;margin-top:14px;color:var(--text-soft);font-size:12px;line-height:1.8}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.meta-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--border);background:#fff;border-radius:999px;color:var(--text-soft);font-size:8px;font-weight:800}.meta-pill i{color:var(--primary)}
+
+.terms-shell{display:grid;grid-template-columns:minmax(0,1fr) 305px;gap:18px;align-items:start;margin-top:18px}
+.terms-card{position:relative;overflow:hidden;background:rgba(255,255,255,.96);border:1px solid var(--border);border-radius:22px;padding:30px;box-shadow:var(--shadow-sm)}
+.terms-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.72),transparent 45%)}
+.terms-intro{position:relative;padding:18px;border:1px solid #eee9f3;border-radius:17px;background:linear-gradient(145deg,#fcf9ff,#fff);margin-bottom:22px}.terms-intro strong{display:block;font-size:11px}.terms-intro p{margin-top:5px!important}
+.notice-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:24px}.notice{padding:13px;border-radius:14px;border:1px solid var(--border);background:#fff}.notice-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:11px;margin-bottom:8px}.notice:nth-child(2) .notice-icon{background:var(--blue-soft);color:var(--blue)}.notice:nth-child(3) .notice-icon{background:var(--green-soft);color:var(--green)}.notice strong{display:block;font-size:9px}.notice span{display:block;margin-top:3px;color:var(--text-muted);font-size:8px;line-height:1.5}
+.term-section{position:relative;padding-top:24px;margin-top:24px;border-top:1px solid #f0edf3}.term-section:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.section-heading{display:flex;align-items:flex-start;gap:11px;margin-bottom:10px}.section-number{flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:9px;font-weight:900}.section-heading h2{font-size:16px;line-height:1.3}.section-heading h2 span{display:block;margin-top:2px;color:var(--text-muted);font-size:7px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.terms-card p{color:var(--text-soft);font-size:10px;line-height:1.78;margin:0 0 10px}.terms-card ul,.terms-card ol{padding-left:19px;color:var(--text-soft);font-size:10px;line-height:1.8;margin:8px 0 11px}.terms-card li{margin:3px 0}.terms-card strong{color:#343038}
+.inline-note{padding:12px 13px;border-radius:13px;background:var(--blue-soft);border:1px solid #dbeafe;color:#1e40af;font-size:9px;line-height:1.65;margin-top:10px}.inline-note i{margin-right:5px}
+.warning-note{padding:12px 13px;border-radius:13px;background:var(--orange-soft);border:1px solid #fed7aa;color:#9a3412;font-size:9px;line-height:1.65;margin-top:10px}
+.side-column{display:grid;gap:14px}.side-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:var(--shadow-sm)}
+.side-card.dark{color:#fff;border-color:transparent;background:linear-gradient(145deg,#211834,#4c1d5f 55%,#7f2355);box-shadow:0 24px 60px rgba(55,20,70,.15)}
+.side-kicker{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.12em}.side-card.dark .side-kicker{color:#f9a8d4}
+.side-card h2{font-size:16px;margin-top:7px}.side-card p{color:var(--text-soft);font-size:9px;line-height:1.7;margin-top:7px}.side-card.dark p{color:rgba(255,255,255,.72)}
+.toc{display:grid;gap:5px;margin-top:12px}.toc a{display:flex;align-items:center;gap:7px;padding:8px 9px;border-radius:9px;background:#faf9fc;color:var(--text-soft);font-size:8px;font-weight:800;transition:.18s ease}.toc a:hover{color:var(--primary);background:var(--primary-soft);transform:translateX(2px)}.toc i{width:13px;color:var(--primary);text-align:center}
+.side-points{display:grid;gap:8px;margin-top:12px}.side-point{display:flex;align-items:flex-start;gap:8px}.side-point i{flex:0 0 25px;width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.09);color:#fff;font-size:9px}.side-point span{color:rgba(255,255,255,.74);font-size:8px;line-height:1.5}
+.callout{margin-top:18px;padding:22px;border-radius:21px;color:#fff;background:linear-gradient(135deg,#4c1d95,#6d28d9 48%,#be185d);box-shadow:0 20px 50px rgba(76,29,149,.16)}.callout-content{display:flex;align-items:center;justify-content:space-between;gap:18px}.callout h2{font-family:"Playfair Display",serif;font-size:23px}.callout p{margin-top:5px;color:rgba(255,255,255,.78);font-size:9px;max-width:760px}.callout a{flex:0 0 auto;min-height:40px;padding:0 13px;display:inline-flex;align-items:center;gap:6px;border-radius:10px;background:#fff;color:var(--primary);font-size:8px;font-weight:900}
+
+.footer{background:#17151b;color:#fff;margin-top:0}.footer-inner{width:min(calc(100% - 30px),var(--container));margin:auto;padding:42px 0 22px}.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr;gap:34px;padding-bottom:28px}.footer-description{max-width:360px;margin-top:10px;color:#9994a1;font-size:9px;line-height:1.75}.footer-heading{font-size:10px;margin-bottom:10px}.footer-links{display:flex;flex-direction:column;gap:6px}.footer-links a{color:#9d99a5;font-size:8.5px;transition:.18s ease}.footer-links a:hover{color:#fff;transform:translateX(2px)}.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);color:#716d78;font-size:8px}
+
+@keyframes notificationPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}@keyframes heroOrbit{to{transform:rotate(360deg)}}@keyframes heroGlow{from{transform:translate3d(-1%,1%,0) scale(1)}to{transform:translate3d(1%,-1%,0) scale(1.04)}}@keyframes iconBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.04)}}
+@media(max-width:1120px){.main-navigation{gap:0}.nav-link{padding-inline:7px}.terms-shell{grid-template-columns:1fr}.side-column{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.main-navigation,.header-guest{display:none}.header-actions .header-action,.profile-shortcut{display:none}.mobile-menu-button{display:flex}.hero{padding:40px 28px;min-height:350px}.notice-grid{grid-template-columns:1fr 1fr}.side-column{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:repeat(2,1fr)}.callout-content{flex-direction:column;align-items:flex-start}.callout a{width:100%;justify-content:center}}
+@media(max-width:620px){.page,.footer-inner,.header-inner{width:calc(100% - 22px)}.header-inner{min-height:68px}.brand-name,.brand-tagline{display:none}.brand-logo{width:40px;height:40px}.mobile-navigation{top:68px}.hero{padding:31px 20px;min-height:0;border-radius:21px}.hero h1{font-size:38px}.hero p{font-size:10px}.hero-icon{width:56px;height:56px;font-size:21px}.terms-card{padding:19px}.notice-grid,.side-column{grid-template-columns:1fr}.section-heading h2{font-size:15px}.terms-card p,.terms-card ul,.terms-card ol{font-size:9.5px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
 
-
 <body>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="LOVEMI Home">
+      <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+      <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline">DISCOVER • CONNECT • MEET</span></span>
+    </a>
 
+    <nav id="guestNavigation" class="main-navigation" aria-label="Public navigation">
+      <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+      <a class="nav-link" href="discover.html"><i class="fa-regular fa-compass"></i>Discover</a>
+      <a class="nav-link" href="about.html"><i class="fa-regular fa-circle-info"></i>About</a>
+      <a class="nav-link" href="help.html"><i class="fa-regular fa-circle-question"></i>Help</a>
+      <a class="nav-link" href="contact.html"><i class="fa-regular fa-envelope"></i>Contact</a>
+    </nav>
 
-<header class="site-header">
+    <nav id="userNavigation" class="main-navigation" aria-label="Member navigation" hidden>
+      <a class="nav-link" href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+      <a class="nav-link" href="discover.html"><i class="fa-regular fa-compass"></i>Discover</a>
+      <a class="nav-link" href="connections.html"><i class="fa-solid fa-user-group"></i>Connections</a>
+      <a class="nav-link" href="messages.html"><i class="fa-regular fa-message"></i>Messages</a>
+      <a class="nav-link" href="profile.html"><i class="fa-regular fa-user"></i>Profile</a>
+      <a class="nav-link" href="notifications.html"><i class="fa-regular fa-bell"></i>Notifications<span id="notificationDot" class="notification-dot"></span></a>
+      <a class="nav-link active" href="terms.html"><i class="fa-solid fa-file-contract"></i>Terms</a>
+      <a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+      <a class="nav-link" href="premium.html"><i class="fa-solid fa-crown"></i>Premium</a>
+    </nav>
 
-    <div class="container nav">
-
-        <a
-            href="index.html"
-            class="brand"
-        >
-            <img
-                src="assets/logo1/LOGO1.ico"
-                alt="LOVEMI"
-            >
-
-            <strong>LOVEMI</strong>
+    <div class="header-actions">
+      <div id="guestActions" class="header-guest">
+        <a href="login.html" class="guest-btn guest-login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+        <a href="registration.html" class="guest-btn guest-join"><i class="fa-solid fa-heart"></i>Join LOVEMI</a>
+      </div>
+      <div id="userActions" class="header-guest" hidden>
+        <a href="notifications.html" class="header-action" title="Notifications" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span id="headerNotificationDot" class="notification-dot"></span></a>
+        <a href="profile.html" class="header-action" title="Profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <a href="profile.html" class="profile-shortcut" aria-label="Open my profile">
+          <span class="profile-shortcut-avatar-wrap"><img id="profileAvatar" class="profile-shortcut-avatar" src="assets/images/defaults/default-avatar-male.png" alt="My profile"><span class="profile-shortcut-online"></span></span>
+          <span><span id="profileName" class="profile-shortcut-name">Account</span><span id="profileSub" class="profile-shortcut-sub">Signed in</span></span>
         </a>
-
-
-        <nav
-            id="guestNav"
-            class="guest-nav"
-        >
-
-            <a
-                class="nav-link"
-                href="index.html"
-            >
-                Home
-            </a>
-
-            <a
-                class="nav-link"
-                href="about.html"
-            >
-                About
-            </a>
-
-            <a
-                class="nav-link"
-                href="help.html"
-            >
-                Help
-            </a>
-
-            <a
-                class="nav-link"
-                href="contact.html"
-            >
-                Contact
-            </a>
-
-            <a
-                class="nav-link"
-                href="login.html"
-            >
-                Login
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="registration.html"
-            >
-                Create Account
-            </a>
-
-        </nav>
-
-
-        <nav
-            id="userNav"
-            class="user-nav"
-            hidden
-        >
-
-            <a
-                class="nav-link"
-                href="dashboard.html"
-            >
-                Dashboard
-            </a>
-
-            <a
-                class="nav-link"
-                href="discover.html"
-            >
-                Discover
-            </a>
-
-            <a
-                class="nav-link"
-                href="connections.html"
-            >
-                Connections
-            </a>
-
-            <a
-                class="nav-link"
-                href="messages.html"
-            >
-                Messages
-            </a>
-
-            <a
-                class="nav-link"
-                href="profile.html"
-            >
-                Profile
-            </a>
-
-            <a
-                class="nav-link"
-                href="notifications.html"
-            >
-                Notifications
-            </a>
-
-            <a
-                class="nav-link"
-                href="settings.html"
-            >
-                Settings
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="premium.html"
-            >
-                Premium
-            </a>
-
-        </nav>
-
-
-        <button
-            id="mobileToggle"
-            class="mobile-toggle"
-            type="button"
-            aria-label="Open navigation"
-        >
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
+      </div>
+      <button type="button" id="mobileMenuButton" class="mobile-menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
     </div>
-
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
-
-        <div
-            class="container"
-            id="mobileLinks"
-        ></div>
-
-    </div>
-
+  </div>
 </header>
 
+<nav id="mobileNavigation" class="mobile-navigation" aria-label="Mobile navigation">
+  <div id="guestMobileGrid" class="mobile-nav-grid">
+    <a class="mobile-nav-link" href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+    <a class="mobile-nav-link" href="discover.html"><i class="fa-solid fa-compass"></i>Discover</a>
+    <a class="mobile-nav-link" href="about.html"><i class="fa-regular fa-circle-info"></i>About</a>
+    <a class="mobile-nav-link" href="help.html"><i class="fa-regular fa-circle-question"></i>Help</a>
+    <a class="mobile-nav-link" href="contact.html"><i class="fa-regular fa-envelope"></i>Contact</a>
+    <a class="mobile-nav-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+    <a class="mobile-nav-link" href="registration.html"><i class="fa-solid fa-user-plus"></i>Create Account</a>
+  </div>
+  <div id="userMobileGrid" class="mobile-nav-grid" hidden>
+    <a class="mobile-nav-link" href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+    <a class="mobile-nav-link" href="discover.html"><i class="fa-solid fa-compass"></i>Discover</a>
+    <a class="mobile-nav-link" href="connections.html"><i class="fa-solid fa-user-group"></i>Connections</a>
+    <a class="mobile-nav-link" href="messages.html"><i class="fa-regular fa-message"></i>Messages</a>
+    <a class="mobile-nav-link" href="profile.html"><i class="fa-regular fa-user"></i>Profile</a>
+    <a class="mobile-nav-link" href="notifications.html"><i class="fa-regular fa-bell"></i>Notifications</a>
+    <a class="mobile-nav-link active" href="terms.html"><i class="fa-solid fa-file-contract"></i>Terms</a>
+    <a class="mobile-nav-link" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    <a class="mobile-nav-link" href="premium.html"><i class="fa-solid fa-crown"></i>Premium</a>
+  </div>
+</nav>
 
-<main>
+<main class="page">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fa-solid fa-scale-balanced"></i> LOVEMI TERMS CENTER</span>
+      <div class="hero-icon"><i class="fa-solid fa-file-contract"></i></div>
+      <h1>Use LOVEMI. <span>Use it responsibly.</span></h1>
+      <p>
+        These Terms and Conditions explain the rules for accessing LOVEMI, creating an account,
+        publishing content, connecting with other members, using messaging and Premium services,
+        making payments, reporting problems, and keeping the platform safe and reliable.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fa-solid fa-calendar"></i>Last reviewed: September 8, 2026</span>
+        <span class="meta-pill"><i class="fa-solid fa-user-shield"></i>Account responsibilities</span>
+        <span class="meta-pill"><i class="fa-solid fa-shield-halved"></i>Safety & moderation</span>
+        <span class="meta-pill"><i class="fa-solid fa-crown"></i>Premium rules</span>
+      </div>
+    </div>
+  </section>
 
-    <section class="hero">
+  <div class="terms-shell">
+    <article class="terms-card">
+      <div class="terms-intro">
+        <strong>Important notice</strong>
+        <p>
+          By registering for or using LOVEMI, you agree to follow these Terms, the Privacy Policy,
+          applicable service-specific rules and applicable law. Read the sections relevant to the
+          features you use. Where a feature has additional rules displayed at the point of use,
+          those rules also apply to that feature.
+        </p>
+      </div>
 
-        <div class="container">
+      <div class="notice-grid">
+        <div class="notice"><div class="notice-icon"><i class="fa-solid fa-handshake"></i></div><strong>Respect others</strong><span>Use the platform without harassment, deception or harmful behavior.</span></div>
+        <div class="notice"><div class="notice-icon"><i class="fa-solid fa-lock"></i></div><strong>Protect your account</strong><span>Keep passwords, verification codes and private account information secure.</span></div>
+        <div class="notice"><div class="notice-icon"><i class="fa-solid fa-scale-balanced"></i></div><strong>Follow the rules</strong><span>Platform access can be restricted when rules or security requirements are violated.</span></div>
+      </div>
 
-            <div class="hero-icon">
-                <i class="fa-solid fa-file-contract"></i>
-            </div>
+      <section class="term-section" id="acceptance">
+        <div class="section-heading"><div class="section-number">01</div><h2>Acceptance of these Terms<span>Your agreement with LOVEMI</span></h2></div>
+        <p>By accessing, registering for, or using LOVEMI, you acknowledge that you have read and agree to these Terms and the applicable LOVEMI policies.</p>
+        <p>When you use a particular feature, additional instructions or rules shown for that feature can form part of the terms governing that use.</p>
+        <div class="inline-note"><i class="fa-solid fa-circle-info"></i> If you do not agree with these Terms, do not create or continue using a LOVEMI account.</div>
+      </section>
 
-            <h1>
-                Terms & Conditions
-            </h1>
+      <section class="term-section" id="eligibility">
+        <div class="section-heading"><div class="section-number">02</div><h2>Eligibility and age requirements<span>Who may use the platform</span></h2></div>
+        <p>LOVEMI must only be used by people who meet the minimum age and eligibility requirements stated during registration and permitted by applicable law.</p>
+        <p>You must not create an account by providing a false age, false identity, or another person's information. If eligibility requirements are not met, access may be denied or removed.</p>
+      </section>
 
-            <p>
-                These terms explain the rules for using LOVEMI
-                and the responsibilities of members.
-            </p>
+      <section class="term-section" id="registration">
+        <div class="section-heading"><div class="section-number">03</div><h2>Registration information<span>Accurate account details</span></h2></div>
+        <p>Registration information must be accurate, current and reasonably complete. Depending on the registration flow, LOVEMI may request information such as username, full name, gender, email, country, phone number and identity or verification information.</p>
+        <ul>
+          <li>Do not register another person without authorization.</li>
+          <li>Do not deliberately enter false or misleading information to bypass account controls.</li>
+          <li>Keep recovery and contact information updated where possible.</li>
+          <li>Provide verification information only through the official LOVEMI account process.</li>
+        </ul>
+      </section>
 
+      <section class="term-section" id="account">
+        <div class="section-heading"><div class="section-number">04</div><h2>Account security<span>Protecting login access</span></h2></div>
+        <p>You are responsible for keeping your password, authentication information, recovery details and active sessions secure. Do not share passwords or one-time verification codes with other people.</p>
+        <p>LOVEMI may request security verification, limit sessions, or restrict an account when unusual activity or a security risk is detected.</p>
+        <p>If you believe someone has gained unauthorized access to your account, contact LOVEMI support as soon as practical.</p>
+      </section>
+
+      <section class="term-section" id="acceptable-use">
+        <div class="section-heading"><div class="section-number">05</div><h2>Acceptable use<span>What you must not do</span></h2></div>
+        <p>LOVEMI is provided for legitimate social, discovery, communication and approved platform purposes. You must not use the service to:</p>
+        <ul>
+          <li>Harass, threaten, bully, stalk or intimidate other people.</li>
+          <li>Impersonate a person, organization or administrator.</li>
+          <li>Operate scams, fraud, phishing or deceptive schemes.</li>
+          <li>Publish or distribute unlawful, abusive or prohibited content.</li>
+          <li>Attempt to bypass authentication, access controls or payment protections.</li>
+          <li>Probe, attack, overload or deliberately disrupt LOVEMI systems.</li>
+          <li>Collect another member's private information without an appropriate reason or permission.</li>
+          <li>Use automation, scripts or scraping in a way that violates platform rules or burdens the service.</li>
+        </ul>
+      </section>
+
+      <section class="term-section" id="content">
+        <div class="section-heading"><div class="section-number">06</div><h2>Posts, photos and videos<span>User content and publishing rules</span></h2></div>
+        <p>You are responsible for content you submit to LOVEMI, including text, captions, comments, photos, videos and profile material.</p>
+        <p>You must have the necessary rights or permission to submit content and must not use LOVEMI to publish another person's confidential information or material you are not permitted to share.</p>
+        <ul>
+          <li>Content can be reviewed under moderation and safety processes.</li>
+          <li>Content can be rejected, hidden, removed or restricted when it violates rules.</li>
+          <li>Accounts can be limited when repeated content violations occur.</li>
+          <li>Do not upload passwords, authentication codes, payment secrets or sensitive identity records into public content.</li>
+        </ul>
+      </section>
+
+      <section class="term-section" id="content-license">
+        <div class="section-heading"><div class="section-number">07</div><h2>Content permissions<span>Using submitted content to operate the service</span></h2></div>
+        <p>When you submit content to LOVEMI, you grant the platform the permissions reasonably necessary to host, store, process, display and deliver that content as required by the feature you chose to use.</p>
+        <p>This does not mean LOVEMI automatically owns your underlying intellectual property. You remain responsible for ensuring that your submission is lawful and does not violate another person's rights.</p>
+      </section>
+
+      <section class="term-section" id="connections">
+        <div class="section-heading"><div class="section-number">08</div><h2>Connections and member interactions<span>Meeting and communicating with others</span></h2></div>
+        <p>LOVEMI provides tools that may allow members to discover people, create connections and communicate. A platform connection does not guarantee that a person is trustworthy, suitable, verified in every respect, or known to you.</p>
+        <p>You are responsible for your own decisions when interacting with other people. Use good judgment and avoid sharing information that could compromise your safety or account.</p>
+      </section>
+
+      <section class="term-section" id="messaging">
+        <div class="section-heading"><div class="section-number">09</div><h2>Messaging and communication<span>Responsible conversations</span></h2></div>
+        <p>Messaging features must be used respectfully and for lawful purposes. Do not use messaging to threaten, harass, scam, spam, impersonate or repeatedly contact someone who does not want further communication.</p>
+        <p>Messages and related metadata may be processed for service delivery, notifications, security, reporting, moderation and technical support.</p>
+      </section>
+
+      <section class="term-section" id="privacy">
+        <div class="section-heading"><div class="section-number">10</div><h2>Privacy and information handling<span>Your data and the Privacy Policy</span></h2></div>
+        <p>LOVEMI's handling of personal information is described in the Privacy Policy. By using LOVEMI, you acknowledge that information can be processed as necessary to provide the services, maintain security, support members and operate enabled features.</p>
+        <p>Do not publish private information about another person without an appropriate legal basis or permission.</p>
+        <div class="inline-note"><i class="fa-solid fa-shield-heart"></i> The Privacy Policy should be read together with these Terms because the two documents address different parts of the LOVEMI experience.</div>
+      </section>
+
+      <section class="term-section" id="verification">
+        <div class="section-heading"><div class="section-number">11</div><h2>Verification and account review<span>Identity, email and account checks</span></h2></div>
+        <p>LOVEMI may use email verification, phone verification, account review, moderation or other checks before allowing particular actions or access.</p>
+        <p>Passing one verification check does not necessarily guarantee that all information provided by a member is accurate or that every future activity is permitted.</p>
+      </section>
+
+      <section class="term-section" id="moderation">
+        <div class="section-heading"><div class="section-number">12</div><h2>Moderation and enforcement<span>Keeping the platform organized</span></h2></div>
+        <p>LOVEMI may review reports, profiles, posts, media, messages or other activity when reasonably necessary to enforce platform rules, investigate suspected abuse, protect users or maintain the service.</p>
+        <ul>
+          <li>Content may be temporarily hidden while being reviewed.</li>
+          <li>An account may receive a warning, restriction, suspension or removal.</li>
+          <li>Repeated or serious violations may result in stronger enforcement.</li>
+          <li>Moderation decisions may consider the available evidence and the current state of the account.</li>
+        </ul>
+      </section>
+
+      <section class="term-section" id="reports">
+        <div class="section-heading"><div class="section-number">13</div><h2>Reports and safety complaints<span>Reporting misuse</span></h2></div>
+        <p>You may use LOVEMI reporting or support features to raise concerns about accounts, content, communications, fraud, impersonation or other misuse.</p>
+        <p>False, abusive or deliberately misleading reports may themselves violate these Terms. Provide enough information to help an administrator understand the issue without sending unnecessary sensitive material.</p>
+      </section>
+
+      <section class="term-section" id="blocked">
+        <div class="section-heading"><div class="section-number">14</div><h2>Blocking and restricted interactions<span>Member controls</span></h2></div>
+        <p>Where available, members may block or restrict other users. LOVEMI may also restrict interactions as part of safety, moderation or security enforcement.</p>
+        <p>Blocking does not necessarily remove existing administrative, security, moderation or transaction records associated with past activity.</p>
+      </section>
+
+      <section class="term-section" id="premium">
+        <div class="section-heading"><div class="section-number">15</div><h2>Premium services<span>Paid features and access</span></h2></div>
+        <p>Premium provides access to additional services or functionality displayed by LOVEMI. A Premium service may have its own eligibility, duration, usage or availability rules.</p>
+        <p>Access can depend on the current subscription record held on the server. A subscription can expire, be cancelled, deactivated, suspended or otherwise become unavailable according to its status and the applicable rules.</p>
+      </section>
+
+      <section class="term-section" id="payments">
+        <div class="section-heading"><div class="section-number">16</div><h2>Payments and transaction records<span>Purchases and payment processing</span></h2></div>
+        <p>When you purchase a paid LOVEMI service, the platform may create transaction records containing the amount, currency, selected service, order reference, payment status and related timestamps.</p>
+        <p>Payment providers may separately process payment information according to their own terms. A successful payment request does not necessarily mean Premium access is permanent or cannot later be restricted under these Terms.</p>
+        <div class="warning-note"><i class="fa-solid fa-triangle-exclamation"></i> Never send card security codes, passwords, payment authentication codes or similar secrets to another member or through ordinary support messages.</div>
+      </section>
+
+      <section class="term-section" id="pricing">
+        <div class="section-heading"><div class="section-number">17</div><h2>Pricing, currency and exchange rates<span>Charges shown at purchase</span></h2></div>
+        <p>Prices and currencies may differ by service, country, payment route or configuration. The applicable amount should be displayed before you complete the purchase.</p>
+        <p>Where local-currency pricing depends on a configured exchange rate, the resulting amount may vary when the rate is updated. The transaction amount confirmed at checkout is the amount associated with that purchase request.</p>
+      </section>
+
+      <section class="term-section" id="refunds">
+        <div class="section-heading"><div class="section-number">18</div><h2>Refunds and payment disputes<span>Handling transaction concerns</span></h2></div>
+        <p>Refund eligibility, payment reversals and transaction disputes depend on the payment method, service terms, transaction state and applicable law.</p>
+        <p>When a transaction problem occurs, provide the relevant payment or order reference through the official support process. Do not send passwords or payment security secrets.</p>
+      </section>
+
+      <section class="term-section" id="support">
+        <div class="section-heading"><div class="section-number">19</div><h2>Support and communications<span>Help from LOVEMI</span></h2></div>
+        <p>Support is provided through available LOVEMI support channels. Information in a support request must be accurate enough to help investigate the problem.</p>
+        <p>LOVEMI may store support tickets and use the information in them to respond, investigate security issues, improve the service or maintain appropriate records.</p>
+      </section>
+
+      <section class="term-section" id="security">
+        <div class="section-heading"><div class="section-number">20</div><h2>Security and technical restrictions<span>Protecting the platform</span></h2></div>
+        <p>You must not attempt to compromise LOVEMI security, bypass technical controls, access data belonging to another user, introduce malicious code, overload endpoints, or interfere with normal platform operation.</p>
+        <p>LOVEMI may use technical controls, logging, authentication, rate limits, blocking and administrative review to protect the service.</p>
+      </section>
+
+      <section class="term-section" id="intellectual-property">
+        <div class="section-heading"><div class="section-number">21</div><h2>LOVEMI intellectual property<span>Brand, software and platform materials</span></h2></div>
+        <p>Unless otherwise stated, LOVEMI software, branding, logos, layout, text, design elements and other platform materials may be protected by intellectual property rights.</p>
+        <p>You may not copy, redistribute, reverse engineer, sell, mirror or exploit protected LOVEMI materials except where permitted by law or with authorization.</p>
+      </section>
+
+      <section class="term-section" id="third-party">
+        <div class="section-heading"><div class="section-number">22</div><h2>Third-party services<span>External providers and links</span></h2></div>
+        <p>LOVEMI can depend on third-party services such as payment providers, email providers, hosting infrastructure or other technical systems.</p>
+        <p>Third-party services may have independent terms, privacy practices, availability and fees. LOVEMI is not responsible for every aspect of a third-party service that operates outside LOVEMI's direct control.</p>
+      </section>
+
+      <section class="term-section" id="availability">
+        <div class="section-heading"><div class="section-number">23</div><h2>Service availability<span>Changes, maintenance and interruptions</span></h2></div>
+        <p>LOVEMI may update, modify, suspend or temporarily interrupt features for maintenance, security, legal requirements, infrastructure changes, service-provider issues or other operational reasons.</p>
+        <p>Not every feature is guaranteed to be available at all times, and a service may change as the platform develops.</p>
+      </section>
+
+      <section class="term-section" id="account-suspension">
+        <div class="section-heading"><div class="section-number">24</div><h2>Suspension, restriction and termination<span>When access can be limited</span></h2></div>
+        <p>LOVEMI may suspend, restrict or terminate an account when there is a reasonable basis to believe that the account violates these Terms, creates a security risk, is involved in fraud or abuse, or otherwise requires enforcement action.</p>
+        <p>Access can also be limited for technical, legal, verification or payment-related reasons where appropriate.</p>
+      </section>
+
+      <section class="term-section" id="termination">
+        <div class="section-heading"><div class="section-number">25</div><h2>Closing your account<span>Ending your use of LOVEMI</span></h2></div>
+        <p>You may close your account through available account controls or by contacting support where the normal account process is unavailable.</p>
+        <p>Closing an account does not necessarily erase every record immediately. Information can remain where reasonably necessary for security, financial records, dispute handling, backups, moderation or legal obligations.</p>
+      </section>
+
+      <section class="term-section" id="disclaimers">
+        <div class="section-heading"><div class="section-number">26</div><h2>Disclaimers and user responsibility<span>Use the service with care</span></h2></div>
+        <p>LOVEMI provides platform tools for discovery, connection and communication. It does not guarantee that another member is honest, suitable, available, safe, or compatible with you.</p>
+        <p>You are responsible for evaluating information, making decisions about interactions, protecting your personal information and following applicable law.</p>
+      </section>
+
+      <section class="term-section" id="limitation">
+        <div class="section-heading"><div class="section-number">27</div><h2>Limitation of responsibility<span>Platform risks and interruptions</span></h2></div>
+        <p>To the extent permitted by applicable law, LOVEMI is not responsible for every loss caused by events outside reasonable platform control, including certain third-party outages, network failures, device problems, unauthorized actions by other users or interruptions caused by force majeure events.</p>
+        <p>Nothing in these Terms is intended to remove rights or protections that cannot lawfully be excluded under applicable law.</p>
+      </section>
+
+      <section class="term-section" id="indemnity">
+        <div class="section-heading"><div class="section-number">28</div><h2>User responsibility for violations<span>Consequences of misuse</span></h2></div>
+        <p>Where permitted by applicable law, a user may be responsible for losses, claims or costs caused by the user's unlawful use of LOVEMI, serious policy violations, fraud, infringement of another person's rights, or deliberate misuse of the platform.</p>
+      </section>
+
+      <section class="term-section" id="law">
+        <div class="section-heading"><div class="section-number">29</div><h2>Applicable law and disputes<span>Resolving disagreements</span></h2></div>
+        <p>Questions concerning these Terms should first be raised through LOVEMI support so the issue can be reviewed and, where possible, resolved directly.</p>
+        <p>Any legal rights, remedies, dispute procedures or governing-law provisions that apply to your use of LOVEMI are subject to the mandatory requirements of the jurisdiction that applies to the relevant matter.</p>
+      </section>
+
+      <section class="term-section" id="changes">
+        <div class="section-heading"><div class="section-number">30</div><h2>Changes to these Terms<span>Keeping the rules current</span></h2></div>
+        <p>LOVEMI may update these Terms when the platform, features, payment arrangements, security practices, legal obligations or operational processes change.</p>
+        <p>The updated version will be published on this page. Where appropriate, material changes may also be communicated through the platform or another suitable notice.</p>
+      </section>
+
+      <section class="term-section" id="severability">
+        <div class="section-heading"><div class="section-number">31</div><h2>Severability<span>If part of the Terms cannot apply</span></h2></div>
+        <p>If a particular provision of these Terms is found to be unenforceable or invalid to the extent permitted by applicable law, the remaining provisions should continue to operate unless the law requires otherwise.</p>
+      </section>
+
+      <section class="term-section" id="entire">
+        <div class="section-heading"><div class="section-number">32</div><h2>Entire agreement for platform use<span>The rules that govern your use</span></h2></div>
+        <p>These Terms, together with the Privacy Policy and applicable feature-specific notices or rules, describe the principal conditions governing your use of LOVEMI.</p>
+      </section>
+
+      <section class="term-section" id="contact">
+        <div class="section-heading"><div class="section-number">33</div><h2>Contact LOVEMI<span>Questions about these Terms</span></h2></div>
+        <p>For questions, complaints, support requests or concerns about these Terms, use the LOVEMI Help or Contact page.</p>
+        <ul>
+          <li>Email: <strong>eduassistasc@gmail.com</strong></li>
+          <li>Help Center: <strong>help.html</strong></li>
+          <li>Contact page: <strong>contact.html</strong></li>
+          <li>Privacy Policy: <strong>privacy.html</strong></li>
+        </ul>
+      </section>
+
+      <div class="callout">
+        <div class="callout-content">
+          <div>
+            <h2>Respect the platform. Protect each other.</h2>
+            <p>Use LOVEMI honestly, protect your account information and report serious problems through the official support channels.</p>
+          </div>
+          <a href="help.html"><i class="fa-solid fa-headset"></i>Visit Help Center</a>
         </div>
+      </div>
+    </article>
 
-    </section>
+    <aside class="side-column">
+      <div class="side-card">
+        <span class="side-kicker"><i class="fa-solid fa-list"></i> On this page</span>
+        <h2>Terms guide</h2>
+        <p>Jump to the part of the Terms that matches your question.</p>
+        <nav class="toc" aria-label="Terms sections">
+          <a href="#acceptance"><i class="fa-solid fa-file-signature"></i>Acceptance</a>
+          <a href="#eligibility"><i class="fa-solid fa-user-check"></i>Eligibility</a>
+          <a href="#account"><i class="fa-solid fa-lock"></i>Account security</a>
+          <a href="#acceptable-use"><i class="fa-solid fa-list-check"></i>Acceptable use</a>
+          <a href="#content"><i class="fa-solid fa-photo-film"></i>Content</a>
+          <a href="#messaging"><i class="fa-regular fa-message"></i>Messaging</a>
+          <a href="#privacy"><i class="fa-solid fa-shield-halved"></i>Privacy</a>
+          <a href="#moderation"><i class="fa-solid fa-user-shield"></i>Moderation</a>
+          <a href="#premium"><i class="fa-solid fa-crown"></i>Premium</a>
+          <a href="#payments"><i class="fa-solid fa-credit-card"></i>Payments</a>
+          <a href="#security"><i class="fa-solid fa-server"></i>Security</a>
+          <a href="#termination"><i class="fa-solid fa-user-xmark"></i>Account closure</a>
+          <a href="#changes"><i class="fa-solid fa-clock-rotate-left"></i>Changes</a>
+        </nav>
+      </div>
 
-
-    <section class="content">
-
-        <div class="container">
-
-            <article class="card">
-
-                <span class="updated">
-                    Last updated: August 29, 2026
-                </span>
-
-
-                <section>
-                    <h2>1. Acceptance of Terms</h2>
-
-                    <p>
-                        By creating or using a LOVEMI account,
-                        you agree to follow these Terms and
-                        Conditions, the Privacy Policy and the
-                        applicable laws of your jurisdiction.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>2. Eligibility</h2>
-
-                    <p>
-                        LOVEMI is intended for adults. You must
-                        meet the minimum age configured by the
-                        platform and provide accurate registration
-                        information.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>3. Your Account</h2>
-
-                    <p>
-                        You are responsible for keeping your
-                        account credentials secure and for
-                        activities performed through your account.
-                    </p>
-
-                    <p>
-                        You must not impersonate another person or
-                        create an account using misleading
-                        information.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>4. Acceptable Use</h2>
-
-                    <ul>
-                        <li>No harassment or threats.</li>
-                        <li>No scams or fraudulent activity.</li>
-                        <li>No impersonation or fake identities.</li>
-                        <li>No prohibited or abusive content.</li>
-                        <li>No attempts to bypass security controls.</li>
-                        <li>No misuse of another member's private information.</li>
-                    </ul>
-                </section>
-
-
-                <section>
-                    <h2>5. Photos, Posts and Videos</h2>
-
-                    <p>
-                        Users may submit permitted content according
-                        to the features available to their accounts.
-                        LOVEMI may review, reject, remove or restrict
-                        content that violates platform rules.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>6. Premium</h2>
-
-                    <p>
-                        Premium services are paid services. The
-                        current Premium price, duration, currency
-                        conversion and available payment methods
-                        are displayed by the platform at checkout.
-                    </p>
-
-                    <p>
-                        Premium access can expire, be suspended or
-                        be restricted when required by platform
-                        rules or payment status.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>7. Connections and Communication</h2>
-
-                    <p>
-                        LOVEMI provides tools to help members connect
-                        and communicate. Members remain responsible
-                        for their own decisions and interactions.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>8. Moderation</h2>
-
-                    <p>
-                        LOVEMI may review reports, messages,
-                        submitted media, profiles and posts when
-                        required to enforce platform policies and
-                        protect members.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>9. Account Suspension</h2>
-
-                    <p>
-                        An account may be suspended, restricted or
-                        removed when there is suspected abuse,
-                        fraud, security risk, policy violation or
-                        another legitimate platform reason.
-                    </p>
-                </section>
-
-
-                <section>
-                    <h2>10. Support</h2>
-
-                    <p>
-                        Questions about these terms can be sent
-                        through LOVEMI support or to:
-                        <strong>eduassistasc@gmail.com</strong>.
-                    </p>
-                </section>
-
-            </article>
-
+      <div class="side-card dark">
+        <span class="side-kicker"><i class="fa-solid fa-shield-heart"></i> Use LOVEMI safely</span>
+        <h2>Good platform behavior starts with you.</h2>
+        <p>Protect yourself and other members while using LOVEMI.</p>
+        <div class="side-points">
+          <div class="side-point"><i class="fa-solid fa-key"></i><span>Never share passwords or authentication codes.</span></div>
+          <div class="side-point"><i class="fa-solid fa-user-check"></i><span>Use accurate account information and respect member boundaries.</span></div>
+          <div class="side-point"><i class="fa-solid fa-flag"></i><span>Report scams, abuse, impersonation or suspicious activity.</span></div>
+          <div class="side-point"><i class="fa-solid fa-shield"></i><span>Do not try to bypass security, moderation or payment controls.</span></div>
         </div>
+      </div>
 
-    </section>
-
+      <div class="side-card">
+        <span class="side-kicker"><i class="fa-solid fa-circle-info"></i> Related pages</span>
+        <h2>More LOVEMI policies</h2>
+        <p>Read the related pages together for a clearer picture of how the platform works.</p>
+        <div class="toc">
+          <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i>Privacy Policy</a>
+          <a href="help.html"><i class="fa-solid fa-headset"></i>Help Center</a>
+          <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact Support</a>
+        </div>
+      </div>
+    </aside>
+  </div>
 </main>
 
-
-<footer>
-
-    <div class="container footer-grid">
-
-        <div>
-
-            <div class="footer-brand">
-
-                <img
-                    src="assets/logo1/LOGO1.ico"
-                    alt="LOVEMI"
-                >
-
-                <strong>LOVEMI</strong>
-
-            </div>
-
-            <p class="footer-description">
-                A modern platform for discovering meaningful
-                connections and communicating safely.
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Explore</h3>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="help.html">
-                Help
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Account</h3>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="registration.html">
-                Register
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>Legal</h3>
-
-            <a href="privacy.html">
-                Privacy
-            </a>
-
-            <a href="terms.html">
-                Terms
-            </a>
-
-        </div>
-
+<footer id="guestFooter" class="footer" aria-label="Guest footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand">
+          <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+          <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f;">DISCOVER • CONNECT • MEET</span></span>
+        </a>
+        <p class="footer-description">Discover people, build meaningful connections and use LOVEMI responsibly with clear account and platform rules.</p>
+      </div>
+      <div><h3 class="footer-heading">Platform</h3><div class="footer-links"><a href="index.html">Home</a><a href="discover.html">Discover</a><a href="about.html">About</a><a href="help.html">Help Center</a><a href="contact.html">Contact</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="login.html">Login</a><a href="registration.html">Create Account</a><a href="forgot-password.html">Forgot Password</a><a href="premium.html">Premium</a></div></div>
+      <div><h3 class="footer-heading">Legal</h3><div class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="help.html">Support</a><a href="contact.html">Contact</a></div></div>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <div class="container footer-bottom-inner">
-
-            <span>
-                © 2026 LOVEMI. All rights reserved.
-            </span>
-
-            <span>
-                Secure connections. Responsible communication.
-            </span>
-
-        </div>
-
-    </div>
-
+    <div class="footer-bottom"><span>© <span id="guestYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
 </footer>
 
+<footer id="userFooter" class="footer" hidden aria-label="Member footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <a href="dashboard.html" class="brand">
+          <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+          <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f;">DISCOVER • CONNECT • MEET</span></span>
+        </a>
+        <p class="footer-description">Discover approved members, manage your profile, connect with others and use LOVEMI services according to the platform rules.</p>
+      </div>
+      <div><h3 class="footer-heading">Explore</h3><div class="footer-links"><a href="dashboard.html">Dashboard</a><a href="discover.html">Discover</a><a href="connections.html">Connections</a><a href="messages.html">Messages</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="profile.html">Profile</a><a href="edit-profile.html">Edit Profile</a><a href="premium.html">Premium</a><a href="settings.html">Settings</a></div></div>
+      <div><h3 class="footer-heading">Help & Legal</h3><div class="footer-links"><a href="notifications.html">Notifications</a><a href="help.html">Help Center</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="userYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
+</footer>
+
+<div id="termsStatus" aria-live="polite"></div>
 
 <script>
+"use strict";
 
-(function () {
+const API={session:"api/auth/session.php",notifications:"api/notifications/unread-count.php"};
+const DEFAULT_MALE="assets/images/defaults/default-avatar-male.png";
+const DEFAULT_FEMALE="assets/images/defaults/default-avatar-female.png";
+const state={authenticated:false,currentUser:null};
+const $=id=>document.getElementById(id);
 
-    "use strict";
+$("guestYear").textContent=new Date().getFullYear();
+$("userYear").textContent=new Date().getFullYear();
 
-
-    const guestNav =
-        document.getElementById(
-            "guestNav"
-        );
-
-
-    const userNav =
-        document.getElementById(
-            "userNav"
-        );
-
-
-    const mobileToggle =
-        document.getElementById(
-            "mobileToggle"
-        );
-
-
-    const mobileMenu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-
-    const mobileLinks =
-        document.getElementById(
-            "mobileLinks"
-        );
-
-
-    const guestLinks = [
-        ["Home","index.html"],
-        ["About","about.html"],
-        ["Help","help.html"],
-        ["Contact","contact.html"],
-        ["Login","login.html"],
-        ["Create Account","registration.html"]
-    ];
-
-
-    const userLinks = [
-        ["Dashboard","dashboard.html"],
-        ["Discover","discover.html"],
-        ["Connections","connections.html"],
-        ["Messages","messages.html"],
-        ["Profile","profile.html"],
-        ["Notifications","notifications.html"],
-        ["Settings","settings.html"],
-        ["Premium","premium.html"]
-    ];
-
-
-    async function session() {
-
-        try {
-
-            const response =
-                await fetch(
-                    "api/auth/session.php",
-                    {
-                        credentials: "include",
-                        cache: "no-store",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                return null;
-            }
-
-
-            return await response.json();
-
-        } catch (error) {
-
-            return null;
-
-        }
-
+function sessionBool(value){
+  if(value===true||value===1)return true;
+  if(typeof value==="string")return /^(1|true|yes|on|authenticated|logged[ _-]?in)$/i.test(value.trim());
+  return false;
+}
+function extractResult(data){
+  if(data&&data.result&&typeof data.result==="object")return data.result;
+  if(data&&data.data&&typeof data.data==="object"&&!Array.isArray(data.data))return data.data;
+  return data||{};
+}
+function extractUser(data){
+  const result=extractResult(data);
+  const candidates=[
+    result.user,data?.user,result.current_user,data?.current_user,
+    result.currentUser,data?.currentUser,result.profile,data?.profile,
+    result.session?.user,data?.session?.user,result.session?.profile,data?.session?.profile
+  ];
+  const found=candidates.find(x=>x&&typeof x==="object"&&!Array.isArray(x));
+  if(found)return found;
+  const id=result.user_id??data?.user_id??result.id??data?.id;
+  if(id!==undefined&&id!==null&&String(id).trim()!=="")return {...result,id,user_id:id};
+  return null;
+}
+function userField(user,keys){
+  for(const key of keys){
+    const value=key.split(".").reduce((obj,part)=>obj?.[part],user);
+    if(value!==undefined&&value!==null&&String(value).trim()!=="")return value;
+  }
+  return "";
+}
+function getAvatar(user){
+  const image=userField(user,["profile_photo","profile_image","profile_picture","profile_thumbnail","avatar","image","photo_url","profile_media_url"]);
+  if(image)return String(image).trim().replace(/^\.\//,"");
+  const gender=String(userField(user,["gender"])||"");
+  return /female|woman|girl/i.test(gender)?DEFAULT_FEMALE:DEFAULT_MALE;
+}
+function setLoggedOut(){
+  state.authenticated=false;state.currentUser=null;
+  $("guestNavigation").hidden=false;$("guestNavigation").setAttribute("aria-hidden","false");
+  $("userNavigation").hidden=true;$("userNavigation").setAttribute("aria-hidden","true");
+  $("guestActions").hidden=false;$("userActions").hidden=true;
+  $("guestFooter").hidden=false;$("guestFooter").setAttribute("aria-hidden","false");
+  $("userFooter").hidden=true;$("userFooter").setAttribute("aria-hidden","true");
+  $("guestMobileGrid").hidden=false;$("userMobileGrid").hidden=true;
+}
+function setLoggedIn(user){
+  state.authenticated=true;state.currentUser=user||{};
+  $("guestNavigation").hidden=true;$("guestNavigation").setAttribute("aria-hidden","true");
+  $("userNavigation").hidden=false;$("userNavigation").setAttribute("aria-hidden","false");
+  $("guestActions").hidden=true;$("userActions").hidden=false;
+  $("guestFooter").hidden=true;$("guestFooter").setAttribute("aria-hidden","true");
+  $("userFooter").hidden=false;$("userFooter").setAttribute("aria-hidden","false");
+  $("guestMobileGrid").hidden=true;$("userMobileGrid").hidden=false;
+  const name=userField(state.currentUser,["full_names","full_name","display_name","username"])||"Account";
+  const username=userField(state.currentUser,["username"]);
+  $("profileName").textContent=name;$("profileSub").textContent=username?"@"+username:"Signed in";
+  const img=$("profileAvatar");img.src=getAvatar(state.currentUser);img.alt=name+" profile picture";
+  img.onerror=function(){this.onerror=null;const gender=String(userField(state.currentUser,["gender"])||"");this.src=/female|woman|girl/i.test(gender)?DEFAULT_FEMALE:DEFAULT_MALE};
+}
+async function getSession(){
+  const sep=API.session.includes("?")?"&":"?";
+  const response=await fetch(API.session+sep+"_="+Date.now(),{
+    method:"GET",credentials:"same-origin",cache:"no-store",
+    headers:{"Accept":"application/json","Cache-Control":"no-cache,no-store,max-age=0"}
+  });
+  const text=await response.text();let data;
+  try{data=JSON.parse(text)}catch(e){throw new Error("The session endpoint returned invalid JSON.")}
+  if(!response.ok)throw new Error(data?.message||"Session request failed.");
+  return data;
+}
+async function loadSession(){
+  try{
+    const data=await getSession(),result=extractResult(data),user=extractUser(data);
+    const flags=[data?.authenticated,data?.logged_in,data?.loggedIn,data?.is_authenticated,data?.isLoggedIn,result?.authenticated,result?.logged_in,result?.loggedIn,result?.is_authenticated,result?.isLoggedIn];
+    const explicit=flags.some(v=>v!==undefined&&v!==null);
+    const userId=user?.user_id??user?.id??user?.userid??result?.user_id??data?.user_id??result?.id??data?.id;
+    const authenticated=explicit?flags.some(sessionBool):Boolean(user&&userId!==undefined&&userId!==null&&String(userId).trim()!=="");
+    if(authenticated)setLoggedIn(user||{});else setLoggedOut();
+  }catch(e){console.warn("LOVEMI Terms session check:",e);setLoggedOut()}
+}
+async function refreshNotifications(){
+  if(!state.authenticated)return;
+  try{
+    const response=await fetch(API.notifications+"?_="+Date.now(),{method:"GET",credentials:"same-origin",cache:"no-store",headers:{"Accept":"application/json","Cache-Control":"no-cache,no-store,max-age=0"}});
+    if(!response.ok)return;
+    const text=await response.text();let data;try{data=JSON.parse(text)}catch(e){return}
+    const count=Number(data?.unread_count??data?.count??data?.data?.unread_count??0);
+    $("notificationDot")?.classList.toggle("show",count>0);
+    $("headerNotificationDot")?.classList.toggle("show",count>0);
+  }catch(e){}
+}
+function setupMobile(){
+  const button=$("mobileMenuButton"),nav=$("mobileNavigation");if(!button||!nav)return;
+  button.addEventListener("click",()=>{
+    const open=nav.classList.toggle("open");document.body.classList.toggle("menu-open",open);
+    button.setAttribute("aria-expanded",String(open));
+    button.innerHTML=open?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>';
+  });
+  nav.addEventListener("click",event=>{
+    if(event.target.closest("a")){
+      nav.classList.remove("open");document.body.classList.remove("menu-open");
+      button.setAttribute("aria-expanded","false");button.innerHTML='<i class="fa-solid fa-bars"></i>';
     }
-
-
-    function makeMobileLinks(
-        links
-    ) {
-
-        mobileLinks.innerHTML = "";
-
-        links.forEach(
-            ([label, href]) => {
-
-                const a =
-                    document.createElement(
-                        "a"
-                    );
-
-                a.textContent =
-                    label;
-
-                a.href =
-                    href;
-
-                mobileLinks.appendChild(
-                    a
-                );
-
-            }
-        );
-
+  });
+  window.addEventListener("resize",()=>{
+    if(window.innerWidth>900){
+      nav.classList.remove("open");document.body.classList.remove("menu-open");
+      button.setAttribute("aria-expanded","false");button.innerHTML='<i class="fa-solid fa-bars"></i>';
     }
-
-
-    async function initialize() {
-
-        const result =
-            await session();
-
-
-        const loggedIn =
-            Boolean(
-                result &&
-                (
-                    result.authenticated === true
-                    ||
-                    result.logged_in === true
-                    ||
-                    (
-                        result.success === true &&
-                        result.user
-                    )
-                )
-            );
-
-
-        if (loggedIn) {
-
-            guestNav.hidden = true;
-
-            userNav.hidden = false;
-
-            makeMobileLinks(
-                userLinks
-            );
-
-        } else {
-
-            guestNav.hidden = false;
-
-            userNav.hidden = true;
-
-            makeMobileLinks(
-                guestLinks
-            );
-
-        }
-
-    }
-
-
-    mobileToggle.addEventListener(
-        "click",
-        () => {
-
-            const opened =
-                mobileMenu.classList.toggle(
-                    "open"
-                );
-
-
-            mobileToggle.innerHTML =
-                opened
-                    ?
-                    '<i class="fa-solid fa-xmark"></i>'
-                    :
-                    '<i class="fa-solid fa-bars"></i>';
-
-        }
-    );
-
-
-    initialize();
-
-})();
-
+  });
+}
+function setupFocusRefresh(){
+  let lastCheck=0;
+  const refresh=()=>{
+    const now=Date.now();if(now-lastCheck<1200)return;lastCheck=now;
+    loadSession().then(refreshNotifications);
+  };
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)refresh()});
+  window.addEventListener("focus",refresh);
+}
+setupMobile();setupFocusRefresh();
+(async()=>{await loadSession();await refreshNotifications()})();
 </script>
-
-
 </body>
 </html>

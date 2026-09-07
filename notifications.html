@@ -20,6 +20,21 @@
         content="#7c3aed"
     >
 
+    <meta
+        http-equiv="Cache-Control"
+        content="no-cache, no-store, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
     <title>
         Notifications | LOVEMI
     </title>
@@ -60,1535 +75,1381 @@
     >
 
 
-    <meta
-        http-equiv="Cache-Control"
-        content="no-cache, no-store, must-revalidate"
+    <!-- ======================================================
+         FONT
+    ======================================================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
     >
 
-    <meta
-        http-equiv="Pragma"
-        content="no-cache"
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
     >
 
-    <meta
-        http-equiv="Expires"
-        content="0"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
     >
 
 
-    <style>
+    <!-- ======================================================
+         FONT AWESOME
+    ======================================================= -->
 
-        :root {
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
 
-            --primary: #7c3aed;
 
-            --primary-dark: #5b21b6;
+<style>
 
-            --primary-light: #ede9fe;
+:root {
 
-            --accent: #ec4899;
+    --primary:#7c3aed;
+    --primary-dark:#5b21b6;
+    --primary-light:#ede9fe;
 
-            --accent-light: #fce7f3;
+    --accent:#ec4899;
+    --accent-light:#fce7f3;
 
-            --text: #18181b;
+    --text:#18181b;
+    --muted:#71717a;
+    --soft:#a1a1aa;
 
-            --muted: #71717a;
+    --page:#f7f7fb;
+    --white:#ffffff;
+    --border:#e8e8ef;
 
-            --soft: #a1a1aa;
+    --success:#16a34a;
+    --success-light:#f0fdf4;
 
-            --page: #f7f7fb;
+    --danger:#dc2626;
+    --danger-light:#fef2f2;
 
-            --white: #ffffff;
+    --warning:#d97706;
+    --warning-light:#fff7ed;
 
-            --border: #e8e8ef;
+    --shadow:
+        0 14px 42px
+        rgba(24,24,27,.07);
 
-            --success: #16a34a;
+    --radius:18px;
+}
 
-            --success-light: #f0fdf4;
 
-            --danger: #dc2626;
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-            --shadow:
-                0 14px 42px
-                rgba(24,24,27,.07);
 
-            --radius:
-                18px;
+html {
+    scroll-behavior:smooth;
+}
 
-        }
 
+body {
 
-        * {
+    min-height:100vh;
 
-            box-sizing:
-                border-box;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-            margin:
-                0;
+    background:
+        var(--page);
 
-            padding:
-                0;
+    color:
+        var(--text);
+}
 
-        }
 
+a {
+    color:inherit;
+    text-decoration:none;
+}
 
-        body {
 
-            min-height:
-                100vh;
+button {
+    font:inherit;
+    cursor:pointer;
+}
 
-            font-family:
-                Inter,
-                ui-sans-serif,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
 
-            background:
-                var(--page);
+button:disabled {
+    opacity:.55;
+    cursor:not-allowed;
+}
 
-            color:
-                var(--text);
 
-        }
+/* ==========================================================
+   HEADER
+========================================================== */
 
+.topbar {
 
-        a {
+    position:sticky;
+    top:0;
+    z-index:1000;
 
-            color:
-                inherit;
+    background:
+        rgba(255,255,255,.96);
 
-            text-decoration:
-                none;
+    backdrop-filter:
+        blur(16px);
 
-        }
+    border-bottom:
+        1px solid var(--border);
 
+}
 
-        button {
 
-            font:
-                inherit;
+.topbar-inner {
 
-            cursor:
-                pointer;
+    width:
+        min(
+            calc(100% - 30px),
+            1380px
+        );
 
-        }
+    min-height:74px;
 
+    margin:auto;
 
-        /* ===================================================
-           HEADER
-        ==================================================== */
+    display:grid;
 
-        .topbar {
+    grid-template-columns:
+        auto
+        1fr
+        auto;
 
-            position:
-                sticky;
+    align-items:center;
 
-            top:
-                0;
+    gap:18px;
 
-            z-index:
-                1000;
+}
 
-            background:
-                rgba(255,255,255,.96);
 
-            backdrop-filter:
-                blur(16px);
+.brand {
 
-            border-bottom:
-                1px solid
-                var(--border);
+    display:flex;
+    align-items:center;
+    gap:9px;
 
-        }
+}
 
 
-        .topbar-inner {
+.brand-logo {
 
-            width:
-                min(
-                    calc(100% - 30px),
-                    1380px
-                );
+    width:44px;
+    height:44px;
 
-            min-height:
-                74px;
+    object-fit:contain;
 
-            margin:
-                auto;
+    border-radius:11px;
 
-            display:
-                grid;
+}
 
-            grid-template-columns:
-                auto
-                1fr
-                auto;
 
-            align-items:
-                center;
+.brand-name {
 
-            gap:
-                18px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-        }
+    font-size:25px;
+    font-weight:800;
 
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
 
-        .brand {
+    -webkit-background-clip:text;
+    background-clip:text;
 
-            display:
-                flex;
+    -webkit-text-fill-color:transparent;
 
-            align-items:
-                center;
+}
 
-            gap:
-                9px;
 
-        }
+.brand-tagline {
 
+    display:block;
 
-        .brand-logo {
+    margin-top:1px;
 
-            width:
-                44px;
+    color:var(--soft);
 
-            height:
-                44px;
+    font-size:7px;
 
-            object-fit:
-                contain;
+    letter-spacing:.9px;
 
-            border-radius:
-                11px;
+}
 
-        }
 
+.desktop-nav {
 
-        .brand-name {
+    display:flex;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+    justify-content:center;
 
-            font-size:
-                25px;
+    align-items:center;
 
-            font-weight:
-                800;
+    gap:3px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--accent)
-                );
+}
 
-            -webkit-background-clip:
-                text;
 
-            background-clip:
-                text;
+.nav-link {
 
-            -webkit-text-fill-color:
-                transparent;
+    min-height:39px;
 
-        }
+    padding:
+        0 9px;
 
+    border-radius:10px;
 
-        .brand-tagline {
+    display:flex;
 
-            display:
-                block;
+    align-items:center;
 
-            margin-top:
-                1px;
+    gap:5px;
 
-            color:
-                var(--soft);
+    color:var(--muted);
 
-            font-size:
-                7px;
+    font-size:9px;
 
-            letter-spacing:
-                .9px;
+    font-weight:800;
 
-        }
+    white-space:nowrap;
 
+}
 
-        .desktop-nav {
 
-            display:
-                flex;
+.nav-link:hover {
 
-            justify-content:
-                center;
+    color:var(--primary);
 
-            align-items:
-                center;
+    background:#fafafa;
 
-            gap:
-                3px;
+}
 
-        }
 
+.nav-link.active {
 
-        .nav-link {
+    color:var(--primary);
 
-            min-height:
-                39px;
+    background:var(--primary-light);
 
-            padding:
-                0 9px;
+}
 
-            border-radius:
-                10px;
 
-            display:
-                flex;
+.top-actions {
 
-            align-items:
-                center;
+    display:flex;
 
-            gap:
-                5px;
+    align-items:center;
 
-            color:
-                var(--muted);
+    gap:7px;
 
-            font-size:
-                10px;
+}
 
-            font-weight:
-                800;
 
-            white-space:
-                nowrap;
+.top-icon {
 
-        }
+    width:39px;
 
+    height:39px;
 
-        .nav-link:hover {
+    border:
+        1px solid var(--border);
 
-            color:
-                var(--primary);
+    border-radius:10px;
 
-            background:
-                #fafafa;
+    background:white;
 
-        }
+    display:grid;
 
+    place-items:center;
 
-        .nav-link.active {
+    color:var(--muted);
 
-            color:
-                var(--primary);
+}
 
-            background:
-                var(--primary-light);
 
-        }
+.top-icon:hover {
 
+    color:var(--primary);
 
-        .top-actions {
+    background:var(--primary-light);
 
-            display:
-                flex;
+}
 
-            align-items:
-                center;
 
-            gap:
-                7px;
+/* ==========================================================
+   MAIN
+========================================================== */
 
-        }
+main {
 
+    width:
+        min(
+            calc(100% - 30px),
+            1180px
+        );
 
-        .top-icon {
+    margin:auto;
 
-            width:
-                39px;
+    padding:
+        32px 0 60px;
 
-            height:
-                39px;
+}
 
-            border:
-                1px solid
-                var(--border);
 
-            border-radius:
-                10px;
+.page-header {
 
-            background:
-                white;
+    display:flex;
 
-            display:
-                grid;
+    align-items:end;
 
-            place-items:
-                center;
+    justify-content:space-between;
 
-            color:
-                var(--muted);
+    gap:15px;
 
-        }
+    margin-bottom:18px;
 
+}
 
-        .top-icon:hover {
 
-            color:
-                var(--primary);
+.page-title h1 {
 
-            background:
-                var(--primary-light);
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-        }
+    font-size:
+        clamp(
+            31px,
+            5vw,
+            46px
+        );
 
+    line-height:1.05;
 
-        /* ===================================================
-           PAGE
-        ==================================================== */
+}
 
-        main {
 
-            width:
-                min(
-                    calc(100% - 30px),
-                    1180px
-                );
+.page-title p {
 
-            margin:
-                auto;
+    margin-top:7px;
 
-            padding:
-                32px 0 60px;
+    color:var(--muted);
 
-        }
+    font-size:10px;
 
+}
 
-        .page-header {
 
-            display:
-                flex;
+.header-buttons {
 
-            align-items:
-                end;
+    display:flex;
 
-            justify-content:
-                space-between;
+    gap:7px;
 
-            gap:
-                15px;
+}
 
-            margin-bottom:
-                18px;
 
-        }
+.button {
 
+    min-height:40px;
 
-        .page-title h1 {
+    padding:0 13px;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+    display:inline-flex;
 
-            font-size:
-                clamp(
-                    31px,
-                    5vw,
-                    46px
-                );
+    align-items:center;
 
-            line-height:
-                1.05;
+    justify-content:center;
 
-        }
+    gap:6px;
 
+    border:
+        1px solid var(--border);
 
-        .page-title p {
+    border-radius:10px;
 
-            margin-top:
-                7px;
+    background:white;
 
-            color:
-                var(--muted);
+    color:var(--text);
 
-            font-size:
-                10px;
+    font-size:9px;
 
-        }
+    font-weight:800;
 
+}
 
-        .header-buttons {
 
-            display:
-                flex;
+.button:hover {
 
-            gap:
-                7px;
+    border-color:#d8c8fa;
 
-        }
+    color:var(--primary);
 
+}
 
-        .button {
 
-            min-height:
-                40px;
+.button.primary {
 
-            padding:
-                0 13px;
+    border-color:var(--primary);
 
-            display:
-                inline-flex;
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
 
-            align-items:
-                center;
+    color:white;
 
-            justify-content:
-                center;
+}
 
-            border:
-                1px solid
-                var(--border);
 
-            border-radius:
-                10px;
+/* ==========================================================
+   SUMMARY
+========================================================== */
 
-            background:
-                white;
+.summary-grid {
 
-            color:
-                var(--text);
+    display:grid;
 
-            font-size:
-                9px;
+    grid-template-columns:
+        repeat(3,1fr);
 
-            font-weight:
-                800;
+    gap:13px;
 
-        }
+    margin-bottom:18px;
 
+}
 
-        .button:hover {
 
-            border-color:
-                #d8c8fa;
+.summary-card {
 
-            color:
-                var(--primary);
+    background:white;
 
-        }
+    border:
+        1px solid var(--border);
 
+    border-radius:var(--radius);
 
-        .button.primary {
+    padding:17px;
 
-            border-color:
-                var(--primary);
+    box-shadow:var(--shadow);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--accent)
-                );
+}
 
-            color:
-                white;
 
-        }
+.summary-top {
 
+    display:flex;
 
-        /* ===================================================
-           SUMMARY
-        ==================================================== */
+    align-items:center;
 
-        .summary-grid {
+    justify-content:space-between;
 
-            display:
-                grid;
+}
 
-            grid-template-columns:
-                repeat(3, 1fr);
 
-            gap:
-                13px;
+.summary-icon {
 
-            margin-bottom:
-                18px;
+    width:39px;
+    height:39px;
 
-        }
+    display:grid;
+    place-items:center;
 
+    border-radius:11px;
 
-        .summary-card {
+    background:var(--primary-light);
 
-            background:
-                white;
+    color:var(--primary);
 
-            border:
-                1px solid
-                var(--border);
+    font-size:17px;
 
-            border-radius:
-                var(--radius);
+}
 
-            padding:
-                17px;
 
-            box-shadow:
-                var(--shadow);
+.summary-number {
 
-        }
+    font-size:27px;
+    font-weight:900;
 
+}
 
-        .summary-top {
 
-            display:
-                flex;
+.summary-label {
 
-            align-items:
-                center;
+    margin-top:9px;
 
-            justify-content:
-                space-between;
+    color:var(--muted);
 
-        }
+    font-size:8px;
 
+    font-weight:700;
 
-        .summary-icon {
+}
 
-            width:
-                39px;
 
-            height:
-                39px;
+/* ==========================================================
+   NOTIFICATION LIST
+========================================================== */
 
-            display:
-                grid;
+.notification-list {
 
-            place-items:
-                center;
+    display:grid;
 
-            border-radius:
-                11px;
+    gap:10px;
 
-            background:
-                var(--primary-light);
+}
 
-            color:
-                var(--primary);
 
-            font-size:
-                17px;
+.notification-card {
 
-        }
+    display:grid;
 
+    grid-template-columns:
+        48px
+        minmax(0,1fr)
+        auto;
 
-        .summary-number {
+    align-items:start;
 
-            font-size:
-                27px;
+    gap:13px;
 
-            font-weight:
-                900;
+    padding:15px;
 
-        }
+    background:white;
 
+    border:
+        1px solid var(--border);
 
-        .summary-label {
+    border-radius:16px;
 
-            margin-top:
-                9px;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 
-            color:
-                var(--muted);
+}
 
-            font-size:
-                8px;
 
-            font-weight:
-                700;
+.notification-card:hover {
 
-        }
+    transform:translateY(-1px);
 
+    box-shadow:
+        0 12px 32px
+        rgba(24,24,27,.06);
 
-        /* ===================================================
-           NOTIFICATION CARD
-        ==================================================== */
+}
 
-        .notification-list {
 
-            display:
-                grid;
+.notification-card.unread {
 
-            gap:
-                10px;
+    background:#fcfaff;
 
-        }
+    border-color:#ddd0fb;
 
+}
 
-        .notification-card {
 
-            display:
-                grid;
+.notification-card.new-arrival {
 
-            grid-template-columns:
-                48px
-                minmax(0,1fr)
-                auto;
+    animation:
+        notificationArrival
+        .7s ease;
 
-            align-items:
-                start;
+}
 
-            gap:
-                13px;
 
-            padding:
-                15px;
+@keyframes notificationArrival {
 
-            background:
-                white;
+    0% {
+        transform:scale(.985);
+        opacity:.65;
+    }
 
-            border:
-                1px solid
-                var(--border);
+    60% {
+        transform:scale(1.008);
+        opacity:1;
+    }
 
-            border-radius:
-                16px;
+    100% {
+        transform:scale(1);
+        opacity:1;
+    }
 
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+}
 
-        }
 
+.notification-icon {
 
-        .notification-card:hover {
+    width:48px;
+    height:48px;
 
-            transform:
-                translateY(-1px);
+    border-radius:14px;
 
-            box-shadow:
-                0 12px 32px
-                rgba(24,24,27,.06);
+    display:grid;
+    place-items:center;
 
-        }
+    background:var(--primary-light);
 
+    color:var(--primary);
 
-        .notification-card.unread {
+    font-size:19px;
 
-            background:
-                #fcfaff;
+}
 
-            border-color:
-                #ddd0fb;
 
-        }
+.notification-icon.payment-failed {
 
+    background:var(--danger-light);
 
-        .notification-icon {
+    color:var(--danger);
 
-            width:
-                48px;
+}
 
-            height:
-                48px;
 
-            border-radius:
-                14px;
+.notification-icon.payment-success {
 
-            display:
-                grid;
+    background:var(--success-light);
 
-            place-items:
-                center;
+    color:var(--success);
 
-            background:
-                var(--primary-light);
+}
 
-            color:
-                var(--primary);
 
-            font-size:
-                19px;
+.notification-title-row {
 
-        }
+    display:flex;
 
+    align-items:center;
 
-        .notification-title-row {
+    gap:7px;
 
-            display:
-                flex;
+    flex-wrap:wrap;
 
-            align-items:
-                center;
+}
 
-            gap:
-                7px;
 
-            flex-wrap:
-                wrap;
+.notification-title {
 
-        }
+    font-size:13px;
 
+    font-weight:900;
 
-        .notification-title {
+}
 
-            font-size:
-                13px;
 
-            font-weight:
-                900;
+.new-label {
 
-        }
+    padding:3px 7px;
 
+    color:white;
 
-        .new-label {
+    background:var(--primary);
 
-            padding:
-                3px 7px;
+    border-radius:999px;
 
-            color:
-                white;
+    font-size:7px;
 
-            background:
-                var(--primary);
+    font-weight:900;
 
-            border-radius:
-                999px;
+}
 
-            font-size:
-                7px;
 
-            font-weight:
-                900;
+.notification-message {
 
-        }
+    margin-top:5px;
 
+    color:#4b4b55;
 
-        .notification-message {
+    font-size:10px;
 
-            margin-top:
-                5px;
+    line-height:1.6;
 
-            color:
-                #4b4b55;
+    word-break:break-word;
 
-            font-size:
-                10px;
+}
 
-            line-height:
-                1.6;
 
-        }
+.notification-meta {
 
+    margin-top:7px;
 
-        .notification-meta {
+    color:var(--soft);
 
-            margin-top:
-                7px;
+    font-size:8px;
 
-            color:
-                var(--soft);
+}
 
-            font-size:
-                8px;
 
-        }
+.notification-actions {
 
+    display:flex;
 
-        .notification-actions {
+    align-items:center;
 
-            display:
-                flex;
+    gap:6px;
 
-            align-items:
-                center;
+}
 
-            gap:
-                5px;
 
-        }
+.small-button {
 
+    min-height:34px;
 
-        .small-button {
+    padding:
+        0 10px;
 
-            min-width:
-                33px;
+    border:
+        1px solid var(--border);
 
-            min-height:
-                33px;
+    border-radius:9px;
 
-            padding:
-                0 8px;
+    background:white;
 
-            border:
-                1px solid
-                var(--border);
+    color:var(--muted);
 
-            border-radius:
-                9px;
+    font-size:8px;
 
-            background:
-                white;
+    font-weight:800;
 
-            color:
-                var(--muted);
+    white-space:nowrap;
 
-            font-size:
-                8px;
+}
 
-            font-weight:
-                800;
 
-        }
+.small-button:hover {
 
+    border-color:#d8c8fa;
 
-        .small-button:hover {
+    color:var(--primary);
 
-            border-color:
-                #d8c8fa;
+}
 
-            color:
-                var(--primary);
 
-        }
+.view-button {
 
+    color:var(--primary);
 
-        /* ===================================================
-           EMPTY / ERROR
-        ==================================================== */
+    background:var(--primary-light);
 
-        .state-card {
+    border-color:#ddd6fe;
 
-            padding:
-                52px 20px;
+}
 
-            text-align:
-                center;
 
-            background:
-                white;
+.mark-read-button {
 
-            border:
-                1px dashed
-                #d9d9e3;
+    color:#166534;
 
-            border-radius:
-                var(--radius);
+    background:#f0fdf4;
 
-        }
+    border-color:#bbf7d0;
 
+}
 
-        .state-icon {
 
-            width:
-                61px;
+/* ==========================================================
+   EMPTY / ERROR
+========================================================== */
 
-            height:
-                61px;
+.state-card {
 
-            margin:
-                0 auto 12px;
+    padding:
+        52px 20px;
 
-            border-radius:
-                18px;
+    text-align:center;
 
-            display:
-                grid;
+    background:white;
 
-            place-items:
-                center;
+    border:
+        1px dashed #d9d9e3;
 
-            background:
-                var(--primary-light);
+    border-radius:var(--radius);
 
-            color:
-                var(--primary);
+}
 
-            font-size:
-                25px;
 
-        }
+.state-icon {
 
+    width:61px;
+    height:61px;
 
-        .state-card h3 {
+    margin:
+        0 auto 12px;
 
-            font-size:
-                15px;
+    border-radius:18px;
 
-        }
+    display:grid;
+    place-items:center;
 
+    background:var(--primary-light);
 
-        .state-card p {
+    color:var(--primary);
 
-            margin-top:
-                7px;
+    font-size:25px;
 
-            color:
-                var(--muted);
+}
 
-            font-size:
-                9px;
 
-        }
+.state-card h3 {
 
+    font-size:15px;
 
-        /* ===================================================
-           SKELETON
-        ==================================================== */
+}
 
-        .skeleton-list {
 
-            display:
-                grid;
+.state-card p {
 
-            gap:
-                10px;
+    margin-top:7px;
 
-        }
+    color:var(--muted);
 
+    font-size:9px;
 
-        .skeleton {
+}
 
-            height:
-                88px;
 
-            border-radius:
-                16px;
+/* ==========================================================
+   SKELETON
+========================================================== */
 
-            background:
-                linear-gradient(
-                    90deg,
-                    #ededf2 25%,
-                    #f7f7f9 50%,
-                    #ededf2 75%
-                );
+.skeleton-list {
 
-            background-size:
-                200% 100%;
+    display:grid;
 
-            animation:
-                loading 1.2s infinite;
+    gap:10px;
 
-        }
+}
 
 
-        @keyframes loading {
+.skeleton {
 
-            from {
-                background-position:
-                    200% 0;
-            }
+    height:88px;
 
-            to {
-                background-position:
-                    -200% 0;
-            }
+    border-radius:16px;
 
-        }
+    background:
+        linear-gradient(
+            90deg,
+            #ededf2 25%,
+            #f7f7f9 50%,
+            #ededf2 75%
+        );
 
+    background-size:200% 100%;
 
-        /* ===================================================
-           FOOTER
-        ==================================================== */
+    animation:
+        loading 1.2s infinite;
 
-        .footer {
+}
 
-            background:
-                #17151b;
 
-            color:
-                white;
+@keyframes loading {
 
-        }
+    from {
+        background-position:200% 0;
+    }
 
+    to {
+        background-position:-200% 0;
+    }
 
-        .footer-inner {
+}
 
-            width:
-                min(
-                    calc(100% - 30px),
-                    1380px
-                );
 
-            margin:
-                auto;
+/* ==========================================================
+   TOAST
+========================================================== */
 
-            padding:
-                38px 0 18px;
+.toast {
 
-        }
+    position:fixed;
 
+    left:50%;
 
-        .footer-grid {
+    bottom:28px;
 
-            display:
-                grid;
+    z-index:5000;
 
-            grid-template-columns:
-                1.5fr
-                1fr
-                1fr
-                1fr;
+    transform:
+        translate(-50%,20px);
 
-            gap:
-                30px;
+    min-width:
+        min(
+            calc(100% - 30px),
+            380px
+        );
 
-            padding-bottom:
-                25px;
+    padding:
+        12px 15px;
 
-        }
+    border-radius:12px;
 
+    background:#18181b;
 
-        .footer-logo-row {
+    color:white;
 
-            display:
-                flex;
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.20);
 
-            align-items:
-                center;
+    font-size:9px;
 
-            gap:
-                9px;
+    font-weight:700;
 
-        }
+    opacity:0;
 
+    pointer-events:none;
 
-        .footer-logo {
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
 
-            width:
-                44px;
+}
 
-            height:
-                44px;
 
-            object-fit:
-                contain;
+.toast.show {
 
-            border-radius:
-                11px;
+    opacity:1;
 
-        }
+    transform:
+        translate(-50%,0);
 
+}
 
-        .footer-brand {
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+/* ==========================================================
+   FOOTER
+========================================================== */
 
-            font-size:
-                24px;
+.footer {
 
-            font-weight:
-                800;
+    background:#17151b;
 
-        }
+    color:white;
 
+}
 
-        .footer-description {
 
-            max-width:
-                330px;
+.footer-inner {
 
-            margin-top:
-                10px;
+    width:
+        min(
+            calc(100% - 30px),
+            1380px
+        );
 
-            color:
-                #9d99a5;
+    margin:auto;
 
-            font-size:
-                9px;
+    padding:
+        38px 0 18px;
 
-            line-height:
-                1.7;
+}
 
-        }
 
+.footer-grid {
 
-        .footer-heading {
+    display:grid;
 
-            margin-bottom:
-                9px;
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
 
-            font-size:
-                10px;
+    gap:30px;
 
-        }
+    padding-bottom:25px;
 
+}
 
-        .footer-links {
 
-            display:
-                flex;
+.footer-logo-row {
 
-            flex-direction:
-                column;
+    display:flex;
 
-            gap:
-                6px;
+    align-items:center;
 
-        }
+    gap:9px;
 
+}
 
-        .footer-links a {
 
-            color:
-                #9d99a5;
+.footer-logo {
 
-            font-size:
-                8px;
+    width:44px;
+    height:44px;
 
-        }
+    object-fit:contain;
 
+    border-radius:11px;
 
-        .footer-links a:hover {
+}
 
-            color:
-                white;
 
-        }
+.footer-brand {
 
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-        .footer-bottom {
+    font-size:24px;
 
-            padding-top:
-                15px;
+    font-weight:800;
 
-            display:
-                flex;
+}
 
-            align-items:
-                center;
 
-            justify-content:
-                space-between;
+.footer-description {
 
-            gap:
-                10px;
+    max-width:330px;
 
-            border-top:
-                1px solid
-                rgba(255,255,255,.08);
+    margin-top:10px;
 
-            color:
-                #716d78;
+    color:#9d99a5;
 
-            font-size:
-                7px;
+    font-size:9px;
 
-        }
+    line-height:1.7;
 
+}
 
-        /* ===================================================
-           MOBILE NAV
-        ==================================================== */
 
-        .mobile-nav {
+.footer-heading {
 
-            display:
-                none;
+    margin-bottom:9px;
 
-        }
+    font-size:10px;
 
+}
 
-        /* ===================================================
-           RESPONSIVE
-        ==================================================== */
 
-        @media (
-            max-width: 1100px
-        ) {
+.footer-links {
 
-            .desktop-nav {
+    display:flex;
 
-                display:
-                    none;
+    flex-direction:column;
 
-            }
+    gap:6px;
 
-            .mobile-nav {
+}
 
-                display:
-                    block;
 
-                position:
-                    fixed;
+.footer-links a {
 
-                left:
-                    0;
+    color:#9d99a5;
 
-                right:
-                    0;
+    font-size:8px;
 
-                bottom:
-                    0;
+}
 
-                z-index:
-                    2000;
 
-                background:
-                    rgba(255,255,255,.97);
+.footer-links a:hover {
 
-                backdrop-filter:
-                    blur(16px);
+    color:white;
 
-                border-top:
-                    1px solid
-                    var(--border);
+}
 
-                padding:
-                    7px 7px
-                    env(safe-area-inset-bottom);
 
-            }
+.footer-bottom {
 
+    padding-top:15px;
 
-            .mobile-nav-inner {
+    display:flex;
 
-                max-width:
-                    650px;
+    align-items:center;
 
-                margin:
-                    auto;
+    justify-content:space-between;
 
-                display:
-                    grid;
+    gap:10px;
 
-                grid-template-columns:
-                    repeat(5,1fr);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
 
-                gap:
-                    4px;
+    color:#716d78;
 
-            }
+    font-size:7px;
 
+}
 
-            .mobile-link {
 
-                min-height:
-                    50px;
+/* ==========================================================
+   MOBILE NAV
+========================================================== */
 
-                display:
-                    flex;
+.mobile-nav {
 
-                flex-direction:
-                    column;
+    display:none;
 
-                align-items:
-                    center;
+}
 
-                justify-content:
-                    center;
 
-                gap:
-                    3px;
+@media(max-width:1100px){
 
-                border-radius:
-                    11px;
+    .desktop-nav{
+        display:none;
+    }
 
-                color:
-                    #8b8b95;
+    .mobile-nav{
 
-                font-size:
-                    8px;
+        display:block;
 
-                font-weight:
-                    800;
+        position:fixed;
 
-                position:
-                    relative;
+        left:0;
+        right:0;
+        bottom:0;
 
-            }
+        z-index:2000;
 
+        background:
+            rgba(255,255,255,.97);
 
-            .mobile-link.active {
+        backdrop-filter:
+            blur(16px);
 
-                color:
-                    var(--primary);
+        border-top:
+            1px solid var(--border);
 
-                background:
-                    var(--primary-light);
+        padding:
+            7px
+            7px
+            calc(7px + env(safe-area-inset-bottom));
 
-            }
+    }
 
 
-            .mobile-link-icon {
+    .mobile-nav-inner{
 
-                font-size:
-                    16px;
+        max-width:650px;
 
-            }
+        margin:auto;
 
+        display:grid;
 
-            main {
+        grid-template-columns:
+            repeat(5,1fr);
 
-                padding-bottom:
-                    95px;
+        gap:4px;
 
-            }
+    }
 
-        }
 
+    .mobile-link{
 
-        @media (
-            max-width: 800px
-        ) {
+        min-height:50px;
 
-            .topbar-inner {
+        display:flex;
 
-                width:
-                    calc(100% - 20px);
+        flex-direction:column;
 
-            }
+        align-items:center;
 
+        justify-content:center;
 
-            .summary-grid {
+        gap:3px;
 
-                grid-template-columns:
-                    1fr;
+        border-radius:11px;
 
-            }
+        color:#8b8b95;
 
+        font-size:8px;
 
-            .footer-grid {
+        font-weight:800;
 
-                grid-template-columns:
-                    repeat(2,1fr);
+    }
 
-            }
 
-        }
+    .mobile-link.active{
 
+        color:var(--primary);
 
-        @media (
-            max-width: 580px
-        ) {
+        background:var(--primary-light);
 
-            .brand-name {
+    }
 
-                font-size:
-                    20px;
 
-            }
+    .mobile-link-icon{
 
+        font-size:16px;
 
-            .brand-tagline {
+    }
 
-                display:
-                    none;
 
-            }
+    main{
 
+        padding-bottom:95px;
 
-            .top-actions .top-icon {
+    }
 
-                display:
-                    none;
+}
 
-            }
 
+@media(max-width:800px){
 
-            main {
+    .topbar-inner{
 
-                width:
-                    calc(100% - 20px);
+        width:calc(100% - 20px);
 
-                padding-top:
-                    22px;
+    }
 
-            }
 
+    .summary-grid{
 
-            .page-header {
+        grid-template-columns:1fr;
 
-                flex-direction:
-                    column;
+    }
 
-                align-items:
-                    stretch;
 
-            }
+    .footer-grid{
 
+        grid-template-columns:
+            repeat(2,1fr);
 
-            .header-buttons {
+    }
 
-                width:
-                    100%;
+}
 
-            }
 
+@media(max-width:580px){
 
-            .button {
+    .brand-name{
 
-                flex:
-                    1;
+        font-size:20px;
 
-            }
+    }
 
 
-            .notification-card {
+    .brand-tagline{
 
-                grid-template-columns:
-                    43px
-                    minmax(0,1fr);
+        display:none;
 
-            }
+    }
 
 
-            .notification-icon {
+    .top-actions .top-icon{
 
-                width:
-                    43px;
+        display:none;
 
-                height:
-                    43px;
+    }
 
-            }
 
+    main{
 
-            .notification-actions {
+        width:
+            calc(100% - 20px);
 
-                grid-column:
-                    2;
+        padding-top:22px;
 
-            }
+    }
 
 
-            .footer-grid {
+    .page-header{
 
-                grid-template-columns:
-                    1fr;
+        flex-direction:column;
 
-            }
+        align-items:stretch;
 
+    }
 
-            .footer-bottom {
 
-                flex-direction:
-                    column;
+    .header-buttons{
 
-                align-items:
-                    flex-start;
+        width:100%;
 
-            }
+    }
 
 
-            .footer {
+    .button{
 
-                padding-bottom:
-                    80px;
+        flex:1;
 
-            }
+    }
 
-        }
 
-    </style>
+    .notification-card{
+
+        grid-template-columns:
+            43px
+            minmax(0,1fr);
+
+    }
+
+
+    .notification-icon{
+
+        width:43px;
+        height:43px;
+
+    }
+
+
+    .notification-actions{
+
+        grid-column:2;
+
+        justify-content:flex-start;
+
+    }
+
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-bottom{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+    .footer{
+
+        padding-bottom:80px;
+
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -1642,55 +1503,70 @@
                 href="dashboard.html"
                 class="nav-link"
             >
+                <i class="fa-solid fa-house"></i>
                 Dashboard
             </a>
+
 
             <a
                 href="discover.html"
                 class="nav-link"
             >
+                <i class="fa-solid fa-compass"></i>
                 Discover
             </a>
+
 
             <a
                 href="connections.html"
                 class="nav-link"
             >
+                <i class="fa-solid fa-user-group"></i>
                 Connections
             </a>
+
 
             <a
                 href="messages.html"
                 class="nav-link"
             >
+                <i class="fa-regular fa-message"></i>
                 Messages
             </a>
+
 
             <a
                 href="profile.html"
                 class="nav-link"
             >
+                <i class="fa-regular fa-user"></i>
                 Profile
             </a>
+
 
             <a
                 href="notifications.html"
                 class="nav-link active"
             >
+                <i class="fa-regular fa-bell"></i>
                 Notifications
             </a>
+
 
             <a
                 href="settings.html"
                 class="nav-link"
             >
+                <i class="fa-solid fa-gear"></i>
                 Settings
             </a>
+
 
             <a
                 href="premium.html"
                 class="nav-link"
             >
+                <i class="fa-solid fa-crown"></i>
                 Premium
             </a>
 
@@ -1704,15 +1580,16 @@
                 class="top-icon"
                 aria-label="Messages"
             >
-                💬
+                <i class="fa-regular fa-message"></i>
             </a>
+
 
             <a
                 href="settings.html"
                 class="top-icon"
                 aria-label="Settings"
             >
-                ⚙
+                <i class="fa-solid fa-gear"></i>
             </a>
 
         </div>
@@ -1730,7 +1607,6 @@
 
 
     <section class="page-header">
-
 
         <div class="page-title">
 
@@ -1754,7 +1630,8 @@
                 id="refreshButton"
             >
 
-                ↻
+                <i class="fa-solid fa-rotate"></i>
+
                 Refresh
 
             </button>
@@ -1766,20 +1643,19 @@
                 id="markAllButton"
             >
 
-                ✓
+                <i class="fa-solid fa-check-double"></i>
+
                 Mark all read
 
             </button>
 
-
         </div>
-
 
     </section>
 
 
     <!-- =======================================================
-         SUMMARY CARDS
+         SUMMARY
     ======================================================== -->
 
     <section class="summary-grid">
@@ -1787,13 +1663,11 @@
 
         <article class="summary-card">
 
-
             <div class="summary-top">
 
                 <div class="summary-icon">
-                    🔔
+                    <i class="fa-regular fa-bell"></i>
                 </div>
-
 
                 <div
                     class="summary-number"
@@ -1804,24 +1678,20 @@
 
             </div>
 
-
             <div class="summary-label">
                 Unread notifications
             </div>
-
 
         </article>
 
 
         <article class="summary-card">
 
-
             <div class="summary-top">
 
                 <div class="summary-icon">
-                    📬
+                    <i class="fa-regular fa-envelope"></i>
                 </div>
-
 
                 <div
                     class="summary-number"
@@ -1832,24 +1702,20 @@
 
             </div>
 
-
             <div class="summary-label">
                 Notifications loaded
             </div>
-
 
         </article>
 
 
         <article class="summary-card">
 
-
             <div class="summary-top">
 
                 <div class="summary-icon">
-                    🔊
+                    <i class="fa-solid fa-volume-high"></i>
                 </div>
-
 
                 <div
                     class="summary-number"
@@ -1860,11 +1726,9 @@
 
             </div>
 
-
             <div class="summary-label">
                 Notifications with sounds
             </div>
-
 
         </article>
 
@@ -1873,11 +1737,12 @@
 
 
     <!-- =======================================================
-         NOTIFICATION LIST
+         LIST
     ======================================================== -->
 
-    <section id="notificationContainer">
-
+    <section
+        id="notificationContainer"
+    >
 
         <div class="skeleton-list">
 
@@ -1889,11 +1754,22 @@
 
         </div>
 
-
     </section>
 
 
 </main>
+
+
+<!-- ==========================================================
+     TOAST
+=========================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+></div>
 
 
 <!-- ==========================================================
@@ -1910,9 +1786,7 @@
 
             <div>
 
-
                 <div class="footer-logo-row">
-
 
                     <img
                         src="assets/logo1/LOGO1.ico"
@@ -1924,11 +1798,9 @@
                         "
                     >
 
-
                     <span class="footer-brand">
                         LOVEMI
                     </span>
-
 
                 </div>
 
@@ -1940,12 +1812,10 @@
 
                 </p>
 
-
             </div>
 
 
             <div>
-
 
                 <h3 class="footer-heading">
                     Explore
@@ -1972,12 +1842,10 @@
 
                 </div>
 
-
             </div>
 
 
             <div>
-
 
                 <h3 class="footer-heading">
                     Account
@@ -2004,12 +1872,10 @@
 
                 </div>
 
-
             </div>
 
 
             <div>
-
 
                 <h3 class="footer-heading">
                     Help
@@ -2036,15 +1902,12 @@
 
                 </div>
 
-
             </div>
-
 
         </div>
 
 
         <div class="footer-bottom">
-
 
             <span>
 
@@ -2056,14 +1919,10 @@
 
 
             <span>
-
                 Discover • Connect • Meet
-
             </span>
 
-
         </div>
-
 
     </div>
 
@@ -2071,7 +1930,7 @@
 
 
 <!-- ==========================================================
-     MOBILE NAVIGATION
+     MOBILE NAV
 =========================================================== -->
 
 <nav
@@ -2079,21 +1938,16 @@
     aria-label="Mobile navigation"
 >
 
-
     <div class="mobile-nav-inner">
-
 
         <a
             href="dashboard.html"
             class="mobile-link"
         >
-
             <span class="mobile-link-icon">
-                🏠
+                <i class="fa-solid fa-house"></i>
             </span>
-
-            Dashboard
-
+            Home
         </a>
 
 
@@ -2101,13 +1955,10 @@
             href="discover.html"
             class="mobile-link"
         >
-
             <span class="mobile-link-icon">
-                🔎
+                <i class="fa-solid fa-compass"></i>
             </span>
-
             Discover
-
         </a>
 
 
@@ -2115,13 +1966,10 @@
             href="connections.html"
             class="mobile-link"
         >
-
             <span class="mobile-link-icon">
-                ❤️
+                <i class="fa-solid fa-user-group"></i>
             </span>
-
             Connect
-
         </a>
 
 
@@ -2129,13 +1977,10 @@
             href="messages.html"
             class="mobile-link"
         >
-
             <span class="mobile-link-icon">
-                💬
+                <i class="fa-regular fa-message"></i>
             </span>
-
             Messages
-
         </a>
 
 
@@ -2143,15 +1988,11 @@
             href="notifications.html"
             class="mobile-link active"
         >
-
             <span class="mobile-link-icon">
-                🔔
+                <i class="fa-regular fa-bell"></i>
             </span>
-
             Alerts
-
         </a>
-
 
     </div>
 
@@ -2160,6 +2001,9 @@
 
 <script>
 
+"use strict";
+
+
 /* ============================================================
    API
 ============================================================ */
@@ -2167,19 +2011,19 @@
 const API = {
 
     list:
-        'api/notifications/list.php',
+        "api/notifications/list.php",
 
     unread:
-        'api/notifications/unread-count.php',
+        "api/notifications/unread-count.php",
 
     markRead:
-        'api/notifications/mark-read.php',
+        "api/notifications/mark-read.php",
 
     markAll:
-        'api/notifications/mark-all-read.php',
+        "api/notifications/mark-all-read.php",
 
-    sound:
-        'api/notifications/play-sound.php?id='
+    dispatchEmail:
+        "api/notifications/email-pending.php"
 
 };
 
@@ -2188,8 +2032,29 @@ const API = {
    STATE
 ============================================================ */
 
-let notifications =
-    [];
+const state = {
+
+    notifications: [],
+
+    knownIds:
+        new Set(),
+
+    initialized:
+        false,
+
+    audioUnlocked:
+        false,
+
+    audioQueue:
+        [],
+
+    polling:
+        null,
+
+    emailPolling:
+        null
+
+};
 
 
 /* ============================================================
@@ -2198,48 +2063,54 @@ let notifications =
 
 const notificationContainer =
     document.getElementById(
-        'notificationContainer'
+        "notificationContainer"
     );
 
 
 const unreadNumber =
     document.getElementById(
-        'unreadNumber'
+        "unreadNumber"
     );
 
 
 const totalNumber =
     document.getElementById(
-        'totalNumber'
+        "totalNumber"
     );
 
 
 const soundNumber =
     document.getElementById(
-        'soundNumber'
+        "soundNumber"
     );
 
 
 const refreshButton =
     document.getElementById(
-        'refreshButton'
+        "refreshButton"
     );
 
 
 const markAllButton =
     document.getElementById(
-        'markAllButton'
+        "markAllButton"
+    );
+
+
+const toast =
+    document.getElementById(
+        "toast"
     );
 
 
 document.getElementById(
-    'footerYear'
+    "footerYear"
 ).textContent =
     new Date().getFullYear();
 
 
 /* ============================================================
-   ESCAPE HTML
+   ESCAPE
 ============================================================ */
 
 function escapeHtml(
@@ -2247,28 +2118,73 @@ function escapeHtml(
 ) {
 
     return String(
-        value ?? ''
+        value ?? ""
     )
     .replace(
         /&/g,
-        '&amp;'
+        "&amp;"
     )
     .replace(
         /</g,
-        '&lt;'
+        "&lt;"
     )
     .replace(
         />/g,
-        '&gt;'
+        "&gt;"
     )
     .replace(
         /"/g,
-        '&quot;'
+        "&quot;"
     )
     .replace(
         /'/g,
-        '&#039;'
+        "&#039;"
     );
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer = null;
+
+
+function showToast(
+    message
+) {
+
+    if (!toast) {
+        return;
+    }
+
+
+    toast.textContent =
+        String(message || "");
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
 
 }
 
@@ -2281,12 +2197,8 @@ function formatDate(
     value
 ) {
 
-    if (
-        !value
-    ) {
-
-        return '';
-
+    if (!value) {
+        return "";
     }
 
 
@@ -2295,8 +2207,8 @@ function formatDate(
             String(
                 value
             ).replace(
-                ' ',
-                'T'
+                " ",
+                "T"
             )
         );
 
@@ -2306,11 +2218,7 @@ function formatDate(
             parsed.getTime()
         )
     ) {
-
-        return String(
-            value
-        );
-
+        return String(value);
     }
 
 
@@ -2318,10 +2226,10 @@ function formatDate(
         undefined,
         {
             dateStyle:
-                'medium',
+                "medium",
 
             timeStyle:
-                'short'
+                "short"
         }
     );
 
@@ -2339,37 +2247,52 @@ function getNotificationIcon(
     const icons = {
 
         new_connection:
-            '❤️',
+            "fa-heart",
+
+        connection_accepted:
+            "fa-link",
 
         new_message:
-            '💬',
+            "fa-message",
 
         premium_activated:
-            '⭐',
+            "fa-crown",
 
         premium_expiring:
-            '⏰',
+            "fa-clock",
 
         premium_expired:
-            '⚠️',
+            "fa-triangle-exclamation",
 
         payment_successful:
-            '💳',
+            "fa-circle-check",
 
         payment_failed:
-            '❌',
+            "fa-circle-xmark",
 
         post_approved:
-            '✅',
+            "fa-circle-check",
 
         photo_approved:
-            '🖼️',
+            "fa-image",
 
         account_approved:
-            '✔️',
+            "fa-user-check",
+
+        post_liked:
+            "fa-heart",
+
+        post_commented:
+            "fa-comment",
+
+        followed_new_post:
+            "fa-rss",
+
+        comment_reply:
+            "fa-reply",
 
         system:
-            '🔔'
+            "fa-bell"
 
     };
 
@@ -2377,12 +2300,228 @@ function getNotificationIcon(
     return (
         icons[
             String(
-                slug || 'system'
+                slug || "system"
             ).toLowerCase()
         ]
         ||
-        '🔔'
+        "fa-bell"
     );
+
+}
+
+
+/* ============================================================
+   ICON CLASS
+============================================================ */
+
+function getIconClass(
+    slug
+) {
+
+    const normalized =
+        String(
+            slug || ""
+        ).toLowerCase();
+
+
+    if (
+        normalized === "payment_failed"
+        || normalized === "premium_expired"
+    ) {
+
+        return "notification-icon payment-failed";
+
+    }
+
+
+    if (
+        normalized === "payment_successful"
+        || normalized === "premium_activated"
+        || normalized === "post_approved"
+        || normalized === "photo_approved"
+        || normalized === "account_approved"
+    ) {
+
+        return "notification-icon payment-success";
+
+    }
+
+
+    return "notification-icon";
+
+}
+
+
+/* ============================================================
+   AUDIO UNLOCK
+============================================================ */
+
+function unlockAudio() {
+
+    if (
+        state.audioUnlocked
+    ) {
+        return;
+    }
+
+
+    state.audioUnlocked =
+        true;
+
+
+    playQueuedSounds();
+
+}
+
+
+[
+    "pointerdown",
+    "keydown",
+    "touchstart"
+].forEach(
+    eventName => {
+
+        window.addEventListener(
+            eventName,
+            unlockAudio,
+            {
+                passive:true,
+                once:false
+            }
+        );
+
+    }
+);
+
+
+/* ============================================================
+   PLAY AUDIO
+============================================================ */
+
+async function playAudioUrl(
+    url
+) {
+
+    if (
+        !url
+        || !state.audioUnlocked
+    ) {
+
+        return false;
+
+    }
+
+
+    try {
+
+        const audio =
+            new Audio(
+                `${url}${
+                    url.includes("?")
+                        ? "&"
+                        : "?"
+                }_=${Date.now()}`
+            );
+
+
+        audio.preload =
+            "auto";
+
+
+        await audio.play();
+
+
+        return true;
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            "LOVEMI notification audio:",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   QUEUE SOUND
+============================================================ */
+
+function queueNotificationSound(
+    notification
+) {
+
+    const url =
+        notification?.audio?.url
+        || "";
+
+
+    if (!url) {
+        return;
+    }
+
+
+    state.audioQueue.push(
+        url
+    );
+
+
+    if (
+        state.audioUnlocked
+    ) {
+
+        playQueuedSounds();
+
+    }
+
+}
+
+
+/* ============================================================
+   PLAY QUEUED SOUNDS
+============================================================ */
+
+async function playQueuedSounds() {
+
+    if (
+        !state.audioUnlocked
+    ) {
+        return;
+    }
+
+
+    while (
+        state.audioQueue.length
+    ) {
+
+        const url =
+            state.audioQueue.shift();
+
+
+        await playAudioUrl(
+            url
+        );
+
+        /*
+         * Small gap so multiple notifications are
+         * distinguishable when several arrive together.
+         */
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    120
+                )
+        );
+
+    }
 
 }
 
@@ -2391,48 +2530,58 @@ function getNotificationIcon(
    LOAD NOTIFICATIONS
 ============================================================ */
 
-async function loadNotifications() {
+async function loadNotifications(
+    options = {}
+) {
 
-    notificationContainer.innerHTML = `
+    const isInitial =
+        !state.initialized;
 
-        <div class="skeleton-list">
 
-            <div class="skeleton"></div>
-            <div class="skeleton"></div>
-            <div class="skeleton"></div>
+    if (
+        isInitial
+    ) {
 
-        </div>
+        notificationContainer.innerHTML = `
 
-    `;
+            <div class="skeleton-list">
+
+                <div class="skeleton"></div>
+
+                <div class="skeleton"></div>
+
+                <div class="skeleton"></div>
+
+            </div>
+
+        `;
+
+    }
 
 
     try {
 
         const response =
             await fetch(
-                API.list
-                +
-                '?limit=50&offset=0&_='
-                +
-                Date.now(),
+                `${API.list}?limit=100&offset=0&_=${Date.now()}`,
                 {
 
                     method:
-                        'GET',
+                        "GET",
 
                     credentials:
-                        'same-origin',
+                        "same-origin",
 
                     cache:
-                        'no-store',
+                        "no-store",
 
                     headers: {
 
-                        'Accept':
-                            'application/json',
+                        "Accept":
+                            "application/json",
 
-                        'Cache-Control':
-                            'no-cache'
+                        "Cache-Control":
+                            "no-cache, no-store"
 
                     }
 
@@ -2449,7 +2598,7 @@ async function loadNotifications() {
         ) {
 
             window.location.href =
-                'login.html?return=notifications.html';
+                "login.html?return=notifications.html";
 
             return;
 
@@ -2458,20 +2607,19 @@ async function loadNotifications() {
 
         if (
             !response.ok
-            ||
-            data.success !== true
+            || data.success !== true
         ) {
 
             throw new Error(
                 data.message
                 ||
-                'Unable to load notifications.'
+                "Unable to load notifications."
             );
 
         }
 
 
-        notifications =
+        const incoming =
             Array.isArray(
                 data.notifications
             )
@@ -2479,6 +2627,77 @@ async function loadNotifications() {
                 data.notifications
                 :
                 [];
+
+
+        /*
+         * Detect genuinely new notification IDs.
+         *
+         * We do not ring existing notifications again when
+         * the page is refreshed.
+         */
+        if (
+            !isInitial
+        ) {
+
+            incoming.forEach(
+                notification => {
+
+                    const id =
+                        Number(
+                            notification.id
+                        );
+
+
+                    if (
+                        id > 0
+                        &&
+                        !state.knownIds.has(id)
+                    ) {
+
+                        state.knownIds.add(
+                            id
+                        );
+
+
+                        queueNotificationSound(
+                            notification
+                        );
+
+                    }
+
+                }
+            );
+
+        } else {
+
+            incoming.forEach(
+                notification => {
+
+                    const id =
+                        Number(
+                            notification.id
+                        );
+
+
+                    if (id > 0) {
+                        state.knownIds.add(id);
+                    }
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Keep latest data.
+         */
+        state.notifications =
+            incoming;
+
+
+        state.initialized =
+            true;
 
 
         updateSummary(
@@ -2494,42 +2713,50 @@ async function loadNotifications() {
     ) {
 
         console.error(
+            "LOVEMI notifications:",
             error
         );
 
 
-        notificationContainer.innerHTML = `
+        if (
+            isInitial
+        ) {
 
-            <div class="state-card">
+            notificationContainer.innerHTML = `
 
-                <div class="state-icon">
-                    ⚠️
+                <div class="state-card">
+
+                    <div class="state-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <h3>
+                        Notifications could not be loaded
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message
+                            ||
+                            "Please try again."
+                        )}
+                    </p>
+
+                    <button
+                        type="button"
+                        class="button primary"
+                        style="margin-top:15px;"
+                        onclick="loadNotifications()"
+                    >
+                        <i class="fa-solid fa-rotate"></i>
+                        Try again
+                    </button>
+
                 </div>
 
-                <h3>
-                    Notifications could not be loaded
-                </h3>
+            `;
 
-                <p>
-                    ${escapeHtml(
-                        error.message
-                        ||
-                        'Please try again.'
-                    )}
-                </p>
-
-                <button
-                    type="button"
-                    class="button primary"
-                    style="margin-top:15px;"
-                    onclick="loadNotifications()"
-                >
-                    Try again
-                </button>
-
-            </div>
-
-        `;
+        }
 
     }
 
@@ -2537,7 +2764,7 @@ async function loadNotifications() {
 
 
 /* ============================================================
-   UPDATE SUMMARY
+   SUMMARY
 ============================================================ */
 
 function updateSummary(
@@ -2547,30 +2774,27 @@ function updateSummary(
     const unread =
         Number(
             data.unread_count
-            ??
-            0
+            ?? 0
         );
 
 
     unreadNumber.textContent =
-        String(
-            unread
-        );
+        String(unread);
 
 
     totalNumber.textContent =
         String(
-            notifications.length
+            state.notifications.length
         );
 
 
     soundNumber.textContent =
         String(
-            notifications.filter(
+            state.notifications.filter(
                 item =>
-                    item.audio
-                    !==
-                    null
+                    Boolean(
+                        item.audio?.url
+                    )
             ).length
         );
 
@@ -2584,7 +2808,7 @@ function updateSummary(
 function renderNotifications() {
 
     if (
-        notifications.length === 0
+        !state.notifications.length
     ) {
 
         notificationContainer.innerHTML = `
@@ -2592,7 +2816,9 @@ function renderNotifications() {
             <div class="state-card">
 
                 <div class="state-icon">
-                    🔔
+
+                    <i class="fa-regular fa-bell"></i>
+
                 </div>
 
                 <h3>
@@ -2617,14 +2843,14 @@ function renderNotifications() {
         <div class="notification-list">
 
             ${
-                notifications
+                state.notifications
                     .map(
                         notification =>
                             renderNotification(
                                 notification
                             )
                     )
-                    .join('')
+                    .join("")
             }
 
         </div>
@@ -2644,24 +2870,13 @@ function renderNotification(
 
     const type =
         notification.notification_type
-        ||
-        {};
+        || {};
 
 
     const slug =
-        type.slug
-        ||
-        'system';
-
-
-    const isRead =
-        Boolean(
-            notification.is_read
-        );
-
-
-    const audio =
-        notification.audio;
+        String(
+            type.slug || "system"
+        ).toLowerCase();
 
 
     const id =
@@ -2670,32 +2885,44 @@ function renderNotification(
         );
 
 
+    const isRead =
+        Boolean(
+            notification.is_read
+        );
+
+
+    const actionUrl =
+        notification.action_url
+        || "notifications.html";
+
+
+    const actionLabel =
+        notification.action_label
+        || "View notification";
+
+
     return `
 
         <article
             class="
                 notification-card
-                ${isRead ? '' : 'unread'}
+                ${isRead ? "" : "unread"}
+                ${notification.is_new ? "new-arrival" : ""}
             "
-            id="
-                notification-${id}
-            "
+            id="notification-${id}"
         >
 
             <div
-                class="notification-icon"
+                class="${getIconClass(slug)}"
                 aria-hidden="true"
             >
 
-                ${getNotificationIcon(
-                    slug
-                )}
+                <i class="fa-solid ${getNotificationIcon(slug)}"></i>
 
             </div>
 
 
             <div>
-
 
                 <div
                     class="notification-title-row"
@@ -2704,22 +2931,22 @@ function renderNotification(
                     <span
                         class="notification-title"
                     >
+
                         ${escapeHtml(
                             notification.title
                         )}
+
                     </span>
 
 
                     ${
                         !isRead
-                            ?
-                            `
+                            ? `
                                 <span class="new-label">
                                     NEW
                                 </span>
                             `
-                            :
-                            ''
+                            : ""
                     }
 
                 </div>
@@ -2728,9 +2955,11 @@ function renderNotification(
                 <div
                     class="notification-message"
                 >
+
                     ${escapeHtml(
                         notification.message
                     )}
+
                 </div>
 
 
@@ -2740,8 +2969,7 @@ function renderNotification(
 
                     ${escapeHtml(
                         type.name
-                        ||
-                        'System notification'
+                        || "System Notification"
                     )}
 
                     •
@@ -2754,7 +2982,6 @@ function renderNotification(
 
                 </div>
 
-
             </div>
 
 
@@ -2762,49 +2989,39 @@ function renderNotification(
                 class="notification-actions"
             >
 
+                ${
+                    actionUrl
+                        ? `
+                            <a
+                                class="small-button view-button"
+                                href="${escapeHtml(
+                                    actionUrl
+                                )}"
+                            >
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                ${escapeHtml(
+                                    actionLabel
+                                )}
+                            </a>
+                        `
+                        : ""
+                }
+
 
                 ${
                     !isRead
-                    ?
-                    `
-                        <button
-                            type="button"
-                            class="small-button"
-                            onclick="
-                                markNotificationRead(
-                                    ${id}
-                                )
-                            "
-                        >
-                            ✓
-                        </button>
-                    `
-                    :
-                    ''
+                        ? `
+                            <button
+                                type="button"
+                                class="small-button mark-read-button"
+                                data-mark-read="${id}"
+                            >
+                                <i class="fa-solid fa-check"></i>
+                                Read
+                            </button>
+                        `
+                        : ""
                 }
-
-
-                ${
-                    audio
-                    ?
-                    `
-                        <button
-                            type="button"
-                            class="small-button"
-                            title="Play sound"
-                            onclick="
-                                playNotificationSound(
-                                    ${id}
-                                )
-                            "
-                        >
-                            🔊
-                        </button>
-                    `
-                    :
-                    ''
-                }
-
 
             </div>
 
@@ -2831,33 +3048,33 @@ async function markNotificationRead(
                 {
 
                     method:
-                        'POST',
+                        "POST",
 
                     credentials:
-                        'same-origin',
+                        "same-origin",
 
                     cache:
-                        'no-store',
+                        "no-store",
 
                     headers: {
 
-                        'Content-Type':
-                            'application/json',
+                        "Content-Type":
+                            "application/json",
 
-                        'Accept':
-                            'application/json'
+                        "Accept":
+                            "application/json"
 
                     },
 
                     body:
-                        JSON.stringify(
-                            {
-                                notification_id:
-                                    Number(
-                                        notificationId
-                                    )
-                            }
-                        )
+                        JSON.stringify({
+
+                            notification_id:
+                                Number(
+                                    notificationId
+                                )
+
+                        })
 
                 }
             );
@@ -2872,7 +3089,7 @@ async function markNotificationRead(
         ) {
 
             window.location.href =
-                'login.html?return=notifications.html';
+                "login.html?return=notifications.html";
 
             return;
 
@@ -2888,14 +3105,14 @@ async function markNotificationRead(
             throw new Error(
                 data.message
                 ||
-                'Unable to mark notification as read.'
+                "Unable to mark notification as read."
             );
 
         }
 
 
         const notification =
-            notifications.find(
+            state.notifications.find(
                 item =>
                     Number(
                         item.id
@@ -2907,9 +3124,7 @@ async function markNotificationRead(
             );
 
 
-        if (
-            notification
-        ) {
+        if (notification) {
 
             notification.is_read =
                 true;
@@ -2924,26 +3139,28 @@ async function markNotificationRead(
             String(
                 Number(
                     data.unread_count
-                    ??
-                    0
+                    ?? 0
                 )
             );
 
 
         renderNotifications();
 
+
     } catch (
         error
     ) {
 
         console.error(
+            "LOVEMI mark read:",
             error
         );
 
-        window.alert(
+
+        showToast(
             error.message
             ||
-            'Unable to update notification.'
+            "Unable to update notification."
         );
 
     }
@@ -2952,23 +3169,54 @@ async function markNotificationRead(
 
 
 /* ============================================================
+   DELEGATED MARK READ
+============================================================ */
+
+notificationContainer.addEventListener(
+    "click",
+    event => {
+
+        const button =
+            event.target.closest(
+                "[data-mark-read]"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        markNotificationRead(
+            Number(
+                button.dataset.markRead
+            )
+        );
+
+    }
+);
+
+
+/* ============================================================
    MARK ALL
 ============================================================ */
 
 markAllButton.addEventListener(
-    'click',
+    "click",
     async function() {
 
-        const originalText =
-            this.textContent;
+        const originalHtml =
+            this.innerHTML;
 
 
         this.disabled =
             true;
 
 
-        this.textContent =
-            'Updating...';
+        this.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Updating...
+        `;
 
 
         try {
@@ -2979,18 +3227,18 @@ markAllButton.addEventListener(
                     {
 
                         method:
-                            'POST',
+                            "POST",
 
                         credentials:
-                            'same-origin',
+                            "same-origin",
 
                         cache:
-                            'no-store',
+                            "no-store",
 
                         headers: {
 
-                            'Accept':
-                                'application/json'
+                            "Accept":
+                                "application/json"
 
                         }
 
@@ -3003,12 +3251,11 @@ markAllButton.addEventListener(
 
 
             if (
-                response.status ===
-                401
+                response.status === 401
             ) {
 
                 window.location.href =
-                    'login.html?return=notifications.html';
+                    "login.html?return=notifications.html";
 
                 return;
 
@@ -3024,14 +3271,14 @@ markAllButton.addEventListener(
                 throw new Error(
                     data.message
                     ||
-                    'Unable to mark notifications as read.'
+                    "Unable to mark notifications as read."
                 );
 
             }
 
 
-            notifications =
-                notifications.map(
+            state.notifications =
+                state.notifications.map(
                     item => ({
 
                         ...item,
@@ -3047,10 +3294,15 @@ markAllButton.addEventListener(
 
 
             unreadNumber.textContent =
-                '0';
+                "0";
 
 
             renderNotifications();
+
+
+            showToast(
+                "All notifications have been marked as read."
+            );
 
 
         } catch (
@@ -3058,14 +3310,15 @@ markAllButton.addEventListener(
         ) {
 
             console.error(
+                "LOVEMI mark all:",
                 error
             );
 
 
-            window.alert(
+            showToast(
                 error.message
                 ||
-                'Unable to update notifications.'
+                "Unable to update notifications."
             );
 
         } finally {
@@ -3074,8 +3327,8 @@ markAllButton.addEventListener(
                 false;
 
 
-            this.textContent =
-                originalText;
+            this.innerHTML =
+                originalHtml;
 
         }
 
@@ -3084,92 +3337,45 @@ markAllButton.addEventListener(
 
 
 /* ============================================================
-   REFRESH BUTTON
+   REFRESH
 ============================================================ */
 
 refreshButton.addEventListener(
-    'click',
-    function() {
+    "click",
+    async function() {
 
-        loadNotifications();
+        const originalHtml =
+            this.innerHTML;
+
+
+        this.disabled =
+            true;
+
+
+        this.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Refreshing...
+        `;
+
+
+        await loadNotifications({
+            manual:true
+        });
+
+
+        this.disabled =
+            false;
+
+
+        this.innerHTML =
+            originalHtml;
 
     }
 );
 
 
 /* ============================================================
-   PLAY SOUND
-============================================================ */
-
-async function playNotificationSound(
-    notificationId
-) {
-
-    try {
-
-        const notification =
-            notifications.find(
-                item =>
-                    Number(
-                        item.id
-                    )
-                    ===
-                    Number(
-                        notificationId
-                    )
-            );
-
-
-        if (
-            notification
-            &&
-            !notification.audio
-        ) {
-
-            return;
-
-        }
-
-
-        const audio =
-            new Audio(
-                API.sound
-                +
-                encodeURIComponent(
-                    Number(
-                        notificationId
-                    )
-                )
-            );
-
-
-        audio.preload =
-            'auto';
-
-
-        await audio.play();
-
-
-    } catch (
-        error
-    ) {
-
-        console.error(
-            error
-        );
-
-
-        window.alert(
-            'The notification sound could not be played.'
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   LIVE UNREAD COUNT
+   UNREAD COUNT
 ============================================================ */
 
 async function refreshUnreadCount() {
@@ -3178,26 +3384,22 @@ async function refreshUnreadCount() {
 
         const response =
             await fetch(
-                API.unread
-                +
-                '?_='
-                +
-                Date.now(),
+                `${API.unread}?_=${Date.now()}`,
                 {
 
                     method:
-                        'GET',
+                        "GET",
 
                     credentials:
-                        'same-origin',
+                        "same-origin",
 
                     cache:
-                        'no-store',
+                        "no-store",
 
                     headers: {
 
-                        'Accept':
-                            'application/json'
+                        "Accept":
+                            "application/json"
 
                     }
 
@@ -3206,8 +3408,7 @@ async function refreshUnreadCount() {
 
 
         if (
-            response.status ===
-            401
+            response.status === 401
         ) {
 
             return;
@@ -3227,8 +3428,7 @@ async function refreshUnreadCount() {
                 String(
                     Number(
                         data.unread_count
-                        ??
-                        0
+                        ?? 0
                     )
                 );
 
@@ -3239,7 +3439,7 @@ async function refreshUnreadCount() {
     ) {
 
         console.debug(
-            'Unread count update failed.',
+            "LOVEMI unread count:",
             error
         );
 
@@ -3249,34 +3449,114 @@ async function refreshUnreadCount() {
 
 
 /* ============================================================
-   START
+   EMAIL DISPATCH
+============================================================ */
+
+async function dispatchPendingEmails() {
+
+    try {
+
+        await fetch(
+            `${API.dispatchEmail}?_=${Date.now()}`,
+            {
+
+                method:
+                    "POST",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json"
+
+                }
+
+            }
+        );
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            "LOVEMI notification email dispatch:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   VISIBILITY
 ============================================================ */
 
 document.addEventListener(
-    'DOMContentLoaded',
-    function() {
+    "visibilitychange",
+    () => {
 
-        loadNotifications();
+        if (
+            document.visibilityState
+            === "visible"
+        ) {
 
-        refreshUnreadCount();
+            loadNotifications();
+
+            refreshUnreadCount();
+
+            dispatchPendingEmails();
+
+        }
 
     }
 );
 
 
-/*
- * Keep the database authoritative.
- * No localStorage or sessionStorage is used for notifications.
- */
+/* ============================================================
+   INITIAL
+============================================================ */
 
-window.setInterval(
-    refreshUnreadCount,
-    30000
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        await loadNotifications();
+
+        await refreshUnreadCount();
+
+        await dispatchPendingEmails();
+
+
+        state.polling =
+            setInterval(
+                async () => {
+
+                    await loadNotifications();
+
+                    await refreshUnreadCount();
+
+                },
+                5000
+            );
+
+
+        state.emailPolling =
+            setInterval(
+                dispatchPendingEmails,
+                30000
+            );
+
+    }
 );
 
 </script>
 
 
 </body>
-
 </html>

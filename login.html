@@ -79,6 +79,15 @@
           referrerpolicy="no-referrer">
 
 
+    <!-- =====================================================
+         GOOGLE IDENTITY SERVICES
+    ====================================================== -->
+
+    <script src="https://accounts.google.com/gsi/client"
+            async
+            defer></script>
+
+
     <style>
 
         :root {
@@ -102,6 +111,9 @@
 
             --border: #e9e9ef;
 
+            --shadow-sm:
+                0 5px 22px rgba(0,0,0,.05);
+
             --shadow-md:
                 0 14px 42px rgba(0,0,0,.08);
 
@@ -116,14 +128,18 @@
 
 
         * {
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
         }
 
 
         html {
+
             scroll-behavior: smooth;
+
         }
 
 
@@ -147,29 +163,46 @@
                 );
 
             line-height: 1.6;
+
         }
 
 
         a {
-            color: inherit;
-            text-decoration: none;
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
         }
 
 
         button,
         input {
-            font-family: inherit;
+
+            font-family:
+                inherit;
+
         }
 
 
         button {
-            cursor: pointer;
+
+            cursor:
+                pointer;
+
         }
 
 
         img {
-            display: block;
-            max-width: 100%;
+
+            display:
+                block;
+
+            max-width:
+                100%;
+
         }
 
 
@@ -179,11 +212,14 @@
 
         .header {
 
-            position: sticky;
+            position:
+                sticky;
 
-            top: 0;
+            top:
+                0;
 
-            z-index: 1000;
+            z-index:
+                1000;
 
             background:
                 rgba(255,255,255,.96);
@@ -195,7 +231,9 @@
                 blur(18px);
 
             border-bottom:
-                1px solid rgba(0,0,0,.055);
+                1px solid
+                rgba(0,0,0,.055);
+
         }
 
 
@@ -224,6 +262,7 @@
 
             gap:
                 20px;
+
         }
 
 
@@ -237,6 +276,7 @@
 
             gap:
                 11px;
+
         }
 
 
@@ -253,6 +293,7 @@
 
             border-radius:
                 12px;
+
         }
 
 
@@ -286,6 +327,7 @@
 
             -webkit-text-fill-color:
                 transparent;
+
         }
 
 
@@ -305,6 +347,7 @@
 
             margin-top:
                 4px;
+
         }
 
 
@@ -318,6 +361,7 @@
 
             gap:
                 4px;
+
         }
 
 
@@ -340,6 +384,7 @@
 
             transition:
                 .2s ease;
+
         }
 
 
@@ -350,6 +395,7 @@
 
             background:
                 var(--primary-soft);
+
         }
 
 
@@ -390,6 +436,7 @@
 
             font-weight:
                 700;
+
         }
 
 
@@ -418,6 +465,7 @@
 
             background:
                 white;
+
         }
 
 
@@ -450,6 +498,7 @@
 
             justify-content:
                 center;
+
         }
 
 
@@ -470,6 +519,7 @@
 
             align-items:
                 stretch;
+
         }
 
 
@@ -526,6 +576,7 @@
 
             box-shadow:
                 var(--shadow-lg);
+
         }
 
 
@@ -555,6 +606,7 @@
             border:
                 1px solid
                 rgba(255,255,255,.12);
+
         }
 
 
@@ -590,6 +642,7 @@
 
             font-weight:
                 700;
+
         }
 
 
@@ -610,6 +663,7 @@
 
             margin-bottom:
                 18px;
+
         }
 
 
@@ -617,6 +671,7 @@
 
             color:
                 #fbcfe8;
+
         }
 
 
@@ -633,6 +688,7 @@
 
             line-height:
                 1.75;
+
         }
 
 
@@ -646,6 +702,7 @@
 
             margin-top:
                 30px;
+
         }
 
 
@@ -672,6 +729,7 @@
 
             background:
                 rgba(255,255,255,.05);
+
         }
 
 
@@ -692,11 +750,15 @@
             justify-content:
                 center;
 
+            flex:
+                0 0 35px;
+
             border-radius:
                 10px;
 
             background:
                 rgba(255,255,255,.12);
+
         }
 
 
@@ -707,6 +769,7 @@
 
             font-size:
                 10px;
+
         }
 
 
@@ -720,6 +783,7 @@
 
             font-size:
                 8px;
+
         }
 
 
@@ -743,6 +807,7 @@
 
             box-shadow:
                 var(--shadow-md);
+
         }
 
 
@@ -762,6 +827,7 @@
 
             border-radius:
                 15px;
+
         }
 
 
@@ -772,6 +838,7 @@
 
             margin-bottom:
                 24px;
+
         }
 
 
@@ -785,6 +852,7 @@
 
             letter-spacing:
                 -.4px;
+
         }
 
 
@@ -798,6 +866,7 @@
 
             margin-top:
                 5px;
+
         }
 
 
@@ -824,6 +893,7 @@
 
             line-height:
                 1.5;
+
         }
 
 
@@ -831,6 +901,7 @@
 
             display:
                 block;
+
         }
 
 
@@ -844,6 +915,7 @@
 
             border:
                 1px solid #fecaca;
+
         }
 
 
@@ -857,6 +929,172 @@
 
             border:
                 1px solid #bbf7d0;
+
+        }
+
+
+        /* =====================================================
+           GOOGLE LOGIN
+        ====================================================== */
+
+        .google-section {
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .google-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                9px;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .google-title i {
+
+            color:
+                #4285f4;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .google-button-wrap {
+
+            width:
+                100%;
+
+            min-height:
+                44px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .google-status {
+
+            display:
+                none;
+
+            margin-top:
+                9px;
+
+            padding:
+                9px 11px;
+
+            border-radius:
+                10px;
+
+            background:
+                #eff6ff;
+
+            border:
+                1px solid #bfdbfe;
+
+            color:
+                #1e3a8a;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .google-status.show {
+
+            display:
+                block;
+
+        }
+
+
+        .or-divider {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin:
+                4px 0 20px;
+
+            color:
+                #a1a1aa;
+
+            font-size:
+                8px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .8px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .or-divider::before,
+        .or-divider::after {
+
+            content:
+                "";
+
+            flex:
+                1;
+
+            height:
+                1px;
+
+            background:
+                #ececf1;
+
         }
 
 
@@ -868,6 +1106,7 @@
 
             margin-bottom:
                 15px;
+
         }
 
 
@@ -884,6 +1123,7 @@
 
             font-weight:
                 700;
+
         }
 
 
@@ -891,6 +1131,7 @@
 
             position:
                 relative;
+
         }
 
 
@@ -916,6 +1157,10 @@
 
             pointer-events:
                 none;
+
+            z-index:
+                2;
+
         }
 
 
@@ -950,6 +1195,7 @@
 
             transition:
                 .2s ease;
+
         }
 
 
@@ -961,6 +1207,7 @@
             box-shadow:
                 0 0 0 4px
                 rgba(109,40,217,.06);
+
         }
 
 
@@ -1001,6 +1248,7 @@
 
             color:
                 #999;
+
         }
 
 
@@ -1008,6 +1256,7 @@
 
             color:
                 var(--primary);
+
         }
 
 
@@ -1031,6 +1280,7 @@
 
             margin:
                 2px 0 18px;
+
         }
 
 
@@ -1050,6 +1300,7 @@
 
             font-size:
                 9px;
+
         }
 
 
@@ -1057,6 +1308,7 @@
 
             accent-color:
                 var(--primary);
+
         }
 
 
@@ -1070,6 +1322,7 @@
 
             font-weight:
                 700;
+
         }
 
 
@@ -1125,6 +1378,7 @@
 
             transition:
                 .2s ease;
+
         }
 
 
@@ -1132,6 +1386,7 @@
 
             transform:
                 translateY(-1px);
+
         }
 
 
@@ -1145,6 +1400,7 @@
 
             transform:
                 none;
+
         }
 
 
@@ -1165,6 +1421,7 @@
 
             font-size:
                 10px;
+
         }
 
 
@@ -1175,6 +1432,7 @@
 
             font-weight:
                 800;
+
         }
 
 
@@ -1213,6 +1471,7 @@
 
             line-height:
                 1.5;
+
         }
 
 
@@ -1223,6 +1482,7 @@
 
             color:
                 var(--primary);
+
         }
 
 
@@ -1237,6 +1497,7 @@
 
             color:
                 white;
+
         }
 
 
@@ -1253,6 +1514,7 @@
 
             padding:
                 40px 0 20px;
+
         }
 
 
@@ -1269,6 +1531,7 @@
 
             padding-bottom:
                 28px;
+
         }
 
 
@@ -1288,6 +1551,7 @@
 
             line-height:
                 1.7;
+
         }
 
 
@@ -1298,6 +1562,7 @@
 
             margin-bottom:
                 10px;
+
         }
 
 
@@ -1311,6 +1576,7 @@
 
             gap:
                 6px;
+
         }
 
 
@@ -1321,6 +1587,7 @@
 
             font-size:
                 9px;
+
         }
 
 
@@ -1328,6 +1595,7 @@
 
             color:
                 white;
+
         }
 
 
@@ -1357,6 +1625,7 @@
 
             font-size:
                 8px;
+
         }
 
 
@@ -1370,6 +1639,7 @@
 
                 grid-template-columns:
                     1fr;
+
             }
 
 
@@ -1377,6 +1647,7 @@
 
                 min-height:
                     400px;
+
             }
 
         }
@@ -1388,6 +1659,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1395,6 +1667,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1402,6 +1675,7 @@
 
                 display:
                     flex;
+
             }
 
 
@@ -1409,6 +1683,7 @@
 
                 padding:
                     27px 21px;
+
             }
 
         }
@@ -1425,6 +1700,7 @@
                         calc(100% - 24px),
                         var(--container)
                     );
+
             }
 
 
@@ -1433,6 +1709,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1440,6 +1717,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1447,6 +1725,7 @@
 
                 padding:
                     24px 18px;
+
             }
 
 
@@ -1454,6 +1733,7 @@
 
                 grid-template-columns:
                     1fr;
+
             }
 
 
@@ -1464,6 +1744,7 @@
 
                 align-items:
                     flex-start;
+
             }
 
         }
@@ -1490,7 +1771,6 @@
             class="brand"
             aria-label="LOVEMI Home">
 
-
             <img
                 src="assets/logo1/logo1.png"
                 alt="LOVEMI Logo"
@@ -1507,13 +1787,11 @@
                     LOVEMI
                 </span>
 
-
                 <span class="brand-tagline">
                     DISCOVER • CONNECT • MEET
                 </span>
 
             </span>
-
 
         </a>
 
@@ -1522,31 +1800,25 @@
             class="navigation"
             id="navigation">
 
-
             <a href="index.html">
                 Home
             </a>
-
 
             <a href="discover.html">
                 Discover
             </a>
 
-
             <a href="about.html">
                 About
             </a>
-
 
             <a href="help.html">
                 Help
             </a>
 
-
             <a href="contact.html">
                 Contact
             </a>
-
 
         </nav>
 
@@ -1571,7 +1843,6 @@
             <i class="fa-solid fa-bars"></i>
 
         </button>
-
 
     </div>
 
@@ -1625,9 +1896,8 @@
 
                 <p>
 
-                    Sign in securely to continue discovering
-                    connections and using the services available
-                    to your account.
+                    Sign in securely using your LOVEMI credentials
+                    or your connected Google account.
 
                 </p>
 
@@ -1652,6 +1922,30 @@
 
                             <span>
                                 Password protection plus Google Authenticator.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+
+                            <i class="fa-brands fa-google"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Google Sign-In
+                            </strong>
+
+                            <span>
+                                Use your connected Google account securely.
                             </span>
 
                         </div>
@@ -1738,7 +2032,7 @@
                 </h2>
 
                 <p>
-                    Enter your LOVEMI account credentials.
+                    Sign in to your LOVEMI account.
                 </p>
 
             </div>
@@ -1750,6 +2044,61 @@
                 role="alert">
             </div>
 
+
+            <!-- =================================================
+                 GOOGLE SIGN-IN
+            ================================================== -->
+
+            <div class="google-section">
+
+
+                <div class="google-title">
+
+                    <i class="fa-brands fa-google"></i>
+
+                    Sign in with Google
+
+                </div>
+
+
+                <div
+                    id="googleButtonContainer"
+                    class="google-button-wrap">
+
+                    <span
+                        style="
+                            color:#9898a1;
+                            font-size:9px;
+                        ">
+
+                        Loading Google Sign-In...
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="googleStatus"
+                    class="google-status"
+                    role="status"
+                    aria-live="polite">
+                </div>
+
+
+            </div>
+
+
+            <div class="or-divider">
+
+                Or use your LOVEMI password
+
+            </div>
+
+
+            <!-- =================================================
+                 NORMAL LOGIN FORM
+            ================================================== -->
 
             <form
                 id="loginForm"
@@ -1774,7 +2123,6 @@
 
                     <div class="field">
 
-
                         <i
                             class="fa-solid fa-user field-icon">
                         </i>
@@ -1789,7 +2137,6 @@
                             maxlength="190"
                             placeholder="Enter username or email"
                             required>
-
 
                     </div>
 
@@ -1814,7 +2161,6 @@
 
 
                     <div class="field">
-
 
                         <i
                             class="fa-solid fa-lock field-icon">
@@ -1903,20 +2249,32 @@
             </form>
 
 
+            <!-- =================================================
+                 REGISTER
+            ================================================== -->
+
             <div class="register-line">
 
                 Don't have a LOVEMI account?
 
                 <a href="registration.html">
+
                     Create one
+
                 </a>
 
             </div>
 
 
+            <!-- =================================================
+                 SECURITY NOTE
+            ================================================== -->
+
             <div class="security-note">
 
+
                 <i class="fa-solid fa-shield-halved"></i>
+
 
                 <span>
 
@@ -1924,7 +2282,11 @@
                     Google Authenticator two-step verification
                     before granting full account access.
 
+                    Google sign-in is also validated by the LOVEMI
+                    server before a session is created.
+
                 </span>
+
 
             </div>
 
@@ -2103,7 +2465,9 @@
 
 
             <span>
+
                 Discover • Connect • Meet
+
             </span>
 
 
@@ -2126,6 +2490,16 @@
 
 const LOGIN_API =
     "api/auth/login.php";
+
+
+/*
+ * The Google Client ID is deliberately obtained from PHP.
+ * Do not place a Google Client Secret in this HTML file.
+ */
+const GOOGLE_CONFIG_API =
+    LOGIN_API
+    +
+    "?action=google-config";
 
 
 /* =========================================================
@@ -2168,6 +2542,34 @@ const alertBox =
     );
 
 
+const googleButtonContainer =
+    document.getElementById(
+        "googleButtonContainer"
+    );
+
+
+const googleStatus =
+    document.getElementById(
+        "googleStatus"
+    );
+
+
+/* =========================================================
+   GOOGLE STATE
+========================================================= */
+
+let googleClientId =
+    "";
+
+
+let googleCsrfToken =
+    "";
+
+
+let googleInitialized =
+    false;
+
+
 /* =========================================================
    YEAR
 ========================================================= */
@@ -2189,10 +2591,20 @@ function showAlert(
 
     alertBox.className =
         "alert show "
-        + type;
+        +
+        type;
+
 
     alertBox.textContent =
         message;
+
+
+    window.scrollTo(
+        {
+            top: 0,
+            behavior: "smooth"
+        }
+    );
 
 }
 
@@ -2202,8 +2614,160 @@ function clearAlert() {
     alertBox.className =
         "alert";
 
+
     alertBox.textContent =
         "";
+
+}
+
+
+/* =========================================================
+   GOOGLE STATUS
+========================================================= */
+
+function showGoogleStatus(
+    message
+) {
+
+    if (
+        !message
+    ) {
+
+        googleStatus.textContent =
+            "";
+
+        googleStatus.classList.remove(
+            "show"
+        );
+
+        return;
+
+    }
+
+
+    googleStatus.textContent =
+        message;
+
+
+    googleStatus.classList.add(
+        "show"
+    );
+
+}
+
+
+function clearGoogleStatus() {
+
+    googleStatus.textContent =
+        "";
+
+    googleStatus.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   API RESPONSE PARSER
+========================================================= */
+
+async function readJsonResponse(
+    response,
+    context
+) {
+
+    const rawText =
+        await response.text();
+
+
+    const text =
+        String(
+            rawText || ""
+        )
+        .replace(
+            /^\uFEFF/,
+            ""
+        )
+        .trim();
+
+
+    if (
+        !text
+    ) {
+
+        throw new Error(
+            context
+            +
+            " returned an empty response."
+        );
+
+    }
+
+
+    let result;
+
+
+    try {
+
+        result =
+            JSON.parse(
+                text
+            );
+
+    } catch (error) {
+
+        console.error(
+            context
+            +
+            " returned non-JSON:",
+            text.substring(
+                0,
+                2000
+            )
+        );
+
+
+        throw new Error(
+            context
+            +
+            " returned an invalid response. Check the PHP file for errors."
+        );
+
+    }
+
+
+    if (
+        !result
+        ||
+        typeof result !==
+            "object"
+    ) {
+
+        throw new Error(
+            context
+            +
+            " returned an invalid response."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   LOGIN ENDPOINT
+========================================================= */
+
+function getLoginEndpoint() {
+
+    return new URL(
+        LOGIN_API,
+        window.location.href
+    ).href;
 
 }
 
@@ -2225,8 +2789,10 @@ document.getElementById(
 
         password.type =
             showing
-                ? "password"
-                : "text";
+                ?
+                "password"
+                :
+                "text";
 
 
         this.innerHTML =
@@ -2241,7 +2807,7 @@ document.getElementById(
 
 
 /* =========================================================
-   LOGIN FORM
+   NORMAL LOGIN
 ========================================================= */
 
 loginForm.addEventListener(
@@ -2252,6 +2818,9 @@ loginForm.addEventListener(
 
 
         clearAlert();
+
+
+        clearGoogleStatus();
 
 
         const loginIdentifier =
@@ -2270,7 +2839,9 @@ loginForm.addEventListener(
                 "Please enter your username or email."
             );
 
+
             identifier.focus();
+
 
             return;
 
@@ -2285,7 +2856,9 @@ loginForm.addEventListener(
                 "Please enter your password."
             );
 
+
             password.focus();
+
 
             return;
 
@@ -2296,18 +2869,75 @@ loginForm.addEventListener(
             true;
 
 
-        loginButton.innerHTML =
-            `
+        loginButton.innerHTML = `
+
             <i class="fa-solid fa-spinner fa-spin"></i>
+
             Signing In...
-            `;
+
+        `;
 
 
         try {
 
+            const formData =
+                new URLSearchParams();
+
+
+            /*
+             * Preserve the existing LOVEMI login.php
+             * POST parameter names.
+             */
+
+            formData.set(
+                "identifier",
+                loginIdentifier
+            );
+
+
+            formData.set(
+                "username",
+                loginIdentifier
+            );
+
+
+            if (
+                loginIdentifier.includes("@")
+            ) {
+
+                formData.set(
+                    "email",
+                    loginIdentifier
+                );
+
+            }
+
+
+            formData.set(
+                "password",
+                loginPassword
+            );
+
+
+            formData.set(
+                "remember",
+                remember.checked
+                    ?
+                    "1"
+                    :
+                    "0"
+            );
+
+
+            formData.set(
+                "action",
+                "login"
+            );
+
+
             const response =
                 await fetch(
-                    LOGIN_API,
+                    getLoginEndpoint(),
                     {
 
                         method:
@@ -2325,7 +2955,7 @@ loginForm.addEventListener(
                                 "application/json",
 
                             "Content-Type":
-                                "application/json",
+                                "application/x-www-form-urlencoded; charset=UTF-8",
 
                             "Cache-Control":
                                 "no-cache, no-store, max-age=0",
@@ -2336,153 +2966,103 @@ loginForm.addEventListener(
                         },
 
                         body:
-                            JSON.stringify(
-                                {
-
-                                    identifier:
-                                        loginIdentifier,
-
-                                    password:
-                                        loginPassword,
-
-                                    remember:
-                                        remember.checked
-
-                                }
-                            )
+                            formData.toString()
 
                     }
                 );
-
-
-            const contentType =
-                response.headers.get(
-                    "content-type"
-                ) || "";
-
-
-            if (
-                !contentType.includes(
-                    "application/json"
-                )
-            ) {
-
-                throw new Error(
-                    "The server returned an invalid response."
-                );
-
-            }
 
 
             const result =
-                await response.json();
+                await readJsonResponse(
+                    response,
+                    "The LOVEMI login server"
+                );
+
+
+            console.debug(
+                "LOVEMI normal login response:",
+                response.status,
+                result
+            );
 
 
             /* =================================================
-               LOGIN FAILED
-            ================================================== */
+               EMAIL NOT VERIFIED
+            ================================================= */
 
             if (
-                !response.ok
-                ||
-                result.success !== true
+                result.code ===
+                "EMAIL_NOT_VERIFIED"
             ) {
-
-
-                /*
-                 * EMAIL NOT VERIFIED
-                 *
-                 * Send the user to exactly where they left:
-                 * email verification.
-                 */
-
-                if (
-                    result.code ===
-                    "EMAIL_NOT_VERIFIED"
-                ) {
-
-                    showAlert(
-                        result.message
-                        ||
-                        "Please verify your email before continuing."
-                    );
-
-
-                    const userId =
-                        result.user_id;
-
-
-                    if (
-                        userId
-                    ) {
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    "verify-account.html?user="
-                                    +
-                                    encodeURIComponent(
-                                        userId
-                                    );
-
-                            },
-                            700
-                        );
-
-                    }
-
-
-                    return;
-                }
-
-
-                /*
-                 * ACCOUNT NOT APPROVED
-                 */
-
-                if (
-                    result.code ===
-                    "ACCOUNT_NOT_APPROVED"
-                ) {
-
-                    showAlert(
-                        result.message
-                        ||
-                        "Your account is not ready for login."
-                    );
-
-
-                    if (
-                        result.user_id
-                    ) {
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    "verify-account.html?user="
-                                    +
-                                    encodeURIComponent(
-                                        result.user_id
-                                    );
-
-                            },
-                            700
-                        );
-
-                    }
-
-
-                    return;
-                }
-
 
                 showAlert(
                     result.message
                     ||
-                    "Invalid username/email or password."
+                    "Please verify your email before continuing."
                 );
+
+
+                if (
+                    result.user_id
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "verify-account.html?user="
+                                +
+                                encodeURIComponent(
+                                    result.user_id
+                                );
+
+                        },
+                        700
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =================================================
+               ACCOUNT NOT APPROVED
+            ================================================= */
+
+            if (
+                result.code ===
+                "ACCOUNT_NOT_APPROVED"
+            ) {
+
+                showAlert(
+                    result.message
+                    ||
+                    "Your account is not ready for login."
+                );
+
+
+                if (
+                    result.user_id
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "verify-account.html?user="
+                                +
+                                encodeURIComponent(
+                                    result.user_id
+                                );
+
+                        },
+                        700
+                    );
+
+                }
 
 
                 return;
@@ -2492,7 +3072,7 @@ loginForm.addEventListener(
 
             /* =================================================
                TWO-FACTOR SETUP REQUIRED
-            ================================================== */
+            ================================================= */
 
             if (
                 result.code ===
@@ -2513,9 +3093,7 @@ loginForm.addEventListener(
                         window.location.href =
                             result.redirect
                             ||
-                            (
-                                "verify-account.html?step=2fa"
-                            );
+                            "verify-account.html?step=2fa";
 
                     },
                     500
@@ -2529,7 +3107,7 @@ loginForm.addEventListener(
 
             /* =================================================
                TWO-FACTOR CODE REQUIRED
-            ================================================== */
+            ================================================= */
 
             if (
                 result.code ===
@@ -2563,11 +3141,38 @@ loginForm.addEventListener(
 
 
             /* =================================================
-               FULLY AUTHENTICATED
-            ================================================== */
+               LOGIN FAILED
+            ================================================= */
 
             if (
-                result.authenticated === true
+                !response.ok
+                ||
+                result.success !==
+                    true
+            ) {
+
+                showAlert(
+                    result.message
+                    ||
+                    "Invalid username/email or password."
+                );
+
+
+                return;
+
+            }
+
+
+            /* =================================================
+               FULLY AUTHENTICATED
+            ================================================= */
+
+            if (
+                result.authenticated ===
+                    true
+                ||
+                result.success ===
+                    true
             ) {
 
                 showAlert(
@@ -2595,10 +3200,6 @@ loginForm.addEventListener(
 
             }
 
-
-            /*
-             * Unknown successful response.
-             */
 
             showAlert(
                 result.message
@@ -2628,15 +3229,16 @@ loginForm.addEventListener(
         } catch (error) {
 
             console.error(
-                "LOVEMI login error:",
+                "LOVEMI normal login error:",
                 error
             );
 
 
             showAlert(
+                error.message
+                ||
                 "The login service could not be reached. Please try again."
             );
-
 
         } finally {
 
@@ -2644,16 +3246,901 @@ loginForm.addEventListener(
                 false;
 
 
-            loginButton.innerHTML =
-                `
+            loginButton.innerHTML = `
+
                 <i class="fa-solid fa-right-to-bracket"></i>
+
                 Sign In
-                `;
+
+            `;
 
         }
 
     }
 );
+
+
+/* =========================================================
+   GOOGLE CONFIGURATION
+========================================================= */
+
+async function loadGoogleConfig() {
+
+    try {
+
+        const response =
+            await fetch(
+                GOOGLE_CONFIG_API
+                +
+                (
+                    GOOGLE_CONFIG_API.includes("?")
+                        ?
+                        "&"
+                        :
+                        "?"
+                )
+                +
+                "_="
+                +
+                Date.now(),
+                {
+
+                    method:
+                        "GET",
+
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Cache-Control":
+                            "no-cache, no-store, max-age=0",
+
+                        "Pragma":
+                            "no-cache"
+
+                    }
+
+                }
+            );
+
+
+        const result =
+            await readJsonResponse(
+                response,
+                "Google configuration"
+            );
+
+
+        if (
+            !response.ok
+            ||
+            result.success !==
+                true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Google login configuration is unavailable."
+            );
+
+        }
+
+
+        googleClientId =
+            String(
+                result.client_id
+                ||
+                ""
+            ).trim();
+
+
+        googleCsrfToken =
+            String(
+                result.csrf_token
+                ||
+                result.google_csrf_token
+                ||
+                ""
+            ).trim();
+
+
+        if (
+            !googleClientId
+        ) {
+
+            throw new Error(
+                "Google Client ID was not returned by the server."
+            );
+
+        }
+
+
+        /*
+         * The server-side login endpoint may use its own
+         * CSRF mechanism. If a token is returned, send it.
+         */
+
+        waitForGoogleSDK();
+
+
+    } catch (error) {
+
+        console.error(
+            "LOVEMI Google configuration error:",
+            error
+        );
+
+
+        googleButtonContainer.innerHTML = `
+
+            <span
+                style="
+                    color:#9898a1;
+                    font-size:9px;
+                    text-align:center;
+                ">
+
+                Google Sign-In is currently unavailable.
+
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   WAIT FOR GOOGLE SDK
+========================================================= */
+
+function waitForGoogleSDK() {
+
+    let attempts =
+        0;
+
+
+    const maxAttempts =
+        100;
+
+
+    const timer =
+        setInterval(
+            function () {
+
+                attempts++;
+
+
+                if (
+                    window.google
+                    &&
+                    window.google.accounts
+                    &&
+                    window.google.accounts.id
+                ) {
+
+                    clearInterval(
+                        timer
+                    );
+
+
+                    renderGoogleButton();
+
+
+                    return;
+
+                }
+
+
+                if (
+                    attempts >=
+                    maxAttempts
+                ) {
+
+                    clearInterval(
+                        timer
+                    );
+
+
+                    googleButtonContainer.innerHTML = `
+
+                        <span
+                            style="
+                                color:#9898a1;
+                                font-size:9px;
+                            ">
+
+                            Google Sign-In could not be loaded.
+                            Please refresh the page.
+
+                        </span>
+
+                    `;
+
+                }
+
+            },
+            100
+        );
+
+}
+
+
+/* =========================================================
+   RENDER GOOGLE SIGN-IN BUTTON
+========================================================= */
+
+function renderGoogleButton() {
+
+    if (
+        !googleClientId
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !window.google
+        ||
+        !window.google.accounts
+        ||
+        !window.google.accounts.id
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * Initialize Google Identity Services once.
+         * The popup callback receives the ID token credential.
+         */
+
+        window.google.accounts.id.initialize(
+            {
+
+                client_id:
+                    googleClientId,
+
+                callback:
+                    handleGoogleCredential,
+
+                auto_select:
+                    false,
+
+                cancel_on_tap_outside:
+                    true,
+
+                context:
+                    "signin",
+
+                ux_mode:
+                    "popup"
+
+            }
+        );
+
+
+        googleInitialized =
+            true;
+
+
+        googleButtonContainer.innerHTML =
+            "";
+
+
+        /*
+         * Google controls the visual contents of this button.
+         */
+
+        window.google.accounts.id.renderButton(
+            googleButtonContainer,
+            {
+
+                type:
+                    "standard",
+
+                theme:
+                    "outline",
+
+                size:
+                    "large",
+
+                text:
+                    "signin_with",
+
+                shape:
+                    "rectangular",
+
+                logo_alignment:
+                    "left",
+
+                width:
+                    Math.min(
+                        googleButtonContainer.clientWidth
+                        ||
+                        420,
+                        420
+                    )
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "LOVEMI Google button error:",
+            error
+        );
+
+
+        googleButtonContainer.innerHTML = `
+
+            <span
+                style="
+                    color:#dc2626;
+                    font-size:9px;
+                    text-align:center;
+                ">
+
+                Google Sign-In could not be initialized.
+
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE GOOGLE CREDENTIAL
+========================================================= */
+
+async function handleGoogleCredential(
+    googleResponse
+) {
+
+    clearAlert();
+
+
+    clearGoogleStatus();
+
+
+    if (
+        !googleResponse
+        ||
+        !googleResponse.credential
+    ) {
+
+        showAlert(
+            "Google did not return a valid sign-in credential."
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        !googleInitialized
+    ) {
+
+        showAlert(
+            "Google Sign-In is not ready. Please refresh the page and try again."
+        );
+
+
+        return;
+
+    }
+
+
+    showGoogleStatus(
+        "Google account received. LOVEMI is securely verifying your account..."
+    );
+
+
+    try {
+
+        /*
+         * Send the Google ID-token credential to PHP.
+         *
+         * Important:
+         * The browser does NOT create the LOVEMI session.
+         * api/auth/login.php must verify the Google token,
+         * find/link user_google_accounts, perform account
+         * checks and create the LOVEMI session server-side.
+         */
+
+        const formData =
+            new URLSearchParams();
+
+
+        formData.set(
+            "credential",
+            googleResponse.credential
+        );
+
+
+        formData.set(
+            "google_credential",
+            googleResponse.credential
+        );
+
+
+        formData.set(
+            "action",
+            "google-login"
+        );
+
+
+        if (
+            googleCsrfToken
+        ) {
+
+            formData.set(
+                "csrf_token",
+                googleCsrfToken
+            );
+
+
+            formData.set(
+                "g_csrf_token",
+                googleCsrfToken
+            );
+
+        }
+
+
+        const response =
+            await fetch(
+                getLoginEndpoint(),
+                {
+
+                    method:
+                        "POST",
+
+                    credentials:
+                        "same-origin",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/x-www-form-urlencoded; charset=UTF-8",
+
+                        "Cache-Control":
+                            "no-cache, no-store, max-age=0",
+
+                        "Pragma":
+                            "no-cache"
+
+                    },
+
+                    body:
+                        formData.toString()
+
+                }
+            );
+
+
+        const result =
+            await readJsonResponse(
+                response,
+                "The LOVEMI Google login server"
+            );
+
+
+        console.debug(
+            "LOVEMI Google login response:",
+            response.status,
+            result
+        );
+
+
+        /* =================================================
+           GOOGLE ACCOUNT NOT FOUND
+        ================================================= */
+
+        if (
+            result.code ===
+                "GOOGLE_ACCOUNT_NOT_FOUND"
+            ||
+            result.code ===
+                "GOOGLE_NOT_LINKED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "This Google account is not connected to a LOVEMI account. Please create an account first.",
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           EMAIL NOT VERIFIED
+        ================================================= */
+
+        if (
+            result.code ===
+                "EMAIL_NOT_VERIFIED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Please verify your email before continuing."
+            );
+
+
+            if (
+                result.user_id
+            ) {
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "verify-account.html?user="
+                            +
+                            encodeURIComponent(
+                                result.user_id
+                            );
+
+                    },
+                    700
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           ACCOUNT NOT APPROVED
+        ================================================= */
+
+        if (
+            result.code ===
+                "ACCOUNT_NOT_APPROVED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Your LOVEMI account is not ready for login."
+            );
+
+
+            if (
+                result.user_id
+            ) {
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "verify-account.html?user="
+                            +
+                            encodeURIComponent(
+                                result.user_id
+                            );
+
+                    },
+                    700
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           ACCOUNT SUSPENDED
+        ================================================= */
+
+        if (
+            result.code ===
+                "ACCOUNT_SUSPENDED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Your LOVEMI account is suspended."
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           ACCOUNT DELETED
+        ================================================= */
+
+        if (
+            result.code ===
+                "ACCOUNT_DELETED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "This LOVEMI account is no longer available."
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           TWO-FACTOR SETUP REQUIRED
+        ================================================= */
+
+        if (
+            result.code ===
+                "TWO_FACTOR_SETUP_REQUIRED"
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Please finish setting up Google Authenticator.",
+                "success"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        result.redirect
+                        ||
+                        "verify-account.html?step=2fa";
+
+                },
+                500
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           TWO-FACTOR REQUIRED
+        ================================================= */
+
+        if (
+            result.code ===
+                "TWO_FACTOR_REQUIRED"
+        ) {
+
+            showGoogleStatus(
+                "Google identity verified. Your LOVEMI account requires the additional security verification."
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Enter your Google Authenticator code.",
+                "success"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        result.redirect
+                        ||
+                        "verify-account.html?step=login-2fa";
+
+                },
+                500
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           GOOGLE LOGIN FAILED
+        ================================================= */
+
+        if (
+            !response.ok
+            ||
+            result.success !==
+                true
+        ) {
+
+            showGoogleStatus(
+                ""
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Google Sign-In failed. Please try again."
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           FULLY AUTHENTICATED
+        ================================================= */
+
+        if (
+            result.authenticated ===
+                true
+            ||
+            result.success ===
+                true
+        ) {
+
+            showGoogleStatus(
+                "Google account verified. Login successful."
+            );
+
+
+            showAlert(
+                result.message
+                ||
+                "Login successful.",
+                "success"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        result.redirect
+                        ||
+                        "dashboard.html";
+
+                },
+                400
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           OTHER SECURITY STEP
+        ================================================= */
+
+        showGoogleStatus(
+            ""
+        );
+
+
+        showAlert(
+            result.message
+            ||
+            "Continue with the next security step.",
+            "success"
+        );
+
+
+        if (
+            result.redirect
+        ) {
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        result.redirect;
+
+                },
+                600
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "LOVEMI Google login error:",
+            error
+        );
+
+
+        clearGoogleStatus();
+
+
+        showAlert(
+            error.message
+            ||
+            "Google Sign-In could not be completed. Please try again."
+        );
+
+    }
+
+}
 
 
 /* =========================================================
@@ -2689,11 +4176,14 @@ mobileMenu.addEventListener(
                 "style"
             );
 
+
             navigation.dataset.open =
                 "false";
 
+
             this.innerHTML =
                 '<i class="fa-solid fa-bars"></i>';
+
 
             return;
 
@@ -2703,35 +4193,46 @@ mobileMenu.addEventListener(
         navigation.style.display =
             "flex";
 
+
         navigation.style.position =
             "absolute";
+
 
         navigation.style.top =
             "72px";
 
+
         navigation.style.left =
             "12px";
+
 
         navigation.style.right =
             "12px";
 
+
         navigation.style.flexDirection =
             "column";
+
 
         navigation.style.alignItems =
             "stretch";
 
+
         navigation.style.padding =
             "8px";
+
 
         navigation.style.background =
             "#ffffff";
 
+
         navigation.style.border =
             "1px solid #e9e9ef";
 
+
         navigation.style.borderRadius =
             "14px";
+
 
         navigation.style.boxShadow =
             "0 20px 45px rgba(0,0,0,.10)";
@@ -2761,9 +4262,117 @@ identifier.addEventListener(
             "Enter"
         ) {
 
+            event.preventDefault();
+
+
             password.focus();
 
         }
+
+    }
+);
+
+
+/* =========================================================
+   RESET MOBILE MENU
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function () {
+
+        if (
+            window.innerWidth >
+            760
+        ) {
+
+            navigation.removeAttribute(
+                "style"
+            );
+
+
+            navigation.dataset.open =
+                "false";
+
+        }
+
+
+        /*
+         * Re-render the Google button on large layout changes
+         * so its width remains correct.
+         */
+
+        if (
+            googleInitialized
+            &&
+            window.google
+            &&
+            window.google.accounts
+            &&
+            window.google.accounts.id
+        ) {
+
+            /*
+             * Do not call initialize() again.
+             * Google recommends initializing only once.
+             */
+
+            googleButtonContainer.innerHTML =
+                "";
+
+
+            window.google.accounts.id.renderButton(
+                googleButtonContainer,
+                {
+
+                    type:
+                        "standard",
+
+                    theme:
+                        "outline",
+
+                    size:
+                        "large",
+
+                    text:
+                        "signin_with",
+
+                    shape:
+                        "rectangular",
+
+                    logo_alignment:
+                        "left",
+
+                    width:
+                        Math.min(
+                            googleButtonContainer.clientWidth
+                            ||
+                            420,
+                            420
+                        )
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        navigation.dataset.open =
+            "false";
+
+
+        loadGoogleConfig();
 
     }
 );

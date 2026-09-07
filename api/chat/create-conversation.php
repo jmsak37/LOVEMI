@@ -1,51 +1,27 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - CREATE / OPEN CONVERSATION API
- * ============================================================
- *
- * POST JSON:
- *
- * {
- *   "user_id": 4
- * }
- *
- * Behavior:
- *
- * 1. Authenticated user is required.
- * 2. Normal member must have active Premium.
- * 3. Administrator/moderator/support can use chat without
- *    Premium.
- * 4. User cannot connect with himself.
- * 5. Blocked pairs cannot chat.
- * 6. A direct connection is created as "connected".
- * 7. Conversation is created/reused.
- * 8. Conversation ID is returned.
- *
- * ============================================================
- */
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../profile/_helper.php';
+
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
 
 /* ============================================================
    RESPONSE
 ============================================================ */
 
-function chatCreateResponse(
+function chatResponse(
     bool $success,
     string $message,
-    array $data = [],
+    array $extra = [],
     int $status = 200
 ): never {
 
@@ -57,7 +33,7 @@ function chatCreateResponse(
                 'success' => $success,
                 'message' => $message
             ],
-            $data
+            $extra
         ),
         JSON_UNESCAPED_UNICODE |
         JSON_UNESCAPED_SLASHES
@@ -66,96 +42,108 @@ function chatCreateResponse(
     exit;
 }
 
+
 /* ============================================================
    METHOD
 ============================================================ */
 
 if (
-    ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST'
+    ($_SERVER['REQUEST_METHOD'] ?? '')
+    !== 'POST'
 ) {
 
-    chatCreateResponse(
+    chatResponse(
         false,
         'Only POST requests are allowed.',
         [
-            'code' => 'METHOD_NOT_ALLOWED'
+            'code' =>
+                'METHOD_NOT_ALLOWED'
         ],
         405
     );
 }
 
+
 /* ============================================================
    AUTH
 ============================================================ */
 
-$currentUserId =
-    isset($_SESSION['lovemi_user_id'])
-        ? (int) $_SESSION['lovemi_user_id']
-        : 0;
+try {
 
-if ($currentUserId <= 0) {
+    $viewerId =
+        requireAuthenticatedUser();
 
-    chatCreateResponse(
+} catch (
+    Throwable $e
+) {
+
+    chatResponse(
         false,
-        'Please log in to connect with another member.',
+        'Please log in first.',
         [
-            'code' => 'AUTHENTICATION_REQUIRED',
-            'redirect' => 'login.html'
+            'code' =>
+                'AUTHENTICATION_REQUIRED'
         ],
         401
     );
 }
+
 
 /* ============================================================
    INPUT
 ============================================================ */
 
 $raw =
-    file_get_contents('php://input');
+    file_get_contents(
+        'php://input'
+    )
+    ?: '';
+
 
 $input =
     json_decode(
-        (string) $raw,
+        $raw,
         true
     );
 
-if (!is_array($input)) {
-    $input = $_POST;
+
+if (
+    !is_array($input)
+) {
+
+    $input =
+        $_POST;
+
 }
 
-$targetUserId =
-    (int)
-    (
+
+$targetId =
+    (int)(
         $input['user_id']
         ??
-        $input['connected_user_id']
+        $input['target_user_id']
         ??
         0
     );
 
-if ($targetUserId <= 0) {
 
-    chatCreateResponse(
+if (
+    $targetId <= 0
+    ||
+    $targetId === $viewerId
+) {
+
+    chatResponse(
         false,
-        'The user you want to connect with is required.',
+        'Invalid chat member.',
         [
-            'code' => 'TARGET_USER_REQUIRED'
+            'code' =>
+                'INVALID_TARGET'
         ],
         422
     );
 }
 
-if ($targetUserId === $currentUserId) {
-
-    chatCreateResponse(
-        false,
-        'You cannot connect with your own account.',
-        [
-            'code' => 'SELF_CONNECTION_NOT_ALLOWED'
-        ],
-        422
-    );
-}
 
 /* ============================================================
    DATABASE
@@ -164,214 +152,32 @@ if ($targetUserId === $currentUserId) {
 try {
 
     $pdo =
-        db();
+        profileDb();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI CREATE CONVERSATION DB] ' .
+        '[LOVEMI CHAT CREATE DB] '
+        .
         $e->getMessage()
     );
 
-    chatCreateResponse(
+    chatResponse(
         false,
         'Database connection failed.',
         [
-            'code' => 'DATABASE_ERROR'
+            'code' =>
+                'DATABASE_ERROR'
         ],
         500
     );
 }
 
-/* ============================================================
-   CURRENT USER ROLE / ACCOUNT
-============================================================ */
-
-try {
-
-    $meStmt =
-        $pdo->prepare(
-            "
-            SELECT
-                u.id,
-                u.role_id,
-                u.account_status,
-                u.is_active,
-                u.is_suspended,
-                u.is_deleted,
-                r.slug AS role_slug
-
-            FROM users u
-
-            LEFT JOIN roles r
-                ON r.id = u.role_id
-
-            WHERE u.id = :id
-
-            LIMIT 1
-            "
-        );
-
-    $meStmt->execute(
-        [
-            ':id' => $currentUserId
-        ]
-    );
-
-    $me =
-        $meStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI CREATE CONVERSATION CURRENT USER] ' .
-        $e->getMessage()
-    );
-
-    chatCreateResponse(
-        false,
-        'Unable to verify your account.',
-        [
-            'code' => 'CURRENT_USER_LOOKUP_FAILED'
-        ],
-        500
-    );
-}
-
-if (!$me) {
-
-    chatCreateResponse(
-        false,
-        'Your account could not be found.',
-        [
-            'code' => 'CURRENT_USER_NOT_FOUND'
-        ],
-        404
-    );
-}
-
-if (
-    (int) $me['is_deleted'] === 1
-    ||
-    (int) $me['is_suspended'] === 1
-    ||
-    (int) $me['is_active'] !== 1
-) {
-
-    chatCreateResponse(
-        false,
-        'Your account cannot currently use messaging.',
-        [
-            'code' => 'ACCOUNT_UNAVAILABLE'
-        ],
-        403
-    );
-}
-
-$roleSlug =
-    strtolower(
-        (string)
-        (
-            $me['role_slug']
-            ??
-            ''
-        )
-    );
-
-$isStaff =
-    in_array(
-        $roleSlug,
-        [
-            'admin',
-            'moderator',
-            'support'
-        ],
-        true
-    );
 
 /* ============================================================
-   PREMIUM CHECK
-============================================================ */
-
-if (!$isStaff) {
-
-    try {
-
-        $premiumStmt =
-            $pdo->prepare(
-                "
-                SELECT
-                    s.id
-
-                FROM subscriptions s
-
-                INNER JOIN services sv
-                    ON sv.id = s.service_id
-
-                WHERE s.user_id = :user_id
-
-                  AND s.status = 'active'
-
-                  AND s.start_at <= CURRENT_TIMESTAMP
-
-                  AND s.end_at > CURRENT_TIMESTAMP
-
-                  AND sv.is_active = 1
-
-                  AND sv.is_premium = 1
-
-                ORDER BY
-                    s.end_at DESC,
-                    s.id DESC
-
-                LIMIT 1
-                "
-            );
-
-        $premiumStmt->execute(
-            [
-                ':user_id' =>
-                    $currentUserId
-            ]
-        );
-
-        $premiumId =
-            $premiumStmt->fetchColumn();
-
-    } catch (Throwable $e) {
-
-        error_log(
-            '[LOVEMI CREATE CONVERSATION PREMIUM] ' .
-            $e->getMessage()
-        );
-
-        chatCreateResponse(
-            false,
-            'Unable to verify Premium access.',
-            [
-                'code' =>
-                    'PREMIUM_LOOKUP_FAILED'
-            ],
-            500
-        );
-    }
-
-    if (!$premiumId) {
-
-        chatCreateResponse(
-            false,
-            'Premium access is required to connect and start a conversation.',
-            [
-                'code' => 'PREMIUM_REQUIRED',
-                'redirect' => 'premium.html'
-            ],
-            403
-        );
-    }
-}
-
-/* ============================================================
-   TARGET USER
+   TARGET VALIDATION
 ============================================================ */
 
 try {
@@ -381,698 +187,621 @@ try {
             "
             SELECT
 
-                u.id,
-                u.username,
-                u.full_names,
-                u.gender,
-                u.account_status,
-                u.is_active,
-                u.is_suspended,
-                u.is_deleted,
+                id,
 
-                p.allow_messages,
-                p.profile_visibility
+                account_status,
 
-            FROM users u
+                email_verified,
 
-            LEFT JOIN profiles p
-                ON p.user_id = u.id
+                is_active,
 
-            WHERE u.id = :id
+                is_suspended,
+
+                is_deleted
+
+            FROM users
+
+            WHERE id = :id
 
             LIMIT 1
             "
         );
+
 
     $targetStmt->execute(
         [
             ':id' =>
-                $targetUserId
+                $targetId
         ]
     );
+
 
     $target =
-        $targetStmt->fetch();
+        $targetStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
-        '[LOVEMI CREATE CONVERSATION TARGET] ' .
+        '[LOVEMI CHAT TARGET] '
+        .
         $e->getMessage()
     );
 
-    chatCreateResponse(
+    chatResponse(
         false,
-        'Unable to load the selected profile.',
-        [],
+        'Unable to verify the chat member.',
+        [
+            'code' =>
+                'TARGET_LOOKUP_FAILED'
+        ],
         500
     );
 }
 
-if (!$target) {
-
-    chatCreateResponse(
-        false,
-        'The selected member does not exist.',
-        [
-            'code' => 'TARGET_USER_NOT_FOUND'
-        ],
-        404
-    );
-}
 
 if (
-    (int) $target['is_deleted'] === 1
+    !$target
     ||
-    (int) $target['is_suspended'] === 1
+    (int)(
+        $target['is_active']
+        ?? 0
+    ) !== 1
     ||
-    (int) $target['is_active'] !== 1
+    (int)(
+        $target['is_suspended']
+        ?? 0
+    ) === 1
+    ||
+    (int)(
+        $target['is_deleted']
+        ?? 0
+    ) === 1
 ) {
 
-    chatCreateResponse(
+    chatResponse(
         false,
-        'This member is currently unavailable.',
+        'This member is no longer available.',
         [
-            'code' => 'TARGET_USER_UNAVAILABLE'
-        ],
-        404
-    );
-}
-
-/*
- * A public connection is not exposed to a private profile.
- * Staff are allowed to initiate conversations for support.
- */
-
-if (
-    !$isStaff
-    &&
-    strtolower(
-        (string)
-        (
-            $target['profile_visibility']
-            ??
-            'public'
-        )
-    )
-    !== 'public'
-) {
-
-    chatCreateResponse(
-        false,
-        'This profile is private.',
-        [
-            'code' => 'PROFILE_PRIVATE'
+            'code' =>
+                'TARGET_UNAVAILABLE'
         ],
         403
     );
 }
 
-if (
-    isset($target['allow_messages'])
-    &&
-    (int) $target['allow_messages'] !== 1
-) {
-
-    chatCreateResponse(
-        false,
-        'This member is not accepting messages.',
-        [
-            'code' => 'MESSAGES_DISABLED'
-        ],
-        403
-    );
-}
 
 /* ============================================================
-   BLOCK CHECK
+   CONNECTION
 ============================================================ */
 
 try {
-
-    $blockStmt =
-        $pdo->prepare(
-            "
-            SELECT id
-
-            FROM blocked_users
-
-            WHERE
-                (
-                    user_id = :user_one
-                    AND
-                    blocked_user_id = :user_two
-                )
-
-                OR
-
-                (
-                    user_id = :user_three
-                    AND
-                    blocked_user_id = :user_four
-                )
-
-            LIMIT 1
-            "
-        );
-
-    $blockStmt->execute(
-        [
-
-            ':user_one' =>
-                $currentUserId,
-
-            ':user_two' =>
-                $targetUserId,
-
-            ':user_three' =>
-                $targetUserId,
-
-            ':user_four' =>
-                $currentUserId
-
-        ]
-    );
-
-    $blocked =
-        $blockStmt->fetchColumn();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI CREATE CONVERSATION BLOCK] ' .
-        $e->getMessage()
-    );
-
-    chatCreateResponse(
-        false,
-        'Unable to verify connection safety.',
-        [],
-        500
-    );
-}
-
-if ($blocked) {
-
-    chatCreateResponse(
-        false,
-        'Messaging is unavailable because one of these accounts has blocked the other.',
-        [
-            'code' => 'USER_BLOCKED'
-        ],
-        403
-    );
-}
-
-/* ============================================================
-   CREATE / RESTORE CONNECTION + CONVERSATION
-============================================================ */
-
-try {
-
-    $pdo->beginTransaction();
-
-    /*
-     * Check whether a connection already exists.
-     */
-
-    $connectionStmt =
-        $pdo->prepare(
-            "
-            SELECT
-                id,
-                status
-
-            FROM connections
-
-            WHERE user_low_id = LEAST(
-                :current_user_1,
-                :target_user_1
-            )
-
-              AND user_high_id = GREATEST(
-                :current_user_2,
-                :target_user_2
-              )
-
-            LIMIT 1
-            "
-        );
-
-    $connectionStmt->execute(
-        [
-
-            ':current_user_1' =>
-                $currentUserId,
-
-            ':target_user_1' =>
-                $targetUserId,
-
-            ':current_user_2' =>
-                $currentUserId,
-
-            ':target_user_2' =>
-                $targetUserId
-
-        ]
-    );
 
     $connection =
-        $connectionStmt->fetch();
-
-
-    $connectionWasCreated =
-        false;
-
-    $connectionId =
-        0;
-
-
-    if (!$connection) {
-
-        /*
-         * "connected" is intentional.
-         * Clicking the profile while authorized means an
-         * immediate connection under the LOVEMI requirement.
-         */
-
-        $insertConnection =
-            $pdo->prepare(
-                "
-                INSERT INTO connections
-                (
-                    user_id,
-                    connected_user_id,
-                    initiated_by,
-                    status,
-                    connected_at
-                )
-                VALUES
-                (
-                    :user_id,
-                    :connected_user_id,
-                    :initiated_by,
-                    'connected',
-                    CURRENT_TIMESTAMP
-                )
-                "
-            );
-
-        $insertConnection->execute(
-            [
-
-                ':user_id' =>
-                    $currentUserId,
-
-                ':connected_user_id' =>
-                    $targetUserId,
-
-                ':initiated_by' =>
-                    $currentUserId
-
-            ]
+        profileGetConnection(
+            $pdo,
+            $viewerId,
+            $targetId
         );
 
-        $connectionId =
-            (int)
-            $pdo->lastInsertId();
+} catch (
+    Throwable $e
+) {
 
-        $connectionWasCreated =
-            true;
+    error_log(
+        '[LOVEMI CHAT CONNECTION] '
+        .
+        $e->getMessage()
+    );
 
-    } else {
+    chatResponse(
+        false,
+        'Unable to verify the connection.',
+        [
+            'code' =>
+                'CONNECTION_LOOKUP_FAILED'
+        ],
+        500
+    );
+}
 
-        $connectionId =
-            (int)
-            $connection['id'];
 
-        /*
-         * Restore an older/pending/rejected connection into an
-         * active connection when the authorized user connects.
-         */
-
-        if (
-            !in_array(
-                strtolower(
-                    (string)
-                    $connection['status']
-                ),
-                [
-                    'connected',
-                    'accepted'
-                ],
-                true
+$connectionStatus =
+    strtolower(
+        trim(
+            (string)(
+                $connection['status']
+                ?? ''
             )
-        ) {
+        )
+    );
 
-            $updateConnection =
-                $pdo->prepare(
-                    "
-                    UPDATE connections
 
-                    SET
+if (
+    !in_array(
+        $connectionStatus,
+        [
+            'accepted',
+            'connected',
+            'active'
+        ],
+        true
+    )
+) {
 
-                        initiated_by =
-                            :initiated_by,
+    chatResponse(
+        false,
+        'You must be connected with this member before starting chat.',
+        [
+            'code' =>
+                'CONNECTION_REQUIRED',
 
-                        status =
-                            'connected',
+            'connection_status' =>
+                $connectionStatus !== ''
+                    ? $connectionStatus
+                    : null
+        ],
+        403
+    );
+}
 
-                        connected_at =
-                            CURRENT_TIMESTAMP
 
-                    WHERE id = :id
+$connectionId =
+    (int)(
+        $connection['id']
+        ?? 0
+    );
 
-                    LIMIT 1
-                    "
-                );
 
-            $updateConnection->execute(
+/* ============================================================
+   PREMIUM
+============================================================ */
+
+/*
+ * LOVEMI RULE:
+ *
+ * Viewer Premium OR Target Premium
+ * = Chat is allowed.
+ *
+ * Only when BOTH are without active Premium
+ * is chat blocked.
+ */
+
+try {
+
+    $viewerPremium =
+        profileHasPremium(
+            $pdo,
+            $viewerId
+        );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT VIEWER PREMIUM] '
+        .
+        $e->getMessage()
+    );
+
+    $viewerPremium =
+        false;
+}
+
+
+try {
+
+    $targetPremium =
+        profileHasPremium(
+            $pdo,
+            $targetId
+        );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT TARGET PREMIUM] '
+        .
+        $e->getMessage()
+    );
+
+    $targetPremium =
+        false;
+}
+
+
+$chatAllowed =
+    $viewerPremium
+    ||
+    $targetPremium;
+
+
+if (
+    !$chatAllowed
+) {
+
+    chatResponse(
+        false,
+        'Messaging is paused because neither connected member currently has active LOVEMI Premium.',
+        [
+            'code' =>
+                'PREMIUM_REQUIRED',
+
+            'current_user_premium' =>
+                false,
+
+            'other_user_premium' =>
+                false,
+
+            'premium_access' =>
                 [
+                    'can_send' =>
+                        false,
 
-                    ':initiated_by' =>
-                        $currentUserId,
+                    'current_user_premium' =>
+                        false,
 
-                    ':id' =>
-                        $connectionId
-
+                    'other_user_premium' =>
+                        false
                 ]
-            );
+        ],
+        403
+    );
+}
 
-        }
-    }
 
-    /*
-     * Find conversation.
-     */
+/* ============================================================
+   CONVERSATION ACCESS CODE TABLE
+============================================================ */
+
+try {
+
+    $pdo->exec(
+        "
+        CREATE TABLE IF NOT EXISTS conversation_access_codes
+        (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+            conversation_id BIGINT UNSIGNED NOT NULL,
+
+            access_code CHAR(64) NOT NULL,
+
+            created_at DATETIME NOT NULL
+                DEFAULT CURRENT_TIMESTAMP,
+
+            last_used_at DATETIME NULL,
+
+            PRIMARY KEY (id),
+
+            UNIQUE KEY uq_conversation_access_code
+                (access_code),
+
+            UNIQUE KEY uq_conversation_access_conversation
+                (conversation_id)
+
+        )
+        ENGINE=InnoDB
+        DEFAULT CHARSET=utf8mb4
+        COLLATE=utf8mb4_unicode_ci
+        "
+    );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT ACCESS TABLE] '
+        .
+        $e->getMessage()
+    );
+
+    chatResponse(
+        false,
+        'Unable to prepare chat access.',
+        [
+            'code' =>
+                'CHAT_ACCESS_TABLE_FAILED'
+        ],
+        500
+    );
+}
+
+
+/* ============================================================
+   FIND EXISTING CONVERSATION
+============================================================ */
+
+try {
 
     $conversationStmt =
         $pdo->prepare(
             "
             SELECT
+
                 id,
+
+                connection_id,
+
+                user_one_id,
+
+                user_two_id,
+
                 status
 
             FROM conversations
 
-            WHERE user_low_id = LEAST(
-                    :user_one_1,
-                    :user_two_1
-                )
+            WHERE
 
-              AND user_high_id = GREATEST(
-                    :user_one_2,
-                    :user_two_2
-                )
+                user_low_id =
+                    LEAST(
+                        :viewer_a,
+                        :target_a
+                    )
+
+              AND
+
+                user_high_id =
+                    GREATEST(
+                        :viewer_b,
+                        :target_b
+                    )
 
             LIMIT 1
             "
         );
 
+
     $conversationStmt->execute(
         [
+            ':viewer_a' =>
+                $viewerId,
 
-            ':user_one_1' =>
-                $currentUserId,
+            ':target_a' =>
+                $targetId,
 
-            ':user_two_1' =>
-                $targetUserId,
+            ':viewer_b' =>
+                $viewerId,
 
-            ':user_one_2' =>
-                $currentUserId,
-
-            ':user_two_2' =>
-                $targetUserId
-
+            ':target_b' =>
+                $targetId
         ]
     );
 
+
     $conversation =
-        $conversationStmt->fetch();
+        $conversationStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT CONVERSATION LOOKUP] '
+        .
+        $e->getMessage()
+    );
+
+    chatResponse(
+        false,
+        'Unable to find the conversation.',
+        [
+            'code' =>
+                'CONVERSATION_LOOKUP_FAILED'
+        ],
+        500
+    );
+}
 
 
-    if (!$conversation) {
+/* ============================================================
+   CREATE CONVERSATION WHEN MISSING
+============================================================ */
 
-        $insertConversation =
+$conversationId =
+    0;
+
+
+if (
+    $conversation
+) {
+
+    $conversationId =
+        (int)(
+            $conversation['id']
+            ?? 0
+        );
+
+} else {
+
+    try {
+
+        $pdo->beginTransaction();
+
+
+        /*
+         * Insert conversation.
+         */
+        $insert =
             $pdo->prepare(
                 "
                 INSERT INTO conversations
                 (
                     connection_id,
+
                     user_one_id,
+
                     user_two_id,
-                    status
+
+                    status,
+
+                    created_at,
+
+                    updated_at
+
                 )
                 VALUES
                 (
                     :connection_id,
+
                     :user_one_id,
+
                     :user_two_id,
-                    'active'
+
+                    'active',
+
+                    CURRENT_TIMESTAMP,
+
+                    CURRENT_TIMESTAMP
                 )
                 "
             );
 
-        $insertConversation->execute(
-            [
 
+        $insert->execute(
+            [
                 ':connection_id' =>
-                    $connectionId,
+                    $connectionId > 0
+                        ? $connectionId
+                        : null,
 
                 ':user_one_id' =>
-                    $currentUserId,
+                    $viewerId,
 
                 ':user_two_id' =>
-                    $targetUserId
-
+                    $targetId
             ]
         );
+
 
         $conversationId =
             (int)
             $pdo->lastInsertId();
 
-    } else {
 
-        $conversationId =
-            (int)
-            $conversation['id'];
+        $pdo->commit();
 
-
-        if (
-            strtolower(
-                (string)
-                $conversation['status']
-            )
-            !==
-            'active'
-        ) {
-
-            $restoreConversation =
-                $pdo->prepare(
-                    "
-                    UPDATE conversations
-
-                    SET
-                        status = 'active'
-
-                    WHERE id = :id
-
-                    LIMIT 1
-                    "
-                );
-
-            $restoreConversation->execute(
-                [
-                    ':id' =>
-                        $conversationId
-                ]
-            );
-        }
-
-    }
-
-
-    /*
-     * If the connection already existed and was changed to
-     * connected, manually create the connection notifications.
-     * New inserts already trigger them through the saved DB
-     * trigger, so only do this for the existing connection case.
-     */
-
-    if (
-        !$connectionWasCreated
-        &&
-        $connection
+    } catch (
+        Throwable $e
     ) {
 
-        $oldStatus =
-            strtolower(
-                (string)
-                $connection['status']
-            );
-
-
         if (
-            !in_array(
-                $oldStatus,
-                [
-                    'connected',
-                    'accepted'
-                ],
-                true
-            )
+            $pdo->inTransaction()
         ) {
 
-            $notificationTypeStmt =
+            $pdo->rollBack();
+
+        }
+
+
+        /*
+         * Another request may have created the same
+         * conversation at almost the same time.
+         *
+         * Try the pair again before failing.
+         */
+        try {
+
+            $retry =
                 $pdo->prepare(
                     "
                     SELECT
-                        id
 
-                    FROM notification_types
+                        id,
 
-                    WHERE slug =
-                        'new_connection'
+                        connection_id,
+
+                        user_one_id,
+
+                        user_two_id,
+
+                        status
+
+                    FROM conversations
+
+                    WHERE
+
+                        user_low_id =
+                            LEAST(
+                                :viewer_a,
+                                :target_a
+                            )
+
+                      AND
+
+                        user_high_id =
+                            GREATEST(
+                                :viewer_b,
+                                :target_b
+                            )
 
                     LIMIT 1
                     "
                 );
 
-            $notificationTypeStmt->execute();
 
-            $notificationTypeId =
-                $notificationTypeStmt->fetchColumn();
+            $retry->execute(
+                [
+                    ':viewer_a' =>
+                        $viewerId,
+
+                    ':target_a' =>
+                        $targetId,
+
+                    ':viewer_b' =>
+                        $viewerId,
+
+                    ':target_b' =>
+                        $targetId
+                ]
+            );
+
+
+            $retryConversation =
+                $retry->fetch(
+                    PDO::FETCH_ASSOC
+                );
 
 
             if (
-                $notificationTypeId
+                $retryConversation
             ) {
 
-                $audioStmt =
-                    $pdo->prepare(
-                        "
-                        SELECT
-                            id
-
-                        FROM notification_audio
-
-                        WHERE notification_type_id =
-                            :type_id
-
-                          AND is_active = 1
-
-                        ORDER BY
-                            sort_order ASC,
-                            id ASC
-
-                        LIMIT 1
-                        "
+                $conversationId =
+                    (int)(
+                        $retryConversation['id']
+                        ?? 0
                     );
 
-                $audioStmt->execute(
-                    [
-                        ':type_id' =>
-                            (int)
-                            $notificationTypeId
-                    ]
-                );
-
-                $audioId =
-                    $audioStmt->fetchColumn();
-
-
-                $notifyStmt =
-                    $pdo->prepare(
-                        "
-                        INSERT INTO notifications
-                        (
-                            user_id,
-                            notification_type_id,
-                            sender_id,
-                            title,
-                            message,
-                            reference_type,
-                            reference_id,
-                            audio_id
-                        )
-                        VALUES
-                        (
-                            :user_id,
-                            :type_id,
-                            :sender_id,
-                            'New Connection',
-                            'You are now connected with another LOVEMI member.',
-                            'connection',
-                            :connection_id,
-                            :audio_id
-                        )
-                        "
-                    );
-
-
-                foreach (
-                    [
-                        [
-                            $currentUserId,
-                            $targetUserId
-                        ],
-                        [
-                            $targetUserId,
-                            $currentUserId
-                        ]
-                    ]
-                    as $notify
-                ) {
-
-                    $notifyStmt->execute(
-                        [
-
-                            ':user_id' =>
-                                $notify[0],
-
-                            ':type_id' =>
-                                (int)
-                                $notificationTypeId,
-
-                            ':sender_id' =>
-                                $notify[1],
-
-                            ':connection_id' =>
-                                $connectionId,
-
-                            ':audio_id' =>
-                                $audioId
-                                ?
-                                (int)
-                                $audioId
-                                :
-                                null
-
-                        ]
-                    );
-                }
             }
+
+        } catch (
+            Throwable $retryError
+        ) {
+
+            error_log(
+                '[LOVEMI CHAT CONVERSATION RETRY] '
+                .
+                $retryError->getMessage()
+            );
         }
     }
+}
 
 
-    $pdo->commit();
+if (
+    $conversationId <= 0
+) {
 
-} catch (Throwable $e) {
-
-    if (
-        $pdo->inTransaction()
-    ) {
-        $pdo->rollBack();
-    }
-
-    error_log(
-        '[LOVEMI CREATE CONVERSATION TRANSACTION] ' .
-        $e->getMessage()
-    );
-
-    chatCreateResponse(
+    chatResponse(
         false,
         'Unable to create the conversation.',
         [
@@ -1083,42 +812,439 @@ try {
     );
 }
 
+
 /* ============================================================
-   RESPONSE
+   RESTORE ACTIVE STATUS
 ============================================================ */
 
-chatCreateResponse(
+try {
+
+    $activateConversation =
+        $pdo->prepare(
+            "
+            UPDATE conversations
+
+            SET
+
+                connection_id =
+                    :connection_id,
+
+                status =
+                    'active',
+
+                updated_at =
+                    CURRENT_TIMESTAMP
+
+            WHERE id =
+                :conversation_id
+
+            LIMIT 1
+            "
+        );
+
+
+    $activateConversation->execute(
+        [
+            ':connection_id' =>
+                $connectionId > 0
+                    ? $connectionId
+                    : null,
+
+            ':conversation_id' =>
+                $conversationId
+        ]
+    );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT ACTIVATE] '
+        .
+        $e->getMessage()
+    );
+
+}
+
+
+/* ============================================================
+   GET EXISTING CHAT CODE
+============================================================ */
+
+try {
+
+    $codeStmt =
+        $pdo->prepare(
+            "
+            SELECT access_code
+
+            FROM conversation_access_codes
+
+            WHERE conversation_id =
+                :conversation_id
+
+            LIMIT 1
+            "
+        );
+
+
+    $codeStmt->execute(
+        [
+            ':conversation_id' =>
+                $conversationId
+        ]
+    );
+
+
+    $accessCode =
+        (string)(
+            $codeStmt->fetchColumn()
+            ?: ''
+        );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT CODE LOOKUP] '
+        .
+        $e->getMessage()
+    );
+
+    chatResponse(
+        false,
+        'Unable to load the chat access code.',
+        [
+            'code' =>
+                'CHAT_CODE_LOOKUP_FAILED'
+        ],
+        500
+    );
+}
+
+
+/* ============================================================
+   CREATE CHAT CODE IF MISSING
+============================================================ */
+
+if (
+    !preg_match(
+        '/^[a-f0-9]{64}$/',
+        $accessCode
+    )
+) {
+
+    $accessCode =
+        '';
+
+
+    for (
+        $attempt = 0;
+        $attempt < 10;
+        $attempt++
+    ) {
+
+        $candidate =
+            bin2hex(
+                random_bytes(
+                    32
+                )
+            );
+
+
+        try {
+
+            $insertCode =
+                $pdo->prepare(
+                    "
+                    INSERT INTO conversation_access_codes
+                    (
+                        conversation_id,
+
+                        access_code,
+
+                        created_at
+
+                    )
+                    VALUES
+                    (
+                        :conversation_id,
+
+                        :access_code,
+
+                        CURRENT_TIMESTAMP
+                    )
+                    "
+                );
+
+
+            $insertCode->execute(
+                [
+                    ':conversation_id' =>
+                        $conversationId,
+
+                    ':access_code' =>
+                        $candidate
+                ]
+            );
+
+
+            $accessCode =
+                $candidate;
+
+
+            break;
+
+        } catch (
+            PDOException $e
+        ) {
+
+            /*
+             * The conversation may have received
+             * a code from another request.
+             */
+            try {
+
+                $retryCodeStmt =
+                    $pdo->prepare(
+                        "
+                        SELECT access_code
+
+                        FROM conversation_access_codes
+
+                        WHERE conversation_id =
+                            :conversation_id
+
+                        LIMIT 1
+                        "
+                    );
+
+
+                $retryCodeStmt->execute(
+                    [
+                        ':conversation_id' =>
+                            $conversationId
+                    ]
+                );
+
+
+                $retryCode =
+                    (string)(
+                        $retryCodeStmt->fetchColumn()
+                        ?: ''
+                    );
+
+
+                if (
+                    preg_match(
+                        '/^[a-f0-9]{64}$/',
+                        $retryCode
+                    )
+                ) {
+
+                    $accessCode =
+                        $retryCode;
+
+                    break;
+                }
+
+            } catch (
+                Throwable $ignored
+            ) {
+
+                /*
+                 * Continue to next attempt.
+                 */
+            }
+        }
+    }
+}
+
+
+if (
+    !preg_match(
+        '/^[a-f0-9]{64}$/',
+        $accessCode
+    )
+) {
+
+    chatResponse(
+        false,
+        'Unable to create the secure chat code.',
+        [
+            'code' =>
+                'CHAT_CODE_ERROR'
+        ],
+        500
+    );
+}
+
+
+/* ============================================================
+   TOUCH CODE
+============================================================ */
+
+try {
+
+    $touch =
+        $pdo->prepare(
+            "
+            UPDATE conversation_access_codes
+
+            SET last_used_at =
+                CURRENT_TIMESTAMP
+
+            WHERE conversation_id =
+                :conversation_id
+
+            LIMIT 1
+            "
+        );
+
+
+    $touch->execute(
+        [
+            ':conversation_id' =>
+                $conversationId
+        ]
+    );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT CODE TOUCH] '
+        .
+        $e->getMessage()
+    );
+}
+
+
+/* ============================================================
+   UPDATE CONVERSATION ACTIVITY
+============================================================ */
+
+try {
+
+    $touchConversation =
+        $pdo->prepare(
+            "
+            UPDATE conversations
+
+            SET
+
+                updated_at =
+                    CURRENT_TIMESTAMP,
+
+                status =
+                    'active'
+
+            WHERE id =
+                :conversation_id
+
+            LIMIT 1
+            "
+        );
+
+
+    $touchConversation->execute(
+        [
+            ':conversation_id' =>
+                $conversationId
+        ]
+    );
+
+} catch (
+    Throwable $e
+) {
+
+    error_log(
+        '[LOVEMI CHAT ACTIVITY] '
+        .
+        $e->getMessage()
+    );
+}
+
+
+/* ============================================================
+   FINAL RESPONSE
+============================================================ */
+
+/*
+ * messages.html uses:
+ *
+ *     messages.html?chat=<chat_code>
+ *
+ * and api/chat/messages.php validates that the chat code
+ * contains exactly 64 lowercase hexadecimal characters.
+ *
+ * Therefore return the same code at the top level and inside
+ * the conversation object for compatibility.
+ */
+
+chatResponse(
     true,
-    'Connection and conversation are ready.',
+    'Conversation is ready.',
     [
 
-        'connection_id' =>
-            $connectionId,
+        'chat_code' =>
+            $accessCode,
+
+        'access_code' =>
+            $accessCode,
+
+        'conversation_code' =>
+            $accessCode,
 
         'conversation_id' =>
             $conversationId,
 
-        'connected_user' => [
+        'connection_id' =>
+            $connectionId > 0
+                ? $connectionId
+                : null,
 
-            'id' =>
-                (int)
-                $target['id'],
+        'premium_access' =>
+            [
 
-            'username' =>
-                $target['username'],
+                'can_send' =>
+                    true,
 
-            'full_names' =>
-                $target['full_names'],
+                'current_user_premium' =>
+                    $viewerPremium,
 
-            'gender' =>
-                $target['gender']
+                'other_user_premium' =>
+                    $targetPremium,
 
-        ],
+                'rule' =>
+                    'Either connected member having active LOVEMI Premium is enough to keep messaging active.'
 
-        'redirect' =>
-            'messages.html?conversation_id='
-            .
-            $conversationId
+            ],
+
+        'conversation' =>
+            [
+
+                'id' =>
+                    $conversationId,
+
+                'connection_id' =>
+                    $connectionId > 0
+                        ? $connectionId
+                        : null,
+
+                'status' =>
+                    'active',
+
+                'chat_code' =>
+                    $accessCode,
+
+                'access_code' =>
+                    $accessCode
+
+            ]
 
     ]
 );

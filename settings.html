@@ -1,3591 +1,1125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <meta
-        name="theme-color"
-        content="#7c3aed"
-    >
-
-    <meta
-        name="description"
-        content="Manage your LOVEMI account settings, privacy, notifications and preferences."
-    >
-
-    <title>Settings | LOVEMI</title>
-
-
-    <!-- ======================================================
-         LOVEMI FAVICON / TAB ICONS
-    ======================================================= -->
-
-    <link
-        rel="icon"
-        type="image/x-icon"
-        href="assets/logo1/favicon.ico"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="assets/logo1/favicon-16x16.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="assets/logo1/apple-touch-icon.png"
-    >
-
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
-
-
-    <style>
-
-        :root {
-
-            --primary: #7c3aed;
-            --primary-dark: #5b21b6;
-            --primary-soft: #f3e8ff;
-
-            --success: #16a34a;
-            --danger: #dc2626;
-            --warning: #d97706;
-
-            --bg: #f7f7fb;
-            --card: #ffffff;
-
-            --text: #18181b;
-            --muted: #71717a;
-            --soft: #a1a1aa;
-
-            --border: #e4e4e7;
-
-            --shadow:
-                0 14px 35px rgba(
-                    24,
-                    24,
-                    27,
-                    .07
-                );
-
-            --radius: 18px;
-        }
-
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-
-            margin: 0;
-
-            min-height: 100vh;
-
-            font-family:
-                Inter,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
-
-            color: var(--text);
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fbfaff 0%,
-                    var(--bg) 45%,
-                    #f5f5f8 100%
-                );
-
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-
-        button {
-            cursor: pointer;
-        }
-
-
-        /* ====================================================
-           HEADER
-        ===================================================== */
-
-        .topbar {
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 1000;
-
-            min-height: 72px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .95
-                );
-
-            backdrop-filter:
-                blur(15px);
-
-            border-bottom:
-                1px solid
-                var(--border);
-
-        }
-
-
-        .topbar-inner {
-
-            width:
-                min(
-                    calc(100% - 30px),
-                    1400px
-                );
-
-            min-height: 72px;
-
-            margin: auto;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap: 15px;
-
-        }
-
-
-        .brand {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap: 10px;
-
-            color:
-                var(--primary);
-
-            font-weight:
-                900;
-
-        }
-
-
-        .brand img {
-
-            width: 44px;
-
-            height: 44px;
-
-            object-fit:
-                contain;
-
-        }
-
-
-        .brand-name {
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                24px;
-
-            letter-spacing:
-                -.5px;
-
-        }
-
-
-        .header-actions {
-
-            display:
-                flex;
-
-            gap: 8px;
-
-        }
-
-
-        .header-btn {
-
-            width:
-                40px;
-
-            height:
-                40px;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                11px;
-
-            background:
-                #fff;
-
-        }
-
-
-        .header-btn:hover {
-
-            background:
-                var(--primary-soft);
-
-            color:
-                var(--primary);
-
-        }
-
-
-        /* ====================================================
-           NAVIGATION
-        ===================================================== */
-
-        .navigation {
-
-            position: sticky;
-
-            top: 72px;
-
-            z-index: 900;
-
-            background:
-                #fff;
-
-            border-bottom:
-                1px solid
-                var(--border);
-
-        }
-
-
-        .nav-inner {
-
-            width:
-                min(
-                    calc(100% - 30px),
-                    1400px
-                );
-
-            margin:
-                auto;
-
-            display:
-                flex;
-
-            gap:
-                7px;
-
-            padding:
-                9px 0;
-
-            overflow-x:
-                auto;
-
-            scrollbar-width:
-                none;
-
-        }
-
-
-        .nav-inner::-webkit-scrollbar {
-            display: none;
-        }
-
-
-        .nav-link {
-
-            flex:
-                0 0 auto;
-
-            min-height:
-                40px;
-
-            padding:
-                0 13px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            border-radius:
-                11px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                12px;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .nav-link:hover {
-
-            background:
-                var(--primary-soft);
-
-            color:
-                var(--primary);
-
-        }
-
-
-        .nav-link.active {
-
-            background:
-                var(--primary-soft);
-
-            color:
-                var(--primary);
-
-        }
-
-
-        /* ====================================================
-           MAIN
-        ===================================================== */
-
-        .main {
-
-            width:
-                min(
-                    calc(100% - 30px),
-                    1150px
-                );
-
-            margin:
-                auto;
-
-            padding:
-                32px 0 60px;
-
-        }
-
-
-        .heading {
-
-            margin-bottom:
-                22px;
-
-        }
-
-
-        .heading h1 {
-
-            margin:
-                0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(
-                    30px,
-                    5vw,
-                    44px
-                );
-
-            letter-spacing:
-                -.8px;
-
-        }
-
-
-        .heading p {
-
-            margin:
-                7px 0 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                12px;
-
-        }
-
-
-        /* ====================================================
-           SETTINGS LAYOUT
-        ===================================================== */
-
-        .settings-layout {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                245px
-                minmax(
-                    0,
-                    1fr
-                );
-
-            gap:
-                17px;
-
-            align-items:
-                start;
-
-        }
-
-
-        /* ====================================================
-           SIDEBAR
-        ===================================================== */
-
-        .settings-menu {
-
-            position:
-                sticky;
-
-            top:
-                145px;
-
-            background:
-                #fff;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                var(--radius);
-
-            padding:
-                9px;
-
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-        .menu-button {
-
-            width:
-                100%;
-
-            min-height:
-                46px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            padding:
-                0 12px;
-
-            border:
-                0;
-
-            border-radius:
-                11px;
-
-            color:
-                var(--muted);
-
-            background:
-                transparent;
-
-            text-align:
-                left;
-
-            font-size:
-                11px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .menu-button:hover {
-
-            color:
-                var(--primary);
-
-            background:
-                #faf8ff;
-
-        }
-
-
-        .menu-button.active {
-
-            color:
-                var(--primary);
-
-            background:
-                var(--primary-soft);
-
-        }
-
-
-        .menu-icon {
-
-            width:
-                27px;
-
-            height:
-                27px;
-
-            flex:
-                0 0 27px;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            border-radius:
-                8px;
-
-            background:
-                #f4f4f5;
-
-        }
-
-
-        .menu-button.active .menu-icon {
-
-            background:
-                #fff;
-
-        }
-
-
-        /* ====================================================
-           PANELS
-        ===================================================== */
-
-        .content {
-
-            min-width:
-                0;
-
-        }
-
-
-        .panel {
-
-            display:
-                none;
-
-            background:
-                #fff;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                var(--radius);
-
-            box-shadow:
-                var(--shadow);
-
-            overflow:
-                hidden;
-
-        }
-
-
-        .panel.active {
-
-            display:
-                block;
-
-        }
-
-
-        .panel-header {
-
-            padding:
-                21px 22px;
-
-            border-bottom:
-                1px solid
-                var(--border);
-
-        }
-
-
-        .panel-header h2 {
-
-            margin:
-                0;
-
-            font-size:
-                18px;
-
-            letter-spacing:
-                -.3px;
-
-        }
-
-
-        .panel-header p {
-
-            margin:
-                6px 0 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-            line-height:
-                1.5;
-
-        }
-
-
-        .panel-body {
-
-            padding:
-                20px 22px;
-
-        }
-
-
-        /* ====================================================
-           SETTINGS ROW
-        ===================================================== */
-
-        .setting-row {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                20px;
-
-            min-height:
-                70px;
-
-            padding:
-                14px 0;
-
-            border-bottom:
-                1px solid
-                #f0f0f2;
-
-        }
-
-
-        .setting-row:last-child {
-
-            border-bottom:
-                0;
-
-        }
-
-
-        .setting-text {
-
-            min-width:
-                0;
-
-        }
-
-
-        .setting-title {
-
-            font-size:
-                12px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .setting-description {
-
-            margin-top:
-                4px;
-
-            max-width:
-                520px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                10px;
-
-            line-height:
-                1.5;
-
-        }
-
-
-        /* ====================================================
-           SWITCH
-        ===================================================== */
-
-        .switch {
-
-            position:
-                relative;
-
-            flex:
-                0 0 auto;
-
-            width:
-                50px;
-
-            height:
-                28px;
-
-        }
-
-
-        .switch input {
-
-            opacity:
-                0;
-
-            width:
-                0;
-
-            height:
-                0;
-
-        }
-
-
-        .slider {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            background:
-                #d4d4d8;
-
-            border-radius:
-                50px;
-
-            transition:
-                .2s ease;
-
-        }
-
-
-        .slider::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                20px;
-
-            height:
-                20px;
-
-            left:
-                4px;
-
-            top:
-                4px;
-
-            border-radius:
-                50%;
-
-            background:
-                #fff;
-
-            box-shadow:
-                0 2px 6px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    .15
-                );
-
-            transition:
-                .2s ease;
-
-        }
-
-
-        .switch input:checked
-        + .slider {
-
-            background:
-                var(--primary);
-
-        }
-
-
-        .switch input:checked
-        + .slider::before {
-
-            transform:
-                translateX(
-                    22px
-                );
-
-        }
-
-
-        /* ====================================================
-           SELECTS
-        ===================================================== */
-
-        .select {
-
-            min-width:
-                180px;
-
-            min-height:
-                42px;
-
-            padding:
-                0 12px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                10px;
-
-            background:
-                #fff;
-
-            color:
-                var(--text);
-
-            outline:
-                none;
-
-            font-size:
-                11px;
-
-        }
-
-
-        .select:focus {
-
-            border-color:
-                #c4b5fd;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(
-                    124,
-                    58,
-                    237,
-                    .09
-                );
-
-        }
-
-
-        /* ====================================================
-           DANGER
-        ===================================================== */
-
-        .danger-box {
-
-            margin-top:
-                20px;
-
-            padding:
-                16px;
-
-            border:
-                1px solid
-                #fecaca;
-
-            background:
-                #fff7f7;
-
-            border-radius:
-                13px;
-
-        }
-
-
-        .danger-box h3 {
-
-            margin:
-                0 0 6px;
-
-            font-size:
-                13px;
-
-            color:
-                var(--danger);
-
-        }
-
-
-        .danger-box p {
-
-            margin:
-                0;
-
-            color:
-                #7f1d1d;
-
-            font-size:
-                10px;
-
-            line-height:
-                1.55;
-
-        }
-
-
-        .danger-button {
-
-            margin-top:
-                12px;
-
-            min-height:
-                40px;
-
-            padding:
-                0 14px;
-
-            color:
-                #fff;
-
-            border:
-                0;
-
-            border-radius:
-                10px;
-
-            background:
-                var(--danger);
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        /* ====================================================
-           ACTIONS
-        ===================================================== */
-
-        .actions {
-
-            display:
-                flex;
-
-            justify-content:
-                flex-end;
-
-            gap:
-                9px;
-
-            padding-top:
-                18px;
-
-        }
-
-
-        .button {
-
-            min-height:
-                42px;
-
-            padding:
-                0 17px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                10px;
-
-            background:
-                #fff;
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .button.primary {
-
-            color:
-                #fff;
-
-            border-color:
-                var(--primary);
-
-            background:
-                var(--primary);
-
-        }
-
-
-        .button.primary:hover {
-
-            background:
-                var(--primary-dark);
-
-        }
-
-
-        /* ====================================================
-           STATUS
-        ===================================================== */
-
-        .save-status {
-
-            min-height:
-                20px;
-
-            margin-top:
-                12px;
-
-            text-align:
-                right;
-
-            font-size:
-                10px;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .save-status.success {
-
-            color:
-                var(--success);
-
-        }
-
-
-        .save-status.error {
-
-            color:
-                var(--danger);
-
-        }
-
-
-        .loading {
-
-            padding:
-                40px;
-
-            text-align:
-                center;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-        }
-
-
-        /* ====================================================
-           FOOTER
-        ===================================================== */
-
-        .footer {
-
-            background:
-                #18161d;
-
-            color:
-                #fff;
-
-        }
-
-
-        .footer-inner {
-
-            width:
-                min(
-                    calc(100% - 30px),
-                    1400px
-                );
-
-            margin:
-                auto;
-
-            padding:
-                36px 0 18px;
-
-        }
-
-
-        .footer-top {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                flex-start;
-
-            gap:
-                30px;
-
-        }
-
-
-        .footer-brand {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                9px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                22px;
-
-            font-weight:
-                900;
-
-        }
-
-
-        .footer-brand img {
-
-            width:
-                40px;
-
-            height:
-                40px;
-
-            object-fit:
-                contain;
-
-        }
-
-
-        .footer-description {
-
-            max-width:
-                360px;
-
-            margin:
-                8px 0 0;
-
-            color:
-                #a29daa;
-
-            font-size:
-                9px;
-
-            line-height:
-                1.7;
-
-        }
-
-
-        .footer-links {
-
-            display:
-                flex;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                12px 17px;
-
-        }
-
-
-        .footer-links a {
-
-            color:
-                #a29daa;
-
-            font-size:
-                9px;
-
-        }
-
-
-        .footer-links a:hover {
-
-            color:
-                #fff;
-
-        }
-
-
-        .footer-bottom {
-
-            margin-top:
-                20px;
-
-            padding-top:
-                14px;
-
-            border-top:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .08
-                );
-
-            color:
-                #746f7c;
-
-            font-size:
-                8px;
-
-        }
-
-
-        /* ====================================================
-           TOAST
-        ===================================================== */
-
-        .toast {
-
-            position:
-                fixed;
-
-            left:
-                50%;
-
-            bottom:
-                24px;
-
-            z-index:
-                5000;
-
-            transform:
-                translate(
-                    -50%,
-                    20px
-                );
-
-            opacity:
-                0;
-
-            pointer-events:
-                none;
-
-            padding:
-                11px 16px;
-
-            border-radius:
-                11px;
-
-            background:
-                #18181b;
-
-            color:
-                #fff;
-
-            font-size:
-                10px;
-
-            font-weight:
-                700;
-
-            transition:
-                .25s ease;
-
-        }
-
-
-        .toast.show {
-
-            opacity:
-                1;
-
-            transform:
-                translate(
-                    -50%,
-                    0
-                );
-
-        }
-
-
-        .toast.error {
-
-            background:
-                var(--danger);
-
-        }
-
-
-        /* ====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (
-            max-width: 820px
-        ) {
-
-            .topbar,
-            .topbar-inner {
-
-                min-height:
-                    62px;
-
-            }
-
-
-            .topbar-inner {
-
-                width:
-                    calc(
-                        100% - 20px
-                    );
-
-            }
-
-
-            .brand-name {
-
-                font-size:
-                    21px;
-
-            }
-
-
-            .navigation {
-
-                top:
-                    62px;
-
-            }
-
-
-            .nav-inner {
-
-                width:
-                    calc(
-                        100% - 20px
-                    );
-
-            }
-
-
-            .nav-link {
-
-                min-height:
-                    37px;
-
-                padding:
-                    0 10px;
-
-                font-size:
-                    10px;
-
-            }
-
-
-            .main {
-
-                width:
-                    calc(
-                        100% - 20px
-                    );
-
-                padding:
-                    22px 0 40px;
-
-            }
-
-
-            .settings-layout {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .settings-menu {
-
-                position:
-                    static;
-
-                display:
-                    flex;
-
-                overflow-x:
-                    auto;
-
-                gap:
-                    5px;
-
-            }
-
-
-            .menu-button {
-
-                width:
-                    auto;
-
-                flex:
-                    0 0 auto;
-
-                padding:
-                    0 10px;
-
-            }
-
-
-            .menu-button span:last-child {
-
-                display:
-                    none;
-
-            }
-
-
-            .menu-icon {
-
-                width:
-                    31px;
-
-                height:
-                    31px;
-
-            }
-
-
-            .setting-row {
-
-                align-items:
-                    flex-start;
-
-            }
-
-
-            .select {
-
-                min-width:
-                    145px;
-
-            }
-
-
-            .panel-body {
-
-                padding:
-                    16px;
-
-            }
-
-
-            .panel-header {
-
-                padding:
-                    18px 16px;
-
-            }
-
-
-            .footer-inner {
-
-                width:
-                    calc(
-                        100% - 20px
-                    );
-
-            }
-
-
-            .footer-top {
-
-                flex-direction:
-                    column;
-
-            }
-
-        }
-
-
-        @media (
-            max-width: 480px
-        ) {
-
-            .brand-name {
-
-                display:
-                    none;
-
-            }
-
-
-            .header-btn {
-
-                width:
-                    36px;
-
-                height:
-                    36px;
-
-            }
-
-
-            .setting-row {
-
-                gap:
-                    12px;
-
-            }
-
-
-            .setting-text {
-
-                flex:
-                    1;
-
-            }
-
-
-            .select {
-
-                min-width:
-                    125px;
-
-                max-width:
-                    145px;
-
-            }
-
-
-            .actions {
-
-                flex-direction:
-                    column;
-
-            }
-
-
-            .button {
-
-                width:
-                    100%;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7c3aed">
+<meta name="description" content="Manage your LOVEMI account, notifications, privacy, live location, content protection and account security.">
+<title>Settings | LOVEMI</title>
+
+<link rel="icon" type="image/x-icon" href="assets/logo1/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="apple-touch-icon" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
+
+<style>
+:root{
+    --primary:#7c3aed;
+    --primary-dark:#5b21b6;
+    --primary-soft:#f3e8ff;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+    --bg:#f7f7fb;
+    --card:#fff;
+    --text:#18181b;
+    --muted:#71717a;
+    --soft:#a1a1aa;
+    --border:#e4e4e7;
+    --shadow:0 14px 35px rgba(24,24,27,.07);
+    --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--text);
+    background:linear-gradient(180deg,#fbfaff 0%,var(--bg) 45%,#f5f5f8 100%);
+}
+body.modal-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.65}
+
+.topbar{
+    position:sticky;top:0;z-index:1000;min-height:72px;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+    width:min(calc(100% - 30px),1400px);min-height:72px;margin:auto;
+    display:flex;align-items:center;justify-content:space-between;gap:15px;
+}
+.brand{display:flex;align-items:center;gap:10px;color:var(--primary);font-weight:900}
+.brand img{width:44px;height:44px;object-fit:contain}
+.brand-name{font-family:Georgia,"Times New Roman",serif;font-size:24px;letter-spacing:-.5px}
+.header-actions{display:flex;gap:8px}
+.header-btn{
+    width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--border);
+    border-radius:11px;background:#fff
+}
+.header-btn:hover{background:var(--primary-soft);color:var(--primary)}
+
+.navigation{
+    position:sticky;top:72px;z-index:900;background:#fff;border-bottom:1px solid var(--border)
+}
+.nav-inner{
+    width:min(calc(100% - 30px),1400px);margin:auto;display:flex;gap:7px;padding:9px 0;
+    overflow-x:auto;scrollbar-width:none
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-link{
+    flex:0 0 auto;min-height:40px;padding:0 13px;display:flex;align-items:center;
+    border-radius:11px;color:var(--muted);font-size:12px;font-weight:700
+}
+.nav-link:hover,.nav-link.active{background:var(--primary-soft);color:var(--primary)}
+
+.main{width:min(calc(100% - 30px),1150px);margin:auto;padding:32px 0 60px}
+.heading{margin-bottom:22px}
+.heading h1{
+    margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,5vw,44px);letter-spacing:-.8px
+}
+.heading p{margin:7px 0 0;color:var(--muted);font-size:12px}
+
+.settings-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:17px;align-items:start}
+.settings-menu{
+    position:sticky;top:145px;background:#fff;border:1px solid var(--border);
+    border-radius:var(--radius);padding:9px;box-shadow:var(--shadow)
+}
+.menu-button{
+    width:100%;min-height:46px;display:flex;align-items:center;gap:10px;padding:0 12px;
+    border:0;border-radius:11px;color:var(--muted);background:transparent;text-align:left;font-size:11px;font-weight:800
+}
+.menu-button:hover,.menu-button.active{color:var(--primary);background:var(--primary-soft)}
+.menu-icon{
+    width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:8px;background:#f4f4f5
+}
+.content{min-width:0}
+.panel{
+    display:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden
+}
+.panel.active{display:block}
+.panel-header{padding:21px 22px;border-bottom:1px solid var(--border)}
+.panel-header h2{margin:0;font-size:18px}
+.panel-header p{margin:6px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+.panel-body{padding:20px 22px}
+
+.setting-row{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px;
+    padding:14px 0;border-bottom:1px solid #f0f0f2
+}
+.setting-row:last-child{border-bottom:0}
+.setting-text{min-width:0}
+.setting-title{font-size:12px;font-weight:800}
+.setting-description{margin-top:4px;max-width:620px;color:var(--muted);font-size:10px;line-height:1.55}
+
+.switch{position:relative;flex:0 0 auto;width:50px;height:28px}
+.switch input{opacity:0;width:0;height:0}
+.slider{
+    position:absolute;inset:0;background:#d4d4d8;border-radius:50px;transition:.2s ease
+}
+.slider::before{
+    content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;border-radius:50%;
+    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.15);transition:.2s ease
+}
+.switch input:checked+.slider{background:var(--primary)}
+.switch input:checked+.slider::before{transform:translateX(22px)}
+
+.button{
+    min-height:42px;padding:0 17px;border:1px solid var(--border);border-radius:10px;background:#fff;
+    font-size:10px;font-weight:800
+}
+.button.primary{color:#fff;border-color:var(--primary);background:var(--primary)}
+.button.primary:hover{background:var(--primary-dark)}
+.danger-button{
+    min-height:40px;padding:0 14px;color:#fff;border:0;border-radius:10px;background:var(--danger);font-size:10px;font-weight:800
+}
+.actions{display:flex;justify-content:flex-end;gap:9px;padding-top:18px}
+.save-status{min-height:20px;margin-top:12px;text-align:right;font-size:10px;font-weight:700}
+.save-status.success{color:var(--success)}
+.save-status.error{color:var(--danger)}
+
+.location-info{
+    margin:0 0 15px;padding:13px 14px;border:1px solid #ddd6fe;border-radius:13px;
+    background:#faf8ff;color:var(--muted);font-size:10px;line-height:1.6
+}
+.location-info strong{color:var(--primary-dark)}
+.location-state{
+    display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:5px 9px;border-radius:999px;
+    background:#f4f4f5;font-size:9px;font-weight:800
+}
+.location-state.enabled{color:#166534;background:#dcfce7}
+.location-state.disabled{color:#991b1b;background:#fee2e2}
+
+.protection-summary{
+    padding:14px;margin-bottom:16px;border:1px solid #ddd6fe;background:#faf8ff;border-radius:13px
+}
+.protection-summary strong{display:block;font-size:12px;color:var(--primary-dark)}
+.protection-summary span{display:block;margin-top:5px;font-size:10px;color:var(--muted);line-height:1.55}
+.post-protection-list{display:grid;gap:12px}
+.protected-post{padding:15px;border:1px solid var(--border);border-radius:14px;background:#fff}
+.protected-post-head{display:flex;justify-content:space-between;gap:12px}
+.protected-post-title{min-width:0;font-size:12px;font-weight:800;word-break:break-word}
+.protected-post-date{color:var(--muted);font-size:9px;white-space:nowrap}
+.protected-post-content{
+    margin-top:8px;color:var(--muted);font-size:10px;line-height:1.5;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
+}
+.protected-controls{margin-top:13px;display:grid;gap:8px}
+.mini-control{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 10px;background:#fafafa;border-radius:10px
+}
+.mini-control-label{font-size:10px;font-weight:700}
+.mini-control-description{margin-top:2px;color:var(--muted);font-size:9px}
+.post-status-pill{
+    display:inline-flex;align-items:center;padding:4px 8px;border-radius:20px;font-size:8px;font-weight:800
+}
+.post-status-pill.locked{color:#166534;background:#dcfce7}
+.post-status-pill.open{color:#92400e;background:#fef3c7}
+.protection-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.empty-posts{padding:30px;text-align:center;color:var(--muted);font-size:11px;border:1px dashed var(--border);border-radius:13px}
+
+.danger-box{margin-top:20px;padding:16px;border:1px solid #fecaca;background:#fff7f7;border-radius:13px}
+.danger-box h3{margin:0 0 6px;font-size:13px;color:var(--danger)}
+.danger-box p{margin:0;color:#7f1d1d;font-size:10px;line-height:1.55}
+.loading{padding:40px;text-align:center;color:var(--muted);font-size:11px}
+
+.footer{background:#18161d;color:#fff}
+.footer-inner{width:min(calc(100% - 30px),1400px);margin:auto;padding:36px 0 18px}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.footer-brand{
+    display:flex;align-items:center;gap:9px;font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:900
+}
+.footer-brand img{width:40px;height:40px;object-fit:contain}
+.footer-description{max-width:360px;margin:8px 0 0;color:#a29daa;font-size:9px;line-height:1.7}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px 17px}
+.footer-links a{color:#a29daa;font-size:9px}
+.footer-links a:hover{color:#fff}
+.footer-bottom{
+    margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);color:#746f7c;font-size:8px
+}
+
+.toast{
+    position:fixed;left:50%;bottom:24px;z-index:5000;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+    padding:11px 16px;border-radius:11px;background:#18181b;color:#fff;font-size:10px;font-weight:700;transition:.25s ease
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.error{background:var(--danger)}
+
+.modal{
+    position:fixed;inset:0;z-index:7000;display:none;align-items:center;justify-content:center;padding:18px;
+    background:rgba(15,23,42,.62);backdrop-filter:blur(8px)
+}
+.modal.show{display:flex}
+.modal-card{
+    width:min(100%,520px);max-height:calc(100vh - 36px);overflow-y:auto;padding:22px;border-radius:18px;
+    background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.25)
+}
+.modal-card h3{margin:0;font-size:19px}
+.modal-card p{margin:7px 0 0;color:var(--muted);font-size:10px;line-height:1.6}
+.delete-step{display:none;margin-top:18px}
+.delete-step.active{display:block}
+.step-number{
+    display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;
+    color:#fff;background:var(--primary);font-size:10px;font-weight:900
+}
+.step-title{margin-left:8px;font-weight:900;font-size:12px}
+.field{margin-top:13px}
+.field label{display:block;margin-bottom:6px;font-size:10px;font-weight:800}
+.field input{
+    width:100%;min-height:44px;padding:0 12px;border:1px solid var(--border);border-radius:10px;outline:none;font-size:12px;letter-spacing:1px
+}
+.field input:focus{border-color:#c4b5fd;box-shadow:0 0 0 3px rgba(124,58,237,.09)}
+.verification-code{text-align:center;font-size:20px!important;letter-spacing:5px!important;font-weight:900}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.verification-message{
+    margin-top:10px;padding:10px;border-radius:10px;background:#fafafa;color:var(--muted);font-size:9px;line-height:1.5
+}
+.verification-message.success{color:#166534;background:#f0fdf4}
+.verification-message.error{color:#991b1b;background:#fef2f2}
+.email-link-state{margin-top:10px;font-size:9px;font-weight:800}
+.email-link-state.verified{color:#15803d}
+.email-link-state.pending{color:#92400e}
+
+@media (max-width:820px){
+    .topbar,.topbar-inner{min-height:62px}
+    .topbar-inner,.nav-inner,.footer-inner{width:calc(100% - 20px)}
+    .brand-name{font-size:21px}
+    .navigation{top:62px}
+    .nav-link{min-height:37px;padding:0 10px;font-size:10px}
+    .main{width:calc(100% - 20px);padding:22px 0 40px}
+    .settings-layout{grid-template-columns:1fr}
+    .settings-menu{position:static;display:flex;overflow-x:auto;gap:5px}
+    .menu-button{width:auto;flex:0 0 auto;padding:0 10px}
+    .menu-button span:last-child{display:none}
+    .menu-icon{width:31px;height:31px}
+    .setting-row{align-items:flex-start}
+    .panel-body{padding:16px}
+    .panel-header{padding:18px 16px}
+    .footer-top{flex-direction:column}
+}
+@media (max-width:480px){
+    .brand-name{display:none}
+    .header-btn{width:36px;height:36px}
+    .actions{flex-direction:column}
+    .button{width:100%}
+    .protected-post-head{flex-direction:column}
+    .modal-actions{flex-direction:column-reverse}
+    .modal-actions .button,.modal-actions .danger-button{width:100%}
+}
+</style>
 </head>
 
-
 <body>
-
-
-<!-- ==========================================================
-     HEADER
-=========================================================== -->
-
 <header class="topbar">
-
     <div class="topbar-inner">
-
-        <a
-            href="dashboard.html"
-            class="brand"
-            aria-label="LOVEMI Dashboard"
-        >
-
-            <img
-                src="assets/logo1/LOGO1.ico"
-                alt="LOVEMI Logo"
-                onerror="
-                    this.onerror=null;
-                    this.src='assets/logo1/apple-touch-icon.png';
-                "
-            >
-
-            <span class="brand-name">
-                LOVEMI
-            </span>
-
+        <a href="dashboard.html" class="brand" aria-label="LOVEMI Dashboard">
+            <img src="assets/logo1/LOGO1.ico" alt="LOVEMI Logo"
+                 onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+            <span class="brand-name">LOVEMI</span>
         </a>
-
-
         <div class="header-actions">
-
-            <a
-                href="notifications.html"
-                class="header-btn"
-                aria-label="Notifications"
-                title="Notifications"
-            >
-                🔔
-            </a>
-
-            <a
-                href="profile.html"
-                class="header-btn"
-                aria-label="Profile"
-                title="Profile"
-            >
-                👤
-            </a>
-
+            <a href="notifications.html" class="header-btn" aria-label="Notifications" title="Notifications">🔔</a>
+            <a href="profile.html" class="header-btn" aria-label="Profile" title="Profile">👤</a>
         </div>
-
     </div>
-
 </header>
 
-
-<!-- ==========================================================
-     MAIN NAVIGATION
-=========================================================== -->
-
-<nav
-    class="navigation"
-    aria-label="Main navigation"
->
-
+<nav class="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-
-        <a
-            class="nav-link"
-            href="dashboard.html"
-        >
-            Dashboard
-        </a>
-
-        <a
-            class="nav-link"
-            href="discover.html"
-        >
-            Discover
-        </a>
-
-        <a
-            class="nav-link"
-            href="connections.html"
-        >
-            Connections
-        </a>
-
-        <a
-            class="nav-link"
-            href="messages.html"
-        >
-            Messages
-        </a>
-
-
-
-        <a
-            class="nav-link"
-            href="notifications.html"
-        >
-            Notifications
-        </a>
-
-        <a
-            class="nav-link active"
-            href="settings.html"
-        >
-            Settings
-        </a>
-
-        <a
-            class="nav-link"
-            href="premium.html"
-        >
-            Premium
-        </a>
-
+        <a class="nav-link" href="dashboard.html">Dashboard</a>
+        <a class="nav-link" href="discover.html">Discover</a>
+        <a class="nav-link" href="connections.html">Connections</a>
+        <a class="nav-link" href="messages.html">Messages</a>
+        <a class="nav-link" href="notifications.html">Notifications</a>
+        <a class="nav-link active" href="settings.html">Settings</a>
+        <a class="nav-link" href="premium.html">Premium</a>
     </div>
-
 </nav>
 
-
-<!-- ==========================================================
-     MAIN
-=========================================================== -->
-
 <main class="main">
-
     <section class="heading">
-
-        <h1>
-            Settings
-        </h1>
-
-        <p>
-            Manage your LOVEMI account and communication preferences.
-        </p>
-
+        <h1>Settings</h1>
+        <p>Manage your LOVEMI account, notifications, privacy, live location, content protection and security.</p>
     </section>
-
 
     <section class="settings-layout">
-
-
-        <!-- ==================================================
-             SETTINGS MENU
-        =================================================== -->
-
         <aside class="settings-menu">
-
-            <button
-                type="button"
-                class="menu-button active"
-                data-panel="account"
-            >
-
-                <span class="menu-icon">
-                    👤
-                </span>
-
-                <span>
-                    Account
-                </span>
-
+            <button type="button" class="menu-button active" data-panel="account">
+                <span class="menu-icon">👤</span><span>Account</span>
             </button>
-
-
-            <button
-                type="button"
-                class="menu-button"
-                data-panel="notifications"
-            >
-
-                <span class="menu-icon">
-                    🔔
-                </span>
-
-                <span>
-                    Notifications
-                </span>
-
+            <button type="button" class="menu-button" data-panel="notifications">
+                <span class="menu-icon">🔔</span><span>Notifications</span>
             </button>
-
-
-            <button
-                type="button"
-                class="menu-button"
-                data-panel="communication"
-            >
-
-                <span class="menu-icon">
-                    💬
-                </span>
-
-                <span>
-                    Communication
-                </span>
-
+            <button type="button" class="menu-button" data-panel="communication">
+                <span class="menu-icon">💬</span><span>Communication</span>
             </button>
-
-
-            <button
-                type="button"
-                class="menu-button"
-                data-panel="privacy"
-            >
-
-                <span class="menu-icon">
-                    🛡️
-                </span>
-
-                <span>
-                    Privacy
-                </span>
-
+            <button type="button" class="menu-button" data-panel="privacy">
+                <span class="menu-icon">🛡️</span><span>Privacy</span>
             </button>
-
-
-            <button
-                type="button"
-                class="menu-button"
-                data-panel="danger"
-            >
-
-                <span class="menu-icon">
-                    ⚠️
-                </span>
-
-                <span>
-                    Account Actions
-                </span>
-
+            <button type="button" class="menu-button" data-panel="protection">
+                <span class="menu-icon">🔐</span><span>Content Protection</span>
             </button>
-
+            <button type="button" class="menu-button" data-panel="danger">
+                <span class="menu-icon">⚠️</span><span>Account Actions</span>
+            </button>
         </aside>
 
-
-        <!-- ==================================================
-             CONTENT
-        =================================================== -->
-
         <div class="content">
+            <div id="loadingState" class="loading">Loading your settings...</div>
 
-
-            <div id="loadingState" class="loading">
-
-                Loading your settings...
-
-            </div>
-
-
-            <!-- ==============================================
-                 ACCOUNT
-            =============================================== -->
-
-            <section
-                id="panel-account"
-                class="panel active"
-                hidden
-            >
-
+            <section id="panel-account" class="panel active" hidden>
                 <div class="panel-header">
-
-                    <h2>
-                        Account
-                    </h2>
-
-                    <p>
-                        Basic settings for your LOVEMI account.
-                    </p>
-
+                    <h2>Account</h2>
+                    <p>Basic settings for your LOVEMI account and live-location visibility.</p>
                 </div>
-
-
                 <div class="panel-body">
-
                     <div class="setting-row">
-
                         <div class="setting-text">
-
-                            <div class="setting-title">
-                                Email notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Receive important LOVEMI information by email.
-                            </div>
-
+                            <div class="setting-title">Email notifications</div>
+                            <div class="setting-description">Receive important LOVEMI information by email.</div>
                         </div>
-
-
                         <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="email_notifications"
-                            >
-
+                            <input type="checkbox" id="email_notifications">
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
-
                     <div class="setting-row">
-
                         <div class="setting-text">
-
-                            <div class="setting-title">
-                                SMS notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Allow important notifications to be sent by SMS.
-                            </div>
-
+                            <div class="setting-title">SMS notifications</div>
+                            <div class="setting-description">Allow important notifications to be sent by SMS.</div>
                         </div>
-
-
                         <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="sms_notifications"
-                            >
-
+                            <input type="checkbox" id="sms_notifications">
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
-
                     <div class="setting-row">
-
                         <div class="setting-text">
-
-                            <div class="setting-title">
-                                Push notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Receive supported notifications in your browser or device.
-                            </div>
-
+                            <div class="setting-title">Push notifications</div>
+                            <div class="setting-description">Receive supported notifications in your browser or device.</div>
                         </div>
-
-
                         <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="push_notifications"
-                            >
-
+                            <input type="checkbox" id="push_notifications">
                             <span class="slider"></span>
-
                         </label>
-
                     </div>
 
+                    <div class="setting-row">
+                        <div class="setting-text">
+                            <div class="setting-title">Live location</div>
+                            <div class="setting-description">
+                                When enabled, LOVEMI may store your latest browser GPS position so Discover can show
+                                your current location and help nearby members find you. Turning this off removes your
+                                active live-location record so other users cannot use LOVEMI's location data to locate you.
+                            </div>
+                            <div id="locationState" class="location-state disabled">● Live location disabled</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="live_location_enabled" aria-label="Live location">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="location-info">
+                        <strong>Privacy:</strong> Your registration country is not changed by this setting.
+                        The live location is stored separately and is removed when you disable live location.
+                        Browser/device location permission is also controlled by your browser or device.
+                    </div>
 
                     <div class="actions">
-
-                        <button
-                            type="button"
-                            class="button primary"
-                            id="saveAccount"
-                        >
-                            Save Changes
-                        </button>
-
+                        <button type="button" class="button primary" id="saveAccount">Save Changes</button>
                     </div>
-
-
-                    <div
-                        id="accountStatus"
-                        class="save-status"
-                    ></div>
-
+                    <div id="accountStatus" class="save-status"></div>
                 </div>
-
             </section>
 
-
-            <!-- ==============================================
-                 NOTIFICATIONS
-            =============================================== -->
-
-            <section
-                id="panel-notifications"
-                class="panel"
-                hidden
-            >
-
-                <div class="panel-header">
-
-                    <h2>
-                        Notifications
-                    </h2>
-
-                    <p>
-                        Choose the types of LOVEMI alerts you receive.
-                    </p>
-
-                </div>
-
-
+            <section id="panel-notifications" class="panel" hidden>
+                <div class="panel-header"><h2>Notifications</h2><p>Choose the LOVEMI alerts you receive.</p></div>
                 <div class="panel-body">
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Connection notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Notify me when connection activity happens.
-                            </div>
-
-                        </div>
-
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="connection_notifications"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
+                        <div class="setting-text"><div class="setting-title">Connection notifications</div><div class="setting-description">Notify me when connection activity happens.</div></div>
+                        <label class="switch"><input type="checkbox" id="connection_notifications"><span class="slider"></span></label>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Message notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Notify me when I receive a message.
-                            </div>
-
-                        </div>
-
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="message_notifications"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
+                        <div class="setting-text"><div class="setting-title">Message notifications</div><div class="setting-description">Notify me when I receive a message.</div></div>
+                        <label class="switch"><input type="checkbox" id="message_notifications"><span class="slider"></span></label>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Premium notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Receive Premium activation, reminder and expiry alerts.
-                            </div>
-
-                        </div>
-
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="premium_notifications"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
+                        <div class="setting-text"><div class="setting-title">Premium notifications</div><div class="setting-description">Receive Premium activation, reminder and expiry alerts.</div></div>
+                        <label class="switch"><input type="checkbox" id="premium_notifications"><span class="slider"></span></label>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                System notifications
-                            </div>
-
-                            <div class="setting-description">
-                                Receive important security and platform notices.
-                            </div>
-
-                        </div>
-
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="system_notifications"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
+                        <div class="setting-text"><div class="setting-title">System notifications</div><div class="setting-description">Receive important security and platform notices.</div></div>
+                        <label class="switch"><input type="checkbox" id="system_notifications"><span class="slider"></span></label>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Notification sounds
-                            </div>
-
-                            <div class="setting-description">
-                                Play the LOVEMI notification audio assigned by the system.
-                            </div>
-
-                        </div>
-
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="sound_enabled"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
+                        <div class="setting-text"><div class="setting-title">Notification sounds</div><div class="setting-description">Play supported LOVEMI notification audio.</div></div>
+                        <label class="switch"><input type="checkbox" id="sound_enabled"><span class="slider"></span></label>
                     </div>
+                    <div class="actions"><button type="button" class="button primary" id="saveNotifications">Save Changes</button></div>
+                    <div id="notificationStatus" class="save-status"></div>
+                </div>
+            </section>
 
-
+            <section id="panel-communication" class="panel" hidden>
+                <div class="panel-header"><h2>Communication</h2><p>Control how LOVEMI communicates with you.</p></div>
+                <div class="panel-body">
+                    <div class="setting-row"><div class="setting-text"><div class="setting-title">Email communication</div><div class="setting-description">This follows your email notification preference.</div></div><span id="emailState">—</span></div>
+                    <div class="setting-row"><div class="setting-text"><div class="setting-title">SMS communication</div><div class="setting-description">This follows your SMS notification preference.</div></div><span id="smsState">—</span></div>
+                    <div class="setting-row"><div class="setting-text"><div class="setting-title">Message alerts</div><div class="setting-description">This follows your message notification setting.</div></div><span id="messageState">—</span></div>
                     <div class="actions">
-
-                        <button
-                            type="button"
-                            class="button primary"
-                            id="saveNotifications"
-                        >
-                            Save Changes
-                        </button>
-
+                        <a href="privacy.html" class="button">Privacy Centre</a>
+                        <a href="help.html" class="button primary">Get Help</a>
                     </div>
-
-
-                    <div
-                        id="notificationStatus"
-                        class="save-status"
-                    ></div>
-
                 </div>
-
             </section>
 
-
-            <!-- ==============================================
-                 COMMUNICATION
-            =============================================== -->
-
-            <section
-                id="panel-communication"
-                class="panel"
-                hidden
-            >
-
-                <div class="panel-header">
-
-                    <h2>
-                        Communication
-                    </h2>
-
-                    <p>
-                        Control how LOVEMI communicates with you.
-                    </p>
-
-                </div>
-
-
+            <section id="panel-privacy" class="panel" hidden>
+                <div class="panel-header"><h2>Privacy</h2><p>Manage profile and communication privacy separately.</p></div>
                 <div class="panel-body">
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Email communication
-                            </div>
-
-                            <div class="setting-description">
-                                This follows the email notification preference.
-                            </div>
-
-                        </div>
-
-
-                        <span id="emailState">
-                            —
-                        </span>
-
+                        <div class="setting-text"><div class="setting-title">Privacy settings</div><div class="setting-description">Manage who can see your profile, online state and messages.</div></div>
+                        <a href="privacy.html" class="button primary">Manage Privacy</a>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                SMS communication
-                            </div>
-
-                            <div class="setting-description">
-                                This follows the SMS notification preference.
-                            </div>
-
-                        </div>
-
-
-                        <span id="smsState">
-                            —
-                        </span>
-
+                        <div class="setting-text"><div class="setting-title">Contact information</div><div class="setting-description">Phone, identity information and sensitive credentials remain protected.</div></div><span>🔒 Protected</span>
                     </div>
-
-
                     <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Message alerts
-                            </div>
-
-                            <div class="setting-description">
-                                This follows your message-notification setting.
-                            </div>
-
-                        </div>
-
-
-                        <span id="messageState">
-                            —
-                        </span>
-
+                        <div class="setting-text"><div class="setting-title">Account security</div><div class="setting-description">Your account uses the existing LOVEMI verification and Google Authenticator security system.</div></div><span>🛡️ Active</span>
                     </div>
-
-
-                    <div class="actions">
-
-                        <a
-                            href="privacy.html"
-                            class="button"
-                        >
-                            Privacy Centre
-                        </a>
-
-                        <a
-                            href="help.html"
-                            class="button primary"
-                        >
-                            Get Help
-                        </a>
-
-                    </div>
-
                 </div>
-
             </section>
 
-
-            <!-- ==============================================
-                 PRIVACY
-            =============================================== -->
-
-            <section
-                id="panel-privacy"
-                class="panel"
-                hidden
-            >
-
+            <section id="panel-protection" class="panel" hidden>
                 <div class="panel-header">
-
-                    <h2>
-                        Privacy
-                    </h2>
-
-                    <p>
-                        Profile visibility and communication privacy are controlled
-                        separately so your private contact information is protected.
-                    </p>
-
+                    <h2>Content Protection</h2>
+                    <p>Control whether other people may repost your posts or download videos from them.</p>
                 </div>
-
-
                 <div class="panel-body">
-
-
-                    <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Privacy settings
-                            </div>
-
-                            <div class="setting-description">
-                                Manage who can see your profile, your online state
-                                and who can send you messages.
-                            </div>
-
-                        </div>
-
-
-                        <a
-                            href="privacy.html"
-                            class="button primary"
-                        >
-                            Manage Privacy
-                        </a>
-
-                    </div>
-
-
-                    <div class="setting-row">
-
-                        <div class="setting-text">
-
-                            <div class="setting-title">
-                                Contact information
-                            </div>
-
-                            <div class="setting-description">
-                                Your phone number, identity information and other
-                                sensitive credentials are not displayed by the normal
-                                profile/settings endpoints.
-                            </div>
-
-                        </div>
-
+                    <div class="protection-summary">
+                        <strong>🔐 Protect your posts</strong>
                         <span>
-                            🔒 Protected
+                            These controls are saved in the database and are intended to be enforced by LOVEMI's post,
+                            repost and protected-video APIs rather than relying only on browser controls.
                         </span>
-
                     </div>
-
 
                     <div class="setting-row">
-
                         <div class="setting-text">
-
-                            <div class="setting-title">
-                                Account security
-                            </div>
-
-                            <div class="setting-description">
-                                Use your account security and verification controls
-                                when changing sensitive account information.
-                            </div>
-
+                            <div class="setting-title">Block reposting by default</div>
+                            <div class="setting-description">New posts inherit a protected setting so supported LOVEMI repost/copy actions are blocked.</div>
                         </div>
-
-                        <a
-                            href="profile.html"
-                            class="button"
-                        >
-                            View Profile
-                        </a>
-
+                        <label class="switch"><input type="checkbox" id="default_allow_repost"><span class="slider"></span></label>
                     </div>
 
-                </div>
-
-            </section>
-
-
-            <!-- ==============================================
-                 DANGER
-            =============================================== -->
-
-            <section
-                id="panel-danger"
-                class="panel"
-                hidden
-            >
-
-                <div class="panel-header">
-
-                    <h2>
-                        Account Actions
-                    </h2>
-
-                    <p>
-                        Actions that affect your LOVEMI account.
-                    </p>
-
-                </div>
-
-
-                <div class="panel-body">
-
-                    <div class="danger-box">
-
-                        <h3>
-                            Delete account
-                        </h3>
-
-                        <p>
-                            Account deletion is permanent. Your account and
-                            associated profile information may be removed
-                            according to the LOVEMI account-deletion rules.
-                        </p>
-
-
-                        <button
-                            type="button"
-                            class="danger-button"
-                            id="deleteAccountButton"
-                        >
-                            Delete My Account
-                        </button>
-
+                    <div class="setting-row">
+                        <div class="setting-text">
+                            <div class="setting-title">Block video downloads by default</div>
+                            <div class="setting-description">Protected videos must be streamed through the protected media endpoint instead of exposing a normal download URL.</div>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="default_allow_video_download"><span class="slider"></span></label>
                     </div>
-
 
                     <div class="actions">
-
-                        <a
-                            href="dashboard.html"
-                            class="button"
-                        >
-                            Back to Dashboard
-                        </a>
-
+                        <button type="button" class="button" id="applyProtectionAll">Apply Current Protection to All Posts</button>
+                        <button type="button" class="button primary" id="saveProtectionDefaults">Save Defaults</button>
                     </div>
+                    <div id="protectionStatus" class="save-status"></div>
 
+                    <div id="postProtectionList" class="post-protection-list">
+                        <div class="loading">Loading your posts...</div>
+                    </div>
                 </div>
-
             </section>
 
+            <section id="panel-danger" class="panel" hidden>
+                <div class="panel-header"><h2>Account Actions</h2><p>Actions that affect the security and availability of your LOVEMI account.</p></div>
+                <div class="panel-body">
+                    <div class="danger-box">
+                        <h3>Delete account</h3>
+                        <p>
+                            Account deletion requires your email verification link, your email verification code,
+                            and your current Google Authenticator 2FA code.
+                        </p>
+                        <button type="button" class="danger-button" id="deleteAccountButton">Delete My Account</button>
+                    </div>
+                    <div class="actions"><a href="dashboard.html" class="button">Back to Dashboard</a></div>
+                </div>
+            </section>
         </div>
-
     </section>
-
 </main>
 
-
-<!-- ==========================================================
-     FOOTER
-=========================================================== -->
-
 <footer class="footer">
-
     <div class="footer-inner">
-
         <div class="footer-top">
-
             <div>
-
                 <div class="footer-brand">
-
-                    <img
-                        src="assets/logo1/LOGO1.ico"
-                        alt="LOVEMI"
-                        onerror="
-                            this.onerror=null;
-                            this.src='assets/logo1/apple-touch-icon.png';
-                        "
-                    >
-
-                    <span>
-                        LOVEMI
-                    </span>
-
+                    <img src="assets/logo1/LOGO1.ico" alt="LOVEMI"
+                         onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+                    <span>LOVEMI</span>
                 </div>
-
-
                 <p class="footer-description">
-
-                    Discover, connect and communicate through
-                    LOVEMI with privacy, account protection and
-                    responsible communication at the centre.
-
+                    Discover, connect and communicate through LOVEMI with privacy, account protection and responsible communication at the centre.
                 </p>
-
             </div>
-
-
             <div class="footer-links">
-
-                <a href="about.html">
-                    About
-                </a>
-
-                <a href="help.html">
-                    Help
-                </a>
-
-                <a href="privacy.html">
-                    Privacy
-                </a>
-
-                <a href="terms.html">
-                    Terms
-                </a>
-
-                <a href="contact.html">
-                    Contact
-                </a>
-
+                <a href="about.html">About</a>
+                <a href="help.html">Help</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
             </div>
-
         </div>
-
-
-        <div class="footer-bottom">
-
-            ©
-            <span id="year"></span>
-            LOVEMI. All rights reserved.
-
-        </div>
-
+        <div class="footer-bottom">© <span id="year"></span> LOVEMI. All rights reserved.</div>
     </div>
-
 </footer>
 
+<div id="deleteModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+        <h3>Secure Account Deletion</h3>
+        <p>LOVEMI will verify your identity before deleting your account.</p>
 
-<div
-    id="toast"
-    class="toast"
-    role="status"
-    aria-live="polite"
-></div>
+        <div id="deleteStep1" class="delete-step active">
+            <div><span class="step-number">1</span><span class="step-title">Request verification</span></div>
+            <p>Enter DELETE below. LOVEMI will send a verification email containing a secure link and six-digit code.</p>
+            <div class="field"><label for="deleteConfirmation">Type DELETE</label><input id="deleteConfirmation" type="text" autocomplete="off" placeholder="DELETE"></div>
+            <div id="deleteRequestMessage" class="verification-message">Your account is not deleted at this stage.</div>
+            <div class="modal-actions">
+                <button type="button" class="button" data-close-delete>Cancel</button>
+                <button type="button" class="button primary" id="requestDeletionVerification">Send Verification Email</button>
+            </div>
+        </div>
 
+        <div id="deleteStep2" class="delete-step">
+            <div><span class="step-number">2</span><span class="step-title">Verify email</span></div>
+            <p>Open the verification link sent to your email, then enter the six-digit verification code.</p>
+            <div id="deleteLinkState" class="email-link-state pending">Waiting for email link verification...</div>
+            <div class="field"><label for="deleteEmailCode">Email verification code</label><input id="deleteEmailCode" class="verification-code" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"></div>
+            <div id="deleteEmailMessage" class="verification-message">The code expires shortly for your protection.</div>
+            <div class="modal-actions">
+                <button type="button" class="button" data-close-delete>Cancel</button>
+                <button type="button" class="button primary" id="verifyDeleteEmail">Verify Email</button>
+            </div>
+        </div>
+
+        <div id="deleteStep3" class="delete-step">
+            <div><span class="step-number">3</span><span class="step-title">Google Authenticator 2FA</span></div>
+            <p>Enter the current six-digit code displayed by your Google Authenticator application.</p>
+            <div class="field"><label for="delete2faCode">2FA verification code</label><input id="delete2faCode" class="verification-code" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"></div>
+            <div id="delete2faMessage" class="verification-message">Your normal Google Authenticator secret is never sent to the browser.</div>
+            <div class="modal-actions">
+                <button type="button" class="button" data-close-delete>Cancel</button>
+                <button type="button" class="button primary" id="verifyDelete2FA">Verify 2FA</button>
+            </div>
+        </div>
+
+        <div id="deleteStep4" class="delete-step">
+            <div><span class="step-number">4</span><span class="step-title">Final confirmation</span></div>
+            <p>All security checks have passed. The next action permanently marks your LOVEMI account as deleted.</p>
+            <div class="verification-message">⚠️ Your profile will become unavailable, your active session will end, and your account will be marked deleted.</div>
+            <div class="modal-actions">
+                <button type="button" class="button" data-close-delete>Cancel</button>
+                <button type="button" class="danger-button" id="finalDeleteAccount">Permanently Delete Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-
 "use strict";
 
-
-/* ============================================================
-   API
-============================================================ */
-
-const SETTINGS_API = {
-
-    GET:
-        "api/settings/get.php",
-
-    UPDATE:
-        "api/settings/update.php",
-
-    DELETE_ACCOUNT:
-        "api/users/delete-account.php"
-
+const API = {
+    GET: "api/settings/get.php",
+    UPDATE: "api/settings/update.php",
+    LOCATION: "api/auth/live-location-udate.php",
+    PROTECTION: "api/settings/post-protection.php",
+    DELETE_ACCOUNT: "api/users/delete-account.php"
 };
 
+const loadingState = document.getElementById("loadingState");
+const toast = document.getElementById("toast");
+const deleteModal = document.getElementById("deleteModal");
+let toastTimer = null;
 
-/* ============================================================
-   ELEMENTS
-============================================================ */
-
-const loadingState =
-    document.getElementById(
-        "loadingState"
-    );
-
-
-const toast =
-    document.getElementById(
-        "toast"
-    );
-
-
-/* ============================================================
-   TOAST
-============================================================ */
-
-let toastTimer;
-
-
-function showToast(
-    message,
-    error = false
-) {
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.toggle(
-        "error",
-        error
-    );
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2800
-        );
-
+function showToast(message,error=false){
+    clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.classList.toggle("error",error);
+    toast.classList.add("show");
+    toastTimer=setTimeout(()=>toast.classList.remove("show"),3200);
 }
 
-
-/* ============================================================
-   API REQUEST
-============================================================ */
-
-async function apiRequest(
-    url,
-    options = {}
-) {
-
-    const response =
-        await fetch(
-            url,
-            {
-
-                ...options,
-
-                cache:
-                    "no-store",
-
-                credentials:
-                    "same-origin",
-
-                headers: {
-
-                    "Accept":
-                        "application/json",
-
-                    "Cache-Control":
-                        "no-cache",
-
-                    ...(options.headers || {})
-
-                }
-
-            }
-        );
-
-
+async function apiRequest(url,options={}){
+    const response=await fetch(url,{
+        ...options,
+        cache:"no-store",
+        credentials:"same-origin",
+        headers:{
+            "Accept":"application/json",
+            "Cache-Control":"no-cache",
+            ...(options.headers||{})
+        }
+    });
     let data;
-
-
-    try {
-
-        data =
-            await response.json();
-
-    } catch {
-
-        throw new Error(
-            "The server returned an invalid response."
-        );
-
+    try{data=await response.json()}catch{
+        throw new Error("The server returned an invalid response.");
     }
-
-
-    if (
-        !response.ok
-        ||
-        data.success === false
-    ) {
-
-        const error =
-            new Error(
-                data.message
-                ||
-                "Request failed."
-            );
-
-
-        error.data =
-            data;
-
-
+    if(!response.ok || data.success===false){
+        const error=new Error(data.message||"Request failed.");
+        error.data=data;
         throw error;
-
     }
-
-
     return data;
-
 }
 
+function setChecked(id,value){
+    const element=document.getElementById(id);
+    if(!element)return;
+    element.checked=typeof value==="boolean"?value:Number(value)===1;
+}
+function getChecked(id){
+    const element=document.getElementById(id);
+    return element && element.checked ? 1 : 0;
+}
+function statusMessage(id,message,error=false){
+    const element=document.getElementById(id);
+    if(!element)return;
+    element.textContent=message;
+    element.className="save-status "+(error?"error":"success");
+}
+function updateCommunicationStates(settings){
+    document.getElementById("emailState").textContent=Number(settings.email_notifications||0)===1?"Enabled":"Disabled";
+    document.getElementById("smsState").textContent=Number(settings.sms_notifications||0)===1?"Enabled":"Disabled";
+    document.getElementById("messageState").textContent=Number(settings.message_notifications||0)===1?"Enabled":"Disabled";
+}
+function updateLocationVisual(enabled){
+    const state=document.getElementById("locationState");
+    state.className="location-state "+(enabled?"enabled":"disabled");
+    state.textContent=enabled?"● Live location enabled":"● Live location disabled";
+}
+function protectionCheckedFromAllow(value){
+    return Number(value??1)!==1;
+}
 
-/* ============================================================
-   SWITCH HELPERS
-============================================================ */
+async function loadSettings(){
+    loadingState.hidden=false;
+    try{
+        const data=await apiRequest(API.GET+"?_="+Date.now());
+        const settings=data.settings||{};
+        const notifications=data.notifications||settings.notifications||{};
+        const contentSecurity=data.content_security||settings.content_security||{};
+        const location=data.location||settings.location||{};
 
-function setChecked(
-    id,
-    value
-) {
+        setChecked("email_notifications",notifications.email_notifications);
+        setChecked("sms_notifications",notifications.sms_notifications);
+        setChecked("push_notifications",notifications.push_notifications);
+        setChecked("connection_notifications",notifications.connection_notifications);
+        setChecked("message_notifications",notifications.message_notifications);
+        setChecked("premium_notifications",notifications.premium_notifications);
+        setChecked("system_notifications",notifications.system_notifications);
+        setChecked("sound_enabled",notifications.sound_enabled);
 
-    const element =
-        document.getElementById(
-            id
-        );
+        setChecked("live_location_enabled",Number(location.live_location_enabled??1)===1);
+        updateLocationVisual(Number(location.live_location_enabled??1)===1);
 
+        setChecked("default_allow_repost",protectionCheckedFromAllow(contentSecurity.default_allow_repost));
+        setChecked("default_allow_video_download",protectionCheckedFromAllow(contentSecurity.default_allow_video_download));
 
-    if (element) {
+        updateCommunicationStates(notifications);
+        loadingState.hidden=true;
 
-        element.checked =
-            Boolean(
-                Number(
-                    value
-                )
-            );
+        document.querySelectorAll(".panel").forEach(panel=>{
+            panel.hidden=!panel.classList.contains("active");
+        });
 
+        await loadProtectedPosts();
+        checkDeletionVerificationLink();
+    }catch(error){
+        loadingState.textContent=error.message;
+        showToast(error.message,true);
     }
-
 }
 
+async function saveAccountSettings(){
+    const button=document.getElementById("saveAccount");
+    button.disabled=true;
+    statusMessage("accountStatus","Saving...");
+    try{
+        const notificationData=await apiRequest(API.UPDATE,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                email_notifications:getChecked("email_notifications"),
+                sms_notifications:getChecked("sms_notifications"),
+                push_notifications:getChecked("push_notifications")
+            })
+        });
 
-function getChecked(
-    id
-) {
+        const enabled=getChecked("live_location_enabled")===1;
+        const locationData=await apiRequest(API.LOCATION,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"preference",enabled})
+        });
 
-    const element =
-        document.getElementById(
-            id
-        );
+        updateLocationVisual(enabled);
+        updateCommunicationStates({
+            email_notifications:getChecked("email_notifications"),
+            sms_notifications:getChecked("sms_notifications"),
+            message_notifications:getChecked("message_notifications")
+        });
 
-
-    return element
-        ?
-        (
-            element.checked
-                ? 1
-                : 0
-        )
-        :
-        0;
-
-}
-
-
-/* ============================================================
-   LOAD SETTINGS
-============================================================ */
-
-async function loadSettings() {
-
-    loadingState.hidden =
-        false;
-
-
-    try {
-
-        const data =
-            await apiRequest(
-                SETTINGS_API.GET
-                +
-                "?_="
-                +
-                Date.now()
-            );
-
-
-        const settings =
-            data.settings
-            ||
-            {};
-
-
-        const notifications =
-            data.notifications
-            ||
-            settings.notifications
-            ||
-            {};
-
-
-        /* -----------------------------------------------
-           Notification preferences
-        ----------------------------------------------- */
-
-        setChecked(
-            "email_notifications",
-            notifications.email_notifications
-        );
-
-
-        setChecked(
-            "sms_notifications",
-            notifications.sms_notifications
-        );
-
-
-        setChecked(
-            "push_notifications",
-            notifications.push_notifications
-        );
-
-
-        setChecked(
-            "connection_notifications",
-            notifications.connection_notifications
-        );
-
-
-        setChecked(
-            "message_notifications",
-            notifications.message_notifications
-        );
-
-
-        setChecked(
-            "premium_notifications",
-            notifications.premium_notifications
-        );
-
-
-        setChecked(
-            "system_notifications",
-            notifications.system_notifications
-        );
-
-
-        setChecked(
-            "sound_enabled",
-            notifications.sound_enabled
-        );
-
-
-        /* -----------------------------------------------
-           Communication state
-        ----------------------------------------------- */
-
-        updateCommunicationStates(
-            notifications
-        );
-
-
-        /* -----------------------------------------------
-           Show panels
-        ----------------------------------------------- */
-
-        loadingState.hidden =
-            true;
-
-        document
-            .querySelectorAll(
-                ".panel"
-            )
-            .forEach(
-                panel => {
-
-                    panel.hidden =
-                        !panel.classList.contains(
-                            "active"
-                        );
-
-                }
-            );
-
-
-    } catch (
-        error
-    ) {
-
-        loadingState.textContent =
-            error.message;
-
-
-        showToast(
-            error.message,
-            true
-        );
-
+        statusMessage("accountStatus","Your account and live-location settings have been saved successfully.");
+        showToast(locationData.message||notificationData.message||"Settings saved.");
+    }catch(error){
+        statusMessage("accountStatus",error.message,true);
+        showToast(error.message,true);
+    }finally{
+        button.disabled=false;
     }
-
 }
 
-
-/* ============================================================
-   COMMUNICATION
-============================================================ */
-
-function updateCommunicationStates(
-    settings
-) {
-
-    const email =
-        Number(
-            settings.email_notifications
-            ||
-            0
-        ) === 1;
-
-
-    const sms =
-        Number(
-            settings.sms_notifications
-            ||
-            0
-        ) === 1;
-
-
-    const messages =
-        Number(
-            settings.message_notifications
-            ||
-            0
-        ) === 1;
-
-
-    document.getElementById(
-        "emailState"
-    ).textContent =
-        email
-            ? "Enabled"
-            : "Disabled";
-
-
-    document.getElementById(
-        "smsState"
-    ).textContent =
-        sms
-            ? "Enabled"
-            : "Disabled";
-
-
-    document.getElementById(
-        "messageState"
-    ).textContent =
-        messages
-            ? "Enabled"
-            : "Disabled";
-
+async function saveNotificationSettings(){
+    const button=document.getElementById("saveNotifications");
+    button.disabled=true;
+    statusMessage("notificationStatus","Saving...");
+    try{
+        const data=await apiRequest(API.UPDATE,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                connection_notifications:getChecked("connection_notifications"),
+                message_notifications:getChecked("message_notifications"),
+                premium_notifications:getChecked("premium_notifications"),
+                system_notifications:getChecked("system_notifications"),
+                sound_enabled:getChecked("sound_enabled")
+            })
+        });
+        updateCommunicationStates({
+            email_notifications:getChecked("email_notifications"),
+            sms_notifications:getChecked("sms_notifications"),
+            message_notifications:getChecked("message_notifications")
+        });
+        statusMessage("notificationStatus",data.message||"Notification settings saved.");
+        showToast(data.message||"Notification settings saved.");
+    }catch(error){
+        statusMessage("notificationStatus",error.message,true);
+        showToast(error.message,true);
+    }finally{button.disabled=false}
 }
 
-
-/* ============================================================
-   SAVE
-============================================================ */
-
-function statusMessage(
-    id,
-    message,
-    error = false
-) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    element.textContent =
-        message;
-
-
-    element.className =
-        "save-status " +
-        (
-            error
-                ? "error"
-                : "success"
-        );
-
+async function saveProtectionDefaults(){
+    const button=document.getElementById("saveProtectionDefaults");
+    button.disabled=true;
+    statusMessage("protectionStatus","Saving...");
+    try{
+        const data=await apiRequest(API.PROTECTION,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                action:"defaults",
+                default_allow_repost:getChecked("default_allow_repost")?0:1,
+                default_allow_video_download:getChecked("default_allow_video_download")?0:1
+            })
+        });
+        statusMessage("protectionStatus",data.message||"Protection defaults saved.");
+        showToast(data.message||"Protection defaults saved.");
+    }catch(error){
+        statusMessage("protectionStatus",error.message,true);
+        showToast(error.message,true);
+    }finally{button.disabled=false}
 }
 
+async function applyProtectionToAll(){
+    if(!window.confirm("Apply the current protection switches to all your existing posts?"))return;
+    const button=document.getElementById("applyProtectionAll");
+    button.disabled=true;
+    statusMessage("protectionStatus","Protecting your posts...");
+    try{
+        const data=await apiRequest(API.PROTECTION,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                action:"apply_all",
+                allow_repost:getChecked("default_allow_repost")?0:1,
+                allow_video_download:getChecked("default_allow_video_download")?0:1
+            })
+        });
+        statusMessage("protectionStatus",data.message||"Protection applied.");
+        await loadProtectedPosts();
+        showToast(data.message||"Protection applied.");
+    }catch(error){
+        statusMessage("protectionStatus",error.message,true);
+        showToast(error.message,true);
+    }finally{button.disabled=false}
+}
 
-/* ============================================================
-   SAVE ACCOUNT
-============================================================ */
+function escapeHtml(value){
+    return String(value??"")
+        .replaceAll("&","&amp;").replaceAll("<","&lt;")
+        .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
 
-async function saveAccountSettings() {
+async function loadProtectedPosts(){
+    const container=document.getElementById("postProtectionList");
+    if(!container)return;
+    container.innerHTML='<div class="loading">Loading your posts...</div>';
+    try{
+        const data=await apiRequest(API.PROTECTION+"?action=list&_="+Date.now());
+        const posts=Array.isArray(data.posts)?data.posts:[];
+        if(!posts.length){
+            container.innerHTML='<div class="empty-posts">You do not have any posts yet.</div>';
+            return;
+        }
+        container.innerHTML=posts.map(renderProtectedPost).join("");
+        container.querySelectorAll("[data-protection-repost]").forEach(checkbox=>{
+            checkbox.addEventListener("change",async()=>{
+                const postId=Number(checkbox.dataset.postProtectionId);
+                const videoCheckbox=container.querySelector(`[data-protection-video="${postId}"]`);
+                await saveIndividualPostProtection(
+                    postId,
+                    checkbox.checked?0:1,
+                    videoCheckbox?(videoCheckbox.checked?0:1):1
+                );
+            });
+        });
+        container.querySelectorAll("[data-protection-video]").forEach(checkbox=>{
+            checkbox.addEventListener("change",async()=>{
+                const postId=Number(checkbox.dataset.postProtectionId);
+                const repostCheckbox=container.querySelector(`[data-protection-repost="${postId}"]`);
+                await saveIndividualPostProtection(
+                    postId,
+                    repostCheckbox?(repostCheckbox.checked?0:1):1,
+                    checkbox.checked?0:1
+                );
+            });
+        });
+    }catch(error){
+        container.innerHTML=`<div class="empty-posts">${escapeHtml(error.message)}</div>`;
+    }
+}
 
-    const button =
-        document.getElementById(
-            "saveAccount"
-        );
+function renderProtectedPost(post){
+    const postId=Number(post.id||post.post_id||0);
+    const allowRepost=Number(post.allow_repost??1)===1;
+    const allowVideoDownload=Number(post.allow_video_download??1)===1;
+    const locked=!allowRepost&&!allowVideoDownload;
+    const text=String(post.content||"Media post").replace(/<[^>]*>/g,"");
+    return `
+    <article class="protected-post">
+        <div class="protected-post-head">
+            <div class="protected-post-title">Post #${postId}</div>
+            <div class="protected-post-date">${escapeHtml(post.created_at||"")}</div>
+        </div>
+        <div class="protected-post-content">${escapeHtml(text)}</div>
+        <div class="protection-tools">
+            <span class="post-status-pill ${locked?"locked":"open"}">${locked?"🔐 Protected":"🔓 Protection not complete"}</span>
+        </div>
+        <div class="protected-controls">
+            <div class="mini-control">
+                <div><div class="mini-control-label">Block reposting</div><div class="mini-control-description">Prevent supported LOVEMI repost/copy actions.</div></div>
+                <label class="switch">
+                    <input type="checkbox" data-protection-repost="${postId}" data-post-protection-id="${postId}" ${allowRepost?"":"checked"}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="mini-control">
+                <div><div class="mini-control-label">Block video downloads</div><div class="mini-control-description">Protected video requests must use the secure stream.</div></div>
+                <label class="switch">
+                    <input type="checkbox" data-protection-video="${postId}" data-post-protection-id="${postId}" ${allowVideoDownload?"":"checked"}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </article>`;
+}
 
+async function saveIndividualPostProtection(postId,allowRepost,allowVideoDownload){
+    try{
+        const data=await apiRequest(API.PROTECTION,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                action:"post",
+                post_id:Number(postId),
+                allow_repost:Number(allowRepost),
+                allow_video_download:Number(allowVideoDownload)
+            })
+        });
+        statusMessage("protectionStatus",data.message||"Post protection saved.");
+        showToast("Post protection updated.");
+    }catch(error){
+        statusMessage("protectionStatus",error.message,true);
+        showToast(error.message,true);
+        await loadProtectedPosts();
+    }
+}
 
-    button.disabled =
-        true;
+function openDeleteModal(){
+    deleteModal.classList.add("show");
+    deleteModal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+}
+function closeDeleteModal(){
+    deleteModal.classList.remove("show");
+    deleteModal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+}
+function showDeleteStep(step){
+    document.querySelectorAll(".delete-step").forEach(item=>item.classList.remove("active"));
+    const target=document.getElementById("deleteStep"+String(step));
+    if(target)target.classList.add("active");
+}
 
+async function requestDeletionVerification(){
+    const confirmation=document.getElementById("deleteConfirmation").value.trim().toUpperCase();
+    const message=document.getElementById("deleteRequestMessage");
+    const button=document.getElementById("requestDeletionVerification");
+    if(confirmation!=="DELETE"){
+        message.className="verification-message error";
+        message.textContent="Type DELETE exactly to continue.";
+        return;
+    }
+    button.disabled=true;button.textContent="Sending...";
+    try{
+        const data=await apiRequest(API.DELETE_ACCOUNT,{
+            method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"request",confirmation:"DELETE"})
+        });
+        message.className="verification-message success";
+        message.textContent=data.message||"Verification email sent.";
+        document.getElementById("deleteEmailCode").value="";
+        document.getElementById("deleteLinkState").textContent="Waiting for email link verification...";
+        document.getElementById("deleteLinkState").className="email-link-state pending";
+        showDeleteStep(2);showToast("Verification email sent.");
+    }catch(error){
+        message.className="verification-message error";
+        message.textContent=error.message;showToast(error.message,true);
+    }finally{button.disabled=false;button.textContent="Send Verification Email"}
+}
 
-    statusMessage(
-        "accountStatus",
-        "Saving..."
-    );
+async function checkDeletionVerificationLink(){
+    const params=new URLSearchParams(window.location.search);
+    const token=(params.get("delete_verify")||"").trim();
+    if(!token)return;
+    try{
+        const data=await apiRequest(API.DELETE_ACCOUNT,{
+            method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"verify_link",token})
+        });
+        const state=document.getElementById("deleteLinkState");
+        state.textContent="✓ Verification link accepted. Enter the email code to continue.";
+        state.className="email-link-state verified";
+        const message=document.getElementById("deleteEmailMessage");
+        message.className="verification-message success";
+        message.textContent=data.message||"Verification link accepted.";
+        showDeleteStep(2);openDeleteModal();
+        window.history.replaceState({},document.title,window.location.pathname+window.location.hash);
+    }catch(error){showToast(error.message,true)}
+}
 
+async function verifyDeleteEmail(){
+    const code=document.getElementById("deleteEmailCode").value.replace(/\D/g,"");
+    const message=document.getElementById("deleteEmailMessage");
+    const linkState=document.getElementById("deleteLinkState");
+    const button=document.getElementById("verifyDeleteEmail");
+    if(!/^\d{6}$/.test(code)){
+        message.className="verification-message error";message.textContent="Enter the six-digit verification code.";return;
+    }
+    if(!linkState.classList.contains("verified")){
+        message.className="verification-message error";
+        message.textContent="Open the verification link sent to your email before entering the code.";return;
+    }
+    button.disabled=true;button.textContent="Verifying...";
+    try{
+        const data=await apiRequest(API.DELETE_ACCOUNT,{
+            method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"verify_email",code})
+        });
+        message.className="verification-message success";
+        message.textContent=data.message||"Email verification successful.";
+        showDeleteStep(3);showToast("Email verification successful.");
+    }catch(error){
+        message.className="verification-message error";message.textContent=error.message;showToast(error.message,true);
+    }finally{button.disabled=false;button.textContent="Verify Email"}
+}
 
-    try {
+async function verifyDelete2FA(){
+    const code=document.getElementById("delete2faCode").value.replace(/\D/g,"");
+    const message=document.getElementById("delete2faMessage");
+    const button=document.getElementById("verifyDelete2FA");
+    if(!/^\d{6}$/.test(code)){
+        message.className="verification-message error";message.textContent="Enter the current six-digit Google Authenticator code.";return;
+    }
+    button.disabled=true;button.textContent="Checking...";
+    try{
+        const data=await apiRequest(API.DELETE_ACCOUNT,{
+            method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"verify_2fa",code})
+        });
+        message.className="verification-message success";
+        message.textContent=data.message||"Two-factor verification successful.";
+        showDeleteStep(4);showToast("2FA verification successful.");
+    }catch(error){
+        message.className="verification-message error";message.textContent=error.message;showToast(error.message,true);
+    }finally{button.disabled=false;button.textContent="Verify 2FA"}
+}
 
-        const data =
-            await apiRequest(
-                SETTINGS_API.UPDATE,
-                {
+async function finalDeleteAccount(){
+    if(!window.confirm("All verification stages have passed. Permanently delete your LOVEMI account?"))return;
+    const button=document.getElementById("finalDeleteAccount");
+    button.disabled=true;button.textContent="Deleting...";
+    try{
+        const data=await apiRequest(API.DELETE_ACCOUNT,{
+            method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({action:"finalize",confirmation:"DELETE"})
+        });
+        showToast(data.message||"Your account has been deleted.");
+        setTimeout(()=>window.location.href=data.redirect||"index.html",900);
+    }catch(error){
+        button.disabled=false;button.textContent="Permanently Delete Account";showToast(error.message,true);
+    }
+}
 
-                    method:
-                        "POST",
+document.querySelectorAll(".menu-button").forEach(button=>{
+    button.addEventListener("click",async()=>{
+        const panelName=button.dataset.panel;
+        document.querySelectorAll(".menu-button").forEach(item=>item.classList.remove("active"));
+        button.classList.add("active");
+        document.querySelectorAll(".panel").forEach(panel=>{
+            const active=panel.id==="panel-"+panelName;
+            panel.classList.toggle("active",active);
+            panel.hidden=!active;
+        });
+        if(panelName==="protection")await loadProtectedPosts();
+    });
+});
 
-                    headers: {
+document.getElementById("saveAccount").addEventListener("click",saveAccountSettings);
+document.getElementById("saveNotifications").addEventListener("click",saveNotificationSettings);
+document.getElementById("saveProtectionDefaults").addEventListener("click",saveProtectionDefaults);
+document.getElementById("applyProtectionAll").addEventListener("click",applyProtectionToAll);
 
-                        "Content-Type":
-                            "application/json"
+document.getElementById("live_location_enabled").addEventListener("change", async ()=>{
+    const checkbox=document.getElementById("live_location_enabled");
+    const enabled=checkbox.checked;
+    checkbox.disabled=true;
+    updateLocationVisual(enabled);
 
-                    },
-
-                    body:
-                        JSON.stringify(
-                            {
-
-                                email_notifications:
-                                    getChecked(
-                                        "email_notifications"
-                                    ),
-
-                                sms_notifications:
-                                    getChecked(
-                                        "sms_notifications"
-                                    ),
-
-                                push_notifications:
-                                    getChecked(
-                                        "push_notifications"
-                                    )
-
-                            }
-                        )
-
-                }
-            );
-
+    try{
+        const data=await apiRequest(API.LOCATION,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                action:"preference",
+                enabled:enabled
+            })
+        });
 
         statusMessage(
             "accountStatus",
-            data.message
-            ||
-            "Settings saved."
+            enabled
+                ? "Live location is enabled."
+                : "Live location is disabled and your saved live location has been removed."
         );
-
-
-        updateCommunicationStates(
-            {
-
-                email_notifications:
-                    getChecked(
-                        "email_notifications"
-                    ),
-
-                sms_notifications:
-                    getChecked(
-                        "sms_notifications"
-                    ),
-
-                message_notifications:
-                    getChecked(
-                        "message_notifications"
-                    )
-
-            }
-        );
-
-
         showToast(
-            data.message
-            ||
-            "Settings saved."
+            data.message ||
+            (enabled ? "Live location enabled." : "Live location disabled.")
         );
-
-
-    } catch (
-        error
-    ) {
-
-        statusMessage(
-            "accountStatus",
-            error.message,
-            true
-        );
-
-
-        showToast(
-            error.message,
-            true
-        );
-
-    } finally {
-
-        button.disabled =
-            false;
-
+    }catch(error){
+        checkbox.checked=!enabled;
+        updateLocationVisual(!enabled);
+        statusMessage("accountStatus",error.message,true);
+        showToast(error.message,true);
+    }finally{
+        checkbox.disabled=false;
     }
-
-}
-
-
-/* ============================================================
-   SAVE NOTIFICATIONS
-============================================================ */
-
-async function saveNotificationSettings() {
-
-    const button =
-        document.getElementById(
-            "saveNotifications"
-        );
-
-
-    button.disabled =
-        true;
-
-
-    statusMessage(
-        "notificationStatus",
-        "Saving..."
-    );
-
-
-    try {
-
-        const data =
-            await apiRequest(
-                SETTINGS_API.UPDATE,
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            {
-
-                                connection_notifications:
-                                    getChecked(
-                                        "connection_notifications"
-                                    ),
-
-                                message_notifications:
-                                    getChecked(
-                                        "message_notifications"
-                                    ),
-
-                                premium_notifications:
-                                    getChecked(
-                                        "premium_notifications"
-                                    ),
-
-                                system_notifications:
-                                    getChecked(
-                                        "system_notifications"
-                                    ),
-
-                                sound_enabled:
-                                    getChecked(
-                                        "sound_enabled"
-                                    )
-
-                            }
-                        )
-
-                }
-            );
-
-
-        statusMessage(
-            "notificationStatus",
-            data.message
-            ||
-            "Notification settings saved."
-        );
-
-
-        updateCommunicationStates(
-            {
-
-                email_notifications:
-                    getChecked(
-                        "email_notifications"
-                    ),
-
-                sms_notifications:
-                    getChecked(
-                        "sms_notifications"
-                    ),
-
-                message_notifications:
-                    getChecked(
-                        "message_notifications"
-                    )
-
-            }
-        );
-
-
-        showToast(
-            data.message
-            ||
-            "Notification settings saved."
-        );
-
-
-    } catch (
-        error
-    ) {
-
-        statusMessage(
-            "notificationStatus",
-            error.message,
-            true
-        );
-
-
-        showToast(
-            error.message,
-            true
-        );
-
-    } finally {
-
-        button.disabled =
-            false;
-
-    }
-
-}
-
-
-/* ============================================================
-   TAB NAVIGATION
-============================================================ */
-
-document
-    .querySelectorAll(
-        ".menu-button"
-    )
-    .forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const panelName =
-                        button.dataset.panel;
-
-
-                    document
-                        .querySelectorAll(
-                            ".menu-button"
-                        )
-                        .forEach(
-                            item => {
-
-                                item.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    document
-                        .querySelectorAll(
-                            ".panel"
-                        )
-                        .forEach(
-                            panel => {
-
-                                const active =
-                                    panel.id ===
-                                    "panel-" +
-                                    panelName;
-
-
-                                panel.classList.toggle(
-                                    "active",
-                                    active
-                                );
-
-
-                                panel.hidden =
-                                    !active;
-
-                            }
-                        );
-
-                }
-            );
-
-        }
-    );
-
-
-/* ============================================================
-   DELETE ACCOUNT
-============================================================ */
-
-document
-    .getElementById(
-        "deleteAccountButton"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            const confirmation =
-                window.prompt(
-                    "To confirm account deletion, type DELETE."
-                );
-
-
-            if (
-                confirmation !==
-                "DELETE"
-            ) {
-
-                return;
-
-            }
-
-
-            const secondConfirmation =
-                window.confirm(
-                    "This action cannot be easily undone. Continue?"
-                );
-
-
-            if (
-                !secondConfirmation
-            ) {
-
-                return;
-
-            }
-
-
-            const button =
-                document.getElementById(
-                    "deleteAccountButton"
-                );
-
-
-            button.disabled =
-                true;
-
-
-            button.textContent =
-                "Deleting...";
-
-
-            try {
-
-                const data =
-                    await apiRequest(
-                        SETTINGS_API.DELETE_ACCOUNT,
-                        {
-
-                            method:
-                                "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    {
-                                        confirmation:
-                                            "DELETE"
-                                    }
-                                )
-
-                        }
-                    );
-
-
-                showToast(
-                    data.message
-                    ||
-                    "Account deleted."
-                );
-
-
-                setTimeout(
-                    () => {
-
-                        window.location.href =
-                            "index.html";
-
-                    },
-                    900
-                );
-
-
-            } catch (
-                error
-            ) {
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "Delete My Account";
-
-
-                showToast(
-                    error.message,
-                    true
-                );
-
-            }
-
-        }
-    );
-
-
-/* ============================================================
-   YEAR
-============================================================ */
-
-document.getElementById(
-    "year"
-).textContent =
-    new Date().getFullYear();
-
-
-/* ============================================================
-   INIT
-============================================================ */
+});
+
+document.getElementById("deleteAccountButton").addEventListener("click",()=>{
+    document.getElementById("deleteConfirmation").value="";
+    document.getElementById("deleteRequestMessage").className="verification-message";
+    document.getElementById("deleteRequestMessage").textContent="Your account is not deleted at this stage.";
+    showDeleteStep(1);openDeleteModal();
+});
+document.getElementById("requestDeletionVerification").addEventListener("click",requestDeletionVerification);
+document.getElementById("verifyDeleteEmail").addEventListener("click",verifyDeleteEmail);
+document.getElementById("verifyDelete2FA").addEventListener("click",verifyDelete2FA);
+document.getElementById("finalDeleteAccount").addEventListener("click",finalDeleteAccount);
+document.querySelectorAll("[data-close-delete]").forEach(button=>button.addEventListener("click",closeDeleteModal));
+deleteModal.addEventListener("click",event=>{if(event.target===deleteModal)closeDeleteModal()});
+document.getElementById("year").textContent=new Date().getFullYear();
 
 loadSettings();
-
 </script>
-
 </body>
 </html>

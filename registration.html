@@ -79,6 +79,15 @@
           referrerpolicy="no-referrer">
 
 
+    <!-- =====================================================
+         GOOGLE IDENTITY SERVICES
+    ====================================================== -->
+
+    <script src="https://accounts.google.com/gsi/client"
+            async
+            defer></script>
+
+
     <style>
 
         /* =====================================================
@@ -782,7 +791,7 @@
         .form-heading {
 
             margin-bottom:
-                23px;
+                18px;
         }
 
 
@@ -806,6 +815,306 @@
 
             margin-top:
                 4px;
+        }
+
+
+        /* =====================================================
+           GOOGLE SIGNUP
+        ====================================================== */
+
+        .google-card {
+
+            margin:
+                0 0 21px;
+
+            padding:
+                17px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius:
+                15px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff,
+                    #fafafa
+                );
+        }
+
+
+        .google-card-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                5px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+        }
+
+
+        .google-card-title i {
+
+            color:
+                #4285f4;
+        }
+
+
+        .google-card-description {
+
+            margin-bottom:
+                13px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .google-button-container {
+
+            width:
+                100%;
+
+            min-height:
+                44px;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            overflow:
+                hidden;
+        }
+
+
+        .google-status {
+
+            display:
+                none;
+
+            margin-top:
+                10px;
+
+            padding:
+                9px 11px;
+
+            border-radius:
+                10px;
+
+            color:
+                #1e3a8a;
+
+            background:
+                #eff6ff;
+
+            border:
+                1px solid #bfdbfe;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
+        }
+
+
+        .google-status.show {
+
+            display:
+                block;
+        }
+
+
+        .google-mode-banner {
+
+            display:
+                none;
+
+            margin:
+                0 0 20px;
+
+            padding:
+                12px 13px;
+
+            border:
+                1px solid #ddd6fe;
+
+            border-radius:
+                12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #faf5ff,
+                    #fdf2f8
+                );
+
+            color:
+                #5b21b6;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .google-mode-banner.show {
+
+            display:
+                flex;
+        }
+
+
+        .google-mode-icon {
+
+            flex:
+                0 0 28px;
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                #4285f4;
+
+            box-shadow:
+                0 3px 12px
+                rgba(66,133,244,.10);
+        }
+
+
+        .google-mode-content strong {
+
+            display:
+                block;
+
+            margin-bottom:
+                2px;
+
+            font-size:
+                10px;
+        }
+
+
+        .google-mode-content span {
+
+            display:
+                block;
+
+            color:
+                #6b7280;
+
+            font-size:
+                8px;
+        }
+
+
+        .google-email-locked {
+
+            background:
+                #f7f7fb;
+
+            color:
+                #4b5563;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        /* =====================================================
+           DIVIDER
+        ====================================================== */
+
+        .or-divider {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin:
+                4px 0 22px;
+
+            color:
+                #a1a1aa;
+
+            font-size:
+                8px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .or-divider::before,
+        .or-divider::after {
+
+            content:
+                "";
+
+            flex:
+                1;
+
+            height:
+                1px;
+
+            background:
+                #ececf1;
         }
 
 
@@ -960,6 +1269,22 @@
         }
 
 
+        .optional {
+
+            color:
+                var(--text-muted);
+
+            font-weight:
+                500;
+
+            font-size:
+                8px;
+
+            margin-left:
+                4px;
+        }
+
+
         .field {
 
             position:
@@ -1034,6 +1359,16 @@
             box-shadow:
                 0 0 0 4px
                 rgba(109,40,217,.06);
+        }
+
+
+        .input:disabled {
+
+            background:
+                #f7f7fb;
+
+            cursor:
+                not-allowed;
         }
 
 
@@ -2051,6 +2386,13 @@
                     flex-start;
             }
 
+
+            .google-card {
+
+                padding:
+                    14px;
+            }
+
         }
 
     </style>
@@ -2206,9 +2548,10 @@
 
                 <p>
 
-                    Register with your real information, select your
-                    country and let LOVEMI automatically use the
-                    appropriate international phone code.
+                    Register normally or use your Google account.
+                    LOVEMI securely stores your required account
+                    information and uses your selected country
+                    to apply the correct international phone code.
 
                 </p>
 
@@ -2229,7 +2572,7 @@
                             </strong>
 
                             <span>
-                                Enter your username and personal details.
+                                Enter your account and personal details.
                             </span>
 
                         </div>
@@ -2271,7 +2614,7 @@
                             </strong>
 
                             <span>
-                                Add your approved photos and profile details.
+                                Add your profile information after registration.
                             </span>
 
                         </div>
@@ -2300,8 +2643,92 @@
                 </h2>
 
                 <p>
-                    Enter your information below.
+                    Register with LOVEMI or continue with Google.
                 </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 GOOGLE SIGNUP CARD
+            ================================================== -->
+
+            <div class="google-card">
+
+                <div class="google-card-title">
+
+                    <i class="fa-brands fa-google"></i>
+
+                    Create your account with Google
+
+                </div>
+
+
+                <div class="google-card-description">
+
+                    Google will securely provide your verified
+                    Google account identity. After that, complete
+                    the remaining LOVEMI registration information.
+
+                </div>
+
+
+                <div
+                    id="googleButtonContainer"
+                    class="google-button-container">
+
+                    <span
+                        style="
+                            color:#9898a1;
+                            font-size:9px;
+                        ">
+
+                        Loading Google Sign-Up...
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="googleStatus"
+                    class="google-status">
+                </div>
+
+            </div>
+
+
+            <div class="or-divider">
+
+                Or register manually
+
+            </div>
+
+
+            <div
+                id="googleModeBanner"
+                class="google-mode-banner">
+
+                <div class="google-mode-icon">
+
+                    <i class="fa-brands fa-google"></i>
+
+                </div>
+
+
+                <div class="google-mode-content">
+
+                    <strong>
+                        Google registration selected
+                    </strong>
+
+                    <span>
+                        Your verified Google name and email have been
+                        prefilled. Complete the remaining LOVEMI
+                        information below.
+                    </span>
+
+                </div>
 
             </div>
 
@@ -2362,6 +2789,13 @@
                                 autocomplete="username"
                                 placeholder="Choose username"
                                 required>
+
+                        </div>
+
+                        <div class="help-text">
+
+                            3–50 characters:
+                            letters, numbers, dots, underscores or hyphens.
 
                         </div>
 
@@ -2474,8 +2908,12 @@
 
                         </div>
 
+
                         <div class="help-text">
-                            You must be 18 or older.
+
+                            Registration is available only to people
+                            aged 18 or older.
+
                         </div>
 
                     </div>
@@ -2526,6 +2964,58 @@
                                 autocomplete="email"
                                 placeholder="you@example.com"
                                 required>
+
+                        </div>
+
+
+                        <div
+                            id="googleEmailHelp"
+                            class="help-text">
+
+                            Use an email address you can access.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CURRENT CITY
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label
+                            for="city"
+                            class="label">
+
+                            Current City
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="field">
+
+                            <i class="fa-solid fa-location-dot field-icon"></i>
+
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                class="input"
+                                maxlength="150"
+                                autocomplete="address-level2"
+                                placeholder="e.g. Kitui"
+                                required>
+
+                        </div>
+
+
+                        <div class="help-text">
+
+                            Enter the city or town where you currently live.
 
                         </div>
 
@@ -2582,8 +3072,6 @@
                         </div>
 
 
-                        <!-- Hidden actual database country ID -->
-
                         <input
                             type="hidden"
                             id="country_id"
@@ -2608,8 +3096,8 @@
 
                         <div class="help-text">
 
-                            Search by country name, ISO code
-                            or international phone code.
+                            Search by country name,
+                            ISO code or international phone code.
 
                         </div>
 
@@ -2620,7 +3108,7 @@
                          PHONE
                     ================================================== -->
 
-                    <div class="form-group">
+                    <div class="form-group full">
 
                         <label
                             for="phone_number"
@@ -2670,6 +3158,152 @@
 
                             Select your country first.
                             The country calling code will be inserted automatically.
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     EDUCATION / PROFILE INFORMATION
+                ================================================== -->
+
+                <div class="section-label">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    Education & Profile Information
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label
+                            for="education_level"
+                            class="label">
+
+                            Education Level
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="field">
+
+                            <i class="fa-solid fa-school field-icon"></i>
+
+
+                            <select
+                                id="education_level"
+                                name="education_level"
+                                class="input"
+                                required>
+
+                                <option value="">
+                                    Select education level
+                                </option>
+
+                                <option value="Secondary School">
+                                    Secondary School
+                                </option>
+
+                                <option value="Certificate">
+                                    Certificate
+                                </option>
+
+                                <option value="Diploma">
+                                    Diploma
+                                </option>
+
+                                <option value="Bachelor's Degree">
+                                    Bachelor's Degree
+                                </option>
+
+                                <option value="Master's Degree">
+                                    Master's Degree
+                                </option>
+
+                                <option value="Doctorate">
+                                    Doctorate
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            for="university_name"
+                            class="label">
+
+                            University / College
+                            <span class="optional">
+                                Optional
+                            </span>
+
+                        </label>
+
+
+                        <div class="field">
+
+                            <i class="fa-solid fa-building-columns field-icon"></i>
+
+
+                            <input
+                                type="text"
+                                id="university_name"
+                                name="university_name"
+                                class="input"
+                                maxlength="255"
+                                autocomplete="organization"
+                                placeholder="University or college">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label
+                            for="course"
+                            class="label">
+
+                            Course / Program
+                            <span class="optional">
+                                Optional
+                            </span>
+
+                        </label>
+
+
+                        <div class="field">
+
+                            <i class="fa-solid fa-book-open field-icon"></i>
+
+
+                            <input
+                                type="text"
+                                id="course"
+                                name="course"
+                                class="input"
+                                maxlength="255"
+                                placeholder="e.g. Computer Science">
 
                         </div>
 
@@ -2747,7 +3381,7 @@
 
                     <i class="fa-solid fa-key"></i>
 
-                    Password
+                    LOVEMI Password
 
                 </div>
 
@@ -3143,7 +3777,6 @@
                 Discover • Connect • Meet
             </span>
 
-
         </div>
 
     </div>
@@ -3168,6 +3801,23 @@ const ADMIN_API =
 
 const REGISTER_API =
     "api/auth/registration.php";
+
+
+/* =========================================================
+   GOOGLE STATE
+========================================================= */
+
+let googleClientId =
+    "";
+
+let googleCsrfToken =
+    "";
+
+let googleSignupMode =
+    false;
+
+let googleIdentity =
+    null;
 
 
 /* =========================================================
@@ -3259,6 +3909,56 @@ const strengthSegments =
         ".strength-segment"
     );
 
+const googleButtonContainer =
+    document.getElementById(
+        "googleButtonContainer"
+    );
+
+const googleStatus =
+    document.getElementById(
+        "googleStatus"
+    );
+
+const googleModeBanner =
+    document.getElementById(
+        "googleModeBanner"
+    );
+
+const googleEmailHelp =
+    document.getElementById(
+        "googleEmailHelp"
+    );
+
+const emailInput =
+    document.getElementById(
+        "email"
+    );
+
+const fullNamesInput =
+    document.getElementById(
+        "full_names"
+    );
+
+const cityInput =
+    document.getElementById(
+        "city"
+    );
+
+const educationLevelInput =
+    document.getElementById(
+        "education_level"
+    );
+
+const universityNameInput =
+    document.getElementById(
+        "university_name"
+    );
+
+const courseInput =
+    document.getElementById(
+        "course"
+    );
+
 
 /* =========================================================
    STATE
@@ -3322,10 +4022,42 @@ function clearAlert() {
 
 
 /* =========================================================
+   GOOGLE STATUS
+========================================================= */
+
+function showGoogleStatus(
+    message
+) {
+
+    googleStatus.textContent =
+        message;
+
+    googleStatus.classList.add(
+        "show"
+    );
+
+}
+
+
+function clearGoogleStatus() {
+
+    googleStatus.textContent =
+        "";
+
+    googleStatus.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
    ESCAPE HTML
 ========================================================= */
 
-function escapeHtml(value) {
+function escapeHtml(
+    value
+) {
 
     if (
         value === null
@@ -3339,11 +4071,26 @@ function escapeHtml(value) {
 
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -3403,13 +4150,109 @@ async function apiGet(
 
 
     if (
-        !contentType.includes(
+        !contentType.toLowerCase().includes(
             "application/json"
         )
     ) {
 
         throw new Error(
-            "Invalid JSON response."
+            "Invalid JSON response from server."
+        );
+
+    }
+
+
+    const result =
+        await response.json();
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            result.message
+            ||
+            "Request failed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   API POST JSON
+========================================================= */
+
+async function apiPostJson(
+    endpoint,
+    payload
+) {
+
+    const response =
+        await fetch(
+            endpoint
+            + (
+                endpoint.includes("?")
+                    ? "&"
+                    : "?"
+            )
+            + "_="
+            + Date.now(),
+            {
+
+                method:
+                    "POST",
+
+                credentials:
+                    "same-origin",
+
+                cache:
+                    "no-store",
+
+                headers: {
+
+                    "Accept":
+                        "application/json",
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache, no-store, max-age=0",
+
+                    "Pragma":
+                        "no-cache"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+
+            }
+        );
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        !contentType.toLowerCase().includes(
+            "application/json"
+        )
+    ) {
+
+        throw new Error(
+            "Invalid server response."
         );
 
     }
@@ -3532,13 +4375,6 @@ async function loadCountries() {
             "Search country, ISO or code";
 
 
-        /*
-         * Do not display all countries immediately.
-         *
-         * User searches/selects them from the database-loaded
-         * searchable control.
-         */
-
         countryMenu.innerHTML = `
 
             <div class="country-empty">
@@ -3605,7 +4441,9 @@ function countryMatches(
 
 
     if (!query) {
+
         return true;
+
     }
 
 
@@ -3630,7 +4468,9 @@ function countryMatches(
                 value ?? ""
             )
             .toLowerCase()
-            .includes(query)
+            .includes(
+                query
+            )
     );
 
 }
@@ -3667,7 +4507,8 @@ function createCountryItem(
     const iso2 =
         String(
             country.iso2
-            || ""
+            ||
+            ""
         )
         .toUpperCase();
 
@@ -3675,7 +4516,8 @@ function createCountryItem(
     const iso3 =
         String(
             country.iso3
-            || ""
+            ||
+            ""
         )
         .toUpperCase();
 
@@ -3683,7 +4525,8 @@ function createCountryItem(
     const phoneCode =
         String(
             country.phone_code
-            || ""
+            ||
+            ""
         );
 
 
@@ -3734,7 +4577,9 @@ function createCountryItem(
 
         <span class="country-phone">
 
-            ${escapeHtml(phoneCode)}
+            ${escapeHtml(
+                phoneCode
+            )}
 
         </span>
 
@@ -3771,17 +4616,18 @@ function renderCountryResults(
 
 
     const filtered =
-        countries.filter(
-            country =>
-                countryMatches(
-                    country,
-                    searchTerm
-                )
-        )
-        .slice(
-            0,
-            30
-        );
+        countries
+            .filter(
+                country =>
+                    countryMatches(
+                        country,
+                        searchTerm
+                    )
+            )
+            .slice(
+                0,
+                30
+            );
 
 
     if (
@@ -3866,12 +4712,15 @@ function selectCountry(
 
 
     phoneHelp.textContent =
-        "Enter the rest of your phone number. "
-        + "LOVEMI will use "
-        + country.phone_code
-        + " for "
-        + country.name
-        + ".";
+        "Enter the rest of your phone number. LOVEMI will use "
+        +
+        country.phone_code
+        +
+        " for "
+        +
+        country.name
+        +
+        ".";
 
 
     phoneHelp.style.color =
@@ -3934,11 +4783,6 @@ countrySearch.addEventListener(
 countrySearch.addEventListener(
     "input",
     function () {
-
-        /*
-         * If the user edits the selected country,
-         * clear the hidden ID until a new country is chosen.
-         */
 
         if (
             selectedCountryObject
@@ -4015,7 +4859,8 @@ document.addEventListener(
     function (event) {
 
         if (
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ) {
 
             countryMenu.classList.remove(
@@ -4042,13 +4887,9 @@ async function checkAdmin() {
             );
 
 
-        /*
-         * IMPORTANT:
-         * Failure must fail closed.
-         */
-
         if (
-            result.success !== true
+            result.success !==
+            true
         ) {
 
             throw new Error(
@@ -4103,10 +4944,6 @@ async function checkAdmin() {
             error
         );
 
-
-        /*
-         * Fail closed.
-         */
 
         adminOption.classList.remove(
             "show"
@@ -4211,7 +5048,9 @@ function passwordStrength(
 
 
     if (
-        /[a-z]/.test(password)
+        /[a-z]/.test(
+            password
+        )
     ) {
 
         score++;
@@ -4220,7 +5059,9 @@ function passwordStrength(
 
 
     if (
-        /[A-Z]/.test(password)
+        /[A-Z]/.test(
+            password
+        )
     ) {
 
         score++;
@@ -4229,7 +5070,9 @@ function passwordStrength(
 
 
     if (
-        /[0-9]/.test(password)
+        /[0-9]/.test(
+            password
+        )
     ) {
 
         score++;
@@ -4238,7 +5081,9 @@ function passwordStrength(
 
 
     if (
-        /[^A-Za-z0-9]/.test(password)
+        /[^A-Za-z0-9]/.test(
+            password
+        )
     ) {
 
         score++;
@@ -4251,8 +5096,11 @@ function passwordStrength(
     ) {
 
         return {
+
             level: 0,
+
             text: "Very weak"
+
         };
 
     }
@@ -4263,8 +5111,11 @@ function passwordStrength(
     ) {
 
         return {
+
             level: 1,
+
             text: "Weak"
+
         };
 
     }
@@ -4275,8 +5126,11 @@ function passwordStrength(
     ) {
 
         return {
+
             level: 2,
+
             text: "Fair"
+
         };
 
     }
@@ -4287,16 +5141,22 @@ function passwordStrength(
     ) {
 
         return {
+
             level: 3,
+
             text: "Strong"
+
         };
 
     }
 
 
     return {
+
         level: 4,
+
         text: "Very strong"
+
     };
 
 }
@@ -4328,9 +5188,7 @@ passwordInput.addEventListener(
 
                 segment.style.background =
                     index < result.level
-
                     ?
-
                     (
                         result.level <= 1
                         ?
@@ -4342,9 +5200,7 @@ passwordInput.addEventListener(
                         :
                         "#16a34a"
                     )
-
                     :
-
                     "#e5e5e8";
 
             }
@@ -4355,7 +5211,7 @@ passwordInput.addEventListener(
 
 
 /* =========================================================
-   DATE OF BIRTH MAX
+   DATE OF BIRTH MAXIMUM
 ========================================================= */
 
 function setDobMax() {
@@ -4416,7 +5272,8 @@ function getAge(
     const birthDate =
         new Date(
             value
-            + "T00:00:00"
+            +
+            "T00:00:00"
         );
 
 
@@ -4465,6 +5322,549 @@ function getAge(
 
 
     return age;
+
+}
+
+
+/* =========================================================
+   GOOGLE CONFIG
+========================================================= */
+
+async function loadGoogleConfiguration() {
+
+    try {
+
+        const result =
+            await apiGet(
+                REGISTER_API
+                +
+                "?action=google-config"
+            );
+
+
+        if (
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Google configuration failed."
+            );
+
+        }
+
+
+        googleClientId =
+            String(
+                result.client_id
+                ||
+                ""
+            ).trim();
+
+
+        googleCsrfToken =
+            String(
+                result.csrf_token
+                ||
+                ""
+            ).trim();
+
+
+        if (
+            !googleClientId
+        ) {
+
+            throw new Error(
+                "Google Client ID is missing."
+            );
+
+        }
+
+
+        if (
+            !googleCsrfToken
+        ) {
+
+            throw new Error(
+                "Google security token is missing."
+            );
+
+        }
+
+
+        waitForGoogleIdentityServices();
+
+
+    } catch (error) {
+
+        console.error(
+            "Google config error:",
+            error
+        );
+
+
+        googleButtonContainer.innerHTML = `
+
+            <span
+                style="
+                    color:#9898a1;
+                    font-size:9px;
+                    text-align:center;
+                ">
+
+                Google registration is currently unavailable.
+
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   WAIT FOR GOOGLE SDK
+========================================================= */
+
+function waitForGoogleIdentityServices() {
+
+    let attempts =
+        0;
+
+    const maxAttempts =
+        100;
+
+
+    const timer =
+        setInterval(
+            function () {
+
+                attempts++;
+
+
+                if (
+                    window.google
+                    &&
+                    window.google.accounts
+                    &&
+                    window.google.accounts.id
+                ) {
+
+                    clearInterval(
+                        timer
+                    );
+
+
+                    renderGoogleButton();
+
+
+                    return;
+
+                }
+
+
+                if (
+                    attempts >=
+                    maxAttempts
+                ) {
+
+                    clearInterval(
+                        timer
+                    );
+
+
+                    googleButtonContainer.innerHTML = `
+
+                        <span
+                            style="
+                                color:#9898a1;
+                                font-size:9px;
+                            ">
+
+                            Google Sign-Up could not be loaded.
+                            Please refresh the page.
+
+                        </span>
+
+                    `;
+
+                }
+
+            },
+            100
+        );
+
+}
+
+
+/* =========================================================
+   RENDER GOOGLE BUTTON
+========================================================= */
+
+function renderGoogleButton() {
+
+    if (
+        !googleClientId
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        google.accounts.id.initialize(
+            {
+
+                client_id:
+                    googleClientId,
+
+                callback:
+                    handleGoogleCredential,
+
+                auto_select:
+                    false,
+
+                cancel_on_tap_outside:
+                    true,
+
+                context:
+                    "signup",
+
+                ux_mode:
+                    "popup"
+
+            }
+        );
+
+
+        googleButtonContainer.innerHTML =
+            "";
+
+
+        google.accounts.id.renderButton(
+            googleButtonContainer,
+            {
+
+                type:
+                    "standard",
+
+                theme:
+                    "outline",
+
+                size:
+                    "large",
+
+                text:
+                    "signup_with",
+
+                shape:
+                    "rectangular",
+
+                width:
+                    Math.min(
+                        googleButtonContainer.clientWidth || 400,
+                        420
+                    )
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Google render error:",
+            error
+        );
+
+
+        googleButtonContainer.innerHTML = `
+
+            <span
+                style="
+                    color:#dc2626;
+                    font-size:9px;
+                ">
+
+                Google Sign-Up could not be initialized.
+
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE GOOGLE CREDENTIAL
+========================================================= */
+
+async function handleGoogleCredential(
+    response
+) {
+
+    clearAlert();
+
+
+    clearGoogleStatus();
+
+
+    if (
+        !response
+        ||
+        !response.credential
+    ) {
+
+        showAlert(
+            "Google did not return a valid account credential."
+        );
+
+        return;
+
+    }
+
+
+    showGoogleStatus(
+        "Google account received. Checking your account securely..."
+    );
+
+
+    try {
+
+        const result =
+            await apiPostJson(
+                REGISTER_API
+                +
+                "?action=google-prepare",
+                {
+
+                    credential:
+                        response.credential,
+
+                    csrf_token:
+                        googleCsrfToken
+
+                }
+            );
+
+
+        if (
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "Google registration could not be prepared."
+            );
+
+        }
+
+
+        googleSignupMode =
+            true;
+
+
+        googleIdentity =
+            result.google
+            ||
+            result.identity
+            ||
+            null;
+
+
+        if (
+            !googleIdentity
+        ) {
+
+            googleIdentity = {
+
+                email:
+                    result.email
+                    ||
+                    "",
+
+                full_names:
+                    result.full_names
+                    ||
+                    result.name
+                    ||
+                    "",
+
+                google_sub:
+                    result.google_sub
+                    ||
+                    "",
+
+                picture_url:
+                    result.picture_url
+                    ||
+                    ""
+
+            };
+
+        }
+
+
+        const googleEmail =
+            String(
+                googleIdentity.email
+                ||
+                ""
+            ).trim();
+
+
+        const googleName =
+            String(
+                googleIdentity.full_names
+                ||
+                googleIdentity.name
+                ||
+                ""
+            ).trim();
+
+
+        if (
+            googleEmail
+        ) {
+
+            emailInput.value =
+                googleEmail;
+
+            emailInput.readOnly =
+                true;
+
+            emailInput.classList.add(
+                "google-email-locked"
+            );
+
+            googleEmailHelp.textContent =
+                "This email was verified by Google and is being used for your LOVEMI account.";
+
+        }
+
+
+        if (
+            googleName
+        ) {
+
+            fullNamesInput.value =
+                googleName;
+
+        }
+
+
+        googleModeBanner.classList.add(
+            "show"
+        );
+
+
+        showGoogleStatus(
+            "Google account verified. Complete the remaining LOVEMI registration details below."
+        );
+
+
+        googleButtonContainer.innerHTML = `
+
+            <div
+                style="
+                    width:100%;
+                    padding:11px;
+                    text-align:center;
+                    border:1px solid #bbf7d0;
+                    border-radius:10px;
+                    background:#f0fdf4;
+                    color:#166534;
+                    font-size:9px;
+                    font-weight:700;
+                ">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Google account connected
+
+            </div>
+
+        `;
+
+
+        window.scrollTo(
+            {
+
+                top:
+                    document.querySelector(
+                        ".form-card"
+                    ).offsetTop - 90,
+
+                behavior:
+                    "smooth"
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Google registration error:",
+            error
+        );
+
+
+        googleSignupMode =
+            false;
+
+
+        googleIdentity =
+            null;
+
+
+        showGoogleStatus(
+            ""
+        );
+
+
+        clearGoogleStatus();
+
+
+        showAlert(
+            error.message
+            ||
+            "Google registration could not be completed. Please try again."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESET GOOGLE ACCOUNT
+========================================================= */
+
+function resetGoogleFieldsIfNeeded() {
+
+    if (
+        !googleSignupMode
+    ) {
+
+        emailInput.readOnly =
+            false;
+
+        emailInput.classList.remove(
+            "google-email-locked"
+        );
+
+        googleEmailHelp.textContent =
+            "Use an email address you can access.";
+
+    }
 
 }
 
@@ -4521,6 +5921,30 @@ registrationForm.addEventListener(
             .trim();
 
 
+        const city =
+            cityInput
+                .value
+                .trim();
+
+
+        const educationLevel =
+            educationLevelInput
+                .value
+                .trim();
+
+
+        const universityName =
+            universityNameInput
+                .value
+                .trim();
+
+
+        const course =
+            courseInput
+                .value
+                .trim();
+
+
         const phoneNumber =
             document.getElementById(
                 "phone_number"
@@ -4557,7 +5981,9 @@ registrationForm.addEventListener(
 
         if (
             !/^[A-Za-z0-9_.-]{3,50}$/
-                .test(username)
+                .test(
+                    username
+                )
         ) {
 
             showAlert(
@@ -4582,7 +6008,9 @@ registrationForm.addEventListener(
         }
 
 
-        if (!gender) {
+        if (
+            !gender
+        ) {
 
             showAlert(
                 "Please select your gender."
@@ -4593,7 +6021,9 @@ registrationForm.addEventListener(
         }
 
 
-        if (!dateOfBirth) {
+        if (
+            !dateOfBirth
+        ) {
 
             showAlert(
                 "Please enter your date of birth."
@@ -4623,12 +6053,59 @@ registrationForm.addEventListener(
             !email
             ||
             !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-                .test(email)
+                .test(
+                    email
+                )
         ) {
 
             showAlert(
                 "Please enter a valid email address."
             );
+
+            return;
+
+        }
+
+
+        if (
+            !city
+        ) {
+
+            showAlert(
+                "Please enter your current city."
+            );
+
+            cityInput.focus();
+
+            return;
+
+        }
+
+
+        if (
+            city.length < 2
+        ) {
+
+            showAlert(
+                "Please enter a valid current city."
+            );
+
+            cityInput.focus();
+
+            return;
+
+        }
+
+
+        if (
+            !educationLevel
+        ) {
+
+            showAlert(
+                "Please select your education level."
+            );
+
+            educationLevelInput.focus();
 
             return;
 
@@ -4680,7 +6157,9 @@ registrationForm.addEventListener(
 
         if (
             !/^[0-9()\s.\-]{5,20}$/
-                .test(phoneNumber)
+                .test(
+                    phoneNumber
+                )
         ) {
 
             showAlert(
@@ -4746,6 +6225,47 @@ registrationForm.addEventListener(
 
 
         /* ====================================================
+           GOOGLE VALIDATION
+        ===================================================== */
+
+        if (
+            googleSignupMode
+        ) {
+
+            if (
+                !googleIdentity
+                ||
+                !String(
+                    googleIdentity.email
+                    ||
+                    ""
+                ).trim()
+            ) {
+
+                showAlert(
+                    "The Google account could not be verified. Please select Google Sign-Up again."
+                );
+
+                return;
+
+            }
+
+            if (
+                !googleCsrfToken
+            ) {
+
+                showAlert(
+                    "The Google security session has expired. Please refresh the page and try again."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* ====================================================
            SUBMIT
         ===================================================== */
 
@@ -4764,109 +6284,68 @@ registrationForm.addEventListener(
 
         try {
 
-            const response =
-                await fetch(
-                    REGISTER_API,
-                    {
+            const payload = {
 
-                        method:
-                            "POST",
+                username,
 
-                        credentials:
-                            "same-origin",
+                full_names:
+                    fullNames,
 
-                        cache:
-                            "no-store",
+                gender,
 
-                        headers: {
+                date_of_birth:
+                    dateOfBirth,
 
-                            "Accept":
-                                "application/json",
+                email,
 
-                            "Content-Type":
-                                "application/json",
+                city,
 
-                            "Cache-Control":
-                                "no-cache, no-store, max-age=0",
+                education_level:
+                    educationLevel,
 
-                            "Pragma":
-                                "no-cache"
+                university_name:
+                    universityName,
 
-                        },
+                course,
 
-                        body:
-                            JSON.stringify(
-                                {
+                country_id:
+                    Number(
+                        countryId.value
+                    ),
 
-                                    username,
+                phone_code:
+                    selectedCountryObject.phone_code,
 
-                                    full_names:
-                                        fullNames,
+                phone_number:
+                    phoneNumber,
 
-                                    gender,
+                id_number:
+                    idNumber,
 
-                                    date_of_birth:
-                                        dateOfBirth,
+                password,
 
-                                    email,
+                confirm_password:
+                    confirmPassword,
 
-                                    country_id:
-                                        Number(
-                                            countryId.value
-                                        ),
+                register_as_admin:
+                    registerAsAdmin.checked,
 
-                                    phone_code:
-                                        selectedCountryObject.phone_code,
+                agree,
 
-                                    phone_number:
-                                        phoneNumber,
+                google_signup:
+                    googleSignupMode
 
-                                    id_number:
-                                        idNumber,
-
-                                    password,
-
-                                    confirm_password:
-                                        confirmPassword,
-
-                                    register_as_admin:
-                                        registerAsAdmin.checked,
-
-                                    agree
-
-                                }
-                            )
-
-                    }
-                );
-
-
-            const contentType =
-                response.headers.get(
-                    "content-type"
-                ) || "";
-
-
-            if (
-                !contentType.includes(
-                    "application/json"
-                )
-            ) {
-
-                throw new Error(
-                    "Invalid server response."
-                );
-
-            }
+            };
 
 
             const result =
-                await response.json();
+                await apiPostJson(
+                    REGISTER_API,
+                    payload
+                );
 
 
             if (
-                !response.ok
-                ||
                 result.success !== true
             ) {
 
@@ -4884,15 +6363,14 @@ registrationForm.addEventListener(
             showAlert(
                 result.message
                 ||
-                "Account created successfully.",
+                "Account created successfully. Please verify your account.",
                 "success"
             );
 
 
-            /*
-             * Once successfully registered, remove the admin
-             * option from this page as well.
-             */
+            /* =================================================
+               REMOVE ADMIN OPTION AFTER SUCCESS
+            ================================================= */
 
             adminOption.classList.remove(
                 "show"
@@ -4907,9 +6385,9 @@ registrationForm.addEventListener(
                 true;
 
 
-            /*
-             * Go to account verification.
-             */
+            /* =================================================
+               REDIRECT
+            ================================================= */
 
             const redirect =
                 result.redirect
@@ -4919,7 +6397,8 @@ registrationForm.addEventListener(
                     +
                     encodeURIComponent(
                         result.user_id
-                        || ""
+                        ||
+                        ""
                     )
                 );
 
@@ -4944,6 +6423,8 @@ registrationForm.addEventListener(
 
 
             showAlert(
+                error.message
+                ||
                 "The registration server could not be reached. Please try again."
             );
 
@@ -4991,17 +6472,22 @@ mobileMenu.addEventListener(
             "true";
 
 
-        if (open) {
+        if (
+            open
+        ) {
 
             navigation.removeAttribute(
                 "style"
             );
 
+
             navigation.dataset.open =
                 "false";
 
+
             this.innerHTML =
                 '<i class="fa-solid fa-bars"></i>';
+
 
             return;
 
@@ -5011,35 +6497,46 @@ mobileMenu.addEventListener(
         navigation.style.display =
             "flex";
 
+
         navigation.style.position =
             "absolute";
+
 
         navigation.style.top =
             "72px";
 
+
         navigation.style.left =
             "12px";
+
 
         navigation.style.right =
             "12px";
 
+
         navigation.style.flexDirection =
             "column";
+
 
         navigation.style.alignItems =
             "stretch";
 
+
         navigation.style.padding =
             "8px";
+
 
         navigation.style.background =
             "#ffffff";
 
+
         navigation.style.border =
             "1px solid #e9e9ef";
 
+
         navigation.style.borderRadius =
             "14px";
+
 
         navigation.style.boxShadow =
             "0 20px 45px rgba(0,0,0,.10)";
@@ -5051,25 +6548,6 @@ mobileMenu.addEventListener(
 
         this.innerHTML =
             '<i class="fa-solid fa-xmark"></i>';
-
-    }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
-
-        await Promise.allSettled(
-            [
-                loadCountries(),
-                checkAdmin()
-            ]
-        );
 
     }
 );
@@ -5092,10 +6570,35 @@ window.addEventListener(
                 "style"
             );
 
+
             navigation.dataset.open =
                 "false";
 
         }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        await Promise.allSettled(
+            [
+
+                loadCountries(),
+
+                checkAdmin(),
+
+                loadGoogleConfiguration()
+
+            ]
+        );
 
     }
 );

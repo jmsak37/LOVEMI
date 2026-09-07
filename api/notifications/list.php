@@ -1,31 +1,13 @@
 <?php
+declare(strict_types=1);
+
 /**
  * ============================================================
  * LOVEMI - NOTIFICATIONS LIST API
  * ============================================================
- *
- * Returns notifications belonging ONLY to the authenticated
- * user.
- *
- * Optional query parameters:
- *
- *   ?limit=20
- *   ?offset=0
- *   ?unread_only=1
- *
- * Audio comes from notification_audio in the database.
- *
- * ============================================================
  */
 
-declare(strict_types=1);
-
 require_once __DIR__ . '/../../config/database.php';
-
-
-/* ============================================================
-   HEADERS
-============================================================ */
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
@@ -37,7 +19,10 @@ header('Expires: 0');
    SESSION
 ============================================================ */
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
+if (
+    session_status()
+    !== PHP_SESSION_ACTIVE
+) {
     session_start();
 }
 
@@ -53,7 +38,10 @@ function notificationsResponse(
     int $status = 200
 ): never {
 
-    http_response_code($status);
+    http_response_code(
+        $status
+    );
+
 
     echo json_encode(
         array_merge(
@@ -66,9 +54,11 @@ function notificationsResponse(
             ],
             $data
         ),
-        JSON_UNESCAPED_UNICODE |
+        JSON_UNESCAPED_UNICODE
+        |
         JSON_UNESCAPED_SLASHES
     );
+
 
     exit;
 }
@@ -97,16 +87,16 @@ if (
 
 
 /* ============================================================
-   USER
+   AUTH
 ============================================================ */
 
 $userId =
-    isset(
-        $_SESSION['lovemi_user_id']
-    )
-        ? (int)
-          $_SESSION['lovemi_user_id']
-        : 0;
+    (int) (
+        $_SESSION[
+            'lovemi_user_id'
+        ]
+        ?? 0
+    );
 
 
 if (
@@ -133,25 +123,14 @@ if (
 ============================================================ */
 
 $limit =
-    isset($_GET['limit'])
-        ? (int)
-          $_GET['limit']
-        : 20;
-
-
-$offset =
-    isset($_GET['offset'])
-        ? (int)
-          $_GET['offset']
-        : 0;
-
-
-$limit =
     max(
         1,
         min(
             100,
-            $limit
+            (int) (
+                $_GET['limit']
+                ?? 50
+            )
         )
     );
 
@@ -159,19 +138,22 @@ $limit =
 $offset =
     max(
         0,
-        $offset
+        (int) (
+            $_GET['offset']
+            ?? 0
+        )
     );
 
 
 $unreadOnly =
-    isset(
-        $_GET['unread_only']
-    )
-    &&
     in_array(
         strtolower(
-            (string)
-            $_GET['unread_only']
+            (string) (
+                $_GET[
+                    'unread_only'
+                ]
+                ?? ''
+            )
         ),
         [
             '1',
@@ -191,12 +173,25 @@ try {
     $pdo =
         db();
 
-} catch (Throwable $e) {
+
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
+
+
+    $pdo->setAttribute(
+        PDO::ATTR_DEFAULT_FETCH_MODE,
+        PDO::FETCH_ASSOC
+    );
+
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI NOTIFICATIONS DB] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -221,12 +216,6 @@ $preferences = [
     'email_notifications' =>
         true,
 
-    'sms_notifications' =>
-        true,
-
-    'push_notifications' =>
-        true,
-
     'connection_notifications' =>
         true,
 
@@ -241,7 +230,6 @@ $preferences = [
 
     'sound_enabled' =>
         true
-
 ];
 
 
@@ -251,10 +239,7 @@ try {
         $pdo->prepare(
             "
             SELECT
-
                 email_notifications,
-                sms_notifications,
-                push_notifications,
                 connection_notifications,
                 message_notifications,
                 premium_notifications,
@@ -287,8 +272,7 @@ try {
     ) {
 
         foreach (
-            $preferences
-            as $key => $defaultValue
+            $preferences as $key => $value
         ) {
 
             if (
@@ -298,7 +282,9 @@ try {
                 )
             ) {
 
-                $preferences[$key] =
+                $preferences[
+                    $key
+                ] =
                     (bool)
                     $pref[$key];
 
@@ -308,17 +294,13 @@ try {
 
     }
 
-} catch (Throwable $e) {
-
-    /*
-     * Defaults remain enabled if a preferences row does not
-     * yet exist.
-     */
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI NOTIFICATION PREFERENCES] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 }
@@ -329,7 +311,9 @@ try {
 ============================================================ */
 
 $where =
-    'n.user_id = :user_id';
+    "
+    n.user_id = :user_id
+    ";
 
 
 if (
@@ -337,7 +321,9 @@ if (
 ) {
 
     $where .=
-        ' AND n.is_read = 0';
+        "
+        AND n.is_read = 0
+        ";
 
 }
 
@@ -384,12 +370,10 @@ try {
             FROM notifications n
 
             LEFT JOIN notification_types nt
-                ON nt.id =
-                   n.notification_type_id
+                ON nt.id = n.notification_type_id
 
             LEFT JOIN notification_audio na
-                ON na.id =
-                   n.audio_id
+                ON na.id = n.audio_id
 
             WHERE {$where}
 
@@ -415,12 +399,13 @@ try {
     $rows =
         $stmt->fetchAll();
 
-} catch (Throwable $e) {
+} catch (
+    Throwable $e
+) {
 
     error_log(
         '[LOVEMI NOTIFICATIONS QUERY] '
-        .
-        $e->getMessage()
+        . $e->getMessage()
     );
 
 
@@ -448,8 +433,7 @@ try {
 
         FROM notifications n
 
-        WHERE
-            n.user_id = :user_id
+        WHERE n.user_id = :user_id
         ";
 
 
@@ -458,7 +442,9 @@ try {
     ) {
 
         $countSql .=
-            " AND n.is_read = 0";
+            "
+            AND n.is_read = 0
+            ";
 
     }
 
@@ -481,14 +467,9 @@ try {
         (int)
         $countStmt->fetchColumn();
 
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI NOTIFICATIONS COUNT] '
-        .
-        $e->getMessage()
-    );
-
+} catch (
+    Throwable $e
+) {
 
     $total =
         count(
@@ -499,7 +480,475 @@ try {
 
 
 /* ============================================================
-   FORMAT NOTIFICATIONS
+   AUDIO URL
+============================================================ */
+
+function notificationAudioUrl(
+    array $row,
+    bool $soundAllowed
+): ?string {
+
+    if (
+        !$soundAllowed
+    ) {
+
+        return null;
+
+    }
+
+
+    /*
+     * Prefer the exact audio record assigned to the
+     * notification.
+     */
+    $path =
+        trim(
+            (string) (
+                $row[
+                    'audio_path'
+                ]
+                ?? ''
+            )
+        );
+
+
+    if (
+        $path !== ''
+        &&
+        (
+            (int) (
+                $row[
+                    'audio_active'
+                ]
+                ?? 1
+            ) === 1
+        )
+    ) {
+
+        /*
+         * Only allow project-relative audio.
+         */
+        if (
+            !preg_match(
+                '#^https?://#i',
+                $path
+            )
+            &&
+            !str_starts_with(
+                $path,
+                '//'
+            )
+            &&
+            !str_contains(
+                $path,
+                '../'
+            )
+            &&
+            !str_contains(
+                $path,
+                '..\\'
+            )
+        ) {
+
+            return ltrim(
+                $path,
+                '/'
+            );
+
+        }
+
+    }
+
+
+    /*
+     * FALLBACK:
+     *
+     * When a notification does not have audio_id,
+     * use notificationN.mp3 based on the notification type.
+     *
+     * LOVEMI currently has notification1.mp3 through
+     * notification19.mp3.
+     */
+    $typeId =
+        (int) (
+            $row[
+                'notification_type_id'
+            ]
+            ?? 0
+        );
+
+
+    if (
+        $typeId >= 1
+        &&
+        $typeId <= 19
+    ) {
+
+        return
+            'assets/audio/notification'
+            . $typeId
+            . '.mp3';
+
+    }
+
+
+    /*
+     * Final fallback.
+     */
+    return
+        'assets/audio/notification1.mp3';
+}
+
+
+/* ============================================================
+   ACTION PATH
+============================================================ */
+
+function notificationActionPath(
+    array $row
+): string {
+
+    $slug =
+        strtolower(
+            trim(
+                (string) (
+                    $row[
+                        'notification_type_slug'
+                    ]
+                    ?? ''
+                )
+            )
+        );
+
+
+    $referenceType =
+        strtolower(
+            trim(
+                (string) (
+                    $row[
+                        'reference_type'
+                    ]
+                    ?? ''
+                )
+            )
+        );
+
+
+    $referenceId =
+        (int) (
+            $row[
+                'reference_id'
+            ]
+            ?? 0
+        );
+
+
+    if (
+        $referenceType ===
+        'conversation'
+        && $referenceId > 0
+    ) {
+
+        return
+            'messages.html?conversation_id='
+            . rawurlencode(
+                (string) $referenceId
+            );
+
+    }
+
+
+    if (
+        $slug ===
+        'new_message'
+    ) {
+
+        return
+            'messages.html';
+
+    }
+
+
+    if (
+        in_array(
+            $slug,
+            [
+                'new_connection',
+                'connection_accepted'
+            ],
+            true
+        )
+        ||
+        $referenceType ===
+        'connection'
+    ) {
+
+        return
+            'connections.html';
+
+    }
+
+
+    if (
+        in_array(
+            $slug,
+            [
+                'premium_activated',
+                'premium_expiring',
+                'premium_expired',
+                'payment_successful',
+                'payment_failed'
+            ],
+            true
+        )
+        ||
+        in_array(
+            $referenceType,
+            [
+                'payment',
+                'subscription'
+            ],
+            true
+        )
+    ) {
+
+        return
+            'premium.html';
+
+    }
+
+
+    if (
+        in_array(
+            $slug,
+            [
+                'post_liked',
+                'post_commented',
+                'comment_reply',
+                'followed_new_post'
+            ],
+            true
+        )
+        ||
+        $referenceType ===
+        'post'
+    ) {
+
+        if (
+            $referenceId > 0
+        ) {
+
+            return
+                'dashboard.html#post-'
+                . rawurlencode(
+                    (string) $referenceId
+                );
+
+        }
+
+
+        return
+            'dashboard.html';
+
+    }
+
+
+    if (
+        $slug ===
+        'photo_approved'
+        ||
+        $referenceType ===
+        'photo'
+    ) {
+
+        return
+            'photos.html';
+
+    }
+
+
+    if (
+        $referenceType ===
+        'profile'
+    ) {
+
+        return
+            'profile.html';
+
+    }
+
+
+    $id =
+        (int) (
+            $row['id']
+            ?? 0
+        );
+
+
+    return
+        'notifications.html'
+        . (
+            $id > 0
+                ? '#notification-' . $id
+                : ''
+        );
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+function notificationIcon(
+    string $slug
+): string {
+
+    return match (
+        strtolower(
+            trim($slug)
+        )
+    ) {
+
+        'new_connection',
+        'connection_accepted'
+            =>
+            'fa-link',
+
+        'new_message'
+            =>
+            'fa-message',
+
+        'premium_activated'
+            =>
+            'fa-crown',
+
+        'premium_expiring'
+            =>
+            'fa-clock',
+
+        'premium_expired'
+            =>
+            'fa-triangle-exclamation',
+
+        'payment_successful'
+            =>
+            'fa-circle-check',
+
+        'payment_failed'
+            =>
+            'fa-circle-xmark',
+
+        'post_approved',
+        'account_approved'
+            =>
+            'fa-circle-check',
+
+        'photo_approved'
+            =>
+            'fa-image',
+
+        'post_liked'
+            =>
+            'fa-heart',
+
+        'post_commented'
+            =>
+            'fa-comment',
+
+        'comment_reply'
+            =>
+            'fa-reply',
+
+        'followed_new_post'
+            =>
+            'fa-rss',
+
+        default
+            =>
+            'fa-bell'
+
+    };
+}
+
+
+/* ============================================================
+   CATEGORY ENABLED
+============================================================ */
+
+function categoryEnabled(
+    string $slug,
+    array $preferences
+): bool {
+
+    $slug =
+        strtolower(
+            trim($slug)
+        );
+
+
+    if (
+        in_array(
+            $slug,
+            [
+                'new_connection',
+                'connection_accepted'
+            ],
+            true
+        )
+    ) {
+
+        return
+            $preferences[
+                'connection_notifications'
+            ];
+
+    }
+
+
+    if (
+        $slug ===
+        'new_message'
+    ) {
+
+        return
+            $preferences[
+                'message_notifications'
+            ];
+
+    }
+
+
+    if (
+        in_array(
+            $slug,
+            [
+                'premium_activated',
+                'premium_expiring',
+                'premium_expired',
+                'payment_successful',
+                'payment_failed'
+            ],
+            true
+        )
+    ) {
+
+        return
+            $preferences[
+                'premium_notifications'
+            ];
+
+    }
+
+
+    return
+        $preferences[
+            'system_notifications'
+        ];
+}
+
+
+/* ============================================================
+   FORMAT
 ============================================================ */
 
 $notifications =
@@ -507,150 +956,58 @@ $notifications =
 
 
 foreach (
-    $rows
-    as $row
+    $rows as $row
 ) {
 
-    $typeSlug =
+    $slug =
         strtolower(
             trim(
-                (string)
-                (
-                    $row['notification_type_slug']
-                    ??
-                    'system'
+                (string) (
+                    $row[
+                        'notification_type_slug'
+                    ]
+                    ?? 'system'
                 )
             )
         );
 
 
-    /*
-     * Determine whether this category is enabled.
-     */
-
     $categoryEnabled =
-        match (
-            true
-        ) {
+        categoryEnabled(
+            $slug,
+            $preferences
+        );
 
-            in_array(
-                $typeSlug,
-                [
-                    'new_connection'
-                ],
-                true
-            )
-                =>
-                $preferences[
-                    'connection_notifications'
-                ],
-
-            in_array(
-                $typeSlug,
-                [
-                    'new_message'
-                ],
-                true
-            )
-                =>
-                $preferences[
-                    'message_notifications'
-                ],
-
-            in_array(
-                $typeSlug,
-                [
-                    'premium_activated',
-                    'premium_expiring',
-                    'premium_expired'
-                ],
-                true
-            )
-                =>
-                $preferences[
-                    'premium_notifications'
-                ],
-
-            default
-                =>
-                $preferences[
-                    'system_notifications'
-                ]
-
-        };
-
-
-    /*
-     * The notification record itself remains visible to the user,
-     * but audio is only returned when both preference switches
-     * allow it.
-     */
 
     $soundAllowed =
-        $preferences['sound_enabled']
+        $preferences[
+            'sound_enabled'
+        ]
         &&
         $categoryEnabled
         &&
         (
-            !isset(
-                $row['notification_type_sound_enabled']
+            (int) (
+                $row[
+                    'notification_type_sound_enabled'
+                ]
+                ?? 1
             )
-            ||
-            (bool)
-            $row[
-                'notification_type_sound_enabled'
-            ]
-        )
-        &&
-        (
-            !isset(
-                $row['audio_active']
-            )
-            ||
-            (bool)
-            $row['audio_active']
+            === 1
         );
 
 
-    $audio =
-        null;
+    $audioUrl =
+        notificationAudioUrl(
+            $row,
+            $soundAllowed
+        );
 
 
-    if (
-        $soundAllowed
-        &&
-        !empty(
-            $row['audio_path']
-        )
-    ) {
-
-        $audio = [
-
-            'id' =>
-                $row['audio_id'] !== null
-                    ?
-                    (int)
-                    $row['audio_id']
-                    :
-                    null,
-
-            'name' =>
-                $row['audio_name'],
-
-            'file_name' =>
-                $row['audio_file_name'],
-
-            'path' =>
-                $row['audio_path'],
-
-            'mime_type' =>
-                $row['audio_mime_type']
-                ??
-                'audio/mpeg'
-
-        ];
-
-    }
+    $actionPath =
+        notificationActionPath(
+            $row
+        );
 
 
     $notifications[] = [
@@ -670,46 +1027,60 @@ foreach (
         'notification_type' => [
 
             'id' =>
-                $row['notification_type_id'] !== null
-                    ?
-                    (int)
-                    $row['notification_type_id']
-                    :
-                    null,
+                $row[
+                    'notification_type_id'
+                ] !== null
+                    ? (int)
+                      $row[
+                          'notification_type_id'
+                      ]
+                    : null,
 
             'name' =>
-                $row['notification_type_name']
+                $row[
+                    'notification_type_name'
+                ]
                 ??
                 'System Notification',
 
             'slug' =>
-                $typeSlug,
+                $slug,
 
             'description' =>
-                $row['notification_type_description']
+                $row[
+                    'notification_type_description'
+                ]
+                ??
+                null
 
         ],
 
         'sender_id' =>
-            $row['sender_id'] !== null
-                ?
-                (int)
-                $row['sender_id']
-                :
-                null,
+            $row[
+                'sender_id'
+            ] !== null
+                ? (int)
+                  $row[
+                      'sender_id'
+                  ]
+                : null,
 
         'reference' => [
 
             'type' =>
-                $row['reference_type'],
+                $row[
+                    'reference_type'
+                ],
 
             'id' =>
-                $row['reference_id'] !== null
-                    ?
-                    (int)
-                    $row['reference_id']
-                    :
-                    null
+                $row[
+                    'reference_id'
+                ] !== null
+                    ? (int)
+                      $row[
+                          'reference_id'
+                      ]
+                    : null
 
         ],
 
@@ -723,11 +1094,62 @@ foreach (
         'created_at' =>
             $row['created_at'],
 
+        'action_url' =>
+            $actionPath,
+
+        'action_label' =>
+            $slug === 'new_message'
+                ? 'View message'
+                : (
+                    str_contains(
+                        $slug,
+                        'payment'
+                    )
+                        ? 'View payment'
+                        : 'View notification'
+                ),
+
+        'icon' =>
+            notificationIcon(
+                $slug
+            ),
+
         'audio' =>
-            $audio
+            $audioUrl !== null
+                ? [
+
+                    'url' =>
+                        $audioUrl,
+
+                    'name' =>
+                        $row[
+                            'audio_name'
+                        ]
+                        ??
+                        basename(
+                            $audioUrl
+                        ),
+
+                    'file_name' =>
+                        $row[
+                            'audio_file_name'
+                        ]
+                        ??
+                        basename(
+                            $audioUrl
+                        ),
+
+                    'mime_type' =>
+                        $row[
+                            'audio_mime_type'
+                        ]
+                        ??
+                        'audio/mpeg'
+
+                ]
+                : null
 
     ];
-
 }
 
 
@@ -763,14 +1185,9 @@ try {
         (int)
         $unreadStmt->fetchColumn();
 
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI UNREAD COUNT] '
-        .
-        $e->getMessage()
-    );
-
+} catch (
+    Throwable $e
+) {
 
     $unreadCount =
         0;
@@ -816,6 +1233,16 @@ notificationsResponse(
 
         'unread_count' =>
             $unreadCount,
+
+        'sound_enabled' =>
+            $preferences[
+                'sound_enabled'
+            ],
+
+        'email_enabled' =>
+            $preferences[
+                'email_notifications'
+            ],
 
         'preferences' =>
             $preferences

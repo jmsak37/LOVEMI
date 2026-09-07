@@ -627,6 +627,87 @@ video {
 }
 
 
+.profile-nav-stack {
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:4px;
+
+    min-width:74px;
+
+    margin-left:auto;
+
+}
+
+.logout-button {
+
+    width:100%;
+
+    min-height:29px;
+
+    padding:0 9px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border:1px solid #fecaca;
+
+    border-radius:9px;
+
+    color:#b91c1c;
+
+    background:#fff;
+
+    font-size:7px;
+
+    font-weight:800;
+
+    transition:.18s ease;
+
+}
+
+.logout-button:hover {
+
+    color:#991b1b;
+
+    background:#fef2f2;
+
+    border-color:#fca5a5;
+
+}
+
+.logout-button:disabled {
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+}
+
+
+.profile-dropdown-toggle {
+
+    display:none;
+
+}
+
+
+.profile-logout-menu {
+
+    display:block;
+
+}
+
+
 .mobile-menu {
 
     width:41px;
@@ -2015,6 +2096,47 @@ video {
 }
 
 
+.media-protection-badge {
+
+    position:absolute;
+
+    top:10px;
+
+    left:10px;
+
+    z-index:5;
+
+    padding:6px 8px;
+
+    border-radius:8px;
+
+    color:white;
+
+    background:rgba(24,24,27,.62);
+
+    backdrop-filter:blur(7px);
+
+    -webkit-backdrop-filter:blur(7px);
+
+    pointer-events:none;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+.post-media img,
+.post-media video {
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+
 .video-hint {
 
     position:absolute;
@@ -2251,6 +2373,121 @@ video {
 
     padding:
         0 15px 15px;
+
+}
+
+
+.comments-area {
+
+    display:none;
+
+}
+
+
+.comments-area.open {
+
+    display:block;
+
+}
+
+
+.latest-comment {
+
+    margin:0 15px 10px;
+
+    padding:8px 10px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:7px;
+
+    border:1px solid #f0eef5;
+
+    border-radius:10px;
+
+    background:#fbfaff;
+
+}
+
+.latest-comment-avatar {
+
+    width:26px;
+
+    height:26px;
+
+    flex:0 0 26px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    background:#efeff4;
+
+}
+
+.latest-comment-body {
+
+    min-width:0;
+
+}
+
+.latest-comment-label {
+
+    color:var(--primary);
+
+    font-size:6.5px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
+
+}
+
+.latest-comment-author {
+
+    margin-top:1px;
+
+    font-size:7.5px;
+
+    font-weight:800;
+
+}
+
+.latest-comment-text {
+
+    margin-top:2px;
+
+    color:#3f3f46;
+
+    font-size:8px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.latest-comment-empty {
+
+    color:var(--text-muted);
+
+    font-size:7px;
+
+}
+
+.comment-toggle.comments-open {
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+    border-color:#ddd6fe;
 
 }
 
@@ -3085,6 +3322,162 @@ video {
 
 
 /* ============================================================
+   LOGOUT CONFIRMATION MODAL
+============================================================ */
+
+.logout-modal {
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(15,23,42,.55);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+}
+
+.logout-modal.open {
+
+    display:flex;
+
+}
+
+.logout-modal-card {
+
+    width:min(100%,390px);
+
+    padding:22px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.logout-modal-icon {
+
+    width:52px;
+
+    height:52px;
+
+    margin:0 auto 12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:15px;
+
+    color:#b91c1c;
+
+    background:#fef2f2;
+
+    font-size:20px;
+
+}
+
+.logout-modal-card h3 {
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:900;
+
+}
+
+.logout-modal-card p {
+
+    margin-top:7px;
+
+    color:var(--text-soft);
+
+    text-align:center;
+
+    font-size:8.5px;
+
+    line-height:1.7;
+
+}
+
+.logout-modal-actions {
+
+    margin-top:16px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+}
+
+.logout-modal-action {
+
+    min-height:40px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    border-radius:10px;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+.logout-modal-cancel {
+
+    border:1px solid var(--border);
+
+    color:var(--text-soft);
+
+    background:#fff;
+
+}
+
+.logout-modal-confirm {
+
+    border:1px solid #fecaca;
+
+    color:#fff;
+
+    background:#dc2626;
+
+}
+
+.logout-modal-confirm:hover {
+
+    background:#b91c1c;
+
+}
+
+/* ============================================================
    TOAST
 ============================================================ */
 
@@ -3225,6 +3618,8 @@ video {
 
         gap:5px;
 
+        align-items:center;
+
     }
 
 
@@ -3232,14 +3627,143 @@ video {
 
         display:inline-flex;
 
+        order:3;
+
+    }
+
+
+    .profile-nav-stack {
+
         order:4;
+
+        min-width:auto;
+
+        width:auto;
+
+        margin-left:0;
+
+        align-items:center;
+
+        gap:2px;
+
+        position:relative;
 
     }
 
 
     .profile-mini {
 
-        order:3;
+        order:initial;
+
+        padding:2px;
+
+        border:0;
+
+        background:transparent;
+
+    }
+
+
+    .profile-mini-avatar {
+
+        width:34px;
+
+        height:34px;
+
+    }
+
+
+    .profile-mini-name {
+
+        display:none;
+
+    }
+
+
+    .profile-dropdown-toggle {
+
+        display:inline-flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        width:24px;
+
+        height:18px;
+
+        padding:0;
+
+        border:0;
+
+        background:transparent;
+
+        color:var(--text-soft);
+
+        cursor:pointer;
+
+    }
+
+
+    .profile-dropdown-toggle i {
+
+        font-size:10px;
+
+        transition:transform .18s ease;
+
+    }
+
+
+    .profile-nav-stack.profile-menu-open
+    .profile-dropdown-toggle i {
+
+        transform:rotate(180deg);
+
+    }
+
+
+    .profile-logout-menu {
+
+        display:none;
+
+        position:absolute;
+
+        top:calc(100% + 4px);
+
+        right:0;
+
+        min-width:92px;
+
+        padding:4px;
+
+        border:1px solid var(--border);
+
+        border-radius:10px;
+
+        background:white;
+
+        box-shadow:0 12px 28px rgba(0,0,0,.12);
+
+        z-index:1200;
+
+    }
+
+
+    .profile-nav-stack.profile-menu-open
+    .profile-logout-menu {
+
+        display:block;
+
+    }
+
+
+    .logout-button {
+
+        min-height:28px;
+
+        padding:0 7px;
+
+        font-size:6.5px;
 
     }
 
@@ -3536,30 +4060,59 @@ video {
             </a>
 
 
-            <a
-                href="profile.html"
-                class="profile-mini"
-            >
+            <div class="profile-nav-stack">
 
-                <img
-                    id="profileMiniAvatar"
-                    class="profile-mini-avatar"
-                    src="assets/images/defaults/default-avatar-male.png"
-                    alt="Your profile"
-                    onerror="
-                        this.onerror=null;
-                        this.src='assets/images/defaults/default-avatar-male.png';
-                    "
+                <a
+                    href="profile.html"
+                    class="profile-mini"
                 >
 
-                <span
-                    id="profileMiniName"
-                    class="profile-mini-name"
-                >
-                    Account
-                </span>
+                    <img
+                        id="profileMiniAvatar"
+                        class="profile-mini-avatar"
+                        src="assets/images/defaults/default-avatar-male.png"
+                        alt="Your profile"
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/images/defaults/default-avatar-male.png';
+                        "
+                    >
 
-            </a>
+                    <span
+                        id="profileMiniName"
+                        class="profile-mini-name"
+                    >
+                        Account
+                    </span>
+
+                </a>
+
+                <button
+                    type="button"
+                    class="profile-dropdown-toggle"
+                    id="profileDropdownToggle"
+                    aria-label="Profile menu"
+                    aria-expanded="false"
+                    aria-controls="profileLogoutMenu"
+                >
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div
+                    class="profile-logout-menu"
+                    id="profileLogoutMenu"
+                >
+                    <button
+                        type="button"
+                        class="logout-button"
+                        id="logoutButton"
+                    >
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+
+            </div>
 
 
             <button
@@ -4269,6 +4822,40 @@ video {
 
 
 <div
+    id="logoutConfirmModal"
+    class="logout-modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="logoutConfirmTitle"
+>
+    <div class="logout-modal-card">
+        <div class="logout-modal-icon">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <h3 id="logoutConfirmTitle">Confirm Logout</h3>
+        <p>Are you sure you want to log out of LOVEMI on this device?</p>
+        <div class="logout-modal-actions">
+            <button
+                type="button"
+                class="logout-modal-action logout-modal-cancel"
+                id="logoutCancelButton"
+            >
+                Cancel
+            </button>
+            <button
+                type="button"
+                class="logout-modal-action logout-modal-confirm"
+                id="logoutConfirmButton"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+        </div>
+    </div>
+</div>
+
+<div
     id="toast"
     class="toast"
 ></div>
@@ -4328,8 +4915,17 @@ const API = {
     connections:
         "api/connections/list.php",
 
+    profileCode:
+        "api/discover/profile-code.php",
+
     notifications:
-        "api/notifications/unread-count.php"
+        "api/notifications/unread-count.php",
+
+    logout:
+        "api/auth/logout.php",
+
+    mediaStream:
+        "api/posts/media-stream.php"
 
 };
 
@@ -4378,7 +4974,9 @@ const state = {
 
     notificationCount:0,
 
-    previousNotificationCount:0
+    previousNotificationCount:0,
+
+    commentsOpen:new Set()
 
 };
 
@@ -5270,11 +5868,12 @@ function renderComposer() {
                         <label
                             for="postMedia"
                             class="media-label"
+                            title="Click to upload file"
                         >
 
-                            <i class="fa-solid fa-photo-film"></i>
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
 
-                            Add Photo / Video / Other
+                            Click to upload file
 
                         </label>
 
@@ -6176,9 +6775,65 @@ function normalizePosts(
     return rows.map(
         row => {
 
+            const firstMedia =
+                Array.isArray(row.media)
+                    ?
+                    (row.media[0] || null)
+                    :
+                    null;
+
+            const postId =
+                Number(
+                    row.post_id
+                    ??
+                    row.id
+                    ??
+                    0
+                );
+
+            const originalMediaUrl =
+                row.media_url
+                ||
+                row.post_image
+                ||
+                row.photo_url
+                ||
+                firstMedia?.url
+                ||
+                firstMedia?.file_path
+                ||
+                "";
+
+            const protectedMediaUrl =
+                originalMediaUrl
+                &&
+                postId > 0
+                    ?
+                    buildProtectedMediaUrl(
+                        postId,
+                        originalMediaUrl
+                    )
+                    :
+                    originalMediaUrl;
+
+            const mediaId =
+                Number(
+                    row.media_id
+                    ??
+                    row.photo_id
+                    ??
+                    firstMedia?.photo_id
+                    ??
+                    firstMedia?.id
+                    ??
+                    0
+                );
+
             let type =
                 String(
                     row.media_type
+                    ||
+                    firstMedia?.mime_type
                     ||
                     ""
                 ).toLowerCase();
@@ -6227,11 +6882,7 @@ function normalizePosts(
             return {
 
                 id:
-                    Number(
-                        row.post_id
-                        ??
-                        row.id
-                    ),
+                    postId,
 
                 userId:
                     Number(
@@ -6275,11 +6926,15 @@ function normalizePosts(
                     "",
 
                 mediaUrl:
-                    row.media_url
-                    ||
-                    row.post_image
-                    ||
-                    "",
+                    protectedMediaUrl,
+
+                originalMediaUrl:
+                    String(
+                        originalMediaUrl
+                    ),
+
+                mediaId:
+                    mediaId,
 
                 thumbnail:
                     row.thumbnail_url
@@ -6341,9 +6996,48 @@ function normalizePosts(
                 viewToken:
                     row.view_token
                     ||
-                    null
+                    null,
+
+                allowRepost:
+                    Boolean(
+                        row.allow_repost
+                        ??
+                        firstMedia?.allow_repost
+                        ??
+                        true
+                    ),
+
+                allowVideoDownload:
+                    Boolean(
+                        row.allow_video_download
+                        ??
+                        firstMedia?.allow_video_download
+                        ??
+                        true
+                    )
 
             };
+
+        }
+    )
+    .sort(
+        function(a, b) {
+
+            const timeA =
+                Date.parse(
+                    a.createdAt
+                ) || 0;
+
+            const timeB =
+                Date.parse(
+                    b.createdAt
+                ) || 0;
+
+            if (timeB !== timeA) {
+                return timeB - timeA;
+            }
+
+            return Number(b.id) - Number(a.id);
 
         }
     );
@@ -6589,6 +7283,8 @@ function renderFeed() {
 
     loadAllComments();
 
+    restoreOpenComments();
+
 
     hideNewPostsButton();
 
@@ -6598,6 +7294,28 @@ function renderFeed() {
 
 
     state.newPostIds.clear();
+
+}
+
+
+/* ============================================================
+   PROTECTED MEDIA URL
+============================================================ */
+
+function buildProtectedMediaUrl(
+    postId,
+    mediaUrl
+) {
+
+    if (!postId || !mediaUrl) {
+        return String(mediaUrl || "");
+    }
+
+    return API.mediaStream
+        + "?post_id="
+        + encodeURIComponent(postId)
+        + "&media_url="
+        + encodeURIComponent(String(mediaUrl));
 
 }
 
@@ -6665,10 +7383,19 @@ function renderPost(
                 </span>
 
 
+                <span class="media-protection-badge">
+                    <i class="fa-solid fa-lock"></i>
+                    Protected
+                </span>
+
+
                 <img
                     src="${escapeHtml(post.mediaUrl)}"
                     alt="${escapeHtml(post.fullName)}"
                     loading="lazy"
+                    draggable="false"
+                    data-protected-media="true"
+                    oncontextmenu="return false;"
                     data-viewer-index="${index}"
                     onerror="
                         this.onerror=null;
@@ -6736,14 +7463,24 @@ function renderPost(
                 </span>
 
 
+                <span class="media-protection-badge">
+                    <i class="fa-solid fa-lock"></i>
+                    Protected
+                </span>
+
+
                 <video
                     class="post-video"
                     src="${escapeHtml(post.mediaUrl)}"
                     muted
                     loop
                     controls
+                    controlsList="nodownload noplaybackrate"
+                    disablePictureInPicture
                     playsinline
                     preload="metadata"
+                    data-protected-media="true"
+                    oncontextmenu="return false;"
                     data-viewer-index="${index}"
                     data-feed-video="true"
                     aria-label="Post video"
@@ -6994,20 +7731,7 @@ function renderPost(
             </header>
 
 
-            ${
-                post.content
-                ?
-                `
-                <div class="post-content">
-
-                    ${post.content}
-
-                </div>
-                `
-                :
-                ""
-
-            }
+            ${renderPostContent(post)}
 
 
             ${media}
@@ -7072,6 +7796,26 @@ function renderPost(
 
                 <button
                     type="button"
+                    class="post-action comment-toggle"
+                    data-comment-toggle="${escapeHtml(post.id)}"
+                >
+
+                    <i class="fa-regular fa-comment"></i>
+
+                    Comment
+
+                    <span
+                        class="comment-count"
+                        data-comment-count="${escapeHtml(post.id)}"
+                    >
+                        ${post.commentCount}
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
                     class="post-action"
                     data-view-post="${escapeHtml(post.id)}"
                 >
@@ -7121,7 +7865,23 @@ function renderPost(
             </footer>
 
 
-            <section class="comments-area">
+            <div
+                class="latest-comment"
+                data-latest-comment="${escapeHtml(post.id)}"
+            >
+                <div class="latest-comment-avatar" aria-hidden="true"></div>
+                <div class="latest-comment-body">
+                    <div class="latest-comment-label">Latest comment</div>
+                    <div class="latest-comment-empty">Checking comments...</div>
+                </div>
+            </div>
+
+
+            <section
+                class="comments-area"
+                data-comments-panel="${escapeHtml(post.id)}"
+                aria-hidden="true"
+            >
 
 
                 <div class="comments-head">
@@ -7197,6 +7957,227 @@ function renderPost(
     `;
 
 }
+
+
+/* ============================================================
+   POST CONTENT / READ MORE
+============================================================ */
+
+function renderPostContent(
+    post
+) {
+
+    const content =
+        String(
+            post.content ||
+            ""
+        );
+
+    if (!content.trim()) {
+        return "";
+    }
+
+    const textLength =
+        content
+            .replace(/<[^>]*>/g, "")
+            .length;
+
+    const longPost =
+        textLength > 420;
+
+    return `
+
+        <div
+            class="post-content ${longPost ? "collapsed" : ""}"
+        >
+
+            ${content}
+
+        </div>
+
+        ${
+            longPost
+            ?
+            `
+            <button
+                type="button"
+                class="read-more"
+                data-read-more="${escapeHtml(post.id)}"
+            >
+                <i class="fa-solid fa-chevron-down"></i>
+                <span>Read More</span>
+            </button>
+            `
+            :
+            ""
+        }
+
+    `;
+
+}
+
+
+/* ============================================================
+   COMMENTS TOGGLE
+============================================================ */
+
+async function toggleComments(
+    postId,
+    article,
+    forceOpen = null
+) {
+
+    const panel =
+        article.querySelector(
+            ".comments-area"
+        );
+
+    if (!panel) {
+        return;
+    }
+
+    const isOpen =
+        panel.classList.contains(
+            "open"
+        );
+
+    const shouldOpen =
+        forceOpen === null
+            ?
+            !isOpen
+            :
+            forceOpen;
+
+    panel.classList.toggle(
+        "open",
+        shouldOpen
+    );
+
+    panel.setAttribute(
+        "aria-hidden",
+        String(!shouldOpen)
+    );
+
+    const button =
+        article.querySelector(
+            `[data-comment-toggle="${postId}"]`
+        );
+
+    if (button) {
+
+        button.classList.toggle(
+            "comments-open",
+            shouldOpen
+        );
+
+        const icon =
+            button.querySelector("i");
+
+        if (icon) {
+            icon.className =
+                shouldOpen
+                    ?
+                    "fa-solid fa-comment"
+                    :
+                    "fa-regular fa-comment";
+        }
+
+    }
+
+    if (shouldOpen) {
+
+        state.commentsOpen.add(
+            Number(postId)
+        );
+
+        await loadComments(
+            postId
+        );
+
+    } else {
+
+        state.commentsOpen.delete(
+            Number(postId)
+        );
+
+    }
+
+}
+
+
+function restoreOpenComments() {
+
+    state.commentsOpen.forEach(
+        function(postId) {
+
+            const article =
+                document.querySelector(
+                    `.post-card[data-post-id="${postId}"]`
+                );
+
+            if (article) {
+
+                toggleComments(
+                    postId,
+                    article,
+                    true
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   PROTECTED MEDIA CONTEXT MENU / DRAG BLOCK
+============================================================ */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
+
+        const media =
+            event.target.closest(
+                ".post-media img, .post-media video"
+            );
+
+        if (!media) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        toast(
+            "Downloading this LOVEMI media is disabled by the post protection settings.",
+            true
+        );
+
+    },
+    true
+);
+
+
+document.addEventListener(
+    "dragstart",
+    function(event) {
+
+        if (
+            event.target.closest(
+                ".post-media img, .post-media video"
+            )
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    },
+    true
+);
 
 
 /* ============================================================
@@ -7299,7 +8280,99 @@ function bindFeedEvents() {
         );
 
 
-    $$("[data-connect-user]")
+    $$(`[data-comment-toggle]`)
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    async function(event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const postId =
+                            Number(
+                                this.dataset.commentToggle
+                            );
+
+                        const article =
+                            this.closest(".post-card");
+
+                        if (!article || !postId) {
+                            return;
+                        }
+
+                        await toggleComments(
+                            postId,
+                            article
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    $$(`[data-read-more]`)
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const article =
+                            this.closest(".post-card");
+
+                        const content =
+                            article?.querySelector(".post-content");
+
+                        if (!content) {
+                            return;
+                        }
+
+                        const collapsed =
+                            content.classList.toggle("collapsed");
+
+                        const icon =
+                            this.querySelector("i");
+
+                        const label =
+                            this.querySelector("span");
+
+                        if (collapsed) {
+                            if (icon) {
+                                icon.className =
+                                    "fa-solid fa-chevron-down";
+                            }
+                            if (label) {
+                                label.textContent =
+                                    "Read More";
+                            }
+                        } else {
+                            if (icon) {
+                                icon.className =
+                                    "fa-solid fa-chevron-up";
+                            }
+                            if (label) {
+                                label.textContent =
+                                    "Show Less";
+                            }
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    $$(`[data-connect-user]`)
         .forEach(
             button => {
 
@@ -7887,6 +8960,110 @@ function updateReactionUI(
    COMMENTS
 ============================================================ */
 
+async function getCommentCreatedTimestamp(comment) {
+
+    const value =
+        comment.created_at
+        ||
+        comment.updated_at
+        ||
+        "";
+
+    const time = Date.parse(String(value));
+
+    return Number.isFinite(time) ? time : 0;
+
+}
+
+
+function getCommentBody(comment) {
+
+    return String(
+        comment.body
+        ??
+        comment.comment_text
+        ??
+        comment.content
+        ??
+        ""
+    );
+
+}
+
+
+function renderLatestComment(postId, latestComment) {
+
+    const box =
+        document.querySelector(
+            `[data-latest-comment="${postId}"]`
+        );
+
+    if (!box) return;
+
+
+    if (!latestComment) {
+
+        box.innerHTML =
+            `
+            <div class="latest-comment-avatar" aria-hidden="true">
+                <i class="fa-regular fa-comment" style="font-size:10px;color:#9898a1;"></i>
+            </div>
+            <div class="latest-comment-body">
+                <div class="latest-comment-label">Latest comment</div>
+                <div class="latest-comment-empty">No comments yet.</div>
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    const avatar =
+        safeImage(
+            latestComment.avatar
+            ||
+            latestComment.profile_photo
+            ||
+            latestComment.photo_url
+            ||
+            "",
+            latestComment.gender
+        );
+
+
+    const name =
+        latestComment.full_name
+        ||
+        latestComment.fullName
+        ||
+        latestComment.username
+        ||
+        "Member";
+
+
+    const body =
+        getCommentBody(latestComment);
+
+
+    box.innerHTML =
+        `
+        <img
+            class="latest-comment-avatar"
+            src="${escapeHtml(avatar)}"
+            alt="${escapeHtml(name)}"
+            onerror="this.onerror=null;this.src='${safeImage("", latestComment.gender)}';"
+        >
+        <div class="latest-comment-body">
+            <div class="latest-comment-label">Latest comment</div>
+            <div class="latest-comment-author">${escapeHtml(name)}</div>
+            <div class="latest-comment-text" title="${escapeHtml(body)}">${escapeHtml(body || "Comment")}</div>
+        </div>
+        `;
+
+}
+
+
 async function loadComments(
     postId
 ) {
@@ -7915,9 +9092,7 @@ async function loadComments(
                 +
                 "?post_id="
                 +
-                encodeURIComponent(
-                    postId
-                )
+                encodeURIComponent(postId)
             );
 
 
@@ -7928,6 +9103,8 @@ async function loadComments(
         ) {
 
             throw new Error(
+                result.message
+                ||
                 "Comments unavailable."
             );
 
@@ -7935,41 +9112,53 @@ async function loadComments(
 
 
         const comments =
-            result.comments
-            ||
-            [];
+            Array.isArray(result.comments)
+                ?
+                result.comments.slice()
+                :
+                [];
 
 
-        if (
-            !comments.length
-        ) {
+        comments.sort(
+            (a, b) =>
+                getCommentCreatedTimestamp(a)
+                -
+                getCommentCreatedTimestamp(b)
+        );
 
-            box.innerHTML =
-                `
 
-                <span
-                    style="
-                        color:#9898a1;
-                        font-size:7px;
-                    "
-                >
-                    No comments yet.
-                </span>
+        const suppliedCount =
+            Number(
+                result.total_comments
+                ??
+                result.comment_count
+                ??
+                result.count
+                ??
+                NaN
+            );
 
-                `;
 
-        } else {
+        const count =
+            Number.isFinite(suppliedCount)
+                &&
+                suppliedCount >= comments.length
+                ?
+                suppliedCount
+                :
+                comments.length;
 
-            box.innerHTML =
-                comments
-                    .slice(
-                        0,
-                        8
-                    )
-                    .map(
-                        renderComment
-                    )
-                    .join("");
+
+        const post =
+            state.posts.find(
+                item =>
+                    Number(item.id) === Number(postId)
+            );
+
+
+        if (post) {
+
+            post.commentCount = count;
 
         }
 
@@ -7983,15 +9172,73 @@ async function loadComments(
         if (counter) {
 
             counter.textContent =
-                comments.length;
+                String(count);
 
         }
 
+
+        const latest =
+            comments.length
+                ?
+                comments[comments.length - 1]
+                :
+                null;
+
+
+        renderLatestComment(
+            postId,
+            latest
+        );
+
+
+        if (!comments.length) {
+
+            box.innerHTML =
+                `
+                <span
+                    style="
+                        color:#9898a1;
+                        font-size:7px;
+                    "
+                >
+                    No comments yet.
+                </span>
+                `;
+
+            return;
+
+        }
+
+
+        box.innerHTML =
+            comments
+                .slice()
+                .reverse()
+                .slice(0, 8)
+                .map(
+                    renderComment
+                )
+                .join("");
+
+
     } catch (error) {
+
+        const cachedCount =
+            Number(
+                document.querySelector(
+                    `[data-comment-count="${postId}"]`
+                )?.textContent
+                ||
+                0
+            );
+
+        renderLatestComment(
+            postId,
+            null
+        );
 
         box.innerHTML =
             `
-
             <span
                 style="
                     color:#9898a1;
@@ -8000,8 +9247,16 @@ async function loadComments(
             >
                 Comments unavailable.
             </span>
-
             `;
+
+        const counter =
+            document.querySelector(
+                `[data-comment-count="${postId}"]`
+            );
+
+        if (counter) {
+            counter.textContent = String(cachedCount);
+        }
 
     }
 
@@ -8547,6 +9802,239 @@ $("#feedShell")
 
 
 /* ============================================================
+   LOGOUT CONFIRMATION
+============================================================ */
+
+function openLogoutConfirmation() {
+
+    const modal =
+        document.getElementById(
+            "logoutConfirmModal"
+        );
+
+    if (!modal) return;
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+
+}
+
+
+function closeLogoutConfirmation() {
+
+    const modal =
+        document.getElementById(
+            "logoutConfirmModal"
+        );
+
+    if (!modal) return;
+
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeLogoutConfirmation();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+async function clearLovemiBrowserSession() {
+
+    try {
+
+        sessionStorage.clear();
+
+    } catch (error) {
+
+        console.debug("sessionStorage clear", error);
+
+    }
+
+
+    try {
+
+        const keys = [];
+
+        for (let i = 0; i < localStorage.length; i += 1) {
+
+            const key =
+                localStorage.key(i);
+
+            if (
+                key
+                &&
+                key.toLowerCase().startsWith("lovemi_")
+            ) {
+
+                keys.push(key);
+
+            }
+
+        }
+
+        keys.forEach(
+            key => localStorage.removeItem(key)
+        );
+
+    } catch (error) {
+
+        console.debug("localStorage clear", error);
+
+    }
+
+
+    if (
+        typeof caches !== "undefined"
+        &&
+        typeof caches.keys === "function"
+    ) {
+
+        try {
+
+            const names =
+                await caches.keys();
+
+            const lovemiCaches =
+                names.filter(
+                    name =>
+                        /lovemi|session|auth/i.test(
+                            name
+                        )
+                );
+
+            await Promise.all(
+                lovemiCaches.map(
+                    name => caches.delete(name)
+                )
+            );
+
+        } catch (error) {
+
+            console.debug("Cache Storage clear", error);
+
+        }
+
+    }
+
+}
+
+
+async function logoutCurrentUser() {
+
+    closeLogoutConfirmation();
+
+    const button =
+        document.getElementById(
+            "logoutConfirmButton"
+        );
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.innerHTML =
+            `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Logging out...</span>
+            `;
+
+    }
+
+    try {
+
+        await apiPost(
+            API.logout,
+            {}
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Logout API:",
+            error
+        );
+
+    } finally {
+
+        await clearLovemiBrowserSession();
+
+        window.location.replace("login.html");
+
+    }
+
+}
+
+
+/* ============================================================
+   LOGOUT BUTTON
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        document
+            .getElementById("logoutButton")
+            ?.addEventListener(
+                "click",
+                openLogoutConfirmation
+            );
+
+        document
+            .getElementById("logoutCancelButton")
+            ?.addEventListener(
+                "click",
+                closeLogoutConfirmation
+            );
+
+        document
+            .getElementById("logoutConfirmButton")
+            ?.addEventListener(
+                "click",
+                logoutCurrentUser
+            );
+
+        document
+            .getElementById("logoutConfirmModal")
+            ?.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeLogoutConfirmation();
+
+                    }
+
+                }
+            );
+
+    }
+);
+
+
+/* ============================================================
    SEARCH
 ============================================================ */
 
@@ -8585,6 +10073,69 @@ $("#globalSearch")
 
         }
     );
+
+
+/* ============================================================
+   PROFILE DROPDOWN
+============================================================ */
+
+const profileDropdownToggle =
+    $("#profileDropdownToggle");
+
+const profileNavStack =
+    $(".profile-nav-stack");
+
+if (
+    profileDropdownToggle
+    &&
+    profileNavStack
+) {
+
+    profileDropdownToggle.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const isOpen =
+                profileNavStack.classList.toggle(
+                    "profile-menu-open"
+                );
+
+            this.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        }
+    );
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !profileNavStack.contains(
+                    event.target
+                )
+            ) {
+
+                profileNavStack.classList.remove(
+                    "profile-menu-open"
+                );
+
+                profileDropdownToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 /* ============================================================
@@ -8796,6 +10347,8 @@ async function loadConnections() {
     const box =
         $("#connectionsList");
 
+    bindConnectionProfileEvents();
+
 
     try {
 
@@ -8889,8 +10442,10 @@ async function loadConnections() {
                         return `
 
                         <a
-                            href="profile.html?user=${encodeURIComponent(id)}"
+                            href="profile.html"
                             class="connection-item"
+                            data-connection-profile="${id}"
+                            aria-label="Open ${escapeHtml(name)} profile"
                         >
 
                             <img
@@ -8954,6 +10509,142 @@ async function loadConnections() {
             `;
 
     }
+
+}
+
+
+/* ============================================================
+   SECURE RECENT-CONNECTION PROFILE ROUTING
+============================================================ */
+
+async function openConnectionProfile(userId) {
+
+    const id =
+        Number(userId);
+
+    if (!Number.isInteger(id) || id <= 0) {
+
+        showToast(
+            "This profile could not be identified.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    try {
+
+        const {
+            response,
+            result
+        } =
+            await apiGet(
+                API.profileCode
+                +
+                "?user_id="
+                +
+                encodeURIComponent(id)
+            );
+
+        if (
+            !response.ok
+            ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result.message
+                ||
+                "This profile could not be opened."
+            );
+
+        }
+
+        const profileCode =
+            String(
+                result.profile_code
+                ||
+                result.code
+                ||
+                result.data?.profile_code
+                ||
+                result.data?.code
+                ||
+                ""
+            ).trim();
+
+        if (!profileCode) {
+
+            throw new Error(
+                "A secure profile code was not returned."
+            );
+
+        }
+
+        window.location.href =
+            "profile.html?code="
+            +
+            encodeURIComponent(
+                profileCode
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Secure connection profile:",
+            error
+        );
+
+        showToast(
+            error.message
+            ||
+            "Unable to open this profile.",
+            "error"
+        );
+
+    }
+
+}
+
+
+function bindConnectionProfileEvents() {
+
+    const box =
+        $("#connectionsList");
+
+    if (!box || box.dataset.profileRoutingBound === "1") {
+
+        return;
+
+    }
+
+    box.dataset.profileRoutingBound = "1";
+
+    box.addEventListener(
+        "click",
+        function(event) {
+
+            const link =
+                event.target.closest(
+                    "a[data-connection-profile]"
+                );
+
+            if (!link || !box.contains(link)) {
+
+                return;
+
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            openConnectionProfile(
+                link.dataset.connectionProfile
+            );
+
+        }
+    );
 
 }
 

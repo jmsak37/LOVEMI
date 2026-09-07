@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-store"
+    >
+
+    <meta
+        name="theme-color"
+        content="#6d28d9"
+    >
+
+    <title>Card Payment | LOVEMI</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="assets/logo1/favicon-32x32.png"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --p:#6d28d9;
+            --a:#db2777;
+            --t:#18181b;
+            --s:#68686f;
+            --m:#9898a1;
+            --bg:#f7f7fb;
+            --b:#e9e9ef;
+        }
+
+        * {
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body {
+            min-height:100vh;
+            background:var(--bg);
+            font-family:Inter,sans-serif;
+            color:var(--t);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+
+        .wrap {
+            width:min(100%,680px);
+        }
+
+        .card {
+            background:#fff;
+            border:1px solid var(--b);
+            border-radius:24px;
+            box-shadow:0 25px 75px rgba(0,0,0,.11);
+            padding:28px;
+        }
+
+        .brand {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+        }
+
+        .brand img {
+            width:64px;
+            height:64px;
+            object-fit:contain;
+        }
+
+        .brand strong {
+            font:800 28px "Playfair Display",serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--p),
+                    var(--a)
+                );
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
+        }
+
+        .title {
+            text-align:center;
+            margin-top:15px;
+        }
+
+        .title h1 {
+            font-size:24px;
+        }
+
+        .title p {
+            margin-top:6px;
+            color:var(--s);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        .state {
+            margin-top:20px;
+            padding:16px;
+            border-radius:14px;
+            background:#faf9ff;
+            border:1px solid #eadcff;
+        }
+
+        .row {
+            display:flex;
+            justify-content:space-between;
+            gap:14px;
+            padding:9px 0;
+            border-bottom:1px solid #eee;
+            font-size:9px;
+        }
+
+        .row:last-child {
+            border-bottom:0;
+        }
+
+        .label {
+            color:var(--m);
+        }
+
+        .value {
+            font-weight:800;
+            text-align:right;
+            overflow-wrap:anywhere;
+        }
+
+        .action {
+            width:100%;
+            min-height:46px;
+            margin-top:15px;
+            border:0;
+            border-radius:11px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--p),
+                    var(--a)
+                );
+            color:#fff;
+            font-weight:800;
+            font-size:10px;
+        }
+
+        .secondary {
+            background:#f3e8ff;
+            color:var(--p);
+            border:1px solid #ddd6fe;
+        }
+
+        .notice {
+            display:none;
+            margin-top:14px;
+            padding:12px;
+            border-radius:11px;
+            font-size:9px;
+            line-height:1.6;
+        }
+
+        .notice.show {
+            display:block;
+        }
+
+        .notice.error {
+            background:#fef2f2;
+            color:#991b1b;
+            border:1px solid #fecaca;
+        }
+
+        .notice.success {
+            background:#f0fdf4;
+            color:#166534;
+            border:1px solid #bbf7d0;
+        }
+
+        .notice.info {
+            background:#eff6ff;
+            color:#1d4ed8;
+            border:1px solid #bfdbfe;
+        }
+
+        .loader {
+            text-align:center;
+            padding:20px;
+            color:var(--m);
+            font-size:9px;
+        }
+
+        .footer {
+            margin-top:14px;
+            text-align:center;
+            color:var(--m);
+            font-size:7px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <main class="card">
+
+        <div class="brand">
+
+            <img
+                src="assets/logo1/logo1.png"
+                alt="LOVEMI"
+                onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png'"
+            >
+
+            <strong>LOVEMI</strong>
+
+        </div>
+
+        <div class="title">
+
+            <h1>
+                <i class="fa-solid fa-credit-card"></i>
+                Card Payment
+            </h1>
+
+            <p>
+                Your secure card payment order is ready.
+                Card details must be handled by a hosted
+                and tokenized payment provider.
+            </p>
+
+        </div>
+
+        <div
+            id="loader"
+            class="loader"
+        >
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Checking secure payment code...
+        </div>
+
+        <div
+            id="invalid"
+            class="notice error"
+        ></div>
+
+        <section
+            id="payment"
+            style="display:none"
+        >
+
+            <div class="state">
+
+                <div class="row">
+                    <span class="label">
+                        Service
+                    </span>
+
+                    <span
+                        id="service"
+                        class="value"
+                    >
+                        —
+                    </span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Payment reference
+                    </span>
+
+                    <span
+                        id="reference"
+                        class="value"
+                    >
+                        —
+                    </span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Amount
+                    </span>
+
+                    <span
+                        id="amount"
+                        class="value"
+                    >
+                        —
+                    </span>
+                </div>
+
+                <div class="row">
+                    <span class="label">
+                        Status
+                    </span>
+
+                    <span
+                        id="status"
+                        class="value"
+                    >
+                        Pending
+                    </span>
+                </div>
+
+            </div>
+
+            <button
+                id="payButton"
+                class="action"
+                type="button"
+            >
+                Continue with Card
+            </button>
+
+            <button
+                id="cancelButton"
+                class="action secondary"
+                type="button"
+            >
+                Return to LOVEMI
+            </button>
+
+            <div
+                id="notice"
+                class="notice"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <div class="footer">
+        LOVEMI • Discover • Connect • Meet
+    </div>
+
+</div>
+
+<script>
+"use strict";
+
+const CODE =
+    new URLSearchParams(location.search)
+        .get("code") || "";
+
+const RETURN_URL =
+    new URLSearchParams(location.search)
+        .get("return") ||
+    "dashboard.html";
+
+const STATUS_API =
+    "api/premium/payment-status.php";
+
+const INIT_API =
+    "api/payments/card/initiate.php";
+
+let payment = null;
+let timer = null;
+
+const $ = (selector) =>
+    document.querySelector(selector);
+
+function notice(message, type = "info") {
+    const element = $("#notice");
+
+    element.className =
+        "notice show " + type;
+
+    element.textContent = message;
+}
+
+async function getJson(url, options = {}) {
+    const response = await fetch(
+        url +
+            (url.includes("?") ? "&" : "?") +
+            "_=" +
+            Date.now(),
+        {
+            credentials:"same-origin",
+            cache:"no-store",
+            headers:{
+                Accept:"application/json",
+                ...(options.headers || {})
+            },
+            ...options
+        }
+    );
+
+    const text =
+        await response.text();
+
+    let result = {};
+
+    try {
+        result = JSON.parse(text);
+    } catch {
+        throw new Error(
+            "The server returned an invalid response."
+        );
+    }
+
+    return {
+        response,
+        result
+    };
+}
+
+function render() {
+    $("#service").textContent =
+        payment.service_name || "—";
+
+    $("#reference").textContent =
+        payment.payment_reference || "—";
+
+    $("#amount").textContent =
+        (payment.currency_symbol || "") +
+        " " +
+        (payment.amount_expected || "0");
+
+    $("#status").textContent =
+        payment.status || "pending";
+
+    const status =
+        String(payment.status || "")
+            .toLowerCase();
+
+    if (status === "paid") {
+
+        $("#payButton").textContent =
+            "Payment successful — open receipt";
+
+        notice(
+            "Payment verified successfully. Your secure receipt is ready.",
+            "success"
+        );
+
+        return;
+    }
+
+    if (
+        status === "failed" ||
+        status === "cancelled"
+    ) {
+
+        $("#payButton").textContent =
+            "Try Payment Again";
+
+        notice(
+            "This payment was not completed. You can try again with the same secure payment order.",
+            "error"
+        );
+
+        return;
+    }
+
+    $("#payButton").textContent =
+        "Continue with Card";
+}
+
+async function load() {
+
+    if (!/^[a-f0-9]{64}$/i.test(CODE)) {
+
+        $("#loader").style.display =
+            "none";
+
+        $("#invalid").textContent =
+            "This payment page requires a valid unique payment code. It cannot be opened without one.";
+
+        $("#invalid").classList.add("show");
+
+        return;
+    }
+
+    try {
+
+        const {
+            response,
+            result
+        } = await getJson(
+            STATUS_API +
+            "?code=" +
+            encodeURIComponent(CODE)
+        );
+
+        if (
+            !response.ok ||
+            result.success !== true
+        ) {
+            throw new Error(
+                result.message ||
+                "The secure payment could not be loaded."
+            );
+        }
+
+        payment =
+            result.payment;
+
+        $("#loader").style.display =
+            "none";
+
+        $("#payment").style.display =
+            "block";
+
+        render();
+
+        if (!timer) {
+            timer = setInterval(
+                load,
+                4000
+            );
+        }
+
+    } catch (error) {
+
+        $("#loader").style.display =
+            "none";
+
+        $("#invalid").textContent =
+            error.message ||
+            "The payment link is invalid or expired.";
+
+        $("#invalid").classList.add("show");
+    }
+}
+
+async function initiate() {
+
+    if (!payment) {
+        return;
+    }
+
+    const button =
+        $("#payButton");
+
+    button.disabled = true;
+
+    button.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Starting payment...
+    `;
+
+    try {
+
+        const {
+            response,
+            result
+        } = await getJson(
+            INIT_API,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+                body:JSON.stringify({
+                    code:CODE,
+                    payment_id:
+                        Number(payment.id),
+                    return_path:
+                        RETURN_URL
+                })
+            }
+        );
+
+        if (
+            !response.ok ||
+            result.success !== true
+        ) {
+            throw new Error(
+                result.message ||
+                "Payment could not be started."
+            );
+        }
+
+        if (result.checkout_url) {
+            location.href =
+                result.checkout_url;
+
+            return;
+        }
+
+        if (result.provider_action) {
+
+            notice(
+                result.provider_action,
+                "info"
+            );
+
+        } else {
+
+            notice(
+                "The card provider API is ready for configuration.",
+                "info"
+            );
+        }
+
+    } catch (error) {
+
+        notice(
+            error.message ||
+            "Payment could not be started.",
+            "error"
+        );
+
+    } finally {
+
+        button.disabled = false;
+
+        render();
+    }
+}
+
+$("#payButton").addEventListener(
+    "click",
+    async () => {
+
+        if (
+            payment &&
+            payment.status === "paid"
+        ) {
+
+            location.href =
+                "receipt.html?code=" +
+                encodeURIComponent(
+                    payment.receipt_code || ""
+                );
+
+            return;
+        }
+
+        await initiate();
+    }
+);
+
+$("#cancelButton").addEventListener(
+    "click",
+    () => {
+
+        location.href =
+            RETURN_URL.startsWith("http")
+                ? "dashboard.html"
+                : RETURN_URL;
+    }
+);
+
+load();
+</script>
+
+</body>
+</html>

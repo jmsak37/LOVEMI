@@ -1,1640 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="LOVEMI Help Center and Support"
-    >
-
-    <title>Help Center | LOVEMI</title>
-
-    <link
-        rel="icon"
-        href="assets/logo1/favicon.ico"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="assets/logo1/favicon-16x16.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="assets/logo1/apple-touch-icon.png"
-    >
-
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-
-    <style>
-
-        :root {
-            --primary: #e91e63;
-            --primary-dark: #c2185b;
-            --secondary: #7c3aed;
-            --text: #172033;
-            --muted: #687386;
-            --white: #fff;
-            --soft: #faf9fd;
-            --border: #e8e9ef;
-            --shadow: 0 12px 35px rgba(25,25,45,.08);
-        }
-
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-
-        body {
-            font-family: Inter, Arial, sans-serif;
-            background:
-                linear-gradient(
-                    180deg,
-                    #ffffff,
-                    #faf9fd
-                );
-            color: var(--text);
-            line-height: 1.65;
-        }
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-
-        .container {
-            width: min(
-                calc(100% - 32px),
-                1180px
-            );
-            margin-inline: auto;
-        }
-
-
-        /* =================================================
-           HEADER
-        ================================================== */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,.97);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-
-        .nav {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-
-        .brand img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-
-
-        .brand strong {
-            font-size: 1.35rem;
-        }
-
-
-        .desktop-links {
-            display: flex;
-            gap: 7px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-
-        .nav-link {
-            padding: 10px 13px;
-            border-radius: 11px;
-            color: #566173;
-            font-size: .9rem;
-            font-weight: 600;
-        }
-
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background: #fff0f5;
-        }
-
-
-        .cta {
-            color: #fff !important;
-            background: var(--primary);
-        }
-
-
-        .mobile-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: 0;
-            border-radius: 12px;
-            background: #f3f4f8;
-            cursor: pointer;
-        }
-
-
-        .mobile-menu {
-            display: none;
-            padding: 10px 0 15px;
-            border-top: 1px solid var(--border);
-        }
-
-
-        .mobile-menu.open {
-            display: block;
-        }
-
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 5px;
-            border-bottom: 1px solid #f0f1f5;
-            font-weight: 600;
-        }
-
-
-        /* =================================================
-           HERO
-        ================================================== */
-
-        .hero {
-            padding: 70px 0 40px;
-            text-align: center;
-        }
-
-
-        .hero-icon {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 18px;
-            display: grid;
-            place-items: center;
-            border-radius: 22px;
-            background: #fff0f5;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-
-        .hero h1 {
-            font-size: clamp(
-                2rem,
-                5vw,
-                3.35rem
-            );
-            line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 13px;
-        }
-
-
-        .hero p {
-            max-width: 700px;
-            margin-inline: auto;
-            color: var(--muted);
-        }
-
-
-        /* =================================================
-           HELP CARDS
-        ================================================== */
-
-        .support-section {
-            padding-bottom: 80px;
-        }
-
-
-        .quick-grid {
-            display: grid;
-            grid-template-columns:
-                repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-
-
-        .quick-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-        }
-
-
-        .quick-icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: #fff0f5;
-            color: var(--primary);
-            margin-bottom: 16px;
-        }
-
-
-        .quick-card h2 {
-            font-size: 1.1rem;
-            margin-bottom: 7px;
-        }
-
-
-        .quick-card p {
-            color: var(--muted);
-            font-size: .9rem;
-        }
-
-
-        .main-grid {
-            display: grid;
-            grid-template-columns:
-                1fr
-                1fr;
-            gap: 24px;
-        }
-
-
-        .card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: clamp(
-                22px,
-                4vw,
-                36px
-            );
-            box-shadow: var(--shadow);
-        }
-
-
-        .card h2 {
-            margin-bottom: 16px;
-            font-size: 1.35rem;
-        }
-
-
-        .faq-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f1f5;
-        }
-
-
-        .faq-item:last-child {
-            border-bottom: 0;
-        }
-
-
-        .faq-item h3 {
-            font-size: .98rem;
-            margin-bottom: 5px;
-        }
-
-
-        .faq-item p {
-            color: var(--muted);
-            font-size: .9rem;
-        }
-
-
-        /* FORM */
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-
-        .form-group label {
-            display: block;
-            font-size: .88rem;
-            font-weight: 700;
-            margin-bottom: 7px;
-        }
-
-
-        .form-control {
-            width: 100%;
-            border: 1px solid #dfe1e8;
-            border-radius: 12px;
-            padding: 12px 13px;
-            outline: none;
-            background: #fff;
-            transition: .2s;
-        }
-
-
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow:
-                0 0 0 4px
-                rgba(233,30,99,.08);
-        }
-
-
-        textarea.form-control {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-
-        .submit-btn {
-            width: 100%;
-            border: 0;
-            border-radius: 12px;
-            padding: 13px;
-            background: var(--primary);
-            color: white;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-
-        .submit-btn:hover {
-            background: var(--primary-dark);
-        }
-
-
-        .submit-btn:disabled {
-            opacity: .65;
-            cursor: wait;
-        }
-
-
-        .status {
-            display: none;
-            margin-top: 15px;
-            padding: 12px 14px;
-            border-radius: 11px;
-            font-size: .9rem;
-        }
-
-
-        .status.show {
-            display: block;
-        }
-
-
-        .status.success {
-            background: #eaf8ef;
-            color: #1e6b3d;
-        }
-
-
-        .status.error {
-            background: #fff0f0;
-            color: #a52626;
-        }
-
-
-        .contact-box {
-            margin-top: 22px;
-            padding: 16px;
-            background: var(--soft);
-            border-radius: 13px;
-        }
-
-
-        .contact-box a {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-
-        /* =================================================
-           FOOTER
-        ================================================== */
-
-        footer {
-            background: #151827;
-            color: #d7dbe6;
-        }
-
-
-        .footer-grid {
-            padding: 52px 0 30px;
-            display: grid;
-            grid-template-columns:
-                1.4fr
-                repeat(3, 1fr);
-            gap: 34px;
-        }
-
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin-bottom: 13px;
-        }
-
-
-        .footer-brand img {
-            width: 42px;
-            height: 42px;
-        }
-
-
-        .footer-brand strong {
-            color: #fff;
-        }
-
-
-        .footer-description {
-            color: #aab0bf;
-            max-width: 330px;
-            font-size: .9rem;
-        }
-
-
-        .footer-col h3 {
-            color: white;
-            margin-bottom: 12px;
-            font-size: .95rem;
-        }
-
-
-        .footer-col a {
-            display: block;
-            color: #aab0bf;
-            font-size: .87rem;
-            margin: 8px 0;
-        }
-
-
-        .footer-col a:hover {
-            color: white;
-        }
-
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,.08);
-            padding: 18px 0;
-        }
-
-
-        .footer-bottom-inner {
-            display: flex;
-            justify-content: space-between;
-            color: #9198a9;
-            font-size: .8rem;
-            gap: 15px;
-        }
-
-
-        @media (max-width: 900px) {
-
-            .desktop-links {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-
-            .quick-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .main-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns:
-                    1fr 1fr;
-            }
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: min(
-                    calc(100% - 22px),
-                    1180px
-                );
-            }
-
-            .nav {
-                min-height: 68px;
-            }
-
-            .brand img {
-                width: 42px;
-                height: 42px;
-            }
-
-            .hero {
-                padding-top: 50px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="LOVEMI Help Center and Support">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Help Center | LOVEMI</title>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+:root{
+ --primary:#6d28d9;--primary-dark:#4c1d95;--primary-soft:#f3e8ff;--accent:#db2777;--accent-soft:#fce7f3;
+ --blue:#2563eb;--blue-soft:#eff6ff;--green:#16a34a;--green-soft:#f0fdf4;--orange:#d97706;--orange-soft:#fff7ed;
+ --red:#dc2626;--red-soft:#fef2f2;--text:#18181b;--text-soft:#68686f;--text-muted:#9898a1;--white:#fff;
+ --background:#f7f7fb;--border:#e9e9ef;--shadow-sm:0 5px 18px rgba(0,0,0,.04);--shadow-md:0 14px 38px rgba(0,0,0,.07);--shadow-lg:0 24px 70px rgba(0,0,0,.11);--container:1380px;
+}
+*{margin:0;padding:0;box-sizing:border-box}[hidden]{display:none !important}html{scroll-behavior:smooth}body{min-height:100vh;font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(circle at 8% 8%,rgba(109,40,217,.055),transparent 22%),radial-gradient(circle at 92% 10%,rgba(219,39,119,.055),transparent 22%),linear-gradient(180deg,#fff 0,var(--background) 50%,#faf9fc 100%);line-height:1.6}body.menu-open{overflow:hidden}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.65}img{display:block;max-width:100%}
+.header{position:sticky;top:0;z-index:2000;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.header-inner{width:min(calc(100% - 30px),var(--container));min-height:76px;margin:auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-width:max-content}.brand-logo{width:45px;height:45px;object-fit:contain;border-radius:12px}.brand-text{display:flex;flex-direction:column}.brand-name{font-family:"Playfair Display",serif;font-size:26px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.brand-tagline{margin-top:3px;color:var(--text-muted);font-size:7px;letter-spacing:.7px}
+.main-navigation{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0} .main-navigation[hidden]{display:none !important}.nav-link{position:relative;min-height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:9px;color:var(--text-soft);font-size:9px;font-weight:700;white-space:nowrap;transition:.22s ease}.nav-link i{font-size:9px}.nav-link:hover,.nav-link.active{color:var(--primary);background:var(--primary-soft)}.nav-link.active::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:max-content}.header-btn{height:40px;padding:0 13px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft);font-size:9px;font-weight:800;display:inline-flex;align-items:center;gap:7px;transition:.2s ease}.header-btn:hover{transform:translateY(-1px);border-color:#d8cff8;color:var(--primary);background:var(--primary-soft)}.header-btn.cta{border-color:transparent;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 8px 20px rgba(109,40,217,.16)}
+.notification-link{position:relative}.notification-dot{position:absolute;top:3px;right:3px;width:7px;height:7px;border:2px solid #fff;border-radius:50%;background:var(--accent);display:none}.notification-dot.show{display:block;animation:notificationPulse 1s ease-in-out infinite}@keyframes notificationPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+.profile-shortcut{display:inline-flex;align-items:center;gap:6px;padding:3px 7px 3px 3px;border:1px solid var(--border);border-radius:10px;background:#fff}.profile-shortcut-avatar-wrap{position:relative}.profile-shortcut-avatar{width:31px;height:31px;border-radius:8px;object-fit:cover;background:#efeff4}.profile-shortcut-online{position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border:2px solid #fff;border-radius:50%;background:#22c55e}.profile-shortcut-name{max-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:800}.profile-shortcut-sub{display:block;color:var(--text-muted);font-size:7px;margin-top:1px}
+.mobile-menu-button{display:none;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;background:white;color:var(--text-soft)}
+.mobile-navigation{position:fixed;top:76px;left:0;right:0;z-index:1900;display:none;padding:8px;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);box-shadow:0 20px 45px rgba(0,0,0,.10)}.mobile-navigation.open{display:block}.mobile-nav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.mobile-nav-link{min-height:48px;padding:8px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--border);border-radius:10px;color:var(--text-soft);background:#fff;font-size:8px;font-weight:800}.mobile-nav-link i{color:var(--primary);font-size:11px}.mobile-nav-link.active{color:var(--primary);background:var(--primary-soft);border-color:#ddd6fe}
+.page{width:min(calc(100% - 30px),var(--container));margin:auto;padding:26px 0 60px}.hero{position:relative;overflow:hidden;margin-bottom:20px;padding:42px 35px;border:1px solid rgba(109,40,217,.10);border-radius:24px;background:radial-gradient(circle at 88% 16%,rgba(219,39,119,.12),transparent 26%),radial-gradient(circle at 6% 92%,rgba(109,40,217,.11),transparent 32%),linear-gradient(135deg,#fff,#fcf9ff);box-shadow:var(--shadow-sm)}.hero::before{content:"";position:absolute;width:260px;height:260px;right:-110px;top:-120px;border:45px solid rgba(109,40,217,.05);border-radius:50%;animation:heroOrbit 18s linear infinite}.hero::after{content:"";position:absolute;left:8%;bottom:-38px;width:180px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(219,39,119,.10),transparent 68%);filter:blur(5px);animation:heroGlow 8s ease-in-out infinite alternate}.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;color:var(--primary);background:var(--primary-soft);font-size:8px;font-weight:800}.hero h1{margin-top:11px;font-family:"Playfair Display",serif;font-size:clamp(30px,4.2vw,48px);line-height:1.05}.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero p{max-width:760px;margin-top:9px;color:var(--text-soft);font-size:10px;line-height:1.75}.hero-art{width:150px;height:150px;display:grid;place-items:center;border-radius:38px;background:linear-gradient(145deg,#f3e8ff,#fce7f3);border:1px solid #eee4f6;box-shadow:0 18px 45px rgba(109,40,217,.10);animation:artFloat 5.5s ease-in-out infinite}.hero-art i{font-size:58px;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 9px 22px rgba(109,40,217,.2))}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:18px}.quick-card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:var(--shadow-sm);transition:.28s ease}.quick-card::after{content:"";position:absolute;inset:-120% 45% auto -70%;height:180%;transform:rotate(16deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:cardShine 7s ease-in-out infinite}.quick-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:#ddd5eb}.quick-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:var(--primary-soft);color:var(--primary);margin-bottom:13px;box-shadow:0 8px 20px rgba(109,40,217,.08);animation:iconBreathe 4s ease-in-out infinite}.quick-card:nth-child(2) .quick-icon{background:var(--accent-soft);color:var(--accent);animation-delay:.6s}.quick-card:nth-child(3) .quick-icon{background:var(--green-soft);color:var(--green);animation-delay:1.2s}.quick-card h2{font-size:12px;margin-bottom:5px}.quick-card p{color:var(--text-soft);font-size:9px;line-height:1.65}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:18px}.card{background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow-sm)}.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:14px}.card h2{font-size:17px}.card-intro{margin-top:4px;color:var(--text-muted);font-size:9px}.help-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:999px;background:#f8f3ff;color:var(--primary);font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.faq-list{display:grid;gap:8px}.faq-item{border:1px solid #eeeaf0;border-radius:14px;background:#fff;overflow:hidden}.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;background:#fff;border:0;text-align:left;color:var(--text);font-size:10px;font-weight:800}.faq-question i{color:var(--primary);font-size:9px;transition:transform .25s ease}.faq-answer{display:none;padding:0 14px 14px;color:var(--text-soft);font-size:9px;line-height:1.7}.faq-item.open .faq-answer{display:block}.faq-item.open .faq-question i{transform:rotate(180deg)}
+.form-card{position:relative;overflow:hidden}.form-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 100% 0,rgba(109,40,217,.07),transparent 25%),radial-gradient(circle at 0 100%,rgba(219,39,119,.05),transparent 25%)}.form-inner{position:relative;z-index:1}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;color:#3a3640;font-size:9px;font-weight:800}.form-control{width:100%;min-height:42px;border:1px solid #dedee6;border-radius:11px;padding:10px 11px;background:#fff;color:var(--text);outline:none;font-size:10px;transition:.2s ease}.form-control:focus{border-color:#c4b5fd;box-shadow:0 0 0 4px rgba(109,40,217,.06)}textarea.form-control{min-height:145px;resize:vertical;line-height:1.55}.form-hint{margin-top:5px;color:var(--text-muted);font-size:8px}.submit-btn{width:100%;min-height:45px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:10px;font-weight:800;box-shadow:0 12px 24px rgba(109,40,217,.17);transition:.2s ease}.submit-btn:hover{transform:translateY(-1px);box-shadow:0 16px 30px rgba(109,40,217,.22)}.status{display:none;margin-top:12px;padding:11px 12px;border-radius:11px;font-size:9px;line-height:1.55}.status.show{display:block}.status.success{background:var(--green-soft);color:#166534;border:1px solid #bbf7d0}.status.error{background:var(--red-soft);color:#991b1b;border:1px solid #fecaca}.status.info{background:var(--blue-soft);color:#1d4ed8;border:1px solid #bfdbfe}
+.support-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.support-item{display:flex;align-items:center;gap:9px;padding:11px;border-radius:13px;background:#faf9fc;border:1px solid #efedf2}.support-item i{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#fff;color:var(--primary);box-shadow:0 5px 14px rgba(0,0,0,.05);font-size:10px}.support-item strong{display:block;font-size:9px}.support-item span{display:block;margin-top:2px;color:var(--text-muted);font-size:7px}
+.contact-box{margin-top:14px;padding:14px;border:1px solid #eeeaf0;border-radius:15px;background:linear-gradient(135deg,#fcf9ff,#fff)}.contact-box strong{display:block;font-size:10px;margin-bottom:6px}.contact-row{display:flex;flex-wrap:wrap;gap:8px}.contact-link{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;background:#fff;border:1px solid var(--border);color:var(--primary);font-size:8px;font-weight:800}.contact-link:hover{background:var(--primary-soft);border-color:#ddd6fe}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step{padding:14px;border-radius:14px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-sm)}.step-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:9px;font-weight:900;margin-bottom:9px}.step h3{font-size:9px;margin-bottom:3px}.step p{font-size:8px;color:var(--text-muted);line-height:1.5}
+.footer{background:#17151b;color:#fff;margin-top:10px} .footer-grid[hidden]{display:none !important}.footer-inner{width:min(calc(100% - 30px),var(--container));margin:auto;padding:42px 0 20px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding-bottom:27px}.footer-description{max-width:340px;margin-top:11px;color:#9d99a5;font-size:9px;line-height:1.75}.footer-heading{font-size:10px;margin-bottom:10px}.footer-links{display:flex;flex-direction:column;gap:6px}.footer-links a{color:#9d99a5;font-size:8px;transition:.2s ease}.footer-links a:hover{color:#fff;transform:translateX(2px)}.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);color:#716d78;font-size:7px}
+.toast{position:fixed;right:18px;bottom:18px;z-index:5000;max-width:min(390px,calc(100vw - 36px));padding:12px 14px;border-radius:12px;background:#18181b;color:#fff;font-size:9px;box-shadow:var(--shadow-lg);opacity:0;transform:translateY(14px);pointer-events:none;transition:.25s ease}.toast.show{opacity:1;transform:none}.toast.success{background:#14532d}.toast.error{background:#7f1d1d}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@keyframes heroOrbit{to{transform:rotate(360deg)}}@keyframes heroGlow{from{transform:translateX(-10px) scale(1)}to{transform:translateX(30px) scale(1.08)}}@keyframes artFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(1deg)}}@keyframes iconBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.045)}}@keyframes cardShine{0%,25%{transform:translateX(-90%) rotate(16deg);opacity:0}42%{opacity:.75}66%,100%{transform:translateX(260%) rotate(16deg);opacity:0}}
+@media (max-width:1100px){.main-navigation{gap:1px}.nav-link{padding-inline:7px}.profile-shortcut-name{max-width:65px}.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.main-navigation{display:none}.mobile-menu-button{display:flex}.header-actions .header-btn{display:none}.main-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:1fr 1fr}.hero-inner{grid-template-columns:1fr}.hero-art{display:none}.footer-grid{grid-template-columns:repeat(2,1fr)}.support-strip{grid-template-columns:1fr 1fr}.header-actions{gap:6px}}
+@media (max-width:620px){.header-inner,.page,.footer-inner{width:calc(100% - 24px)}.header-inner{min-height:68px}.brand-tagline,.brand-name{display:none}.brand-logo{width:40px;height:40px}.profile-shortcut-name,.profile-shortcut-sub{display:none}.profile-shortcut{padding:3px}.notification-link{display:inline-flex}.mobile-navigation{top:68px}.page{padding-top:17px}.hero{padding:27px 19px;border-radius:19px}.hero h1{font-size:34px}.quick-grid{grid-template-columns:1fr}.card{padding:18px}.support-strip{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.contact-row{flex-direction:column}.contact-link{width:100%;justify-content:center}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
-
 <body>
-
-
-<header class="site-header">
-
-    <div class="container nav">
-
-        <a
-            href="index.html"
-            class="brand"
-        >
-
-            <img
-                src="assets/logo1/LOGO1.ico"
-                alt="LOVEMI"
-            >
-
-            <strong>LOVEMI</strong>
-
-        </a>
-
-
-        <nav
-            id="guestLinks"
-            class="desktop-links"
-        >
-
-            <a
-                class="nav-link"
-                href="index.html"
-            >
-                Home
-            </a>
-
-            <a
-                class="nav-link"
-                href="about.html"
-            >
-                About
-            </a>
-
-            <a
-                class="nav-link active"
-                href="help.html"
-            >
-                Help
-            </a>
-
-            <a
-                class="nav-link"
-                href="contact.html"
-            >
-                Contact
-            </a>
-
-            <a
-                class="nav-link"
-                href="login.html"
-            >
-                Login
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="registration.html"
-            >
-                Create Account
-            </a>
-
-        </nav>
-
-
-        <nav
-            id="userLinks"
-            class="desktop-links"
-            hidden
-        >
-
-            <a
-                class="nav-link"
-                href="dashboard.html"
-            >
-                Dashboard
-            </a>
-
-            <a
-                class="nav-link"
-                href="discover.html"
-            >
-                Discover
-            </a>
-
-            <a
-                class="nav-link"
-                href="connections.html"
-            >
-                Connections
-            </a>
-
-            <a
-                class="nav-link"
-                href="messages.html"
-            >
-                Messages
-            </a>
-
-            <a
-                class="nav-link"
-                href="profile.html"
-            >
-                Profile
-            </a>
-
-            <a
-                class="nav-link"
-                href="notifications.html"
-            >
-                Notifications
-            </a>
-
-            <a
-                class="nav-link"
-                href="settings.html"
-            >
-                Settings
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="premium.html"
-            >
-                Premium
-            </a>
-
-        </nav>
-
-
-        <button
-            class="mobile-toggle"
-            id="mobileToggle"
-            type="button"
-            aria-label="Open menu"
-        >
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="LOVEMI Home">
+      <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+      <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline">DISCOVER • CONNECT • MEET</span></span>
+    </a>
+    <nav id="guestNavigation" class="main-navigation" aria-label="Public navigation">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+      <a href="discover.html" class="nav-link"><i class="fa-solid fa-compass"></i>Discover</a>
+      <a href="about.html" class="nav-link"><i class="fa-regular fa-circle-info"></i>About</a>
+      <a href="help.html" class="nav-link active"><i class="fa-regular fa-circle-question"></i>Help</a>
+      <a href="contact.html" class="nav-link"><i class="fa-regular fa-envelope"></i>Contact</a>
+    </nav>
+    <nav id="userNavigation" class="main-navigation" aria-label="Member navigation" hidden>
+      <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>Dashboard</a>
+      <a href="discover.html" class="nav-link"><i class="fa-solid fa-compass"></i>Discover</a>
+      <a href="connections.html" class="nav-link"><i class="fa-solid fa-user-group"></i>Connections</a>
+      <a href="messages.html" class="nav-link"><i class="fa-regular fa-message"></i>Messages</a>
+      <a href="about.html" class="nav-link"><i class="fa-regular fa-circle-info"></i>About</a>
+      <a href="help.html" class="nav-link active"><i class="fa-regular fa-circle-question"></i>Help</a>
+      <a href="notifications.html" class="nav-link notification-link"><i class="fa-regular fa-bell"></i>Notifications<span id="notificationDot" class="notification-dot"></span></a>
+      <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
+      <a href="premium.html" class="nav-link"><i class="fa-solid fa-crown"></i>Premium</a>
+    </nav>
+    <div class="header-actions">
+      <a id="guestLogin" href="login.html" class="header-btn"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+      <a id="guestJoin" href="registration.html" class="header-btn cta"><i class="fa-solid fa-user-plus"></i>Join LOVEMI</a>
+      <a id="profileShortcut" href="profile.html" class="profile-shortcut" hidden aria-label="My LOVEMI profile">
+        <span class="profile-shortcut-avatar-wrap"><img id="profileAvatar" class="profile-shortcut-avatar" src="assets/images/defaults/default-avatar-male.png" alt="My profile"><span class="profile-shortcut-online"></span></span>
+        <span><span id="profileName" class="profile-shortcut-name">Account</span><span id="profileSub" class="profile-shortcut-sub">Signed in</span></span>
+      </a>
+      <button type="button" id="mobileMenuButton" class="mobile-menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
     </div>
-
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
-
-        <div
-            class="container"
-            id="mobileLinks"
-        ></div>
-
-    </div>
-
+  </div>
 </header>
-
-
-<main>
-
-
-    <section class="hero">
-
-        <div class="container">
-
-            <div class="hero-icon">
-                <i class="fa-solid fa-circle-question"></i>
-            </div>
-
-            <h1>
-                How Can We Help?
-            </h1>
-
-            <p>
-                Find answers or send a support ticket to the
-                LOVEMI support team.
-            </p>
-
-        </div>
-
+<nav id="mobileNavigation" class="mobile-navigation" aria-label="Mobile navigation"><div id="mobileNavGrid" class="mobile-nav-grid"></div></nav>
+<main class="page">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-badge"><i class="fa-solid fa-headset"></i> LOVEMI SUPPORT CENTER</span>
+        <h1>How can we <span>help?</span></h1>
+        <p>Find answers, learn how LOVEMI works, or send a support ticket directly to the LOVEMI support team. Every ticket is stored in the database and sent through the site's central email service.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><i class="fa-solid fa-circle-question"></i></div>
+    </div>
+  </section>
+  <section class="quick-grid">
+    <article class="quick-card"><div class="quick-icon"><i class="fa-solid fa-user-shield"></i></div><h2>Account & Verification</h2><p>Get help with registration, login, email verification, password recovery and profile access.</p></article>
+    <article class="quick-card"><div class="quick-icon"><i class="fa-solid fa-crown"></i></div><h2>Premium & Services</h2><p>Questions about Premium access, payments, subscription status and available LOVEMI services.</p></article>
+    <article class="quick-card"><div class="quick-icon"><i class="fa-solid fa-shield-halved"></i></div><h2>Safety & Reports</h2><p>Report suspicious accounts, unwanted activity, inappropriate content or technical concerns.</p></article>
+  </section>
+  <section class="main-grid">
+    <section class="card">
+      <div class="card-header"><div><h2>Frequently Asked Questions</h2><p class="card-intro">Common answers for LOVEMI members and visitors.</p></div><span class="help-badge"><i class="fa-solid fa-bolt"></i> Quick answers</span></div>
+      <div class="faq-list">
+        <div class="faq-item open"><button type="button" class="faq-question">I cannot log in. What should I do?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">Check your email verification and make sure you are using the correct login details. For forgotten passwords, use the Forgot Password page. If the problem continues, send a support ticket with the exact problem you are seeing.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question">I forgot my password.<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">Open Forgot Password from the login page and follow the account recovery process. Keep your account details accurate so the recovery checks can identify the correct account.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question">Why is my post or photo not visible?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">LOVEMI can require approval before submitted posts or media become publicly visible. A pending item may simply be waiting for the normal review process.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question">Why is my Premium service unavailable?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">Premium access depends on the current subscription state stored on the server. Expiration, deactivation or another access restriction can remove Premium features.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question">How do I report a problem or suspicious account?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">Use the support form on this page and choose Report / Safety. Include enough information for the support team to identify and review the issue without sharing unnecessary sensitive information.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question">Can I contact LOVEMI directly?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-answer">Yes. The support email and WhatsApp contact are shown below. Support tickets are also sent directly to the LOVEMI support mailbox.</div></div>
+      </div>
+      <div class="contact-box">
+        <strong>Direct support</strong>
+        <div class="contact-row"><a class="contact-link" href="mailto:eduassistasc@gmail.com"><i class="fa-regular fa-envelope"></i> eduassistasc@gmail.com</a><a class="contact-link" href="https://wa.me/254769089734" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +254 769 089 734</a></div>
+      </div>
     </section>
-
-
-    <section class="support-section">
-
-        <div class="container">
-
-
-            <div class="quick-grid">
-
-                <div class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-user-lock"></i>
-                    </div>
-
-                    <h2>Account Help</h2>
-
-                    <p>
-                        Use Login, Registration, Forgot Password
-                        and Verify Account to manage account access.
-                    </p>
-
-                </div>
-
-
-                <div class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
-
-                    <h2>Premium</h2>
-
-                    <p>
-                        Premium provides access to the platform
-                        services available to eligible members.
-                    </p>
-
-                </div>
-
-
-                <div class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-
-                    <h2>Safety</h2>
-
-                    <p>
-                        Report suspicious accounts, messages or
-                        content through the available reporting
-                        tools.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="main-grid">
-
-
-                <section class="card">
-
-                    <h2>
-                        Frequently Asked Questions
-                    </h2>
-
-
-                    <div class="faq-item">
-
-                        <h3>
-                            I cannot log in. What should I do?
-                        </h3>
-
-                        <p>
-                            Check your email verification status.
-                            If verification was not completed,
-                            LOVEMI will direct you back to the
-                            verification step.
-                        </p>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <h3>
-                            I forgot my password.
-                        </h3>
-
-                        <p>
-                            Open Forgot Password from the login
-                            page and follow the account recovery
-                            process.
-                        </p>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <h3>
-                            Why is my post not visible?
-                        </h3>
-
-                        <p>
-                            Submitted posts and media can require
-                            administrator review before public
-                            publication.
-                        </p>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <h3>
-                            Why has my Premium access ended?
-                        </h3>
-
-                        <p>
-                            Premium access ends when its subscription
-                            reaches its configured expiry date or is
-                            otherwise restricted.
-                        </p>
-
-                    </div>
-
-
-                    <div class="faq-item">
-
-                        <h3>
-                            How do I report a problem?
-                        </h3>
-
-                        <p>
-                            Use the support ticket form on this page.
-                            Provide enough information for the support
-                            team to understand the issue.
-                        </p>
-
-                    </div>
-
-
-                    <div class="contact-box">
-
-                        <strong>
-                            Direct support
-                        </strong>
-
-                        <p>
-                            Email:
-                            <a
-                                href="mailto:eduassistasc@gmail.com"
-                            >
-                                eduassistasc@gmail.com
-                            </a>
-                        </p>
-
-                        <p>
-                            WhatsApp:
-                            <a
-                                href="https://wa.me/254769089734"
-                                target="_blank"
-                                rel="noopener"
-                            >
-                                +254 769 089 734
-                            </a>
-                        </p>
-
-                    </div>
-
-                </section>
-
-
-                <section class="card">
-
-                    <h2>
-                        Submit a Support Ticket
-                    </h2>
-
-
-                    <form
-                        id="ticketForm"
-                        novalidate
-                    >
-
-                        <div class="form-group">
-
-                            <label for="name">
-                                Your Name
-                            </label>
-
-                            <input
-                                class="form-control"
-                                id="name"
-                                name="name"
-                                type="text"
-                                maxlength="120"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="email">
-                                Email Address
-                            </label>
-
-                            <input
-                                class="form-control"
-                                id="email"
-                                name="email"
-                                type="email"
-                                maxlength="190"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="category">
-                                Problem Category
-                            </label>
-
-                            <select
-                                class="form-control"
-                                id="category"
-                                name="category"
-                                required
-                            >
-
-                                <option value="">
-                                    Select category
-                                </option>
-
-                                <option value="account">
-                                    Account
-                                </option>
-
-                                <option value="login">
-                                    Login / Verification
-                                </option>
-
-                                <option value="premium">
-                                    Premium / Payment
-                                </option>
-
-                                <option value="profile">
-                                    Profile
-                                </option>
-
-                                <option value="connection">
-                                    Connection / Chat
-                                </option>
-
-                                <option value="report">
-                                    Report / Safety
-                                </option>
-
-                                <option value="technical">
-                                    Technical Problem
-                                </option>
-
-                                <option value="other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="subject">
-                                Subject
-                            </label>
-
-                            <input
-                                class="form-control"
-                                id="subject"
-                                name="subject"
-                                type="text"
-                                maxlength="180"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="message">
-                                Message
-                            </label>
-
-                            <textarea
-                                class="form-control"
-                                id="message"
-                                name="message"
-                                maxlength="5000"
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <button
-                            class="submit-btn"
-                            type="submit"
-                            id="submitTicket"
-                        >
-                            <i class="fa-solid fa-paper-plane"></i>
-                            Send Support Ticket
-                        </button>
-
-
-                        <div
-                            id="ticketStatus"
-                            class="status"
-                        ></div>
-
-                    </form>
-
-                </section>
-
-            </div>
-
-        </div>
-
+    <section class="card form-card">
+      <div class="form-inner">
+        <div class="card-header"><div><h2>Submit a Support Ticket</h2><p class="card-intro">Send your request to LOVEMI Support.</p></div><span class="help-badge"><i class="fa-solid fa-paper-plane"></i> Email support</span></div>
+        <form id="ticketForm" novalidate>
+          <div class="form-group"><label for="name">Your Name</label><input class="form-control" id="name" name="name" type="text" maxlength="120" autocomplete="name" required></div>
+          <div class="form-group"><label for="email">Email Address</label><input class="form-control" id="email" name="email" type="email" maxlength="190" autocomplete="email" required><div class="form-hint">A valid email is required so support can reply.</div></div>
+          <div class="form-group"><label for="category">Problem Category</label><select class="form-control" id="category" name="category" required><option value="">Select category</option><option value="account">Account</option><option value="login">Login / Verification</option><option value="premium">Premium / Payment</option><option value="profile">Profile</option><option value="connection">Connection / Chat</option><option value="report">Report / Safety</option><option value="technical">Technical Problem</option><option value="contact">Contact</option><option value="other">Other</option></select></div>
+          <div class="form-group"><label for="subject">Subject</label><input class="form-control" id="subject" name="subject" type="text" maxlength="180" required></div>
+          <div class="form-group"><label for="message">Message</label><textarea class="form-control" id="message" name="message" maxlength="5000" required placeholder="Describe the issue clearly and include any useful steps that caused the problem."></textarea><div class="form-hint"><span id="messageCount">0</span>/5000 characters</div></div>
+          <button class="submit-btn" type="submit" id="submitTicket"><i class="fa-solid fa-paper-plane"></i> Send Support Ticket</button>
+          <div id="ticketStatus" class="status" role="status" aria-live="polite"></div>
+        </form>
+        <div class="support-strip"><div class="support-item"><i class="fa-solid fa-database"></i><div><strong>Saved safely</strong><span>Ticket stored in LOVEMI</span></div></div><div class="support-item"><i class="fa-solid fa-envelope-circle-check"></i><div><strong>Email delivery</strong><span>Central LOVEMI mail service</span></div></div><div class="support-item"><i class="fa-solid fa-reply"></i><div><strong>Reply ready</strong><span>Support can respond directly</span></div></div></div>
+      </div>
     </section>
-
+  </section>
+  <section class="steps">
+    <article class="step"><div class="step-number">1</div><h3>Describe</h3><p>Explain what happened and what you expected.</p></article>
+    <article class="step"><div class="step-number">2</div><h3>Submit</h3><p>Send the form securely to the LOVEMI support API.</p></article>
+    <article class="step"><div class="step-number">3</div><h3>Review</h3><p>The ticket is stored and delivered to support by email.</p></article>
+    <article class="step"><div class="step-number">4</div><h3>Respond</h3><p>Keep your ticket information for follow-up communication.</p></article>
+  </section>
 </main>
-
-
-<footer>
-
-    <div class="container footer-grid">
-
-        <div>
-
-            <div class="footer-brand">
-
-                <img
-                    src="assets/logo1/LOGO1.ico"
-                    alt="LOVEMI"
-                >
-
-                <strong>LOVEMI</strong>
-
-            </div>
-
-            <p class="footer-description">
-                Connect, communicate and discover meaningful
-                connections through LOVEMI.
-            </p>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>Explore</h3>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="help.html">
-                Help
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>Account</h3>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="registration.html">
-                Register
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>Legal</h3>
-
-            <a href="privacy.html">
-                Privacy
-            </a>
-
-            <a href="terms.html">
-                Terms
-            </a>
-
-        </div>
-
+<footer class="footer">
+  <div class="footer-inner">
+    <div id="guestFooter" class="footer-grid">
+      <div><a href="index.html" class="brand"><img src="assets/logo1/logo1.png" alt="LOVEMI" class="brand-logo"><span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f;">DISCOVER • CONNECT • MEET</span></span></a><p class="footer-description">Discover people, create meaningful connections and find help through the modern LOVEMI platform.</p></div>
+      <div><h3 class="footer-heading">Explore</h3><div class="footer-links"><a href="index.html">Home</a><a href="discover.html">Discover</a><a href="about.html">About</a><a href="help.html">Help</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="login.html">Login</a><a href="registration.html">Register</a><a href="premium.html">Premium</a><a href="forgot-password.html">Forgot Password</a></div></div>
+      <div><h3 class="footer-heading">Information</h3><div class="footer-links"><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="help.html">Support</a></div></div>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <div class="container footer-bottom-inner">
-
-            <span>
-                © 2026 LOVEMI. All rights reserved.
-            </span>
-
-            <span>
-                Support: eduassistasc@gmail.com
-            </span>
-
-        </div>
-
+    <div id="userFooter" class="footer-grid" hidden>
+      <div><a href="dashboard.html" class="brand"><img src="assets/logo1/logo1.png" alt="LOVEMI" class="brand-logo"><span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f;">DISCOVER • CONNECT • MEET</span></span></a><p class="footer-description">Discover approved members, manage your profile, connect with others and access LOVEMI services securely.</p></div>
+      <div><h3 class="footer-heading">Explore</h3><div class="footer-links"><a href="dashboard.html">Dashboard</a><a href="discover.html">Discover</a><a href="connections.html">Connections</a><a href="messages.html">Messages</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="profile.html">Profile</a><a href="edit-profile.html">Edit Profile</a><a href="premium.html">Premium</a><a href="settings.html">Settings</a></div></div>
+      <div><h3 class="footer-heading">Help</h3><div class="footer-links"><a href="help.html">Help Center</a><a href="notifications.html">Notifications</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div>
     </div>
-
+    <div class="footer-bottom"><span>© <span id="year"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
 </footer>
-
-
+<div id="toast" class="toast" role="alert" aria-live="polite"></div>
 <script>
-
-(function () {
-
-    "use strict";
-
-
-    const guestLinks =
-        [
-            ["Home","index.html"],
-            ["About","about.html"],
-            ["Help","help.html"],
-            ["Contact","contact.html"],
-            ["Login","login.html"],
-            ["Create Account","registration.html"]
-        ];
-
-
-    const userLinks =
-        [
-            ["Dashboard","dashboard.html"],
-            ["Discover","discover.html"],
-            ["Connections","connections.html"],
-            ["Messages","messages.html"],
-            ["Profile","profile.html"],
-            ["Notifications","notifications.html"],
-            ["Settings","settings.html"],
-            ["Premium","premium.html"]
-        ];
-
-
-    const guestNav =
-        document.getElementById(
-            "guestLinks"
-        );
-
-
-    const userNav =
-        document.getElementById(
-            "userLinks"
-        );
-
-
-    const mobileMenu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-
-    const mobileLinks =
-        document.getElementById(
-            "mobileLinks"
-        );
-
-
-    const mobileToggle =
-        document.getElementById(
-            "mobileToggle"
-        );
-
-
-    async function getSession() {
-
-        try {
-
-            const response =
-                await fetch(
-                    "api/auth/session.php",
-                    {
-                        credentials: "include",
-                        cache: "no-store",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                return null;
-            }
-
-
-            return await response.json();
-
-        } catch (error) {
-
-            return null;
-
-        }
-
-    }
-
-
-    function buildMobile(
-        links
-    ) {
-
-        mobileLinks.innerHTML = "";
-
-        links.forEach(
-            ([label, href]) => {
-
-                const a =
-                    document.createElement(
-                        "a"
-                    );
-
-                a.href =
-                    href;
-
-                a.textContent =
-                    label;
-
-                mobileLinks.appendChild(
-                    a
-                );
-
-            }
-        );
-
-    }
-
-
-    async function navigation() {
-
-        const data =
-            await getSession();
-
-
-        const loggedIn =
-            Boolean(
-                data &&
-                (
-                    data.authenticated === true
-                    ||
-                    data.logged_in === true
-                    ||
-                    (
-                        data.success === true &&
-                        data.user
-                    )
-                )
-            );
-
-
-        if (loggedIn) {
-
-            guestNav.hidden = true;
-
-            userNav.hidden = false;
-
-            buildMobile(
-                userLinks
-            );
-
-        } else {
-
-            guestNav.hidden = false;
-
-            userNav.hidden = true;
-
-            buildMobile(
-                guestLinks
-            );
-
-        }
-
-    }
-
-
-    mobileToggle.addEventListener(
-        "click",
-        () => {
-
-            const open =
-                mobileMenu.classList.toggle(
-                    "open"
-                );
-
-
-            mobileToggle.innerHTML =
-                open
-                    ?
-                    '<i class="fa-solid fa-xmark"></i>'
-                    :
-                    '<i class="fa-solid fa-bars"></i>';
-
-        }
-    );
-
-
-    navigation();
-
-
-    /* ======================================================
-       SUPPORT TICKET
-    ====================================================== */
-
-    const form =
-        document.getElementById(
-            "ticketForm"
-        );
-
-
-    const statusBox =
-        document.getElementById(
-            "ticketStatus"
-        );
-
-
-    const submitButton =
-        document.getElementById(
-            "submitTicket"
-        );
-
-
-    form.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            statusBox.className =
-                "status";
-
-
-            const name =
-                document.getElementById(
-                    "name"
-                ).value.trim();
-
-
-            const email =
-                document.getElementById(
-                    "email"
-                ).value.trim();
-
-
-            const category =
-                document.getElementById(
-                    "category"
-                ).value;
-
-
-            const subject =
-                document.getElementById(
-                    "subject"
-                ).value.trim();
-
-
-            const message =
-                document.getElementById(
-                    "message"
-                ).value.trim();
-
-
-            if (
-                !name ||
-                !email ||
-                !category ||
-                !subject ||
-                !message
-            ) {
-
-                statusBox.textContent =
-                    "Please complete all required fields.";
-
-                statusBox.classList.add(
-                    "show",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            submitButton.disabled =
-                true;
-
-
-            submitButton.innerHTML =
-                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "api/support/create-ticket.php",
-                        {
-                            method: "POST",
-                            credentials: "include",
-                            cache: "no-store",
-                            headers: {
-                                "Content-Type":
-                                    "application/json",
-                                "Accept":
-                                    "application/json"
-                            },
-                            body:
-                                JSON.stringify(
-                                    {
-                                        name,
-                                        email,
-                                        category,
-                                        subject,
-                                        message
-                                    }
-                                )
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-
-                    throw new Error(
-                        data.message
-                        ||
-                        "The support ticket could not be sent."
-                    );
-
-                }
-
-
-                statusBox.textContent =
-                    data.message
-                    ||
-                    "Your support ticket has been sent successfully.";
-
-
-                statusBox.classList.add(
-                    "show",
-                    "success"
-                );
-
-
-                form.reset();
-
-            } catch (error) {
-
-                statusBox.textContent =
-                    error.message
-                    ||
-                    "Unable to send the support ticket.";
-
-                statusBox.classList.add(
-                    "show",
-                    "error"
-                );
-
-            } finally {
-
-                submitButton.disabled =
-                    false;
-
-                submitButton.innerHTML =
-                    '<i class="fa-solid fa-paper-plane"></i> Send Support Ticket';
-
-            }
-
-        }
-    );
-
-})();
-
+"use strict";
+const API={session:"api/auth/session.php",ticket:"api/support/create-ticket.php",notifications:"api/notifications/unread-count.php"};
+const DEFAULT_MALE="assets/images/defaults/default-avatar-male.png",DEFAULT_FEMALE="assets/images/defaults/default-avatar-female.png";
+const $=id=>document.getElementById(id);$("year").textContent=new Date().getFullYear();
+function absoluteUrl(v){const s=String(v||"").trim();if(!s)return"";return s}
+function sessionBool(v){if(v===true||v===1)return true;if(typeof v==="string")return /^(1|true|yes|on|authenticated|logged[ _-]?in)$/i.test(v.trim());return false}
+function findUser(data){const candidates=[data?.user,data?.current_user,data?.currentUser,data?.profile,data?.result?.user,data?.result?.current_user,data?.result?.profile,data?.data?.user,data?.data?.current_user,data?.data?.profile,data?.session?.user];return candidates.find(v=>v&&typeof v==="object"&&!Array.isArray(v))||null}
+function userField(user,keys){for(const key of keys){const val=key.split(".").reduce((o,p)=>o?.[p],user);if(val!==undefined&&val!==null&&String(val).trim()!=="")return val}return ""}
+async function getJson(url,options={}){const sep=url.includes("?")?"&":"?";const response=await fetch(url+sep+"_="+Date.now(),{...options,cache:"no-store",credentials:"same-origin",headers:{Accept:"application/json","Cache-Control":"no-cache, no-store, max-age=0",...(options.headers||{})}});const text=await response.text();let data;try{data=JSON.parse(text)}catch(e){throw new Error("The server returned an invalid response. Please try again.")}if(!response.ok||data?.success===false)throw new Error(data?.message||`Request failed (${response.status}).`);return data}
+let authenticated=false,currentUser=null;
+function getAvatar(user){const image=userField(user,["profile_photo","profile_image","profile_picture","profile_thumbnail","avatar","image","photo_url"]);if(image)return absoluteUrl(image);return /female|woman|girl/i.test(String(userField(user,["gender"])||""))?DEFAULT_FEMALE:DEFAULT_MALE}
+function renderNavigation(){const guestNav=$("guestNavigation"),userNav=$("userNavigation"),guestLogin=$("guestLogin"),guestJoin=$("guestJoin"),profile=$("profileShortcut"),guestFooter=$("guestFooter"),userFooter=$("userFooter");if(authenticated){guestNav.hidden=true;guestNav.setAttribute("aria-hidden","true");userNav.hidden=false;userNav.setAttribute("aria-hidden","false");guestLogin.hidden=true;guestJoin.hidden=true;profile.hidden=false;guestFooter.hidden=true;guestFooter.setAttribute("aria-hidden","true");userFooter.hidden=false;userFooter.setAttribute("aria-hidden","false");const name=userField(currentUser,["full_names","full_name","display_name","username"])||"Account";const username=userField(currentUser,["username"]);$("profileName").textContent=name;$("profileSub").textContent=username?`@${username}`:"Signed in";$("profileAvatar").src=getAvatar(currentUser);$("profileAvatar").onerror=()=>{$("profileAvatar").onerror=null;$("profileAvatar").src=/female|woman|girl/i.test(String(userField(currentUser,["gender"])))?DEFAULT_FEMALE:DEFAULT_MALE};}else{guestNav.hidden=false;guestNav.setAttribute("aria-hidden","false");userNav.hidden=true;userNav.setAttribute("aria-hidden","true");guestLogin.hidden=false;guestJoin.hidden=false;profile.hidden=true;guestFooter.hidden=false;guestFooter.setAttribute("aria-hidden","false");userFooter.hidden=true;userFooter.setAttribute("aria-hidden","true")}}
+function mobileItems(){return authenticated?[['Dashboard','dashboard.html','fa-house'],['Discover','discover.html','fa-compass'],['Connections','connections.html','fa-user-group'],['Messages','messages.html','fa-message'],['About','about.html','fa-circle-info'],['Help','help.html','fa-circle-question'],['Notifications','notifications.html','fa-bell'],['Settings','settings.html','fa-gear'],['Premium','premium.html','fa-crown']]:[['Home','index.html','fa-house'],['Discover','discover.html','fa-compass'],['About','about.html','fa-circle-info'],['Help','help.html','fa-circle-question'],['Contact','contact.html','fa-envelope'],['Login','login.html','fa-right-to-bracket'],['Create Account','registration.html','fa-user-plus']]}
+function renderMobile(){const grid=$("mobileNavGrid");grid.innerHTML=mobileItems().map(([label,href,icon])=>`<a class="mobile-nav-link ${label==='Help'?'active':''}" href="${href}"><i class="fa-solid ${icon}"></i>${label}</a>`).join("")}
+async function loadSession(){try{const data=await getJson(API.session);const user=findUser(data);const flags=[data?.authenticated,data?.logged_in,data?.loggedIn,data?.is_authenticated,data?.isLoggedIn,data?.result?.authenticated,data?.result?.logged_in,data?.result?.loggedIn,data?.data?.authenticated,data?.data?.logged_in];const explicit=flags.some(v=>v!==undefined&&v!==null);const id=user?.user_id??user?.id??data?.user_id??data?.id??data?.result?.user_id??data?.result?.id??data?.data?.user_id??data?.data?.id;authenticated=explicit?flags.some(sessionBool):Boolean(user&&id!==undefined&&id!==null&&String(id).trim()!=="");currentUser=user}catch(e){authenticated=false;currentUser=null}renderNavigation();renderMobile()}
+async function refreshNotifications(){if(!authenticated)return;try{const data=await getJson(API.notifications);const count=Number(data?.unread_count??data?.count??0);$("notificationDot").classList.toggle("show",count>0)}catch(e){} }
+function showStatus(message,type){const box=$("ticketStatus");box.className=`status show ${type}`;box.textContent=message}
+$("mobileMenuButton").addEventListener("click",function(){const nav=$("mobileNavigation"),open=nav.classList.toggle("open");document.body.classList.toggle("menu-open",open);this.setAttribute("aria-expanded",String(open));this.innerHTML=open?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>'});
+window.addEventListener("resize",()=>{if(window.innerWidth>900){$("mobileNavigation").classList.remove("open");document.body.classList.remove("menu-open");$("mobileMenuButton").setAttribute("aria-expanded","false");$("mobileMenuButton").innerHTML='<i class="fa-solid fa-bars"></i>'}});
+document.querySelectorAll(".faq-question").forEach(button=>button.addEventListener("click",()=>button.closest(".faq-item").classList.toggle("open")));
+const messageField=$("message"),messageCount=$("messageCount");messageField.addEventListener("input",()=>messageCount.textContent=String(messageField.value.length));
+$("ticketForm").addEventListener("submit",async event=>{event.preventDefault();const name=$("name").value.trim(),email=$("email").value.trim(),category=$("category").value,subject=$("subject").value.trim(),message=$("message").value.trim();if(!name||!email||!category||!subject||!message){showStatus("Please complete all required fields.","error");return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showStatus("Please enter a valid email address.","error");return}const button=$("submitTicket"),old=button.innerHTML;button.disabled=true;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';showStatus("Sending your support ticket...","info");try{const data=await getJson(API.ticket,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,category,subject,message})});showStatus(data.message||"Your support ticket has been sent successfully.","success");$("ticketForm").reset();messageCount.textContent="0";showToast("Support ticket sent successfully.","success")}catch(error){showStatus(error.message||"Unable to send the support ticket.","error");showToast("Support ticket could not be sent.","error")}finally{button.disabled=false;button.innerHTML=old}});
+function showToast(message,type=""){const toast=$("toast");clearTimeout(showToast.timer);toast.textContent=message;toast.className=`toast show ${type}`;showToast.timer=setTimeout(()=>toast.className="toast",3500)}
+window.addEventListener("pageshow",async()=>{await loadSession();await refreshNotifications()});
+(async()=>{await loadSession();await refreshNotifications()})();
 </script>
-
-
 </body>
 </html>

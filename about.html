@@ -1,1196 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="About LOVEMI"
-    >
-
-    <title>About LOVEMI</title>
-
-    <link
-        rel="icon"
-        href="assets/logo1/favicon.ico"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="assets/logo1/favicon-16x16.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="assets/logo1/apple-touch-icon.png"
-    >
-
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-
-    <style>
-
-        :root {
-            --primary: #e91e63;
-            --primary-dark: #c2185b;
-            --secondary: #7c3aed;
-            --text: #172033;
-            --muted: #687386;
-            --white: #fff;
-            --soft: #faf9fd;
-            --border: #e8e9ef;
-            --shadow: 0 12px 35px rgba(25,25,45,.08);
-        }
-
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-
-        body {
-            font-family: Inter, Arial, sans-serif;
-            color: var(--text);
-            background:
-                linear-gradient(
-                    180deg,
-                    #fff,
-                    #faf9fd
-                );
-            line-height: 1.7;
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        .container {
-            width: min(
-                calc(100% - 32px),
-                1180px
-            );
-            margin-inline: auto;
-        }
-
-
-        /* =================================================
-           NAV
-        ================================================== */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,.97);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-
-        .nav {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 22px;
-        }
-
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-
-        .brand img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-
-
-        .brand strong {
-            font-size: 1.35rem;
-        }
-
-
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            flex-wrap: wrap;
-        }
-
-
-        .nav-link {
-            padding: 10px 13px;
-            border-radius: 11px;
-            color: #566173;
-            font-size: .9rem;
-            font-weight: 600;
-        }
-
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background: #fff0f5;
-        }
-
-
-        .cta {
-            color: white !important;
-            background: var(--primary);
-        }
-
-
-        .mobile-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: 0;
-            border-radius: 12px;
-            background: #f3f4f8;
-            cursor: pointer;
-        }
-
-
-        .mobile-menu {
-            display: none;
-            padding: 10px 0 16px;
-            border-top: 1px solid var(--border);
-        }
-
-
-        .mobile-menu.open {
-            display: block;
-        }
-
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 5px;
-            border-bottom: 1px solid #f0f1f5;
-            font-weight: 600;
-        }
-
-
-        /* =================================================
-           HERO
-        ================================================== */
-
-        .hero {
-            padding: 82px 0 55px;
-            text-align: center;
-        }
-
-
-        .hero-icon {
-            width: 78px;
-            height: 78px;
-            margin: 0 auto 20px;
-            display: grid;
-            place-items: center;
-            border-radius: 24px;
-            background: #fff0f5;
-            color: var(--primary);
-            font-size: 2rem;
-        }
-
-
-        .hero h1 {
-            font-size: clamp(
-                2.1rem,
-                5vw,
-                3.6rem
-            );
-            line-height: 1.05;
-            letter-spacing: -1.2px;
-            margin-bottom: 15px;
-        }
-
-
-        .hero p {
-            max-width: 760px;
-            margin-inline: auto;
-            color: var(--muted);
-            font-size: 1.03rem;
-        }
-
-
-        /* =================================================
-           ABOUT CONTENT
-        ================================================== */
-
-        .section {
-            padding-bottom: 78px;
-        }
-
-
-        .grid {
-            display: grid;
-            grid-template-columns:
-                1.35fr
-                .85fr;
-            gap: 24px;
-        }
-
-
-        .card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: clamp(
-                22px,
-                4vw,
-                40px
-            );
-            box-shadow: var(--shadow);
-        }
-
-
-        .card h2 {
-            margin-bottom: 13px;
-            font-size: 1.4rem;
-        }
-
-
-        .card p {
-            color: #5e6879;
-            margin-bottom: 13px;
-        }
-
-
-        .feature-list {
-            display: grid;
-            gap: 14px;
-            margin-top: 20px;
-        }
-
-
-        .feature {
-            display: flex;
-            gap: 13px;
-            align-items: flex-start;
-            padding: 16px;
-            border-radius: 14px;
-            background: var(--soft);
-        }
-
-
-        .feature-icon {
-            flex: 0 0 42px;
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 12px;
-            background: #fff0f5;
-            color: var(--primary);
-        }
-
-
-        .feature strong {
-            display: block;
-            margin-bottom: 3px;
-        }
-
-
-        .feature span {
-            color: var(--muted);
-            font-size: .88rem;
-        }
-
-
-        .stats {
-            display: grid;
-            grid-template-columns:
-                1fr 1fr;
-            gap: 13px;
-            margin-top: 20px;
-        }
-
-
-        .stat {
-            padding: 19px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: #fff;
-        }
-
-
-        .stat strong {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 2px;
-        }
-
-
-        .stat span {
-            color: var(--muted);
-            font-size: .83rem;
-        }
-
-
-        /* =================================================
-           FOOTER
-        ================================================== */
-
-        footer {
-            background: #151827;
-            color: #d7dbe6;
-        }
-
-
-        .footer-grid {
-            padding: 52px 0 30px;
-            display: grid;
-            grid-template-columns:
-                1.4fr
-                repeat(3, 1fr);
-            gap: 34px;
-        }
-
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin-bottom: 14px;
-        }
-
-
-        .footer-brand img {
-            width: 42px;
-            height: 42px;
-        }
-
-
-        .footer-brand strong {
-            color: white;
-            font-size: 1.18rem;
-        }
-
-
-        .footer-desc {
-            max-width: 330px;
-            color: #aab0bf;
-            font-size: .9rem;
-        }
-
-
-        .footer-col h3 {
-            color: white;
-            font-size: .95rem;
-            margin-bottom: 12px;
-        }
-
-
-        .footer-col a {
-            display: block;
-            color: #aab0bf;
-            font-size: .87rem;
-            margin: 8px 0;
-        }
-
-
-        .footer-col a:hover {
-            color: white;
-        }
-
-
-        .footer-bottom {
-            padding: 18px 0;
-            border-top: 1px solid rgba(255,255,255,.08);
-        }
-
-
-        .footer-bottom-inner {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            color: #9198a9;
-            font-size: .8rem;
-        }
-
-
-        @media (max-width: 900px) {
-
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-
-            .grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns:
-                    1fr 1fr;
-            }
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: min(
-                    calc(100% - 22px),
-                    1180px
-                );
-            }
-
-            .nav {
-                min-height: 68px;
-            }
-
-            .brand img {
-                width: 42px;
-                height: 42px;
-            }
-
-            .hero {
-                padding-top: 52px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .footer-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .footer-bottom-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="About LOVEMI — discover people, build meaningful connections and manage your experience through a modern platform.">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>About LOVEMI | Discover • Connect • Meet</title>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo1/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo1/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo1/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+:root{
+  --primary:#6d28d9;--primary-dark:#4c1d95;--primary-soft:#f3e8ff;
+  --accent:#db2777;--accent-soft:#fce7f3;--blue:#2563eb;--green:#16a34a;
+  --orange:#d97706;--red:#dc2626;--text:#18181b;--text-soft:#68686f;
+  --text-muted:#9898a1;--white:#fff;--background:#f7f7fb;--border:#e9e9ef;
+  --shadow-sm:0 5px 18px rgba(0,0,0,.045);--shadow-md:0 14px 38px rgba(0,0,0,.075);
+  --shadow-lg:0 25px 70px rgba(0,0,0,.12);--container:1380px;--radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:Inter,sans-serif;color:var(--text);background:
+  radial-gradient(circle at 12% 2%,rgba(109,40,217,.055),transparent 24%),
+  radial-gradient(circle at 88% 18%,rgba(219,39,119,.05),transparent 23%),
+  linear-gradient(180deg,#fff 0,#faf9fd 270px,#f7f7fb 100%);line-height:1.6;overflow-x:hidden}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
+[hidden]{display:none!important}
+
+/* ================= HEADER / GUEST + LOGGED-IN ================= */
+.header{position:sticky;top:0;z-index:2000;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.header-inner{width:min(calc(100% - 30px),var(--container));min-height:76px;margin:auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px}
+.brand{display:inline-flex;align-items:center;gap:10px;min-width:max-content}
+.brand-logo{width:45px;height:45px;object-fit:contain;border-radius:12px;flex:0 0 45px}
+.brand-text{display:flex;flex-direction:column}
+.brand-name{font-family:"Playfair Display",serif;font-size:26px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-tagline{margin-top:3px;color:var(--text-muted);font-size:7px;letter-spacing:.7px}
+.main-navigation{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0}
+.nav-link{position:relative;min-height:40px;padding:0 9px;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:9px;color:var(--text-soft);font-size:9px;font-weight:800;white-space:nowrap;transition:.22s ease}
+.nav-link i{font-size:9px}.nav-link:hover{color:var(--primary);background:var(--primary-soft)}
+.nav-link.active{color:var(--primary);background:var(--primary-soft)}
+.nav-link.active::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px}
+.header-action{position:relative;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft);transition:.2s ease}
+.header-action:hover{color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}
+.notification-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border:2px solid #fff;border-radius:50%;background:var(--accent);display:none}
+.notification-dot.pulse{display:block;animation:notificationPulse 1s ease-in-out infinite}
+.profile-shortcut{display:inline-flex;align-items:center;gap:6px;padding:3px 7px 3px 3px;border:1px solid var(--border);border-radius:10px;background:#fff;transition:.2s ease}
+.profile-shortcut:hover{border-color:#ddd6fe;background:#faf8ff;transform:translateY(-1px)}
+.profile-shortcut-avatar-wrap{position:relative}.profile-shortcut-avatar{width:31px;height:31px;border-radius:8px;object-fit:cover;background:#efeff4}
+.profile-shortcut-online{position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border:2px solid #fff;background:#22c55e;border-radius:50%}
+.profile-shortcut-name{max-width:82px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px;font-weight:900}
+.header-guest{display:flex;align-items:center;gap:7px}
+.guest-btn{min-height:37px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:9px;font-weight:900;transition:.2s ease}
+.guest-login{color:var(--primary);background:#fff;border:1px solid #ddd6fe}.guest-login:hover{background:var(--primary-soft);transform:translateY(-1px)}
+.guest-join{color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 8px 20px rgba(109,40,217,.16)}.guest-join:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(109,40,217,.22)}
+.mobile-menu-button{display:none;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text-soft)}
+.mobile-navigation{position:fixed;top:76px;left:0;right:0;z-index:1900;display:none;padding:8px;background:rgba(255,255,255,.98);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:0 20px 45px rgba(0,0,0,.10)}
+.mobile-navigation.open{display:block}.mobile-nav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.mobile-nav-link{min-height:48px;padding:8px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--border);border-radius:10px;color:var(--text-soft);background:white;font-size:8px;font-weight:900}
+.mobile-nav-link i{color:var(--primary);font-size:11px}.mobile-nav-link.active{color:var(--primary);background:var(--primary-soft);border-color:#ddd6fe}
+
+/* ================= PAGE HERO ================= */
+.page{width:min(calc(100% - 30px),var(--container));margin:auto;padding:25px 0 70px}
+.hero{position:relative;overflow:hidden;min-height:365px;padding:52px 42px;display:flex;align-items:center;border:1px solid rgba(109,40,217,.12);border-radius:28px;background:
+  radial-gradient(circle at 85% 16%,rgba(219,39,119,.16),transparent 22%),
+  radial-gradient(circle at 8% 92%,rgba(109,40,217,.13),transparent 27%),
+  linear-gradient(145deg,#fff,#fbf8ff 60%,#fff8fc);box-shadow:var(--shadow-lg)}
+.hero::before{content:"";position:absolute;width:330px;height:330px;right:-150px;bottom:-190px;border:70px solid rgba(109,40,217,.055);border-radius:50%;animation:heroOrbit 18s linear infinite}
+.hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(circle at 22% 28%,rgba(255,255,255,.85),transparent 17%),radial-gradient(circle at 75% 72%,rgba(219,39,119,.05),transparent 20%);animation:heroGlow 11s ease-in-out infinite alternate}
+.hero-content{position:relative;z-index:2;max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;color:var(--primary);background:var(--primary-soft);font-size:8px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;animation:badgeFloat 5s ease-in-out infinite}
+.hero-icon{width:66px;height:66px;display:grid;place-items:center;margin:18px 0 15px;border-radius:20px;background:linear-gradient(135deg,#fff0f6,#f1e9ff);color:var(--primary);font-size:25px;box-shadow:0 14px 35px rgba(109,40,217,.10);animation:iconBreathe 4.5s ease-in-out infinite}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(36px,5vw,60px);line-height:1.03;letter-spacing:-1.3px}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{max-width:760px;margin-top:14px;color:var(--text-soft);font-size:12px;line-height:1.8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:23px}.hero-btn{min-height:42px;padding:0 15px;display:inline-flex;align-items:center;gap:7px;border-radius:10px;font-size:9px;font-weight:900;transition:.22s ease}
+.hero-btn.primary{color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 10px 25px rgba(109,40,217,.17)}
+.hero-btn.secondary{color:var(--primary);border:1px solid #ddd6fe;background:#fff}.hero-btn:hover{transform:translateY(-2px)}
+
+/* ================= ABOUT CONTENT ================= */
+.section{padding-top:22px}.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.75fr);gap:18px}
+.card{position:relative;overflow:hidden;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:var(--shadow-sm);transition:.28s ease}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.72),transparent 45%)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.card h2{position:relative;font-size:20px;margin-bottom:8px;letter-spacing:-.3px}.card h3{font-size:12px}.card p{position:relative;color:var(--text-soft);font-size:11px;line-height:1.75;margin-bottom:11px}
+.section-kicker{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.14em;margin-bottom:7px}
+.feature-list{position:relative;display:grid;gap:10px;margin-top:19px}.feature{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;border:1px solid #f0edf4;background:linear-gradient(145deg,#fff,#fbf9fc);transition:.24s ease;animation:riseIn .8s both}
+.feature:nth-child(2){animation-delay:.06s}.feature:nth-child(3){animation-delay:.12s}.feature:nth-child(4){animation-delay:.18s}.feature:hover{transform:translateX(4px);border-color:#e2d5f6;box-shadow:0 10px 25px rgba(40,20,55,.05)}
+.feature-icon{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--primary-soft);color:var(--primary);font-size:14px}
+.feature:nth-child(2) .feature-icon{background:var(--accent-soft);color:var(--accent)}.feature:nth-child(3) .feature-icon{background:#e0f2fe;color:#0284c7}.feature:nth-child(4) .feature-icon{background:#fef3c7;color:#d97706}
+.feature strong{display:block;font-size:11px;margin:2px 0 3px}.feature span{color:var(--text-muted);font-size:9px;line-height:1.6}
+.glance-card{background:linear-gradient(145deg,#211834,#3f1e5b 55%,#7f2355);color:#fff;border-color:transparent;box-shadow:0 24px 60px rgba(55,20,70,.18)}
+.glance-card::before{background:radial-gradient(circle at 90% 0,rgba(255,255,255,.12),transparent 27%),radial-gradient(circle at 0 100%,rgba(255,255,255,.08),transparent 24%)}
+.glance-card .section-kicker{color:#f9a8d4}.glance-card h2{color:#fff}.glance-card p{color:rgba(255,255,255,.72)}
+.stats{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.stat{padding:15px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);transition:.25s ease}.stat:hover{transform:translateY(-3px);background:rgba(255,255,255,.12)}.stat-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:rgba(255,255,255,.12);color:#fff;font-size:11px;margin-bottom:9px}.stat strong{display:block;font-size:16px;color:#fff}.stat span{display:block;margin-top:2px;color:rgba(255,255,255,.62);font-size:8px}
+
+/* ================= FEATURE BAND ================= */
+.band{margin-top:18px;padding:24px;border-radius:22px;border:1px solid var(--border);background:rgba(255,255,255,.72);box-shadow:var(--shadow-sm)}
+.band-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:15px}.band-heading h2{font-family:"Playfair Display",serif;font-size:25px}.band-heading p{max-width:580px;color:var(--text-soft);font-size:10px}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.value{padding:16px;border-radius:16px;border:1px solid #eee9f2;background:#fff;transition:.25s ease}.value:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}.value-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}.value-top i{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:11px}.value:nth-child(2) .value-top i{background:#e0f2fe;color:#0284c7}.value:nth-child(3) .value-top i{background:#fce7f3;color:#db2777}.value strong{font-size:10px}.value p{margin:0;color:var(--text-muted);font-size:8.5px;line-height:1.6}
+
+/* ================= TIMELINE / CALL TO ACTION ================= */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:18px}.step{position:relative;padding:18px;border-radius:17px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-sm)}.step-number{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));font-size:10px;font-weight:900;margin-bottom:10px}.step h3{font-size:11px}.step p{margin-top:5px;color:var(--text-muted);font-size:8.5px;line-height:1.6}
+.callout{position:relative;overflow:hidden;margin-top:18px;padding:28px;border-radius:23px;background:linear-gradient(135deg,#4c1d95,#6d28d9 48%,#be185d);color:#fff;box-shadow:0 22px 55px rgba(76,29,149,.18)}
+.callout::before{content:"";position:absolute;width:240px;height:240px;right:-100px;top:-130px;border:45px solid rgba(255,255,255,.08);border-radius:50%;animation:heroOrbit 20s linear infinite}.callout-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px}.callout h2{font-family:"Playfair Display",serif;font-size:26px}.callout p{max-width:680px;margin-top:6px;color:rgba(255,255,255,.78);font-size:10px}.callout a{flex:0 0 auto;min-height:42px;padding:0 15px;display:inline-flex;align-items:center;gap:7px;border-radius:10px;background:#fff;color:var(--primary);font-size:9px;font-weight:900;box-shadow:0 10px 25px rgba(0,0,0,.12);transition:.22s ease}.callout a:hover{transform:translateY(-2px) scale(1.02)}
+
+/* ================= FOOTERS ================= */
+.footer{margin-top:0;background:#17151b;color:#fff}.footer-inner{width:min(calc(100% - 30px),var(--container));margin:auto;padding:42px 0 22px}.footer-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr;gap:34px;padding-bottom:28px}.footer-description{max-width:360px;margin-top:10px;color:#9994a1;font-size:9px;line-height:1.75}.footer-heading{font-size:10px;margin-bottom:10px}.footer-links{display:flex;flex-direction:column;gap:6px}.footer-links a{color:#9d99a5;font-size:8.5px;transition:.18s ease}.footer-links a:hover{color:#fff;transform:translateX(2px)}.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);color:#716d78;font-size:8px}
+.footer-guest .footer-brand{display:inline-flex;align-items:center;gap:10px}.footer-guest .footer-brand img{width:42px;height:42px;object-fit:contain;border-radius:10px}.footer-guest .footer-brand strong{font-family:"Playfair Display",serif;font-size:22px;color:#fff}
+
+/* ================= SMALL UX ================= */
+#sessionStatus{position:fixed;left:14px;bottom:14px;z-index:4000;padding:8px 11px;border:1px solid rgba(109,40,217,.12);border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 12px 30px rgba(30,15,35,.08);color:var(--text-muted);font-size:7px;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s ease}#sessionStatus.show{opacity:1;transform:none}
+@keyframes notificationPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+@keyframes heroOrbit{to{transform:rotate(360deg)}}@keyframes heroGlow{from{transform:translate3d(-1%,1%,0) scale(1)}to{transform:translate3d(1%,-1%,0) scale(1.04)}}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}@keyframes iconBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.04)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1050px){.main-navigation{gap:0}.nav-link{padding:0 7px}.grid{grid-template-columns:1fr}.value-grid{grid-template-columns:repeat(3,1fr)}.timeline{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:820px){.header-inner{grid-template-columns:auto 1fr auto}.main-navigation,.header-guest{display:none}.header-actions .header-action,.profile-shortcut{display:none}.mobile-menu-button{display:flex}.mobile-navigation .desktop-mobile-only{display:none}.hero{min-height:340px;padding:38px 28px}.callout-content{flex-direction:column;align-items:flex-start}.callout a{width:100%;justify-content:center}}
+@media(max-width:620px){.page,.footer-inner,.header-inner{width:calc(100% - 22px)}.header-inner{min-height:68px}.brand-logo{width:40px;height:40px;flex-basis:40px}.brand-name{font-size:23px}.brand-tagline{font-size:6px}.mobile-navigation{top:68px}.hero{padding:32px 20px;border-radius:21px;min-height:0}.hero h1{font-size:39px}.hero p{font-size:10px}.hero-icon{width:56px;height:56px;font-size:21px;margin-top:15px}.card{padding:21px}.stats{grid-template-columns:1fr 1fr}.value-grid,.timeline{grid-template-columns:1fr}.band{padding:18px}.band-heading{display:block}.band-heading p{margin-top:5px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}.callout{padding:22px}.callout h2{font-size:23px}.sessionStatus{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
-
 <body>
 
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="LOVEMI Home">
+      <img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';">
+      <span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline">DISCOVER • CONNECT • MEET</span></span>
+    </a>
 
-<header class="site-header">
+    <nav id="guestNavigation" class="main-navigation" aria-label="Guest navigation">
+      <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+      <a class="nav-link" href="discover.html"><i class="fa-regular fa-compass"></i>Discover</a>
+      <a class="nav-link active" href="about.html"><i class="fa-regular fa-circle-question"></i>About</a>
+      <a class="nav-link" href="help.html"><i class="fa-regular fa-circle-question"></i>Help</a>
+      <a class="nav-link" href="contact.html"><i class="fa-regular fa-envelope"></i>Contact</a>
+    </nav>
 
-    <div class="container nav">
+    <nav id="userNavigation" class="main-navigation" aria-label="Signed-in navigation" hidden>
+      <a class="nav-link" href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+      <a class="nav-link" href="discover.html"><i class="fa-regular fa-compass"></i>Discover</a>
+      <a class="nav-link" href="connections.html"><i class="fa-solid fa-user-group"></i>Connections</a>
+      <a class="nav-link" href="messages.html"><i class="fa-regular fa-message"></i>Messages</a>
+      <a class="nav-link" href="profile.html"><i class="fa-regular fa-user"></i>Profile</a>
+      <a class="nav-link" href="notifications.html"><i class="fa-regular fa-bell"></i>Notifications</a>
+      <a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+      <a class="nav-link" href="premium.html"><i class="fa-solid fa-crown"></i>Premium</a>
+    </nav>
 
-        <a
-            class="brand"
-            href="index.html"
-        >
+    <div class="header-actions">
+      <div id="guestActions" class="header-guest">
+        <a href="login.html" class="guest-btn guest-login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+        <a href="registration.html" class="guest-btn guest-join"><i class="fa-solid fa-heart"></i>Join LOVEMI</a>
+      </div>
 
-            <img
-                src="assets/logo1/LOGO1.ico"
-                alt="LOVEMI"
-            >
-
-            <strong>LOVEMI</strong>
-
+      <div id="userActions" class="header-guest" hidden>
+        <a href="notifications.html" class="header-action" title="Notifications" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span id="notificationDot" class="notification-dot" aria-hidden="true"></span></a>
+        <a href="profile.html" class="header-action" title="Profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <a href="profile.html" class="profile-shortcut" aria-label="Open my profile">
+          <span class="profile-shortcut-avatar-wrap"><img id="profileAvatar" class="profile-shortcut-avatar" src="assets/images/defaults/default-avatar-male.png" alt="My profile"><span class="profile-shortcut-online"></span></span>
+          <span id="profileName" class="profile-shortcut-name">Account</span>
         </a>
+      </div>
 
-
-        <nav
-            id="guestNav"
-            class="desktop-nav"
-        >
-
-            <a
-                class="nav-link"
-                href="index.html"
-            >
-                Home
-            </a>
-
-            <a
-                class="nav-link active"
-                href="about.html"
-            >
-                About
-            </a>
-
-            <a
-                class="nav-link"
-                href="help.html"
-            >
-                Help
-            </a>
-
-            <a
-                class="nav-link"
-                href="contact.html"
-            >
-                Contact
-            </a>
-
-            <a
-                class="nav-link"
-                href="login.html"
-            >
-                Login
-            </a>
-
-            <a
-                class="nav-link cta"
-                href="registration.html"
-            >
-                Create Account
-            </a>
-
-        </nav>
-
-
-        <nav
-            id="userNav"
-            class="desktop-nav"
-            hidden
-        >
-
-            
-        </nav>
-
-
-        <button
-            class="mobile-toggle"
-            id="mobileToggle"
-            type="button"
-            aria-label="Open menu"
-        >
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
+      <button type="button" id="mobileMenuButton" class="mobile-menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
     </div>
-
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu"
-    >
-
-        <div
-            class="container"
-            id="mobileLinks"
-        ></div>
-
-    </div>
-
+  </div>
 </header>
 
+<nav id="mobileNavigation" class="mobile-navigation" aria-label="Mobile navigation">
+  <div id="guestMobileGrid" class="mobile-nav-grid">
+    <a class="mobile-nav-link" href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+    <a class="mobile-nav-link" href="discover.html"><i class="fa-solid fa-compass"></i>Discover</a>
+    <a class="mobile-nav-link active" href="about.html"><i class="fa-regular fa-circle-question"></i>About</a>
+    <a class="mobile-nav-link" href="help.html"><i class="fa-regular fa-circle-question"></i>Help</a>
+    <a class="mobile-nav-link" href="contact.html"><i class="fa-regular fa-envelope"></i>Contact</a>
+    <a class="mobile-nav-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+    <a class="mobile-nav-link" href="registration.html"><i class="fa-solid fa-user-plus"></i>Create Account</a>
+  </div>
+  <div id="userMobileGrid" class="mobile-nav-grid" hidden>
+    <a class="mobile-nav-link" href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+    <a class="mobile-nav-link" href="discover.html"><i class="fa-solid fa-compass"></i>Discover</a>
+    <a class="mobile-nav-link" href="connections.html"><i class="fa-solid fa-user-group"></i>Connections</a>
+    <a class="mobile-nav-link" href="messages.html"><i class="fa-regular fa-message"></i>Messages</a>
+    <a class="mobile-nav-link" href="profile.html"><i class="fa-regular fa-user"></i>Profile</a>
+    <a class="mobile-nav-link" href="notifications.html"><i class="fa-regular fa-bell"></i>Notifications</a>
+    <a class="mobile-nav-link" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    <a class="mobile-nav-link" href="premium.html"><i class="fa-solid fa-crown"></i>Premium</a>
+  </div>
+</nav>
 
-<main>
+<main class="page">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> About the LOVEMI platform</div>
+      <div class="hero-icon"><i class="fa-solid fa-heart"></i></div>
+      <h1>Discover. <span>Connect. Meet.</span></h1>
+      <p>LOVEMI brings people discovery, profiles, connections, conversations, notifications and Premium services together in one organized experience. The platform is built to make every part of a member's journey clear, modern and easy to use.</p>
+      <div class="hero-actions">
+        <a class="hero-btn primary" href="discover.html"><i class="fa-solid fa-compass"></i> Explore LOVEMI</a>
+        <a class="hero-btn secondary" href="help.html"><i class="fa-regular fa-circle-question"></i> Learn More</a>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="grid">
+      <article class="card">
+        <div class="section-kicker"><i class="fa-solid fa-heart-circle-check"></i> Our purpose</div>
+        <h2>A platform centered around people and connection</h2>
+        <p>LOVEMI is designed to bring the important parts of a modern social experience together without making the interface complicated. Members can discover approved profiles, open secure profiles, create connections, communicate and manage their account from one place.</p>
+        <p>The experience is supported by server-side authentication, database-driven records, moderation controls and controlled access to account services.</p>
 
-    <section class="hero">
-
-        <div class="container">
-
-            <div class="hero-icon">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <h1>
-                About LOVEMI
-            </h1>
-
-            <p>
-                LOVEMI is designed to make it easier for adults
-                to discover people, create connections and
-                communicate through an organized platform.
-            </p>
-
+        <div class="feature-list">
+          <div class="feature"><div class="feature-icon"><i class="fa-solid fa-users"></i></div><div><strong>Discover People</strong><span>Explore approved members and use LOVEMI discovery to find people that may be relevant to you.</span></div></div>
+          <div class="feature"><div class="feature-icon"><i class="fa-solid fa-link"></i></div><div><strong>Build Connections</strong><span>Create and manage connections with other members through LOVEMI's relationship tools.</span></div></div>
+          <div class="feature"><div class="feature-icon"><i class="fa-regular fa-message"></i></div><div><strong>Communicate</strong><span>Continue eligible conversations using LOVEMI messaging and notification tools.</span></div></div>
+          <div class="feature"><div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div><div><strong>Moderated Experience</strong><span>Approvals, reporting and administration help keep platform activity organized and controlled.</span></div></div>
         </div>
+      </article>
 
+      <aside class="card glance-card">
+        <div class="section-kicker"><i class="fa-solid fa-chart-simple"></i> Platform at a glance</div>
+        <h2>Built around a current, database-driven experience</h2>
+        <p>LOVEMI pages read important account and service states from the server so that current information can be used instead of depending on stale browser state.</p>
+        <div class="stats">
+          <div class="stat"><div class="stat-icon"><i class="fa-solid fa-database"></i></div><strong>Database</strong><span>Current records drive key platform states</span></div>
+          <div class="stat"><div class="stat-icon"><i class="fa-solid fa-shield-heart"></i></div><strong>Controlled</strong><span>Authentication and server-side access control</span></div>
+          <div class="stat"><div class="stat-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><strong>Responsive</strong><span>Designed for phones, tablets and desktop</span></div>
+          <div class="stat"><div class="stat-icon"><i class="fa-solid fa-crown"></i></div><strong>Premium</strong><span>Additional services can be access-controlled</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="band">
+      <div class="band-heading"><div><div class="section-kicker"><i class="fa-solid fa-gem"></i> What matters</div><h2>A thoughtful LOVEMI experience</h2></div><p>The interface, account system and member tools are designed to work together so the experience stays clear as the platform grows.</p></div>
+      <div class="value-grid">
+        <article class="value"><div class="value-top"><i class="fa-solid fa-lock"></i><strong>Privacy & control</strong></div><p>Important services can be protected by authentication, permissions and server-side checks.</p></article>
+        <article class="value"><div class="value-top"><i class="fa-solid fa-location-dot"></i><strong>Useful discovery</strong></div><p>Location-aware discovery can help members see relevant people without exposing exact coordinates.</p></article>
+        <article class="value"><div class="value-top"><i class="fa-solid fa-bolt"></i><strong>Modern usability</strong></div><p>Fast layouts, responsive cards, clear navigation and subtle motion make the interface easier to explore.</p></article>
+      </div>
     </section>
 
-
-    <section class="section">
-
-        <div class="container grid">
-
-
-            <article class="card">
-
-                <h2>
-                    Our Purpose
-                </h2>
-
-                <p>
-                    LOVEMI brings discovery, profiles, connections,
-                    messaging, notifications and Premium services
-                    together in one platform.
-                </p>
-
-                <p>
-                    The platform is built around database-driven
-                    accounts, controlled access, verification,
-                    moderation and administrator management.
-                </p>
-
-
-                <div class="feature-list">
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Discover People
-                            </strong>
-
-                            <span>
-                                Find profiles based on information
-                                available through LOVEMI discovery.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            <i class="fa-solid fa-link"></i>
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Build Connections
-                            </strong>
-
-                            <span>
-                                Create connections and manage your
-                                relationship with other members.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            <i class="fa-solid fa-comments"></i>
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Communicate
-                            </strong>
-
-                            <span>
-                                Use the messaging tools available to
-                                eligible connected members.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Moderated Platform
-                            </strong>
-
-                            <span>
-                                Reports, approvals and administration
-                                help keep platform activity organized.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <aside class="card">
-
-                <h2>
-                    LOVEMI at a Glance
-                </h2>
-
-
-                <p>
-                    The system is designed around a database-first
-                    architecture so important account and service
-                    states are determined from current server data.
-                </p>
-
-
-                <div class="stats">
-
-                    <div class="stat">
-
-                        <strong>
-                            24/7
-                        </strong>
-
-                        <span>
-                            Platform availability target
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <strong>
-                            DB
-                        </strong>
-
-                        <span>
-                            Database-driven records
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <strong>
-                            Secure
-                        </strong>
-
-                        <span>
-                            Authentication and moderation
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <strong>
-                            Mobile
-                        </strong>
-
-                        <span>
-                            Responsive experience
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </aside>
-
-
-        </div>
-
+    <section class="timeline">
+      <article class="step"><div class="step-number">1</div><h3>Create or access your account</h3><p>Register or sign in to unlock the account area and member tools.</p></article>
+      <article class="step"><div class="step-number">2</div><h3>Discover approved members</h3><p>Explore profiles and use LOVEMI discovery features to find people.</p></article>
+      <article class="step"><div class="step-number">3</div><h3>Connect and communicate</h3><p>Use connections, messaging and notifications according to account permissions.</p></article>
+      <article class="step"><div class="step-number">4</div><h3>Manage your experience</h3><p>Keep your profile, settings, privacy and Premium services under your control.</p></article>
     </section>
 
+    <section class="callout">
+      <div class="callout-content">
+        <div><h2>LOVEMI is built to grow with its members.</h2><p>Start with discovery, move to meaningful connections and manage your account from a single, organized platform.</p></div>
+        <a href="registration.html"><i class="fa-solid fa-user-plus"></i>Create Your Account</a>
+      </div>
+    </section>
+  </section>
 </main>
 
-
-<footer>
-
-    <div class="container footer-grid">
-
-
-        <div>
-
-            <div class="footer-brand">
-
-                <img
-                    src="assets/logo1/LOGO1.ico"
-                    alt="LOVEMI"
-                >
-
-                <strong>
-                    LOVEMI
-                </strong>
-
-            </div>
-
-            <p class="footer-desc">
-                Discover meaningful connections, communicate
-                responsibly and manage your experience through
-                one modern platform.
-            </p>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>
-                Explore
-            </h3>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="help.html">
-                Help
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>
-                Account
-            </h3>
-
-            <a href="login.html">
-                Login
-            </a>
-
-            <a href="registration.html">
-                Register
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h3>
-                Legal
-            </h3>
-
-            <a href="privacy.html">
-                Privacy
-            </a>
-
-            <a href="terms.html">
-                Terms
-            </a>
-
-        </div>
-
+<!-- Guest footer: same public-facing style used by the LOVEMI home experience -->
+<footer id="guestFooter" class="footer footer-guest">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><a href="index.html" class="footer-brand"><img src="assets/logo1/logo1.png" alt="LOVEMI Logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"><strong>LOVEMI</strong></a><p class="footer-description">Discover people, build meaningful connections and begin conversations through LOVEMI.</p></div>
+      <div><h3 class="footer-heading">Platform</h3><div class="footer-links"><a href="discover.html">Discover</a><a href="about.html">About LOVEMI</a><a href="help.html">Help Center</a><a href="contact.html">Contact</a></div></div>
+      <div><h3 class="footer-heading">Information</h3><div class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="login.html">Login</a><a href="registration.html">Register</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="login.html">Login</a><a href="registration.html">Create Account</a><a href="forgot-password.html">Forgot Password</a><a href="premium.html">Premium</a></div></div>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <div class="container footer-bottom-inner">
-
-            <span>
-                © 2026 LOVEMI. All rights reserved.
-            </span>
-
-            <span>
-                Support: eduassistasc@gmail.com
-            </span>
-
-        </div>
-
-    </div>
-
+    <div class="footer-bottom"><span>© <span id="guestYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
 </footer>
 
+<!-- Logged-in footer: same account-oriented structure used by Discover -->
+<footer id="userFooter" class="footer" hidden>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><a href="dashboard.html" class="brand"><img src="assets/logo1/logo1.png" alt="LOVEMI Logo" class="brand-logo" onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"><span class="brand-text"><span class="brand-name">LOVEMI</span><span class="brand-tagline" style="color:#77717f">DISCOVER • CONNECT • MEET</span></span></a><p class="footer-description">Discover approved members, build meaningful connections and manage your LOVEMI profile securely.</p></div>
+      <div><h3 class="footer-heading">Explore</h3><div class="footer-links"><a href="dashboard.html">Dashboard</a><a href="discover.html">Discover</a><a href="connections.html">Connections</a><a href="messages.html">Messages</a></div></div>
+      <div><h3 class="footer-heading">Account</h3><div class="footer-links"><a href="profile.html">Profile</a><a href="edit-profile.html">Edit Profile</a><a href="premium.html">Premium</a><a href="settings.html">Settings</a></div></div>
+      <div><h3 class="footer-heading">Help</h3><div class="footer-links"><a href="notifications.html">Notifications</a><a href="help.html">Help Center</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="userYear"></span> LOVEMI. All rights reserved.</span><span>Discover • Connect • Meet</span></div>
+  </div>
+</footer>
+
+<div id="sessionStatus" aria-live="polite"></div>
 
 <script>
+"use strict";
 
-(function () {
+const API = { session: "api/auth/session.php" };
+const DEFAULT_MALE = "assets/images/defaults/default-avatar-male.png";
+const DEFAULT_FEMALE = "assets/images/defaults/default-avatar-female.png";
+const state = { authenticated:false, currentUser:null };
 
-    "use strict";
+const $ = (id) => document.getElementById(id);
+$("guestYear").textContent = new Date().getFullYear();
+$("userYear").textContent = new Date().getFullYear();
 
+function sessionBool(value){
+  if(value === true || value === 1) return true;
+  if(typeof value === "string") return /^(1|true|yes|on|authenticated|logged[ _-]?in)$/i.test(value.trim());
+  return false;
+}
 
-    const guestNav =
-        document.getElementById(
-            "guestNav"
-        );
+function extractResult(data){
+  if(data && data.result && typeof data.result === "object") return data.result;
+  if(data && data.data && typeof data.data === "object" && !Array.isArray(data.data)) return data.data;
+  return data || {};
+}
 
+function extractUser(data){
+  const result = extractResult(data);
+  const candidates = [
+    result.user, data?.user, result.current_user, data?.current_user,
+    result.currentUser, data?.currentUser, result.profile, data?.profile,
+    result.session?.user, data?.session?.user, result.session?.profile, data?.session?.profile
+  ];
+  const found = candidates.find((x) => x && typeof x === "object" && !Array.isArray(x));
+  if(found) return found;
+  const id = result.user_id ?? data?.user_id ?? result.id ?? data?.id;
+  if(id !== undefined && id !== null && String(id).trim() !== "") return { ...result, id, user_id:id };
+  return null;
+}
 
-    const userNav =
-        document.getElementById(
-            "userNav"
-        );
+function getAvatar(user){
+  const raw = user?.profile_photo || user?.photo_url || user?.profile_image || user?.profile_picture || user?.avatar || user?.image || user?.profile_media_url || user?.profile_thumbnail || "";
+  if(String(raw).trim()) return String(raw).trim().replace(/^\.\//,"");
+  return /female|woman|girl/i.test(String(user?.gender || "")) ? DEFAULT_FEMALE : DEFAULT_MALE;
+}
 
+function displayName(user){
+  return String(user?.username || user?.full_names || user?.full_name || user?.display_name || "Account").trim() || "Account";
+}
 
-    const mobileMenu =
-        document.getElementById(
-            "mobileMenu"
-        );
+function setLoggedOut(){
+  state.authenticated = false; state.currentUser = null;
+  $("guestNavigation").hidden = false; $("userNavigation").hidden = true;
+  $("guestActions").hidden = false; $("userActions").hidden = true;
+  $("guestFooter").hidden = false; $("userFooter").hidden = true;
+  $("guestMobileGrid").hidden = false; $("userMobileGrid").hidden = true;
+}
 
+function setLoggedIn(user){
+  state.authenticated = true; state.currentUser = user || {};
+  $("guestNavigation").hidden = true; $("userNavigation").hidden = false;
+  $("guestActions").hidden = true; $("userActions").hidden = false;
+  $("guestFooter").hidden = true; $("userFooter").hidden = false;
+  $("guestMobileGrid").hidden = true; $("userMobileGrid").hidden = false;
+  $("profileName").textContent = displayName(state.currentUser);
+  const img = $("profileAvatar");
+  const avatar = getAvatar(state.currentUser);
+  img.src = avatar;
+  img.alt = `${displayName(state.currentUser)} profile picture`;
+  img.onerror = function(){ this.onerror = null; this.src = /female|woman|girl/i.test(String(state.currentUser?.gender || "")) ? DEFAULT_FEMALE : DEFAULT_MALE; };
+}
 
-    const mobileLinks =
-        document.getElementById(
-            "mobileLinks"
-        );
+async function apiSession(){
+  const separator = API.session.includes("?") ? "&" : "?";
+  const response = await fetch(`${API.session}${separator}_=${Date.now()}`, {
+    method:"GET", credentials:"same-origin", cache:"no-store",
+    headers:{Accept:"application/json","Cache-Control":"no-cache,no-store,max-age=0"}
+  });
+  const text = await response.text();
+  let data;
+  try { data = JSON.parse(text); }
+  catch(e){ throw new Error("The session endpoint returned invalid JSON."); }
+  if(!response.ok) throw new Error(data?.message || `Session request failed (${response.status}).`);
+  return data;
+}
 
-
-    const mobileToggle =
-        document.getElementById(
-            "mobileToggle"
-        );
-
-
-    const guestItems = [
-
-        ["Home","index.html"],
-
-        ["About","about.html"],
-
-        ["Help","help.html"],
-
-        ["Contact","contact.html"],
-
-        ["Login","login.html"],
-
-        ["Create Account","registration.html"]
-
+async function loadSession(){
+  try{
+    const data = await apiSession();
+    const result = extractResult(data);
+    const user = extractUser(data);
+    const explicitAuth = [
+      data?.authenticated,data?.logged_in,data?.loggedIn,data?.is_authenticated,data?.isLoggedIn,
+      result?.authenticated,result?.logged_in,result?.loggedIn,result?.is_authenticated,result?.isLoggedIn
     ];
+    const hasExplicit = explicitAuth.some(v => v !== undefined && v !== null);
+    const userId = user?.user_id ?? user?.id ?? user?.userid ?? result?.user_id ?? data?.user_id ?? result?.id ?? data?.id;
+    const authenticated = hasExplicit ? explicitAuth.some(sessionBool) : Boolean(user && userId !== undefined && userId !== null && String(userId).trim() !== "");
+    if(authenticated && user){ setLoggedIn(user); }
+    else { setLoggedOut(); }
+  }catch(error){
+    console.warn("LOVEMI About session check:", error);
+    setLoggedOut();
+  }
+}
 
+function setupMobile(){
+  const button = $("mobileMenuButton");
+  const menu = $("mobileNavigation");
+  if(!button || !menu) return;
+  button.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    document.body.classList.toggle("menu-open", open);
+    button.setAttribute("aria-expanded", String(open));
+    button.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+  });
+  menu.addEventListener("click", (event) => { if(event.target.closest("a")){ menu.classList.remove("open"); document.body.classList.remove("menu-open"); button.setAttribute("aria-expanded","false"); button.innerHTML='<i class="fa-solid fa-bars"></i>'; } });
+  window.addEventListener("resize", () => { if(window.innerWidth > 820){ menu.classList.remove("open"); document.body.classList.remove("menu-open"); button.setAttribute("aria-expanded","false"); button.innerHTML='<i class="fa-solid fa-bars"></i>'; } });
+}
 
-    const userItems = [
+function setupFocusRefresh(){
+  let lastCheck = 0;
+  const refresh = () => {
+    const now = Date.now();
+    if(now - lastCheck < 1200) return;
+    lastCheck = now;
+    loadSession();
+  };
+  document.addEventListener("visibilitychange", () => { if(!document.hidden) refresh(); });
+  window.addEventListener("focus", refresh);
+}
 
-        ["Dashboard","dashboard.html"],
-
-        ["Discover","discover.html"],
-
-        ["Connections","connections.html"],
-
-        ["Messages","messages.html"],
-
-        ["Profile","profile.html"],
-
-        ["Notifications","notifications.html"],
-
-        ["Settings","settings.html"],
-
-        ["Premium","premium.html"]
-
-    ];
-
-
-    async function fetchSession() {
-
-        try {
-
-            const response =
-                await fetch(
-                    "api/auth/session.php",
-                    {
-                        credentials: "include",
-                        cache: "no-store",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                return null;
-            }
-
-
-            return await response.json();
-
-        } catch (
-            error
-        ) {
-
-            return null;
-
-        }
-
-    }
-
-
-    function renderMobile(
-        items
-    ) {
-
-        mobileLinks.innerHTML = "";
-
-        items.forEach(
-            ([text, href]) => {
-
-                const a =
-                    document.createElement(
-                        "a"
-                    );
-
-                a.textContent =
-                    text;
-
-                a.href =
-                    href;
-
-                mobileLinks.appendChild(
-                    a
-                );
-
-            }
-        );
-
-    }
-
-
-    async function initializeNavigation() {
-
-        const result =
-            await fetchSession();
-
-
-        const loggedIn =
-            Boolean(
-                result &&
-                (
-                    result.authenticated === true
-                    ||
-                    result.logged_in === true
-                    ||
-                    (
-                        result.success === true &&
-                        result.user
-                    )
-                )
-            );
-
-
-        if (
-            loggedIn
-        ) {
-
-            guestNav.hidden =
-                true;
-
-            userNav.hidden =
-                false;
-
-            renderMobile(
-                userItems
-            );
-
-        } else {
-
-            guestNav.hidden =
-                false;
-
-            userNav.hidden =
-                true;
-
-            renderMobile(
-                guestItems
-            );
-
-        }
-
-    }
-
-
-    mobileToggle.addEventListener(
-        "click",
-        function () {
-
-            const open =
-                mobileMenu.classList.toggle(
-                    "open"
-                );
-
-
-            mobileToggle.innerHTML =
-                open
-                    ?
-                    '<i class="fa-solid fa-xmark"></i>'
-                    :
-                    '<i class="fa-solid fa-bars"></i>';
-
-        }
-    );
-
-
-    initializeNavigation();
-
-})();
-
+setupMobile();
+setupFocusRefresh();
+loadSession();
 </script>
-
-
 </body>
 </html>

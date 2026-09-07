@@ -1,54 +1,22 @@
 <?php
-/**
- * ============================================================
- * LOVEMI - PREMIUM SERVICES API
- * ============================================================
- *
- * Returns active premium services and the current user's
- * calculated payment currency.
- *
- * Source of truth:
- *   services
- *   users
- *   countries
- *   currencies
- *   exchange_rates
- *   subscriptions
- *   system_settings
- *
- * No browser cache.
- * No hardcoded country list.
- * No hardcoded exchange rate.
- * ============================================================
- */
-
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
+header(
+    'Content-Type: application/json; charset=utf-8'
+);
 
-/* ============================================================
-   RESPONSE HEADERS
-============================================================ */
+header(
+    'Cache-Control: no-store, no-cache, must-revalidate, max-age=0'
+);
 
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
-
-
-/* ============================================================
-   SESSION
-============================================================ */
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-
-
-/* ============================================================
-   RESPONSE FUNCTION
-============================================================ */
 
 function premiumServicesResponse(
     bool $success,
@@ -74,815 +42,599 @@ function premiumServicesResponse(
     exit;
 }
 
-
-/* ============================================================
-   METHOD
-============================================================ */
-
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET') {
+if (
+    ($_SERVER['REQUEST_METHOD'] ?? '') !==
+    'GET'
+) {
 
     premiumServicesResponse(
         false,
         'Only GET requests are allowed.',
         [
-            'code' => 'METHOD_NOT_ALLOWED'
+            'code' =>
+                'METHOD_NOT_ALLOWED'
         ],
         405
     );
 }
 
-
-/* ============================================================
-   AUTHENTICATION
-============================================================ */
-
 $userId =
-    isset($_SESSION['lovemi_user_id'])
-        ? (int) $_SESSION['lovemi_user_id']
-        : 0;
-
+    (int) (
+        $_SESSION['lovemi_user_id'] ?? 0
+    );
 
 if ($userId <= 0) {
 
     premiumServicesResponse(
         false,
-        'Please log in before viewing Premium services.',
+        'Please log in before viewing Premium.',
         [
-            'code' => 'AUTHENTICATION_REQUIRED',
-            'redirect' => 'login.html?return=premium.html'
+            'code' =>
+                'AUTHENTICATION_REQUIRED',
+            'redirect' =>
+                'login.html?return=premium.html'
         ],
         401
     );
 }
 
-
-/* ============================================================
-   DATABASE
-============================================================ */
-
 try {
 
-    $pdo = db();
+    $pdo =
+        db();
 
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI PREMIUM SERVICES DB] ' .
-        $e->getMessage()
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
     );
 
-    premiumServicesResponse(
-        false,
-        'Unable to connect to the database.',
-        [
-            'code' => 'DATABASE_ERROR'
-        ],
-        500
-    );
-}
-
-
-/* ============================================================
-   USER + COUNTRY + CURRENCY
-============================================================ */
-
-try {
-
-    $userStmt = $pdo->prepare(
-        "
-        SELECT
-
-            u.id,
-            u.username,
-            u.full_names,
-            u.email_verified,
-            u.is_active,
-            u.is_suspended,
-            u.is_deleted,
-
-            c.id AS country_id,
-            c.name AS country_name,
-            c.iso2 AS country_iso2,
-            c.phone_code,
-
-            cur.id AS currency_id,
-            cur.code AS currency_code,
-            cur.name AS currency_name,
-            cur.symbol AS currency_symbol,
-            cur.decimal_places AS decimal_places
-
-        FROM users u
-
-        LEFT JOIN countries c
-            ON c.id = u.country_id
-
-        LEFT JOIN currencies cur
-            ON cur.id = c.currency_id
-
-        WHERE u.id = :user_id
-
-        LIMIT 1
-        "
+    $pdo->setAttribute(
+        PDO::ATTR_DEFAULT_FETCH_MODE,
+        PDO::FETCH_ASSOC
     );
 
-
-    $userStmt->execute(
-        [
-            ':user_id' => $userId
-        ]
-    );
-
-
-    $user = $userStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI PREMIUM USER QUERY] ' .
-        $e->getMessage()
-    );
-
-    premiumServicesResponse(
-        false,
-        'Unable to load your account information.',
-        [
-            'code' => 'USER_QUERY_ERROR'
-        ],
-        500
-    );
-}
-
-
-/* ============================================================
-   USER VALIDATION
-============================================================ */
-
-if (!$user) {
-
-    premiumServicesResponse(
-        false,
-        'Your account could not be found.',
-        [
-            'code' => 'USER_NOT_FOUND'
-        ],
-        404
-    );
-}
-
-
-if (
-    !(bool) $user['email_verified']
-) {
-
-    premiumServicesResponse(
-        false,
-        'Please complete email verification before purchasing Premium.',
-        [
-            'code' => 'EMAIL_NOT_VERIFIED',
-            'redirect' =>
-                'verify-account.html?user=' .
-                rawurlencode((string) $userId)
-        ],
-        403
-    );
-}
-
-
-if (
-    !(bool) $user['is_active']
-    ||
-    (bool) $user['is_suspended']
-    ||
-    (bool) $user['is_deleted']
-) {
-
-    premiumServicesResponse(
-        false,
-        'Your account is currently unavailable.',
-        [
-            'code' => 'ACCOUNT_UNAVAILABLE'
-        ],
-        403
-    );
-}
-
-
-/* ============================================================
-   DETERMINE CURRENCY
-============================================================ */
-
-/*
- * Requirement:
- *
- * Kenya       -> KES
- * Other       -> USD
- *
- * We determine this from the country record and its currency.
- */
-
-$countryIso =
-    strtoupper(
-        trim(
-            (string) (
-                $user['country_iso2'] ?? ''
-            )
-        )
-    );
-
-
-$currencyCode =
-    strtoupper(
-        trim(
-            (string) (
-                $user['currency_code'] ?? ''
-            )
-        )
-    );
-
-
-$isKenya =
-    (
-        $countryIso === 'KE'
-        ||
-        $currencyCode === 'KES'
-    );
-
-
-if ($isKenya) {
-
-    $displayCurrencyCode = 'KES';
-
-} else {
-
-    $displayCurrencyCode = 'USD';
-
-}
-
-
-/* ============================================================
-   GET CURRENCY
-============================================================ */
-
-try {
-
-    $currencyStmt = $pdo->prepare(
-        "
-        SELECT
-
-            id,
-            code,
-            name,
-            symbol,
-            decimal_places
-
-        FROM currencies
-
-        WHERE code = :code
-
-          AND is_active = TRUE
-
-        LIMIT 1
-        "
-    );
-
-
-    $currencyStmt->execute(
-        [
-            ':code' => $displayCurrencyCode
-        ]
-    );
-
-
-    $displayCurrency = $currencyStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI PREMIUM CURRENCY QUERY] ' .
-        $e->getMessage()
-    );
-
-    premiumServicesResponse(
-        false,
-        'Unable to determine the payment currency.',
-        [
-            'code' => 'CURRENCY_QUERY_ERROR'
-        ],
-        500
-    );
-}
-
-
-if (!$displayCurrency) {
-
-    premiumServicesResponse(
-        false,
-        'The required payment currency is not configured.',
-        [
-            'code' => 'CURRENCY_NOT_CONFIGURED'
-        ],
-        500
-    );
-}
-
-
-/* ============================================================
-   PREMIUM SERVICES
-============================================================ */
-
-try {
-
-    $serviceStmt = $pdo->prepare(
-        "
-        SELECT
-
-            id,
-            name,
-            slug,
-            description,
-            service_type,
-            base_price_usd,
-            duration_days,
-            max_usage,
-            is_premium,
-            is_active,
-            sort_order
-
-        FROM services
-
-        WHERE is_active = TRUE
-
-          AND is_premium = TRUE
-
-        ORDER BY
-            sort_order ASC,
-            id ASC
-        "
-    );
-
-
-    $serviceStmt->execute();
-
-
-    $services = $serviceStmt->fetchAll();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI PREMIUM SERVICE QUERY] ' .
-        $e->getMessage()
-    );
-
-    premiumServicesResponse(
-        false,
-        'Premium services could not be loaded.',
-        [
-            'code' => 'SERVICE_QUERY_ERROR'
-        ],
-        500
-    );
-}
-
-
-/* ============================================================
-   EXISTING PREMIUM
-============================================================ */
-
-try {
-
-    $subscriptionStmt = $pdo->prepare(
-        "
-        SELECT
-
-            s.id,
-            s.service_id,
-            s.status,
-            s.start_at,
-            s.end_at,
-            s.base_amount_usd,
-            s.amount_paid,
-            s.currency_id,
-            s.exchange_rate,
-            s.usage_limit,
-            s.usage_used,
-
-            sv.name AS service_name
-
-        FROM subscriptions s
-
-        INNER JOIN services sv
-            ON sv.id = s.service_id
-
-        WHERE s.user_id = :user_id
-
-          AND s.status = 'active'
-
-          AND s.start_at <= CURRENT_TIMESTAMP
-
-          AND s.end_at > CURRENT_TIMESTAMP
-
-        ORDER BY
-            s.end_at DESC
-
-        LIMIT 1
-        "
-    );
-
-
-    $subscriptionStmt->execute(
-        [
-            ':user_id' => $userId
-        ]
-    );
-
-
-    $activeSubscription =
-        $subscriptionStmt->fetch();
-
-} catch (Throwable $e) {
-
-    error_log(
-        '[LOVEMI ACTIVE PREMIUM QUERY] ' .
-        $e->getMessage()
-    );
-
-    $activeSubscription = false;
-}
-
-
-/* ============================================================
-   LATEST USD -> LOCAL RATE
-============================================================ */
-
-$exchangeRate =
-    1.0;
-
-
-if (
-    $displayCurrencyCode !== 'USD'
-) {
-
-    try {
-
-        $rateStmt = $pdo->prepare(
-            "
-            SELECT
-
-                er.rate,
-                er.effective_at,
-                er.source
-
-            FROM exchange_rates er
-
-            INNER JOIN currencies base
-                ON base.id =
-                   er.base_currency_id
-
-            INNER JOIN currencies target
-                ON target.id =
-                   er.target_currency_id
-
-            WHERE base.code = 'USD'
-
-              AND target.code = :target_code
-
-              AND er.is_active = TRUE
-
-            ORDER BY
-                er.effective_at DESC,
-                er.id DESC
-
-            LIMIT 1
-            "
+    $userQuery =
+        $pdo->prepare(
+            "SELECT
+                u.id,
+                u.username,
+                u.full_names,
+                u.email,
+                u.email_verified,
+                u.is_active,
+                u.is_suspended,
+                u.is_deleted,
+                c.name AS country_name,
+                c.iso2,
+                curr.id AS currency_id,
+                curr.code AS currency_code,
+                curr.name AS currency_name,
+                curr.symbol AS currency_symbol,
+                curr.decimal_places
+             FROM users u
+             LEFT JOIN countries c
+                ON c.id = u.country_id
+             LEFT JOIN currencies curr
+                ON curr.id = c.currency_id
+             WHERE u.id = :id
+             LIMIT 1"
         );
 
+    $userQuery->execute(
+        [
+            ':id' => $userId
+        ]
+    );
 
-        $rateStmt->execute(
+    $user =
+        $userQuery->fetch();
+
+    if (!$user) {
+
+        premiumServicesResponse(
+            false,
+            'Your account could not be found.',
             [
-                ':target_code' =>
-                    $displayCurrencyCode
-            ]
+                'code' =>
+                    'USER_NOT_FOUND'
+            ],
+            404
         );
-
-
-        $rateRow =
-            $rateStmt->fetch();
-
-
-        if ($rateRow) {
-
-            $exchangeRate =
-                (float)
-                $rateRow['rate'];
-
-        }
-
-    } catch (Throwable $e) {
-
-        error_log(
-            '[LOVEMI PREMIUM RATE QUERY] ' .
-            $e->getMessage()
-        );
-
-        $rateRow = false;
-
     }
 
+    if (!(bool) $user['email_verified']) {
+
+        premiumServicesResponse(
+            false,
+            'Please complete email verification before purchasing Premium.',
+            [
+                'code' =>
+                    'EMAIL_NOT_VERIFIED'
+            ],
+            403
+        );
+    }
 
     if (
-        !$rateRow
-        ||
-        $exchangeRate <= 0
+        !(bool) $user['is_active'] ||
+        (bool) $user['is_suspended'] ||
+        (bool) $user['is_deleted']
     ) {
 
         premiumServicesResponse(
             false,
-            'The current exchange rate for ' .
-            $displayCurrencyCode .
-            ' is not available.',
+            'Your account is currently unavailable.',
             [
-                'code' => 'EXCHANGE_RATE_UNAVAILABLE'
+                'code' =>
+                    'ACCOUNT_UNAVAILABLE'
             ],
-            503
+            403
+        );
+    }
+
+    $targetCurrency =
+        strtoupper(
+            (string) (
+                $user['iso2'] ?? ''
+            )
+        ) === 'KE'
+            ? 'KES'
+            : 'USD';
+
+    $currencyQuery =
+        $pdo->prepare(
+            "SELECT
+                id,
+                code,
+                name,
+                symbol,
+                decimal_places
+             FROM currencies
+             WHERE code = :code
+               AND is_active = 1
+             LIMIT 1"
         );
 
+    $currencyQuery->execute(
+        [
+            ':code' =>
+                $targetCurrency
+        ]
+    );
+
+    $currency =
+        $currencyQuery->fetch();
+
+    if (!$currency) {
+
+        premiumServicesResponse(
+            false,
+            'The payment currency is not configured.',
+            [
+                'code' =>
+                    'CURRENCY_NOT_CONFIGURED'
+            ],
+            500
+        );
     }
 
-}
+    $rate =
+        1.0;
 
+    $rateSource =
+        'internal';
 
-/* ============================================================
-   FORMAT SERVICES
-============================================================ */
+    if ($targetCurrency !== 'USD') {
 
-$formattedServices = [];
+        $rateQuery =
+            $pdo->prepare(
+                "SELECT
+                    er.rate,
+                    er.effective_at,
+                    er.source
+                 FROM exchange_rates er
+                 JOIN currencies b
+                    ON b.id =
+                        er.base_currency_id
+                 JOIN currencies t
+                    ON t.id =
+                        er.target_currency_id
+                 WHERE b.code = 'USD'
+                   AND t.code = :currency
+                   AND er.is_active = 1
+                 ORDER BY
+                    er.effective_at DESC,
+                    er.id DESC
+                 LIMIT 1"
+            );
 
+        $rateQuery->execute(
+            [
+                ':currency' =>
+                    $targetCurrency
+            ]
+        );
 
-foreach ($services as $service) {
+        $latestRate =
+            $rateQuery->fetch();
 
-    $baseUsd =
-        (float)
-        $service['base_price_usd'];
+        if (
+            !$latestRate ||
+            (float) $latestRate['rate'] <= 0
+        ) {
 
+            premiumServicesResponse(
+                false,
+                'The current exchange rate is unavailable. Run the administrator exchange-rate refresh first.',
+                [
+                    'code' =>
+                        'EXCHANGE_RATE_UNAVAILABLE'
+                ],
+                503
+            );
+        }
 
-    $localAmount =
-        $baseUsd
-        *
-        $exchangeRate;
+        $rate =
+            (float) $latestRate['rate'];
 
+        $rateSource =
+            (string) $latestRate['source'];
+    }
+
+    $services =
+        $pdo->query(
+            "SELECT
+                id,
+                name,
+                slug,
+                description,
+                service_type,
+                base_price_usd,
+                duration_days,
+                max_usage,
+                is_premium
+             FROM services
+             WHERE is_active = 1
+               AND is_premium = 1
+             ORDER BY
+                sort_order ASC,
+                id ASC"
+        )->fetchAll();
+
+    $activeQuery =
+        $pdo->prepare(
+            "SELECT
+                s.id,
+                s.service_id,
+                s.status,
+                s.start_at,
+                s.end_at,
+                s.base_amount_usd,
+                s.amount_paid,
+                cu.code AS currency_code,
+                cu.symbol AS currency_symbol,
+                sv.name AS service_name
+             FROM subscriptions s
+             JOIN services sv
+                ON sv.id = s.service_id
+             LEFT JOIN currencies cu
+                ON cu.id = s.currency_id
+             WHERE s.user_id = :user_id
+               AND s.status = 'active'
+               AND s.start_at <= CURRENT_TIMESTAMP
+               AND s.end_at > CURRENT_TIMESTAMP
+             ORDER BY
+                s.end_at ASC"
+        );
+
+    $activeQuery->execute(
+        [
+            ':user_id' =>
+                $userId
+        ]
+    );
+
+    $activeRows =
+        $activeQuery->fetchAll();
+
+    $now =
+        time();
+
+    $active =
+        [];
+
+    foreach ($activeRows as $row) {
+
+        $start =
+            strtotime(
+                (string) $row['start_at']
+            ) ?: $now;
+
+        $end =
+            strtotime(
+                (string) $row['end_at']
+            ) ?: $now;
+
+        $total =
+            max(
+                1,
+                $end - $start
+            );
+
+        $remaining =
+            max(
+                0,
+                $end - $now
+            );
+
+        $active[] = [
+            'id' =>
+                (int) $row['id'],
+
+            'service_id' =>
+                (int) $row['service_id'],
+
+            'service_name' =>
+                $row['service_name'],
+
+            'status' =>
+                $row['status'],
+
+            'start_at' =>
+                $row['start_at'],
+
+            'end_at' =>
+                $row['end_at'],
+
+            'base_amount_usd' =>
+                (string) $row['base_amount_usd'],
+
+            'amount_paid' =>
+                (string) $row['amount_paid'],
+
+            'amount_paid_display' =>
+                (string) (
+                    $row['currency_symbol'] ??
+                    $targetCurrency
+                ) .
+                ' ' .
+                number_format(
+                    (float) $row['amount_paid'],
+                    (int) $currency['decimal_places']
+                ),
+
+            'total_seconds' =>
+                $total,
+
+            'remaining_seconds' =>
+                $remaining,
+
+            'percent_remaining' =>
+                round(
+                    (
+                        $remaining /
+                        $total
+                    ) * 100,
+                    2
+                ),
+
+            'percent_used' =>
+                round(
+                    (
+                        1 -
+                        (
+                            $remaining /
+                            $total
+                        )
+                    ) * 100,
+                    2
+                ),
+
+            'end_at_display' =>
+                date(
+                    'M j, Y g:i A',
+                    $end
+                )
+        ];
+    }
+
+    $formattedServices =
+        [];
 
     $decimalPlaces =
-        (int)
-        $displayCurrency['decimal_places'];
-
-
-    if (
-        $decimalPlaces < 0
-        ||
-        $decimalPlaces > 6
-    ) {
-
-        $decimalPlaces = 2;
-
-    }
-
-
-    $formattedServices[] = [
-
-        'id' =>
-            (int)
-            $service['id'],
-
-        'name' =>
-            (string)
-            $service['name'],
-
-        'slug' =>
-            (string)
-            $service['slug'],
-
-        'description' =>
-            (string)
-            (
-                $service['description']
-                ?? ''
-            ),
-
-        'service_type' =>
-            (string)
-            $service['service_type'],
-
-        'base_price_usd' =>
-            number_format(
-                $baseUsd,
-                2,
-                '.',
-                ''
-            ),
-
-        'price_usd_display' =>
-            '$' .
-            number_format(
-                $baseUsd,
-                2
-            ),
-
-        'duration_days' =>
-            (int)
-            $service['duration_days'],
-
-        'max_usage' =>
-            $service['max_usage'] !== null
-                ?
+        max(
+            0,
+            min(
+                6,
                 (int)
-                $service['max_usage']
-                :
-                null,
+                    $currency[
+                        'decimal_places'
+                    ]
+            )
+        );
 
-        'is_premium' =>
-            (bool)
-            $service['is_premium'],
+    foreach ($services as $service) {
 
-        'currency' => [
+        $base =
+            (float)
+                $service[
+                    'base_price_usd'
+                ];
 
+        $localAmount =
+            $base *
+            $rate;
+
+        $formattedServices[] = [
             'id' =>
-                (int)
-                $displayCurrency['id'],
-
-            'code' =>
-                $displayCurrencyCode,
+                (int) $service['id'],
 
             'name' =>
-                (string)
-                $displayCurrency['name'],
+                $service['name'],
 
-            'symbol' =>
-                (string)
-                $displayCurrency['symbol'],
+            'slug' =>
+                $service['slug'],
 
-            'decimal_places' =>
-                $decimalPlaces
+            'description' =>
+                $service['description'] ?? '',
 
-        ],
+            'service_type' =>
+                $service['service_type'],
 
-        'exchange_rate' =>
-            number_format(
-                $exchangeRate,
-                10,
-                '.',
-                ''
-            ),
+            'base_price_usd' =>
+                number_format(
+                    $base,
+                    2,
+                    '.',
+                    ''
+                ),
 
-        'local_amount' =>
-            number_format(
-                $localAmount,
-                $decimalPlaces,
-                '.',
-                ''
-            ),
-
-        'local_amount_display' =>
-            (string)
-            $displayCurrency['symbol']
-            .
-            number_format(
-                $localAmount,
-                $decimalPlaces
-            )
-
-    ];
-
-}
-
-
-/* ============================================================
-   RESPONSE
-============================================================ */
-
-premiumServicesResponse(
-    true,
-    'Premium services loaded successfully.',
-    [
-
-        'user' => [
-
-            'id' =>
+            'duration_days' =>
                 (int)
-                $user['id'],
+                    $service['duration_days'],
 
-            'username' =>
-                (string)
-                $user['username'],
-
-            'full_name' =>
-                (string)
-                $user['full_names'],
-
-            'country' => [
-
-                'id' =>
-                    $user['country_id'] !== null
-                        ?
+            'duration_label' =>
+                (int)
+                    $service['duration_days'] === 1
+                    ? '1 day'
+                    : (
                         (int)
-                        $user['country_id']
-                        :
-                        null,
+                            $service['duration_days']
+                    ) . ' days',
+
+            'max_usage' =>
+                $service['max_usage'] !== null
+                    ? (int)
+                        $service['max_usage']
+                    : null,
+
+            'currency' => [
+                'id' =>
+                    (int) $currency['id'],
+
+                'code' =>
+                    $targetCurrency,
 
                 'name' =>
+                    $currency['name'],
+
+                'symbol' =>
+                    $currency['symbol'],
+
+                'decimal_places' =>
+                    $decimalPlaces
+            ],
+
+            'exchange_rate' =>
+                number_format(
+                    $rate,
+                    10,
+                    '.',
+                    ''
+                ),
+
+            'local_amount' =>
+                number_format(
+                    $localAmount,
+                    $decimalPlaces,
+                    '.',
+                    ''
+                ),
+
+            'local_amount_display' =>
+                (string)
+                    $currency['symbol'] .
+                number_format(
+                    $localAmount,
+                    $decimalPlaces
+                ),
+
+            'price_usd_display' =>
+                '$' .
+                number_format(
+                    $base,
+                    2
+                )
+        ];
+    }
+
+    premiumServicesResponse(
+        true,
+        'Premium services loaded successfully.',
+        [
+            'user' => [
+                'id' =>
+                    (int) $user['id'],
+
+                'username' =>
+                    $user['username'],
+
+                'full_name' =>
+                    $user['full_names'],
+
+                'email' =>
+                    $user['email'],
+
+                'country' =>
                     $user['country_name'],
 
                 'iso2' =>
-                    $countryIso
+                    $user['iso2']
+            ],
 
-            ]
+            'payment_currency' => [
+                'id' =>
+                    (int) $currency['id'],
 
-        ],
+                'code' =>
+                    $targetCurrency,
 
-        'payment_currency' => [
+                'name' =>
+                    $currency['name'],
 
-            'id' =>
-                (int)
-                $displayCurrency['id'],
+                'symbol' =>
+                    $currency['symbol'],
 
+                'decimal_places' =>
+                    $decimalPlaces
+            ],
+
+            'exchange_rate' =>
+                number_format(
+                    $rate,
+                    10,
+                    '.',
+                    ''
+                ),
+
+            'exchange_rate_source' =>
+                $rateSource,
+
+            'active_count' =>
+                count($active),
+
+            'active_subscriptions' =>
+                $active,
+
+            'services' =>
+                $formattedServices
+        ]
+    );
+
+} catch (Throwable $e) {
+
+    error_log(
+        '[LOVEMI PREMIUM SERVICES] ' .
+        $e->getMessage()
+    );
+
+    premiumServicesResponse(
+        false,
+        'Premium information could not be loaded.',
+        [
             'code' =>
-                $displayCurrencyCode,
-
-            'name' =>
-                (string)
-                $displayCurrency['name'],
-
-            'symbol' =>
-                (string)
-                $displayCurrency['symbol'],
-
-            'decimal_places' =>
-                (int)
-                $displayCurrency['decimal_places']
-
+                'PREMIUM_SERVICES_ERROR'
         ],
-
-        'exchange_rate' =>
-            number_format(
-                $exchangeRate,
-                10,
-                '.',
-                ''
-            ),
-
-        'active_subscription' =>
-            $activeSubscription
-                ?
-                [
-                    'id' =>
-                        (int)
-                        $activeSubscription['id'],
-
-                    'service_id' =>
-                        (int)
-                        $activeSubscription['service_id'],
-
-                    'service_name' =>
-                        (string)
-                        $activeSubscription['service_name'],
-
-                    'status' =>
-                        (string)
-                        $activeSubscription['status'],
-
-                    'start_at' =>
-                        $activeSubscription['start_at'],
-
-                    'end_at' =>
-                        $activeSubscription['end_at'],
-
-                    'base_amount_usd' =>
-                        $activeSubscription['base_amount_usd'],
-
-                    'amount_paid' =>
-                        $activeSubscription['amount_paid'],
-
-                    'usage_limit' =>
-                        $activeSubscription['usage_limit'] !== null
-                            ?
-                            (int)
-                            $activeSubscription['usage_limit']
-                            :
-                            null,
-
-                    'usage_used' =>
-                        (int)
-                        $activeSubscription['usage_used']
-
-                ]
-                :
-                null,
-
-        'has_active_premium' =>
-            (bool)
-            $activeSubscription,
-
-        'services' =>
-            $formattedServices
-
-    ]
-);
+        500
+    );
+}
