@@ -383,7 +383,135 @@ html,body{overflow-x:hidden}body{background:radial-gradient(circle at 8% 4%,rgba
   .session-user-main:hover .session-user-avatar{transform:none}
 }
 </style>
-<style id="lovemi-session-state-fix">#sessionUser[hidden]{display:none!important}#loginButton[hidden],#joinButton[hidden],#heroJoin[hidden]{display:none!important}</style></head>
+<style id="lovemi-session-state-fix">#sessionUser[hidden]{display:none!important}#loginButton[hidden],#joinButton[hidden],#heroJoin[hidden]{display:none!important}</style>
+<style id="lovemi-homepage-media-upgrade">
+.latest-stat-recent{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:40px}
+.latest-stat-recent .recent-loader{width:10px;height:10px;border:1.7px solid rgba(109,40,217,.20);border-top-color:var(--primary);border-right-color:var(--accent);border-radius:50%;opacity:.32;display:block;transition:opacity .2s ease}
+.latest-stat-recent .recent-loader.is-active{opacity:1;animation:lovemiRecentSpin .65s linear infinite}
+.latest-stat-recent .recent-label{display:block;color:var(--text-muted);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+@keyframes lovemiRecentSpin{to{transform:rotate(360deg)}}
+.latest-slide-media,.activity-media,.member-media{backface-visibility:hidden;transform-style:preserve-3d}
+.latest-slide-media-wrap,.activity-media-wrap,.member-media-button{background:radial-gradient(circle at 50% 15%,rgba(255,255,255,.30),transparent 28%),linear-gradient(145deg,#f6eff8,#eee7f0)}
+.latest-slide-media-wrap:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.16) 48%,transparent 78%);transform:translateX(-130%);animation:lovemiMediaSweep 9s ease-in-out infinite}
+.latest-slide-media-wrap:after{content:"";position:absolute;inset:8px;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.24);border-radius:18px;box-shadow:inset 0 0 30px rgba(25,10,35,.06);animation:lovemiFramePulse 5s ease-in-out infinite}
+.latest-slide-media,.activity-media{transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .8s ease,opacity .4s ease}
+.latest-slide.is-active .latest-slide-media{transform:scale(1.035)}
+.activity-card .activity-media-wrap img,.activity-card .activity-media-wrap video{transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .55s ease}
+.activity-card:hover .activity-media-wrap img,.activity-card:hover .activity-media-wrap video{transform:scale(1.045)}
+.latest-slide-badge,.activity-type{box-shadow:0 10px 28px rgba(29,10,38,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.activity-card{will-change:transform,box-shadow}
+.activity-media-wrap video,.latest-slide-media-wrap video{object-fit:cover;background:#09060c}
+.activity-card.is-queue-new{animation:lovemiQueueCard .8s cubic-bezier(.2,.72,.25,1) both}
+.latest-slide.is-queue-new{animation:lovemiQueueSlide .8s cubic-bezier(.18,.72,.2,1) both}
+@keyframes lovemiQueueCard{0%{opacity:0;transform:translateY(24px) scale(.97);filter:blur(3px)}100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes lovemiQueueSlide{0%{opacity:0;transform:translateX(7%) scale(.95);filter:blur(4px)}100%{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}}
+@keyframes lovemiMediaSweep{0%,24%{transform:translateX(-130%)}62%,100%{transform:translateX(135%)}}
+@keyframes lovemiFramePulse{0%,100%{opacity:.28;transform:scale(1)}50%{opacity:.72;transform:scale(1.008)}}
+@media(max-width:760px){
+  html,body{overflow-x:hidden!important}
+  .posts{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:18px!important;width:100%!important;max-height:none!important;overflow-x:hidden!important;overflow-y:visible!important;scroll-snap-type:none!important;padding:4px 0 28px!important}
+  .posts .activity-card{flex:0 0 auto!important;width:100%!important;max-width:none!important;min-height:calc(100svh - 92px)!important;border-radius:22px!important;scroll-snap-align:none!important}
+  .posts .activity-card .activity-media-wrap{height:min(72svh,720px)!important;min-height:340px!important}
+  .posts .activity-card .activity-media-wrap img,.posts .activity-card .activity-media-wrap video{width:100%!important;height:100%!important;object-fit:cover!important}
+  .posts .activity-body{padding:15px 16px 17px!important}
+  .latest-stage{min-height:360px!important;height:calc(100svh - 210px)!important;max-height:680px!important}
+  .latest-stage-media-wrap{min-height:100%!important}
+  .latest-slide-info{left:15px!important;right:15px!important;bottom:18px!important}
+  .latest-slide-name{font-size:18px!important}
+  .latest-slide-copy{max-width:94%!important;font-size:11px!important}
+  .latest-stage-nav button,.latest-stage-unmute,.activity-unmute{width:38px!important;height:38px!important}
+  .latest-stat-recent .recent-loader{width:9px;height:9px}
+}
+@media(max-width:430px){.posts .activity-card{min-height:calc(100svh - 82px)!important}.posts .activity-card .activity-media-wrap{height:68svh!important;min-height:300px!important}.activity-card{border-radius:19px!important}}
+@media(prefers-reduced-motion:reduce){.latest-slide-media-wrap:before,.latest-slide-media-wrap:after,.recent-loader,.activity-card.is-queue-new,.latest-slide.is-queue-new{animation:none!important}}
+</style>
+<style id="lovemi-index-media-protection">
+/* ============================================================
+   LOVEMI INDEX MEDIA PROTECTION / VERTICAL FEED
+   ============================================================ */
+.discover-scroller,.posts{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:18px!important;
+  width:100%!important;
+  overflow:visible!important;
+  overflow-x:visible!important;
+  overflow-y:visible!important;
+  scroll-snap-type:none!important;
+  overscroll-behavior:contain;
+  padding:8px 2px 26px!important;
+}
+.member-card{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  flex:initial!important;
+}
+.activity-card{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  flex:initial!important;
+}
+.member-media,.activity-media,.latest-slide-media,
+.member-media-button,.activity-media-button{
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
+.member-media-button,.activity-media-button{
+  -webkit-tap-highlight-color:transparent;
+}
+.activity-media-wrap video,.latest-slide-media-wrap video{
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
+@media(max-width:1000px){
+  .discover-scroller,.posts{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:760px){
+  .discover-scroller,.posts{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:18px!important;
+    overflow:visible!important;
+    padding:5px 0 30px!important;
+  }
+  .member-card,.activity-card{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+  }
+  .activity-card{
+    min-height:calc(100svh - 92px)!important;
+  }
+  .activity-card .activity-media-wrap{
+    height:min(72svh,720px)!important;
+    min-height:340px!important;
+  }
+}
+@media(max-width:430px){
+  .activity-card{
+    min-height:calc(100svh - 82px)!important;
+  }
+  .activity-card .activity-media-wrap{
+    height:68svh!important;
+    min-height:300px!important;
+  }
+}
+@media(print){
+  .latest-stage,.discover-scroller,.posts{
+    display:none!important;
+  }
+}
+</style>
+
+</head>
 <body>
 <header class="header">
   <div class="header-inner">
@@ -425,7 +553,7 @@ html,body{overflow-x:hidden}body{background:radial-gradient(circle at 8% 4%,rgba
     <aside class="latest">
       <div class="latest-header"><div class="latest-title-area"><div class="latest-icon"><i class="fa-solid fa-images"></i></div><div><h2 class="latest-title">Latest Posts</h2><p class="latest-subtitle">Newest member images and videos</p></div></div><span class="latest-live"><i class="fa-solid fa-circle"></i>LIVE</span></div>
       <div class="latest-stage" id="latestStage"><div class="state" style="border:none;border-radius:0;height:100%;padding-top:90px"><div class="spinner"></div><p>Loading newest LOVEMI media...</p></div></div>
-      <div class="latest-footer"><div class="latest-stat"><strong id="latestCount">—</strong><span>Recent</span></div><div class="latest-stat"><strong><i class="fa-solid fa-shield-heart"></i></strong><span>Protected</span></div><div class="latest-stat"><strong><i class="fa-solid fa-heart"></i></strong><span>Connect</span></div></div>
+      <div class="latest-footer"><div class="latest-stat latest-stat-recent" id="recentStat"><span class="recent-loader" aria-hidden="true"></span><span class="recent-label">Recent</span></div><div class="latest-stat"><strong><i class="fa-solid fa-shield-heart"></i></strong><span>Protected</span></div><div class="latest-stat"><strong><i class="fa-solid fa-heart"></i></strong><span>Connect</span></div></div>
     </aside>
   </section>
   <section class="features">
@@ -477,7 +605,14 @@ const state = {
   profileBusy: false,
   search: "",
   observer: null,
-  autoScrollFrame: null
+  autoScrollFrame: null,
+  profileMediaByUser: new Map(),
+  pendingLatestItems: [],
+  backgroundTimer: null,
+  mobileVideoSoundUnlocked: false,
+  videoPlaybackArmed: false,
+  refreshing: false,
+  isMobile: window.innerWidth <= 760
 };
 
 const $ = (id) => document.getElementById(id);
@@ -570,6 +705,134 @@ function absoluteUrl(value) {
   if (!v) return "";
   if (/^(https?:)?\/\//i.test(v) || v.startsWith("/")) return v;
   return v.replace(/^\.\//, "");
+}
+
+function mediaVersion(item) {
+  const mapped = state.profileMediaByUser.get(profileUserId(item));
+  if (mapped?.version) return String(mapped.version);
+  return String(
+    item?.profile_photo_id
+    ?? item?.photo_id
+    ?? item?.activity_id
+    ?? item?.item_id
+    ?? item?.id
+    ?? item?.profile_updated_at
+    ?? item?.activity_at
+    ?? Date.now()
+  );
+}
+
+function cacheBustMediaUrl(url, item) {
+  const value = String(url || "").trim();
+  if (!value) return "";
+  const separator = value.includes("?") ? "&" : "?";
+  return `${value}${separator}lovemi_media_v=${encodeURIComponent(mediaVersion(item))}`;
+}
+
+function profileUserId(item) {
+  return Number(item?.user_id ?? item?.id ?? 0);
+}
+
+function currentProfileMediaFor(item) {
+  const id = profileUserId(item);
+  if (id <= 0) return "";
+  return String(state.profileMediaByUser.get(id)?.url || "").trim();
+}
+
+function applyCurrentProfileMedia(item) {
+  const current = currentProfileMediaFor(item);
+  if (!current) return item;
+
+  const profileActivity =
+    item?.item_type === "profile" ||
+    item?.item_type === "profile_media" ||
+    (item?.profile_photo_id !== undefined && item?.profile_photo_id !== null);
+
+  if (!profileActivity) return item;
+
+  item.media_url = current;
+  item.profile_media_url = current;
+  item.has_media = true;
+  if (item?.item_type === "profile_media") {
+    item.is_video = false;
+    item.mime_type = "image/*";
+  }
+  return item;
+}
+
+function activityKey(item) {
+  return String(
+    item?.activity_key
+    || `${item?.item_type || "item"}:${item?.activity_id ?? item?.photo_id ?? item?.item_id ?? item?.id ?? 0}:${item?.user_id ?? 0}`
+  );
+}
+
+function protectedMediaUrl(item, candidate) {
+  const value = String(candidate || "").trim();
+  const photoId = Number(item?.photo_id ?? item?.profile_photo_id ?? item?.profile_media_id ?? 0);
+
+  /* Prefer the protected streaming endpoint whenever a photo/media ID exists. */
+  if (photoId > 0) {
+    return `download-index-protector.php?photo_id=${encodeURIComponent(photoId)}`;
+  }
+
+  return absoluteUrl(value);
+}
+
+function getMediaUrl(item) {
+  const currentProfile = currentProfileMediaFor(item);
+  const isProfileActivity =
+    item?.item_type === "profile" ||
+    item?.item_type === "profile_media" ||
+    (item?.profile_photo_id !== undefined && item?.profile_photo_id !== null);
+  const candidates = [];
+  if (isProfileActivity && currentProfile) candidates.push(currentProfile);
+  candidates.push(
+    item?.media_url,
+    item?.photo_url,
+    item?.file_path,
+    item?.image_url,
+    item?.url,
+    item?.path,
+    item?.file_url,
+    item?.stream_url,
+    item?.profile_media_url,
+    item?.profile_photo,
+    item?.avatar,
+    item?.thumbnail_url
+  );
+  for (const candidate of candidates) {
+    if (candidate && String(candidate).trim()) {
+      return cacheBustMediaUrl(protectedMediaUrl(item, candidate), item);
+    }
+  }
+  return "";
+}
+
+function hasDisplayMedia(item) {
+  if (!item || item.has_media !== true) return false;
+  return Boolean(getMediaUrl(item));
+}
+
+function currentProfileAvatar(item) {
+  const current = currentProfileMediaFor(item);
+  if (current) return cacheBustMediaUrl(current, item);
+  return cacheBustMediaUrl(
+    absoluteUrl(item?.profile_media_url || item?.profile_photo || item?.profile_thumbnail || ""),
+    item
+  ) || avatarFor(item?.gender);
+}
+
+function mergeCurrentProfileMediaIntoItems() {
+  state.items.forEach(applyCurrentProfileMedia);
+}
+
+function pulseRecentLoader(duration = 850) {
+  const loader = document.querySelector("#recentStat .recent-loader");
+  if (!loader) return;
+  loader.classList.add("is-active");
+  clearTimeout(pulseRecentLoader.timer);
+  pulseRecentLoader.timer = setTimeout(() => loader.classList.remove("is-active"), duration);
 }
 
 function mediaAnimation(index) {
@@ -812,49 +1075,94 @@ function getRows(data) {
   return [];
 }
 
-async function loadLatest() {
+async function loadLatest({ initial = true } = {}) {
   const stage = $("latestStage");
   const feed = $("posts");
+  pulseRecentLoader(750);
   try {
     const data = await apiGet(`${API.latest}?limit=80&offset=0`);
-    state.items = getRows(data).filter((item) => Boolean(item?.has_media && item?.media_url));
-    state.posts = Array.isArray(data.posts) ? data.posts.filter((item) => item?.has_media && item?.media_url) : state.items.filter((x) => x.item_type === "post_media");
-    state.profiles = Array.isArray(data.profiles) ? data.profiles.filter((item) => item?.has_media && item?.media_url) : state.items.filter((x) => x.item_type === "profile_media");
+    const incoming = getRows(data)
+      .filter(Boolean)
+      .map((item) => ({ ...item }));
 
-    if ($("latestCount")) $("latestCount").textContent = String(state.items.length);
+    incoming.forEach(applyCurrentProfileMedia);
+
+    /* HOMEPAGE MEDIA ONLY: discard every text-only activity. */
+    const mediaIncoming = incoming.filter(hasDisplayMedia);
+
+    if (initial || !state.items.length) {
+      state.items = mediaIncoming;
+    } else {
+      const existing = new Map(state.items.map((item) => [activityKey(item), item]));
+      mediaIncoming.forEach((item) => {
+        const key = activityKey(item);
+        if (existing.has(key)) {
+          Object.assign(existing.get(key), item);
+          applyCurrentProfileMedia(existing.get(key));
+        } else {
+          /* New media records are queued instead of moving the visible item. */
+          state.items.push(item);
+          state.pendingLatestItems.push(item);
+        }
+      });
+    }
+
+    state.items = state.items.filter(hasDisplayMedia);
+    state.pendingLatestItems = state.pendingLatestItems.filter(hasDisplayMedia);
+    mergeCurrentProfileMediaIntoItems();
+
+    state.posts = Array.isArray(data.posts)
+      ? data.posts.filter(hasDisplayMedia)
+      : state.items.filter((x) => x.item_type === "post_media" && hasDisplayMedia(x));
+
+    state.profiles = Array.isArray(data.profiles)
+      ? data.profiles.filter(hasDisplayMedia)
+      : state.items.filter((x) => x.item_type === "profile_media" && hasDisplayMedia(x));
+
+    /* The Recent number is intentionally never displayed. */
+    if ($("latestCount")) $("latestCount").textContent = "";
+
     if ($("postCount")) {
       const mediaLabel = state.items.length === 1 ? "approved media item" : "approved media items";
       $("postCount").textContent = `${state.items.length} ${mediaLabel}`;
     }
 
-    renderLatestStage();
-    renderActivityFeed(state.items);
+    if (initial) {
+      renderLatestStage();
+      renderActivityFeed(state.items);
+    } else {
+      syncLatestStageInPlace();
+      syncActivityFeedInPlace();
+    }
+
+    pulseRecentLoader(900);
   } catch (error) {
     console.error("LOVEMI latest activity:", error);
-    const message = error.message || "The latest LOVEMI media could not be loaded.";
-    const errorHtml = `<div class="latest-error"><i class="fa-solid fa-cloud-arrow-down" style="font-size:34px;color:#c43d7a"></i><h3>Latest media could not be loaded</h3><p>${esc(message)}</p><div class="error-code">Check: api/discover/list-latest.php</div></div>`;
-    if (stage) stage.innerHTML = errorHtml;
-    if (feed) feed.innerHTML = errorHtml;
-    if ($("latestCount")) $("latestCount").textContent = "—";
-    if ($("postCount")) $("postCount").textContent = "Unavailable";
+    if (initial) {
+      const message = error.message || "The latest LOVEMI media could not be loaded.";
+      const errorHtml = `<div class="latest-error"><i class="fa-solid fa-cloud-arrow-down" style="font-size:34px;color:#c43d7a"></i><h3>Latest media could not be loaded</h3><p>${esc(message)}</p><div class="error-code">Check: api/discover/list-latest.php</div></div>`;
+      if (stage) stage.innerHTML = errorHtml;
+      if (feed) feed.innerHTML = errorHtml;
+      if ($("postCount")) $("postCount").textContent = "Unavailable";
+    }
   }
 }
 
 function buildMediaHtml(item, compact = false) {
-  const media = safeUrl(item?.media_url, "");
-  const poster = absoluteUrl(item?.thumbnail_url || "");
+  const media = getMediaUrl(item);
+  const poster = absoluteUrl(item?.thumbnail_url || item?.poster || "");
   const fx = mediaAnimation((Number(item?.photo_id || item?.activity_id || item?.item_id || 0) + (compact ? 17 : 31)) % 72);
   const fallback = avatarFor(item?.gender);
 
-  if (!item?.has_media || !media) {
-    return `<div class="latest-plain"><div class="latest-plain-inner"><div class="latest-plain-icon"><i class="fa-regular fa-newspaper"></i></div><div class="latest-plain-label">${esc(itemTypeLabel(item))}</div><h3 class="latest-plain-title">${esc(item?.item_type === "profile" ? "A LOVEMI member updated their profile" : "A new LOVEMI post")}</h3><p class="latest-plain-text">${esc(item?.content || `Updated ${itemName(item)}'s LOVEMI activity.`)}</p><div class="latest-slide-profile"><img src="${esc(absoluteUrl(item?.profile_media_url || item?.avatar_url) || fallback)}" alt=""><strong>${esc(itemName(item))}</strong></div></div></div>`;
+  if (!media) {
+    return "";
   }
 
   if (isVideo(item)) {
-    return `<video class="${compact ? "activity-media" : "latest-slide-media"} ${fx}" muted autoplay loop playsinline preload="metadata" ${poster ? `poster="${esc(poster)}"` : ""} controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false" data-photo-id="${esc(item?.photo_id || "")}"><source src="${esc(absoluteUrl(media))}" type="${esc(item?.mime_type || "video/mp4")}"></video>`;
+    return `<video class="${compact ? "activity-media" : "latest-slide-media"} ${fx}" loop playsinline preload="metadata" muted ${poster ? `poster="${esc(cacheBustMediaUrl(poster, item))}"` : ""} controls controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false" data-photo-id="${esc(item?.photo_id || "")}"><source src="${esc(media)}" type="${esc(item?.mime_type || "video/mp4")}"></video>`;
   }
 
-  return `<img class="${compact ? "activity-media" : "latest-slide-media"} ${fx}" src="${esc(absoluteUrl(media))}" alt="${esc(itemName(item))}" loading="${compact ? "lazy" : "eager"}" decoding="async" onerror="this.onerror=null;this.src='${esc(fallback)}';">`;
+  return `<img class="${compact ? "activity-media" : "latest-slide-media"} ${fx}" src="${esc(media)}" alt="${esc(itemName(item))}" loading="${compact ? "lazy" : "eager"}" decoding="async" draggable="false" onerror="this.onerror=null;this.src='${esc(fallback)}';">`;
 }
 
 function renderLatestStage() {
@@ -866,8 +1174,9 @@ function renderLatestStage() {
   state.latestIndex = 0;
 
   const items = state.items.slice(0, 12);
+
   if (!items.length) {
-    stage.innerHTML = `<div class="latest-empty"><div><i class="fa-regular fa-images"></i><h3>No recent LOVEMI activity yet</h3><p>New approved videos, posts and profile updates will appear here automatically.</p></div></div>`;
+    stage.innerHTML = `<div class="latest-empty"><div><i class="fa-regular fa-images"></i><h3>No recent LOVEMI activity yet</h3><p>New approved videos, posts and current profile pictures will appear here automatically.</p></div></div>`;
     return;
   }
 
@@ -887,31 +1196,127 @@ function renderLatestStage() {
   updateVisibleVideoPlayback();
 }
 
-function buildLatestSlide(item, activeClass) {
-  const media = buildMediaHtml(item, false);
-  const copy = item?.item_type === "profile_media"
-    ? (item?.is_video ? `Newest approved profile video from ${itemName(item)}.` : `Latest approved profile picture from ${itemName(item)}.`)
-    : item?.item_type === "profile"
-      ? `Profile updated ${humanTime(item?.activity_at)}.`
-      : (item?.content || (item?.is_video ? "Newest approved LOVEMI video." : item?.has_media ? "Newest approved LOVEMI photo." : "Newest approved LOVEMI post."));
-  const renderedCopy = renderCaptionHTML(copy);
-  const videoButton = item?.has_media && isVideo(item) ? `<button type="button" class="latest-stage-unmute js-unmute" aria-label="Unmute video"><i class="fa-solid fa-volume-xmark"></i></button>` : "";
+function appendLatestQueueItems() {
+  const stage = $("latestStage");
+  if (!stage) return;
+  const dots = stage.querySelector(".latest-stage-dots");
+  const displayed = new Set(
+    [...stage.querySelectorAll("[data-latest-slide]")].map((slide) => String(slide.dataset.latestKey || slide.dataset.latestSlide || ""))
+  );
+  const queueItems = state.pendingLatestItems.length
+    ? [...state.pendingLatestItems]
+    : [];
 
-  return `<article class="latest-slide ${activeClass}" data-latest-slide="${esc(item?.activity_key || item?.item_id || item?.id || 0)}" data-user-id="${esc(item?.user_id || 0)}">
-    <button type="button" class="activity-media-button js-profile" data-user-id="${esc(item?.user_id || 0)}" aria-label="Open ${esc(itemName(item))}'s secure profile">
-      <div class="latest-slide-media-wrap">${media}<div class="latest-slide-shade"></div><span class="latest-slide-badge"><i class="fa-solid ${itemTypeIcon(item)}"></i>${esc(itemTypeLabel(item))}</span><div class="latest-slide-info"><div class="latest-slide-name">${esc(itemName(item))}</div><div class="latest-slide-meta">${esc(itemMeta(item) || "LOVEMI member")} • ${esc(humanTime(item?.activity_at))}</div><div class="latest-slide-copy">${renderedCopy}</div></div></div>
+  queueItems.forEach((item) => {
+    const key = activityKey(item);
+    if (displayed.has(key)) return;
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = buildLatestSlide(item, "is-queue-new");
+    const slide = wrapper.firstElementChild;
+    if (!slide) return;
+    stage.appendChild(slide);
+
+    if (dots) {
+      const dotIndex = stage.querySelectorAll("[data-latest-slide]").length - 1;
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "latest-stage-dot";
+      dot.dataset.latestDot = String(dotIndex);
+      dot.setAttribute("aria-label", `Show latest item ${dotIndex + 1}`);
+      dot.addEventListener("click", (event) => {
+        event.stopPropagation();
+        showLatestSlide(dotIndex);
+        startLatestTimer(stage.querySelectorAll("[data-latest-slide]").length);
+      });
+      dots.appendChild(dot);
+    }
+    displayed.add(key);
+  });
+
+  state.pendingLatestItems = [];
+}
+
+function syncLatestStageInPlace() {
+  const stage = $("latestStage");
+  if (!stage) return;
+  const currentSlides = [...stage.querySelectorAll("[data-latest-slide]")];
+  if (!currentSlides.length) {
+    renderLatestStage();
+    return;
+  }
+
+  const oldIndex = state.latestIndex;
+  const map = new Map(currentSlides.map((slide) => [String(slide.dataset.latestKey || slide.dataset.latestSlide || ""), slide]));
+
+  state.items.forEach((item) => {
+    const slide = map.get(activityKey(item));
+    if (!slide) return;
+    const wrap = slide.querySelector(".latest-slide-media-wrap");
+    const mediaNode = wrap?.querySelector("img,video");
+    const currentSrc = mediaNode?.currentSrc || mediaNode?.src || mediaNode?.querySelector?.("source")?.src || "";
+    const desiredSrc = getMediaUrl(item);
+
+    if (wrap && desiredSrc && (!mediaNode || !String(currentSrc).includes(`lovemi_media_v=${encodeURIComponent(mediaVersion(item))}`))) {
+      mediaNode?.remove();
+      const temp = document.createElement("div");
+      temp.innerHTML = buildMediaHtml(item, false);
+      if (temp.firstElementChild) wrap.prepend(temp.firstElementChild);
+    }
+
+    const name = slide.querySelector(".latest-slide-name");
+    const meta = slide.querySelector(".latest-slide-meta");
+    if (name) name.textContent = itemName(item);
+    if (meta) meta.textContent = `${itemMeta(item) || "LOVEMI member"} • ${humanTime(item?.activity_at)}`;
+  });
+
+  appendLatestQueueItems();
+  const total = stage.querySelectorAll("[data-latest-slide]").length;
+  if (total) {
+    state.latestIndex = Math.min(oldIndex, total - 1);
+    showLatestSlide(state.latestIndex, false);
+    startLatestTimer(total);
+  }
+  observeVideos();
+}
+
+function buildLatestSlide(item, activeClass) {
+  const current = applyCurrentProfileMedia(item);
+  const media = buildMediaHtml(current, false);
+  const copy = current?.item_type === "profile_media"
+    ? (current?.is_video ? `Newest approved profile video from ${itemName(current)}.` : `Latest approved profile picture from ${itemName(current)}.`)
+    : current?.item_type === "profile"
+      ? (getMediaUrl(current) ? `Latest profile picture from ${itemName(current)}.` : `Profile updated ${humanTime(current?.activity_at)}.`)
+      : (current?.content || (current?.is_video ? "Newest approved LOVEMI video." : current?.has_media ? "Newest approved LOVEMI photo." : "Newest approved LOVEMI post."));
+  const renderedCopy = renderCaptionHTML(copy);
+  const videoButton = current?.has_media && isVideo(current) ? `<button type="button" class="latest-stage-unmute js-unmute" aria-label="Unmute video"><i class="fa-solid fa-volume-xmark"></i></button>` : "";
+  const key = activityKey(current);
+
+  return `<article class="latest-slide ${activeClass}" data-latest-slide="${esc(key)}" data-latest-key="${esc(key)}" data-user-id="${esc(current?.user_id || 0)}">
+    <button type="button" class="activity-media-button js-profile" data-user-id="${esc(current?.user_id || 0)}" aria-label="Open ${esc(itemName(current))}'s secure profile">
+      <div class="latest-slide-media-wrap">${media}<div class="latest-slide-shade"></div><span class="latest-slide-badge"><i class="fa-solid ${itemTypeIcon(current)}"></i>${esc(itemTypeLabel(current))}</span><div class="latest-slide-info"><div class="latest-slide-name">${esc(itemName(current))}</div><div class="latest-slide-meta">${esc(itemMeta(current) || "LOVEMI member")} • ${esc(humanTime(current?.activity_at))}</div><div class="latest-slide-copy">${renderedCopy}</div></div></div>
     </button>
     ${videoButton}
   </article>`;
 }
 
-function showLatestSlide(index) {
+function showLatestSlide(index, pulse = true) {
   const slides = [...document.querySelectorAll("[data-latest-slide]")];
   if (!slides.length) return;
   state.latestIndex = (index + slides.length) % slides.length;
   slides.forEach((slide, i) => slide.classList.toggle("is-active", i === state.latestIndex));
   document.querySelectorAll("[data-latest-dot]").forEach((dot, i) => dot.classList.toggle("is-active", i === state.latestIndex));
+  if (pulse) pulseRecentLoader(850);
   updateVisibleVideoPlayback();
+
+  const next = state.items[(state.latestIndex + 1) % Math.max(1, state.items.length)];
+  if (next) {
+    const nextUrl = getMediaUrl(next);
+    if (nextUrl && !isVideo(next)) {
+      const image = new Image();
+      image.decoding = "async";
+      image.src = nextUrl;
+    }
+  }
 }
 
 function startLatestTimer(length) {
@@ -944,7 +1349,7 @@ function renderActivityFeed(rows) {
   const el = $("posts");
   if (!el) return;
   if (!rows.length) {
-    el.innerHTML = `<div class="latest-empty" style="min-width:100%"><div><i class="fa-regular fa-heart"></i><h3>No latest activity found</h3><p>Approved videos, posts and profile updates will appear here when LOVEMI members publish or update them.</p></div></div>`;
+    el.innerHTML = `<div class="latest-empty" style="min-width:100%"><div><i class="fa-regular fa-heart"></i><h3>No latest activity found</h3><p>Approved videos, posts and current profile pictures will appear here when LOVEMI members publish or update them.</p></div></div>`;
     return;
   }
   el.innerHTML = rows.map((item, index) => buildActivityCard(item, index)).join("");
@@ -952,34 +1357,88 @@ function renderActivityFeed(rows) {
   bindAutoScroll(el);
 }
 
+function syncActivityFeedInPlace() {
+  const el = $("posts");
+  if (!el) return;
+  if (el.querySelector(".latest-empty") && state.items.length) el.innerHTML = "";
+
+  const existing = new Map(
+    [...el.querySelectorAll(".activity-card")].map((card) => [String(card.dataset.activityKey || ""), card])
+  );
+
+  state.items.forEach((item, index) => {
+    const key = activityKey(item);
+    const card = existing.get(key);
+
+    if (!card) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = buildActivityCard(item, index);
+      const newCard = wrapper.firstElementChild;
+      if (newCard) {
+        newCard.classList.add("is-queue-new");
+        el.appendChild(newCard);
+      }
+      return;
+    }
+
+    const wrap = card.querySelector(".activity-media-wrap");
+    const node = wrap?.querySelector("img,video");
+    const desired = getMediaUrl(item);
+    const currentSrc = node?.currentSrc || node?.src || node?.querySelector?.("source")?.src || "";
+    if (wrap && desired && (!node || !String(currentSrc).includes(`lovemi_media_v=${encodeURIComponent(mediaVersion(item))}`))) {
+      const temp = document.createElement("div");
+      temp.innerHTML = buildActivityCard(item, index);
+      const replacement = temp.firstElementChild?.querySelector(".activity-media-wrap");
+      if (replacement) wrap.replaceWith(replacement);
+    }
+
+    const avatar = card.querySelector(".activity-avatar");
+    if (avatar) avatar.src = currentProfileAvatar(item);
+    const name = card.querySelector(".activity-name");
+    const meta = card.querySelector(".activity-meta");
+    if (name) name.textContent = itemName(item);
+    if (meta) meta.textContent = `${itemMeta(item) || "LOVEMI member"} • ${humanTime(item?.activity_at)}`;
+  });
+
+  const search = state.search.trim().toLowerCase();
+  el.querySelectorAll(".activity-card").forEach((card) => {
+    const haystack = `${card.dataset.name || ""} ${card.dataset.country || ""} ${card.dataset.content || ""}`;
+    card.style.display = !search || haystack.includes(search) ? "" : "none";
+  });
+
+  observeVideos();
+}
+
 function buildActivityCard(item, index) {
-  const name = itemName(item);
-  const avatar = absoluteUrl(item?.profile_media_url || "") || avatarFor(item?.gender);
-  const media = item?.has_media && item?.media_url ? buildMediaHtml(item, true) : "";
+  const current = applyCurrentProfileMedia(item);
+  const name = itemName(current);
+  const avatar = currentProfileAvatar(current);
+  const media = current?.has_media && getMediaUrl(current) ? buildMediaHtml(current, true) : "";
   let profileNote = "";
-  if (item?.item_type === "profile_media") {
-    profileNote = `<div class="activity-profile-note"><i class="fa-solid fa-sparkles"></i> ${esc(item?.is_video ? "Latest approved profile video" : "Latest approved profile picture")}</div>`;
-  } else if (item?.item_type === "profile") {
-    profileNote = `<div class="activity-profile-note"><i class="fa-solid fa-sparkles"></i> Latest public profile update</div>`;
+  if (current?.item_type === "profile_media") {
+    profileNote = `<div class="activity-profile-note"><i class="fa-solid fa-sparkles"></i> ${esc(current?.is_video ? "Latest approved profile video" : "Latest approved profile picture")}</div>`;
+  } else if (current?.item_type === "profile") {
+    profileNote = `<div class="activity-profile-note"><i class="fa-solid fa-sparkles"></i> ${esc(getMediaUrl(current) ? "Latest current profile picture" : "Latest public profile update")}</div>`;
   }
-  const videoButton = item?.has_media && isVideo(item) ? `<button type="button" class="activity-unmute js-unmute" aria-label="Unmute video"><i class="fa-solid fa-volume-xmark"></i></button>` : "";
-  const bodyText = item?.content || (item?.item_type === "profile_media" ? (item?.is_video ? "Newest approved profile video." : "Newest approved profile picture.") : item?.item_type === "profile" ? "This member recently updated their LOVEMI profile." : item?.has_media ? (item?.is_video ? "Newest approved LOVEMI video." : "Newest approved LOVEMI photo.") : "Newest approved LOVEMI post.");
+  const videoButton = current?.has_media && isVideo(current) ? `<button type="button" class="activity-unmute js-unmute" aria-label="Unmute video"><i class="fa-solid fa-volume-xmark"></i></button>` : "";
+  const bodyText = current?.content || (current?.item_type === "profile_media" ? (current?.is_video ? "Newest approved profile video." : "Newest approved profile picture.") : current?.item_type === "profile" ? (getMediaUrl(current) ? "This member's current LOVEMI profile picture." : "This member recently updated their LOVEMI profile.") : current?.has_media ? (current?.is_video ? "Newest approved LOVEMI video." : "Newest approved LOVEMI photo.") : "Newest approved LOVEMI post.");
   const renderedBodyText = renderCaptionHTML(bodyText);
   const searchableBodyText = plainCaptionText(bodyText);
+  const key = activityKey(current);
 
-  return `<article class="activity-card" data-name="${esc(name.toLowerCase())}" data-country="${esc(String(itemCountry(item)).toLowerCase())}" data-content="${esc(searchableBodyText.toLowerCase())}">
-    <button type="button" class="activity-media-button js-profile" data-user-id="${esc(item?.user_id || 0)}">
+  return `<article class="activity-card" data-activity-key="${esc(key)}" data-user-id="${esc(current?.user_id || 0)}" data-name="${esc(name.toLowerCase())}" data-country="${esc(String(itemCountry(current)).toLowerCase())}" data-content="${esc(searchableBodyText.toLowerCase())}">
+    <button type="button" class="activity-media-button js-profile" data-user-id="${esc(current?.user_id || 0)}">
       <div class="activity-media-wrap">
-        <span class="activity-type"><i class="fa-solid ${itemTypeIcon(item)}"></i>${esc(itemTypeLabel(item))}</span>
-        ${media || `<div class="latest-plain" style="height:100%"><div class="latest-plain-inner"><div class="latest-plain-icon"><i class="fa-regular fa-newspaper"></i></div><div class="latest-plain-label">${esc(itemTypeLabel(item))}</div><h3 class="latest-plain-title">${esc(item?.item_type === "profile" ? "Profile updated" : "New post")}</h3></div></div>`}
+        <span class="activity-type"><i class="fa-solid ${itemTypeIcon(current)}"></i>${esc(itemTypeLabel(current))}</span>
+        ${media}
         ${videoButton}
       </div>
     </button>
     <div class="activity-body">
-      <div class="activity-person"><img class="activity-avatar" src="${esc(avatar)}" alt="${esc(name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${esc(avatarFor(item?.gender))}';"><div class="activity-person-main"><div class="activity-name">${esc(name)}</div><div class="activity-meta">${esc(itemMeta(item) || "LOVEMI member")} • ${esc(humanTime(item?.activity_at))}</div></div></div>
+      <div class="activity-person"><img class="activity-avatar" src="${esc(avatar)}" alt="${esc(name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${esc(avatarFor(current?.gender))}';"><div class="activity-person-main"><div class="activity-name">${esc(name)}</div><div class="activity-meta">${esc(itemMeta(current) || "LOVEMI member")} • ${esc(humanTime(current?.activity_at))}</div></div></div>
       <div class="activity-content">${renderedBodyText}</div>
       ${profileNote}
-      <div class="activity-footer"><span><i class="fa-regular fa-clock"></i> ${esc(humanTime(item?.activity_at))}</span><span class="open-profile">Open secure profile <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="activity-footer"><span><i class="fa-regular fa-clock"></i> ${esc(humanTime(current?.activity_at))}</span><span class="open-profile">Open secure profile <i class="fa-solid fa-arrow-right"></i></span></div>
     </div>
   </article>`;
 }
@@ -987,23 +1446,52 @@ function buildActivityCard(item, index) {
 function bindAutoScroll(element) {
   if (!element || element.dataset.autoScrollBound === "1") return;
   element.dataset.autoScrollBound = "1";
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  let paused = false;
-  let last = performance.now();
-  const loop = (now) => {
-    const delta = Math.min(40, now - last);
-    last = now;
-    if (!paused && element.scrollWidth > element.clientWidth) {
-      element.scrollLeft += delta * 0.035;
-      if (element.scrollLeft + element.clientWidth >= element.scrollWidth - 4) element.scrollLeft = 0;
-    }
-    state.autoScrollFrame = requestAnimationFrame(loop);
+
+  /* The homepage media feed is intentionally vertically scrollable.
+     Do not auto-scroll it horizontally. */
+  const arm = () => {
+    state.videoPlaybackArmed = true;
+    updateVisibleVideoPlayback();
   };
-  element.addEventListener("mouseenter", () => { paused = true; });
-  element.addEventListener("mouseleave", () => { paused = false; });
-  element.addEventListener("touchstart", () => { paused = true; }, { passive: true });
-  element.addEventListener("touchend", () => setTimeout(() => { paused = false; }, 1800), { passive: true });
-  requestAnimationFrame(loop);
+
+  element.addEventListener("wheel", arm, { passive: true });
+  element.addEventListener("scroll", arm, { passive: true });
+  element.addEventListener("touchstart", arm, { passive: true });
+  element.addEventListener("pointerdown", arm, { passive: true });
+}
+
+function setVideoSoundMode(video, unmuted) {
+  if (!video) return;
+  video.muted = !unmuted;
+  if (unmuted) video.removeAttribute("muted");
+  else video.setAttribute("muted", "");
+}
+
+async function tryPlayVideo(video, unmuted) {
+  if (!video) return;
+  if (!state.videoPlaybackArmed) {
+    video.pause();
+    setVideoSoundMode(video, false);
+    return;
+  }
+
+  setVideoSoundMode(video, Boolean(unmuted));
+
+  try {
+    await video.play();
+  } catch (_) {
+    /* A browser can still reject sound playback. Keep the video ready. */
+    if (unmuted) {
+      setVideoSoundMode(video, false);
+      try { await video.play(); } catch (_) {}
+    }
+  }
+}
+
+function unlockMobileVideoSound() {
+  state.videoPlaybackArmed = true;
+  state.mobileVideoSoundUnlocked = true;
+  updateVisibleVideoPlayback();
 }
 
 function observeVideos() {
@@ -1011,40 +1499,51 @@ function observeVideos() {
     video.controlsList = "nodownload noplaybackrate";
     video.disablePictureInPicture = true;
     video.setAttribute("playsinline", "");
-    video.muted = true;
+    video.setAttribute("loop", "");
+    video.setAttribute("preload", "metadata");
+    video.setAttribute("controlsList", "nodownload noplaybackrate");
     video.addEventListener("contextmenu", (event) => event.preventDefault());
-    video.addEventListener("loadedmetadata", () => video.play().catch(() => {}));
-    video.addEventListener("canplay", () => {
-      if (!video.closest(".latest-slide") || video.closest(".latest-slide")?.classList.contains("is-active")) video.play().catch(() => {});
-    });
+    video.addEventListener("dragstart", (event) => event.preventDefault());
+    setVideoSoundMode(video, false);
   });
 
   if (state.observer) state.observer.disconnect();
   const videos = [...document.querySelectorAll("video")];
   if (!videos.length || !("IntersectionObserver" in window)) return;
+
   state.observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const video = entry.target;
-      if (entry.isIntersecting && (video.closest(".latest-slide") ? video.closest(".latest-slide")?.classList.contains("is-active") : true)) {
-        video.muted = true;
-        video.play().catch(() => {});
+      const latestSlide = video.closest(".latest-slide");
+      const activeLatest = latestSlide ? latestSlide.classList.contains("is-active") : true;
+
+      if (entry.isIntersecting && activeLatest && state.videoPlaybackArmed) {
+        tryPlayVideo(video, true);
       } else {
         video.pause();
+        setVideoSoundMode(video, false);
       }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: 0.60 });
+
   videos.forEach((video) => state.observer.observe(video));
 }
 
 function updateVisibleVideoPlayback() {
   document.querySelectorAll(".latest-slide video").forEach((video) => {
     const active = video.closest(".latest-slide")?.classList.contains("is-active");
-    if (active) {
-      video.muted = true;
-      video.play().catch(() => {});
-    } else {
+    if (active && state.videoPlaybackArmed) tryPlayVideo(video, true);
+    else {
       video.pause();
+      setVideoSoundMode(video, false);
     }
+  });
+
+  document.querySelectorAll(".posts video").forEach((video) => {
+    const rect = video.getBoundingClientRect();
+    const visible = rect.top < window.innerHeight * 0.88 && rect.bottom > window.innerHeight * 0.12;
+    if (visible && state.videoPlaybackArmed) tryPlayVideo(video, true);
+    else video.pause();
   });
 }
 
@@ -1068,21 +1567,77 @@ function locationText(user) {
 function memberCard(user, index) {
   const id = Number(user?.id || user?.user_id || 0);
   const name = user?.display_name || user?.full_names || user?.username || "LOVEMI Member";
-  const avatar = absoluteUrl(user?.profile_media_url || user?.profile_photo || user?.profile_thumbnail || "") || avatarFor(user?.gender);
+  const mappedAvatar = state.profileMediaByUser.get(id)?.url || "";
+  const avatar = cacheBustMediaUrl(mappedAvatar || absoluteUrl(user?.profile_media_url || user?.profile_photo || user?.profile_thumbnail || ""), { profile_photo_id: user?.profile_photo_id || user?.profile_media_id || user?.profile_updated_at || user?.updated_at || Date.now() }) || avatarFor(user?.gender);
   const country = user?.country_name || "";
   const gender = user?.gender || "";
   return `<article class="member-card"><button type="button" class="member-media-button js-profile" data-user-id="${esc(id)}"><img class="member-media ${mediaAnimation(index)}" src="${esc(avatar)}" alt="${esc(name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${esc(avatarFor(user?.gender))}';"><div class="member-overlay"><div class="member-name">${esc(name)}</div><div class="member-meta">${esc(gender)}${gender && country ? " • " : ""}${esc(country)}</div><span class="member-distance"><i class="fa-solid fa-location-dot"></i>${esc(locationText(user))}</span></div></button><div class="member-body"><div class="member-country">${esc(country || "LOVEMI member")}</div><button type="button" class="member-profile-btn js-profile" data-user-id="${esc(id)}"><i class="fa-regular fa-user"></i> View Profile</button></div></article>`;
 }
 
-async function loadUsers() {
+function syncDiscoverCurrentMediaInPlace() {
+  const root = $("discoverScroller");
+  if (!root) return;
+
+  state.profileMediaByUser.forEach((entry, userId) => {
+    const selector = `.member-media-button[data-user-id="${String(userId).replace(/[^0-9]/g, "")}"] .member-media`;
+    const image = root.querySelector(selector);
+    if (!image || !entry?.url) return;
+
+    const current = cacheBustMediaUrl(entry.url, {
+      profile_photo_id: entry.version || userId
+    });
+
+    if (!current) return;
+
+    try {
+      const absolute = new URL(current, window.location.href).href;
+      if (image.src !== absolute) image.src = absolute;
+    } catch (_) {
+      image.src = current;
+    }
+  });
+}
+
+async function loadUsers({ render = true } = {}) {
   try {
     const params = new URLSearchParams({ limit: "50", sort: "nearest" });
     if (state.lat !== null && state.lng !== null) {
       params.set("lat", String(state.lat));
       params.set("lng", String(state.lng));
     }
+
     const data = await apiGet(`${API.users}?${params.toString()}`);
     state.users = Array.isArray(data.users) ? data.users : (Array.isArray(data.data) ? data.data : []);
+
+    /* Use the exact current-profile media priority used by Discover People. */
+    state.profileMediaByUser.clear();
+    state.users.forEach((user) => {
+      const id = Number(user?.id ?? user?.user_id ?? 0);
+      if (id <= 0) return;
+      const current = protectedMediaUrl(user,
+        user?.profile_media_url
+        || user?.profile_photo
+        || user?.profile_thumbnail
+        || ""
+      );
+      if (!current) return;
+      state.profileMediaByUser.set(id, {
+        url: current,
+        version: String(user?.profile_photo_id ?? user?.profile_media_id ?? user?.profile_updated_at ?? user?.updated_at ?? Date.now())
+      });
+    });
+
+    mergeCurrentProfileMediaIntoItems();
+    syncLatestStageInPlace();
+    syncActivityFeedInPlace();
+
+    /* Background checks do not rebuild Discover People, preserving its
+       scroll position and leaving the existing display untouched. */
+    if (!render) {
+      syncDiscoverCurrentMediaInPlace();
+      return;
+    }
+
     const scroller = $("discoverScroller");
     if (!scroller) return;
     const users = state.users.slice(0, 20);
@@ -1226,6 +1781,41 @@ $("enableLocation")?.addEventListener("click", async function () {
   }
 });
 
+/* ============================================================
+   HOMEPAGE MEDIA DETERRENTS
+   These reduce casual saving/dragging/context-menu actions.
+   They cannot prevent OS-level screenshots or screen recording.
+   ============================================================ */
+document.addEventListener("contextmenu", (event) => {
+  if (event.target.closest("img,video,.member-media-button,.activity-media-button,.latest-slide")) {
+    event.preventDefault();
+  }
+});
+document.addEventListener("dragstart", (event) => {
+  if (event.target.closest?.("img,video")) event.preventDefault();
+});
+document.addEventListener("selectstart", (event) => {
+  if (event.target.closest?.("img,video,.member-media-button,.activity-media-button")) event.preventDefault();
+});
+document.addEventListener("keydown", (event) => {
+  const key = String(event.key || "").toLowerCase();
+  const blocked =
+    (event.ctrlKey || event.metaKey) && ["s","u","p","c"].includes(key)
+    || event.key === "PrintScreen";
+  if (blocked) {
+    event.preventDefault();
+    state.videoPlaybackArmed = true;
+  }
+});
+
+window.addEventListener("wheel", unlockMobileVideoSound, { passive: true });
+window.addEventListener("touchstart", unlockMobileVideoSound, { passive: true });
+window.addEventListener("pointerdown", unlockMobileVideoSound, { passive: true });
+window.addEventListener("scroll", () => {
+  if (!state.videoPlaybackArmed) state.videoPlaybackArmed = true;
+  updateVisibleVideoPlayback();
+}, { passive: true });
+
 document.addEventListener("click", function (event) {
   const unmute = event.target.closest?.(".js-unmute");
   if (unmute) {
@@ -1248,6 +1838,7 @@ document.addEventListener("click", function (event) {
     openProfile(profile.dataset.userId);
   }
 });
+
 
 const mobileMenu = $("mobileMenu");
 const mainNav = $("mainNav");
@@ -1280,6 +1871,7 @@ if (mobileMenu && mainNav) {
 }
 
 window.addEventListener("resize", () => {
+  state.isMobile = window.innerWidth <= 760;
   if (window.innerWidth > 760 && mainNav) {
     mainNav.removeAttribute("style");
     mainNav.dataset.open = "false";
@@ -1292,6 +1884,8 @@ window.addEventListener("resize", () => {
 
 window.addEventListener("beforeunload", () => {
   clearInterval(state.latestTimer);
+  clearInterval(state.backgroundTimer);
+  clearTimeout(pulseRecentLoader.timer);
   if (state.autoScrollFrame) cancelAnimationFrame(state.autoScrollFrame);
 });
 
@@ -1302,6 +1896,21 @@ window.addEventListener("pageshow", () => {
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) loadSession().catch(() => {});
 });
+
+async function backgroundSync() {
+  if (document.hidden || state.refreshing) return;
+  state.refreshing = true;
+  try {
+    await loadLatest({ initial: false });
+    await loadUsers({ render: false });
+  } catch (error) {
+    console.debug("LOVEMI background media sync:", error);
+  } finally {
+    state.refreshing = false;
+  }
+}
+
+state.backgroundTimer = setInterval(backgroundSync, 18000);
 
 (async function init() {
   await loadSession();

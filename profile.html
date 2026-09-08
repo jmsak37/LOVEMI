@@ -1,2607 +1,2800 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta
-        name="description"
-        content="LOVEMI member profile."
-    >
+<meta
+    name="description"
+    content="LOVEMI member profile."
+>
 
-    <meta
-        name="theme-color"
-        content="#6d28d9"
-    >
+<meta
+    name="theme-color"
+    content="#6d28d9"
+>
 
-    <meta
-        http-equiv="Cache-Control"
-        content="no-cache, no-store, must-revalidate"
-    >
+<meta
+    http-equiv="Cache-Control"
+    content="no-cache, no-store, must-revalidate"
+>
 
-    <meta
-        http-equiv="Pragma"
-        content="no-cache"
-    >
+<meta
+    http-equiv="Pragma"
+    content="no-cache"
+>
 
-    <meta
-        http-equiv="Expires"
-        content="0"
-    >
+<meta
+    http-equiv="Expires"
+    content="0"
+>
 
-    <title>Profile | LOVEMI</title>
+<title>Profile | LOVEMI</title>
 
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="assets/logo1/favicon-16x16.png"
-    >
+<link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="assets/logo1/favicon-16x16.png"
+>
 
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="assets/logo1/favicon-32x32.png"
-    >
+<link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="assets/logo1/favicon-32x32.png"
+>
 
-    <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="assets/logo1/apple-touch-icon.png"
-    >
+<link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="assets/logo1/apple-touch-icon.png"
+>
 
-    <link
-        rel="manifest"
-        href="assets/logo1/site.webmanifest"
-    >
+<link
+    rel="manifest"
+    href="assets/logo1/site.webmanifest"
+>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
-        rel="stylesheet"
-    >
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet"
+>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    >
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+>
 
-    <style>
-        :root {
-            --primary:#6d28d9;
-            --primary-dark:#4c1d95;
-            --primary-soft:#f3e8ff;
+<style>
+    :root {
+        --primary:#6d28d9;
+        --primary-dark:#4c1d95;
+        --primary-soft:#f3e8ff;
 
-            --accent:#db2777;
-            --accent-soft:#fce7f3;
+        --accent:#db2777;
+        --accent-soft:#fce7f3;
 
-            --blue:#2563eb;
-            --blue-soft:#eff6ff;
+        --blue:#2563eb;
+        --blue-soft:#eff6ff;
 
-            --green:#16a34a;
-            --green-soft:#f0fdf4;
+        --green:#16a34a;
+        --green-soft:#f0fdf4;
 
-            --red:#dc2626;
-            --red-soft:#fef2f2;
+        --red:#dc2626;
+        --red-soft:#fef2f2;
 
-            --orange:#d97706;
-            --orange-soft:#fff7ed;
+        --orange:#d97706;
+        --orange-soft:#fff7ed;
 
-            --text:#18181b;
-            --soft:#68686f;
-            --muted:#9898a1;
+        --text:#18181b;
+        --soft:#68686f;
+        --muted:#9898a1;
 
-            --bg:#f6f6fa;
-            --white:#ffffff;
+        --bg:#f6f6fa;
+        --white:#ffffff;
 
-            --border:#e9e9ef;
+        --border:#e9e9ef;
 
-            --shadow-sm:0 6px 20px rgba(0,0,0,.045);
-            --shadow-md:0 14px 38px rgba(0,0,0,.075);
-            --shadow-lg:0 25px 75px rgba(0,0,0,.18);
+        --shadow-sm:0 6px 20px rgba(0,0,0,.045);
+        --shadow-md:0 14px 38px rgba(0,0,0,.075);
+        --shadow-lg:0 25px 75px rgba(0,0,0,.18);
 
-            --container:1380px;
+        --container:1380px;
+    }
+
+    * {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    html {
+        scroll-behavior:smooth;
+    }
+
+    body {
+        min-height:100vh;
+        font-family:"Inter",sans-serif;
+        color:var(--text);
+        background:var(--bg);
+        line-height:1.55;
+    }
+
+    body.modal-open,
+    body.menu-open {
+        overflow:hidden;
+    }
+
+    a {
+        color:inherit;
+        text-decoration:none;
+    }
+
+    button,
+    input,
+    textarea {
+        font-family:inherit;
+    }
+
+    button {
+        cursor:pointer;
+    }
+
+    img,
+    video {
+        display:block;
+        max-width:100%;
+    }
+
+    /* ----------------------------------------------
+       ENHANCED STYLES (added without altering existing)
+    ---------------------------------------------- */
+    /* Smooth transitions for interactive elements */
+    .header-icon,
+    .action-button,
+    .post-action,
+    .brand-logo,
+    .profile-photo,
+    .connection-item,
+    .mobile-link,
+    .gallery-item img,
+    .post-media-item img {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Hover effects */
+    .header-icon:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+    .action-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+    }
+    .action-secondary:hover {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+    }
+    .action-whatsapp:hover {
+        background: #d1fae5;
+        border-color: #34d399;
+    }
+    .action-danger:hover {
+        background: var(--red-soft);
+        border-color: var(--red);
+    }
+
+    .post-action:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+    }
+    .post-action.active-like:hover {
+        background: var(--blue-soft);
+    }
+
+    .connection-item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .mobile-link:hover {
+        background: var(--primary-soft);
+        color: var(--primary);
+    }
+    .mobile-link.active {
+        background: var(--primary-soft);
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .gallery-item img:hover {
+        transform: scale(1.03);
+        box-shadow: var(--shadow-md);
+    }
+
+    .post-media-item img:hover {
+        transform: scale(1.02);
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* Card hover lift */
+    .card {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Better profile photo shadow */
+    .profile-photo {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .profile-photo:hover {
+        transform: scale(1.02);
+        box-shadow: 0 20px 45px rgba(0,0,0,.2);
+    }
+
+    /* Improved cover gradient */
+    .cover {
+        background:
+            radial-gradient(circle at 10% 10%, rgba(255,255,255,.3), transparent 25%),
+            radial-gradient(circle at 90% 10%, rgba(255,255,255,.2), transparent 28%),
+            linear-gradient(135deg, #4c1d95, #7e22ce, #be185d);
+        background-size: 200% 200%;
+        animation: coverShimmer 8s ease-in-out infinite alternate;
+    }
+    @keyframes coverShimmer {
+        0% { background-position: 0% 0%; }
+        100% { background-position: 100% 100%; }
+    }
+
+    /* Post header hover */
+    .post-header:hover .post-author-name {
+        color: var(--primary);
+    }
+
+    /* Refined shadow for post */
+    .post {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .post:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Footer links hover */
+    .footer-links a {
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .footer-links a:hover {
+        color: #fff;
+        transform: translateX(4px);
+    }
+
+    /* Brand hover */
+    .brand:hover .brand-logo {
+        transform: rotate(-6deg) scale(1.05);
+    }
+
+    /* Profile stats hover */
+    .profile-stat {
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .profile-stat:hover {
+        background: var(--primary-soft);
+        transform: translateY(-2px);
+    }
+
+    /* Smooth scrolling for posts shell */
+    .posts-shell {
+        scroll-behavior: smooth;
+    }
+
+    /* Better focus styles */
+    input:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    /* Responsive adjustments */
+    @media(max-width:760px) {
+        .card:hover {
+            transform: translateY(-2px);
         }
-
-        * {
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        .post:hover {
+            transform: translateY(-2px);
         }
-
-        html {
-            scroll-behavior:smooth;
+        .profile-stat:hover {
+            transform: translateY(-1px);
         }
-
-        body {
-            min-height:100vh;
-            font-family:"Inter",sans-serif;
-            color:var(--text);
-            background:var(--bg);
-            line-height:1.55;
+        .action-button:hover {
+            transform: translateY(-1px);
         }
+    }
 
-        body.modal-open,
-        body.menu-open {
-            overflow:hidden;
-        }
+    /* Video container aspect ratio */
+    .video-wrap {
+        background: #050505;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .video-wrap video {
+        width: 100%;
+        height: auto;
+        max-height: 700px;
+        object-fit: contain;
+        background: #050505;
+    }
 
-        a {
-            color:inherit;
-            text-decoration:none;
-        }
+    /* Slightly better comment styling */
+    .comment {
+        transition: background 0.15s ease;
+    }
+    .comment:hover {
+        background: #f3f0ff;
+    }
 
-        button,
-        input,
-        textarea {
-            font-family:inherit;
-        }
+    /* Loading spinner colour */
+    .loading i {
+        color: var(--primary);
+    }
 
-        button {
-            cursor:pointer;
-        }
+    /* Existing styles continue below */
+    .header {
+        position:sticky;
+        top:0;
+        z-index:2000;
+        background:rgba(255,255,255,.97);
+        backdrop-filter:blur(18px);
+        -webkit-backdrop-filter:blur(18px);
+        border-bottom:1px solid rgba(0,0,0,.055);
+    }
 
-        img,
-        video {
-            display:block;
-            max-width:100%;
-        }
+    .header-inner {
+        width:min(calc(100% - 20px),var(--container));
+        min-height:74px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:auto minmax(200px,1fr) auto;
+        align-items:center;
+        gap:18px;
+    }
 
-        .header {
-            position:sticky;
-            top:0;
-            z-index:2000;
-            background:rgba(255,255,255,.97);
-            backdrop-filter:blur(18px);
-            -webkit-backdrop-filter:blur(18px);
-            border-bottom:1px solid rgba(0,0,0,.055);
-        }
+    .brand {
+        display:inline-flex;
+        align-items:center;
+        gap:10px;
+    }
 
-        .header-inner {
-            width:min(calc(100% - 20px),var(--container));
-            min-height:74px;
-            margin:auto;
-            display:grid;
-            grid-template-columns:auto minmax(200px,1fr) auto;
-            align-items:center;
-            gap:18px;
-        }
+    .brand-logo {
+        width:45px;
+        height:45px;
+        object-fit:contain;
+        border-radius:12px;
+    }
 
-        .brand {
-            display:inline-flex;
-            align-items:center;
-            gap:10px;
-        }
+    .brand-text {
+        display:flex;
+        flex-direction:column;
+    }
 
-        .brand-logo {
-            width:45px;
-            height:45px;
-            object-fit:contain;
-            border-radius:12px;
-        }
+    .brand-name {
+        font-family:"Playfair Display",serif;
+        font-size:26px;
+        font-weight:800;
+        line-height:1;
+        background:linear-gradient(135deg,var(--primary),var(--accent));
+        background-clip:text;
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
 
-        .brand-text {
-            display:flex;
-            flex-direction:column;
-        }
+    .brand-tagline {
+        margin-top:3px;
+        color:var(--muted);
+        font-size:7px;
+        letter-spacing:.7px;
+    }
 
-        .brand-name {
-            font-family:"Playfair Display",serif;
-            font-size:26px;
-            font-weight:800;
-            line-height:1;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-            background-clip:text;
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
+    .header-search {
+        width:100%;
+        max-width:560px;
+        margin:auto;
+        position:relative;
+    }
 
-        .brand-tagline {
-            margin-top:3px;
-            color:var(--muted);
-            font-size:7px;
-            letter-spacing:.7px;
-        }
+    .header-search i {
+        position:absolute;
+        left:14px;
+        top:50%;
+        transform:translateY(-50%);
+        color:var(--muted);
+        font-size:11px;
+    }
 
+    .header-search input {
+        width:100%;
+        height:42px;
+        padding:0 14px 0 38px;
+        outline:none;
+        border:1px solid var(--border);
+        border-radius:12px;
+        background:#fafaff;
+        font-size:10px;
+    }
+
+    .header-search input:focus {
+        background:#fff;
+        border-color:#c4b5fd;
+        box-shadow:0 0 0 4px rgba(109,40,217,.05);
+    }
+
+    .header-actions {
+        display:flex;
+        align-items:center;
+        justify-content:flex-end;
+        gap:6px;
+    }
+
+    .header-icon {
+        position:relative;
+        width:41px;
+        height:41px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        border:1px solid var(--border);
+        border-radius:11px;
+        background:#fff;
+        color:var(--soft);
+    }
+
+    .header-icon:hover {
+        color:var(--primary);
+        background:var(--primary-soft);
+    }
+
+    .notification-count {
+        position:absolute;
+        top:-4px;
+        right:-4px;
+        min-width:17px;
+        height:17px;
+        padding:0 4px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border:2px solid #fff;
+        border-radius:999px;
+        color:#fff;
+        background:var(--accent);
+        font-size:7px;
+        font-weight:900;
+    }
+
+    .profile-shortcut {
+        display:flex;
+        align-items:center;
+        gap:7px;
+        padding:4px 8px 4px 4px;
+        border:1px solid var(--border);
+        border-radius:12px;
+        background:#fff;
+    }
+
+    .profile-shortcut img {
+        width:33px;
+        height:33px;
+        object-fit:cover;
+        border-radius:9px;
+    }
+
+    .profile-shortcut span {
+        max-width:100px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        font-size:9px;
+        font-weight:800;
+    }
+
+    .mobile-menu {
+        width:41px;
+        height:41px;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        border:1px solid var(--border);
+        border-radius:11px;
+        background:#fff;
+        color:var(--soft);
+    }
+
+    .mobile-navigation {
+        position:fixed;
+        top:74px;
+        left:10px;
+        right:10px;
+        z-index:1900;
+        display:none;
+        padding:8px;
+        border:1px solid var(--border);
+        border-radius:15px;
+        background:#fff;
+        box-shadow:var(--shadow-lg);
+    }
+
+    .mobile-navigation.open {
+        display:block;
+    }
+
+    .mobile-grid {
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:6px;
+    }
+
+    .mobile-link {
+        min-height:44px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:7px;
+        border:1px solid var(--border);
+        border-radius:10px;
+        color:var(--soft);
+        background:#fff;
+        font-size:8px;
+        font-weight:800;
+    }
+
+    .mobile-link.active {
+        color:var(--primary);
+        background:var(--primary-soft);
+    }
+
+    .mobile-link i {
+        color:var(--primary);
+    }
+
+    .page {
+        width:min(calc(100% - 20px),1180px);
+        margin:auto;
+        padding:22px 0 55px;
+    }
+
+    .back-link {
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        margin-bottom:14px;
+        color:var(--primary);
+        font-size:8px;
+        font-weight:800;
+    }
+
+    .profile-hero {
+        overflow:hidden;
+        border:1px solid var(--border);
+        border-radius:22px;
+        background:#fff;
+        box-shadow:var(--shadow-sm);
+    }
+
+    .cover {
+        height:180px;
+        background:
+            radial-gradient(circle at 10% 10%,rgba(255,255,255,.25),transparent 22%),
+            radial-gradient(circle at 90% 10%,rgba(255,255,255,.18),transparent 25%),
+            linear-gradient(135deg,#5b21b6,#7e22ce,#be185d);
+    }
+
+    .profile-summary {
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap:20px;
+        padding:0 24px 22px;
+    }
+
+    .profile-main {
+        min-width:0;
+        display:flex;
+        align-items:flex-end;
+        gap:16px;
+        margin-top:-75px;
+    }
+
+    .profile-photo-wrap {
+        position:relative;
+        width:155px;
+        height:155px;
+        flex:0 0 155px;
+    }
+
+    .profile-photo {
+        width:155px;
+        height:155px;
+        object-fit:cover;
+        border:6px solid #fff;
+        border-radius:26px;
+        background:#efeff4;
+        box-shadow:0 15px 35px rgba(0,0,0,.15);
+    }
+
+    .online-badge {
+        position:absolute;
+        left:13px;
+        bottom:10px;
+        padding:5px 7px;
+        border-radius:999px;
+        color:#fff;
+        background:rgba(0,0,0,.58);
+        font-size:6px;
+        font-weight:900;
+    }
+
+    .online-badge i {
+        color:#4ade80;
+        font-size:5px;
+    }
+
+    .online-badge.offline i {
+        color:#f87171;
+    }
+
+    .profile-info {
+        min-width:0;
+        padding-bottom:3px;
+    }
+
+    .profile-name {
+        display:flex;
+        align-items:center;
+        gap:7px;
+        font-family:"Playfair Display",serif;
+        font-size:clamp(26px,4vw,40px);
+        line-height:1.05;
+        overflow-wrap:anywhere;
+    }
+
+    .verified {
+        color:var(--blue);
+        font-family:"Inter",sans-serif;
+        font-size:12px;
+    }
+
+    .profile-username {
+        margin-top:4px;
+        color:var(--muted);
+        font-size:8px;
+    }
+
+    .profile-location {
+        margin-top:7px;
+        display:flex;
+        align-items:center;
+        gap:5px;
+        color:var(--soft);
+        font-size:8px;
+    }
+
+    .profile-location i {
+        color:var(--accent);
+    }
+
+    .profile-actions {
+        display:flex;
+        align-items:center;
+        justify-content:flex-end;
+        flex-wrap:wrap;
+        gap:7px;
+        padding-bottom:4px;
+    }
+
+    .action-button {
+        min-height:40px;
+        padding:0 12px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        border-radius:10px;
+        font-size:8px;
+        font-weight:800;
+        white-space:nowrap;
+    }
+
+    .action-primary {
+        border:none;
+        color:#fff;
+        background:linear-gradient(135deg,var(--primary),var(--accent));
+    }
+
+    .action-secondary {
+        border:1px solid #ddd6fe;
+        color:var(--primary);
+        background:#fff;
+    }
+
+    .action-whatsapp {
+        border:1px solid #bbf7d0;
+        color:#15803d;
+        background:#f0fdf4;
+    }
+
+    .action-danger {
+        border:1px solid #fecaca;
+        color:#b91c1c;
+        background:#fff;
+    }
+
+    .action-button:disabled {
+        opacity:.5;
+        cursor:not-allowed;
+    }
+
+    .relationship-status {
+        min-height:34px;
+        padding:0 9px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:5px;
+        border-radius:9px;
+        font-size:7px;
+        font-weight:900;
+        border:1px solid var(--border);
+        color:var(--soft);
+        background:#fafafa;
+    }
+
+    .relationship-status.pending {
+        color:#92400e;
+        background:#fff7ed;
+        border-color:#fed7aa;
+    }
+
+    .relationship-status.connected {
+        color:#166534;
+        background:#f0fdf4;
+        border-color:#bbf7d0;
+    }
+
+    .profile-stats {
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:1px;
+        margin:0 24px 20px;
+        overflow:hidden;
+        border:1px solid var(--border);
+        border-radius:13px;
+        background:var(--border);
+    }
+
+    .profile-stat {
+        padding:11px;
+        text-align:center;
+        background:#fff;
+    }
+
+    .profile-stat strong {
+        display:block;
+        font-size:15px;
+        font-weight:900;
+    }
+
+    .profile-stat span {
+        display:block;
+        margin-top:1px;
+        color:var(--muted);
+        font-size:7px;
+        text-transform:uppercase;
+        letter-spacing:.3px;
+    }
+
+    .content-grid {
+        display:grid;
+        grid-template-columns:minmax(0,1fr) 340px;
+        gap:17px;
+        margin-top:17px;
+        align-items:start;
+    }
+
+    .main-column,
+    .sidebar {
+        min-width:0;
+    }
+
+    .sidebar {
+        display:grid;
+        gap:14px;
+    }
+
+    .card {
+        padding:17px;
+        border:1px solid var(--border);
+        border-radius:16px;
+        background:#fff;
+        box-shadow:var(--shadow-sm);
+    }
+
+    .card + .card {
+        margin-top:14px;
+    }
+
+    .card-heading {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        margin-bottom:11px;
+    }
+
+    .card-heading h2 {
+        font-size:13px;
+        font-weight:900;
+    }
+
+    .card-heading span {
+        color:var(--muted);
+        font-size:7px;
+    }
+
+    .bio {
+        color:var(--soft);
+        font-size:9px;
+        line-height:1.75;
+        white-space:pre-line;
+        word-break:break-word;
+    }
+
+    .bio.empty {
+        color:var(--muted);
+    }
+
+    .detail-grid {
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+    }
+
+    .detail {
+        min-width:0;
+        padding:10px;
+        border:1px solid var(--border);
+        border-radius:10px;
+        background:#fafafa;
+    }
+
+    .detail-label {
+        color:var(--muted);
+        font-size:7px;
+    }
+
+    .detail-value {
+        margin-top:3px;
+        font-size:9px;
+        font-weight:800;
+        word-break:break-word;
+    }
+
+    .verification-grid {
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .verification-item {
+        padding:10px;
+        display:flex;
+        align-items:center;
+        gap:8px;
+        border:1px solid var(--border);
+        border-radius:10px;
+        background:#fafafa;
+    }
+
+    .verification-item i {
+        color:var(--green);
+        font-size:11px;
+    }
+
+    .verification-item.off i {
+        color:var(--muted);
+    }
+
+    .verification-item div {
+        min-width:0;
+    }
+
+    .verification-item strong {
+        display:block;
+        font-size:8px;
+    }
+
+    .verification-item span {
+        display:block;
+        margin-top:1px;
+        color:var(--muted);
+        font-size:6.5px;
+    }
+
+    .contact-box {
+        padding:12px;
+        border:1px solid #dbeafe;
+        border-radius:12px;
+        background:#f8fbff;
+    }
+
+    .contact-box-title {
+        display:flex;
+        align-items:center;
+        gap:6px;
+        color:#1d4ed8;
+        font-size:9px;
+        font-weight:900;
+    }
+
+    .contact-box-note {
+        margin-top:5px;
+        color:#475569;
+        font-size:7px;
+        line-height:1.6;
+    }
+
+    .contact-row {
+        margin-top:8px;
+        padding:9px;
+        border-radius:9px;
+        background:#fff;
+    }
+
+    .contact-row small {
+        display:block;
+        color:var(--muted);
+        font-size:6.5px;
+    }
+
+    .contact-row strong {
+        display:block;
+        margin-top:2px;
+        font-size:9px;
+        word-break:break-word;
+    }
+
+    .posts-header {
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap:10px;
+        margin-bottom:11px;
+    }
+
+    .posts-header h2 {
+        font-size:16px;
+        font-weight:900;
+    }
+
+    .posts-header p {
+        margin-top:2px;
+        color:var(--muted);
+        font-size:7px;
+    }
+
+    .posts-count {
+        min-width:35px;
+        height:30px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:9px;
+        color:var(--primary);
+        background:var(--primary-soft);
+        font-size:8px;
+        font-weight:900;
+    }
+
+    .posts-shell {
+        height:min(920px,78vh);
+        overflow-y:auto;
+        overflow-x:hidden;
+        padding-right:5px;
+        scrollbar-width:thin;
+        scrollbar-color:#c4b5fd #f1f1f6;
+    }
+
+    .posts-shell::-webkit-scrollbar {
+        width:7px;
+    }
+
+    .posts-shell::-webkit-scrollbar-track {
+        background:#f1f1f6;
+        border-radius:99px;
+    }
+
+    .posts-shell::-webkit-scrollbar-thumb {
+        background:#c4b5fd;
+        border-radius:99px;
+    }
+
+    .posts-feed {
+        display:grid;
+        gap:13px;
+    }
+
+    .post {
+        overflow:hidden;
+        border:1px solid var(--border);
+        border-radius:16px;
+        background:#fff;
+        box-shadow:var(--shadow-sm);
+    }
+
+    .post-header {
+        display:flex;
+        align-items:center;
+        gap:9px;
+        padding:13px 14px 9px;
+    }
+
+    .post-avatar {
+        width:40px;
+        height:40px;
+        flex:0 0 40px;
+        object-fit:cover;
+        border-radius:11px;
+        background:#efeff4;
+    }
+
+    .post-author {
+        min-width:0;
+        flex:1;
+    }
+
+    .post-author-name {
+        display:flex;
+        align-items:center;
+        gap:5px;
+        font-size:9px;
+        font-weight:900;
+    }
+
+    .post-author-name i {
+        color:var(--blue);
+        font-size:8px;
+    }
+
+    .post-meta {
+        margin-top:2px;
+        color:var(--muted);
+        font-size:6.5px;
+    }
+
+    .post-status {
+        padding:5px 7px;
+        border-radius:999px;
+        color:#166534;
+        background:#dcfce7;
+        font-size:6px;
+        font-weight:900;
+    }
+
+    .post-content {
+        padding:2px 14px 11px;
+        font-size:9px;
+        line-height:1.75;
+        white-space:pre-wrap;
+        word-break:break-word;
+    }
+
+    .post-content.rich-content {
+        white-space:normal;
+        overflow-wrap:anywhere;
+    }
+
+    .post-content.collapsed {
+        max-height:170px;
+        overflow:hidden;
+        position:relative;
+    }
+
+    .post-content.collapsed::after {
+        content:"";
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        height:50px;
+        background:linear-gradient(transparent,#fff);
+        pointer-events:none;
+    }
+
+    .rich-content p {
+        margin:0 0 7px;
+    }
+
+    .rich-content div {
+        margin:0;
+    }
+
+    .rich-content ul,
+    .rich-content ol {
+        padding-left:20px;
+        margin:6px 0;
+    }
+
+    .rich-content blockquote {
+        margin:7px 0;
+        padding-left:9px;
+        border-left:3px solid #ddd6fe;
+    }
+
+    .rich-content a {
+        color:var(--primary);
+        text-decoration:underline;
+    }
+
+    .read-more {
+        margin:-4px 14px 10px;
+        padding:0;
+        border:none;
+        color:var(--primary);
+        background:transparent;
+        font-size:8px;
+        font-weight:900;
+    }
+
+    .post-media {
+        width:100%;
+        background:#050505;
+    }
+
+    .post-media-grid {
+        display:grid;
+        gap:2px;
+    }
+
+    .post-media-grid.one {
+        grid-template-columns:1fr;
+    }
+
+    .post-media-grid.two {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .post-media-grid.three,
+    .post-media-grid.many {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .post-media-item {
+        position:relative;
+        min-height:190px;
+        overflow:hidden;
+        background:#080808;
+    }
+
+    .post-media-grid.one .post-media-item {
+        min-height:260px;
+    }
+
+    .post-media-item img {
+        width:100%;
+        height:100%;
+        min-height:190px;
+        object-fit:cover;
+        cursor:pointer;
+    }
+
+    .video-wrap {
+        position:relative;
+        width:100%;
+        background:#050505;
+    }
+
+    .post-media-item video {
+        width:100%;
+        min-height:220px;
+        max-height:700px;
+        object-fit:contain;
+        background:#050505;
+        outline:none;
+    }
+
+    .video-lock {
+        position:absolute;
+        top:9px;
+        right:9px;
+        z-index:4;
+        padding:5px 7px;
+        border-radius:999px;
+        color:#fff;
+        background:rgba(0,0,0,.65);
+        font-size:6px;
+        font-weight:900;
+        pointer-events:none;
+    }
+
+    .document-media {
+        min-height:210px;
+        padding:25px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        gap:9px;
+        color:#fff;
+        background:linear-gradient(135deg,#111827,#312e81);
+    }
+
+    .document-media i {
+        font-size:40px;
+    }
+
+    .document-media strong {
+        font-size:11px;
+    }
+
+    .document-media small {
+        color:#c7d2fe;
+        font-size:7px;
+    }
+
+    .post-actions {
+        padding:10px 14px 11px;
+        display:flex;
+        flex-wrap:wrap;
+        gap:6px;
+        border-top:1px solid #f4f4f7;
+    }
+
+    .post-action {
+        min-height:34px;
+        padding:0 10px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:5px;
+        border:1px solid var(--border);
+        border-radius:9px;
+        color:var(--soft);
+        background:#fff;
+        font-size:7.5px;
+        font-weight:800;
+    }
+
+    .post-action:hover {
+        color:var(--primary);
+        background:var(--primary-soft);
+    }
+
+    .post-action.active-like {
+        color:var(--blue);
+        border-color:#bfdbfe;
+        background:var(--blue-soft);
+    }
+
+    .post-action i {
+        font-size:10px;
+    }
+
+    .comment-count,
+    .like-count {
+        font-weight:900;
+    }
+
+    .comments-panel {
+        display:none;
+        padding:0 14px 13px;
+    }
+
+    .comments-panel.open {
+        display:block;
+    }
+
+    .comments-title {
+        margin-bottom:7px;
+        font-size:8px;
+        font-weight:900;
+    }
+
+    .comments-list {
+        display:grid;
+        gap:7px;
+    }
+
+    .comment {
+        padding:8px;
+        border-radius:10px;
+        background:#fafafa;
+    }
+
+    .comment.reply {
+        margin-left:28px;
+        border-left:2px solid #ddd6fe;
+    }
+
+    .comment-head {
+        display:flex;
+        align-items:flex-start;
+        gap:7px;
+    }
+
+    .comment-avatar {
+        width:29px;
+        height:29px;
+        flex:0 0 29px;
+        object-fit:cover;
+        border-radius:8px;
+        background:#efeff4;
+    }
+
+    .comment-body {
+        min-width:0;
+        flex:1;
+    }
+
+    .comment-author {
+        font-size:7.5px;
+        font-weight:900;
+    }
+
+    .comment-time {
+        display:block;
+        margin-top:1px;
+        color:var(--muted);
+        font-size:6px;
+    }
+
+    .comment-text {
+        margin-top:4px;
+        color:#3f3f46;
+        font-size:8px;
+        line-height:1.6;
+        white-space:pre-wrap;
+        word-break:break-word;
+    }
+
+    .comment-text.rich-content {
+        white-space:normal;
+    }
+
+    .comment-actions {
+        margin-top:4px;
+        display:flex;
+        align-items:center;
+        gap:6px;
+    }
+
+    .comment-reply {
+        padding:0;
+        border:none;
+        color:var(--primary);
+        background:transparent;
+        font-size:6.5px;
+        font-weight:900;
+    }
+
+    .comment-form {
+        display:flex;
+        align-items:flex-end;
+        gap:6px;
+        margin-top:9px;
+    }
+
+    .comment-input {
+        flex:1;
+        min-height:39px;
+        max-height:100px;
+        resize:none;
+        outline:none;
+        padding:9px;
+        border:1px solid var(--border);
+        border-radius:10px;
+        background:#fafaff;
+        font-size:8px;
+    }
+
+    .comment-input:focus {
+        border-color:#c4b5fd;
+    }
+
+    .comment-send {
+        width:39px;
+        height:39px;
+        flex:0 0 39px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border:none;
+        border-radius:10px;
+        color:#fff;
+        background:linear-gradient(135deg,var(--primary),var(--accent));
+    }
+
+    .replying-label {
+        display:none;
+        margin-top:6px;
+        padding:6px 8px;
+        border-radius:7px;
+        color:#5b21b6;
+        background:#f5f3ff;
+        font-size:6.5px;
+        font-weight:700;
+    }
+
+    .replying-label.show {
+        display:block;
+    }
+
+    .cancel-reply {
+        float:right;
+        border:none;
+        color:var(--red);
+        background:transparent;
+        font-size:6px;
+        font-weight:900;
+    }
+
+    .gallery {
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:7px;
+    }
+
+    .gallery-item {
+        overflow:hidden;
+        position:relative;
+        aspect-ratio:1/1;
+        border-radius:10px;
+        background:#efeff4;
+    }
+
+    .gallery-item img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        cursor:pointer;
+    }
+
+    .gallery-badge {
+        position:absolute;
+        right:5px;
+        bottom:5px;
+        padding:4px 6px;
+        border-radius:999px;
+        color:#fff;
+        background:rgba(0,0,0,.55);
+        font-size:5.5px;
+        font-weight:900;
+    }
+
+    .connection-list {
+        display:grid;
+        gap:8px;
+        max-height:500px;
+        overflow-y:auto;
+        padding-right:3px;
+    }
+
+    .connection-item {
+        padding:8px;
+        display:flex;
+        align-items:center;
+        gap:8px;
+        border-radius:10px;
+        background:#fafafa;
+    }
+
+    .connection-item:hover {
+        background:var(--primary-soft);
+    }
+
+    .connection-avatar {
+        width:37px;
+        height:37px;
+        flex:0 0 37px;
+        object-fit:cover;
+        border-radius:10px;
+    }
+
+    .connection-info {
+        min-width:0;
+        flex:1;
+    }
+
+    .connection-name {
+        display:block;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        font-size:8px;
+        font-weight:900;
+    }
+
+    .connection-meta {
+        display:block;
+        margin-top:1px;
+        color:var(--muted);
+        font-size:6.5px;
+    }
+
+    .online-dot {
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#22c55e;
+        box-shadow:0 0 0 3px #dcfce7;
+    }
+
+    .offline-dot {
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#94a3b8;
+        box-shadow:0 0 0 3px #e2e8f0;
+    }
+
+    .privacy-box {
+        padding:12px;
+        border:1px solid #eadcff;
+        border-radius:12px;
+        color:var(--soft);
+        background:#fcfaff;
+        font-size:7px;
+        line-height:1.65;
+    }
+
+    .privacy-box i {
+        margin-right:5px;
+        color:var(--primary);
+    }
+
+    .empty {
+        min-height:150px;
+        padding:25px 15px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        border:1px dashed #dcdce4;
+        border-radius:13px;
+        color:var(--muted);
+        background:#fff;
+        font-size:8px;
+    }
+
+    .empty i {
+        width:46px;
+        height:46px;
+        margin-bottom:9px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:14px;
+        color:var(--primary);
+        background:var(--primary-soft);
+        font-size:17px;
+    }
+
+    .empty strong {
+        color:var(--text);
+        font-size:11px;
+    }
+
+    .empty span {
+        margin-top:3px;
+        max-width:400px;
+        font-size:7px;
+    }
+
+    .loading {
+        min-height:150px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:7px;
+        color:var(--muted);
+        font-size:8px;
+    }
+
+    .toast {
+        position:fixed;
+        left:50%;
+        bottom:20px;
+        z-index:5000;
+        width:max-content;
+        max-width:calc(100% - 30px);
+        padding:11px 15px;
+        transform:translateX(-50%) translateY(20px);
+        opacity:0;
+        pointer-events:none;
+        transition:.2s ease;
+        border-radius:11px;
+        color:#166534;
+        background:#f0fdf4;
+        border:1px solid #bbf7d0;
+        font-size:8px;
+        font-weight:800;
+        box-shadow:var(--shadow-md);
+    }
+
+    .toast.error {
+        color:#991b1b;
+        background:#fef2f2;
+        border-color:#fecaca;
+    }
+
+    .toast.info {
+        color:#1d4ed8;
+        background:#eff6ff;
+        border-color:#bfdbfe;
+    }
+
+    .toast.show {
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+    }
+
+    .modal {
+        position:fixed;
+        inset:0;
+        z-index:4500;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        background:rgba(15,23,42,.58);
+        backdrop-filter:blur(7px);
+    }
+
+    .modal.open {
+        display:flex;
+    }
+
+    .modal-card {
+        width:min(100%,440px);
+        padding:23px;
+        border-radius:18px;
+        background:#fff;
+        box-shadow:var(--shadow-lg);
+        text-align:center;
+    }
+
+    .modal-icon {
+        width:56px;
+        height:56px;
+        margin:0 auto 10px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:16px;
+        color:var(--primary);
+        background:var(--primary-soft);
+        font-size:20px;
+    }
+
+    .modal-card h3 {
+        font-size:16px;
+    }
+
+    .modal-card p {
+        margin-top:7px;
+        color:var(--soft);
+        font-size:8px;
+        line-height:1.7;
+    }
+
+    .modal-actions {
+        margin-top:16px;
+        display:flex;
+        gap:7px;
+    }
+
+    .modal-actions button {
+        flex:1;
+        min-height:40px;
+    }
+
+    .footer {
+        margin-top:20px;
+        color:#fff;
+        background:#17151b;
+    }
+
+    .footer-inner {
+        width:min(calc(100% - 30px),var(--container));
+        margin:auto;
+        padding:35px 0 18px;
+    }
+
+    .footer-grid {
+        display:grid;
+        grid-template-columns:1.5fr 1fr 1fr 1fr;
+        gap:30px;
+        padding-bottom:25px;
+    }
+
+    .footer-description {
+        max-width:320px;
+        margin-top:10px;
+        color:#9d99a5;
+        font-size:9px;
+        line-height:1.7;
+    }
+
+    .footer-heading {
+        margin-bottom:9px;
+        font-size:10px;
+    }
+
+    .footer-links {
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+    }
+
+    .footer-links a {
+        color:#9d99a5;
+        font-size:8px;
+    }
+
+    .footer-links a:hover {
+        color:#fff;
+    }
+
+    .footer-bottom {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:15px;
+        padding-top:15px;
+        border-top:1px solid rgba(255,255,255,.08);
+        color:#716d78;
+        font-size:7px;
+    }
+
+    @media(max-width:1100px) {
         .header-search {
-            width:100%;
-            max-width:560px;
-            margin:auto;
-            position:relative;
-        }
-
-        .header-search i {
-            position:absolute;
-            left:14px;
-            top:50%;
-            transform:translateY(-50%);
-            color:var(--muted);
-            font-size:11px;
-        }
-
-        .header-search input {
-            width:100%;
-            height:42px;
-            padding:0 14px 0 38px;
-            outline:none;
-            border:1px solid var(--border);
-            border-radius:12px;
-            background:#fafaff;
-            font-size:10px;
-        }
-
-        .header-search input:focus {
-            background:#fff;
-            border-color:#c4b5fd;
-            box-shadow:0 0 0 4px rgba(109,40,217,.05);
-        }
-
-        .header-actions {
-            display:flex;
-            align-items:center;
-            justify-content:flex-end;
-            gap:6px;
-        }
-
-        .header-icon {
-            position:relative;
-            width:41px;
-            height:41px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            border:1px solid var(--border);
-            border-radius:11px;
-            background:#fff;
-            color:var(--soft);
-        }
-
-        .header-icon:hover {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .notification-count {
-            position:absolute;
-            top:-4px;
-            right:-4px;
-            min-width:17px;
-            height:17px;
-            padding:0 4px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border:2px solid #fff;
-            border-radius:999px;
-            color:#fff;
-            background:var(--accent);
-            font-size:7px;
-            font-weight:900;
-        }
-
-        .profile-shortcut {
-            display:flex;
-            align-items:center;
-            gap:7px;
-            padding:4px 8px 4px 4px;
-            border:1px solid var(--border);
-            border-radius:12px;
-            background:#fff;
-        }
-
-        .profile-shortcut img {
-            width:33px;
-            height:33px;
-            object-fit:cover;
-            border-radius:9px;
-        }
-
-        .profile-shortcut span {
-            max-width:100px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
-            font-size:9px;
-            font-weight:800;
+            display:none;
         }
 
         .mobile-menu {
-            width:41px;
-            height:41px;
-            display:none;
-            align-items:center;
-            justify-content:center;
-            border:1px solid var(--border);
-            border-radius:11px;
-            background:#fff;
-            color:var(--soft);
-        }
-
-        .mobile-navigation {
-            position:fixed;
-            top:74px;
-            left:10px;
-            right:10px;
-            z-index:1900;
-            display:none;
-            padding:8px;
-            border:1px solid var(--border);
-            border-radius:15px;
-            background:#fff;
-            box-shadow:var(--shadow-lg);
-        }
-
-        .mobile-navigation.open {
-            display:block;
-        }
-
-        .mobile-grid {
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:6px;
-        }
-
-        .mobile-link {
-            min-height:44px;
             display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:7px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            color:var(--soft);
-            background:#fff;
-            font-size:8px;
-            font-weight:800;
-        }
-
-        .mobile-link.active {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .mobile-link i {
-            color:var(--primary);
-        }
-
-        .page {
-            width:min(calc(100% - 20px),1180px);
-            margin:auto;
-            padding:22px 0 55px;
-        }
-
-        .back-link {
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
-            margin-bottom:14px;
-            color:var(--primary);
-            font-size:8px;
-            font-weight:800;
-        }
-
-        .profile-hero {
-            overflow:hidden;
-            border:1px solid var(--border);
-            border-radius:22px;
-            background:#fff;
-            box-shadow:var(--shadow-sm);
-        }
-
-        .cover {
-            height:180px;
-            background:
-                radial-gradient(circle at 10% 10%,rgba(255,255,255,.25),transparent 22%),
-                radial-gradient(circle at 90% 10%,rgba(255,255,255,.18),transparent 25%),
-                linear-gradient(135deg,#5b21b6,#7e22ce,#be185d);
-        }
-
-        .profile-summary {
-            display:flex;
-            align-items:flex-end;
-            justify-content:space-between;
-            gap:20px;
-            padding:0 24px 22px;
-        }
-
-        .profile-main {
-            min-width:0;
-            display:flex;
-            align-items:flex-end;
-            gap:16px;
-            margin-top:-75px;
-        }
-
-        .profile-photo-wrap {
-            position:relative;
-            width:155px;
-            height:155px;
-            flex:0 0 155px;
-        }
-
-        .profile-photo {
-            width:155px;
-            height:155px;
-            object-fit:cover;
-            border:6px solid #fff;
-            border-radius:26px;
-            background:#efeff4;
-            box-shadow:0 15px 35px rgba(0,0,0,.15);
-        }
-
-        .online-badge {
-            position:absolute;
-            left:13px;
-            bottom:10px;
-            padding:5px 7px;
-            border-radius:999px;
-            color:#fff;
-            background:rgba(0,0,0,.58);
-            font-size:6px;
-            font-weight:900;
-        }
-
-        .online-badge i {
-            color:#4ade80;
-            font-size:5px;
-        }
-
-        .online-badge.offline i {
-            color:#f87171;
-        }
-
-        .profile-info {
-            min-width:0;
-            padding-bottom:3px;
-        }
-
-        .profile-name {
-            display:flex;
-            align-items:center;
-            gap:7px;
-            font-family:"Playfair Display",serif;
-            font-size:clamp(26px,4vw,40px);
-            line-height:1.05;
-            overflow-wrap:anywhere;
-        }
-
-        .verified {
-            color:var(--blue);
-            font-family:"Inter",sans-serif;
-            font-size:12px;
-        }
-
-        .profile-username {
-            margin-top:4px;
-            color:var(--muted);
-            font-size:8px;
-        }
-
-        .profile-location {
-            margin-top:7px;
-            display:flex;
-            align-items:center;
-            gap:5px;
-            color:var(--soft);
-            font-size:8px;
-        }
-
-        .profile-location i {
-            color:var(--accent);
-        }
-
-        .profile-actions {
-            display:flex;
-            align-items:center;
-            justify-content:flex-end;
-            flex-wrap:wrap;
-            gap:7px;
-            padding-bottom:4px;
-        }
-
-        .action-button {
-            min-height:40px;
-            padding:0 12px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:6px;
-            border-radius:10px;
-            font-size:8px;
-            font-weight:800;
-            white-space:nowrap;
-        }
-
-        .action-primary {
-            border:none;
-            color:#fff;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-        }
-
-        .action-secondary {
-            border:1px solid #ddd6fe;
-            color:var(--primary);
-            background:#fff;
-        }
-
-        .action-whatsapp {
-            border:1px solid #bbf7d0;
-            color:#15803d;
-            background:#f0fdf4;
-        }
-
-        .action-danger {
-            border:1px solid #fecaca;
-            color:#b91c1c;
-            background:#fff;
-        }
-
-        .action-button:disabled {
-            opacity:.5;
-            cursor:not-allowed;
-        }
-
-        .relationship-status {
-            min-height:34px;
-            padding:0 9px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border-radius:9px;
-            font-size:7px;
-            font-weight:900;
-            border:1px solid var(--border);
-            color:var(--soft);
-            background:#fafafa;
-        }
-
-        .relationship-status.pending {
-            color:#92400e;
-            background:#fff7ed;
-            border-color:#fed7aa;
-        }
-
-        .relationship-status.connected {
-            color:#166534;
-            background:#f0fdf4;
-            border-color:#bbf7d0;
-        }
-
-        .profile-stats {
-            display:grid;
-            grid-template-columns:repeat(5,1fr);
-            gap:1px;
-            margin:0 24px 20px;
-            overflow:hidden;
-            border:1px solid var(--border);
-            border-radius:13px;
-            background:var(--border);
-        }
-
-        .profile-stat {
-            padding:11px;
-            text-align:center;
-            background:#fff;
-        }
-
-        .profile-stat strong {
-            display:block;
-            font-size:15px;
-            font-weight:900;
-        }
-
-        .profile-stat span {
-            display:block;
-            margin-top:1px;
-            color:var(--muted);
-            font-size:7px;
-            text-transform:uppercase;
-            letter-spacing:.3px;
         }
 
         .content-grid {
-            display:grid;
-            grid-template-columns:minmax(0,1fr) 340px;
-            gap:17px;
-            margin-top:17px;
-            align-items:start;
-        }
-
-        .main-column,
-        .sidebar {
-            min-width:0;
-        }
-
-        .sidebar {
-            display:grid;
-            gap:14px;
-        }
-
-        .card {
-            padding:17px;
-            border:1px solid var(--border);
-            border-radius:16px;
-            background:#fff;
-            box-shadow:var(--shadow-sm);
-        }
-
-        .card + .card {
-            margin-top:14px;
-        }
-
-        .card-heading {
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:10px;
-            margin-bottom:11px;
-        }
-
-        .card-heading h2 {
-            font-size:13px;
-            font-weight:900;
-        }
-
-        .card-heading span {
-            color:var(--muted);
-            font-size:7px;
-        }
-
-        .bio {
-            color:var(--soft);
-            font-size:9px;
-            line-height:1.75;
-            white-space:pre-line;
-            word-break:break-word;
-        }
-
-        .bio.empty {
-            color:var(--muted);
-        }
-
-        .detail-grid {
-            display:grid;
-            grid-template-columns:repeat(2,minmax(0,1fr));
-            gap:8px;
-        }
-
-        .detail {
-            min-width:0;
-            padding:10px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            background:#fafafa;
-        }
-
-        .detail-label {
-            color:var(--muted);
-            font-size:7px;
-        }
-
-        .detail-value {
-            margin-top:3px;
-            font-size:9px;
-            font-weight:800;
-            word-break:break-word;
-        }
-
-        .verification-grid {
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:8px;
-        }
-
-        .verification-item {
-            padding:10px;
-            display:flex;
-            align-items:center;
-            gap:8px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            background:#fafafa;
-        }
-
-        .verification-item i {
-            color:var(--green);
-            font-size:11px;
-        }
-
-        .verification-item.off i {
-            color:var(--muted);
-        }
-
-        .verification-item div {
-            min-width:0;
-        }
-
-        .verification-item strong {
-            display:block;
-            font-size:8px;
-        }
-
-        .verification-item span {
-            display:block;
-            margin-top:1px;
-            color:var(--muted);
-            font-size:6.5px;
-        }
-
-        .contact-box {
-            padding:12px;
-            border:1px solid #dbeafe;
-            border-radius:12px;
-            background:#f8fbff;
-        }
-
-        .contact-box-title {
-            display:flex;
-            align-items:center;
-            gap:6px;
-            color:#1d4ed8;
-            font-size:9px;
-            font-weight:900;
-        }
-
-        .contact-box-note {
-            margin-top:5px;
-            color:#475569;
-            font-size:7px;
-            line-height:1.6;
-        }
-
-        .contact-row {
-            margin-top:8px;
-            padding:9px;
-            border-radius:9px;
-            background:#fff;
-        }
-
-        .contact-row small {
-            display:block;
-            color:var(--muted);
-            font-size:6.5px;
-        }
-
-        .contact-row strong {
-            display:block;
-            margin-top:2px;
-            font-size:9px;
-            word-break:break-word;
-        }
-
-        .posts-header {
-            display:flex;
-            align-items:flex-end;
-            justify-content:space-between;
-            gap:10px;
-            margin-bottom:11px;
-        }
-
-        .posts-header h2 {
-            font-size:16px;
-            font-weight:900;
-        }
-
-        .posts-header p {
-            margin-top:2px;
-            color:var(--muted);
-            font-size:7px;
-        }
-
-        .posts-count {
-            min-width:35px;
-            height:30px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:9px;
-            color:var(--primary);
-            background:var(--primary-soft);
-            font-size:8px;
-            font-weight:900;
-        }
-
-        .posts-shell {
-            height:min(920px,78vh);
-            overflow-y:auto;
-            overflow-x:hidden;
-            padding-right:5px;
-            scrollbar-width:thin;
-            scrollbar-color:#c4b5fd #f1f1f6;
-        }
-
-        .posts-shell::-webkit-scrollbar {
-            width:7px;
-        }
-
-        .posts-shell::-webkit-scrollbar-track {
-            background:#f1f1f6;
-            border-radius:99px;
-        }
-
-        .posts-shell::-webkit-scrollbar-thumb {
-            background:#c4b5fd;
-            border-radius:99px;
-        }
-
-        .posts-feed {
-            display:grid;
-            gap:13px;
-        }
-
-        .post {
-            overflow:hidden;
-            border:1px solid var(--border);
-            border-radius:16px;
-            background:#fff;
-            box-shadow:var(--shadow-sm);
-        }
-
-        .post-header {
-            display:flex;
-            align-items:center;
-            gap:9px;
-            padding:13px 14px 9px;
-        }
-
-        .post-avatar {
-            width:40px;
-            height:40px;
-            flex:0 0 40px;
-            object-fit:cover;
-            border-radius:11px;
-            background:#efeff4;
-        }
-
-        .post-author {
-            min-width:0;
-            flex:1;
-        }
-
-        .post-author-name {
-            display:flex;
-            align-items:center;
-            gap:5px;
-            font-size:9px;
-            font-weight:900;
-        }
-
-        .post-author-name i {
-            color:var(--blue);
-            font-size:8px;
-        }
-
-        .post-meta {
-            margin-top:2px;
-            color:var(--muted);
-            font-size:6.5px;
-        }
-
-        .post-status {
-            padding:5px 7px;
-            border-radius:999px;
-            color:#166534;
-            background:#dcfce7;
-            font-size:6px;
-            font-weight:900;
-        }
-
-        .post-content {
-            padding:2px 14px 11px;
-            font-size:9px;
-            line-height:1.75;
-            white-space:pre-wrap;
-            word-break:break-word;
-        }
-
-        .post-content.rich-content {
-            white-space:normal;
-            overflow-wrap:anywhere;
-        }
-
-        .post-content.collapsed {
-            max-height:170px;
-            overflow:hidden;
-            position:relative;
-        }
-
-        .post-content.collapsed::after {
-            content:"";
-            position:absolute;
-            left:0;
-            right:0;
-            bottom:0;
-            height:50px;
-            background:linear-gradient(transparent,#fff);
-            pointer-events:none;
-        }
-
-        .rich-content p {
-            margin:0 0 7px;
-        }
-
-        .rich-content div {
-            margin:0;
-        }
-
-        .rich-content ul,
-        .rich-content ol {
-            padding-left:20px;
-            margin:6px 0;
-        }
-
-        .rich-content blockquote {
-            margin:7px 0;
-            padding-left:9px;
-            border-left:3px solid #ddd6fe;
-        }
-
-        .rich-content a {
-            color:var(--primary);
-            text-decoration:underline;
-        }
-
-        .read-more {
-            margin:-4px 14px 10px;
-            padding:0;
-            border:none;
-            color:var(--primary);
-            background:transparent;
-            font-size:8px;
-            font-weight:900;
-        }
-
-        .post-media {
-            width:100%;
-            background:#050505;
-        }
-
-        .post-media-grid {
-            display:grid;
-            gap:2px;
-        }
-
-        .post-media-grid.one {
             grid-template-columns:1fr;
         }
 
-        .post-media-grid.two {
-            grid-template-columns:repeat(2,1fr);
+        .sidebar {
+            grid-template-columns:repeat(2,minmax(0,1fr));
         }
+    }
 
-        .post-media-grid.three,
-        .post-media-grid.many {
-            grid-template-columns:repeat(2,1fr);
-        }
-
-        .post-media-item {
-            position:relative;
-            min-height:190px;
-            overflow:hidden;
-            background:#080808;
-        }
-
-        .post-media-grid.one .post-media-item {
-            min-height:260px;
-        }
-
-        .post-media-item img {
-            width:100%;
-            height:100%;
-            min-height:190px;
-            object-fit:cover;
-            cursor:pointer;
-        }
-
-        .video-wrap {
-            position:relative;
-            width:100%;
-            background:#050505;
-        }
-
-        .post-media-item video {
-            width:100%;
-            min-height:220px;
-            max-height:700px;
-            object-fit:contain;
-            background:#050505;
-            outline:none;
-        }
-
-        .video-lock {
-            position:absolute;
-            top:9px;
-            right:9px;
-            z-index:4;
-            padding:5px 7px;
-            border-radius:999px;
-            color:#fff;
-            background:rgba(0,0,0,.65);
-            font-size:6px;
-            font-weight:900;
-            pointer-events:none;
-        }
-
-        .document-media {
-            min-height:210px;
-            padding:25px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            gap:9px;
-            color:#fff;
-            background:linear-gradient(135deg,#111827,#312e81);
-        }
-
-        .document-media i {
-            font-size:40px;
-        }
-
-        .document-media strong {
-            font-size:11px;
-        }
-
-        .document-media small {
-            color:#c7d2fe;
-            font-size:7px;
-        }
-
-        .post-actions {
-            padding:10px 14px 11px;
-            display:flex;
-            flex-wrap:wrap;
-            gap:6px;
-            border-top:1px solid #f4f4f7;
-        }
-
-        .post-action {
-            min-height:34px;
-            padding:0 10px;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-            border:1px solid var(--border);
-            border-radius:9px;
-            color:var(--soft);
-            background:#fff;
-            font-size:7.5px;
-            font-weight:800;
-        }
-
-        .post-action:hover {
-            color:var(--primary);
-            background:var(--primary-soft);
-        }
-
-        .post-action.active-like {
-            color:var(--blue);
-            border-color:#bfdbfe;
-            background:var(--blue-soft);
-        }
-
-        .post-action i {
-            font-size:10px;
-        }
-
-        .comment-count,
-        .like-count {
-            font-weight:900;
-        }
-
-        .comments-panel {
-            display:none;
-            padding:0 14px 13px;
-        }
-
-        .comments-panel.open {
-            display:block;
-        }
-
-        .comments-title {
-            margin-bottom:7px;
-            font-size:8px;
-            font-weight:900;
-        }
-
-        .comments-list {
-            display:grid;
-            gap:7px;
-        }
-
-        .comment {
-            padding:8px;
-            border-radius:10px;
-            background:#fafafa;
-        }
-
-        .comment.reply {
-            margin-left:28px;
-            border-left:2px solid #ddd6fe;
-        }
-
-        .comment-head {
-            display:flex;
-            align-items:flex-start;
-            gap:7px;
-        }
-
-        .comment-avatar {
-            width:29px;
-            height:29px;
-            flex:0 0 29px;
-            object-fit:cover;
-            border-radius:8px;
-            background:#efeff4;
-        }
-
-        .comment-body {
-            min-width:0;
-            flex:1;
-        }
-
-        .comment-author {
-            font-size:7.5px;
-            font-weight:900;
-        }
-
-        .comment-time {
-            display:block;
-            margin-top:1px;
-            color:var(--muted);
-            font-size:6px;
-        }
-
-        .comment-text {
-            margin-top:4px;
-            color:#3f3f46;
-            font-size:8px;
-            line-height:1.6;
-            white-space:pre-wrap;
-            word-break:break-word;
-        }
-
-        .comment-text.rich-content {
-            white-space:normal;
-        }
-
-        .comment-actions {
-            margin-top:4px;
-            display:flex;
-            align-items:center;
-            gap:6px;
-        }
-
-        .comment-reply {
-            padding:0;
-            border:none;
-            color:var(--primary);
-            background:transparent;
-            font-size:6.5px;
-            font-weight:900;
-        }
-
-        .comment-form {
-            display:flex;
-            align-items:flex-end;
-            gap:6px;
-            margin-top:9px;
-        }
-
-        .comment-input {
-            flex:1;
-            min-height:39px;
-            max-height:100px;
-            resize:none;
-            outline:none;
-            padding:9px;
-            border:1px solid var(--border);
-            border-radius:10px;
-            background:#fafaff;
-            font-size:8px;
-        }
-
-        .comment-input:focus {
-            border-color:#c4b5fd;
-        }
-
-        .comment-send {
-            width:39px;
-            height:39px;
-            flex:0 0 39px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border:none;
-            border-radius:10px;
-            color:#fff;
-            background:linear-gradient(135deg,var(--primary),var(--accent));
-        }
-
-        .replying-label {
-            display:none;
-            margin-top:6px;
-            padding:6px 8px;
-            border-radius:7px;
-            color:#5b21b6;
-            background:#f5f3ff;
-            font-size:6.5px;
-            font-weight:700;
-        }
-
-        .replying-label.show {
-            display:block;
-        }
-
-        .cancel-reply {
-            float:right;
-            border:none;
-            color:var(--red);
-            background:transparent;
-            font-size:6px;
-            font-weight:900;
-        }
-
-        .gallery {
-            display:grid;
-            grid-template-columns:repeat(3,minmax(0,1fr));
-            gap:7px;
-        }
-
-        .gallery-item {
-            overflow:hidden;
-            position:relative;
-            aspect-ratio:1/1;
-            border-radius:10px;
-            background:#efeff4;
-        }
-
-        .gallery-item img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            cursor:pointer;
-        }
-
-        .gallery-badge {
-            position:absolute;
-            right:5px;
-            bottom:5px;
-            padding:4px 6px;
-            border-radius:999px;
-            color:#fff;
-            background:rgba(0,0,0,.55);
-            font-size:5.5px;
-            font-weight:900;
-        }
-
-        .connection-list {
-            display:grid;
-            gap:8px;
-            max-height:500px;
-            overflow-y:auto;
-            padding-right:3px;
-        }
-
-        .connection-item {
-            padding:8px;
-            display:flex;
-            align-items:center;
-            gap:8px;
-            border-radius:10px;
-            background:#fafafa;
-        }
-
-        .connection-item:hover {
-            background:var(--primary-soft);
-        }
-
-        .connection-avatar {
-            width:37px;
-            height:37px;
-            flex:0 0 37px;
-            object-fit:cover;
-            border-radius:10px;
-        }
-
-        .connection-info {
-            min-width:0;
-            flex:1;
-        }
-
-        .connection-name {
-            display:block;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
-            font-size:8px;
-            font-weight:900;
-        }
-
-        .connection-meta {
-            display:block;
-            margin-top:1px;
-            color:var(--muted);
-            font-size:6.5px;
-        }
-
-        .online-dot {
-            width:7px;
-            height:7px;
-            border-radius:50%;
-            background:#22c55e;
-            box-shadow:0 0 0 3px #dcfce7;
-        }
-
-        .offline-dot {
-            width:7px;
-            height:7px;
-            border-radius:50%;
-            background:#94a3b8;
-            box-shadow:0 0 0 3px #e2e8f0;
-        }
-
-        .privacy-box {
-            padding:12px;
-            border:1px solid #eadcff;
-            border-radius:12px;
-            color:var(--soft);
-            background:#fcfaff;
-            font-size:7px;
-            line-height:1.65;
-        }
-
-        .privacy-box i {
-            margin-right:5px;
-            color:var(--primary);
-        }
-
-        .empty {
-            min-height:150px;
-            padding:25px 15px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            border:1px dashed #dcdce4;
-            border-radius:13px;
-            color:var(--muted);
-            background:#fff;
-            font-size:8px;
-        }
-
-        .empty i {
-            width:46px;
-            height:46px;
-            margin-bottom:9px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:14px;
-            color:var(--primary);
-            background:var(--primary-soft);
-            font-size:17px;
-        }
-
-        .empty strong {
-            color:var(--text);
-            font-size:11px;
-        }
-
-        .empty span {
-            margin-top:3px;
-            max-width:400px;
-            font-size:7px;
-        }
-
-        .loading {
-            min-height:150px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:7px;
-            color:var(--muted);
-            font-size:8px;
-        }
-
-        .toast {
-            position:fixed;
-            left:50%;
-            bottom:20px;
-            z-index:5000;
-            width:max-content;
-            max-width:calc(100% - 30px);
-            padding:11px 15px;
-            transform:translateX(-50%) translateY(20px);
-            opacity:0;
-            pointer-events:none;
-            transition:.2s ease;
-            border-radius:11px;
-            color:#166534;
-            background:#f0fdf4;
-            border:1px solid #bbf7d0;
-            font-size:8px;
-            font-weight:800;
-            box-shadow:var(--shadow-md);
-        }
-
-        .toast.error {
-            color:#991b1b;
-            background:#fef2f2;
-            border-color:#fecaca;
-        }
-
-        .toast.info {
-            color:#1d4ed8;
-            background:#eff6ff;
-            border-color:#bfdbfe;
-        }
-
-        .toast.show {
-            opacity:1;
-            transform:translateX(-50%) translateY(0);
-        }
-
-        .modal {
-            position:fixed;
-            inset:0;
-            z-index:4500;
-            display:none;
-            align-items:center;
-            justify-content:center;
-            padding:20px;
-            background:rgba(15,23,42,.58);
-            backdrop-filter:blur(7px);
-        }
-
-        .modal.open {
-            display:flex;
-        }
-
-        .modal-card {
-            width:min(100%,440px);
-            padding:23px;
-            border-radius:18px;
-            background:#fff;
-            box-shadow:var(--shadow-lg);
-            text-align:center;
-        }
-
-        .modal-icon {
-            width:56px;
-            height:56px;
-            margin:0 auto 10px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:16px;
-            color:var(--primary);
-            background:var(--primary-soft);
-            font-size:20px;
-        }
-
-        .modal-card h3 {
-            font-size:16px;
-        }
-
-        .modal-card p {
-            margin-top:7px;
-            color:var(--soft);
-            font-size:8px;
-            line-height:1.7;
-        }
-
-        .modal-actions {
-            margin-top:16px;
-            display:flex;
-            gap:7px;
-        }
-
-        .modal-actions button {
-            flex:1;
-            min-height:40px;
-        }
-
-        .footer {
-            margin-top:20px;
-            color:#fff;
-            background:#17151b;
-        }
-
-        .footer-inner {
-            width:min(calc(100% - 30px),var(--container));
-            margin:auto;
-            padding:35px 0 18px;
-        }
-
-        .footer-grid {
-            display:grid;
-            grid-template-columns:1.5fr 1fr 1fr 1fr;
-            gap:30px;
-            padding-bottom:25px;
-        }
-
-        .footer-description {
-            max-width:320px;
-            margin-top:10px;
-            color:#9d99a5;
-            font-size:9px;
-            line-height:1.7;
-        }
-
-        .footer-heading {
-            margin-bottom:9px;
-            font-size:10px;
-        }
-
-        .footer-links {
-            display:flex;
-            flex-direction:column;
-            gap:6px;
-        }
-
-        .footer-links a {
-            color:#9d99a5;
-            font-size:8px;
-        }
-
-        .footer-links a:hover {
-            color:#fff;
-        }
-
-        .footer-bottom {
+    @media(max-width:760px) {
+        .header-inner {
+            width:calc(100% - 14px);
             display:flex;
             align-items:center;
             justify-content:space-between;
-            gap:15px;
+        }
+
+        .brand-text {
+            display:none;
+        }
+
+        .profile-shortcut {
+            padding:4px;
+        }
+
+        .profile-shortcut span {
+            display:none;
+        }
+
+        .page {
+            width:calc(100% - 14px);
             padding-top:15px;
-            border-top:1px solid rgba(255,255,255,.08);
-            color:#716d78;
-            font-size:7px;
         }
 
-        @media(max-width:1100px) {
-            .header-search {
-                display:none;
-            }
-
-            .mobile-menu {
-                display:flex;
-            }
-
-            .content-grid {
-                grid-template-columns:1fr;
-            }
-
-            .sidebar {
-                grid-template-columns:repeat(2,minmax(0,1fr));
-            }
+        .cover {
+            height:135px;
         }
 
-        @media(max-width:760px) {
-            .header-inner {
-                width:calc(100% - 14px);
-                display:flex;
-                align-items:center;
-                justify-content:space-between;
-            }
-
-            .brand-text {
-                display:none;
-            }
-
-            .profile-shortcut {
-                padding:4px;
-            }
-
-            .profile-shortcut span {
-                display:none;
-            }
-
-            .page {
-                width:calc(100% - 14px);
-                padding-top:15px;
-            }
-
-            .cover {
-                height:135px;
-            }
-
-            .profile-summary {
-                flex-direction:column;
-                align-items:flex-start;
-                padding:0 14px 17px;
-            }
-
-            .profile-main {
-                margin-top:-58px;
-                gap:11px;
-            }
-
-            .profile-photo-wrap,
-            .profile-photo {
-                width:120px;
-                height:120px;
-                flex-basis:120px;
-            }
-
-            .profile-actions {
-                width:100%;
-                justify-content:stretch;
-            }
-
-            .action-button,
-            .relationship-status {
-                flex:1;
-            }
-
-            .profile-stats {
-                margin:0 14px 17px;
-                grid-template-columns:repeat(5,1fr);
-            }
-
-            .profile-stat {
-                padding:9px 3px;
-            }
-
-            .profile-stat strong {
-                font-size:12px;
-            }
-
-            .profile-stat span {
-                font-size:5.5px;
-            }
-
-            .sidebar {
-                grid-template-columns:1fr;
-            }
-
-            .detail-grid,
-            .verification-grid {
-                grid-template-columns:1fr;
-            }
-
-            .gallery {
-                grid-template-columns:repeat(2,1fr);
-            }
-
-            .posts-shell {
-                height:72vh;
-            }
-
-            .post-actions .post-action {
-                flex:1;
-                min-width:calc(50% - 3px);
-            }
-
-            .footer-grid {
-                grid-template-columns:1fr 1fr;
-            }
+        .profile-summary {
+            flex-direction:column;
+            align-items:flex-start;
+            padding:0 14px 17px;
         }
 
-        @media(max-width:450px) {
-            .profile-name {
-                font-size:27px;
-            }
-
-            .profile-actions {
-                display:grid;
-                grid-template-columns:repeat(2,1fr);
-            }
-
-            .action-button,
-            .relationship-status {
-                width:100%;
-            }
-
-            .profile-stats {
-                margin-left:8px;
-                margin-right:8px;
-            }
-
-            .profile-stat strong {
-                font-size:11px;
-            }
-
-            .profile-stat span {
-                font-size:5px;
-            }
-
-            .footer-grid {
-                grid-template-columns:1fr;
-            }
-
-            .footer-bottom {
-                flex-direction:column;
-                align-items:flex-start;
-            }
+        .profile-main {
+            margin-top:-58px;
+            gap:11px;
         }
-    </style>
+
+        .profile-photo-wrap,
+        .profile-photo {
+            width:120px;
+            height:120px;
+            flex-basis:120px;
+        }
+
+        .profile-actions {
+            width:100%;
+            justify-content:stretch;
+        }
+
+        .action-button,
+        .relationship-status {
+            flex:1;
+        }
+
+        .profile-stats {
+            margin:0 14px 17px;
+            grid-template-columns:repeat(5,1fr);
+        }
+
+        .profile-stat {
+            padding:9px 3px;
+        }
+
+        .profile-stat strong {
+            font-size:12px;
+        }
+
+        .profile-stat span {
+            font-size:5.5px;
+        }
+
+        .sidebar {
+            grid-template-columns:1fr;
+        }
+
+        .detail-grid,
+        .verification-grid {
+            grid-template-columns:1fr;
+        }
+
+        .gallery {
+            grid-template-columns:repeat(2,1fr);
+        }
+
+        .posts-shell {
+            height:72vh;
+        }
+
+        .post-actions .post-action {
+            flex:1;
+            min-width:calc(50% - 3px);
+        }
+
+        .footer-grid {
+            grid-template-columns:1fr 1fr;
+        }
+    }
+
+    @media(max-width:450px) {
+        .profile-name {
+            font-size:27px;
+        }
+
+        .profile-actions {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+        }
+
+        .action-button,
+        .relationship-status {
+            width:100%;
+        }
+
+        .profile-stats {
+            margin-left:8px;
+            margin-right:8px;
+        }
+
+        .profile-stat strong {
+            font-size:11px;
+        }
+
+        .profile-stat span {
+            font-size:5px;
+        }
+
+        .footer-grid {
+            grid-template-columns:1fr;
+        }
+
+        .footer-bottom {
+            flex-direction:column;
+            align-items:flex-start;
+        }
+    }
+</style>
+
 </head>
-
 <body>
-
 <header class="header">
-    <div class="header-inner">
+<div class="header-inner">
 
-        <a href="dashboard.html" class="brand">
-            <img
-                src="assets/logo1/logo1.png"
-                alt="LOVEMI Logo"
-                class="brand-logo"
-                onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"
+    <a href="dashboard.html" class="brand">
+        <img
+            src="assets/logo1/logo1.png"
+            alt="LOVEMI Logo"
+            class="brand-logo"
+            onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"
+        >
+
+        <span class="brand-text">
+            <span class="brand-name">LOVEMI</span>
+            <span class="brand-tagline">DISCOVER • CONNECT • MEET</span>
+        </span>
+    </a>
+
+    <div class="header-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            id="globalSearch"
+            type="search"
+            placeholder="Search people..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="header-actions">
+
+        <a
+            href="notifications.html"
+            class="header-icon"
+            aria-label="Notifications"
+        >
+            <i class="fa-regular fa-bell"></i>
+
+            <span
+                id="notificationCount"
+                class="notification-count"
+                style="display:none;"
             >
-
-            <span class="brand-text">
-                <span class="brand-name">LOVEMI</span>
-                <span class="brand-tagline">DISCOVER • CONNECT • MEET</span>
+                0
             </span>
         </a>
 
-        <div class="header-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
+        <a
+            href="messages.html"
+            class="header-icon"
+            aria-label="Messages"
+        >
+            <i class="fa-regular fa-comment-dots"></i>
+        </a>
 
-            <input
-                id="globalSearch"
-                type="search"
-                placeholder="Search people..."
-                autocomplete="off"
+        <a
+            href="profile.html"
+            class="profile-shortcut"
+        >
+            <img
+                id="headerAvatar"
+                src="assets/images/defaults/default-avatar-male.png"
+                alt="Account"
+                onerror="this.onerror=null;this.src='assets/images/defaults/default-avatar-male.png';"
             >
-        </div>
 
-        <div class="header-actions">
-
-            <a
-                href="notifications.html"
-                class="header-icon"
-                aria-label="Notifications"
-            >
-                <i class="fa-regular fa-bell"></i>
-
-                <span
-                    id="notificationCount"
-                    class="notification-count"
-                    style="display:none;"
-                >
-                    0
-                </span>
-            </a>
-
-            <a
-                href="messages.html"
-                class="header-icon"
-                aria-label="Messages"
-            >
-                <i class="fa-regular fa-comment-dots"></i>
-            </a>
-
-            <a
-                href="profile.html"
-                class="profile-shortcut"
-            >
-                <img
-                    id="headerAvatar"
-                    src="assets/images/defaults/default-avatar-male.png"
-                    alt="Account"
-                    onerror="this.onerror=null;this.src='assets/images/defaults/default-avatar-male.png';"
-                >
-
-                <span id="headerName">Account</span>
-            </a>
-
-            <button
-                type="button"
-                class="mobile-menu"
-                id="mobileMenu"
-                aria-label="Menu"
-            >
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-        </div>
-    </div>
-</header>
-
-<nav id="mobileNavigation" class="mobile-navigation">
-    <div class="mobile-grid">
-
-        <a href="dashboard.html" class="mobile-link">
-            <i class="fa-solid fa-house"></i>
-            Dashboard
+            <span id="headerName">Account</span>
         </a>
 
-        <a href="discover.html" class="mobile-link">
-            <i class="fa-solid fa-compass"></i>
-            Discover
-        </a>
-
-        <a href="connections.html" class="mobile-link">
-            <i class="fa-solid fa-user-group"></i>
-            Connections
-        </a>
-
-        <a href="messages.html" class="mobile-link">
-            <i class="fa-regular fa-message"></i>
-            Messages
-        </a>
-
-        <a href="profile.html" class="mobile-link active">
-            <i class="fa-regular fa-user"></i>
-            Profile
-        </a>
-
-        <a href="notifications.html" class="mobile-link">
-            <i class="fa-regular fa-bell"></i>
-            Notifications
-        </a>
-
-        <a href="settings.html" class="mobile-link">
-            <i class="fa-solid fa-gear"></i>
-            Settings
-        </a>
-
-        <a href="premium.html" class="mobile-link">
-            <i class="fa-solid fa-crown"></i>
-            Premium
-        </a>
-
-    </div>
-</nav>
-
-<main class="page">
-
-    <a href="javascript:history.back()" class="back-link">
-        <i class="fa-solid fa-arrow-left"></i>
-        Back
-    </a>
-
-    <section id="profileLoading" class="loading">
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        Loading LOVEMI profile...
-    </section>
-
-    <section
-        id="profileError"
-        class="empty"
-        style="display:none;"
-    >
-        <i class="fa-solid fa-user-slash"></i>
-
-        <strong>Profile unavailable</strong>
-
-        <span id="profileErrorMessage">
-            The requested profile could not be loaded.
-        </span>
-    </section>
-
-    <div id="profileContent" style="display:none;">
-
-        <section class="profile-hero">
-
-            <div class="cover"></div>
-
-            <div class="profile-summary">
-
-                <div class="profile-main">
-
-                    <div class="profile-photo-wrap">
-
-                        <img
-                            id="profilePhoto"
-                            class="profile-photo"
-                            src="assets/images/defaults/default-avatar-male.png"
-                            alt="Profile"
-                            onerror="this.onerror=null;this.src='assets/images/defaults/default-avatar-male.png';"
-                        >
-
-                        <span
-                            id="onlineBadge"
-                            class="online-badge"
-                            style="display:none;"
-                        >
-                            <i class="fa-solid fa-circle"></i>
-                            <span id="onlineBadgeText">Offline</span>
-                        </span>
-
-                    </div>
-
-                    <div class="profile-info">
-
-                        <h1 class="profile-name">
-
-                            <span id="profileName">Member</span>
-
-                            <i
-                                id="verifiedIcon"
-                                class="fa-solid fa-circle-check verified"
-                                style="display:none;"
-                            ></i>
-
-                        </h1>
-
-                        <div
-                            id="profileUsername"
-                            class="profile-username"
-                        ></div>
-
-                        <div
-                            id="profileLocation"
-                            class="profile-location"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-                <div class="profile-actions">
-
-                    <button
-                        type="button"
-                        id="friendButton"
-                        class="action-button action-primary"
-                        style="display:none;"
-                    >
-                        <i class="fa-solid fa-user-plus"></i>
-                        Add Friend
-                    </button>
-
-                    <span
-                        id="relationshipStatus"
-                        class="relationship-status"
-                        style="display:none;"
-                    ></span>
-
-                    <button
-                        type="button"
-                        id="chatButton"
-                        class="action-button action-secondary"
-                        style="display:none;"
-                    >
-                        <i class="fa-regular fa-message"></i>
-                        Chat
-                    </button>
-
-                    <a
-                        id="whatsappButton"
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="action-button action-whatsapp"
-                        style="display:none;"
-                    >
-                        <i class="fa-brands fa-whatsapp"></i>
-                        WhatsApp
-                    </a>
-
-                    <a
-                        id="editButton"
-                        href="edit-profile.html"
-                        class="action-button action-secondary"
-                        style="display:none;"
-                    >
-                        <i class="fa-solid fa-pen"></i>
-                        Edit
-                    </a>
-
-                    <a
-                        id="reportButton"
-                        href="#"
-                        class="action-button action-danger"
-                        style="display:none;"
-                    >
-                        <i class="fa-regular fa-flag"></i>
-                        Report
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="profile-stats">
-
-                <div class="profile-stat">
-                    <strong id="postsCount">0</strong>
-                    <span>Posts</span>
-                </div>
-
-                <div class="profile-stat">
-                    <strong id="connectionsCount">0</strong>
-                    <span>Connections</span>
-                </div>
-
-                <div class="profile-stat">
-                    <strong id="followersCount">0</strong>
-                    <span>Followers</span>
-                </div>
-
-                <div class="profile-stat">
-                    <strong id="followingCount">0</strong>
-                    <span>Following</span>
-                </div>
-
-                <div class="profile-stat">
-                    <strong id="photosCount">0</strong>
-                    <span>Photos</span>
-                </div>
-
-            </div>
-
-        </section>
-
-        <div class="content-grid">
-
-            <section class="main-column">
-
-                <section class="card">
-
-                    <div class="card-heading">
-                        <h2>About</h2>
-                        <span>Profile information</span>
-                    </div>
-
-                    <p
-                        id="profileBio"
-                        class="bio empty"
-                    >
-                        This member has not added an About Me description yet.
-                    </p>
-
-                    <div
-                        id="aboutDetails"
-                        class="detail-grid"
-                        style="margin-top:13px;"
-                    >
-
-                        <div class="detail">
-                            <div class="detail-label">Occupation</div>
-                            <div id="aboutOccupation" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Education</div>
-                            <div id="aboutEducation" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Relationship</div>
-                            <div id="aboutRelationship" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Looking For</div>
-                            <div id="aboutLookingFor" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Interests</div>
-                            <div id="aboutInterests" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Member Since</div>
-                            <div id="aboutJoined" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div
-                            id="ownerEmailDetail"
-                            class="detail"
-                            style="display:none;"
-                        >
-                            <div class="detail-label">Email</div>
-                            <div id="ownerEmail" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div
-                            id="ownerDobDetail"
-                            class="detail"
-                            style="display:none;"
-                        >
-                            <div class="detail-label">Date of Birth</div>
-                            <div id="ownerDob" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <section class="card">
-
-                    <div class="posts-header">
-
-                        <div>
-                            <h2>Posts</h2>
-
-                            <p>
-                                Posts, pictures, videos and discussions
-                            </p>
-                        </div>
-
-                        <span
-                            id="postsCounter"
-                            class="posts-count"
-                        >
-                            0
-                        </span>
-
-                    </div>
-
-                    <div id="postsShell" class="posts-shell">
-
-                        <div
-                            id="postsFeed"
-                            class="posts-feed"
-                        >
-                            <div class="loading">
-                                <i class="fa-solid fa-spinner fa-spin"></i>
-                                Loading posts...
-                            </div>
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <section class="card">
-
-                    <div class="card-heading">
-                        <h2>Photos</h2>
-
-                        <span>
-                            Approved member photos
-                        </span>
-                    </div>
-
-                    <div
-                        id="gallery"
-                        class="gallery"
-                    ></div>
-
-                </section>
-
-                <section class="privacy-box">
-
-                    <i class="fa-solid fa-lock"></i>
-
-                    LOVEMI protects private member information.
-                    Contact information is shown only when the server
-                    confirms that the viewer has the required access.
-
-                </section>
-
-            </section>
-
-            <aside class="sidebar">
-
-                <section class="card">
-
-                    <div class="card-heading">
-                        <h2>Profile Details</h2>
-                        <span>Member information</span>
-                    </div>
-
-                    <div class="detail-grid">
-
-                        <div class="detail">
-                            <div class="detail-label">Gender</div>
-                            <div id="detailGender" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Country</div>
-                            <div id="detailCountry" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">City</div>
-                            <div id="detailCity" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Status</div>
-                            <div id="detailStatus" class="detail-value">
-                                Offline
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Username</div>
-                            <div id="detailUsername" class="detail-value">
-                                Not specified
-                            </div>
-                        </div>
-
-                        <div class="detail">
-                            <div class="detail-label">Visibility</div>
-                            <div id="detailVisibility" class="detail-value">
-                                Public
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="card-heading"
-                        style="margin-top:15px;"
-                    >
-                        <h2>Verification</h2>
-                    </div>
-
-                    <div class="verification-grid">
-
-                        <div
-                            id="verifyEmail"
-                            class="verification-item off"
-                        >
-                            <i class="fa-solid fa-envelope"></i>
-
-                            <div>
-                                <strong>Email</strong>
-                                <span>Not verified</span>
-                            </div>
-                        </div>
-
-                        <div
-                            id="verifyPhone"
-                            class="verification-item off"
-                        >
-                            <i class="fa-solid fa-phone"></i>
-
-                            <div>
-                                <strong>Phone</strong>
-                                <span>Not verified</span>
-                            </div>
-                        </div>
-
-                        <div
-                            id="verifyIdentity"
-                            class="verification-item off"
-                        >
-                            <i class="fa-solid fa-id-card"></i>
-
-                            <div>
-                                <strong>Identity</strong>
-                                <span>Not verified</span>
-                            </div>
-                        </div>
-
-                        <div
-                            id="verifyAge"
-                            class="verification-item off"
-                        >
-                            <i class="fa-solid fa-user-check"></i>
-
-                            <div>
-                                <strong>Age</strong>
-                                <span>Not verified</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div
-                        id="contactSection"
-                        style="display:none;margin-top:15px;"
-                    >
-
-                        <div class="contact-box">
-
-                            <div class="contact-box-title">
-                                <i class="fa-solid fa-address-book"></i>
-                                Contact
-                            </div>
-
-                            <div class="contact-box-note">
-                                Contact information is displayed only
-                                when LOVEMI authorizes access.
-                            </div>
-
-                            <div
-                                id="phoneRow"
-                                class="contact-row"
-                                style="display:none;"
-                            >
-                                <small>Phone</small>
-                                <strong id="phoneValue"></strong>
-                            </div>
-
-                            <div
-                                id="whatsappRow"
-                                class="contact-row"
-                                style="display:none;"
-                            >
-                                <small>WhatsApp</small>
-                                <strong id="whatsappValue"></strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <section class="card">
-
-                    <div class="card-heading">
-                        <h2>Connections</h2>
-
-                        <span>
-                            People connected with this member
-                        </span>
-                    </div>
-
-                    <div
-                        id="connectionList"
-                        class="connection-list"
-                    >
-                        <div class="loading">
-                            <i class="fa-solid fa-spinner fa-spin"></i>
-                            Loading...
-                        </div>
-                    </div>
-
-                </section>
-
-                <section class="card">
-
-                    <div class="privacy-box">
-
-                        <i class="fa-solid fa-shield-halved"></i>
-
-                        Stay safe on LOVEMI. Never share passwords,
-                        verification codes, banking information or
-                        identity documents through comments or chat.
-
-                    </div>
-
-                </section>
-
-            </aside>
-
-        </div>
-    </div>
-</main>
-
-<div
-    id="accessModal"
-    class="modal"
->
-    <div class="modal-card">
-
-        <div class="modal-icon">
-            <i id="accessModalIcon" class="fa-solid fa-link"></i>
-        </div>
-
-        <h3 id="accessModalTitle">
-            Action required
-        </h3>
-
-        <p id="accessModalMessage">
-            LOVEMI requires additional access for this action.
-        </p>
-
-        <div class="modal-actions">
-
-            <button
-                type="button"
-                id="accessCancel"
-                class="action-button action-secondary"
-            >
-                Cancel
-            </button>
-
-            <button
-                type="button"
-                id="accessContinue"
-                class="action-button action-primary"
-            >
-                Continue
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-label="Menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
     </div>
 </div>
 
-<div
-    id="toast"
-    class="toast"
-></div>
+</header>
+<nav id="mobileNavigation" class="mobile-navigation">
+<div class="mobile-grid">
 
-<audio
-    id="notificationAudio"
-    preload="auto"
+    <a href="dashboard.html" class="mobile-link">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="discover.html" class="mobile-link">
+        <i class="fa-solid fa-compass"></i>
+        Discover
+    </a>
+
+    <a href="connections.html" class="mobile-link">
+        <i class="fa-solid fa-user-group"></i>
+        Connections
+    </a>
+
+    <a href="messages.html" class="mobile-link">
+        <i class="fa-regular fa-message"></i>
+        Messages
+    </a>
+
+    <a href="profile.html" class="mobile-link active">
+        <i class="fa-regular fa-user"></i>
+        Profile
+    </a>
+
+    <a href="notifications.html" class="mobile-link">
+        <i class="fa-regular fa-bell"></i>
+        Notifications
+    </a>
+
+    <a href="settings.html" class="mobile-link">
+        <i class="fa-solid fa-gear"></i>
+        Settings
+    </a>
+
+    <a href="premium.html" class="mobile-link">
+        <i class="fa-solid fa-crown"></i>
+        Premium
+    </a>
+
+</div>
+
+</nav>
+<main class="page">
+
+<a href="javascript:history.back()" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back
+</a>
+
+<section id="profileLoading" class="loading">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    Loading LOVEMI profile...
+</section>
+
+<section
+    id="profileError"
+    class="empty"
+    style="display:none;"
 >
-    <source
-        src="assets/audio/notification1.mp3"
-        type="audio/mpeg"
-    >
-</audio>
+    <i class="fa-solid fa-user-slash"></i>
 
-<footer class="footer">
+    <strong>Profile unavailable</strong>
 
-    <div class="footer-inner">
+    <span id="profileErrorMessage">
+        The requested profile could not be loaded.
+    </span>
+</section>
 
-        <div class="footer-grid">
+<div id="profileContent" style="display:none;">
 
-            <div>
+    <section class="profile-hero">
 
-                <a href="dashboard.html" class="brand">
+        <div class="cover"></div>
+
+        <div class="profile-summary">
+
+            <div class="profile-main">
+
+                <div class="profile-photo-wrap">
 
                     <img
-                        src="assets/logo1/logo1.png"
-                        alt="LOVEMI"
-                        class="brand-logo"
-                        onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"
+                        id="profilePhoto"
+                        class="profile-photo"
+                        src="assets/images/defaults/default-avatar-male.png"
+                        alt="Profile"
+                        onerror="this.onerror=null;this.src='assets/images/defaults/default-avatar-male.png';"
                     >
 
-                    <span class="brand-text">
-
-                        <span class="brand-name">
-                            LOVEMI
-                        </span>
-
-                        <span
-                            class="brand-tagline"
-                            style="color:#77717f;"
-                        >
-                            DISCOVER • CONNECT • MEET
-                        </span>
-
+                    <span
+                        id="onlineBadge"
+                        class="online-badge"
+                        style="display:none;"
+                    >
+                        <i class="fa-solid fa-circle"></i>
+                        <span id="onlineBadgeText">Offline</span>
                     </span>
 
+                </div>
+
+                <div class="profile-info">
+
+                    <h1 class="profile-name">
+
+                        <span id="profileName">Member</span>
+
+                        <i
+                            id="verifiedIcon"
+                            class="fa-solid fa-circle-check verified"
+                            style="display:none;"
+                        ></i>
+
+                    </h1>
+
+                    <div
+                        id="profileUsername"
+                        class="profile-username"
+                    ></div>
+
+                    <div
+                        id="profileLocation"
+                        class="profile-location"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            <div class="profile-actions">
+
+                <button
+                    type="button"
+                    id="friendButton"
+                    class="action-button action-primary"
+                    style="display:none;"
+                >
+                    <i class="fa-solid fa-user-plus"></i>
+                    Add Friend
+                </button>
+
+                <span
+                    id="relationshipStatus"
+                    class="relationship-status"
+                    style="display:none;"
+                ></span>
+
+                <button
+                    type="button"
+                    id="chatButton"
+                    class="action-button action-secondary"
+                    style="display:none;"
+                >
+                    <i class="fa-regular fa-message"></i>
+                    Chat
+                </button>
+
+                <a
+                    id="whatsappButton"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-button action-whatsapp"
+                    style="display:none;"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    WhatsApp
                 </a>
 
-                <p class="footer-description">
-                    Discover approved members, build meaningful
-                    connections and manage your LOVEMI profile securely.
-                </p>
+                <a
+                    id="editButton"
+                    href="edit-profile.html"
+                    class="action-button action-secondary"
+                    style="display:none;"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                </a>
 
-            </div>
-
-            <div>
-
-                <h3 class="footer-heading">
-                    Explore
-                </h3>
-
-                <div class="footer-links">
-
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="discover.html">Discover</a>
-                    <a href="connections.html">Connections</a>
-                    <a href="messages.html">Messages</a>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <h3 class="footer-heading">
-                    Account
-                </h3>
-
-                <div class="footer-links">
-
-                    <a href="profile.html">Profile</a>
-                    <a href="edit-profile.html">Edit Profile</a>
-                    <a href="premium.html">Premium</a>
-                    <a href="settings.html">Settings</a>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <h3 class="footer-heading">
-                    Help
-                </h3>
-
-                <div class="footer-links">
-
-                    <a href="help.html">Help Center</a>
-                    <a href="privacy.html">Privacy</a>
-                    <a href="terms.html">Terms</a>
-                    <a href="contact.html">Contact</a>
-
-                </div>
+                <a
+                    id="reportButton"
+                    href="#"
+                    class="action-button action-danger"
+                    style="display:none;"
+                >
+                    <i class="fa-regular fa-flag"></i>
+                    Report
+                </a>
 
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="profile-stats">
 
-            <span>
-                © <span id="year"></span> LOVEMI. All rights reserved.
-            </span>
+            <div class="profile-stat">
+                <strong id="postsCount">0</strong>
+                <span>Posts</span>
+            </div>
 
-            <span>
-                Discover • Connect • Meet
-            </span>
+            <div class="profile-stat">
+                <strong id="connectionsCount">0</strong>
+                <span>Connections</span>
+            </div>
+
+            <div class="profile-stat">
+                <strong id="followersCount">0</strong>
+                <span>Followers</span>
+            </div>
+
+            <div class="profile-stat">
+                <strong id="followingCount">0</strong>
+                <span>Following</span>
+            </div>
+
+            <div class="profile-stat">
+                <strong id="photosCount">0</strong>
+                <span>Photos</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="content-grid">
+
+        <section class="main-column">
+
+            <section class="card">
+
+                <div class="card-heading">
+                    <h2>About</h2>
+                    <span>Profile information</span>
+                </div>
+
+                <p
+                    id="profileBio"
+                    class="bio empty"
+                >
+                    This member has not added an About Me description yet.
+                </p>
+
+                <div
+                    id="aboutDetails"
+                    class="detail-grid"
+                    style="margin-top:13px;"
+                >
+
+                    <div class="detail">
+                        <div class="detail-label">Occupation</div>
+                        <div id="aboutOccupation" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Education</div>
+                        <div id="aboutEducation" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Relationship</div>
+                        <div id="aboutRelationship" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Looking For</div>
+                        <div id="aboutLookingFor" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Interests</div>
+                        <div id="aboutInterests" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Member Since</div>
+                        <div id="aboutJoined" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div
+                        id="ownerEmailDetail"
+                        class="detail"
+                        style="display:none;"
+                    >
+                        <div class="detail-label">Email</div>
+                        <div id="ownerEmail" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div
+                        id="ownerDobDetail"
+                        class="detail"
+                        style="display:none;"
+                    >
+                        <div class="detail-label">Date of Birth</div>
+                        <div id="ownerDob" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <div class="posts-header">
+
+                    <div>
+                        <h2>Posts</h2>
+
+                        <p>
+                            Posts, pictures, videos and discussions
+                        </p>
+                    </div>
+
+                    <span
+                        id="postsCounter"
+                        class="posts-count"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+                <div id="postsShell" class="posts-shell">
+
+                    <div
+                        id="postsFeed"
+                        class="posts-feed"
+                    >
+                        <div class="loading">
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                            Loading posts...
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <div class="card-heading">
+                    <h2>Photos</h2>
+
+                    <span>
+                        Approved member photos
+                    </span>
+                </div>
+
+                <div
+                    id="gallery"
+                    class="gallery"
+                ></div>
+
+            </section>
+
+            <section class="privacy-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                LOVEMI protects private member information.
+                Contact information is shown only when the server
+                confirms that the viewer has the required access.
+
+            </section>
+
+        </section>
+
+        <aside class="sidebar">
+
+            <section class="card">
+
+                <div class="card-heading">
+                    <h2>Profile Details</h2>
+                    <span>Member information</span>
+                </div>
+
+                <div class="detail-grid">
+
+                    <div class="detail">
+                        <div class="detail-label">Gender</div>
+                        <div id="detailGender" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Country</div>
+                        <div id="detailCountry" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">City</div>
+                        <div id="detailCity" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Status</div>
+                        <div id="detailStatus" class="detail-value">
+                            Offline
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Username</div>
+                        <div id="detailUsername" class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div class="detail-label">Visibility</div>
+                        <div id="detailVisibility" class="detail-value">
+                            Public
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    class="card-heading"
+                    style="margin-top:15px;"
+                >
+                    <h2>Verification</h2>
+                </div>
+
+                <div class="verification-grid">
+
+                    <div
+                        id="verifyEmail"
+                        class="verification-item off"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <div>
+                            <strong>Email</strong>
+                            <span>Not verified</span>
+                        </div>
+                    </div>
+
+                    <div
+                        id="verifyPhone"
+                        class="verification-item off"
+                    >
+                        <i class="fa-solid fa-phone"></i>
+
+                        <div>
+                            <strong>Phone</strong>
+                            <span>Not verified</span>
+                        </div>
+                    </div>
+
+                    <div
+                        id="verifyIdentity"
+                        class="verification-item off"
+                    >
+                        <i class="fa-solid fa-id-card"></i>
+
+                        <div>
+                            <strong>Identity</strong>
+                            <span>Not verified</span>
+                        </div>
+                    </div>
+
+                    <div
+                        id="verifyAge"
+                        class="verification-item off"
+                    >
+                        <i class="fa-solid fa-user-check"></i>
+
+                        <div>
+                            <strong>Age</strong>
+                            <span>Not verified</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    id="contactSection"
+                    style="display:none;margin-top:15px;"
+                >
+
+                    <div class="contact-box">
+
+                        <div class="contact-box-title">
+                            <i class="fa-solid fa-address-book"></i>
+                            Contact
+                        </div>
+
+                        <div class="contact-box-note">
+                            Contact information is displayed only
+                            when LOVEMI authorizes access.
+                        </div>
+
+                        <div
+                            id="phoneRow"
+                            class="contact-row"
+                            style="display:none;"
+                        >
+                            <small>Phone</small>
+                            <strong id="phoneValue"></strong>
+                        </div>
+
+                        <div
+                            id="whatsappRow"
+                            class="contact-row"
+                            style="display:none;"
+                        >
+                            <small>WhatsApp</small>
+                            <strong id="whatsappValue"></strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <div class="card-heading">
+                    <h2>Connections</h2>
+
+                    <span>
+                        People connected with this member
+                    </span>
+                </div>
+
+                <div
+                    id="connectionList"
+                    class="connection-list"
+                >
+                    <div class="loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        Loading...
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <div class="privacy-box">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Stay safe on LOVEMI. Never share passwords,
+                    verification codes, banking information or
+                    identity documents through comments or chat.
+
+                </div>
+
+            </section>
+
+        </aside>
+
+    </div>
+</div>
+
+</main>
+<div
+id="accessModal"
+class="modal"
+>
+<div class="modal-card">
+
+    <div class="modal-icon">
+        <i id="accessModalIcon" class="fa-solid fa-link"></i>
+    </div>
+
+    <h3 id="accessModalTitle">
+        Action required
+    </h3>
+
+    <p id="accessModalMessage">
+        LOVEMI requires additional access for this action.
+    </p>
+
+    <div class="modal-actions">
+
+        <button
+            type="button"
+            id="accessCancel"
+            class="action-button action-secondary"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="button"
+            id="accessContinue"
+            class="action-button action-primary"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+<div
+id="toast"
+class="toast"
+></div>
+<audio
+id="notificationAudio"
+preload="auto"
+>
+<source
+src="assets/audio/notification1.mp3"
+type="audio/mpeg"
+>
+</audio>
+<footer class="footer">
+
+<div class="footer-inner">
+
+    <div class="footer-grid">
+
+        <div>
+
+            <a href="dashboard.html" class="brand">
+
+                <img
+                    src="assets/logo1/logo1.png"
+                    alt="LOVEMI"
+                    class="brand-logo"
+                    onerror="this.onerror=null;this.src='assets/logo1/apple-touch-icon.png';"
+                >
+
+                <span class="brand-text">
+
+                    <span class="brand-name">
+                        LOVEMI
+                    </span>
+
+                    <span
+                        class="brand-tagline"
+                        style="color:#77717f;"
+                    >
+                        DISCOVER • CONNECT • MEET
+                    </span>
+
+                </span>
+
+            </a>
+
+            <p class="footer-description">
+                Discover approved members, build meaningful
+                connections and manage your LOVEMI profile securely.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3 class="footer-heading">
+                Explore
+            </h3>
+
+            <div class="footer-links">
+
+                <a href="dashboard.html">Dashboard</a>
+                <a href="discover.html">Discover</a>
+                <a href="connections.html">Connections</a>
+                <a href="messages.html">Messages</a>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h3 class="footer-heading">
+                Account
+            </h3>
+
+            <div class="footer-links">
+
+                <a href="profile.html">Profile</a>
+                <a href="edit-profile.html">Edit Profile</a>
+                <a href="premium.html">Premium</a>
+                <a href="settings.html">Settings</a>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h3 class="footer-heading">
+                Help
+            </h3>
+
+            <div class="footer-links">
+
+                <a href="help.html">Help Center</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
 
         </div>
 
     </div>
 
-</footer>
+    <div class="footer-bottom">
 
+        <span>
+            © <span id="year"></span> LOVEMI. All rights reserved.
+        </span>
+
+        <span>
+            Discover • Connect • Meet
+        </span>
+
+    </div>
+
+</div>
+
+</footer>
 <script>
 "use strict";
-
 /* ============================================================
-   API
+API
 ============================================================ */
-
 const API = {
-    session: "api/auth/session.php",
-    profile: "api/profile/data.php",
-    posts: "api/profile/posts.php",
-    comments: "api/profile/comments.php",
-    comment: "api/profile/comment.php",
-    react: "api/posts/react.php",
-    connection: "api/connections/create.php",
-    premium: "api/premium/status.php",
-    chatCreate: "api/chat/create-conversation.php",
-    notifications: "api/notifications/unread-count.php"
+session: "api/auth/session.php",
+profile: "api/profile/data.php",
+posts: "api/profile/posts.php",
+comments: "api/profile/comments.php",
+comment: "api/profile/comment.php",
+react: "api/posts/react.php",
+connection: "api/connections/create.php",
+premium: "api/premium/status.php",
+chatCreate: "api/chat/create-conversation.php",
+notifications: "api/notifications/unread-count.php"
 };
-
 const DEFAULT_MALE =
-    "assets/images/defaults/default-avatar-male.png";
-
+"assets/images/defaults/default-avatar-male.png";
 const DEFAULT_FEMALE =
-    "assets/images/defaults/default-avatar-female.png";
-
+"assets/images/defaults/default-avatar-female.png";
 const state = {
-    currentUser:null,
-    profile:null,
-    profileResult:null,
-    profileCode:"",
-    isOwn:false,
+currentUser:null,
+profile:null,
+profileResult:null,
+profileCode:"",
+isOwn:false,
 
     posts:[],
     page:1,
@@ -2630,27 +2823,23 @@ const state = {
 
     accessAction:null,
     accessHandler:null
+
 };
-
 const $ = selector =>
-    document.querySelector(selector);
-
+document.querySelector(selector);
 const $$ = selector =>
-    Array.from(
-        document.querySelectorAll(selector)
-    );
-
+Array.from(
+document.querySelectorAll(selector)
+);
 $("#year").textContent =
-    String(
-        new Date().getFullYear()
-    );
-
+String(
+new Date().getFullYear()
+);
 /* ============================================================
-   ESCAPE
+ESCAPE
 ============================================================ */
-
 function escapeHtml(
-    value
+value
 ) {
 
     return String(
@@ -2676,15 +2865,14 @@ function escapeHtml(
         "'",
         "&#039;"
     );
+
 }
-
 /* ============================================================
-   SAFE IMAGE
+SAFE IMAGE
 ============================================================ */
-
 function safeImage(
-    value,
-    gender=""
+value,
+gender=""
 ) {
 
     const fallback =
@@ -2702,15 +2890,14 @@ function safeImage(
     }
 
     return value.trim();
+
 }
-
 /* ============================================================
-   SAFE URL
-   Handles normal web paths and paths returned from PHP/MySQL.
+SAFE URL
+Handles normal web paths and paths returned from PHP/MySQL.
 ============================================================ */
-
 function safeUrl(
-    value
+value
 ) {
 
     let input =
@@ -2724,7 +2911,7 @@ function safeUrl(
 
     input =
         input.replace(
-            /\\/g,
+            /\\\\/g,
             "/"
         );
 
@@ -2815,14 +3002,13 @@ function safeUrl(
     }
 
     return "";
+
 }
-
 /* ============================================================
-   DATE FORMAT
+DATE FORMAT
 ============================================================ */
-
 function formatDate(
-    value
+value
 ) {
 
     if (!value) {
@@ -2852,10 +3038,10 @@ function formatDate(
             timeStyle:"short"
         }
     );
-}
 
+}
 function formatShortDate(
-    value
+value
 ) {
 
     if (!value) {
@@ -2884,18 +3070,16 @@ function formatShortDate(
             dateStyle:"medium"
         }
     );
+
 }
-
 /* ============================================================
-   TOAST
+TOAST
 ============================================================ */
-
 let toastTimer =
-    null;
-
+null;
 function toast(
-    message,
-    type="success"
+message,
+type="success"
 ) {
 
     const element =
@@ -2950,14 +3134,13 @@ function toast(
                 ),
             4000
         );
+
 }
-
 /* ============================================================
-   JSON
+JSON
 ============================================================ */
-
 async function parseJson(
-    response
+response
 ) {
 
     const text =
@@ -3000,14 +3183,13 @@ async function parseJson(
             "The server returned an invalid response. Check the LOVEMI PHP error log."
         );
     }
+
 }
-
 /* ============================================================
-   GET
+GET
 ============================================================ */
-
 async function apiGet(
-    url
+url
 ) {
 
     const join =
@@ -3042,15 +3224,14 @@ async function apiGet(
         response,
         result
     };
+
 }
-
 /* ============================================================
-   POST
+POST
 ============================================================ */
-
 async function apiPost(
-    url,
-    data
+url,
+data
 ) {
 
     const response =
@@ -3084,12 +3265,11 @@ async function apiPost(
         response,
         result
     };
+
 }
-
 /* ============================================================
-   PROFILE CODE
+PROFILE CODE
 ============================================================ */
-
 function getCode() {
 
     const params =
@@ -3103,12 +3283,11 @@ function getCode() {
         )
         || ""
     ).trim();
+
 }
-
 /* ============================================================
-   SESSION
+SESSION
 ============================================================ */
-
 async function loadSession() {
 
     const {
@@ -3156,14 +3335,13 @@ async function loadSession() {
         );
 
     return true;
+
 }
-
 /* ============================================================
-   CONNECTION HELPERS
+CONNECTION HELPERS
 ============================================================ */
-
 function isActive(
-    status
+status
 ) {
 
     return [
@@ -3175,10 +3353,10 @@ function isActive(
             status || ""
         ).toLowerCase()
     );
-}
 
+}
 function isPending(
-    status
+status
 ) {
 
     return [
@@ -3192,14 +3370,13 @@ function isPending(
             status || ""
         ).toLowerCase()
     );
+
 }
-
 /* ============================================================
-   ONLINE
+ONLINE
 ============================================================ */
-
 function renderOnline(
-    online
+online
 ) {
 
     const badge =
@@ -3232,15 +3409,14 @@ function renderOnline(
         online
             ? "Online"
             : "Offline";
+
 }
-
 /* ============================================================
-   VERIFICATION
+VERIFICATION
 ============================================================ */
-
 function updateVerification(
-    selector,
-    verified
+selector,
+verified
 ) {
 
     const row =
@@ -3280,14 +3456,13 @@ function updateVerification(
                 ? "Verified"
                 : "Not verified";
     }
+
 }
-
 /* ============================================================
-   WHATSAPP
+WHATSAPP
 ============================================================ */
-
 function normalizeWhatsApp(
-    value
+value
 ) {
 
     let number =
@@ -3330,15 +3505,14 @@ function normalizeWhatsApp(
     return number.length >= 9
         ? number
         : "";
+
 }
-
 /* ============================================================
-   RENDER PROFILE
+RENDER PROFILE
 ============================================================ */
-
 function renderProfile(
-    profile,
-    result
+profile,
+result
 ) {
 
     $("#profileLoading")
@@ -3641,14 +3815,13 @@ function renderProfile(
                 0
             )
         );
+
 }
-
 /* ============================================================
-   CONTACT
+CONTACT
 ============================================================ */
-
 function renderContact(
-    result
+result
 ) {
 
     const section =
@@ -3720,14 +3893,13 @@ function renderContact(
         $("#whatsappValue").textContent =
             whatsapp;
     }
+
 }
-
 /* ============================================================
-   ACTION BUTTONS
+ACTION BUTTONS
 ============================================================ */
-
 function renderActions(
-    result
+result
 ) {
 
     const friend =
@@ -3930,12 +4102,11 @@ function renderActions(
         whatsapp.style.display =
             "none";
     }
+
 }
-
 /* ============================================================
-   LOAD PROFILE
+LOAD PROFILE
 ============================================================ */
-
 async function loadProfile() {
 
     try {
@@ -4059,14 +4230,13 @@ async function loadProfile() {
             || "Unable to load this profile."
         );
     }
+
 }
-
 /* ============================================================
-   CONNECTIONS
+CONNECTIONS
 ============================================================ */
-
 function renderConnections(
-    rows
+rows
 ) {
 
     const container =
@@ -4190,14 +4360,13 @@ function renderConnections(
                 }
             )
             .join("");
+
 }
-
 /* ============================================================
-   GALLERY
+GALLERY
 ============================================================ */
-
 function renderGallery(
-    rows
+rows
 ) {
 
     const gallery =
@@ -4280,16 +4449,15 @@ function renderGallery(
                 }
             )
             .join("");
+
 }
-
 /* ============================================================
-   POST MEDIA NORMALIZATION
-   This is intentionally tolerant of the different field names
-   that may already exist in the LOVEMI API response.
+POST MEDIA NORMALIZATION
+This is intentionally tolerant of the different field names
+that may already exist in the LOVEMI API response.
 ============================================================ */
-
 function postMedia(
-    post
+post
 ) {
 
     const candidates = [
@@ -4316,14 +4484,13 @@ function postMedia(
     }
 
     return [];
+
 }
-
 /* ============================================================
-   MEDIA TYPE
+MEDIA TYPE
 ============================================================ */
-
 function mediaType(
-    media
+media
 ) {
 
     const mime =
@@ -4367,7 +4534,7 @@ function mediaType(
         .toLowerCase();
 
     if (
-        /\.(jpg|jpeg|png|gif|webp|bmp|svg|avif)(\?.*)?$/.test(
+        /\.(jpg|jpeg|png|gif|webp|bmp|svg|avif)(\?.+)?$/.test(
             url
         )
     ) {
@@ -4376,7 +4543,7 @@ function mediaType(
     }
 
     if (
-        /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/.test(
+        /\.(mp4|webm|ogg|mov|m4v)(\?.+)?$/.test(
             url
         )
     ) {
@@ -4385,14 +4552,13 @@ function mediaType(
     }
 
     return "document";
+
 }
-
 /* ============================================================
-   RENDER POSTS
+RENDER POSTS
 ============================================================ */
-
 async function loadPosts(
-    reset=false
+reset=false
 ) {
 
     if (
@@ -4583,53 +4749,50 @@ async function loadPosts(
         state.loadingPosts =
             false;
     }
+
 }
-
 /* ============================================================
-   SAFE RICH TEXT
+SAFE RICH TEXT
 ============================================================ */
-
 const SAFE_TAGS =
-    new Set(
-        [
-            "b",
-            "strong",
-            "i",
-            "em",
-            "u",
-            "s",
-            "del",
-            "ins",
-            "br",
-            "p",
-            "div",
-            "span",
-            "small",
-            "mark",
-            "blockquote",
-            "ul",
-            "ol",
-            "li",
-            "sub",
-            "sup",
-            "a"
-        ]
-    );
-
+new Set(
+[
+"b",
+"strong",
+"i",
+"em",
+"u",
+"s",
+"del",
+"ins",
+"br",
+"p",
+"div",
+"span",
+"small",
+"mark",
+"blockquote",
+"ul",
+"ol",
+"li",
+"sub",
+"sup",
+"a"
+]
+);
 const SAFE_STYLES =
-    new Set(
-        [
-            "color",
-            "background-color",
-            "font-weight",
-            "font-style",
-            "text-decoration",
-            "text-align"
-        ]
-    );
-
+new Set(
+[
+"color",
+"background-color",
+"font-weight",
+"font-style",
+"text-decoration",
+"text-align"
+]
+);
 function safeStyle(
-    input
+input
 ) {
 
     const output = [];
@@ -4760,10 +4923,10 @@ function safeStyle(
     return output.join(
         ";"
     );
-}
 
+}
 function sanitizeHtml(
-    input
+input
 ) {
 
     const parser =
@@ -4924,14 +5087,13 @@ function sanitizeHtml(
     );
 
     return output.innerHTML;
+
 }
-
 /* ============================================================
-   BUILD POST
+BUILD POST
 ============================================================ */
-
 function buildPost(
-    post
+post
 ) {
 
     const article =
@@ -5362,12 +5524,11 @@ function buildPost(
         );
 
     return article;
+
 }
-
 /* ============================================================
-   RENDER POSTS
+RENDER POSTS
 ============================================================ */
-
 function renderPosts() {
 
     const feed =
@@ -5410,16 +5571,15 @@ function renderPosts() {
             );
         }
     );
+
 }
-
 /* ============================================================
-   RENDER MEDIA
-   Corrected so image posts display even when the API uses:
-   media_url / image_url / photo_url / file_url / path / file_path.
+RENDER MEDIA
+Corrected so image posts display even when the API uses:
+media_url / image_url / photo_url / file_url / path / file_path.
 ============================================================ */
-
 function renderMedia(
-    media
+media
 ) {
 
     if (
@@ -5675,15 +5835,14 @@ function renderMedia(
 
         </div>
     `;
+
 }
-
 /* ============================================================
-   LIKE
+LIKE
 ============================================================ */
-
 async function reactToPost(
-    post,
-    article
+post,
+article
 ) {
 
     const postId =
@@ -5850,16 +6009,15 @@ async function reactToPost(
         button.disabled =
             false;
     }
+
 }
-
 /* ============================================================
-   COMMENTS
+COMMENTS
 ============================================================ */
-
 async function toggleComments(
-    postId,
-    article,
-    forceOpen=false
+postId,
+article,
+forceOpen=false
 ) {
 
     const panel =
@@ -5911,15 +6069,14 @@ async function toggleComments(
             article
         );
     }
+
 }
-
 /* ============================================================
-   LOAD COMMENTS
+LOAD COMMENTS
 ============================================================ */
-
 async function loadComments(
-    postId,
-    article
+postId,
+article
 ) {
 
     const list =
@@ -6117,15 +6274,14 @@ async function loadComments(
                 </div>
             `;
     }
+
 }
-
 /* ============================================================
-   COMMENT RENDER
+COMMENT RENDER
 ============================================================ */
-
 function renderComment(
-    comment,
-    depth
+comment,
+depth
 ) {
 
     const id =
@@ -6219,11 +6375,11 @@ function renderComment(
 
         </div>
     `;
-}
 
+}
 function updateCommentCount(
-    article,
-    count
+article,
+count
 ) {
 
     const element =
@@ -6241,16 +6397,15 @@ function updateCommentCount(
                 || 0
             );
     }
+
 }
-
 /* ============================================================
-   REPLY
+REPLY
 ============================================================ */
-
 function startReply(
-    article,
-    id,
-    name
+article,
+id,
+name
 ) {
 
     const input =
@@ -6299,10 +6454,10 @@ function startReply(
         text.textContent =
             `Replying to ${name}.`;
     }
-}
 
+}
 function clearReply(
-    article
+article
 ) {
 
     const input =
@@ -6333,15 +6488,14 @@ function clearReply(
             "show"
         );
     }
+
 }
-
 /* ============================================================
-   SUBMIT COMMENT
+SUBMIT COMMENT
 ============================================================ */
-
 async function submitComment(
-    postId,
-    article
+postId,
+article
 ) {
 
     const input =
@@ -6477,14 +6631,13 @@ async function submitComment(
         button.disabled =
             false;
     }
+
 }
-
 /* ============================================================
-   SHARE
+SHARE
 ============================================================ */
-
 async function sharePost(
-    post
+post
 ) {
 
     const id =
@@ -6564,18 +6717,16 @@ async function sharePost(
             error
         );
     }
+
 }
-
 /* ============================================================
-   FRIEND BUTTON
+FRIEND BUTTON
 ============================================================ */
-
 $("#friendButton")
-    .addEventListener(
-        "click",
-        handleFriendButton
-    );
-
+.addEventListener(
+"click",
+handleFriendButton
+);
 async function handleFriendButton() {
 
     if (
@@ -6660,14 +6811,13 @@ async function handleFriendButton() {
     await sendConnectionRequest(
         targetId
     );
+
 }
-
 /* ============================================================
-   SEND CONNECTION REQUEST
+SEND CONNECTION REQUEST
 ============================================================ */
-
 async function sendConnectionRequest(
-    targetId
+targetId
 ) {
 
     try {
@@ -6835,18 +6985,16 @@ async function sendConnectionRequest(
             "error"
         );
     }
+
 }
-
 /* ============================================================
-   CHAT
+CHAT
 ============================================================ */
-
 $("#chatButton")
-    .addEventListener(
-        "click",
-        handleChat
-    );
-
+.addEventListener(
+"click",
+handleChat
+);
 async function handleChat() {
 
     if (
@@ -6986,17 +7134,16 @@ async function handleChat() {
     await openConversation(
         targetId
     );
+
 }
-
 /* ============================================================
-   OPEN CONVERSATION
-   CORRECT LINK FOR messages.html:
-       messages.html?chat=<chat_code>
-   This matches messages.html, which reads ?chat=...
+OPEN CONVERSATION
+CORRECT LINK FOR messages.html:
+messages.html?chat=<chat_code>
+This matches messages.html, which reads ?chat=...
 ============================================================ */
-
 async function openConversation(
-    targetId
+targetId
 ) {
 
     try {
@@ -7127,12 +7274,11 @@ async function openConversation(
             "error"
         );
     }
+
 }
-
 /* ============================================================
-   PREMIUM
+PREMIUM
 ============================================================ */
-
 async function getPremium() {
 
     try {
@@ -7163,13 +7309,13 @@ async function getPremium() {
 
         return false;
     }
-}
 
+}
 function showAccessModal(
-    title,
-    message,
-    type,
-    handler
+title,
+message,
+type,
+handler
 ) {
 
     $("#accessModalTitle")
@@ -7220,18 +7366,17 @@ function showAccessModal(
     document.body.classList.add(
         "modal-open"
     );
+
 }
-
 $("#accessCancel")
-    .addEventListener(
-        "click",
-        closeAccessModal
-    );
-
+.addEventListener(
+"click",
+closeAccessModal
+);
 $("#accessContinue")
-    .addEventListener(
-        "click",
-        async () => {
+.addEventListener(
+"click",
+async () => {
 
             const handler =
                 state.accessHandler;
@@ -7246,7 +7391,7 @@ $("#accessContinue")
                 await handler();
             }
         }
-    );
+);
 
 function closeAccessModal() {
 
@@ -7264,11 +7409,11 @@ function closeAccessModal() {
 
     state.accessAction =
         null;
-}
 
+}
 function openPremium(
-    action,
-    targetId
+action,
+targetId
 ) {
 
     state.premiumAction =
@@ -7336,11 +7481,10 @@ function openPremium(
     popup.focus?.();
 
     startPremiumMonitor();
+
 }
-
 let premiumMonitor =
-    null;
-
+null;
 function startPremiumMonitor() {
 
     clearInterval(
@@ -7394,11 +7538,11 @@ function startPremiumMonitor() {
             },
             2500
         );
-}
 
+}
 window.addEventListener(
-    "message",
-    async event => {
+"message",
+async event => {
 
         if (
             event.origin !==
@@ -7423,10 +7567,9 @@ window.addEventListener(
         }
     }
 );
-
 window.addEventListener(
-    "storage",
-    async event => {
+"storage",
+async event => {
 
         if (
             event.key !==
@@ -7441,7 +7584,6 @@ window.addEventListener(
         await premiumSucceeded();
     }
 );
-
 async function premiumSucceeded() {
 
     state.premium =
@@ -7524,12 +7666,11 @@ async function premiumSucceeded() {
             );
         }
     }
+
 }
-
 /* ============================================================
-   REFRESH PROFILE STATE
+REFRESH PROFILE STATE
 ============================================================ */
-
 async function refreshProfileState() {
 
     try {
@@ -7606,12 +7747,11 @@ async function refreshProfileState() {
             error
         );
     }
+
 }
-
 /* ============================================================
-   NOTIFICATIONS
+NOTIFICATIONS
 ============================================================ */
-
 function unlockNotificationAudio() {
 
     if (
@@ -7669,8 +7809,8 @@ function unlockNotificationAudio() {
         }
 
     } catch {}
-}
 
+}
 function playNotificationSound() {
 
     const audio =
@@ -7694,10 +7834,10 @@ function playNotificationSound() {
             );
 
     } catch {}
-}
 
+}
 function updateNotificationCount(
-    count
+count
 ) {
 
     const badge =
@@ -7718,8 +7858,8 @@ function updateNotificationCount(
         count > 0
             ? "flex"
             : "none";
-}
 
+}
 async function pollNotifications() {
 
     try {
@@ -7791,14 +7931,13 @@ async function pollNotifications() {
             error
         );
     }
+
 }
-
 /* ============================================================
-   IMAGE VIEWER
+IMAGE VIEWER
 ============================================================ */
-
 function openImage(
-    url
+url
 ) {
 
     const imageUrl =
@@ -7883,113 +8022,84 @@ function openImage(
     document.body.appendChild(
         overlay
     );
+
 }
-
 /* ============================================================
-   VIDEO AUTOPLAY
+VIDEO AUTOPLAY
 ============================================================ */
-
+/*
+ * Replaced the original startVideoObserver with an IntersectionObserver
+ * based implementation. Videos play only when in viewport and pause when out.
+ */
 function startVideoObserver() {
+    const videos = $$(".lovemi-video");
+    if (!videos.length) return;
 
-    const videos =
-        $$(".lovemi-video");
+    // Set initial attributes (no autoplay yet)
+    videos.forEach(video => {
+        video.muted = false;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.setAttribute("controlsList", "nodownload noplaybackrate");
+        video.setAttribute("disablepictureinpicture", "");
+        video.addEventListener("contextmenu", e => e.preventDefault());
+    });
 
-    if (
-        !videos.length
-    ) {
-
-        return;
-    }
-
-    videos.forEach(
-        video => {
-
-            video.muted =
-                false;
-
-            video.autoplay =
-                true;
-
-            video.playsInline =
-                true;
-
-            video.setAttribute(
-                "playsinline",
-                ""
-            );
-
-            video.setAttribute(
-                "autoplay",
-                ""
-            );
-
-            video.setAttribute(
-                "controlsList",
-                "nodownload noplaybackrate"
-            );
-
-            video.setAttribute(
-                "disablepictureinpicture",
-                ""
-            );
-
-            video.addEventListener(
-                "contextmenu",
-                event =>
-                    event.preventDefault()
-            );
-
-            const tryPlay =
-                () => {
-
-                    video.muted =
-                        false;
-
-                    const promise =
-                        video.play();
-
-                    if (
-                        promise
-                        &&
-                        typeof promise.catch ===
-                            "function"
-                    ) {
-
-                        promise.catch(
-                            () => {}
-                        );
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                // Video is in view – play
+                try {
+                    const promise = video.play();
+                    if (promise && typeof promise.catch === "function") {
+                        promise.catch(() => {});
                     }
-                };
+                } catch (_) {}
+            } else {
+                // Video out of view – pause
+                try {
+                    video.pause();
+                } catch (_) {}
+            }
+        });
+    }, {
+        threshold: 0.3, // 30% of video visible before playing
+        rootMargin: '0px 0px -50px 0px' // small offset to avoid play too early
+    });
 
-            video.addEventListener(
-                "loadeddata",
-                tryPlay,
-                {
-                    once:true
-                }
-            );
+    videos.forEach(video => observer.observe(video));
 
-            video.addEventListener(
-                "canplay",
-                tryPlay,
-                {
-                    once:true
-                }
-            );
+    // Also try to play when data is loaded, but only if visible (we'll check)
+    videos.forEach(video => {
+        const tryPlayIfVisible = () => {
+            // Check if currently visible via observer? We can use getBoundingClientRect
+            const rect = video.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            const visible = rect.top < windowHeight - 50 && rect.bottom > 50;
+            if (visible) {
+                try {
+                    const promise = video.play();
+                    if (promise && typeof promise.catch === "function") {
+                        promise.catch(() => {});
+                    }
+                } catch (_) {}
+            }
+        };
+        video.addEventListener("loadeddata", tryPlayIfVisible, { once: true });
+        video.addEventListener("canplay", tryPlayIfVisible, { once: true });
+    });
 
-            tryPlay();
-        }
-    );
+    // Re-check on scroll/resize (already handled by observer)
 }
-
 /* ============================================================
-   POSTS SCROLL
+POSTS SCROLL
 ============================================================ */
-
 $("#postsShell")
-    .addEventListener(
-        "scroll",
-        event => {
+.addEventListener(
+"scroll",
+event => {
 
             const element =
                 event.currentTarget;
@@ -8014,15 +8124,14 @@ $("#postsShell")
                 );
             }
         }
-    );
+);
 
 /* ============================================================
-   IMAGE CLICK
+IMAGE CLICK
 ============================================================ */
-
 document.addEventListener(
-    "click",
-    event => {
+"click",
+event => {
 
         const image =
             event.target.closest(
@@ -8041,15 +8150,13 @@ document.addEventListener(
         }
     }
 );
-
 /* ============================================================
-   GLOBAL SEARCH
+GLOBAL SEARCH
 ============================================================ */
-
 $("#globalSearch")
-    .addEventListener(
-        "keydown",
-        event => {
+.addEventListener(
+"keydown",
+event => {
 
             if (
                 event.key !==
@@ -8074,16 +8181,15 @@ $("#globalSearch")
             window.location.href =
                 `discover.html?search=${encodeURIComponent(value)}`;
         }
-    );
+);
 
 /* ============================================================
-   MOBILE MENU
+MOBILE MENU
 ============================================================ */
-
 $("#mobileMenu")
-    .addEventListener(
-        "click",
-        event => {
+.addEventListener(
+"click",
+event => {
 
             event.stopPropagation();
 
@@ -8105,11 +8211,11 @@ $("#mobileMenu")
                     ? '<i class="fa-solid fa-xmark"></i>'
                     : '<i class="fa-solid fa-bars"></i>';
         }
-    );
+);
 
 document.addEventListener(
-    "click",
-    event => {
+"click",
+event => {
 
         const nav =
             $("#mobileNavigation");
@@ -8144,14 +8250,12 @@ document.addEventListener(
         }
     }
 );
-
 /* ============================================================
-   ESCAPE
+ESCAPE
 ============================================================ */
-
 document.addEventListener(
-    "keydown",
-    event => {
+"keydown",
+event => {
 
         if (
             event.key !==
@@ -8175,17 +8279,15 @@ document.addEventListener(
         );
     }
 );
-
 /* ============================================================
-   AUDIO UNLOCK
+AUDIO UNLOCK
 ============================================================ */
-
 [
-    "click",
-    "keydown",
-    "touchstart"
+"click",
+"keydown",
+"touchstart"
 ].forEach(
-    type => {
+type => {
 
         document.addEventListener(
             type,
@@ -8196,14 +8298,12 @@ document.addEventListener(
         );
     }
 );
-
 /* ============================================================
-   VISIBILITY
+VISIBILITY
 ============================================================ */
-
 document.addEventListener(
-    "visibilitychange",
-    () => {
+"visibilitychange",
+() => {
 
         if (
             document.visibilityState ===
@@ -8216,18 +8316,15 @@ document.addEventListener(
         }
     }
 );
-
 /* ============================================================
-   POLLING
+POLLING
 ============================================================ */
-
 setInterval(
-    pollNotifications,
-    5000
+pollNotifications,
+5000
 );
-
 setInterval(
-    async () => {
+async () => {
 
         if (
             document.visibilityState ===
@@ -8240,14 +8337,12 @@ setInterval(
     },
     7000
 );
-
 /* ============================================================
-   INIT
+INIT
 ============================================================ */
-
 document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+"DOMContentLoaded",
+async () => {
 
         try {
 
@@ -8288,13 +8383,11 @@ document.addEventListener(
         }
     }
 );
-
 /* ============================================================
-   ERROR
+ERROR
 ============================================================ */
-
 function showError(
-    message
+message
 ) {
 
     $("#profileLoading")
@@ -8313,8 +8406,8 @@ function showError(
         .textContent =
         message
         || "This profile could not be loaded.";
+
 }
 </script>
-
 </body>
 </html>

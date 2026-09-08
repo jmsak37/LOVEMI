@@ -1134,7 +1134,7 @@
 
         textarea {
 
-            min-height:115px;
+            min-height:90px;
 
             padding:11px;
 
@@ -1304,6 +1304,31 @@
             color:#1d4ed8;
 
             font-size:9px;
+
+        }
+
+
+        /* =====================================================
+           ADDED STYLING FOR NEW FIELDS
+        ====================================================== */
+
+        .field textarea + i {
+
+            display:none; /* icon not used for textarea */
+        }
+
+
+        select {
+
+            appearance:auto;
+
+        }
+
+
+        /* small touch for selects with icon */
+        .field select {
+
+            padding-right:30px;
 
         }
 
@@ -2367,7 +2392,241 @@
                     </div>
 
 
-                    <!-- ABOUT -->
+                    <!-- =============================================
+                         NEW FIELDS: OCCUPATION, EDUCATION,
+                         RELATIONSHIP STATUS, LOOKING FOR, INTERESTS
+                    ============================================== -->
+
+                    <!-- OCCUPATION -->
+
+                    <div class="form-group">
+
+
+                        <label
+                            for="occupation">
+
+                            Occupation
+
+                        </label>
+
+
+                        <div class="field">
+
+
+                            <i class="fa-solid fa-briefcase"></i>
+
+
+                            <input
+                                type="text"
+                                id="occupation"
+                                maxlength="150"
+                                placeholder="e.g. Software Engineer">
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- EDUCATION -->
+
+                    <div class="form-group">
+
+
+                        <label
+                            for="education">
+
+                            Education
+
+                        </label>
+
+
+                        <div class="field">
+
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+
+                            <input
+                                type="text"
+                                id="education"
+                                maxlength="180"
+                                placeholder="e.g. University of Nairobi">
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- RELATIONSHIP STATUS -->
+
+                    <div class="form-group">
+
+
+                        <label
+                            for="relationshipStatus">
+
+                            Relationship Status
+
+                        </label>
+
+
+                        <div class="field">
+
+
+                            <i class="fa-solid fa-heart"></i>
+
+
+                            <select
+                                id="relationshipStatus">
+
+
+                                <option value="">
+                                    Select status
+                                </option>
+
+
+                                <option value="Single">
+                                    Single
+                                </option>
+
+
+                                <option value="In a relationship">
+                                    In a relationship
+                                </option>
+
+
+                                <option value="Married">
+                                    Married
+                                </option>
+
+
+                                <option value="Divorced">
+                                    Divorced
+                                </option>
+
+
+                                <option value="Widowed">
+                                    Widowed
+                                </option>
+
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- LOOKING FOR -->
+
+                    <div class="form-group">
+
+
+                        <label
+                            for="lookingFor">
+
+                            Looking For
+
+                        </label>
+
+
+                        <div class="field">
+
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+
+                            <select
+                                id="lookingFor">
+
+
+                                <option value="">
+                                    Select option
+                                </option>
+
+
+                                <option value="Friendship">
+                                    Friendship
+                                </option>
+
+
+                                <option value="Dating">
+                                    Dating
+                                </option>
+
+
+                                <option value="Marriage">
+                                    Marriage
+                                </option>
+
+
+                                <option value="Networking">
+                                    Networking
+                                </option>
+
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- INTERESTS (full-width) -->
+
+                    <div class="form-group full-width">
+
+
+                        <label
+                            for="interests">
+
+                            Interests
+
+                        </label>
+
+
+                        <div class="field">
+
+
+                            <i class="fa-solid fa-star" style="display:none;"></i> <!-- icon hidden for textarea -->
+
+
+                            <textarea
+                                id="interests"
+                                maxlength="5000"
+                                placeholder="What are you passionate about? e.g. hiking, reading, travel..."></textarea>
+
+
+                        </div>
+
+
+                        <div class="help-text">
+                            Maximum 5,000 characters.
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- ABOUT (existing) -->
 
                     <div class="form-group full-width">
 
@@ -2396,7 +2655,7 @@
                     </div>
 
 
-                    <!-- LOCATION -->
+                    <!-- LOCATION (existing) -->
 
                     <div class="form-group full-width">
 
@@ -3242,6 +3501,51 @@ function fillProfile(
         "";
 
 
+    /* ---- NEW FIELDS ---- */
+
+    document.getElementById(
+        "occupation"
+    ).value =
+        profile.occupation
+        ||
+        "";
+
+
+    document.getElementById(
+        "education"
+    ).value =
+        profile.education
+        ||
+        "";
+
+
+    document.getElementById(
+        "relationshipStatus"
+    ).value =
+        profile.relationship_status
+        ||
+        "";
+
+
+    document.getElementById(
+        "lookingFor"
+    ).value =
+        profile.looking_for
+        ||
+        "";
+
+
+    document.getElementById(
+        "interests"
+    ).value =
+        profile.interests
+        ||
+        "";
+
+
+    /* --------------------- */
+
+
     const countryId =
         profile.country_id
         ??
@@ -3565,6 +3869,56 @@ profileForm.addEventListener(
                 .trim();
 
 
+        /* ---- NEW FIELDS ---- */
+
+        const occupation =
+            document
+                .getElementById(
+                    "occupation"
+                )
+                .value
+                .trim();
+
+
+        const education =
+            document
+                .getElementById(
+                    "education"
+                )
+                .value
+                .trim();
+
+
+        const relationshipStatus =
+            document
+                .getElementById(
+                    "relationshipStatus"
+                )
+                .value
+                .trim();
+
+
+        const lookingFor =
+            document
+                .getElementById(
+                    "lookingFor"
+                )
+                .value
+                .trim();
+
+
+        const interests =
+            document
+                .getElementById(
+                    "interests"
+                )
+                .value
+                .trim();
+
+
+        /* --------------------- */
+
+
         if (
             fullNames.length < 2
         ) {
@@ -3636,6 +3990,50 @@ profileForm.addEventListener(
         }
 
 
+        /* ---- validation for new fields ---- */
+
+        if (
+            occupation.length > 150
+        ) {
+
+            showAlert(
+                "Occupation is too long (max 150 characters)."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            education.length > 180
+        ) {
+
+            showAlert(
+                "Education is too long (max 180 characters)."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            interests.length > 5000
+        ) {
+
+            showAlert(
+                "Your interests are too long (max 5000 characters)."
+            );
+
+            return;
+
+        }
+
+
+        /* ---------------------------------- */
+
+
         saveButton.disabled =
             true;
 
@@ -3673,7 +4071,26 @@ profileForm.addEventListener(
                             bio,
 
                         location:
-                            location
+                            location,
+
+                        /* ---- new fields ---- */
+
+                        occupation:
+                            occupation,
+
+                        education:
+                            education,
+
+                        relationship_status:
+                            relationshipStatus,
+
+                        looking_for:
+                            lookingFor,
+
+                        interests:
+                            interests
+
+                        /* -------------------- */
 
                     }
                 );
