@@ -337,6 +337,79 @@
         }
     }
 
+    /* =========================================================
+       PROFILE MEDIA DOWNLOAD / SCREENSHOT DETERRENCE
+       ========================================================= */
+    .protected-media,
+    .protected-media img,
+    .protected-media video {
+        -webkit-user-select:none;
+        user-select:none;
+        -webkit-touch-callout:none;
+        -webkit-user-drag:none;
+        user-drag:none;
+    }
+
+    .protected-media {
+        position:relative;
+        overflow:hidden;
+        isolation:isolate;
+        background:#050505;
+    }
+
+    .protected-media img {
+        display:block;
+        width:100%;
+        height:auto;
+    }
+
+    .media-protection-badge {
+        position:absolute;
+        left:10px;
+        bottom:10px;
+        z-index:4;
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        padding:6px 9px;
+        border-radius:999px;
+        background:rgba(0,0,0,.72);
+        color:#fff;
+        font-size:.75rem;
+        font-weight:800;
+        pointer-events:none;
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+    }
+
+    .media-protection-shield {
+        position:absolute;
+        inset:0;
+        z-index:3;
+        background:transparent;
+        pointer-events:auto;
+        -webkit-user-select:none;
+        user-select:none;
+        -webkit-touch-callout:none;
+    }
+
+    .protected-video .media-protection-shield {
+        pointer-events:none;
+    }
+
+    body.print-protected .protected-media {
+        visibility:hidden !important;
+    }
+
+    @media(max-width:760px) {
+        .media-protection-badge {
+            left:7px;
+            bottom:7px;
+            padding:5px 8px;
+            font-size:.68rem;
+        }
+    }
+
     /* Video container aspect ratio */
     .video-wrap {
         background: #050505;
@@ -363,6 +436,140 @@
     /* Loading spinner colour */
     .loading i {
         color: var(--primary);
+    }
+
+    /* =========================================================
+       LIVE ONLINE STATUS
+       ========================================================= */
+    .online-badge {
+        min-height:24px;
+        align-items:center;
+        gap:6px;
+        padding:5px 9px;
+        border:1px solid rgba(255,255,255,.22);
+        box-shadow:0 5px 14px rgba(0,0,0,.18);
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+    }
+
+    .online-badge i {
+        width:7px;
+        height:7px;
+        display:inline-block;
+        flex:0 0 7px;
+        border-radius:50%;
+        background:#4ade80;
+        box-shadow:0 0 0 3px rgba(74,222,128,.16);
+    }
+
+    .online-badge.online i {
+        animation:lovemiOnlinePulse 1.8s ease-in-out infinite;
+    }
+
+    .online-badge.offline {
+        background:rgba(15,23,42,.70);
+    }
+
+    .online-badge.offline i {
+        background:#94a3b8;
+        box-shadow:0 0 0 3px rgba(148,163,184,.16);
+        animation:none;
+    }
+
+    @keyframes lovemiOnlinePulse {
+        0%,100% {
+            opacity:1;
+            transform:scale(1);
+        }
+
+        50% {
+            opacity:.55;
+            transform:scale(.82);
+        }
+    }
+
+    #detailStatus {
+        display:inline-flex;
+        align-items:center;
+        width:max-content;
+        min-width:68px;
+        padding:4px 8px;
+        border-radius:999px;
+        font-weight:900;
+        border:1px solid var(--border);
+        background:#fafafa;
+    }
+
+    #detailStatus.status-online {
+        color:#166534;
+        background:#f0fdf4;
+        border-color:#bbf7d0;
+    }
+
+    #detailStatus.status-offline {
+        color:#64748b;
+        background:#f8fafc;
+        border-color:#e2e8f0;
+    }
+
+    @media(min-width:1101px) {
+        .profile-hero,
+        .card {
+            box-shadow:0 12px 35px rgba(15,23,42,.06);
+        }
+    }
+
+    @media(max-width:760px) {
+        .header-inner {
+            min-height:66px;
+        }
+
+        .mobile-navigation {
+            top:66px;
+        }
+
+        .profile-hero {
+            border-radius:18px;
+        }
+
+        .online-badge {
+            left:8px;
+            bottom:8px;
+            min-height:23px;
+            padding:5px 8px;
+            font-size:7px;
+        }
+
+        #detailStatus {
+            min-width:64px;
+            padding:4px 7px;
+        }
+
+        .card {
+            border-radius:14px;
+        }
+    }
+
+    @media(max-width:380px) {
+        .profile-main {
+            gap:8px;
+        }
+
+        .profile-photo-wrap,
+        .profile-photo {
+            width:104px;
+            height:104px;
+            flex-basis:104px;
+        }
+
+        .profile-main {
+            margin-top:-50px;
+        }
+
+        .online-badge {
+            left:5px;
+            bottom:6px;
+        }
     }
 
     /* Existing styles continue below */
@@ -2783,7 +2990,9 @@ react: "api/posts/react.php",
 connection: "api/connections/create.php",
 premium: "api/premium/status.php",
 chatCreate: "api/chat/create-conversation.php",
-notifications: "api/notifications/unread-count.php"
+notifications: "api/notifications/unread-count.php",
+    presence: "api/chat/online.php",
+    downloadProtector: "api/profile/profile-download-protector.php"
 };
 const DEFAULT_MALE =
 "assets/images/defaults/default-avatar-male.png";
@@ -2822,7 +3031,13 @@ isOwn:false,
     premiumWindow:null,
 
     accessAction:null,
-    accessHandler:null
+    accessHandler:null,
+
+    presenceTimer:null,
+    presenceOnline:false,
+    presenceStopping:false,
+    mediaProtection:new Map(),
+    mediaProtectionLoading:new Set()
 
 };
 const $ = selector =>
@@ -3379,38 +3594,64 @@ function renderOnline(
 online
 ) {
 
+    const isOnline =
+        Boolean(
+            online
+        );
+
     const badge =
         $("#onlineBadge");
 
     const text =
         $("#onlineBadgeText");
 
-    if (!badge) {
-        return;
+    const detail =
+        $("#detailStatus");
+
+    if (badge) {
+
+        badge.style.display =
+            "inline-flex";
+
+        badge.classList.toggle(
+            "offline",
+            !isOnline
+        );
+
+        badge.classList.toggle(
+            "online",
+            isOnline
+        );
     }
-
-    badge.style.display =
-        "inline-flex";
-
-    badge.classList.toggle(
-        "offline",
-        !online
-    );
 
     if (text) {
 
         text.textContent =
-            online
+            isOnline
                 ? "Online"
                 : "Offline";
     }
 
-    $("#detailStatus").textContent =
-        online
-            ? "Online"
-            : "Offline";
+    if (detail) {
+
+        detail.textContent =
+            isOnline
+                ? "Online"
+                : "Offline";
+
+        detail.classList.toggle(
+            "status-online",
+            isOnline
+        );
+
+        detail.classList.toggle(
+            "status-offline",
+            !isOnline
+        );
+    }
 
 }
+
 /* ============================================================
 VERIFICATION
 ============================================================ */
@@ -3594,14 +3835,31 @@ result
             ? "inline-block"
             : "none";
 
-    renderOnline(
+    const serverOnline =
         Boolean(
             profile.is_online
             ??
             profile.online
             ??
             false
-        )
+        );
+
+    /*
+     * A successful heartbeat is authoritative for our own
+     * profile in this browser tab. This prevents the profile
+     * from displaying Offline while the presence API has just
+     * marked the current account online.
+     */
+    const displayedOnline =
+        state.isOwn
+            ? (
+                state.presenceOnline
+                || serverOnline
+            )
+            : serverOnline;
+
+    renderOnline(
+        displayedOnline
     );
 
     const bio =
@@ -4363,6 +4621,82 @@ rows
 
 }
 /* ============================================================
+MEDIA PROTECTION HELPERS
+============================================================ */
+function mediaIdOf(item){
+    return Number(
+        item?.photo_id
+        ?? item?.media_id
+        ?? item?.id
+        ?? item?.photoId
+        ?? item?.mediaId
+        ?? 0
+    );
+}
+
+function mediaPermissionFlag(value,fallback=false){
+    if(value===undefined||value===null||value==='')return fallback;
+    if(typeof value==='boolean')return value;
+    if(typeof value==='number')return value===1;
+    const v=String(value).trim().toLowerCase();
+    if(['1','true','yes','on','allow','allowed'].includes(v))return true;
+    if(['0','false','no','off','deny','denied','blocked'].includes(v))return false;
+    return fallback;
+}
+
+function protectedMediaUrl(mediaId,download=false){
+    const id=Number(mediaId||0);
+    if(id<=0)return '';
+    return `${API.downloadProtector}?action=media&photo_id=${encodeURIComponent(id)}${download?'&download=1':''}`;
+}
+
+async function loadMediaProtection(mediaId){
+    const id=Number(mediaId||0);
+    if(id<=0)return null;
+    if(state.mediaProtection.has(id))return state.mediaProtection.get(id);
+    if(state.mediaProtectionLoading.has(id))return null;
+    state.mediaProtectionLoading.add(id);
+    try{
+        const {response,result}=await apiGet(`${API.downloadProtector}?action=check&photo_id=${encodeURIComponent(id)}`);
+        if(!response.ok||result.success!==true)throw new Error(result.message||'Media protection policy unavailable.');
+        const p=result.policy||result.data?.policy||{};
+        const policy={allowDownload:Boolean(p.allow_download),allowScreenshot:Boolean(p.allow_screenshot),protected:Boolean(p.protected)};
+        state.mediaProtection.set(id,policy);
+        return policy;
+    }catch(error){
+        console.debug('Media protection',id,error);
+        const blocked={allowDownload:false,allowScreenshot:false,protected:true};
+        state.mediaProtection.set(id,blocked);
+        return blocked;
+    }finally{
+        state.mediaProtectionLoading.delete(id);
+    }
+}
+
+function refreshMediaProtectionUI(){
+    $$('[data-media-protection-id]').forEach(node=>{
+        const id=Number(node.dataset.mediaProtectionId||0);
+        const policy=state.mediaProtection.get(id);
+        if(!policy)return;
+        node.dataset.allowDownload=policy.allowDownload?'1':'0';
+        node.dataset.allowScreenshot=policy.allowScreenshot?'1':'0';
+        const badge=node.querySelector('[data-protection-badge]');
+        if(badge){
+            badge.innerHTML=policy.allowDownload
+                ? '<i class="fa-solid fa-shield"></i> Downloads allowed'
+                : '<i class="fa-solid fa-lock"></i> Download disabled';
+        }
+        node.classList.toggle('screenshot-protected',!policy.allowScreenshot);
+    });
+}
+
+function queueMediaProtectionChecks(items){
+    const ids=[...new Set((Array.isArray(items)?items:[]).map(mediaIdOf).filter(id=>id>0))];
+    if(!ids.length)return;
+    Promise.all(ids.map(loadMediaProtection)).then(refreshMediaProtectionUI).catch(()=>{});
+}
+
+/* ============================================================
 GALLERY
 ============================================================ */
 function renderGallery(
@@ -4430,13 +4764,21 @@ rows
                     }
 
                     return `
-                        <div class="gallery-item">
+                        <div
+                            class="gallery-item protected-media screenshot-protected"
+                            data-media-protection-id="${mediaIdOf(photo)}"
+                            data-allow-download="0"
+                            data-allow-screenshot="0"
+                            oncontextmenu="return false;"
+                        >
 
                             <img
-                                src="${escapeHtml(thumb)}"
+                                src="${escapeHtml(protectedMediaUrl(mediaIdOf(photo)) || thumb)}"
                                 alt="Profile photo"
                                 loading="lazy"
-                                data-full-image="${escapeHtml(url)}"
+                                draggable="false"
+                                data-full-image="${escapeHtml(protectedMediaUrl(mediaIdOf(photo)) || url)}"
+                                data-original-media-id="${mediaIdOf(photo)}"
                                 onerror="this.parentElement.remove();"
                             >
 
@@ -4444,11 +4786,20 @@ rows
                                 Approved
                             </span>
 
+                            <span class="media-protection-badge" data-protection-badge>
+                                <i class="fa-solid fa-lock"></i>
+                                Download disabled
+                            </span>
+
+                            <span class="media-protection-shield" aria-hidden="true"></span>
+
                         </div>
                     `;
                 }
             )
             .join("");
+
+    queueMediaProtectionChecks(rows);
 
 }
 /* ============================================================
@@ -5706,19 +6057,31 @@ media
 
                                     return `
                                         <div
-                                            class="post-media-item"
+                                            class="post-media-item protected-media screenshot-protected"
+                                            data-media-protection-id="${mediaIdOf(item)}"
+                                            data-allow-download="0"
+                                            data-allow-screenshot="0"
+                                            oncontextmenu="return false;"
                                         >
 
                                             <img
-                                                src="${escapeHtml(src)}"
+                                                src="${escapeHtml(protectedMediaUrl(mediaIdOf(item)) || src)}"
                                                 alt="Post image"
                                                 loading="lazy"
                                                 draggable="false"
-                                                data-full-image="${escapeHtml(src)}"
+                                                data-full-image="${escapeHtml(protectedMediaUrl(mediaIdOf(item)) || src)}"
+                                                data-original-media-id="${mediaIdOf(item)}"
                                                 onerror="
                                                     this.parentElement.remove();
                                                 "
                                             >
+
+                                            <span class="media-protection-badge" data-protection-badge>
+                                                <i class="fa-solid fa-lock"></i>
+                                                Download disabled
+                                            </span>
+
+                                            <span class="media-protection-shield" aria-hidden="true"></span>
 
                                         </div>
                                     `;
@@ -5734,7 +6097,11 @@ media
 
                                     return `
                                         <div
-                                            class="post-media-item"
+                                            class="post-media-item protected-media protected-video screenshot-protected"
+                                            data-media-protection-id="${mediaIdOf(item)}"
+                                            data-allow-download="0"
+                                            data-allow-screenshot="0"
+                                            oncontextmenu="return false;"
                                         >
 
                                             <div class="video-wrap">
@@ -7669,6 +8036,262 @@ async function premiumSucceeded() {
 
 }
 /* ============================================================
+LIVE PRESENCE / ONLINE STATUS
+============================================================ */
+
+/*
+ * The LOVEMI presence service already exists at:
+ *     api/chat/online.php
+ *
+ * heartbeat keeps user_presence.is_online and last_seen_at
+ * current for the authenticated member.
+ */
+
+async function updateOwnPresence(
+action = "heartbeat"
+) {
+
+    if (
+        !state.currentUser
+        ||
+        state.presenceStopping
+    ) {
+        return false;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                API.presence,
+                {
+                    method:"POST",
+                    credentials:"same-origin",
+                    cache:"no-store",
+                    keepalive:
+                        action === "offline",
+                    headers:{
+                        "Accept":
+                            "application/json",
+                        "Content-Type":
+                            "application/json",
+                        "Cache-Control":
+                            "no-cache, no-store, max-age=0",
+                        "Pragma":
+                            "no-cache"
+                    },
+                    body:
+                        JSON.stringify(
+                            {
+                                action:
+                                    action
+                            }
+                        )
+                }
+            );
+
+        if (
+            action === "offline"
+        ) {
+            return response.ok;
+        }
+
+        const raw =
+            await response.text();
+
+        if (
+            !response.ok
+        ) {
+            return false;
+        }
+
+        let result =
+            {};
+
+        if (
+            raw.trim()
+        ) {
+
+            try {
+
+                result =
+                    JSON.parse(
+                        raw
+                            .replace(
+                                /^\uFEFF/,
+                                ""
+                            )
+                            .trim()
+                    );
+
+            } catch {
+                /*
+                 * A successful HTTP request is enough to keep the
+                 * heartbeat state locally even if the response
+                 * body is unexpectedly malformed.
+                 */
+            }
+        }
+
+        if (
+            result.success === false
+        ) {
+            return false;
+        }
+
+        state.presenceOnline =
+            action !== "offline";
+
+        if (
+            action !== "offline"
+            &&
+            state.isOwn
+        ) {
+
+            renderOnline(
+                true
+            );
+        }
+
+        return true;
+
+    } catch (
+        error
+    ) {
+
+        console.debug(
+            "LOVEMI presence:",
+            error
+        );
+
+        return false;
+    }
+}
+
+function startPresenceHeartbeat() {
+
+    clearInterval(
+        state.presenceTimer
+    );
+
+    state.presenceStopping =
+        false;
+
+    /*
+     * Mark the account online immediately instead of waiting
+     * for the first interval.
+     */
+    updateOwnPresence(
+        "heartbeat"
+    );
+
+    state.presenceTimer =
+        setInterval(
+            () => {
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    updateOwnPresence(
+                        "heartbeat"
+                    );
+                }
+
+            },
+            20000
+        );
+}
+
+function sendOfflinePresence() {
+
+    if (
+        state.presenceStopping
+        ||
+        !state.currentUser
+    ) {
+        return;
+    }
+
+    state.presenceStopping =
+        true;
+
+    state.presenceOnline =
+        false;
+
+    clearInterval(
+        state.presenceTimer
+    );
+
+    /*
+     * sendBeacon is designed for page shutdown.
+     */
+    try {
+
+        const payload =
+            new Blob(
+                [
+                    JSON.stringify(
+                        {
+                            action:
+                                "offline"
+                        }
+                    )
+                ],
+                {
+                    type:
+                        "application/json"
+                }
+            );
+
+        if (
+            navigator.sendBeacon
+            &&
+            navigator.sendBeacon(
+                API.presence,
+                payload
+            )
+        ) {
+            return;
+        }
+
+    } catch {}
+
+    /*
+     * Fallback for browsers without a usable sendBeacon.
+     */
+    try {
+
+        fetch(
+            API.presence,
+            {
+                method:"POST",
+                credentials:"same-origin",
+                cache:"no-store",
+                keepalive:true,
+                headers:{
+                    "Accept":
+                        "application/json",
+                    "Content-Type":
+                        "application/json"
+                },
+                body:
+                    JSON.stringify(
+                        {
+                            action:
+                                "offline"
+                        }
+                    )
+            }
+        ).catch(
+            () => {}
+        );
+
+    } catch {}
+}
+
+/* ============================================================
 REFRESH PROFILE STATE
 ============================================================ */
 async function refreshProfileState() {
@@ -7936,21 +8559,24 @@ async function pollNotifications() {
 /* ============================================================
 IMAGE VIEWER
 ============================================================ */
-function openImage(
-url
+async function openImage(
+url,
+mediaId=0
 ) {
 
-    const imageUrl =
-        safeUrl(
-            url
-        );
+    const id=Number(mediaId||0);
+    let imageUrl=safeUrl(url);
 
-    if (
-        !imageUrl
-    ) {
-
-        return;
+    if(id>0){
+        const policy=await loadMediaProtection(id);
+        if(!policy)return;
+        imageUrl=protectedMediaUrl(id)||imageUrl;
+        if(!policy.allowScreenshot){
+            toast("The owner has disabled screenshots for this media.","info");
+        }
     }
+
+    if(!imageUrl)return;
 
     const overlay =
         document.createElement(
@@ -7966,7 +8592,9 @@ url
             align-items:center;
             justify-content:center;
             padding:20px;
-            background:rgba(0,0,0,.88);
+            background:rgba(0,0,0,.92);
+            user-select:none;
+            -webkit-user-select:none;
         `;
 
     overlay.innerHTML =
@@ -7991,6 +8619,7 @@ url
 
             <img
                 src="${escapeHtml(imageUrl)}"
+                draggable="false"
                 alt="Full size"
                 style="
                     max-width:96vw;
@@ -8025,6 +8654,33 @@ url
 
 }
 /* ============================================================
+PROTECTED MEDIA EVENTS
+============================================================ */
+document.addEventListener("contextmenu",event=>{
+    if(event.target?.closest?.(".protected-media"))event.preventDefault();
+});
+
+document.addEventListener("dragstart",event=>{
+    if(event.target?.closest?.(".protected-media, img, video"))event.preventDefault();
+});
+
+document.addEventListener("keydown",event=>{
+    const key=String(event.key||"").toLowerCase();
+    if((event.ctrlKey||event.metaKey)&&["s","u","p"].includes(key)){
+        event.preventDefault();
+        event.stopPropagation();
+        toast("Saving or printing protected media is disabled.","info");
+    }
+    if(key==="printscreen"){
+        event.preventDefault();
+        toast("Screen capture is not supported for protected media.","info");
+    }
+});
+
+window.addEventListener("beforeprint",()=>document.body.classList.add("print-protected"));
+window.addEventListener("afterprint",()=>document.body.classList.remove("print-protected"));
+
+/* ============================================================
 VIDEO AUTOPLAY
 ============================================================ */
 /*
@@ -8040,9 +8696,12 @@ function startVideoObserver() {
         video.muted = false;
         video.playsInline = true;
         video.setAttribute("playsinline", "");
-        video.setAttribute("controlsList", "nodownload noplaybackrate");
+        video.setAttribute("controlsList", "nodownload noplaybackrate nofullscreen");
         video.setAttribute("disablepictureinpicture", "");
+        video.setAttribute("disableRemotePlayback", "");
+        video.draggable = false;
         video.addEventListener("contextmenu", e => e.preventDefault());
+        video.addEventListener("dragstart", e => e.preventDefault());
     });
 
     // Intersection Observer
@@ -8143,7 +8802,10 @@ event => {
         ) {
 
             openImage(
-                image.dataset.fullImage
+                image.dataset.fullImage,
+                image.closest("[data-media-protection-id]")?.dataset.mediaProtectionId
+                || image.dataset.originalMediaId
+                || 0
             );
 
             return;
@@ -8299,11 +8961,31 @@ type => {
     }
 );
 /* ============================================================
+PRESENCE SHUTDOWN
+============================================================ */
+
+window.addEventListener(
+    "pagehide",
+    sendOfflinePresence,
+    {
+        capture:true
+    }
+);
+
+window.addEventListener(
+    "beforeunload",
+    sendOfflinePresence,
+    {
+        capture:true
+    }
+);
+
+/* ============================================================
 VISIBILITY
 ============================================================ */
 document.addEventListener(
 "visibilitychange",
-() => {
+async () => {
 
         if (
             document.visibilityState ===
@@ -8311,6 +8993,22 @@ document.addEventListener(
         ) {
 
             pollNotifications();
+
+            /*
+             * Refresh the presence immediately when the page
+             * becomes visible again.
+             */
+            if (
+                state.currentUser
+            ) {
+
+                state.presenceStopping =
+                    false;
+
+                await updateOwnPresence(
+                    "heartbeat"
+                );
+            }
 
             refreshProfileState();
         }
@@ -8358,6 +9056,18 @@ async () => {
 
                 return;
             }
+
+            /*
+             * Mark the authenticated member online before the
+             * profile request is made. The profile API reads
+             * user_presence, so this fixes the false Offline state
+             * on the member's own profile.
+             */
+            await updateOwnPresence(
+                "heartbeat"
+            );
+
+            startPresenceHeartbeat();
 
             /*
              * Empty ?code = own profile.
