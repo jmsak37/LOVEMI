@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2026 at 05:23 PM
+-- Generation Time: Sep 09, 2026 at 08:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -500,7 +500,78 @@ INSERT INTO `audit_logs` (`id`, `user_id`, `action`, `entity_type`, `entity_id`,
 (417, 11, 'profile_photo_upload', 'photo', 13, NULL, '{\"photo_type\":\"profile\",\"approval_status\":\"approved\",\"mime_type\":\"image\\/jpeg\",\"file_size\":1716739}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:28:58'),
 (418, 11, 'profile_update', 'profile', 11, NULL, '{\"updated_fields\":[\"full_names\",\"gender\",\"country_id\",\"phone_number\",\"bio\",\"occupation\",\"education\",\"city\",\"relationship_status\",\"looking_for\",\"interests\"]}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:29:32'),
 (419, 3, 'admin_activate_premium', 'subscription', 19, '{\"status\":\"pending\",\"start_at\":null,\"end_at\":null}', '{\"status\":\"active\",\"start_at\":\"2026-09-08 12:38:46\",\"end_at\":\"2026-09-09 12:38:46\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:38:46'),
-(420, 12, 'profile_photo_upload', 'photo', 14, NULL, '{\"photo_type\":\"profile\",\"approval_status\":\"approved\",\"mime_type\":\"image\\/jpeg\",\"file_size\":2094093}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:39:20');
+(420, 12, 'profile_photo_upload', 'photo', 14, NULL, '{\"photo_type\":\"profile\",\"approval_status\":\"approved\",\"mime_type\":\"image\\/jpeg\",\"file_size\":2094093}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:39:20'),
+(421, 13, 'registration', 'user', 13, NULL, '{\"role\":\"member\",\"account_status\":\"pending\",\"google_signup\":false,\"city\":\"Nairobi\",\"education_level\":\"Doctorate\",\"university_name\":\"SEKU\",\"course\":\"EDUCATION\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 18:18:38'),
+(422, 3, 'admin_delete_notification', 'notification', 206, '{\"id\":206,\"user_id\":5,\"notification_type_id\":null,\"sender_id\":3,\"title\":\"New message from LOVEMI Support\",\"message\":\"BOOOOOONI\",\"reference_type\":\"support_ticket\",\"reference_id\":0,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-09 17:07:10\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:03:50'),
+(423, 3, 'admin_delete_notification', 'notification', 202, '{\"id\":202,\"user_id\":5,\"notification_type_id\":null,\"sender_id\":3,\"title\":\"New message from LOVEMI Support\",\"message\":\"jmsak37@gmail.com\",\"reference_type\":\"support_ticket\",\"reference_id\":0,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-09 16:04:34\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:05'),
+(424, 3, 'admin_delete_notification', 'notification', 153, '{\"id\":153,\"user_id\":12,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":19,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-08 13:39:35\",\"created_at\":\"2026-09-08 13:38:46\",\"email_sent_at\":\"2026-09-08 13:39:35\",\"email_attempted_at\":\"2026-09-08 13:39:31\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:08'),
+(425, 3, 'admin_delete_notification', 'notification', 151, '{\"id\":151,\"user_id\":10,\"notification_type_id\":13,\"sender_id\":11,\"title\":\"New comment on your post\",\"message\":\"Someone commented on your post.\",\"reference_type\":\"post\",\"reference_id\":20,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-08 12:51:24\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:09'),
+(426, 3, 'admin_delete_notification', 'notification', 134, '{\"id\":134,\"user_id\":3,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-07 22:08:18\",\"created_at\":\"2026-09-07 13:00:14\",\"email_sent_at\":\"2026-09-07 22:50:22\",\"email_attempted_at\":\"2026-09-07 22:50:18\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:11'),
+(427, 3, 'admin_delete_notification', 'notification', 133, '{\"id\":133,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":5,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-07 13:00:12\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:12'),
+(428, 3, 'admin_delete_notification', 'notification', 129, '{\"id\":129,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-07 22:08:18\",\"created_at\":\"2026-09-07 12:07:58\",\"email_sent_at\":\"2026-09-07 22:50:18\",\"email_attempted_at\":\"2026-09-07 22:50:15\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:13'),
+(429, 3, 'admin_delete_notification', 'notification', 128, '{\"id\":128,\"user_id\":10,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":5,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-07 12:07:52\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:14'),
+(430, 3, 'admin_delete_notification', 'notification', 123, '{\"id\":123,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 21:26:29\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:16'),
+(431, 3, 'admin_delete_notification', 'notification', 121, '{\"id\":121,\"user_id\":3,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-07 22:08:18\",\"created_at\":\"2026-09-06 21:26:25\",\"email_sent_at\":\"2026-09-07 22:50:15\",\"email_attempted_at\":\"2026-09-07 22:50:11\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:17');
+INSERT INTO `audit_logs` (`id`, `user_id`, `action`, `entity_type`, `entity_id`, `old_values`, `new_values`, `ip_address`, `user_agent`, `created_at`) VALUES
+(432, 3, 'admin_delete_notification', 'notification', 120, '{\"id\":120,\"user_id\":10,\"notification_type_id\":1,\"sender_id\":3,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":24,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 21:18:56\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:17'),
+(433, 3, 'admin_delete_notification', 'notification', 119, '{\"id\":119,\"user_id\":10,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 20:58:43\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:19'),
+(434, 3, 'admin_delete_notification', 'notification', 152, '{\"id\":152,\"user_id\":11,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":18,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-08 13:28:25\",\"email_sent_at\":\"2026-09-08 13:29:49\",\"email_attempted_at\":\"2026-09-08 13:29:44\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:20'),
+(435, 3, 'admin_delete_notification', 'notification', 116, '{\"id\":116,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 20:42:59\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:21'),
+(436, 3, 'admin_delete_notification', 'notification', 114, '{\"id\":114,\"user_id\":3,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-07 22:08:18\",\"created_at\":\"2026-09-06 20:42:54\",\"email_sent_at\":\"2026-09-07 22:50:08\",\"email_attempted_at\":\"2026-09-07 22:50:03\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:21'),
+(437, 3, 'admin_delete_notification', 'notification', 113, '{\"id\":113,\"user_id\":3,\"notification_type_id\":14,\"sender_id\":null,\"title\":\"New post from someone you follow\",\"message\":\"Someone you follow has published a new post.\",\"reference_type\":\"post\",\"reference_id\":23,\"audio_id\":9,\"is_read\":1,\"read_at\":\"2026-09-06 14:35:48\",\"created_at\":\"2026-09-06 14:30:04\",\"email_sent_at\":\"2026-09-07 22:50:03\",\"email_attempted_at\":\"2026-09-07 22:49:59\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:22'),
+(438, 3, 'admin_delete_notification', 'notification', 112, '{\"id\":112,\"user_id\":10,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 12:41:55\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:22'),
+(439, 3, 'admin_delete_notification', 'notification', 110, '{\"id\":110,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-06 14:35:49\",\"created_at\":\"2026-09-06 12:41:50\",\"email_sent_at\":\"2026-09-07 22:41:02\",\"email_attempted_at\":\"2026-09-07 22:40:58\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:23'),
+(440, 3, 'admin_delete_notification', 'notification', 109, '{\"id\":109,\"user_id\":3,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-06 14:35:51\",\"created_at\":\"2026-09-06 12:24:03\",\"email_sent_at\":\"2026-09-07 22:40:58\",\"email_attempted_at\":\"2026-09-07 22:40:54\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:23'),
+(441, 3, 'admin_delete_notification', 'notification', 107, '{\"id\":107,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":5,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 12:23:57\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:24'),
+(442, 3, 'admin_delete_notification', 'notification', 106, '{\"id\":106,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 12:23:55\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:24'),
+(443, 3, 'admin_delete_notification', 'notification', 105, '{\"id\":105,\"user_id\":3,\"notification_type_id\":13,\"sender_id\":null,\"title\":\"New comment on your post\",\"message\":\"Someone commented on your post.\",\"reference_type\":\"post\",\"reference_id\":21,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-06 14:35:53\",\"created_at\":\"2026-09-06 12:07:26\",\"email_sent_at\":\"2026-09-07 22:40:54\",\"email_attempted_at\":\"2026-09-07 22:40:49\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:24'),
+(444, 3, 'admin_delete_notification', 'notification', 104, '{\"id\":104,\"user_id\":10,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":23,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-06 12:05:17\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:25'),
+(445, 3, 'admin_delete_notification', 'notification', 102, '{\"id\":102,\"user_id\":3,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":26,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-06 11:50:24\",\"created_at\":\"2026-09-06 11:23:52\",\"email_sent_at\":\"2026-09-07 22:40:49\",\"email_attempted_at\":\"2026-09-07 22:40:46\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:25'),
+(446, 3, 'admin_delete_notification', 'notification', 101, '{\"id\":101,\"user_id\":3,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":23,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-06 11:50:24\",\"created_at\":\"2026-09-06 11:22:49\",\"email_sent_at\":\"2026-09-07 22:40:46\",\"email_attempted_at\":\"2026-09-07 22:40:41\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:26'),
+(447, 3, 'admin_delete_notification', 'notification', 98, '{\"id\":98,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":22,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-06 11:50:24\",\"created_at\":\"2026-09-06 11:20:59\",\"email_sent_at\":\"2026-09-07 22:40:41\",\"email_attempted_at\":\"2026-09-07 22:40:37\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:27'),
+(448, 3, 'admin_delete_notification', 'notification', 97, '{\"id\":97,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":21,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-06 11:19:57\",\"created_at\":\"2026-09-06 11:19:42\",\"email_sent_at\":\"2026-09-07 22:40:37\",\"email_attempted_at\":\"2026-09-07 22:40:34\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:27'),
+(449, 3, 'admin_delete_notification', 'notification', 96, '{\"id\":96,\"user_id\":3,\"notification_type_id\":14,\"sender_id\":null,\"title\":\"New post from someone you follow\",\"message\":\"Someone you follow has published a new post.\",\"reference_type\":\"post\",\"reference_id\":22,\"audio_id\":9,\"is_read\":1,\"read_at\":\"2026-09-06 10:33:02\",\"created_at\":\"2026-09-06 10:32:32\",\"email_sent_at\":\"2026-09-07 22:40:34\",\"email_attempted_at\":\"2026-09-07 22:40:30\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:28'),
+(450, 3, 'admin_delete_notification', 'notification', 95, '{\"id\":95,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-06 10:30:47\",\"created_at\":\"2026-09-06 10:26:57\",\"email_sent_at\":\"2026-09-07 22:40:30\",\"email_attempted_at\":\"2026-09-07 22:40:27\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:28'),
+(451, 3, 'admin_delete_notification', 'notification', 94, '{\"id\":94,\"user_id\":3,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-06 10:30:47\",\"created_at\":\"2026-09-06 10:26:15\",\"email_sent_at\":\"2026-09-07 22:40:26\",\"email_attempted_at\":\"2026-09-07 22:40:23\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:29'),
+(452, 3, 'admin_delete_notification', 'notification', 91, '{\"id\":91,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":3,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":20,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-05 22:26:20\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:29'),
+(453, 3, 'admin_delete_notification', 'notification', 90, '{\"id\":90,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":19,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-05 21:42:47\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:29'),
+(454, 3, 'admin_delete_notification', 'notification', 89, '{\"id\":89,\"user_id\":3,\"notification_type_id\":13,\"sender_id\":null,\"title\":\"New comment on your post\",\"message\":\"Someone commented on your post.\",\"reference_type\":\"post\",\"reference_id\":21,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-05 21:45:12\",\"created_at\":\"2026-09-05 21:42:09\",\"email_sent_at\":\"2026-09-07 22:08:18\",\"email_attempted_at\":\"2026-09-07 22:08:14\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:30'),
+(455, 3, 'admin_delete_notification', 'notification', 88, '{\"id\":88,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-05 21:45:12\",\"created_at\":\"2026-09-05 21:41:27\",\"email_sent_at\":\"2026-09-07 22:08:14\",\"email_attempted_at\":\"2026-09-07 22:08:09\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:30'),
+(456, 3, 'admin_delete_notification', 'notification', 87, '{\"id\":87,\"user_id\":10,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":5,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-05 21:41:22\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:30'),
+(457, 3, 'admin_delete_notification', 'notification', 85, '{\"id\":85,\"user_id\":10,\"notification_type_id\":13,\"sender_id\":null,\"title\":\"New comment on your post\",\"message\":\"Someone commented on your post.\",\"reference_type\":\"post\",\"reference_id\":20,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-05 21:36:55\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:31'),
+(458, 3, 'admin_delete_notification', 'notification', 117, '{\"id\":117,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-07 22:08:18\",\"created_at\":\"2026-09-06 20:58:37\",\"email_sent_at\":\"2026-09-07 22:50:11\",\"email_attempted_at\":\"2026-09-07 22:50:08\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:32'),
+(459, 3, 'admin_delete_notification', 'notification', 80, '{\"id\":80,\"user_id\":3,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":20,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-03 18:06:50\",\"created_at\":\"2026-09-03 18:06:37\",\"email_sent_at\":\"2026-09-07 22:08:09\",\"email_attempted_at\":\"2026-09-07 22:08:05\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:32'),
+(460, 3, 'admin_delete_notification', 'notification', 79, '{\"id\":79,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"Connection Accepted\",\"message\":\"Your connection request was accepted.\",\"reference_type\":\"connection_accepted\",\"reference_id\":18,\"audio_id\":10,\"is_read\":1,\"read_at\":\"2026-09-03 18:06:50\",\"created_at\":\"2026-09-03 18:06:25\",\"email_sent_at\":\"2026-09-07 22:08:05\",\"email_attempted_at\":\"2026-09-07 22:08:00\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:32'),
+(461, 3, 'admin_delete_notification', 'notification', 77, '{\"id\":77,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-03 18:06:50\",\"created_at\":\"2026-09-03 18:05:42\",\"email_sent_at\":\"2026-09-07 22:08:00\",\"email_attempted_at\":\"2026-09-07 22:07:55\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:33'),
+(462, 3, 'admin_delete_notification', 'notification', 75, '{\"id\":75,\"user_id\":10,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":17,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-03 17:24:32\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:33'),
+(463, 3, 'admin_delete_notification', 'notification', 71, '{\"id\":71,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":3,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":15,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-02 17:09:40\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:34'),
+(464, 3, 'admin_delete_notification', 'notification', 70, '{\"id\":70,\"user_id\":3,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":8,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-02 22:41:57\",\"created_at\":\"2026-09-02 17:09:04\",\"email_sent_at\":\"2026-09-07 22:07:55\",\"email_attempted_at\":\"2026-09-07 22:07:51\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:34'),
+(465, 3, 'admin_delete_notification', 'notification', 67, '{\"id\":67,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":14,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-02 17:06:21\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:34'),
+(466, 3, 'admin_delete_notification', 'notification', 66, '{\"id\":66,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":13,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-02 17:04:53\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:35'),
+(467, 3, 'admin_delete_notification', 'notification', 65, '{\"id\":65,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":12,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-02 17:08:21\",\"created_at\":\"2026-09-02 17:04:47\",\"email_sent_at\":\"2026-09-07 22:07:51\",\"email_attempted_at\":\"2026-09-07 22:07:46\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:35'),
+(468, 3, 'admin_delete_notification', 'notification', 64, '{\"id\":64,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":11,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-02 17:08:22\",\"created_at\":\"2026-09-02 17:03:34\",\"email_sent_at\":\"2026-09-07 22:07:46\",\"email_attempted_at\":\"2026-09-07 22:07:42\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:36'),
+(469, 3, 'admin_delete_notification', 'notification', 61, '{\"id\":61,\"user_id\":10,\"notification_type_id\":3,\"sender_id\":3,\"title\":\"Premium Activated\",\"message\":\"Your LOVEMI Premium subscription has been activated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-02 16:46:00\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:36'),
+(470, 3, 'admin_delete_notification', 'notification', 60, '{\"id\":60,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":10,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-02 22:41:57\",\"created_at\":\"2026-09-02 16:39:17\",\"email_sent_at\":\"2026-09-07 22:07:42\",\"email_attempted_at\":\"2026-09-07 22:07:37\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:36'),
+(471, 3, 'admin_delete_notification', 'notification', 53, '{\"id\":53,\"user_id\":3,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":3,\"audio_id\":1,\"is_read\":1,\"read_at\":\"2026-09-02 22:41:57\",\"created_at\":\"2026-09-02 13:31:03\",\"email_sent_at\":\"2026-09-07 22:07:37\",\"email_attempted_at\":\"2026-09-07 22:07:32\",\"email_attempts\":1,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:37'),
+(472, 3, 'admin_delete_notification', 'notification', 52, '{\"id\":52,\"user_id\":5,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"New Connection Request\",\"message\":\"Someone sent you a connection request on LOVEMI.\",\"reference_type\":\"connection\",\"reference_id\":2,\"audio_id\":1,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-02 13:30:59\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:37'),
+(473, 3, 'admin_delete_notification', 'notification', 48, '{\"id\":48,\"user_id\":10,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":18,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 22:04:52\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:37'),
+(474, 3, 'admin_delete_notification', 'notification', 44, '{\"id\":44,\"user_id\":10,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":13,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-01 22:00:15\",\"created_at\":\"2026-09-01 21:59:29\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:38'),
+(475, 3, 'admin_delete_notification', 'notification', 42, '{\"id\":42,\"user_id\":10,\"notification_type_id\":5,\"sender_id\":3,\"title\":\"Premium Deactivated\",\"message\":\"Your LOVEMI Premium subscription has been deactivated by administration.\",\"reference_type\":\"subscription\",\"reference_id\":6,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 21:58:12\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:38'),
+(476, 3, 'admin_delete_notification', 'notification', 41, '{\"id\":41,\"user_id\":10,\"notification_type_id\":6,\"sender_id\":null,\"title\":\"Payment Successful\",\"message\":\"Your payment LVM-20260901184513-10-7101D7C676 was completed successfully.\",\"reference_type\":null,\"reference_id\":null,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 21:57:54\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:38'),
+(477, 3, 'admin_delete_notification', 'notification', 40, '{\"id\":40,\"user_id\":10,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":9,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 21:30:45\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:39'),
+(478, 3, 'admin_delete_notification', 'notification', 38, '{\"id\":38,\"user_id\":10,\"notification_type_id\":null,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You received a new LOVEMI message.\",\"reference_type\":\"new_message\",\"reference_id\":6,\"audio_id\":4,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 21:27:08\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:39'),
+(479, 3, 'admin_delete_notification', 'notification', 37, '{\"id\":37,\"user_id\":10,\"notification_type_id\":2,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You have a new message from HI\",\"reference_type\":\"conversation\",\"reference_id\":1,\"audio_id\":2,\"is_read\":1,\"read_at\":\"2026-09-01 22:06:57\",\"created_at\":\"2026-09-01 21:19:20\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:40'),
+(480, 3, 'admin_delete_notification', 'notification', 34, '{\"id\":34,\"user_id\":10,\"notification_type_id\":2,\"sender_id\":null,\"title\":\"New Message\",\"message\":\"You have a new message from I\",\"reference_type\":\"conversation\",\"reference_id\":1,\"audio_id\":2,\"is_read\":1,\"read_at\":\"2026-09-01 20:33:43\",\"created_at\":\"2026-09-01 20:33:13\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:40'),
+(481, 3, 'admin_delete_notification', 'notification', 32, '{\"id\":32,\"user_id\":10,\"notification_type_id\":null,\"sender_id\":3,\"title\":\"New Message\",\"message\":\"You have a new message from LOVEMI Administration.\",\"reference_type\":\"conversation\",\"reference_id\":1,\"audio_id\":null,\"is_read\":1,\"read_at\":\"2026-09-01 20:32:07\",\"created_at\":\"2026-09-01 20:30:48\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:40'),
+(482, 3, 'admin_delete_notification', 'notification', 31, '{\"id\":31,\"user_id\":10,\"notification_type_id\":1,\"sender_id\":null,\"title\":\"Connection Accepted\",\"message\":\"Your connection request was accepted.\",\"reference_type\":\"connection_accepted\",\"reference_id\":1,\"audio_id\":10,\"is_read\":1,\"read_at\":\"2026-09-01 20:32:11\",\"created_at\":\"2026-09-01 20:28:21\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:45'),
+(483, 3, 'admin_delete_notification', 'notification', 84, '{\"id\":84,\"user_id\":10,\"notification_type_id\":13,\"sender_id\":3,\"title\":\"New comment on your post\",\"message\":\"Someone commented on your post.\",\"reference_type\":\"post\",\"reference_id\":20,\"audio_id\":null,\"is_read\":0,\"read_at\":null,\"created_at\":\"2026-09-04 14:31:57\",\"email_sent_at\":null,\"email_attempted_at\":null,\"email_attempts\":0,\"email_last_error\":null}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:04:49'),
+(484, 3, 'admin_delete_backup', 'backup', 7, '{\"id\":7,\"file_name\":\"LOVEMI_backup_2026-09-01_21-18-11.zip\",\"file_path\":\"C:\\\\xampp\\\\htdocs\\\\LOVEMI\\\\storage\\\\backups\\\\LOVEMI_backup_2026-09-01_21-18-11.zip\",\"file_size\":14478873,\"status\":\"created\"}', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:34:08'),
+(485, 3, 'admin_create_backup', 'backup', 8, NULL, '{\"file_name\":\"LOVEMI_backup_2026-09-09_20-34-13.zip\",\"file_path\":\"C:\\\\xampp\\\\htdocs\\\\LOVEMI\\\\storage\\\\backups\\\\LOVEMI_backup_2026-09-09_20-34-13.zip\",\"file_count\":605,\"file_size\":21458389,\"zip\":true}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:34:58'),
+(486, 3, 'admin_deactivate_premium', 'subscription', 18, '{\"status\":\"active\",\"start_at\":\"2026-09-08 12:28:25\",\"end_at\":\"2026-09-09 12:28:25\"}', '{\"status\":\"cancelled\",\"end_at\":\"2026-09-09 12:28:25\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:42:08'),
+(487, 3, 'admin_activate_premium', 'subscription', 16, '{\"status\":\"pending\",\"start_at\":null,\"end_at\":null}', '{\"status\":\"active\",\"start_at\":\"2026-09-09 20:43:07\",\"end_at\":\"2026-09-10 20:43:07\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:43:07'),
+(488, 3, 'admin_deactivate_premium', 'subscription', 16, '{\"status\":\"active\",\"start_at\":\"2026-09-09 20:43:07\",\"end_at\":\"2026-09-10 20:43:07\"}', '{\"status\":\"cancelled\",\"end_at\":\"2026-09-10 20:43:07\"}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:43:10'),
+(489, 3, 'admin_live_exchange_rate_refresh', 'exchange_rate', NULL, NULL, '{\"source\":\"moneyconvert.net\",\"source_timestamp\":\"2026-09-09 20:43:37\",\"refresh_time\":\"2026-09-09 20:43:37\",\"base_currency\":\"USD\",\"updated_pairs\":149,\"missing_currencies\":[]}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:43:38'),
+(490, 3, 'admin_live_exchange_rate_refresh', 'exchange_rate', NULL, NULL, '{\"source\":\"moneyconvert.net\",\"source_timestamp\":\"2026-09-09 20:43:55\",\"refresh_time\":\"2026-09-09 20:43:55\",\"base_currency\":\"USD\",\"updated_pairs\":149,\"missing_currencies\":[]}', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:43:55');
 
 -- --------------------------------------------------------
 
@@ -523,7 +594,7 @@ CREATE TABLE `backup_logs` (
 --
 
 INSERT INTO `backup_logs` (`id`, `created_by`, `file_name`, `file_path`, `status`, `file_size`, `created_at`) VALUES
-(7, 3, 'LOVEMI_backup_2026-09-01_21-18-11.zip', 'C:\\xampp\\htdocs\\LOVEMI\\storage\\backups\\LOVEMI_backup_2026-09-01_21-18-11.zip', 'created', 14478873, '2026-09-01 22:18:31');
+(8, 3, 'LOVEMI_backup_2026-09-09_20-34-13.zip', 'C:\\xampp\\htdocs\\LOVEMI\\storage\\backups\\LOVEMI_backup_2026-09-09_20-34-13.zip', 'created', 21458389, '2026-09-09 21:34:58');
 
 -- --------------------------------------------------------
 
@@ -15677,155 +15748,454 @@ INSERT INTO `exchange_rates` (`id`, `base_currency_id`, `target_currency_id`, `r
 (14445, 1, 149, 236.9961519600, 'moneyconvert.net', '2026-09-07 09:30:51', 0, '2026-09-07 10:30:52'),
 (14446, 1, 8, 15.9740075800, 'moneyconvert.net', '2026-09-07 09:30:51', 0, '2026-09-07 10:30:52'),
 (14447, 1, 150, 19.2078514000, 'moneyconvert.net', '2026-09-07 09:30:51', 0, '2026-09-07 10:30:52'),
-(14448, 1, 9, 3.6725000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14449, 1, 10, 65.4817212800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14450, 1, 12, 79.2905531200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14451, 1, 13, 363.9461116800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14452, 1, 14, 916.2231075100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14453, 1, 15, 1508.7803193200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14454, 1, 16, 1.3852847500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14455, 1, 17, 1.7900000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14456, 1, 18, 1.6999444100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14457, 1, 19, 1.6829225800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14458, 1, 20, 2.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14459, 1, 21, 122.9877105200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14460, 1, 23, 1.6829225800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14461, 1, 24, 0.3760000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14462, 1, 25, 2991.6411625200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14463, 1, 26, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14464, 1, 27, 1.2658873200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14465, 1, 28, 12.3731782200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14466, 1, 29, 5.1269162800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14467, 1, 30, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14468, 1, 33, 13.3566709400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14469, 1, 34, 3.0813000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14470, 1, 35, 2.0129948000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14471, 1, 36, 1.3826347900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14472, 1, 37, 2306.7498794400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14473, 1, 39, 0.8094786600, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14474, 1, 41, 930.9817130000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14475, 1, 42, 6.7111539600, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14476, 1, 43, 3131.1212579200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14477, 1, 44, 453.7468881400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14478, 1, 45, 25.7500000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14479, 1, 46, 94.8834372800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14480, 1, 48, 20.8257917000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14481, 1, 49, 178.0616857700, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14482, 1, 50, 6.4317148300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14483, 1, 51, 59.2037470100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14484, 1, 52, 133.2588437800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14485, 1, 53, 50.9492815200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14486, 1, 55, 15.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14487, 1, 56, 162.3413008100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14488, 1, 3, 0.8604646500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14489, 1, 57, 2.2162733200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14490, 1, 58, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14491, 1, 4, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14492, 1, 59, 2.6042346400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14493, 1, 60, 11.3830894000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14494, 1, 61, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14495, 1, 62, 74.4144204800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14496, 1, 63, 8797.0225686400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14497, 1, 64, 7.6325659200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14498, 1, 65, 209.1929722500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14499, 1, 66, 7.8404381500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14500, 1, 67, 26.8379335400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14501, 1, 68, 130.7954676300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14502, 1, 69, 311.5197270000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14503, 1, 70, 17638.0223435300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14504, 1, 71, 3.0080742700, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14505, 1, 31, 94.4728454000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14506, 1, 72, 1310.4369427600, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14507, 1, 73, 1374600.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14508, 1, 74, 121.1605640900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14509, 1, 75, 158.5412978800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14510, 1, 76, 0.7090000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14511, 1, 77, 154.4805447600, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14512, 1, 2, 129.4044364500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14513, 1, 78, 87.5476771700, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14514, 1, 79, 4047.5769708500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14515, 1, 80, 423.3208592400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14516, 1, 81, 900.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14517, 1, 82, 1344.3666870800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14518, 1, 83, 0.3089007900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14519, 1, 84, 0.8310685500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14520, 1, 85, 454.3042293400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14521, 1, 86, 22436.4883637300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14522, 1, 87, 89691.0032887100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14523, 1, 88, 328.1594209800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14524, 1, 89, 174.9938518900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14525, 1, 90, 6.3466168300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14526, 1, 54, 9.3772470400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14527, 1, 91, 17.2284033300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14528, 1, 92, 4286.2862865000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14529, 1, 93, 52.9617849200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14530, 1, 94, 2099.6007654900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14531, 1, 95, 3598.8445134100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14532, 1, 96, 8.0756512900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14533, 1, 97, 40.1451425800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14534, 1, 98, 46.8847891000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14535, 1, 99, 15.4587405300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14536, 1, 100, 1734.6300966400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14537, 1, 101, 16.9124209200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14538, 1, 102, 4.0457049500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14539, 1, 103, 63.8190593400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14540, 1, 7, 1321.9109363900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14541, 1, 105, 36.8030180300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14542, 1, 32, 9.2782008500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14543, 1, 106, 151.2274072800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14544, 1, 40, 1.7000009400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14545, 1, 107, 0.3848364800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14546, 1, 108, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14547, 1, 109, 3.3559335200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14548, 1, 110, 4.4765384200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14549, 1, 111, 62.6036219000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14550, 1, 112, 277.4006180200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14551, 1, 113, 3.7085207100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14552, 1, 114, 5981.1109669200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14553, 1, 115, 3.6400000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14554, 1, 116, 4.5184667500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14555, 1, 117, 100.9742120300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14556, 1, 118, 86.0495960000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14557, 1, 119, 1472.5071637700, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14558, 1, 120, 3.7500000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14559, 1, 121, 7.9956859000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14560, 1, 122, 14.1315605300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14561, 1, 123, 600.1470937500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14562, 1, 124, 9.6037800300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14563, 1, 125, 1.2658873200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14564, 1, 126, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14565, 1, 127, 22.9200045800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14566, 1, 128, 571.2393327400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14567, 1, 129, 37.9135139000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14568, 1, 130, 5648.3070558900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14569, 1, 131, 21.2467852900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14570, 1, 132, 13002.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14571, 1, 133, 15.9720792200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14572, 1, 134, 32.8689483300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14573, 1, 135, 9.2306773400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14574, 1, 136, 3.4974367900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14575, 1, 137, 2.9084116200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:41'),
-(14576, 1, 138, 2.4083942800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14577, 1, 139, 48.4346325100, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14578, 1, 140, 6.7798233200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14579, 1, 141, 31.5367805000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14580, 1, 6, 2645.8069198400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14581, 1, 142, 44.5171328800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14582, 1, 5, 3780.1767995800, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14583, 1, 143, 40.2484279500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14584, 1, 144, 11780.8057251400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14585, 1, 145, 809.0092818500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14586, 1, 146, 26035.4948220000, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14587, 1, 147, 117.9979397500, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14588, 1, 148, 2.7181063900, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14589, 1, 38, 564.4278123200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14590, 1, 11, 2.7071740300, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14591, 1, 47, 1.8023623400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14592, 1, 22, 564.4278123200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14593, 1, 104, 102.6807461700, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14594, 1, 149, 236.9827887600, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14595, 1, 8, 15.9720792200, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42'),
-(14596, 1, 150, 19.2527123400, 'moneyconvert.net', '2026-09-07 11:06:41', 1, '2026-09-07 12:06:42');
+(14448, 1, 9, 3.6725000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14449, 1, 10, 65.4817212800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14450, 1, 12, 79.2905531200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14451, 1, 13, 363.9461116800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14452, 1, 14, 916.2231075100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14453, 1, 15, 1508.7803193200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14454, 1, 16, 1.3852847500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14455, 1, 17, 1.7900000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14456, 1, 18, 1.6999444100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14457, 1, 19, 1.6829225800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14458, 1, 20, 2.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14459, 1, 21, 122.9877105200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14460, 1, 23, 1.6829225800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14461, 1, 24, 0.3760000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14462, 1, 25, 2991.6411625200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14463, 1, 26, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14464, 1, 27, 1.2658873200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14465, 1, 28, 12.3731782200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14466, 1, 29, 5.1269162800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14467, 1, 30, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14468, 1, 33, 13.3566709400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14469, 1, 34, 3.0813000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14470, 1, 35, 2.0129948000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14471, 1, 36, 1.3826347900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14472, 1, 37, 2306.7498794400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14473, 1, 39, 0.8094786600, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14474, 1, 41, 930.9817130000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14475, 1, 42, 6.7111539600, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14476, 1, 43, 3131.1212579200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14477, 1, 44, 453.7468881400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14478, 1, 45, 25.7500000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14479, 1, 46, 94.8834372800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14480, 1, 48, 20.8257917000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14481, 1, 49, 178.0616857700, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14482, 1, 50, 6.4317148300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14483, 1, 51, 59.2037470100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14484, 1, 52, 133.2588437800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14485, 1, 53, 50.9492815200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14486, 1, 55, 15.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14487, 1, 56, 162.3413008100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14488, 1, 3, 0.8604646500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14489, 1, 57, 2.2162733200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14490, 1, 58, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14491, 1, 4, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14492, 1, 59, 2.6042346400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14493, 1, 60, 11.3830894000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14494, 1, 61, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14495, 1, 62, 74.4144204800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14496, 1, 63, 8797.0225686400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14497, 1, 64, 7.6325659200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14498, 1, 65, 209.1929722500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14499, 1, 66, 7.8404381500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14500, 1, 67, 26.8379335400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14501, 1, 68, 130.7954676300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14502, 1, 69, 311.5197270000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14503, 1, 70, 17638.0223435300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14504, 1, 71, 3.0080742700, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14505, 1, 31, 94.4728454000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14506, 1, 72, 1310.4369427600, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14507, 1, 73, 1374600.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14508, 1, 74, 121.1605640900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14509, 1, 75, 158.5412978800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14510, 1, 76, 0.7090000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14511, 1, 77, 154.4805447600, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14512, 1, 2, 129.4044364500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14513, 1, 78, 87.5476771700, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14514, 1, 79, 4047.5769708500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14515, 1, 80, 423.3208592400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14516, 1, 81, 900.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14517, 1, 82, 1344.3666870800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14518, 1, 83, 0.3089007900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14519, 1, 84, 0.8310685500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14520, 1, 85, 454.3042293400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14521, 1, 86, 22436.4883637300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14522, 1, 87, 89691.0032887100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14523, 1, 88, 328.1594209800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14524, 1, 89, 174.9938518900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14525, 1, 90, 6.3466168300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14526, 1, 54, 9.3772470400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14527, 1, 91, 17.2284033300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14528, 1, 92, 4286.2862865000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14529, 1, 93, 52.9617849200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14530, 1, 94, 2099.6007654900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14531, 1, 95, 3598.8445134100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14532, 1, 96, 8.0756512900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14533, 1, 97, 40.1451425800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14534, 1, 98, 46.8847891000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14535, 1, 99, 15.4587405300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14536, 1, 100, 1734.6300966400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14537, 1, 101, 16.9124209200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14538, 1, 102, 4.0457049500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14539, 1, 103, 63.8190593400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14540, 1, 7, 1321.9109363900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14541, 1, 105, 36.8030180300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14542, 1, 32, 9.2782008500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14543, 1, 106, 151.2274072800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14544, 1, 40, 1.7000009400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14545, 1, 107, 0.3848364800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14546, 1, 108, 1.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14547, 1, 109, 3.3559335200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14548, 1, 110, 4.4765384200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14549, 1, 111, 62.6036219000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14550, 1, 112, 277.4006180200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14551, 1, 113, 3.7085207100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14552, 1, 114, 5981.1109669200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14553, 1, 115, 3.6400000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14554, 1, 116, 4.5184667500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14555, 1, 117, 100.9742120300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14556, 1, 118, 86.0495960000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14557, 1, 119, 1472.5071637700, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14558, 1, 120, 3.7500000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14559, 1, 121, 7.9956859000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14560, 1, 122, 14.1315605300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14561, 1, 123, 600.1470937500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14562, 1, 124, 9.6037800300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14563, 1, 125, 1.2658873200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14564, 1, 126, 0.7388059800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14565, 1, 127, 22.9200045800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14566, 1, 128, 571.2393327400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14567, 1, 129, 37.9135139000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14568, 1, 130, 5648.3070558900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14569, 1, 131, 21.2467852900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14570, 1, 132, 13002.0000000000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14571, 1, 133, 15.9720792200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14572, 1, 134, 32.8689483300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14573, 1, 135, 9.2306773400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14574, 1, 136, 3.4974367900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14575, 1, 137, 2.9084116200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:41'),
+(14576, 1, 138, 2.4083942800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14577, 1, 139, 48.4346325100, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14578, 1, 140, 6.7798233200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14579, 1, 141, 31.5367805000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14580, 1, 6, 2645.8069198400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14581, 1, 142, 44.5171328800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14582, 1, 5, 3780.1767995800, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14583, 1, 143, 40.2484279500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14584, 1, 144, 11780.8057251400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14585, 1, 145, 809.0092818500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14586, 1, 146, 26035.4948220000, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14587, 1, 147, 117.9979397500, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14588, 1, 148, 2.7181063900, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14589, 1, 38, 564.4278123200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14590, 1, 11, 2.7071740300, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14591, 1, 47, 1.8023623400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14592, 1, 22, 564.4278123200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14593, 1, 104, 102.6807461700, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14594, 1, 149, 236.9827887600, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14595, 1, 8, 15.9720792200, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14596, 1, 150, 19.2527123400, 'moneyconvert.net', '2026-09-07 11:06:41', 0, '2026-09-07 12:06:42'),
+(14597, 1, 9, 3.6725000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14598, 1, 10, 65.3885171000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14599, 1, 12, 79.1226774500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14600, 1, 13, 364.3989692500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14601, 1, 14, 916.6975681500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14602, 1, 15, 1513.6139314900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14603, 1, 16, 1.3849061200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14604, 1, 17, 1.7900000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14605, 1, 18, 1.6999995200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14606, 1, 19, 1.6810091000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14607, 1, 20, 2.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14608, 1, 21, 122.9453420800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14609, 1, 23, 1.6810091000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14610, 1, 24, 0.3760000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14611, 1, 25, 2996.6945374300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14612, 1, 26, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14613, 1, 27, 1.2641513800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14614, 1, 28, 12.4678840500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14615, 1, 29, 5.1078441500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14616, 1, 30, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14617, 1, 33, 13.3449516000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14618, 1, 34, 3.0613940000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14619, 1, 35, 2.0139684400, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14620, 1, 36, 1.3803011600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14621, 1, 37, 2308.2500008800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14622, 1, 39, 0.8099465600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14623, 1, 41, 927.0537937600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14624, 1, 42, 6.7094296200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14625, 1, 43, 3109.4380321900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14626, 1, 44, 453.9800298500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14627, 1, 45, 25.7500000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14628, 1, 46, 94.7755547900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14629, 1, 48, 20.8539263200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14630, 1, 49, 177.9712185300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14631, 1, 50, 6.4248613600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14632, 1, 51, 58.7870638800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14633, 1, 52, 133.0207922700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14634, 1, 53, 51.1913028900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14635, 1, 55, 15.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14636, 1, 56, 161.1924300100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14637, 1, 3, 0.8594863000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14638, 1, 57, 2.1948604000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14639, 1, 58, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14640, 1, 4, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14641, 1, 59, 2.6016102400, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14642, 1, 60, 11.4342920900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14643, 1, 61, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14644, 1, 62, 74.1200363300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14645, 1, 63, 8801.8427328000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14646, 1, 64, 7.6334313000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14647, 1, 65, 209.1482543100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14648, 1, 66, 7.8421531100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14649, 1, 67, 26.8297252000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14650, 1, 68, 131.2493261600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14651, 1, 69, 312.9066695800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14652, 1, 70, 17505.7545486700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14653, 1, 71, 3.0236338400, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14654, 1, 31, 95.1356757300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14655, 1, 72, 1310.6842691000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14656, 1, 73, 1374575.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14657, 1, 74, 120.1833985000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14658, 1, 75, 157.7977511200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14659, 1, 76, 0.7090000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14660, 1, 77, 153.4926968200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14661, 1, 2, 129.4399238100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14662, 1, 78, 87.5438068100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14663, 1, 79, 4051.1743858600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14664, 1, 80, 422.8395433600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14665, 1, 81, 900.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14666, 1, 82, 1339.4451288700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14667, 1, 83, 0.3085623100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14668, 1, 84, 0.8290703000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14669, 1, 85, 455.3606222000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14670, 1, 86, 22325.5709898300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14671, 1, 87, 89914.4653699600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14672, 1, 88, 328.4610463900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14673, 1, 89, 179.1004986600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14674, 1, 90, 6.3290230700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14675, 1, 54, 9.3655802800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14676, 1, 91, 17.2270633700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14677, 1, 92, 4334.1521199000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14678, 1, 93, 52.8699233500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14679, 1, 94, 2099.6661925600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14680, 1, 95, 3597.1477396400, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14681, 1, 96, 8.0774177000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14682, 1, 97, 40.1125115900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14683, 1, 98, 46.8385495300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14684, 1, 99, 15.4557521900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14685, 1, 100, 1735.4615295800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14686, 1, 101, 16.8948758600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14687, 1, 102, 4.0694898000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14688, 1, 103, 63.7459382800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14689, 1, 7, 1323.9762679700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14690, 1, 105, 36.6933868000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14691, 1, 32, 9.1968682300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14692, 1, 106, 152.2884329300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14693, 1, 40, 1.7120444800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14694, 1, 107, 0.3848838000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14695, 1, 108, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14696, 1, 109, 3.3559570200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14697, 1, 110, 4.4322562000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:37'),
+(14698, 1, 111, 62.4537790900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14699, 1, 112, 277.1660848200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14700, 1, 113, 3.7084007600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14701, 1, 114, 5938.0128708200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14702, 1, 115, 3.6400000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14703, 1, 116, 4.5152580000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14704, 1, 117, 100.8460600600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14705, 1, 118, 85.0676720000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14706, 1, 119, 1472.3590809800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14707, 1, 120, 3.7500000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14708, 1, 121, 7.9952043100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14709, 1, 122, 14.3247054600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14710, 1, 123, 600.1935241800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14711, 1, 124, 9.5948064600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14712, 1, 125, 1.2641513800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14713, 1, 126, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14714, 1, 127, 22.9239891300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14715, 1, 128, 570.6446902800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14716, 1, 129, 37.8213381800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14717, 1, 130, 5659.1191311700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14718, 1, 131, 21.2630624100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14719, 1, 132, 13002.0000000000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14720, 1, 133, 16.0390708800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14721, 1, 134, 32.9136504500, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14722, 1, 135, 9.2324468900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14723, 1, 136, 3.5082493900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14724, 1, 137, 2.8981698200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14725, 1, 138, 2.3949814200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14726, 1, 139, 48.4768643200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14727, 1, 140, 6.7710058200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14728, 1, 141, 31.4816342300, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14729, 1, 6, 2636.1790828100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14730, 1, 142, 44.6248771700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14731, 1, 5, 3788.2964298200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14732, 1, 143, 40.2308355700, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14733, 1, 144, 11798.8765255600, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14734, 1, 145, 815.4459269200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14735, 1, 146, 25894.7980631200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14736, 1, 147, 117.8015011800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14737, 1, 148, 2.7203233900, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14738, 1, 38, 563.7860578100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14739, 1, 11, 2.7060264100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14740, 1, 47, 1.8002147200, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14741, 1, 22, 563.7860578100, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14742, 1, 104, 102.5639981400, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14743, 1, 149, 237.0297137000, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14744, 1, 8, 16.0390708800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14745, 1, 150, 19.2988665800, 'moneyconvert.net', '2026-09-09 20:43:37', 0, '2026-09-09 21:43:38'),
+(14746, 1, 9, 3.6725000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14747, 1, 10, 65.3885171000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14748, 1, 12, 79.1226774500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14749, 1, 13, 364.3989692500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14750, 1, 14, 916.6975681500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14751, 1, 15, 1513.6139314900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14752, 1, 16, 1.3849061200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14753, 1, 17, 1.7900000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14754, 1, 18, 1.6999995200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14755, 1, 19, 1.6810091000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14756, 1, 20, 2.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14757, 1, 21, 122.9453420800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14758, 1, 23, 1.6810091000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14759, 1, 24, 0.3760000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14760, 1, 25, 2996.6945374300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14761, 1, 26, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14762, 1, 27, 1.2641513800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14763, 1, 28, 12.4678840500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14764, 1, 29, 5.1078441500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14765, 1, 30, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14766, 1, 33, 13.3449516000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55');
+INSERT INTO `exchange_rates` (`id`, `base_currency_id`, `target_currency_id`, `rate`, `source`, `effective_at`, `is_active`, `created_at`) VALUES
+(14767, 1, 34, 3.0613940000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14768, 1, 35, 2.0139684400, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14769, 1, 36, 1.3803011600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14770, 1, 37, 2308.2500008800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14771, 1, 39, 0.8099465600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14772, 1, 41, 927.0537937600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14773, 1, 42, 6.7094296200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14774, 1, 43, 3109.4380321900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14775, 1, 44, 453.9800298500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14776, 1, 45, 25.7500000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14777, 1, 46, 94.7755547900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14778, 1, 48, 20.8539263200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14779, 1, 49, 177.9712185300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14780, 1, 50, 6.4248613600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14781, 1, 51, 58.7870638800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14782, 1, 52, 133.0207922700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14783, 1, 53, 51.1913028900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14784, 1, 55, 15.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14785, 1, 56, 161.1924300100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14786, 1, 3, 0.8594863000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14787, 1, 57, 2.1948604000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14788, 1, 58, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14789, 1, 4, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14790, 1, 59, 2.6016102400, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14791, 1, 60, 11.4342920900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14792, 1, 61, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14793, 1, 62, 74.1200363300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14794, 1, 63, 8801.8427328000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14795, 1, 64, 7.6334313000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14796, 1, 65, 209.1482543100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14797, 1, 66, 7.8421531100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14798, 1, 67, 26.8297252000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14799, 1, 68, 131.2493261600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14800, 1, 69, 312.9066695800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14801, 1, 70, 17505.7545486700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14802, 1, 71, 3.0236338400, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14803, 1, 31, 95.1356757300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14804, 1, 72, 1310.6842691000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14805, 1, 73, 1374575.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14806, 1, 74, 120.1833985000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14807, 1, 75, 157.7977511200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14808, 1, 76, 0.7090000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14809, 1, 77, 153.4926968200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14810, 1, 2, 129.4399238100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14811, 1, 78, 87.5438068100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14812, 1, 79, 4051.1743858600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14813, 1, 80, 422.8395433600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14814, 1, 81, 900.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14815, 1, 82, 1339.4451288700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14816, 1, 83, 0.3085623100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14817, 1, 84, 0.8290703000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14818, 1, 85, 455.3606222000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14819, 1, 86, 22325.5709898300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14820, 1, 87, 89914.4653699600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14821, 1, 88, 328.4610463900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14822, 1, 89, 179.1004986600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14823, 1, 90, 6.3290230700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14824, 1, 54, 9.3655802800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14825, 1, 91, 17.2270633700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14826, 1, 92, 4334.1521199000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14827, 1, 93, 52.8699233500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14828, 1, 94, 2099.6661925600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14829, 1, 95, 3597.1477396400, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14830, 1, 96, 8.0774177000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14831, 1, 97, 40.1125115900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14832, 1, 98, 46.8385495300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14833, 1, 99, 15.4557521900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14834, 1, 100, 1735.4615295800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14835, 1, 101, 16.8948758600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14836, 1, 102, 4.0694898000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14837, 1, 103, 63.7459382800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14838, 1, 7, 1323.9762679700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14839, 1, 105, 36.6933868000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14840, 1, 32, 9.1968682300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14841, 1, 106, 152.2884329300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14842, 1, 40, 1.7120444800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14843, 1, 107, 0.3848838000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14844, 1, 108, 1.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14845, 1, 109, 3.3559570200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14846, 1, 110, 4.4322562000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14847, 1, 111, 62.4537790900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14848, 1, 112, 277.1660848200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14849, 1, 113, 3.7084007600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14850, 1, 114, 5938.0128708200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14851, 1, 115, 3.6400000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14852, 1, 116, 4.5152580000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14853, 1, 117, 100.8460600600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14854, 1, 118, 85.0676720000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14855, 1, 119, 1472.3590809800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14856, 1, 120, 3.7500000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14857, 1, 121, 7.9952043100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14858, 1, 122, 14.3247054600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14859, 1, 123, 600.1935241800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14860, 1, 124, 9.5948064600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14861, 1, 125, 1.2641513800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14862, 1, 126, 0.7377629600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14863, 1, 127, 22.9239891300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14864, 1, 128, 570.6446902800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14865, 1, 129, 37.8213381800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14866, 1, 130, 5659.1191311700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14867, 1, 131, 21.2630624100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14868, 1, 132, 13002.0000000000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14869, 1, 133, 16.0390708800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14870, 1, 134, 32.9136504500, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14871, 1, 135, 9.2324468900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14872, 1, 136, 3.5082493900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14873, 1, 137, 2.8981698200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14874, 1, 138, 2.3949814200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14875, 1, 139, 48.4768643200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14876, 1, 140, 6.7710058200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14877, 1, 141, 31.4816342300, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14878, 1, 6, 2636.1790828100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14879, 1, 142, 44.6248771700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14880, 1, 5, 3788.2964298200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14881, 1, 143, 40.2308355700, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14882, 1, 144, 11798.8765255600, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14883, 1, 145, 815.4459269200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14884, 1, 146, 25894.7980631200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14885, 1, 147, 117.8015011800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14886, 1, 148, 2.7203233900, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14887, 1, 38, 563.7860578100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14888, 1, 11, 2.7060264100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14889, 1, 47, 1.8002147200, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14890, 1, 22, 563.7860578100, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14891, 1, 104, 102.5639981400, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14892, 1, 149, 237.0297137000, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14893, 1, 8, 16.0390708800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55'),
+(14894, 1, 150, 19.2988665800, 'moneyconvert.net', '2026-09-09 20:43:55', 1, '2026-09-09 21:43:55');
 
 -- --------------------------------------------------------
 
@@ -15976,7 +16346,13 @@ INSERT INTO `login_logs` (`id`, `user_id`, `identifier`, `login_status`, `failur
 (125, 12, 'juliusmsamuel@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 00:58:49'),
 (126, 11, 'cjj', 'password_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:42:57'),
 (127, 12, 'juliusmsamuel@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:49:58'),
-(128, 3, 'jmsak37@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:27:28');
+(128, 3, 'jmsak37@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:27:28'),
+(129, 12, 'juliusmsamuel@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 18:35:07'),
+(130, 3, 'jmsak37', 'password_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 15:54:35'),
+(131, 5, 'musyokjsamuel@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 16:09:41'),
+(132, 3, 'jmsak37@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 17:49:41'),
+(133, 12, 'juliusmsamuel@gmail.com', 'google_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 17:52:51'),
+(134, 3, 'jmsak37', 'password_verified_2fa_pending', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:00:22');
 
 -- --------------------------------------------------------
 
@@ -16055,66 +16431,9 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `user_id`, `notification_type_id`, `sender_id`, `title`, `message`, `reference_type`, `reference_id`, `audio_id`, `is_read`, `read_at`, `created_at`, `email_sent_at`, `email_attempted_at`, `email_attempts`, `email_last_error`) VALUES
-(31, 10, 1, NULL, 'Connection Accepted', 'Your connection request was accepted.', 'connection_accepted', 1, 10, 1, '2026-09-01 20:32:11', '2026-09-01 20:28:21', NULL, NULL, 0, NULL),
-(32, 10, NULL, 3, 'New Message', 'You have a new message from LOVEMI Administration.', 'conversation', 1, NULL, 1, '2026-09-01 20:32:07', '2026-09-01 20:30:48', NULL, NULL, 0, NULL),
-(34, 10, 2, NULL, 'New Message', 'You have a new message from I', 'conversation', 1, 2, 1, '2026-09-01 20:33:43', '2026-09-01 20:33:13', NULL, NULL, 0, NULL),
-(37, 10, 2, NULL, 'New Message', 'You have a new message from HI', 'conversation', 1, 2, 1, '2026-09-01 22:06:57', '2026-09-01 21:19:20', NULL, NULL, 0, NULL),
-(38, 10, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 6, 4, 1, '2026-09-01 22:06:57', '2026-09-01 21:27:08', NULL, NULL, 0, NULL),
-(40, 10, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 9, 4, 1, '2026-09-01 22:06:57', '2026-09-01 21:30:45', NULL, NULL, 0, NULL),
-(41, 10, 6, NULL, 'Payment Successful', 'Your payment LVM-20260901184513-10-7101D7C676 was completed successfully.', NULL, NULL, NULL, 1, '2026-09-01 22:06:57', '2026-09-01 21:57:54', NULL, NULL, 0, NULL),
-(42, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 6, NULL, 1, '2026-09-01 22:06:57', '2026-09-01 21:58:12', NULL, NULL, 0, NULL),
-(44, 10, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 13, 4, 1, '2026-09-01 22:00:15', '2026-09-01 21:59:29', NULL, NULL, 0, NULL),
-(48, 10, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 18, 4, 1, '2026-09-01 22:06:57', '2026-09-01 22:04:52', NULL, NULL, 0, NULL),
-(52, 5, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 2, 1, 0, NULL, '2026-09-02 13:30:59', NULL, NULL, 0, NULL),
-(53, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 3, 1, 1, '2026-09-02 22:41:57', '2026-09-02 13:31:03', '2026-09-07 22:07:37', '2026-09-07 22:07:32', 1, NULL),
-(60, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 10, 1, 1, '2026-09-02 22:41:57', '2026-09-02 16:39:17', '2026-09-07 22:07:42', '2026-09-07 22:07:37', 1, NULL),
-(61, 10, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-02 16:46:00', NULL, NULL, 0, NULL),
-(64, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 11, 1, 1, '2026-09-02 17:08:22', '2026-09-02 17:03:34', '2026-09-07 22:07:46', '2026-09-07 22:07:42', 1, NULL),
-(65, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 12, 1, 1, '2026-09-02 17:08:21', '2026-09-02 17:04:47', '2026-09-07 22:07:51', '2026-09-07 22:07:46', 1, NULL),
-(66, 5, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 13, 1, 0, NULL, '2026-09-02 17:04:53', NULL, NULL, 0, NULL),
-(67, 5, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 14, 1, 0, NULL, '2026-09-02 17:06:21', NULL, NULL, 0, NULL),
-(70, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-02 22:41:57', '2026-09-02 17:09:04', '2026-09-07 22:07:55', '2026-09-07 22:07:51', 1, NULL),
-(71, 5, 1, 3, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 15, 1, 0, NULL, '2026-09-02 17:09:40', NULL, NULL, 0, NULL),
-(75, 10, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 17, 1, 0, NULL, '2026-09-03 17:24:32', NULL, NULL, 0, NULL),
-(77, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-03 18:06:50', '2026-09-03 18:05:42', '2026-09-07 22:08:00', '2026-09-07 22:07:55', 1, NULL),
-(79, 3, 1, NULL, 'Connection Accepted', 'Your connection request was accepted.', 'connection_accepted', 18, 10, 1, '2026-09-03 18:06:50', '2026-09-03 18:06:25', '2026-09-07 22:08:05', '2026-09-07 22:08:00', 1, NULL),
-(80, 3, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 20, 4, 1, '2026-09-03 18:06:50', '2026-09-03 18:06:37', '2026-09-07 22:08:09', '2026-09-07 22:08:05', 1, NULL),
-(84, 10, 13, 3, 'New comment on your post', 'Someone commented on your post.', 'post', 20, NULL, 0, NULL, '2026-09-04 14:31:57', NULL, NULL, 0, NULL),
-(85, 10, 13, NULL, 'New comment on your post', 'Someone commented on your post.', 'post', 20, NULL, 0, NULL, '2026-09-05 21:36:55', NULL, NULL, 0, NULL),
-(87, 10, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 5, NULL, 0, NULL, '2026-09-05 21:41:22', NULL, NULL, 0, NULL),
-(88, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-05 21:45:12', '2026-09-05 21:41:27', '2026-09-07 22:08:14', '2026-09-07 22:08:09', 1, NULL),
-(89, 3, 13, NULL, 'New comment on your post', 'Someone commented on your post.', 'post', 21, NULL, 1, '2026-09-05 21:45:12', '2026-09-05 21:42:09', '2026-09-07 22:08:18', '2026-09-07 22:08:14', 1, NULL),
-(90, 5, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 19, 1, 0, NULL, '2026-09-05 21:42:47', NULL, NULL, 0, NULL),
-(91, 5, 1, 3, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 20, 1, 0, NULL, '2026-09-05 22:26:20', NULL, NULL, 0, NULL),
-(94, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 8, NULL, 1, '2026-09-06 10:30:47', '2026-09-06 10:26:15', '2026-09-07 22:40:26', '2026-09-07 22:40:23', 1, NULL),
-(95, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-06 10:30:47', '2026-09-06 10:26:57', '2026-09-07 22:40:30', '2026-09-07 22:40:27', 1, NULL),
-(96, 3, 14, NULL, 'New post from someone you follow', 'Someone you follow has published a new post.', 'post', 22, 9, 1, '2026-09-06 10:33:02', '2026-09-06 10:32:32', '2026-09-07 22:40:34', '2026-09-07 22:40:30', 1, NULL),
-(97, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 21, 1, 1, '2026-09-06 11:19:57', '2026-09-06 11:19:42', '2026-09-07 22:40:37', '2026-09-07 22:40:34', 1, NULL),
-(98, 3, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 22, 1, 1, '2026-09-06 11:50:24', '2026-09-06 11:20:59', '2026-09-07 22:40:41', '2026-09-07 22:40:37', 1, NULL),
-(101, 3, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 23, 4, 1, '2026-09-06 11:50:24', '2026-09-06 11:22:49', '2026-09-07 22:40:46', '2026-09-07 22:40:41', 1, NULL),
-(102, 3, NULL, NULL, 'New Message', 'You received a new LOVEMI message.', 'new_message', 26, 4, 1, '2026-09-06 11:50:24', '2026-09-06 11:23:52', '2026-09-07 22:40:49', '2026-09-07 22:40:46', 1, NULL),
-(104, 10, 1, NULL, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 23, 1, 0, NULL, '2026-09-06 12:05:17', NULL, NULL, 0, NULL),
-(105, 3, 13, NULL, 'New comment on your post', 'Someone commented on your post.', 'post', 21, NULL, 1, '2026-09-06 14:35:53', '2026-09-06 12:07:26', '2026-09-07 22:40:54', '2026-09-07 22:40:49', 1, NULL),
-(106, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-06 12:23:55', NULL, NULL, 0, NULL),
-(107, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 5, NULL, 0, NULL, '2026-09-06 12:23:57', NULL, NULL, 0, NULL),
-(109, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 8, NULL, 1, '2026-09-06 14:35:51', '2026-09-06 12:24:03', '2026-09-07 22:40:58', '2026-09-07 22:40:54', 1, NULL),
-(110, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-06 14:35:49', '2026-09-06 12:41:50', '2026-09-07 22:41:02', '2026-09-07 22:40:58', 1, NULL),
-(112, 10, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-06 12:41:55', NULL, NULL, 0, NULL),
-(113, 3, 14, NULL, 'New post from someone you follow', 'Someone you follow has published a new post.', 'post', 23, 9, 1, '2026-09-06 14:35:48', '2026-09-06 14:30:04', '2026-09-07 22:50:03', '2026-09-07 22:49:59', 1, NULL),
-(114, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 8, NULL, 1, '2026-09-07 22:08:18', '2026-09-06 20:42:54', '2026-09-07 22:50:08', '2026-09-07 22:50:03', 1, NULL),
-(116, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-06 20:42:59', NULL, NULL, 0, NULL),
-(117, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-07 22:08:18', '2026-09-06 20:58:37', '2026-09-07 22:50:11', '2026-09-07 22:50:08', 1, NULL),
-(119, 10, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-06 20:58:43', NULL, NULL, 0, NULL),
-(120, 10, 1, 3, 'New Connection Request', 'Someone sent you a connection request on LOVEMI.', 'connection', 24, 1, 0, NULL, '2026-09-06 21:18:56', NULL, NULL, 0, NULL),
-(121, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 8, NULL, 1, '2026-09-07 22:08:18', '2026-09-06 21:26:25', '2026-09-07 22:50:15', '2026-09-07 22:50:11', 1, NULL),
-(123, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 6, NULL, 0, NULL, '2026-09-06 21:26:29', NULL, NULL, 0, NULL),
-(128, 10, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 5, NULL, 0, NULL, '2026-09-07 12:07:52', NULL, NULL, 0, NULL),
-(129, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 8, NULL, 1, '2026-09-07 22:08:18', '2026-09-07 12:07:58', '2026-09-07 22:50:18', '2026-09-07 22:50:15', 1, NULL),
-(133, 10, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 5, NULL, 0, NULL, '2026-09-07 13:00:12', NULL, NULL, 0, NULL),
-(134, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 8, NULL, 1, '2026-09-07 22:08:18', '2026-09-07 13:00:14', '2026-09-07 22:50:22', '2026-09-07 22:50:18', 1, NULL),
-(151, 10, 13, 11, 'New comment on your post', 'Someone commented on your post.', 'post', 20, NULL, 0, NULL, '2026-09-08 12:51:24', NULL, NULL, 0, NULL),
-(152, 11, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 18, NULL, 0, NULL, '2026-09-08 13:28:25', '2026-09-08 13:29:49', '2026-09-08 13:29:44', 1, NULL),
-(153, 12, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 19, NULL, 1, '2026-09-08 13:39:35', '2026-09-08 13:38:46', '2026-09-08 13:39:35', '2026-09-08 13:39:31', 1, NULL);
+(243, 11, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 18, NULL, 0, NULL, '2026-09-09 21:42:08', NULL, NULL, 0, NULL),
+(244, 3, 3, 3, 'Premium Activated', 'Your LOVEMI Premium subscription has been activated by administration.', 'subscription', 16, NULL, 0, NULL, '2026-09-09 21:43:07', NULL, NULL, 0, NULL),
+(245, 3, 5, 3, 'Premium Deactivated', 'Your LOVEMI Premium subscription has been deactivated by administration.', 'subscription', 16, NULL, 0, NULL, '2026-09-09 21:43:10', NULL, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -16253,7 +16572,8 @@ INSERT INTO `notification_preferences` (`user_id`, `email_notifications`, `sms_n
 (5, 1, 1, 1, 1, 1, 1, 1, 1, '2026-08-29 10:29:25'),
 (10, 1, 1, 1, 1, 1, 1, 1, 1, '2026-09-01 15:08:33'),
 (11, 1, 1, 1, 1, 1, 1, 1, 1, '2026-09-07 14:30:56'),
-(12, 1, 1, 1, 1, 1, 1, 1, 1, '2026-09-07 20:28:30');
+(12, 1, 1, 1, 1, 1, 1, 1, 1, '2026-09-07 20:28:30'),
+(13, 1, 1, 1, 1, 1, 1, 1, 1, '2026-09-09 18:18:38');
 
 -- --------------------------------------------------------
 
@@ -16584,7 +16904,9 @@ INSERT INTO `photos` (`id`, `user_id`, `file_name`, `file_path`, `thumbnail_path
 (9, 10, 'LOVEMI STRUCTURE.png', 'uploads/posts/original/294304be50b7a040db90b4f6f95480e6851b81939f247d51.png', NULL, 'image/png', 1496549, 1536, 1024, 'post', 'approved', 0, 0, '2026-09-01 19:46:34', NULL, NULL),
 (12, 11, 'profile_11_20260908122850_648a37b06809921823270ea6b86d35ef.jpg', 'uploads/profiles/original/profile_11_20260908122850_648a37b06809921823270ea6b86d35ef.jpg', 'uploads/profiles/original/profile_11_20260908122850_648a37b06809921823270ea6b86d35ef.jpg', 'image/jpeg', 2094093, 4000, 6016, 'profile', 'approved', 0, 0, '2026-09-08 13:28:50', '2026-09-08 12:28:50', NULL),
 (13, 11, 'profile_11_20260908122858_91b8e182a03ab58fc96b1dd8a57fdc92.jpg', 'uploads/profiles/original/profile_11_20260908122858_91b8e182a03ab58fc96b1dd8a57fdc92.jpg', 'uploads/profiles/original/profile_11_20260908122858_91b8e182a03ab58fc96b1dd8a57fdc92.jpg', 'image/jpeg', 1716739, 3744, 5616, 'profile', 'approved', 1, 0, '2026-09-08 13:28:58', '2026-09-08 12:28:58', NULL),
-(14, 12, 'profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'uploads/profiles/original/profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'uploads/profiles/original/profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'image/jpeg', 2094093, 4000, 6016, 'profile', 'approved', 1, 0, '2026-09-08 13:39:20', '2026-09-08 12:39:20', NULL);
+(14, 12, 'profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'uploads/profiles/original/profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'uploads/profiles/original/profile_12_20260908123920_e317996b8889cb14f016b407b52ce952.jpg', 'image/jpeg', 2094093, 4000, 6016, 'profile', 'approved', 1, 0, '2026-09-08 13:39:20', '2026-09-08 12:39:20', NULL),
+(15, 12, 'images (6).jfif', 'uploads/posts/original/9e231f59810aa804556dd83f4b3401c4b9112fb0b442ec61.jpg', NULL, 'image/jpeg', 44232, 440, 697, 'post', 'approved', 0, 0, '2026-09-08 19:39:36', NULL, NULL),
+(16, 12, 'images (5).jfif', 'uploads/posts/original/91b29058455beacb9b9290e09f14c546f71c7a8fee56fcb4.jpg', NULL, 'image/jpeg', 31462, 678, 452, 'post', 'approved', 0, 0, '2026-09-08 19:40:57', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -16620,7 +16942,9 @@ INSERT INTO `posts` (`id`, `user_id`, `content`, `visibility`, `approval_status`
 (18, 10, '<font color=\"#532cdd\"><b>CURRENT ONEOOOO</b></font>', 'public', 'approved', 0, '2026-09-01 17:07:30', '2026-09-01 17:08:22', '2026-09-01 17:08:22', 3, NULL),
 (19, 10, '<font color=\"#ae2cdd\"><b>STRUCTURE</b></font>', 'public', 'approved', 0, '2026-09-01 19:46:34', '2026-09-01 19:46:34', '2026-09-01 18:46:34', NULL, NULL),
 (20, 10, 'mamboni', 'public', 'approved', 0, '2026-09-02 16:46:20', '2026-09-02 16:46:20', '2026-09-02 15:46:20', NULL, NULL),
-(21, 3, 'yooo<div><br></div>', 'public', 'approved', 0, '2026-09-02 17:09:19', '2026-09-02 17:09:19', '2026-09-02 16:09:19', NULL, NULL);
+(21, 3, 'yooo<div><br></div>', 'public', 'approved', 0, '2026-09-02 17:09:19', '2026-09-02 17:09:19', '2026-09-02 16:09:19', NULL, NULL),
+(24, 12, '<font color=\"#5b2cdd\"><b>picture of the day</b></font>', 'public', 'approved', 0, '2026-09-08 19:39:36', '2026-09-08 19:39:36', '2026-09-08 18:39:36', NULL, NULL),
+(25, 12, '<b><font color=\"#dd612c\">Lovely</font></b>', 'public', 'approved', 0, '2026-09-08 19:40:57', '2026-09-08 19:40:57', '2026-09-08 18:40:57', NULL, NULL);
 
 --
 -- Triggers `posts`
@@ -16805,7 +17129,9 @@ CREATE TABLE `post_photos` (
 
 INSERT INTO `post_photos` (`id`, `post_id`, `photo_id`, `display_order`, `created_at`) VALUES
 (6, 18, 8, 1, '2026-09-01 17:07:30'),
-(7, 19, 9, 1, '2026-09-01 19:46:34');
+(7, 19, 9, 1, '2026-09-01 19:46:34'),
+(10, 24, 15, 1, '2026-09-08 19:39:36'),
+(11, 25, 16, 1, '2026-09-08 19:40:57');
 
 -- --------------------------------------------------------
 
@@ -16834,9 +17160,10 @@ INSERT INTO `post_public_links` (`id`, `post_id`, `public_token`, `created_at`, 
 (6, 17, 'ff1930bed97a8466f666d68cb0f997d5bd3a4f472eec7564799d854c8cc31ab7', '2026-09-01 17:06:00', '2026-09-06 20:11:14'),
 (7, 18, '7b1df93096580b66a57c0b78efa88826877e232d51f84da497a09b90f18f78d0', '2026-09-01 17:08:35', '2026-09-08 02:33:09'),
 (8, 19, 'decf07bdcd10becc3fa5547df36d3c24fbc0c802bf2bb0ee3a817e2d08b25666', '2026-09-01 19:47:23', '2026-09-08 13:13:27'),
-(9, 20, '42d1895216df5b56ed3540e5894693f687f90dec5ef9729193f71ce3ddbcb37e', '2026-09-02 17:07:50', '2026-09-02 23:35:30'),
+(9, 20, '42d1895216df5b56ed3540e5894693f687f90dec5ef9729193f71ce3ddbcb37e', '2026-09-02 17:07:50', '2026-09-08 19:36:27'),
 (10, 21, 'efc764dc1dd4f0f7d1500708de87853793a55deef20afcd1aac3c409dabb15d2', '2026-09-03 00:16:38', '2026-09-03 00:16:38'),
-(11, 23, '8eb52c6005b9a6827432a4a74c40e21b6d97338aff62ec33fc1ee7891c1c4ae8', '2026-09-06 14:30:07', '2026-09-06 21:19:09');
+(11, 23, '8eb52c6005b9a6827432a4a74c40e21b6d97338aff62ec33fc1ee7891c1c4ae8', '2026-09-06 14:30:07', '2026-09-06 21:19:09'),
+(12, 25, '1064a638f5a0514dfb1c633073a681209421e0091dbefb6d4a7256d06acb7931', '2026-09-08 20:42:25', '2026-09-08 20:42:26');
 
 -- --------------------------------------------------------
 
@@ -16898,7 +17225,8 @@ INSERT INTO `profiles` (`id`, `user_id`, `display_name`, `bio`, `occupation`, `e
 (8, 5, 'julius k samuel', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'public', 1, 1, '2026-08-29 10:29:25', '2026-08-29 10:29:25'),
 (13, 10, 'MUTUA KIMONDIU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'public', 1, 1, '2026-09-01 15:08:33', '2026-09-01 15:08:33'),
 (14, 11, 'Eduassista julius', 'loviing', 'computer', 'seku', NULL, NULL, NULL, 'kitui', 'Single', 'Dating', 'looking for a faithful man', 'public', 1, 1, '2026-09-07 14:30:56', '2026-09-08 13:29:32'),
-(15, 12, 'SOUTH EASTERN KENYA UNIVERSITY', NULL, NULL, 'Bachelor\'s Degree', 'Bachelor\'s Degree', 'SOUTH EASTERN KENYA UNIVERSITY', 'computer sciece', 'kitui', NULL, NULL, NULL, 'public', 1, 1, '2026-09-07 20:28:30', '2026-09-07 20:28:30');
+(15, 12, 'SOUTH EASTERN KENYA UNIVERSITY', NULL, NULL, 'Bachelor\'s Degree', 'Bachelor\'s Degree', 'SOUTH EASTERN KENYA UNIVERSITY', 'computer sciece', 'kitui', NULL, NULL, NULL, 'public', 1, 1, '2026-09-07 20:28:30', '2026-09-07 20:28:30'),
+(17, 13, 'Rembo Resh', NULL, NULL, 'Doctorate', 'Doctorate', 'SEKU', 'EDUCATION', 'Nairobi', NULL, NULL, NULL, 'public', 1, 1, '2026-09-09 18:18:38', '2026-09-09 18:18:38');
 
 -- --------------------------------------------------------
 
@@ -16921,11 +17249,11 @@ CREATE TABLE `profile_codes` (
 --
 
 INSERT INTO `profile_codes` (`id`, `user_id`, `code_hash`, `encrypted_payload`, `version`, `created_at`, `updated_at`) VALUES
-(1, 5, '69ca754b33e9924a6a16bf932b941b6f3f2655fc45fcd01b81a48a82511107cb', 'x0GyMfJKMGeFYvZgBCcZMBhJ0bLbhpZyUXlvjT004J579E5NAK2X1FHHkxpJExBuCzl5WYJ7SYRxv2yipGWrmDfWtdf9r-8SGyjn9FyNfnpuvEym37bXcnB-hU7_rix-reUGR1L0yr_O-GQTcyhX00riDS4ZiLM2Fc4cSpOcgeHzANsoVaHV1cu6mZSYcBFn5QPcL7ls3j1b1USRB4wb2YOUG8XxzWCx6E9kv439ceWAl6bZpBKcaQ', 2, '2026-09-03 11:19:27', '2026-09-08 13:10:32'),
+(1, 5, 'e0aa0013eec0ac9f72ea7ec672cec1a475333eac8322b3967c34847fc1c37f26', 'eCdn8cGoCRxjTqlaqaTc6bFJfAk0MjezTT-9GSfI6ecbUDWkRqn7Om4GwJwvbV1-8Jwy7vtt0WO0SpvSZtO13WHmquk-xBAOd5cpcCCICRiRkI6cZvcmsAQZE0Tbi4BVhIhty7EVBMH3IuvOFjoRjeh5QBYCYW1Zp7UGC9MvKwhIVFpdBUwsYSeKIHG1nCpiE_9n45vtKB4GQ4kKIjDnggH7YZ5IWdQeDMQUArqiBA-7wP62Fb2rRA', 2, '2026-09-03 11:19:27', '2026-09-08 19:04:54'),
 (2, 3, '3a8ab7975cbe67cef76fed68838df403f9bb4b43bfa2110f026f1dd350314c2c', 'nYUZQG1v6CJvBQgNPmhK_hnExvYOU6KaiFb_DL83rqD5oPE-HEFlIF4cK6cier14rZ5tfOU7x86fXdYyJFIjndD_RgM9Tt_JDLtlw8rAhIEX0dkG-eFv8pMWBtsrzqL3IMk_BEexFLtMu_R__QaAJiv76FvcH7SHdyn7RDEereTmF4GFi2i88zIrvTwuxE_EpGfuOr2oFR6PlBdqdd_cGV0Eea4_T37xjq6UdG5DphaRdOIDhhT-pA', 2, '2026-09-03 14:45:37', '2026-09-06 21:15:54'),
-(92, 11, 'ff48f49bb417d6a75e67ebcdc8382534b9ec3546cf51f3a0327adffc3d2dcf7f', '58dpb04NXlAT5jMTi3ciXvDGlNRAi6iyjsyYLV4Lus7SIjNDK0e5VZ3udBDkPGjQxNohWQBJnlvAqML5BJnVr3EK9KC4_4ECWgT7BYjeudTvhsCZTRsbX5pz08NY5t5UDcC6TsKsn1Gi1TRqQyYXJq7CkUKwiFGp0gysTaXqwK8wejwqQ-OrWGSJTb_BpJvu52A_HQdj1uBcm0ZNOpPBuXaUfjiaqict3Qgc1DZC3nAq33OocL54t3I', 2, '2026-09-07 14:52:14', '2026-09-08 13:09:44'),
-(93, 12, 'f3a6cca5e08afc0d3535d54c81db274f9c48982af5f522621bb224ed47e9d107', 'MF3G9_Cu84E_MPas1bmmBaVc0ZI8GYG6TCAwYdtYfKWyikWgVyVoCT4ZficXezgq16HRwULrnlTM-K4r3MiD7NzCIPbEKE_iq_E8Xezvgb6MdjlyDchqlKsFs8VfgGWBgRMiDJbvmjNL0vqFKEvCCXexHVA7wSd_l3MW4m2a2StRm26kc0aFq3r5FBbQKWwnE2xpjGUpMgyHWS4etpGd2knIOmsNLmRXDn6545SRmjXbbgW5x2nuxI0', 2, '2026-09-07 22:30:43', '2026-09-08 17:45:53'),
-(111, 10, 'e8e37f79913e2263c54963545f993a4a19e925b11d77ffa880932a49b5532fc6', 'iA1rLjOgYKSM9bEvUsmY6gVADAz6yo3Co-bhSkmyDLluTP3eyx3V7-qKNB3HtikeSSHIImZd-jTbgcezpMCMidn4o9E-Cd_Qgv3Rm8Akn8zCFV0dHVeq3eWzVFDR3SCzqMwqZLd_vAFvq-wClYQxFGZ5zc9scIE0z5saX3p2Quf5hWEwjaMCVsr9VdO23iwIcf_XgnE86OuwdffE7SwuoivJ6lK96sCXu_c-3ncLOTJZI3HNNy-7KTM', 2, '2026-09-08 01:00:24', '2026-09-08 17:29:50');
+(92, 11, 'd51ed7f408f1df59f915d94431464455f4a0b9237ceb16afba802129642c378d', 'WTDf05JkTJoyFY0xDt9NIjRbQdXsgDrXWzHK61tYWpidiJJaGTOIReE30sKvVfrshYAII0XUrJNL8ZaZJ3EIasbT5uFJMC2m7WjfoRRIkjrrZrH4PUuMZYnbZZArGflA0NrzSm-6AX_9ZI0dEh9bWHRn3hWyHvsgymHiI7zoWy11Dk2z2fyz-qauzkf6b6wdDTMT2ciJ1FcYZso4KKlXp9aGqKq92Ebe6DKSkhepT9Qu4ukzIA6S-v0', 2, '2026-09-07 14:52:14', '2026-09-08 19:33:30'),
+(93, 12, '2984c1115438ff1594dc01504217c87ca42afa2fec0cf436f8b53825de746e0d', '6sIfgW7M8p-21MAnmIMRutFeS94vjJQVHzeuZajZKwr3T4vsTAS3nH1AvMovxFHF0oT7yp_-i4x8x1zcjI1oDotcpDgcj0-JK5t-rt5r4uKHZ68Wk4KFJTHQh62Japhu02Uikc_tAdFltnSaPfqUl1o2aic-LKQAYXc3ZB4SbTNdM_cEA8GtNKeU4eOyu0mvwr5PI1C8KfhTPLxppmW_Fw1TdzAmOOh2z_aOOK4lKt925BiXaJSKYYk', 2, '2026-09-07 22:30:43', '2026-09-08 19:05:34'),
+(111, 10, 'd2fc538d79cf77cec0c29fdf655c90532db9a30cff005a390dda03ba37d44162', 'kILHygl_KV44q1-MS_gkG9EoQNB7RNiYoOikzpHReUBdip4Tec__A0Xy-4rJgVTUR4-vjQegBUjiLfRyH2OApdGasCjHVHe5lLhRdz3GSj_hnUmsZPz1vUF1l18OA0wb5HWtbjOuqUvOAAkqgI8awzl6BXrCAUmnmtBjXPjs0sW0DCodYcvkqMiIvti8lBA6fiGNnzoKMFImI5DxEWiD7lw70KVGRNOJlxA7F8uUXeHGknRPNKDv5j0', 2, '2026-09-08 01:00:24', '2026-09-08 19:36:04');
 
 -- --------------------------------------------------------
 
@@ -16949,6 +17277,21 @@ CREATE TABLE `profile_extra_details` (
   `profile_note` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profile_media_security`
+--
+
+CREATE TABLE `profile_media_security` (
+  `photo_id` bigint(20) UNSIGNED NOT NULL,
+  `allow_download` tinyint(1) NOT NULL DEFAULT 0,
+  `allow_screenshot` tinyint(1) NOT NULL DEFAULT 0,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -17132,9 +17475,9 @@ INSERT INTO `subscriptions` (`id`, `user_id`, `service_id`, `status`, `start_at`
 (5, 10, 1, 'cancelled', '2026-09-07 11:07:52', '2026-09-08 11:07:52', 1.00, 0.0000, 1, 1.0000000000, 5, NULL, 0, '2026-09-01 15:12:11', '2026-09-07 13:00:12'),
 (6, 10, 1, 'cancelled', '2026-09-06 19:58:43', '2026-09-07 19:58:43', 1.00, 0.0000, 1, 1.0000000000, 6, NULL, 0, '2026-09-01 19:45:13', '2026-09-06 21:26:29'),
 (8, 3, 1, 'cancelled', '2026-09-07 11:07:58', '2026-09-08 11:07:58', 1.00, 0.0000, 2, 129.3100000000, 8, NULL, 0, '2026-09-02 17:08:45', '2026-09-07 13:00:14'),
-(16, 3, 1, 'pending', NULL, NULL, 1.00, 0.0000, 2, 129.4067828000, 16, NULL, 0, '2026-09-07 11:52:58', '2026-09-07 11:52:58'),
-(18, 11, 1, 'active', '2026-09-08 12:28:25', '2026-09-09 12:28:25', 1.00, 0.0000, 2, 129.4044364500, 18, NULL, 0, '2026-09-07 14:51:59', '2026-09-08 13:28:25'),
-(19, 12, 1, 'active', '2026-09-08 12:38:46', '2026-09-09 12:38:46', 1.00, 0.0000, 1, 1.0000000000, 19, NULL, 0, '2026-09-08 13:38:33', '2026-09-08 13:38:46');
+(16, 3, 1, 'cancelled', '2026-09-09 20:43:07', '2026-09-10 20:43:07', 1.00, 0.0000, 2, 129.4067828000, 16, NULL, 0, '2026-09-07 11:52:58', '2026-09-09 21:43:10'),
+(18, 11, 1, 'cancelled', '2026-09-08 12:28:25', '2026-09-09 12:28:25', 1.00, 0.0000, 2, 129.4044364500, 18, NULL, 0, '2026-09-07 14:51:59', '2026-09-09 21:42:08'),
+(19, 12, 1, 'expired', '2026-09-08 12:38:46', '2026-09-09 12:38:46', 1.00, 0.0000, 1, 1.0000000000, 19, NULL, 0, '2026-09-08 13:38:33', '2026-09-09 17:53:06');
 
 --
 -- Triggers `subscriptions`
@@ -17207,21 +17550,95 @@ CREATE TABLE `support_tickets` (
   `message` text NOT NULL,
   `status` varchar(30) NOT NULL DEFAULT 'open',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `source` varchar(20) NOT NULL DEFAULT 'help',
+  `last_user_reply_at` datetime DEFAULT NULL,
+  `last_admin_reply_at` datetime DEFAULT NULL,
+  `last_message_at` datetime DEFAULT NULL,
+  `close_at` datetime DEFAULT NULL,
+  `solved_at` datetime DEFAULT NULL,
+  `closed_at` datetime DEFAULT NULL,
+  `reminder_24_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `reminder_12_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `reminder_1_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `admin_last_reminder_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support_ticket_access`
+--
+
+CREATE TABLE `support_ticket_access` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `access_type` varchar(20) NOT NULL DEFAULT 'guest',
+  `token_hash` char(64) NOT NULL,
+  `email_code_hash` char(64) DEFAULT NULL,
+  `email_code_expires_at` datetime DEFAULT NULL,
+  `email_code_attempts` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `email_code_sent_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `email_code_locked_until` datetime DEFAULT NULL,
+  `two_factor_attempts` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `two_factor_locked_until` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support_ticket_messages`
+--
+
+CREATE TABLE `support_ticket_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_type` varchar(20) NOT NULL,
+  `sender_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sender_name` varchar(180) NOT NULL,
+  `sender_email` varchar(190) NOT NULL,
+  `body` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support_ticket_token_history`
+--
+
+CREATE TABLE `support_ticket_token_history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `access_id` bigint(20) UNSIGNED NOT NULL,
+  `token_hash` char(64) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `support_tickets`
+-- Dumping data for table `support_ticket_token_history`
 --
 
-INSERT INTO `support_tickets` (`id`, `user_id`, `name`, `email`, `category`, `subject`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Julius Samuel', 'jmsak37@gmail.com', 'technical', 'rr', 'rr', 'open', '2026-08-29 09:47:36', '2026-08-29 09:47:36'),
-(2, NULL, 'Julius Samuel', 'jmsak37@gmail.com', 'account', 'hhh', 'hhhh', 'open', '2026-08-29 09:50:25', '2026-08-29 09:50:25'),
-(3, NULL, 'Eduassista', 'eduassistasc@gmail.com', 'contact', 'bnbnb', 'sss', 'open', '2026-09-08 01:17:12', '2026-09-08 01:17:12'),
-(4, 12, 'SOUTH EASTERN KENYA UNIVERSITY', 'juliusmsamuel@gmail.com', 'account', 'ccc', 'vdvdvasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss', 'open', '2026-09-08 01:23:41', '2026-09-08 01:23:41'),
-(5, NULL, 'Eduassista', 'eduassistasc@gmail.com', 'account', 'vvv', 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'received', '2026-09-08 01:58:07', '2026-09-08 01:58:17'),
-(6, 12, 'SOUTH EASTERN KENYA UNIVERSITY', 'juliusmsamuel@gmail.com', 'login', 'ccc', 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'received', '2026-09-08 02:03:24', '2026-09-08 02:03:32'),
-(7, NULL, 'Eduassista', 'eduassistasc@gmail.com', 'profile', 'bnbnb', 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', 'received', '2026-09-08 02:12:27', '2026-09-08 02:12:36');
+INSERT INTO `support_ticket_token_history` (`id`, `ticket_id`, `access_id`, `token_hash`, `created_at`) VALUES
+(1, 4, 1, '28aa297c34c9a19da591f82441676218be4a237eb0deb8669c0c40fb15ab91b8', '2026-09-09 00:08:36'),
+(2, 8, 2, '6d7a379655b91cc6155f84bb3a4cdd0291b712ae552177ba6e1763a95293ba99', '2026-09-09 00:18:08'),
+(3, 9, 3, 'f6355de90854d9c456727cc072227929ec2a59705c87f4b2b3cda0d6c200eb16', '2026-09-09 00:19:33'),
+(4, 9, 3, '55c1e745e0bf839985e28c73b1461fb88b4bcd330013af65767f150c188439ab', '2026-09-09 00:34:04'),
+(5, 1, 4, '3d12e5902016a8353ce37a8438edfc3f5ba57c187ee1e15485a90e01b56fcd73', '2026-09-09 00:35:30'),
+(6, 2, 5, '4570bb7278e2c946a10382d3c658168386e8de7be2161d86f2f941d3e57b8026', '2026-09-09 00:38:09'),
+(7, 9, 3, '781670877ada61efb08b6e7b010a3e511de5feaf455ebe16cdf75a6a5f470f70', '2026-09-09 00:46:53'),
+(8, 8, 2, 'de63910285b2b6804e40d23386389143f28079a3eac489712b765d38f7d69bd4', '2026-09-09 00:54:38'),
+(9, 1, 4, 'c1ea4850d4f3b0e985c2f638b908338b3e1c16438b706c0ef57cb0e2881e80a5', '2026-09-09 00:55:14'),
+(10, 2, 5, '5f1f8ae189a3eed5f9a0284250fffc05a60a640fbcf6fd24e3a4657e2431eddd', '2026-09-09 01:11:13'),
+(11, 10, 6, '6c1fd8295acbd0557d2c86a5eafb1225024d0b05e03b3f82f4ebe5c1c00294a0', '2026-09-09 16:11:31'),
+(12, 11, 7, 'a4ff8aafa2a330b19c21397fdf35a0e2caa5f053df9316c44858b13151d60da6', '2026-09-09 16:12:16'),
+(13, 11, 7, '1f4e23a1c19d1f43198409bd119c1f3d43cc58e138b74607b6301c2d243ccc19', '2026-09-09 16:19:09'),
+(14, 11, 7, 'ccc15e16e3d433c756848c63a81e8a30ad12326cd881624455c0fa1fa037f90e', '2026-09-09 16:33:15'),
+(15, 4, 1, 'd77f9d626beb0957ceb8cf55cb8d48b51863e03b03e26264936ac8beb26ba868', '2026-09-09 16:35:23'),
+(16, 14, 10, '74989a1414c2c84899e468983ea819f3a82987084225bc1c80a21244cc37c62e', '2026-09-09 21:11:09'),
+(17, 15, 11, 'a3685772a71090397a04d26943f832bfeb4c7e7bd6d9773da62d8835c4cab874', '2026-09-09 21:12:10');
 
 -- --------------------------------------------------------
 
@@ -17306,11 +17723,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `full_names`, `gender`, `email`, `country_id`, `phone_number`, `phone_e164`, `id_number_hash`, `id_number_encrypted`, `date_of_birth`, `password_hash`, `two_factor_secret_encrypted`, `two_factor_enabled`, `two_factor_verified_at`, `account_status`, `email_verified`, `phone_verified`, `identity_verified`, `age_verified`, `is_active`, `is_suspended`, `is_deleted`, `last_login_at`, `last_seen_at`, `created_at`, `updated_at`) VALUES
-(3, 2, 'jmsak37', 'Julius Samuel', 'Male', 'jmsak37@gmail.com', 1, '0769089734', '+254769089734', '1091b506d8020be8fa979cd09b982895b58641cacdf07c68a1abef3e8d1fa28b', NULL, '1999-05-24', '$2y$10$BcVUg77YoQs2G6MZPDGK2eJ4bY6YQdRqBv6YoTjaxvagT8ygkdTyO', 'vgMoyY7hXfCMzGsDBD3OJA==:65Cq4KGYo/ymFLNucELDNEJEZKXoiRG2tmAfTj8J8M8=', 1, '2026-08-27 12:40:44', 'approved', 1, 0, 1, 1, 1, 0, 0, NULL, '2026-09-08 18:21:25', '2026-08-27 11:19:45', '2026-09-08 18:21:25'),
-(5, 1, 'musyokjs', 'julius k samuel', 'Female', 'musyokjsamuel@gmail.com', 2, '7769089734', '+17769089734', '6d4270f3e78bef667fc4db8334c3e7e75d550d78311b51e78a29fae59fea59bf', NULL, '2003-05-24', '$2y$10$Xg/TMYc4dsqktKlGua3lnejMzWiojtBsC57uxsCDt75KsHjG5gzLi', 'OQzBaEBy2UKPIWnUVaSj/w==:LHmIi13ifyhYg+EiAU/8MfY2PEgKhtNm14bljaQwDlM=', 1, '2026-08-29 10:35:38', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-08-30 17:17:19', '2026-08-29 10:29:25', '2026-08-30 21:41:53'),
+(3, 2, 'jmsak37', 'Julius Samuel', 'Male', 'jmsak37@gmail.com', 1, '0769089734', '+254769089734', '1091b506d8020be8fa979cd09b982895b58641cacdf07c68a1abef3e8d1fa28b', NULL, '1999-05-24', '$2y$10$BcVUg77YoQs2G6MZPDGK2eJ4bY6YQdRqBv6YoTjaxvagT8ygkdTyO', 'vgMoyY7hXfCMzGsDBD3OJA==:65Cq4KGYo/ymFLNucELDNEJEZKXoiRG2tmAfTj8J8M8=', 1, '2026-08-27 12:40:44', 'approved', 1, 0, 1, 1, 1, 0, 0, NULL, '2026-09-09 21:22:17', '2026-08-27 11:19:45', '2026-09-09 21:22:17'),
+(5, 1, 'musyokjs', 'julius k samuel', 'Female', 'musyokjsamuel@gmail.com', 2, '7769089734', '+17769089734', '6d4270f3e78bef667fc4db8334c3e7e75d550d78311b51e78a29fae59fea59bf', NULL, '2003-05-24', '$2y$10$Xg/TMYc4dsqktKlGua3lnejMzWiojtBsC57uxsCDt75KsHjG5gzLi', 'OQzBaEBy2UKPIWnUVaSj/w==:LHmIi13ifyhYg+EiAU/8MfY2PEgKhtNm14bljaQwDlM=', 1, '2026-08-29 10:35:38', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-09-09 16:11:49', '2026-08-29 10:29:25', '2026-09-09 16:11:49'),
 (10, 1, 'MUTU', 'MUTUA KIMONDIU', 'Male', 'josphinesamuel02@gmail.com', 2, '7123456789', '+17123456789', '8598e9784c250419526c91671f48bfa9ac279190c4ce7f5e6f2de14e22ab7f1b', NULL, '1997-05-24', '$2y$10$qHYnIAecAVANaNIwZiLsS.FfkxLUeBLku2lpUwYQUusHkFcBv9kMa', 'DUaE6f7ur6Ae/MSCHQMg3A==:UMGgYedjuS5obhx9oKEXGz4zR/6A+AnIWQN9qI6eYko=', 1, '2026-09-01 15:09:48', 'approved', 1, 1, 1, 1, 1, 0, 0, NULL, '2026-09-02 17:16:10', '2026-09-01 15:08:33', '2026-09-02 17:16:10'),
-(11, 1, 'cjj', 'Eduassista julius', 'Female', 'eduassistasc@gmail.com', 1, '0791642994', '+254791642994', 'e268c2afd5fbf1f30855a969a2e8ea7c3338a0d69285c0441b621836a0a080ab', NULL, '2000-05-24', '$2y$10$SyVjLxY5.np8sH/pcNbCk.me/6T6mhDxonVOXxx0AbPVRvJmvUmXa', 'VS9eakAjyUR0Xhgl9lwE5w==:m/6O0qZopJiaszH/bHf+OvwR47tIsZI4xp71mYnQDgc=', 1, '2026-09-07 14:51:05', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-09-08 18:23:35', '2026-09-07 14:30:56', '2026-09-08 18:23:35'),
-(12, 1, 'SOUTH', 'SOUTH EASTERN KENYA UNIVERSITY', 'Female', 'juliusmsamuel@gmail.com', 21, '791642994', '+61791642994', 'c2ee4517a658fe4643d9271cd55beb61038732f469f1902f9c3ebd4fe20211d6', NULL, '1999-05-24', '$2y$10$mJl7SaTaxd7Nmc4iXTvY7eVFjG6DelazGpGk1xFBNGJbIDNCyfLz6', 'jPF+HTmsPDJQARv7bTCe5A==:UJsdhGiK05unDT+KYypiyHbQ94fFlY44Zl0DmEwtFbA=', 1, '2026-09-07 20:30:34', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-09-08 18:23:36', '2026-09-07 20:28:30', '2026-09-08 18:23:36');
+(11, 1, 'cjj', 'Eduassista julius', 'Female', 'eduassistasc@gmail.com', 1, '0791642994', '+254791642994', 'e268c2afd5fbf1f30855a969a2e8ea7c3338a0d69285c0441b621836a0a080ab', NULL, '2000-05-24', '$2y$10$SyVjLxY5.np8sH/pcNbCk.me/6T6mhDxonVOXxx0AbPVRvJmvUmXa', 'VS9eakAjyUR0Xhgl9lwE5w==:m/6O0qZopJiaszH/bHf+OvwR47tIsZI4xp71mYnQDgc=', 1, '2026-09-07 14:51:05', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-09-08 20:45:16', '2026-09-07 14:30:56', '2026-09-08 20:45:16'),
+(12, 1, 'SOUTH', 'SOUTH EASTERN KENYA UNIVERSITY', 'Female', 'juliusmsamuel@gmail.com', 21, '791642994', '+61791642994', 'c2ee4517a658fe4643d9271cd55beb61038732f469f1902f9c3ebd4fe20211d6', NULL, '1999-05-24', '$2y$10$mJl7SaTaxd7Nmc4iXTvY7eVFjG6DelazGpGk1xFBNGJbIDNCyfLz6', 'jPF+HTmsPDJQARv7bTCe5A==:UJsdhGiK05unDT+KYypiyHbQ94fFlY44Zl0DmEwtFbA=', 1, '2026-09-07 20:30:34', 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, '2026-09-09 18:26:11', '2026-09-07 20:28:30', '2026-09-09 18:26:11'),
+(13, 1, 'Rembo', 'Rembo Resh', 'Female', 'remboresh92@gmail.com', 1, '711111111', '+254711111111', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', NULL, '2004-05-24', '$2y$10$YSpe9E.LxAvddO9p.XrXwekx/PuPb9D6/9BVRaYCUR7F8NAX8pcrS', 'mDDDmluXseUL6f0BVUcFDA==:bL4AkH2KOeVJH/KsufaE6ytLWcqrLL+SP4llXOTB4ck=', 0, NULL, 'approved', 1, 0, 0, 1, 1, 0, 0, NULL, NULL, '2026-09-09 18:18:38', '2026-09-09 18:19:32');
 
 --
 -- Triggers `users`
@@ -17378,7 +17796,10 @@ CREATE TABLE `user_content_security` (
 --
 
 INSERT INTO `user_content_security` (`user_id`, `default_allow_repost`, `default_allow_video_download`, `created_at`, `updated_at`) VALUES
-(12, 0, 0, '2026-09-07 19:47:28', '2026-09-07 19:48:12');
+(3, 1, 1, '2026-09-09 18:10:08', '2026-09-09 18:10:08'),
+(10, 1, 1, '2026-09-08 16:36:04', '2026-09-08 16:36:04'),
+(11, 1, 1, '2026-09-08 16:33:31', '2026-09-08 16:33:31'),
+(12, 1, 1, '2026-09-07 19:47:28', '2026-09-08 16:32:51');
 
 -- --------------------------------------------------------
 
@@ -17409,8 +17830,8 @@ CREATE TABLE `user_devices` (
 
 INSERT INTO `user_devices` (`id`, `user_id`, `device_id`, `device_name`, `browser_name`, `operating_system`, `user_agent`, `first_seen_at`, `last_seen_at`, `last_ip_address`, `last_country`, `last_region`, `last_city`, `is_trusted`) VALUES
 (1, 11, 'e88169d2a9cea0b4f7d1ed8e57980eb1', 'Desktop device', 'Chrome', 'Windows', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-07 22:02:31', '2026-09-08 00:39:35', '::1', 'Russia', 'ЗАТО Северск', 'Seversk', 0),
-(2, 3, '478ddf04-039c-4655-b791-8a4ed5acbe56', 'Desktop device', 'Chrome', 'Windows', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-07 22:08:22', '2026-09-08 03:20:02', '::1', 'Russia', 'ЗАТО Северск', 'Seversk', 0),
-(3, 11, 'a9d94ca4c4af05786c0a929bfbab0233', 'Desktop device', 'Chrome', 'Windows', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 12:50:57', '2026-09-08 12:50:57', '::1', 'Russia', 'ЗАТО Северск', 'Seversk', 0);
+(2, 3, '478ddf04-039c-4655-b791-8a4ed5acbe56', 'Desktop device', 'Chrome', 'Windows', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-07 22:08:22', '2026-09-08 19:05:15', '::1', 'Kenya', 'Nairobi County', 'Nairobi', 0),
+(3, 11, 'a9d94ca4c4af05786c0a929bfbab0233', 'Desktop device', 'Chrome', 'Windows', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 12:50:57', '2026-09-08 19:04:02', '::1', 'Kenya', 'Nairobi County', 'Nairobi', 0);
 
 -- --------------------------------------------------------
 
@@ -17447,9 +17868,10 @@ CREATE TABLE `user_google_accounts` (
 
 INSERT INTO `user_google_accounts` (`id`, `user_id`, `google_sub`, `email`, `picture_url`, `created_at`, `updated_at`) VALUES
 (1, 11, '102261571712290839590', 'eduassistasc@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLU29J9y9plWrtV0aoaK7danfEgkhyXLU06oVa2sRcX7w43Qg=s96-c', '2026-09-07 18:05:37', '2026-09-07 18:05:37'),
-(2, 3, '106969414574664808523', 'jmsak37@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLiYcMDrIsScgycKJ7QwlXciAHiUYsfTluyrV0Vao0lEJjBpy0=s96-c', '2026-09-07 20:20:38', '2026-09-08 13:27:28'),
+(2, 3, '106969414574664808523', 'jmsak37@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLiYcMDrIsScgycKJ7QwlXciAHiUYsfTluyrV0Vao0lEJjBpy0=s96-c', '2026-09-07 20:20:38', '2026-09-09 17:49:41'),
 (3, 10, '111763975717675023107', 'josphinesamuel02@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLxjvexp6AaAmn7pS6bAd5N5SFNMj6u479NjLp7G__VEhHtYQ=s96-c', '2026-09-07 20:22:37', '2026-09-07 20:22:37'),
-(4, 12, '116952482063643967927', 'juliusmsamuel@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocKbDYccoK_6Dd71tnQmPBo3XAEvFC76YvIKPSmExLKdFZd-nI3p=s96-c', '2026-09-07 20:28:30', '2026-09-08 10:49:58');
+(4, 12, '116952482063643967927', 'juliusmsamuel@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocKbDYccoK_6Dd71tnQmPBo3XAEvFC76YvIKPSmExLKdFZd-nI3p=s96-c', '2026-09-07 20:28:30', '2026-09-09 17:52:51'),
+(5, 5, '115345952257148830213', 'musyokjsamuel@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocKt61FJ4pel5vF1CwPJOXZU5bhhvFu8bfO4SFhwygduh4fGDg=s96-c', '2026-09-09 16:09:41', '2026-09-09 16:09:41');
 
 -- --------------------------------------------------------
 
@@ -17477,8 +17899,8 @@ CREATE TABLE `user_live_locations` (
 --
 
 INSERT INTO `user_live_locations` (`user_id`, `latitude`, `longitude`, `accuracy_meters`, `altitude_meters`, `heading`, `speed_mps`, `country_name`, `region_name`, `city_name`, `location_enabled`, `last_updated_at`) VALUES
-(3, 56.58076250, 84.91375525, 292.00, NULL, NULL, NULL, 'Russia', 'ЗАТО Северск', 'Seversk', 1, '2026-09-08 03:20:02'),
-(11, 56.58076250, 84.91375525, 292.00, NULL, NULL, NULL, 'Russia', 'ЗАТО Северск', 'Seversk', 1, '2026-09-08 12:50:57');
+(3, -1.28410000, 36.81550000, 20000.00, NULL, NULL, NULL, 'Kenya', 'Nairobi County', 'Nairobi', 1, '2026-09-08 19:05:15'),
+(11, -1.28410000, 36.81550000, 20000.00, NULL, NULL, NULL, 'Kenya', 'Nairobi County', 'Nairobi', 1, '2026-09-08 19:04:02');
 
 -- --------------------------------------------------------
 
@@ -17523,11 +17945,12 @@ CREATE TABLE `user_presence` (
 --
 
 INSERT INTO `user_presence` (`user_id`, `is_online`, `last_seen_at`, `is_typing`, `typing_conversation_id`, `updated_at`) VALUES
-(3, 1, '2026-08-31 11:19:09', 0, NULL, '2026-08-31 11:19:09'),
+(3, 0, '2026-09-09 21:19:10', 0, NULL, '2026-09-09 21:19:10'),
 (5, 0, NULL, 0, NULL, '2026-08-29 10:29:25'),
 (10, 1, '2026-09-01 21:19:24', 0, NULL, '2026-09-01 21:19:24'),
-(11, 0, NULL, 0, NULL, '2026-09-07 14:30:56'),
-(12, 0, NULL, 0, NULL, '2026-09-07 20:28:30');
+(11, 0, '2026-09-08 20:32:02', 0, NULL, '2026-09-08 20:32:02'),
+(12, 0, '2026-09-08 19:36:16', 0, NULL, '2026-09-08 19:36:16'),
+(13, 0, NULL, 0, NULL, '2026-09-09 18:18:38');
 
 -- --------------------------------------------------------
 
@@ -17555,7 +17978,7 @@ CREATE TABLE `user_sessions` (
 
 INSERT INTO `user_sessions` (`id`, `user_id`, `session_token_hash`, `device_id`, `ip_address`, `user_agent`, `created_at`, `last_activity_at`, `two_factor_passed`, `expires_at`, `revoked_at`) VALUES
 (32, 5, 'b42d8e40998679090a41f076c5827c807cae8ad64ad681317753637628cf48ce', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-08-29 10:36:02', '2026-08-29 13:57:04', 1, '2026-08-30 09:36:02', '2026-08-30 17:09:40'),
-(48, 5, '18592c88cf6cfc10815975a24491469095b24a54f24ae3dbc10df978f9aa0249', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-08-30 17:09:40', '2026-08-30 17:17:19', 1, '2026-08-31 16:09:40', NULL),
+(48, 5, '18592c88cf6cfc10815975a24491469095b24a54f24ae3dbc10df978f9aa0249', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-08-30 17:09:40', '2026-08-30 17:17:19', 1, '2026-08-31 16:09:40', '2026-09-09 16:09:41'),
 (65, 10, '4a189003e0d3004312e1d49fd29aa669e0f5597a86eea43dc3fdc05ca730cc3e', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-09-01 15:09:54', '2026-09-01 15:16:22', 1, '2026-09-02 14:09:54', '2026-09-01 15:17:48'),
 (66, 10, '94b8ba803fb2220f6518d3382f8cb657c0d7c2f76f086c59a5730405d51678b8', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-09-01 15:17:48', '2026-09-01 15:18:34', 1, '2026-09-02 14:17:48', '2026-09-01 15:22:34'),
 (68, 10, '2ead628c0016d5711862a5b09202b30b00e2c93f3b049fad1082d4a8a6e8b212', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '2026-09-01 15:22:34', '2026-09-01 22:12:32', 1, '2026-09-02 14:22:34', '2026-09-02 16:45:02'),
@@ -17585,9 +18008,15 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `session_token_hash`, `device_id`,
 (114, 12, '06b004da1d03ab9321c8c07553770a7226144f6d19efb91b599b45b994ff6f31', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-07 22:10:32', '2026-09-07 22:54:16', 1, '2026-09-08 22:10:32', '2026-09-07 22:54:18'),
 (115, 12, '093347ce1353b917f630f10d0498a6a870e24dc69b55ed6fead2d18cc3fad0cb', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-07 23:39:28', '2026-09-08 00:52:07', 1, '2026-09-08 23:39:28', '2026-09-08 00:52:11'),
 (116, 12, '17f3036207a84d1314e0b12ccb759dfa411b0c1befb58fff8b9e9a80443f13fe', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 00:58:49', '2026-09-08 02:37:30', 1, '2026-09-09 00:58:49', '2026-09-08 02:37:45'),
-(117, 11, '144651bdf993083c318c5c9a376e2ebc56c8b8acbdf99b684b62b40bec619d38', 'a9d94ca4c4af05786c0a929bfbab0233', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:42:57', '2026-09-08 18:23:34', 1, '2026-09-09 10:42:57', NULL),
-(118, 12, 'ebabdaf0220d47b1586a6ee9c437f1a1c6d898f262118bd6d0ee2f5490fb60b8', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:49:58', '2026-09-08 18:23:34', 1, '2026-09-09 10:49:58', NULL),
-(119, 3, '12e790f86ed046c0a9814994921e3f292519c32def3ceb1177bbdfb708ff1f82', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:27:28', '2026-09-08 18:21:25', 1, '2026-09-09 13:27:28', NULL);
+(117, 11, '144651bdf993083c318c5c9a376e2ebc56c8b8acbdf99b684b62b40bec619d38', 'a9d94ca4c4af05786c0a929bfbab0233', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:42:57', '2026-09-08 20:45:16', 1, '2026-09-09 10:42:57', NULL),
+(118, 12, 'ebabdaf0220d47b1586a6ee9c437f1a1c6d898f262118bd6d0ee2f5490fb60b8', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 10:49:58', '2026-09-08 18:34:25', 1, '2026-09-09 10:49:58', '2026-09-08 18:34:30'),
+(119, 3, '12e790f86ed046c0a9814994921e3f292519c32def3ceb1177bbdfb708ff1f82', '478ddf04-039c-4655-b791-8a4ed5acbe56', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 13:27:28', '2026-09-09 06:11:47', 1, '2026-09-09 13:27:28', '2026-09-09 15:54:35'),
+(120, 12, '9a06dacdd1a33f6823c83cd7bcceeb8ac80e86377fa8551c7d86c5fba7a791a0', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-08 18:35:07', '2026-09-09 00:46:18', 1, '2026-09-09 18:35:07', '2026-09-09 00:46:21'),
+(121, 3, '17b0b9319d6cbfae650374620da770b27397a7c7e6e0c294242bf20d540cddb4', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 15:54:35', '2026-09-09 17:48:49', 1, '2026-09-10 15:54:35', '2026-09-09 17:48:53'),
+(122, 5, 'b5f421de63e06021a2598d9f7133defcc0a85371382861d7cd0c16d946b42edf', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 16:09:41', '2026-09-09 16:17:14', 1, '2026-09-10 16:09:41', NULL),
+(123, 3, '67c678a30cb4f5d42257b363a9d997b4f528d5896f215a4a426b50f0acaf1d55', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 17:49:41', '2026-09-09 18:28:33', 1, '2026-09-10 17:49:41', '2026-09-09 21:00:22'),
+(124, 12, '125ccbe718c593c16414e12db2863654116f4dc26855db7322d935268ae1e5d6', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 17:52:51', '2026-09-09 18:26:11', 1, '2026-09-10 17:52:51', NULL),
+(125, 3, '384eb0bbb3cebe7150ae574bdd69877b5bcab702a7946c18343041a55ecbb83d', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36', '2026-09-09 21:00:22', '2026-09-09 21:44:52', 1, '2026-09-10 21:00:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -17643,7 +18072,8 @@ INSERT INTO `verifications` (`id`, `user_id`, `email`, `phone_e164`, `verificati
 (13, 5, 'musyokjsamuel@gmail.com', NULL, 'email_registration', 'e040cd0e47d96d1c75e3cf13d9a9068d8ad264460ad66ff920eec02f446606f2', 0, 1, '2026-08-29 09:39:25', '2026-08-29 10:30:40', NULL, '2026-08-29 10:29:25'),
 (18, 10, 'josphinesamuel02@gmail.com', NULL, 'email_registration', '8b39efb1b605aeb4fa6ab3ee928a970ca6c1810a430af930f7d17b45b9fe8b05', 0, 1, '2026-09-01 14:18:33', '2026-09-01 15:08:59', NULL, '2026-09-01 15:08:33'),
 (19, 11, 'eduassistasc@gmail.com', NULL, 'email_registration', 'a35803694c591d755c711fe534dc7ece232091f9d43122d77249752250ae5474', 0, 1, '2026-09-07 13:40:56', '2026-09-07 14:31:50', NULL, '2026-09-07 14:30:56'),
-(20, 12, 'juliusmsamuel@gmail.com', NULL, 'email_registration', '1c081bc23c5a279f665b41a6b7e91274c4d2360ee7d8c4770d0a432d9876eade', 0, 1, '2026-09-07 19:38:30', '2026-09-07 20:29:59', NULL, '2026-09-07 20:28:30');
+(20, 12, 'juliusmsamuel@gmail.com', NULL, 'email_registration', '1c081bc23c5a279f665b41a6b7e91274c4d2360ee7d8c4770d0a432d9876eade', 0, 1, '2026-09-07 19:38:30', '2026-09-07 20:29:59', NULL, '2026-09-07 20:28:30'),
+(21, 13, 'remboresh92@gmail.com', NULL, 'email_registration', 'd512778f85960173e52769bc47bd7a68149b8beb4c2ab001cbff4886331f1bce', 0, 1, '2026-09-09 17:28:38', '2026-09-09 18:19:32', NULL, '2026-09-09 18:18:38');
 
 -- --------------------------------------------------------
 
@@ -18169,6 +18599,13 @@ ALTER TABLE `profile_extra_details`
   ADD UNIQUE KEY `uq_profile_extra_user` (`user_id`);
 
 --
+-- Indexes for table `profile_media_security`
+--
+ALTER TABLE `profile_media_security`
+  ADD PRIMARY KEY (`photo_id`),
+  ADD KEY `idx_profile_media_security_updated_by` (`updated_by`);
+
+--
 -- Indexes for table `reports`
 --
 ALTER TABLE `reports`
@@ -18233,7 +18670,35 @@ ALTER TABLE `support_tickets`
   ADD KEY `idx_support_user_id` (`user_id`),
   ADD KEY `idx_support_email` (`email`),
   ADD KEY `idx_support_status` (`status`),
-  ADD KEY `idx_support_created_at` (`created_at`);
+  ADD KEY `idx_support_created_at` (`created_at`),
+  ADD KEY `idx_support_source` (`source`),
+  ADD KEY `idx_support_close` (`close_at`),
+  ADD KEY `idx_support_last_message` (`last_message_at`);
+
+--
+-- Indexes for table `support_ticket_access`
+--
+ALTER TABLE `support_ticket_access`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_sta_ticket` (`ticket_id`),
+  ADD UNIQUE KEY `uq_sta_token` (`token_hash`),
+  ADD KEY `idx_sta_type` (`access_type`);
+
+--
+-- Indexes for table `support_ticket_messages`
+--
+ALTER TABLE `support_ticket_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_stm_ticket` (`ticket_id`),
+  ADD KEY `idx_stm_created` (`created_at`);
+
+--
+-- Indexes for table `support_ticket_token_history`
+--
+ALTER TABLE `support_ticket_token_history`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_stth_token` (`token_hash`),
+  ADD KEY `idx_stth_ticket` (`ticket_id`);
 
 --
 -- Indexes for table `system_settings`
@@ -18357,13 +18822,13 @@ ALTER TABLE `account_deletion_verifications`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=421;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=491;
 
 --
 -- AUTO_INCREMENT for table `backup_logs`
 --
 ALTER TABLE `backup_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `blocked_users`
@@ -18405,13 +18870,13 @@ ALTER TABLE `currencies`
 -- AUTO_INCREMENT for table `exchange_rates`
 --
 ALTER TABLE `exchange_rates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14597;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14895;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -18423,7 +18888,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT for table `notification_audio`
@@ -18489,13 +18954,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `post_comments`
@@ -18513,13 +18978,13 @@ ALTER TABLE `post_likes`
 -- AUTO_INCREMENT for table `post_photos`
 --
 ALTER TABLE `post_photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `post_public_links`
 --
 ALTER TABLE `post_public_links`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `post_reactions`
@@ -18531,13 +18996,13 @@ ALTER TABLE `post_reactions`
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `profile_codes`
 --
 ALTER TABLE `profile_codes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `profile_extra_details`
@@ -18579,7 +19044,25 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `support_tickets`
 --
 ALTER TABLE `support_tickets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `support_ticket_access`
+--
+ALTER TABLE `support_ticket_access`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `support_ticket_messages`
+--
+ALTER TABLE `support_ticket_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `support_ticket_token_history`
+--
+ALTER TABLE `support_ticket_token_history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -18591,7 +19074,7 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_devices`
@@ -18609,13 +19092,13 @@ ALTER TABLE `user_follows`
 -- AUTO_INCREMENT for table `user_google_accounts`
 --
 ALTER TABLE `user_google_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `user_whatsapp_numbers`
@@ -18627,7 +19110,7 @@ ALTER TABLE `user_whatsapp_numbers`
 -- AUTO_INCREMENT for table `verifications`
 --
 ALTER TABLE `verifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
