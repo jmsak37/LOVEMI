@@ -1,0 +1,4 @@
+Contact: mailto:security@example.com
+Expires: 2027-09-09T00:00:00Z
+Preferred-Languages: en
+Policy: /SECURITY.md

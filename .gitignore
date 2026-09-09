@@ -1,0 +1,98 @@
+# =========================================================
+# LOVEMI Git Ignore
+# =========================================================
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local configuration
+config/local.php
+config/secrets.php
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Temporary files
+tmp/
+temp/
+storage/temp/
+*.tmp
+*.temp
+
+# Backups
+storage/backups/*
+!storage/backups/.gitkeep
+
+# Uploaded user content
+uploads/*
+!uploads/.gitkeep
+
+# Generated payment/receipt temporary files
+storage/receipts/*
+!storage/receipts/.gitkeep
+
+# Generated exchange-rate files
+storage/exchange-rates/*
+!storage/exchange-rates/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Windows generated files
+*.stackdump
+
+# PHP
+vendor/
+composer.phar
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# PHPUnit / coverage
+.phpunit.result.cache
+.phpunit.cache/
+coverage/
+
+# Cache files
+cache/
+.cache/
+
+# Backup archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Database exports
+*.sql.gz
+*.dump
+
+# Local development files
+local/
+development/
+debug/
+
+# Don't commit private keys/certificates
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Except public placeholder files
+!.well-known/
