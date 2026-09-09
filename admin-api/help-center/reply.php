@@ -1,0 +1,16 @@
+<?php
+declare(strict_types=1); require_once __DIR__ . '/common.php';
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') sc_response(false,'Only POST requests are allowed.',['code'=>'METHOD_NOT_ALLOWED'],405);
+$pdo=sc_pdo();sc_ensure_schema($pdo);$admin=sc_admin_auth($pdo);$in=sc_input();$ticketId=(int)($in['ticket_id']??0);$body=sc_clean($in['message']??'',10000);if($ticketId<=0||$body==='')sc_response(false,'Ticket and reply message are required.',['code'=>'FIELDS_REQUIRED'],422);
+$ticket=sc_get_ticket($pdo,$ticketId);if(!$ticket)sc_response(false,'Ticket not found.',['code'=>'TICKET_NOT_FOUND'],404);if((string)$ticket['status']==='closed')sc_response(false,'This ticket is already closed.',['code'=>'TICKET_CLOSED'],409);
+$access=sc_get_ticket_by_token($pdo,(string)($_SESSION['__never__']??''));
+$st=$pdo->prepare('SELECT id FROM support_ticket_access WHERE ticket_id=:id LIMIT 1');$st->execute([':id'=>$ticketId]);$accessRow=$st->fetch(PDO::FETCH_ASSOC);
+$replyStmt=$pdo->prepare('INSERT INTO support_ticket_messages(ticket_id,sender_type,sender_id,sender_name,sender_email,body) VALUES(:tid,\'admin\',:sid,:name,:email,:body)');$replyStmt->execute([':tid'=>$ticketId,':sid'=>(int)$admin['id'],':name'=>sc_clean($admin['full_names']??$admin['username']??'LOVEMI Support',180),':email'=>(string)($admin['email']??LOVEMI_SUPPORT_EMAIL),':body'=>$body]);
+$pdo->prepare("UPDATE support_tickets SET status='awaiting_user',last_admin_reply_at=CURRENT_TIMESTAMP,last_message_at=CURRENT_TIMESTAMP,close_at=DATE_ADD(CURRENT_TIMESTAMP,INTERVAL 48 HOUR),solved_at=NULL,closed_at=NULL,reminder_24_sent=0,reminder_12_sent=0,reminder_1_sent=0 WHERE id=:id LIMIT 1")->execute([':id'=>$ticketId]);
+$newToken=bin2hex(random_bytes(48));
+$pdo->prepare('UPDATE support_ticket_access SET token_hash=:h,updated_at=CURRENT_TIMESTAMP WHERE ticket_id=:id LIMIT 1')->execute([':h'=>hash('sha256',$newToken),':id'=>$ticketId]);
+$feedbackUrl=sc_app_url().'/Support-Ticket-Feedback.html?token='.rawurlencode($newToken);
+$emailHtml='<div style="font-family:Arial,sans-serif;max-width:680px;margin:auto;background:#f7f7fb;padding:24px"><div style="background:#fff;border-radius:18px;padding:28px"><h2 style="color:#6d28d9;margin-top:0">LOVEMI Support Reply</h2><p>Hello '.sc_html((string)$ticket['name']).',</p><p>LOVEMI Support has replied to your support ticket <strong>LM-TKT-'.str_pad((string)$ticketId,6,'0',STR_PAD_LEFT).'</strong>.</p><div style="padding:16px;background:#faf9fc;border-radius:12px"><strong>Subject:</strong> '.sc_html((string)$ticket['subject']).'<br><br><strong>Support reply:</strong><br>'.nl2br(sc_html($body)).'</div><p><a href="'.sc_html($feedbackUrl).'" style="display:inline-block;padding:13px 20px;border-radius:11px;background:#6d28d9;color:#fff;text-decoration:none;font-weight:800">Open Support Conversation</a></p></div></div>';
+$mailSent=sc_mail((string)$ticket['email'],(string)$ticket['name'],'LOVEMI Support replied - LM-TKT-'.str_pad((string)$ticketId,6,'0',STR_PAD_LEFT),$emailHtml);
+sc_notify_user($pdo,(int)($ticket['user_id']??0),'Support Reply Received','LOVEMI Support replied to your support ticket.', $ticketId,(int)$admin['id']);
+sc_response(true,'Support reply sent.', ['mail_sent'=>$mailSent,'ticket_id'=>$ticketId,'feedback_url'=>$feedbackUrl]);

@@ -1,0 +1,3 @@
+<?php
+declare(strict_types=1); require_once __DIR__ . '/common.php';
+if(($_SERVER['REQUEST_METHOD']??'')!=='POST')sc_response(false,'Only POST requests are allowed.',['code'=>'METHOD_NOT_ALLOWED'],405);$pdo=sc_pdo();sc_ensure_schema($pdo);$admin=sc_admin_auth($pdo);$in=sc_input();$id=(int)($in['ticket_id']??0);if($id<=0)sc_response(false,'Invalid ticket.',['code'=>'INVALID_TICKET'],422);$st=$pdo->prepare("UPDATE notifications SET is_read=1,read_at=CURRENT_TIMESTAMP WHERE user_id=:uid AND reference_type='support_ticket' AND reference_id=:rid");$st->execute([':uid'=>(int)$admin['id'],':rid'=>$id]);sc_response(true,'Notification marked read.');

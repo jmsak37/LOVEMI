@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#6d28d9">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Help Center | LOVEMI Admin</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/logo1/favicon-32x32.png">
+<link rel="apple-touch-icon" href="../assets/logo1/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#6d28d9;--primary-dark:#4c1d95;--accent:#db2777;--bg:#f6f6fa;--card:#fff;--text:#18181b;--muted:#8b8b95;--border:#e8e8ef;--green:#16a34a;--green-soft:#ecfdf5;--orange:#d97706;--orange-soft:#fff7ed;--red:#dc2626;--red-soft:#fef2f2;--blue:#2563eb;--blue-soft:#eff6ff;--sidebar:250px}
+*{box-sizing:border-box;margin:0;padding:0}html,body{min-height:100%;font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}body{overflow-x:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}a{text-decoration:none;color:inherit}[hidden]{display:none!important}
+.app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:#16131e;color:#fff;z-index:1000;overflow:auto;border-right:1px solid rgba(255,255,255,.06)}.side-head{height:78px;display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07)}.side-logo{width:42px;height:42px;border-radius:11px;object-fit:contain}.side-title{font:800 21px "Playfair Display",serif}.side-sub{display:block;font-size:7px;letter-spacing:1px;color:#aaa4b3;margin-top:2px}.side-badge{display:inline-flex;gap:6px;align-items:center;margin:14px 14px 6px;padding:7px 9px;border-radius:999px;background:rgba(109,40,217,.2);border:1px solid rgba(255,255,255,.08);font-size:8px;font-weight:800;color:#eee5ff}.side-section{padding:8px 10px}.side-label{padding:9px;color:#716c7d;font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:1px}.side-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;color:#bdb6c7;font-size:8px;font-weight:700}.side-link i{width:15px;text-align:center;font-size:9px}.side-link:hover,.side-link.active{background:rgba(255,255,255,.06);color:#fff}.side-link.active{background:linear-gradient(135deg,rgba(109,40,217,.78),rgba(219,39,119,.55))}
+.main{margin-left:var(--sidebar);min-height:100vh}.topbar{position:sticky;top:0;z-index:900;min-height:72px;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px}.top-left{display:flex;align-items:center;gap:11px}.menu-btn{display:none;width:38px;height:38px;border:1px solid var(--border);border-radius:10px;background:#fff}.title h1{font-size:17px;font-weight:800}.title p{font-size:8px;color:var(--muted);margin-top:2px}.top-right{display:flex;align-items:center;gap:8px}.top-btn{width:38px;height:38px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#5f5d68;display:grid;place-items:center}.top-btn:hover{color:var(--primary);background:#faf7ff}.admin-pill{display:flex;align-items:center;gap:8px;padding-left:8px;border-left:1px solid var(--border)}.admin-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#f3e8ff}.admin-meta strong{display:block;font-size:8px}.admin-meta span{display:block;color:var(--muted);font-size:7px;margin-top:1px}
+.page{width:min(calc(100% - 32px),1450px);margin:auto;padding:20px 0 40px}.hero{padding:22px;border-radius:20px;background:radial-gradient(circle at 88% 9%,rgba(219,39,119,.1),transparent 24%),linear-gradient(135deg,#fff,#fcf9ff);border:1px solid rgba(109,40,217,.11);box-shadow:0 12px 35px rgba(0,0,0,.05);margin-bottom:15px}.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.hero-badge{display:inline-flex;gap:6px;align-items:center;padding:6px 9px;border-radius:999px;background:#f3e8ff;color:var(--primary);font-size:7px;font-weight:900}.hero h2{font:800 28px "Playfair Display",serif;margin-top:9px}.hero p{max-width:850px;margin-top:5px;color:var(--muted);font-size:9px;line-height:1.7}.hero-action{min-width:42px;height:42px;border:1px solid #ddd6fe;background:#fff;border-radius:11px;color:var(--primary);display:grid;place-items:center}.hero-action:hover{background:var(--primary);color:#fff}
+
+/* =========================================================
+   ADMIN DIRECT EMAIL COMPOSER
+========================================================= */
+.email-tool-card{
+    margin-top:15px;
+    padding:18px;
+    border:1px solid #e7def5;
+    border-radius:18px;
+    background:linear-gradient(135deg,#fff,#fbf8ff);
+    box-shadow:0 10px 28px rgba(70,40,100,.05);
+}
+.email-tool-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+.email-tool-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.email-tool-icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:#f1e8ff;
+    color:var(--primary);
+}
+.email-tool-title h3{
+    font-size:11px;
+    font-weight:900;
+}
+.email-tool-title p{
+    margin-top:2px;
+    color:var(--muted);
+    font-size:7px;
+}
+.email-send-btn{
+    min-height:38px;
+    padding:0 12px;
+    border:0;
+    border-radius:10px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    font-size:7.5px;
+    font-weight:900;
+    box-shadow:0 8px 20px rgba(109,40,217,.15);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+.email-modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:12px;
+    background:rgba(20,14,30,.62);
+    backdrop-filter:blur(9px);
+}
+.email-modal.show{display:flex}
+.email-modal-panel{
+    width:min(100%,760px);
+    max-height:92vh;
+    overflow:auto;
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:24px;
+    background:#fff;
+    box-shadow:0 30px 90px rgba(0,0,0,.25);
+    animation:emailPop .18s ease;
+}
+.email-modal-head{
+    padding:19px 20px 15px;
+    border-bottom:1px solid #efedf3;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    background:linear-gradient(135deg,#fcf9ff,#fff8fb);
+}
+.email-modal-brand{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+.email-modal-brand img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    border-radius:11px;
+}
+.email-modal-brand h3{
+    font-size:13px;
+}
+.email-modal-brand p{
+    margin-top:3px;
+    color:var(--muted);
+    font-size:7px;
+}
+.email-close{
+    width:34px;
+    height:34px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+    color:#6b6671;
+}
+.email-modal-body{padding:19px}
+.email-mode-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:14px;
+}
+.email-mode{
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:#fff;
+    text-align:left;
+    transition:.16s ease;
+}
+.email-mode.active{
+    border-color:#cbb9ef;
+    background:#faf7ff;
+    box-shadow:inset 0 0 0 1px rgba(109,40,217,.08);
+}
+.email-mode strong{display:block;font-size:8px}
+.email-mode span{display:block;margin-top:3px;color:var(--muted);font-size:6.5px;line-height:1.45}
+.email-fields{
+    display:grid;
+    gap:10px;
+}
+.email-field label{
+    display:block;
+    margin-bottom:5px;
+    font-size:7px;
+    font-weight:900;
+}
+.email-field .control,
+.email-field textarea{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+    outline:0;
+    font-size:8px;
+}
+.email-field .control{height:38px;padding:0 10px}
+.email-field textarea{min-height:160px;resize:vertical;padding:10px;line-height:1.65}
+.email-field .control:focus,
+.email-field textarea:focus{
+    border-color:#c4b5fd;
+    box-shadow:0 0 0 3px rgba(109,40,217,.06);
+}
+.email-recipient-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 150px;
+    gap:9px;
+}
+.user-results{
+    max-height:200px;
+    overflow:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+}
+.user-results:empty{display:none}
+.user-result{
+    width:100%;
+    padding:9px 10px;
+    border:0;
+    border-bottom:1px solid #f1eff4;
+    background:#fff;
+    text-align:left;
+}
+.user-result:last-child{border-bottom:0}
+.user-result:hover{background:#faf7ff}
+.user-result strong{display:block;font-size:7.5px}
+.user-result span{display:block;margin-top:2px;color:var(--muted);font-size:6.3px}
+.user-picked{
+    display:none;
+    margin-top:7px;
+    padding:8px 10px;
+    border-radius:9px;
+    background:#f0e8ff;
+    color:var(--primary);
+    font-size:6.8px;
+    font-weight:800;
+}
+.user-picked.show{display:block}
+.email-checks{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+}
+.email-check{
+    display:flex;
+    align-items:flex-start;
+    gap:7px;
+    padding:9px 10px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fcfcfe;
+}
+.email-check input{margin-top:2px;accent-color:var(--primary)}
+.email-check span{font-size:6.8px;line-height:1.5;color:#69636f}
+.email-preview{
+    padding:11px;
+    border:1px solid #e9dff7;
+    border-radius:12px;
+    background:linear-gradient(180deg,#fcf9ff,#fff);
+}
+.email-preview-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:7px;
+}
+.email-preview-head strong{font-size:8px}
+.preview-badge{
+    padding:5px 7px;
+    border-radius:999px;
+    background:#f1e8ff;
+    color:var(--primary);
+    font-size:5.5px;
+    font-weight:900;
+}
+.preview-subject{font-size:8px;font-weight:900}
+.preview-body{
+    margin-top:6px;
+    color:#68626e;
+    font-size:7px;
+    line-height:1.65;
+    white-space:pre-wrap;
+    word-break:break-word;
+    max-height:180px;
+    overflow:auto;
+}
+.email-modal-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-top:12px;
+}
+.email-modal-actions .btn{min-width:120px}
+.email-result{
+    display:none;
+    margin-top:10px;
+    padding:10px 11px;
+    border-radius:10px;
+    font-size:7px;
+    line-height:1.55;
+}
+.email-result.show{display:block}
+.email-result.ok{background:var(--green-soft);color:#166534;border:1px solid #bbf7d0}
+.email-result.err{background:var(--red-soft);color:#991b1b;border:1px solid #fecaca}
+.email-note{font-size:6px;color:var(--muted);line-height:1.5}
+@keyframes emailPop{from{opacity:0;transform:translateY(9px) scale(.985)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+    .email-recipient-row{grid-template-columns:1fr}
+    .email-checks{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+    .email-modal{padding:7px}
+    .email-modal-panel{border-radius:18px}
+    .email-modal-head,.email-modal-body{padding:15px}
+    .email-mode-grid{grid-template-columns:1fr}
+    .email-modal-actions{flex-direction:column-reverse}
+    .email-modal-actions .btn{width:100%}
+    .email-send-btn{width:100%}
+}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:15px}.stat{background:#fff;border:1px solid var(--border);border-radius:15px;padding:13px;box-shadow:0 7px 22px rgba(0,0,0,.04)}.stat-head{display:flex;align-items:center;justify-content:space-between}.stat-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#f3e8ff;color:var(--primary);font-size:11px}.stat b{font-size:20px;display:block;margin-top:11px}.stat span{font-size:7px;color:var(--muted)}
+.workspace{display:grid;grid-template-columns:390px minmax(0,1fr);gap:14px}.panel{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.04);overflow:hidden}.panel-head{padding:13px 14px;border-bottom:1px solid #f0f0f4;display:flex;align-items:center;justify-content:space-between;gap:10px}.panel-head h3{font-size:11px}.panel-head p{font-size:7px;color:var(--muted);margin-top:2px}.filters{padding:11px;border-bottom:1px solid #f0f0f4;display:grid;gap:7px}.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:7px}.control{width:100%;height:37px;border:1px solid var(--border);border-radius:9px;background:#fff;padding:0 9px;outline:0;font-size:8px}.control:focus{border-color:#c4b5fd;box-shadow:0 0 0 3px rgba(109,40,217,.06)}.ticket-list{max-height:calc(100vh - 285px);overflow:auto}.ticket{padding:12px;border-bottom:1px solid #f2f2f5;cursor:pointer;transition:.18s ease}.ticket:hover{background:#fcfbff}.ticket.active{background:#f8f3ff;border-left:3px solid var(--primary);padding-left:9px}.ticket-top{display:flex;justify-content:space-between;gap:8px}.ticket-title{font-size:9px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ticket-time{font-size:6px;color:var(--muted);white-space:nowrap}.ticket-sub{font-size:7px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ticket-foot{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.ticket-direct-btn{border:1px solid #ddd6fe;background:#fff;color:var(--primary);border-radius:999px;padding:4px 7px;font-size:6px;font-weight:900;display:inline-flex;align-items:center;gap:4px;cursor:pointer}.ticket-direct-btn:hover{background:#f5efff}.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 6px;border-radius:999px;background:#f2f2f5;color:#66636e;font-size:6px;font-weight:800}.chip.help{background:#f3e8ff;color:var(--primary)}.chip.contact{background:#fce7f3;color:#be185d}.chip.direct{background:#e0f2fe;color:#0369a1}.chip.wait{background:var(--orange-soft);color:#9a5a00}.chip.reply{background:var(--red-soft);color:#b91c1c}.chip.solved{background:var(--green-soft);color:#166534}.chip.closed{background:#f1f1f4;color:#65636b}
+.empty{padding:35px 20px;text-align:center;color:var(--muted);font-size:8px}.empty i{font-size:24px;color:#c4bdd0;margin-bottom:10px}.empty strong{display:block;color:var(--text);font-size:11px}
+.detail{min-width:0}.detail-empty{height:100%;min-height:560px;display:grid;place-items:center}.detail-shell{display:flex;flex-direction:column;height:calc(100vh - 180px);min-height:560px}.detail-head{padding:15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:10px}.detail-head h3{font-size:14px}.detail-meta{margin-top:4px;color:var(--muted);font-size:7px;line-height:1.6}.detail-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mobile-back{display:none}.btn{min-height:35px;padding:0 10px;border:1px solid var(--border);background:#fff;border-radius:9px;font-size:7px;font-weight:800;color:#55525d}.btn:hover{background:#faf7ff;border-color:#ddd6fe;color:var(--primary)}.btn.primary{border:0;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}.btn.success{border-color:#bbf7d0;background:var(--green-soft);color:#166534}.btn.danger{border-color:#fecaca;background:var(--red-soft);color:#991b1b}.thread{flex:1;overflow:auto;padding:15px;background:linear-gradient(180deg,#fcfcfe,#f8f8fb)}.bubble-wrap{display:flex;margin-bottom:9px}.bubble-wrap.admin{justify-content:flex-end}.bubble{max-width:min(78%,760px);padding:10px 11px;border:1px solid var(--border);border-radius:13px;background:#fff}.bubble.admin{background:linear-gradient(135deg,#f2eaff,#fff0f7);border-color:#e5d9f4}.sender{font-size:6px;color:#77727f;font-weight:800}.body{font-size:8px;line-height:1.7;white-space:pre-wrap;word-break:break-word;margin-top:4px}.when{font-size:6px;color:#9d99a4;margin-top:5px}.composer{border-top:1px solid var(--border);padding:11px;background:#fff}.composer textarea{width:100%;min-height:85px;resize:vertical;border:1px solid var(--border);border-radius:10px;padding:9px;font-size:8px;outline:0}.composer textarea:focus{border-color:#c4b5fd;box-shadow:0 0 0 3px rgba(109,40,217,.06)}.compose-row{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:7px}.compose-help{font-size:6px;color:var(--muted)}.detail-side{padding:12px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.fact{padding:8px 9px;border:1px solid var(--border);border-radius:10px;background:#fcfcfe}.fact span{display:block;color:var(--muted);font-size:6px}.fact strong{display:block;margin-top:3px;font-size:8px;word-break:break-word}.notice{padding:9px 11px;border-radius:10px;font-size:7px;margin:10px 15px 0;display:none}.notice.show{display:block}.notice.info{background:var(--blue-soft);color:#1d4ed8}.notice.ok{background:var(--green-soft);color:#166534}.notice.err{background:var(--red-soft);color:#991b1b}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:950}.overlay.show{display:block}
+.alarm{position:fixed;right:16px;bottom:16px;z-index:1200;display:none;max-width:350px;padding:12px 13px;border-radius:13px;background:#24172e;color:#fff;box-shadow:0 18px 45px rgba(0,0,0,.18)}.alarm.show{display:block}.alarm strong{display:block;font-size:9px}.alarm span{display:block;font-size:7px;color:#ddd3e6;margin-top:3px}.alarm button{margin-top:8px;height:30px;padding:0 9px;border:0;border-radius:8px;background:#fff;color:var(--primary);font-size:7px;font-weight:800}
+@media(max-width:1200px){.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:980px){:root{--sidebar:250px}.sidebar{transform:translateX(-100%);transition:transform .22s ease}.sidebar.open{transform:none}.main{margin-left:0}.menu-btn{display:grid;place-items:center}.workspace{grid-template-columns:1fr}.ticket-list{max-height:360px}.detail-shell{height:auto;min-height:560px}.detail-side{grid-template-columns:repeat(2,1fr)}body:not(.mobile-chat-open) .detail-panel{display:none!important}body.mobile-chat-open .tickets-panel{display:none!important}.mobile-back{display:inline-flex!important;align-items:center;gap:6px}}@media(max-width:620px){.page{width:calc(100% - 20px);padding-top:12px}.topbar{padding:0 10px}.admin-meta{display:none}.hero-top{align-items:center}.hero h2{font-size:23px}.stats{grid-template-columns:1fr 1fr}.stat b{font-size:18px}.filter-row{grid-template-columns:1fr}.detail-head{flex-direction:column}.detail-actions{justify-content:flex-start}.bubble{max-width:94%}.compose-row{align-items:stretch;flex-direction:column}.compose-row .btn{width:100%}.detail-side{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="side-head"><img class="side-logo" src="../assets/logo1/logo1.png" alt="LOVEMI"><div><div class="side-title">LOVEMI</div><span class="side-sub">ADMINISTRATION</span></div></div>
+  <div class="side-badge"><i class="fa-solid fa-headset"></i> SUPPORT CENTER</div>
+  <div class="side-section"><div class="side-label">Overview</div><a class="side-link" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></div>
+  <div class="side-section"><div class="side-label">Members</div><a class="side-link" href="users.html"><i class="fa-solid fa-users"></i> Users</a><a class="side-link" href="profiles.html"><i class="fa-solid fa-id-card"></i> Profiles</a></div>
+  <div class="side-section"><div class="side-label">Support</div><a class="side-link active" href="help.html"><i class="fa-solid fa-headset"></i> Help Center</a><a class="side-link" href="messages.html"><i class="fa-solid fa-message"></i> Messages</a><a class="side-link" href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a></div>
+  <div class="side-section"><div class="side-label">Safety</div><a class="side-link" href="reports.html"><i class="fa-solid fa-flag"></i> Reports</a><a class="side-link" href="blocked-users.html"><i class="fa-solid fa-ban"></i> Blocked Users</a></div>
+  <div class="side-section"><div class="side-label">System</div><a class="side-link" href="system-settings.html"><i class="fa-solid fa-sliders"></i> System Settings</a><a class="side-link" href="audit-logs.html"><i class="fa-solid fa-list-check"></i> Audit Logs</a><a class="side-link" href="../dashboard.html"><i class="fa-solid fa-arrow-left"></i> User Dashboard</a><a class="side-link" href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+</aside>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<header class="topbar"><div class="top-left"><button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button><div class="title"><h1>Help Center</h1><p>Receive, review and answer LOVEMI support conversations</p></div></div><div class="top-right"><a class="top-btn" href="dashboard.html" title="Dashboard"><i class="fa-solid fa-gauge-high"></i></a><a class="top-btn" href="notifications.html" title="Notifications"><i class="fa-regular fa-bell"></i></a><div class="admin-pill"><img id="adminAvatar" class="admin-avatar" src="../assets/images/defaults/default-avatar-male.png" alt="Admin"><div class="admin-meta"><strong id="adminName">Administrator</strong><span id="adminRole">Admin</span></div></div></div></header>
+<div class="page">
+<section class="hero"><div class="hero-top"><div><span class="hero-badge"><i class="fa-solid fa-headset"></i> LOVEMI SUPPORT</span><h2>Customer Help Center</h2><p>Every message from Help Center and Contact Center is stored as a ticket. Reply from here and the user receives an email with a secure conversation link.</p></div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><button class="email-send-btn" id="openEmailComposer" type="button"><i class="fa-solid fa-paper-plane"></i> Send Email / Message</button><button class="hero-action" id="refreshBtn" title="Refresh tickets"><i class="fa-solid fa-rotate"></i></button></div></div><div class="notice" id="pageNotice"></div></section>
+<section class="stats"><div class="stat"><div class="stat-head"><div class="stat-icon"><i class="fa-solid fa-inbox"></i></div></div><b id="sAll">0</b><span>All tickets</span></div><div class="stat"><div class="stat-head"><div class="stat-icon"><i class="fa-solid fa-headset"></i></div></div><b id="sAdmin">0</b><span>Awaiting support</span></div><div class="stat"><div class="stat-head"><div class="stat-icon"><i class="fa-solid fa-user-clock"></i></div></div><b id="sUser">0</b><span>Awaiting user</span></div><div class="stat"><div class="stat-head"><div class="stat-icon"><i class="fa-solid fa-check"></i></div></div><b id="sSolved">0</b><span>Solved</span></div><div class="stat"><div class="stat-head"><div class="stat-icon"><i class="fa-solid fa-lock"></i></div></div><b id="sClosed">0</b><span>Closed</span></div></section>
+<section class="workspace">
+<section class="panel tickets-panel" id="ticketsPanel"><div class="panel-head"><div><h3>Support Tickets</h3><p>Newest and waiting tickets first</p></div><button class="btn" id="alarmToggle"><i class="fa-solid fa-volume-high"></i> Alarm on</button></div><div class="filters"><div class="filter-row"><select class="control" id="statusFilter"><option value="">All statuses</option><option value="awaiting_admin">Awaiting support</option><option value="awaiting_user">Awaiting user</option><option value="solved">Solved</option><option value="closed">Closed</option></select><select class="control" id="sourceFilter"><option value="">All sources</option><option value="help">Help Center</option><option value="contact">Contact Center</option><option value="direct">Direct Email</option></select></div><input class="control" id="searchBox" placeholder="Search name, email, subject or ticket number..."></div><div class="ticket-list" id="ticketList"></div></section>
+<section class="panel detail detail-panel" id="detailPanel"><div id="detailEmpty" class="detail-empty"><div class="empty"><i class="fa-regular fa-comments"></i><strong>Select a support ticket</strong><span>Choose a conversation on the left to read the full message and reply.</span></div></div><div id="detailShell" class="detail-shell" hidden><div class="detail-head"><div><h3 id="dSubject">Support ticket</h3><div class="detail-meta" id="dMeta">—</div><div class="ticket-foot" id="dChips"></div></div><div class="detail-actions"><button class="btn mobile-back" id="mobileBackBtn"><i class="fa-solid fa-arrow-left"></i> Back to chats</button><button class="btn" id="sendLinkBtn"><i class="fa-solid fa-link"></i> Send Secure Link</button><button class="btn primary" id="directMessageSelectedBtn"><i class="fa-solid fa-paper-plane"></i> Send Email / Message</button><button class="btn success" id="solveBtn"><i class="fa-solid fa-check"></i> Solve</button><button class="btn" id="reopenBtn"><i class="fa-solid fa-rotate-left"></i> Reopen</button><button class="btn danger" id="closeBtn"><i class="fa-solid fa-lock"></i> Close</button><button class="btn danger delete-btn" id="deleteBtn" hidden><i class="fa-solid fa-trash"></i> Delete solved</button></div></div><div class="detail-side"><div class="fact"><span>Ticket</span><strong id="fTicket">—</strong></div><div class="fact"><span>Source</span><strong id="fSource">—</strong></div><div class="fact"><span>Category</span><strong id="fCategory">—</strong></div><div class="fact"><span>Email</span><strong id="fEmail">—</strong></div></div><div class="thread" id="thread"></div><div class="composer"><textarea id="replyBox" maxlength="10000" placeholder="Write your reply to the user..."></textarea><div class="compose-row"><span class="compose-help">Replying sends an email to the requester and updates the ticket to Awaiting User.</span><button class="btn primary" id="replyBtn"><i class="fa-solid fa-paper-plane"></i> Send Support Reply</button></div></div></div></section>
+</section>
+</div>
+</main>
+</div>
+<div class="alarm" id="alarmBox"><strong><i class="fa-solid fa-bell"></i> Support needs attention</strong><span id="alarmText">A ticket is waiting for an administrator reply.</span><button id="alarmDismiss">Dismiss</button></div>
+
+<!-- =========================================================
+     DIRECT USER EMAIL COMPOSER
+========================================================= -->
+<div class="email-modal" id="emailComposerModal" aria-modal="true" role="dialog" aria-labelledby="emailComposerTitle">
+    <div class="email-modal-panel">
+        <div class="email-modal-head">
+            <div class="email-modal-brand">
+                <img src="../assets/logo1/logo1.png" alt="LOVEMI Logo">
+                <div>
+                    <h3 id="emailComposerTitle">Send LOVEMI Email / Message</h3>
+                    <p>Send a polished LOVEMI-branded message to an existing member or any valid email address.</p>
+                </div>
+            </div>
+            <button class="email-close" id="closeEmailComposer" type="button" aria-label="Close email composer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="email-modal-body">
+            <div class="email-mode-grid">
+                <button class="email-mode active" id="existingUserMode" type="button">
+                    <strong><i class="fa-solid fa-user-check"></i> Existing LOVEMI user</strong>
+                    <span>Search and select a registered account. The server will use the verified address stored in the database.</span>
+                </button>
+                <button class="email-mode" id="newEmailMode" type="button">
+                    <strong><i class="fa-solid fa-envelope"></i> New / external email</strong>
+                    <span>Enter the recipient email manually without selecting a LOVEMI account.</span>
+                </button>
+            </div>
+
+            <div class="email-fields">
+                <div class="email-field" id="existingUserField">
+                    <label for="userSearch">Search existing user</label>
+                    <input class="control" id="userSearch" type="search" autocomplete="off" placeholder="Search by name, username or email...">
+                    <div class="user-results" id="userResults"></div>
+                    <div class="user-picked" id="userPicked"></div>
+                </div>
+
+                <div class="email-field" id="manualEmailField" hidden>
+                    <label for="manualEmail">Recipient email</label>
+                    <input class="control" id="manualEmail" type="email" maxlength="190" autocomplete="email" placeholder="recipient@example.com">
+                </div>
+
+                <div class="email-recipient-row">
+                    <div class="email-field">
+                        <label for="recipientName">Recipient name (optional)</label>
+                        <input class="control" id="recipientName" maxlength="120" placeholder="Name displayed in the email greeting">
+                    </div>
+                    <div class="email-field">
+                        <label for="referenceId">Reference / ID (optional)</label>
+                        <input class="control" id="referenceId" maxlength="120" placeholder="e.g. User ID / Ticket ID">
+                    </div>
+                </div>
+
+                <div class="email-field">
+                    <label for="emailSubject">Subject</label>
+                    <input class="control" id="emailSubject" maxlength="180" placeholder="Enter the email subject...">
+                </div>
+
+                <div class="email-field">
+                    <label for="emailBody">Message body</label>
+                    <textarea id="emailBody" maxlength="20000" placeholder="Write the message you want the recipient to receive..."></textarea>
+                </div>
+
+                <div class="email-checks">
+                    <label class="email-check">
+                        <input type="checkbox" id="includeBranding" checked>
+                        <span><strong>LOVEMI branding</strong><br>Include LOVEMI header, logo and branded footer in the email.</span>
+                    </label>
+                    <label class="email-check">
+                        <input type="checkbox" id="includeReference" checked>
+                        <span><strong>Reference block</strong><br>Show the supplied reference / ID in the email when one is provided.</span>
+                    </label>
+                </div>
+
+                <div class="email-preview">
+                    <div class="email-preview-head">
+                        <strong>Email preview</strong>
+                        <span class="preview-badge">LOVEMI</span>
+                    </div>
+                    <div class="preview-subject" id="previewSubject">Your LOVEMI message subject</div>
+                    <div class="preview-body" id="previewBody">Your message preview will appear here.</div>
+                </div>
+
+                <div class="email-note">
+                    The message is sent through the existing LOVEMI email service. The admin page does not expose or duplicate SMTP credentials.
+                </div>
+
+                <div class="email-result" id="emailResult"></div>
+            </div>
+
+            <div class="email-modal-actions">
+                <button class="btn" id="cancelEmailComposer" type="button">Cancel</button>
+                <button class="btn primary" id="sendDirectEmailBtn" type="button">
+                    <i class="fa-solid fa-paper-plane"></i> Send Email / Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="ring" preload="auto"><source src="../assets/audio/notification1.mp3" type="audio/mpeg"></audio>
+<script>
+"use strict";
+const LOVEMI_ROOT = window.location.origin + '/LOVEMI';
+const API={
+  list:LOVEMI_ROOT+'/admin-api/help-center/list.php',
+  get:LOVEMI_ROOT+'/admin-api/help-center/get.php',
+  reply:LOVEMI_ROOT+'/admin-api/help-center/reply.php',
+  status:LOVEMI_ROOT+'/admin-api/help-center/status.php',
+  delete:LOVEMI_ROOT+'/admin-api/help-center/delete.php',
+  sendLink:LOVEMI_ROOT+'/admin-api/help-center/send-link.php',
+message:LOVEMI_ROOT+'/admin-api/help-center/send-message.php',
+  markRead:LOVEMI_ROOT+'/admin-api/help-center/mark-read.php',
+  reminders:LOVEMI_ROOT+'/admin-api/help-center/reminders.php',
+  logout:LOVEMI_ROOT+'/api/auth/logout.php'
+};
+const state={tickets:[],selectedId:0,selected:null,alarm:true,lastAwaitingAdmin:0};
+const $=id=>document.getElementById(id);
+function esc(v){const d=document.createElement('div');d.textContent=v??'';return d.innerHTML}
+function dt(v){if(!v)return'—';const d=new Date(String(v).replace(' ','T'));return Number.isNaN(d.getTime())?String(v):d.toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}
+function ticketNo(id){return'LM-TKT-'+String(id).padStart(6,'0')}
+function chipClass(t){const s=String(t.status||'');if(s==='awaiting_admin')return'reply';if(s==='awaiting_user')return'wait';if(s==='solved')return'solved';if(s==='closed')return'closed';return''}
+function showNotice(msg,type='info'){const n=$('pageNotice');n.textContent=msg;n.className='notice show '+type;clearTimeout(showNotice.t);showNotice.t=setTimeout(()=>n.className='notice',4500)}
+async function json(url,opt={}){
+  const sep=url.includes('?')?'&':'?';
+  const endpoint=url+sep+'_='+Date.now();
+  const r=await fetch(endpoint,{...opt,cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json','Cache-Control':'no-cache,no-store,max-age=0',...(opt.headers||{})}});
+  const text=await r.text();
+  let j=null;
+  try{j=JSON.parse(text)}catch(_){
+    if(r.status===404) throw new Error('Support API not found (404): '+url+' — make sure this PHP file exists in C:\\xampp\\htdocs\\LOVEMI\\admin-api\\help-center\\');
+    if(r.status===401||r.status===403) throw new Error('Administrator session is not authorized.');
+    throw new Error('The admin support API returned a non-JSON response (HTTP '+r.status+').');
+  }
+  if((r.status===401||r.status===403)&&j?.code){
+    if(j.code==='ADMIN_AUTH_REQUIRED'||j.code==='ADMIN_2FA_REQUIRED'||j.code==='ADMIN_ACCESS_REQUIRED'){
+      location.href='../login.html?redirect='+encodeURIComponent('admin/help.html');
+      return;
+    }
+  }
+  if(!r.ok||j.success===false) throw new Error(j.message||('Request failed (HTTP '+r.status+').'));
+  return j;
+}
+function renderStats(s){$('sAll').textContent=s.all??0;$('sAdmin').textContent=s.awaiting_admin??0;$('sUser').textContent=s.awaiting_user??0;$('sSolved').textContent=s.solved??0;$('sClosed').textContent=s.closed??0}
+function filteredTickets(){const q=$('searchBox').value.trim().toLowerCase(),sf=$('statusFilter').value,src=$('sourceFilter').value;return [...state.tickets].sort((a,b)=>{const ad=new Date(String(a.last_message_at||a.updated_at||a.created_at||'').replace(' ','T')).getTime()||0;const bd=new Date(String(b.last_message_at||b.updated_at||b.created_at||'').replace(' ','T')).getTime()||0;return bd-ad;}).filter(t=>{if(sf&&String(t.status)!==sf)return false;if(src&&String(t.source)!==src)return false;if(!q)return true;return [t.name,t.email,t.subject,t.id,t.ticket_number,t.source_label].join(' ').toLowerCase().includes(q)})}
+function renderTickets(){const box=$('ticketList'),arr=filteredTickets();if(!arr.length){box.innerHTML='<div class="empty"><i class="fa-regular fa-folder-open"></i><strong>No tickets found</strong><span>There are no tickets matching your filters.</span></div>';return}box.innerHTML=arr.map(t=>{const active=Number(t.id)===state.selectedId;return `<div class="ticket ${active?'active':''}" data-id="${esc(t.id)}"><div class="ticket-top"><div class="ticket-title">${esc(t.subject||'No subject')}</div><div class="ticket-time">${esc(dt(t.last_message_at||t.updated_at||t.created_at))}</div></div><div class="ticket-sub">${esc(t.name||'Visitor')} • ${esc(t.email||'')}</div><div class="ticket-foot"><span class="chip ${String(t.source)==='contact'?'contact':(String(t.source)==='direct'?'direct':'help')}">${esc(t.source_label||'Help Center')}</span><span class="chip ${chipClass(t)}">${esc(t.status_label||t.status)}</span>${t.needs_admin_reply?'<span class="chip reply"><i class="fa-solid fa-reply"></i> Reply needed</span>':''}<button type="button" class="ticket-direct-btn" data-direct-id="${Number(t.id)}"><i class="fa-solid fa-paper-plane"></i> Direct Message</button></div></div>`}).join('');box.querySelectorAll('.ticket').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('.ticket-direct-btn'))return;loadTicket(Number(el.dataset.id))}));box.querySelectorAll('.ticket-direct-btn').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();const t=state.tickets.find(x=>Number(x.id)===Number(btn.dataset.directId));if(t)openDirectComposerForTicket(t)}))}
+function renderThread(messages){const box=$('thread');box.innerHTML=(messages||[]).map(m=>`<div class="bubble-wrap ${m.sender_type==='admin'?'admin':''}"><div class="bubble ${m.sender_type==='admin'?'admin':''}"><div class="sender">${esc(m.sender_name)} · ${m.sender_type==='admin'?'LOVEMI Support':'Requester'}</div><div class="body">${esc(m.body)}</div><div class="when">${esc(dt(m.created_at))}</div></div></div>`).join('')||'<div class="empty"><i class="fa-regular fa-comment-dots"></i><strong>No messages</strong></div>';box.scrollTop=box.scrollHeight}
+function renderDetail(){const t=state.selected;if(!t)return;$('detailEmpty').hidden=true;$('detailShell').hidden=false;$('dSubject').textContent=t.subject||'Support ticket';$('dMeta').textContent=`${t.name||'Visitor'} • ${t.email||''} • ${dt(t.created_at)}`;$('dChips').innerHTML=`<span class="chip ${String(t.source)==='contact'?'contact':(String(t.source)==='direct'?'direct':'help')}">${esc(t.source_label)}</span><span class="chip ${chipClass(t)}">${esc(t.status_label)}</span><span class="chip">${ticketNo(t.id)}</span>`;$('fTicket').textContent=ticketNo(t.id);$('fSource').textContent=t.source_label||'Help Center';$('fCategory').textContent=t.category||'—';$('fEmail').textContent=t.email||'—';renderThread(state.selected.messages);const closed=String(t.status)==='closed';$('replyBox').disabled=closed;$('replyBtn').disabled=closed;$('solveBtn').disabled=closed;$('closeBtn').disabled=closed;$('reopenBtn').disabled=!closed;const deletable=String(t.status)==='solved'||String(t.status)==='closed'||!!t.solved_at;$('deleteBtn').hidden=!deletable}
+async function loadList(){try{const d=await json(API.list);state.tickets=Array.isArray(d.tickets)?d.tickets:[];renderStats(d.stats||{});renderTickets();const waiting=state.tickets.find(t=>t.needs_admin_reply);if(waiting&&Number(waiting.id)!==state.lastAwaitingAdmin){state.lastAwaitingAdmin=Number(waiting.id);triggerAlarm('Ticket '+ticketNo(waiting.id)+' is waiting for an administrator reply.');}if(state.selectedId)await loadTicket(state.selectedId,true)}catch(e){showNotice(e.message,'err')}}
+async function loadTicket(id,silent=false){try{document.body.classList.add('mobile-chat-open');const d=await json(API.get+'?id='+encodeURIComponent(id));state.selectedId=id;state.selected={...(d.ticket||{}),messages:Array.isArray(d.messages)?d.messages:[]};renderTickets();renderDetail();await json(API.markRead,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket_id:id})}).catch(()=>{});if(!silent)showNotice('Ticket '+ticketNo(id)+' loaded.','ok')}catch(e){showNotice(e.message,'err')}}
+async function sendReply(){if(!state.selected)return;const msg=$('replyBox').value.trim();if(!msg){showNotice('Write a reply before sending.','err');return}const b=$('replyBtn');b.disabled=true;const old=b.innerHTML;b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';try{const d=await json(API.reply,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket_id:state.selected.id,message:msg})});$('replyBox').value='';showNotice(d.mail_sent===false?'Reply saved, but the requester email could not be delivered.':'Support reply sent to the requester.','ok');await loadTicket(state.selected.id,true);await loadList()}catch(e){showNotice(e.message,'err')}finally{b.disabled=false;b.innerHTML=old}}
+async function sendSecureLink(){if(!state.selected)return;const b=$('sendLinkBtn');const old=b.innerHTML;b.disabled=true;b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';try{const d=await json(API.sendLink,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket_id:state.selected.id})});showNotice(d.mail_sent===false?'Secure link generated, but email delivery failed.':'New secure support link emailed to the requester.','ok');if(d.feedback_url){navigator.clipboard?.writeText(d.feedback_url).catch(()=>{});}}catch(e){showNotice(e.message,'err')}finally{b.disabled=false;b.innerHTML=old}}
+async function setStatus(action){if(!state.selected)return;const id=state.selected.id;try{const d=await json(API.status,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket_id:id,action})});showNotice(d.message||'Ticket updated.','ok');await loadList();if(state.selectedId)await loadTicket(id,true)}catch(e){showNotice(e.message,'err')}}
+
+async function deleteSolvedTicket(){
+    if(!state.selected)return;
+    const t=state.selected;
+    if(!(String(t.status)==='solved'||String(t.status)==='closed'||t.solved_at)){showNotice('Only solved or closed tickets can be deleted.','err');return;}
+    if(!confirm('Delete '+ticketNo(t.id)+' permanently? This removes the ticket, messages and secure access record.'))return;
+    const id=Number(t.id); const b=$('deleteBtn'); const old=b.innerHTML; b.disabled=true; b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+    try{const d=await json(API.delete,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket_id:id})});showNotice(d.message||'Solved ticket deleted.','ok');state.selectedId=0;state.selected=null;$('detailShell').hidden=true;$('detailEmpty').hidden=false;document.body.classList.remove('mobile-chat-open');await loadList();}
+    catch(e){showNotice(e.message,'err')}
+    finally{b.disabled=false;b.innerHTML=old;}
+}
+
+function triggerAlarm(text){if(!state.alarm)return;const box=$('alarmBox');$('alarmText').textContent=text;box.classList.add('show');const a=$('ring');try{a.currentTime=0;a.play().catch(()=>{})}catch{}}
+$('alarmToggle').addEventListener('click',()=>{state.alarm=!state.alarm;$('alarmToggle').innerHTML=state.alarm?'<i class="fa-solid fa-volume-high"></i> Alarm on':'<i class="fa-solid fa-volume-xmark"></i> Alarm off'});
+$('alarmDismiss').addEventListener('click',()=>$('alarmBox').classList.remove('show'));
+$('refreshBtn').addEventListener('click',loadList);$('mobileBackBtn').addEventListener('click',()=>{document.body.classList.remove('mobile-chat-open');state.selectedId=0;state.selected=null;$('detailShell').hidden=true;$('detailEmpty').hidden=false;renderTickets()});$('deleteBtn').addEventListener('click',deleteSolvedTicket);$('sendLinkBtn').addEventListener('click',sendSecureLink);$('directMessageSelectedBtn').addEventListener('click',()=>{if(state.selected)openDirectComposerForTicket(state.selected)});$('searchBox').addEventListener('input',renderTickets);$('statusFilter').addEventListener('change',renderTickets);$('sourceFilter').addEventListener('change',renderTickets);$('replyBtn').addEventListener('click',sendReply);$('solveBtn').addEventListener('click',()=>setStatus('solve'));$('reopenBtn').addEventListener('click',()=>setStatus('reopen'));$('closeBtn').addEventListener('click',()=>{if(confirm('Close this support conversation now? It will automatically be marked solved.'))setStatus('close')});
+$('menuBtn').addEventListener('click',()=>{ $('sidebar').classList.add('open');$('overlay').classList.add('show')});$('overlay').addEventListener('click',()=>{$('sidebar').classList.remove('open');$('overlay').classList.remove('show')});$('logoutLink').addEventListener('click',async e=>{e.preventDefault();try{await fetch(API.logout,{method:'POST',credentials:'same-origin',cache:'no-store'})}catch{}location.href='../login.html'});
+
+/* =========================================================
+   DIRECT EMAIL / MESSAGE COMPOSER
+========================================================= */
+function openDirectComposerForTicket(t){
+    $('emailComposerModal').classList.add('show');
+    $('emailResult').className='email-result';
+    $('emailResult').textContent='';
+    emailState.mode='existing';
+    emailState.selectedUser=t && Number(t.user_id)>0 ? {id:Number(t.user_id),full_names:t.name||'',username:'',email:t.email||''} : null;
+    $('existingUserMode').classList.toggle('active',!!emailState.selectedUser);
+    $('newEmailMode').classList.toggle('active',!emailState.selectedUser);
+    $('existingUserField').hidden=!emailState.selectedUser;
+    $('manualEmailField').hidden=!!emailState.selectedUser;
+    $('userResults').innerHTML='';
+    $('userSearch').value='';
+    $('manualEmail').value=emailState.selectedUser?'':(t?.email||'');
+    $('recipientName').value=t?.name||'';
+    $('referenceId').value=t?.id?ticketNo(t.id):'';
+    $('emailSubject').value=t?.subject?('Re: '+t.subject):'';
+    $('emailBody').value='';
+    refreshEmailPreview();
+    setTimeout(()=>$(emailState.selectedUser?'emailBody':'manualEmail').focus(),80);
+}
+
+const emailState={mode:'existing',selectedUser:null,userTimer:null};
+
+function openEmailComposer(){
+    $('emailComposerModal').classList.add('show');
+    $('emailResult').className='email-result';
+    $('emailResult').textContent='';
+    setTimeout(()=>$('userSearch').focus(),80);
+    refreshEmailPreview();
+}
+
+function closeEmailComposer(){
+    $('emailComposerModal').classList.remove('show');
+    clearTimeout(emailState.userTimer);
+}
+
+function setEmailMode(mode){
+    emailState.mode=mode;
+    emailState.selectedUser=null;
+    $('existingUserMode').classList.toggle('active',mode==='existing');
+    $('newEmailMode').classList.toggle('active',mode==='manual');
+    $('existingUserField').hidden=mode!=='existing';
+    $('manualEmailField').hidden=mode!=='manual';
+    $('userPicked').className='user-picked';
+    $('userResults').innerHTML='';
+    $('recipientName').value='';
+    if(mode==='manual') $('manualEmail').focus(); else $('userSearch').focus();
+    refreshEmailPreview();
+}
+
+async function searchUsers(){
+    if(emailState.mode!=='existing') return;
+    const q=$('userSearch').value.trim();
+    clearTimeout(emailState.userTimer);
+    if(q.length<2){$('userResults').innerHTML='';return;}
+    emailState.userTimer=setTimeout(async()=>{
+        try{
+            const d=await json(API.message+'?action=users&search='+encodeURIComponent(q));
+            const users=Array.isArray(d.users)?d.users:[];
+            $('userResults').innerHTML=users.length?users.map(u=>`
+                <button type="button" class="user-result" data-user-id="${Number(u.id)}">
+                    <strong>${esc(u.full_names||u.username||'LOVEMI Member')}</strong>
+                    <span>${esc(u.username||'')} • ${esc(u.email||'')}</span>
+                </button>
+            `).join(''):'<div style="padding:10px;color:#999;font-size:7px">No active users found.</div>';
+            $('userResults').querySelectorAll('[data-user-id]').forEach(btn=>btn.addEventListener('click',()=>pickUser(Number(btn.dataset.userId),users)));
+        }catch(e){
+            $('userResults').innerHTML=`<div style="padding:10px;color:#991b1b;font-size:7px">${esc(e.message||'Unable to search users.')}</div>`;
+        }
+    },250);
+}
+
+function pickUser(id,users){
+    const user=users.find(u=>Number(u.id)===id);
+    if(!user)return;
+    emailState.selectedUser=user;
+    $('recipientName').value=user.full_names||user.username||'';
+    $('referenceId').value=String(user.id);
+    $('userPicked').textContent=`Selected: ${user.full_names||user.username||'LOVEMI Member'} • ${user.email||''}`;
+    $('userPicked').className='user-picked show';
+    $('userResults').innerHTML='';
+    $('userSearch').value='';
+    refreshEmailPreview();
+}
+
+function refreshEmailPreview(){
+    const subject=$('emailSubject').value.trim()||'Your LOVEMI message subject';
+    const body=$('emailBody').value.trim()||'Your message preview will appear here.';
+    $('previewSubject').textContent=subject;
+    $('previewBody').textContent=body;
+}
+
+async function sendDirectEmail(){
+    const subject=$('emailSubject').value.trim();
+    const body=$('emailBody').value.trim();
+    let email='';
+    if(emailState.mode==='existing'){
+        if(!emailState.selectedUser){showNotice('Select an existing LOVEMI user first.','err');return;}
+        email=String(emailState.selectedUser.email||'').trim();
+    }else{
+        email=String($('manualEmail').value||'').trim();
+    }
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showNotice('Enter a valid recipient email address.','err');return;}
+    if(!subject){showNotice('Enter an email subject.','err');$('emailSubject').focus();return;}
+    if(!body){showNotice('Enter the message body.','err');$('emailBody').focus();return;}
+    const b=$('sendDirectEmailBtn');const old=b.innerHTML;b.disabled=true;b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+    $('emailResult').className='email-result';
+    try{
+        const d=await json(API.message,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+            user_id:emailState.mode==='existing'?Number(emailState.selectedUser.id||0):0,
+            email:email,
+            recipient_name:$('recipientName').value.trim(),
+            reference_id:$('referenceId').value.trim(),
+            subject:subject,
+            body:body,
+            include_branding:$('includeBranding').checked,
+            include_reference:$('includeReference').checked
+        })});
+        const replyUrl=String(d.feedback_url||'');
+        $('emailResult').innerHTML=esc(d.message||'Email/message created successfully.')+(replyUrl?' <a href="'+esc(replyUrl)+'" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:7px;color:#6d28d9;font-weight:900">Open reply link</a>':'');
+        $('emailResult').className='email-result show ok';
+        showNotice((d.mail_sent===false?'Message saved, but the email service did not deliver it.':'Email/message sent successfully to '+email+'.')+(replyUrl?' Reply link created.':''),'ok');
+        setTimeout(()=>closeEmailComposer(),900);
+    }catch(e){
+        $('emailResult').textContent=e.message||'The email could not be sent.';
+        $('emailResult').className='email-result show err';
+    }finally{
+        b.disabled=false;b.innerHTML=old;
+    }
+}
+
+$('openEmailComposer').addEventListener('click',openEmailComposer);
+$('closeEmailComposer').addEventListener('click',closeEmailComposer);
+$('cancelEmailComposer').addEventListener('click',closeEmailComposer);
+$('existingUserMode').addEventListener('click',()=>setEmailMode('existing'));
+$('newEmailMode').addEventListener('click',()=>setEmailMode('manual'));
+$('userSearch').addEventListener('input',searchUsers);
+$('emailSubject').addEventListener('input',refreshEmailPreview);
+$('emailBody').addEventListener('input',refreshEmailPreview);
+$('sendDirectEmailBtn').addEventListener('click',sendDirectEmail);
+$('emailComposerModal').addEventListener('click',e=>{if(e.target===$('emailComposerModal'))closeEmailComposer()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('emailComposerModal').classList.contains('show'))closeEmailComposer()});
+
+async function runReminderCheck(){try{const d=await json(API.reminders);const adminReminders=Array.isArray(d.admin_reminders)?d.admin_reminders:[];if(adminReminders.length&&state.alarm)triggerAlarm(adminReminders[0].message||'A support ticket needs your reply.')}catch{}}
+setInterval(loadList,10000);setInterval(runReminderCheck,60000);loadList();runReminderCheck();
+</script>
+</body>
+</html>
