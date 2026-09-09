@@ -1,0 +1,228 @@
+LOVEMI SOFTWARE LICENSE
+Copyright (c) 2026 LOVEMI
+
+All Rights Reserved.
+
+1. OWNERSHIP
+
+This software, including but not limited to its source code, HTML files,
+PHP files, JavaScript files, CSS files, database structure, database
+scripts, APIs, configuration files, user interfaces, designs, graphics,
+logos, icons, documentation, and related project materials, is the
+property of the copyright owner identified in this project.
+
+The name "LOVEMI", the LOVEMI logo, branding, visual identity, and related
+trademarks or service marks are also reserved and may not be used without
+prior written permission from the owner.
+
+2. LICENSE GRANT
+
+Permission is NOT automatically granted to copy, modify, distribute,
+publish, sublicense, sell, rent, lease, transfer, or commercially use
+this software.
+
+Any person or organization wishing to use, copy, modify, deploy,
+distribute, or commercially use any part of this software must obtain
+prior written permission from the copyright owner.
+
+3. PROHIBITED USE
+
+Without prior written permission, you may not:
+
+a. Copy the LOVEMI source code or substantial portions of it.
+
+b. Redistribute the source code in public repositories, websites,
+   forums, file-sharing services, or other platforms.
+
+c. Sell, resell, sublicense, lease, rent, or otherwise commercially
+   distribute the software.
+
+d. Create a derivative software product based on LOVEMI for distribution
+   or commercial use.
+
+e. Remove copyright notices, license notices, ownership notices,
+   branding, or other attribution contained in the software.
+
+f. Use the LOVEMI name, logo, trademarks, service marks, or branding
+   to imply endorsement, partnership, authorization, or ownership
+   without prior written permission.
+
+g. Publish modified or unmodified copies of the complete project or
+   substantial portions of the project without permission.
+
+h. Use the software to create a competing service that reproduces
+   substantial portions of the LOVEMI application, design, database
+   structure, APIs, or functionality without authorization.
+
+4. PRIVATE USE
+
+The copyright owner may authorize individuals or organizations to use
+the software for private development, testing, educational, evaluation,
+or internal purposes.
+
+Such permission must be granted explicitly by the copyright owner.
+
+Private use does not transfer ownership of the software.
+
+5. MODIFICATIONS
+
+No permission is granted to modify the software for redistribution or
+commercial use unless the copyright owner provides written authorization.
+
+Any authorized modification must retain all applicable copyright,
+ownership, and license notices.
+
+6. THIRD-PARTY SOFTWARE
+
+LOVEMI may contain, use, communicate with, or depend upon third-party
+software, libraries, APIs, frameworks, services, fonts, or other
+components.
+
+Such third-party components remain subject to their own licenses and
+terms.
+
+This license does not override or replace the license terms of any
+third-party software.
+
+Examples may include:
+
+- PHP
+- MariaDB / MySQL
+- Apache
+- JavaScript libraries
+- PHPMailer
+- Google Authenticator libraries
+- Payment provider APIs
+- Mapping, geolocation, or routing services
+- Other open-source libraries or external services
+
+Users are responsible for complying with the respective licenses and
+terms of such third-party components.
+
+7. DATABASE AND DATA
+
+The LOVEMI database structure, schema design, SQL files, migrations,
+queries, triggers, views, stored procedures, and other database-related
+project materials are protected to the extent permitted by applicable
+law.
+
+This license does not grant ownership of user-generated content stored
+within a deployed LOVEMI installation.
+
+The operator of each deployed installation is responsible for complying
+with applicable privacy, data-protection, consumer-protection, payment,
+and other legal requirements.
+
+8. SECURITY
+
+No license granted under this agreement authorizes a person to bypass
+authentication, authorization, security controls, payment controls,
+access controls, administrator restrictions, or other security mechanisms
+implemented by LOVEMI.
+
+Unauthorized access, modification, extraction, or misuse of the system
+is prohibited.
+
+9. NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE,
+NON-INFRINGEMENT, SECURITY, AVAILABILITY, OR ERROR-FREE OPERATION.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT OWNER
+SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, CONSEQUENTIAL, OR OTHER DAMAGES ARISING FROM OR RELATED TO
+THE USE, INABILITY TO USE, MODIFICATION, DEPLOYMENT, OR DISTRIBUTION
+OF THE SOFTWARE.
+
+10. RESPONSIBILITY OF DEPLOYMENT
+
+Anyone who receives written authorization to deploy or operate LOVEMI
+is responsible for:
+
+- securing the server and database;
+- protecting authentication credentials;
+- protecting API keys and secrets;
+- configuring HTTPS/TLS correctly;
+- maintaining backups;
+- protecting personal information;
+- complying with applicable laws and regulations;
+- complying with payment-provider requirements;
+- complying with third-party service terms.
+
+11. CONTRIBUTIONS
+
+Unless a separate written agreement states otherwise, submitting code,
+documentation, graphics, or other material to the LOVEMI project does
+not transfer ownership of the existing LOVEMI project to the contributor.
+
+Contributors should ensure that they have the necessary rights to submit
+their contributions.
+
+12. COMMERCIAL LICENSE
+
+A separate commercial license may be granted by the copyright owner.
+
+A commercial license may define, among other things:
+
+- number of installations;
+- permitted domains;
+- number of users;
+- modification rights;
+- redistribution rights;
+- reseller rights;
+- support arrangements;
+- maintenance arrangements;
+- branding requirements;
+- payment terms.
+
+No commercial rights are granted merely by obtaining a copy of the
+software.
+
+13. TERMINATION
+
+Any permission granted under a separate written license may be terminated
+if the licensee violates the terms of that agreement.
+
+Upon termination, the licensee must cease all uses that are no longer
+authorized and, where required by the applicable agreement, remove or
+destroy unauthorized copies.
+
+14. COPYRIGHT NOTICE
+
+The following notice may be used where appropriate:
+
+Copyright (c) 2026 LOVEMI
+All Rights Reserved.
+
+15. GOVERNING RIGHTS
+
+This license is intended to preserve all rights not expressly granted
+in writing by the copyright owner.
+
+Nothing in this license is intended to limit rights that cannot legally
+be restricted under applicable law.
+
+16. PERMISSION REQUESTS
+
+Requests for permission to copy, modify, distribute, deploy, sell,
+resell, sublicense, publish, or commercially use LOVEMI should be made
+directly to the copyright owner.
+
+The copyright owner may approve or reject such requests at their
+discretion.
+
+17. ENTIRE LICENSE
+
+This license represents the default license for the LOVEMI project unless
+a separate written agreement expressly replaces or supplements it.
+
+No statement in the project documentation should be interpreted as
+granting rights broader than those expressly granted by this license.
+
+------------------------------------------------------------
+LOVEMI
+Copyright (c) 2026
+All Rights Reserved.
+------------------------------------------------------------
